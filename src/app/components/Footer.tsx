@@ -34,13 +34,40 @@ const companyLinks = [
   },
 ];
 
+const socialLinks = [
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/adachukwu-favour-ba7483414",
+  },
+  {
+    label: "Fiverr",
+    href: "https://www.fiverr.com/s/38B4XjB",
+  },
+  {
+    label: "X",
+    href: "https://x.com/ailaluxe?s=11",
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/ailaluxeventures?igsh=MXh5OW91cDk4d2lqbg==",
+  },
+  {
+    label: "TikTok",
+    href: "https://www.tiktok.com/@ailaluxeventures?_r=1&_t=ZS-97t4y3OvRgb",
+  },
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/share/1BZiH6gAV7/?mibextid=wwXIfr",
+  },
+];
+
 export default function Footer() {
   return (
     <footer className="relative overflow-hidden border-t border-white/[0.07] bg-[#030303]">
       <div className="pointer-events-none absolute bottom-[-300px] left-1/2 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-cyan-500/[0.06] blur-[160px]" />
 
       <div className="relative mx-auto max-w-7xl px-6 py-20">
-        <div className="grid gap-16 lg:grid-cols-[1.5fr_1fr_1fr]">
+        <div className="grid gap-16 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
           {/* BRAND */}
           <div>
             <Link
@@ -70,7 +97,23 @@ export default function Footer() {
               and automation systems for what comes next.
             </p>
 
-            <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-white/[0.07] bg-white/[0.025] px-4 py-2">
+            <a
+              href="https://wa.me/2348080479490"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Chat with Aila Ecosystem on WhatsApp"
+              className="mt-7 inline-flex items-center gap-3 rounded-full border border-green-400/20 bg-green-400/[0.06] px-5 py-3 text-sm font-medium text-green-300 transition duration-300 hover:-translate-y-0.5 hover:border-green-400/40 hover:bg-green-400/[0.1]"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-60" />
+
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-green-400" />
+              </span>
+
+              Chat on WhatsApp
+            </a>
+
+            <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-white/[0.07] bg-white/[0.025] px-4 py-2">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-60" />
 
@@ -102,7 +145,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* COMPANY */}
+          {/* EXPLORE */}
           <div>
             <p className="text-xs uppercase tracking-[0.25em] text-neutral-700">
               Explore
@@ -117,6 +160,35 @@ export default function Footer() {
                 >
                   {item.label}
                 </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* CONNECT */}
+          <div>
+            <p className="text-xs uppercase tracking-[0.25em] text-neutral-700">
+              Connect
+            </p>
+
+            <div className="mt-6 flex flex-col gap-4">
+              {socialLinks.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Visit Aila Ecosystem on ${item.label}`}
+                  className="group flex w-fit items-center gap-2 text-sm text-neutral-500 transition hover:translate-x-1 hover:text-white"
+                >
+                  {item.label}
+
+                  <span
+                    aria-hidden="true"
+                    className="text-neutral-700 transition group-hover:text-cyan-300"
+                  >
+                    ↗
+                  </span>
+                </a>
               ))}
             </div>
           </div>
