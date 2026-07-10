@@ -1,15 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import {
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Message = {
   role: "user" | "assistant";
   content: string;
+};
+
+const welcomeMessage: Message = {
+  role: "assistant",
+  content:
+    "Welcome. I am Aila Intelligence, the intelligence layer of the Aila Ecosystem. Tell me what you want to build, improve or automate.",
 };
 
 const suggestions = [
@@ -66,22 +68,15 @@ const ecosystemNodes = [
 
 export default function AilaIntelligencePage() {
   const [input, setInput] = useState("");
-
-  const [messages, setMessages] = useState<
-    Message[]
-  >([
-    {
-      role: "assistant",
-      content:
-        "Welcome. I am Aila Intelligence, the intelligence layer of the Aila Ecosystem. Tell me what you want to build, improve or automate.",
-    },
+  const [messages, setMessages] = useState<Message[]>([
+    welcomeMessage,
   ]);
+  const [loading, setLoading] = useState(false);
+  const [copiedIndex, setCopiedIndex] = useState<number | null>(
+    null
+  );
 
-  const [loading, setLoading] =
-    useState(false);
-
-  const chatEndRef =
-    useRef<HTMLDivElement | null>(null);
+  const chatEndRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({
@@ -89,45 +84,32 @@ export default function AilaIntelligencePage() {
     });
   }, [messages, loading]);
 
-  async function sendMessage(
-    customMessage?: string
-  ) {
-    const messageToSend = (
-      customMessage || input
-    ).trim();
+  async function sendMessage(customMessage?: string) {
+    const messageToSend = (customMessage || input).trim();
 
-    if (!messageToSend || loading) {
-      return;
-    }
+    if (!messageToSend || loading) return;
 
     const userMessage: Message = {
       role: "user",
       content: messageToSend,
     };
 
-    const updatedMessages = [
-      ...messages,
-      userMessage,
-    ];
+    const updatedMessages = [...messages, userMessage];
 
     setMessages(updatedMessages);
     setInput("");
     setLoading(true);
 
     try {
-      const response = await fetch(
-        "/api/chat",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type":
-              "application/json",
-          },
-          body: JSON.stringify({
-            messages: updatedMessages,
-          }),
-        }
-      );
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          messages: updatedMessages,
+        }),
+      });
 
       const data = await response.json();
 
@@ -148,10 +130,7 @@ export default function AilaIntelligencePage() {
         },
       ]);
     } catch (error) {
-      console.error(
-        "Aila Intelligence Error:",
-        error
-      );
+      console.error("Aila Intelligence Error:", error);
 
       setMessages((previous) => [
         ...previous,
@@ -166,22 +145,68 @@ export default function AilaIntelligencePage() {
     }
   }
 
+  function clearConversation() {
+    setMessages([welcomeMessage]);
+    setInput("");
+    setCopiedIndex(null);
+  }
+
+  async function copyMessage(content: string, index: number) {
+    await navigator.clipboard.writeText(content);
+    setCopiedIndex(index);
+
+    window.setTimeout(() => {
+      setCopiedIndex(null);
+    }, 1500);
+  }
+
+  function downloadBrief() {
+    const conversation = messages
+      .map(
+        (message) =>
+          `${message.role === "user" ? "YOU" : "AILA INTELLIGENCE"}\n${message.content}`
+      )
+      .join("\n\n");
+
+    const content = `AILA ECOSYSTEM
+PROJECT INTELLIGENCE BRIEF
+
+Generated: ${new Date().toLocaleString()}
+
+${conversation}
+
+—
+Aila Ecosystem
+Intelligence for what comes next.
+`;
+
+    const blob = new Blob([content], {
+      type: "text/plain;charset=utf-8",
+    });
+
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+
+    anchor.href = url;
+    anchor.download = "aila-project-brief.txt";
+    anchor.click();
+
+    URL.revokeObjectURL(url);
+  }
+
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#030303] text-white">
-      {/* BACKGROUND */}
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:72px_72px]" />
 
       <div className="pointer-events-none absolute left-1/2 top-[-350px] h-[900px] w-[1100px] -translate-x-1/2 rounded-full bg-cyan-500/[0.1] blur-[200px]" />
 
       <div className="pointer-events-none absolute right-[-300px] top-[700px] h-[600px] w-[600px] rounded-full bg-purple-500/[0.07] blur-[180px]" />
 
-      {/* HERO */}
       <section className="relative mx-auto grid min-h-screen max-w-7xl gap-16 px-6 pb-24 pt-36 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
         <div>
           <div className="inline-flex items-center gap-3 rounded-full border border-cyan-300/15 bg-cyan-300/[0.04] px-4 py-2">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-60" />
-
               <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-400" />
             </span>
 
@@ -203,40 +228,36 @@ export default function AilaIntelligencePage() {
           </h1>
 
           <p className="mt-8 max-w-xl text-lg leading-8 text-neutral-400">
-            Aila Intelligence is the core layer
-            connecting ideas, products, AI systems
-            and intelligent digital experiences
-            across the Aila Ecosystem.
+            Aila Intelligence is the core layer connecting
+            ideas, products, AI systems and intelligent
+            digital experiences across the Aila Ecosystem.
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4">
-            <Link
-              href="/#start-project"
+            <a
+              href="#live-intelligence"
               className="rounded-full bg-white px-8 py-4 font-semibold text-black transition duration-300 hover:scale-105"
             >
-              Start a Project
-            </Link>
+              Talk to Aila
+            </a>
 
             <Link
-              href="/#products"
+              href="/#start-project"
               className="rounded-full border border-white/[0.1] bg-white/[0.03] px-8 py-4 text-neutral-300 transition duration-300 hover:bg-white/[0.07]"
             >
-              Explore Ecosystem
+              Start a Project
             </Link>
           </div>
         </div>
 
-        {/* LIVE INTELLIGENCE */}
-        <div className="relative">
+        <div id="live-intelligence" className="relative">
           <div className="pointer-events-none absolute inset-0 rounded-full bg-cyan-500/[0.08] blur-[110px]" />
 
           <div className="relative overflow-hidden rounded-[36px] border border-white/[0.09] bg-[#080808]/90 shadow-[0_40px_120px_rgba(0,0,0,0.65)] backdrop-blur-2xl">
-            {/* HEADER */}
-            <div className="flex items-center justify-between border-b border-white/[0.07] px-6 py-5">
+            <div className="flex items-center justify-between border-b border-white/[0.07] px-5 py-5 sm:px-6">
               <div className="flex items-center gap-4">
                 <div className="relative flex h-12 w-12 items-center justify-center rounded-2xl border border-cyan-300/15 bg-cyan-300/[0.05]">
                   <div className="absolute h-6 w-6 rounded-full bg-cyan-300/[0.12] blur-lg" />
-
                   <div className="relative h-2.5 w-2.5 rounded-full bg-cyan-300 shadow-[0_0_20px_rgba(103,232,249,0.95)]" />
                 </div>
 
@@ -251,29 +272,48 @@ export default function AilaIntelligencePage() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 rounded-full border border-green-400/10 bg-green-400/[0.04] px-3 py-1.5">
-                <span className="h-1.5 w-1.5 rounded-full bg-green-400 shadow-[0_0_10px_rgba(74,222,128,0.8)]" />
+              <div className="flex items-center gap-2">
+                {messages.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={downloadBrief}
+                    className="hidden rounded-full border border-white/[0.08] bg-white/[0.025] px-3 py-2 text-[10px] text-neutral-500 transition hover:text-white sm:block"
+                  >
+                    Export Brief
+                  </button>
+                )}
 
-                <span className="hidden text-[9px] uppercase tracking-[0.18em] text-green-300/60 sm:block">
-                  Live
-                </span>
+                <button
+                  type="button"
+                  onClick={clearConversation}
+                  disabled={loading || messages.length === 1}
+                  className="rounded-full border border-white/[0.08] bg-white/[0.025] px-3 py-2 text-[10px] text-neutral-500 transition hover:text-white disabled:cursor-not-allowed disabled:opacity-30"
+                >
+                  Clear
+                </button>
+
+                <div className="flex items-center gap-2 rounded-full border border-green-400/10 bg-green-400/[0.04] px-3 py-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-green-400 shadow-[0_0_10px_rgba(74,222,128,0.8)]" />
+                  <span className="hidden text-[9px] uppercase tracking-[0.18em] text-green-300/60 sm:block">
+                    Live
+                  </span>
+                </div>
               </div>
             </div>
 
-            {/* MESSAGES */}
-            <div className="h-[400px] space-y-5 overflow-y-auto p-5 sm:p-6">
-              {messages.map(
-                (message, index) => (
-                  <div
-                    key={`${message.role}-${index}`}
-                    className={`flex ${
-                      message.role === "user"
-                        ? "justify-end"
-                        : "justify-start"
-                    }`}
-                  >
+            <div className="h-[430px] space-y-5 overflow-y-auto p-5 sm:p-6">
+              {messages.map((message, index) => (
+                <div
+                  key={`${message.role}-${index}`}
+                  className={`group flex ${
+                    message.role === "user"
+                      ? "justify-end"
+                      : "justify-start"
+                  }`}
+                >
+                  <div className="max-w-[88%] sm:max-w-[80%]">
                     <div
-                      className={`max-w-[88%] rounded-3xl px-5 py-4 text-sm leading-7 sm:max-w-[80%] ${
+                      className={`whitespace-pre-wrap rounded-3xl px-5 py-4 text-sm leading-7 ${
                         message.role === "user"
                           ? "rounded-br-md bg-white text-black"
                           : "rounded-bl-md border border-white/[0.07] bg-white/[0.035] text-neutral-300"
@@ -281,18 +321,34 @@ export default function AilaIntelligencePage() {
                     >
                       {message.content}
                     </div>
+
+                    {message.role === "assistant" &&
+                      index > 0 && (
+                        <button
+                          type="button"
+                          onClick={() =>
+                            copyMessage(
+                              message.content,
+                              index
+                            )
+                          }
+                          className="mt-2 px-2 text-[10px] text-neutral-700 transition hover:text-cyan-300"
+                        >
+                          {copiedIndex === index
+                            ? "Copied"
+                            : "Copy response"}
+                        </button>
+                      )}
                   </div>
-                )
-              )}
+                </div>
+              ))}
 
               {loading && (
                 <div className="flex justify-start">
                   <div className="flex items-center gap-3 rounded-3xl rounded-bl-md border border-white/[0.07] bg-white/[0.035] px-5 py-4">
                     <div className="flex gap-1">
                       <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-cyan-300" />
-
                       <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-blue-300 [animation-delay:150ms]" />
-
                       <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-purple-300 [animation-delay:300ms]" />
                     </div>
 
@@ -306,43 +362,31 @@ export default function AilaIntelligencePage() {
               <div ref={chatEndRef} />
             </div>
 
-            {/* SUGGESTIONS */}
             <div className="border-t border-white/[0.07] px-5 pt-5 sm:px-6">
               <div className="flex flex-wrap gap-2">
-                {suggestions.map(
-                  (suggestion) => (
-                    <button
-                      key={suggestion}
-                      type="button"
-                      onClick={() =>
-                        sendMessage(
-                          suggestion
-                        )
-                      }
-                      disabled={loading}
-                      className="rounded-full border border-white/[0.08] bg-white/[0.025] px-4 py-2 text-xs text-neutral-500 transition hover:border-cyan-300/20 hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
-                    >
-                      {suggestion}
-                    </button>
-                  )
-                )}
+                {suggestions.map((suggestion) => (
+                  <button
+                    key={suggestion}
+                    type="button"
+                    onClick={() => sendMessage(suggestion)}
+                    disabled={loading}
+                    className="rounded-full border border-white/[0.08] bg-white/[0.025] px-4 py-2 text-xs text-neutral-500 transition hover:border-cyan-300/20 hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
+                  >
+                    {suggestion}
+                  </button>
+                ))}
               </div>
             </div>
 
-            {/* INPUT */}
             <div className="p-5 sm:p-6">
               <div className="flex gap-2 rounded-2xl border border-white/[0.09] bg-black/40 p-2 transition focus-within:border-cyan-300/25">
                 <input
                   value={input}
                   onChange={(event) =>
-                    setInput(
-                      event.target.value
-                    )
+                    setInput(event.target.value)
                   }
                   onKeyDown={(event) => {
-                    if (
-                      event.key === "Enter"
-                    ) {
+                    if (event.key === "Enter") {
                       event.preventDefault();
                       sendMessage();
                     }
@@ -354,26 +398,28 @@ export default function AilaIntelligencePage() {
 
                 <button
                   type="button"
-                  onClick={() =>
-                    sendMessage()
-                  }
-                  disabled={
-                    loading ||
-                    !input.trim()
-                  }
+                  onClick={() => sendMessage()}
+                  disabled={loading || !input.trim()}
                   className="rounded-xl bg-white px-5 py-3 text-sm font-semibold text-black transition hover:scale-[1.03] disabled:cursor-not-allowed disabled:opacity-30"
                 >
-                  {loading
-                    ? "..."
-                    : "Send"}
+                  {loading ? "..." : "Send"}
                 </button>
               </div>
+
+              {messages.length > 1 && (
+                <button
+                  type="button"
+                  onClick={downloadBrief}
+                  className="mt-3 w-full rounded-xl border border-white/[0.07] py-3 text-xs text-neutral-600 transition hover:border-cyan-300/20 hover:text-white sm:hidden"
+                >
+                  Export Project Brief
+                </button>
+              )}
             </div>
           </div>
         </div>
       </section>
 
-      {/* ECOSYSTEM CONNECTIONS */}
       <section className="relative mx-auto max-w-7xl px-6 py-28">
         <div className="text-center">
           <p className="text-sm uppercase tracking-[0.3em] text-cyan-300/60">
@@ -382,7 +428,6 @@ export default function AilaIntelligencePage() {
 
           <h2 className="mx-auto mt-6 max-w-4xl text-4xl font-semibold tracking-[-0.05em] sm:text-6xl">
             One core.
-
             <span className="block text-neutral-600">
               Multiple intelligent systems.
             </span>
@@ -398,7 +443,6 @@ export default function AilaIntelligencePage() {
             >
               <div className="flex items-center justify-between">
                 <div className="h-2 w-2 rounded-full bg-cyan-300/50 transition group-hover:shadow-[0_0_16px_rgba(103,232,249,0.9)]" />
-
                 <span className="text-neutral-700 transition group-hover:translate-x-1 group-hover:text-cyan-300">
                   →
                 </span>
@@ -416,7 +460,6 @@ export default function AilaIntelligencePage() {
         </div>
       </section>
 
-      {/* CAPABILITIES */}
       <section className="relative mx-auto max-w-7xl px-6 py-28">
         <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
           <div>
@@ -426,56 +469,45 @@ export default function AilaIntelligencePage() {
 
             <h2 className="mt-6 max-w-lg text-4xl font-semibold tracking-[-0.05em] sm:text-6xl">
               Start with an idea.
-
               <span className="block text-neutral-600">
                 Build what comes next.
               </span>
             </h2>
 
             <p className="mt-7 max-w-md leading-8 text-neutral-500">
-              Aila helps transform ideas into
-              clearer products, intelligent
-              systems and real digital
-              experiences.
+              Aila helps transform ideas into clearer
+              products, intelligent systems and real
+              digital experiences.
             </p>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
-            {capabilities.map(
-              (capability) => (
-                <div
-                  key={capability.title}
-                  className="group rounded-[28px] border border-white/[0.08] bg-white/[0.025] p-7 transition duration-500 hover:-translate-y-1 hover:border-cyan-300/20 hover:bg-cyan-300/[0.035]"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-neutral-700">
-                      {
-                        capability.number
-                      }
-                    </span>
+            {capabilities.map((capability) => (
+              <div
+                key={capability.title}
+                className="group rounded-[28px] border border-white/[0.08] bg-white/[0.025] p-7 transition duration-500 hover:-translate-y-1 hover:border-cyan-300/20 hover:bg-cyan-300/[0.035]"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-neutral-700">
+                    {capability.number}
+                  </span>
 
-                    <div className="h-2 w-2 rounded-full border border-neutral-700 transition group-hover:border-cyan-300 group-hover:bg-cyan-300 group-hover:shadow-[0_0_15px_rgba(103,232,249,0.8)]" />
-                  </div>
-
-                  <h3 className="mt-12 text-xl font-medium">
-                    {
-                      capability.title
-                    }
-                  </h3>
-
-                  <p className="mt-4 text-sm leading-7 text-neutral-500">
-                    {
-                      capability.description
-                    }
-                  </p>
+                  <div className="h-2 w-2 rounded-full border border-neutral-700 transition group-hover:border-cyan-300 group-hover:bg-cyan-300 group-hover:shadow-[0_0_15px_rgba(103,232,249,0.8)]" />
                 </div>
-              )
-            )}
+
+                <h3 className="mt-12 text-xl font-medium">
+                  {capability.title}
+                </h3>
+
+                <p className="mt-4 text-sm leading-7 text-neutral-500">
+                  {capability.description}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* FINAL CTA */}
       <section className="relative mx-auto max-w-6xl px-6 py-32">
         <div className="relative overflow-hidden rounded-[40px] border border-white/[0.09] bg-white/[0.025] px-6 py-20 text-center backdrop-blur-2xl sm:px-12">
           <div className="pointer-events-none absolute left-1/2 top-[-300px] h-[600px] w-[800px] -translate-x-1/2 rounded-full bg-cyan-500/[0.1] blur-[170px]" />
@@ -487,17 +519,15 @@ export default function AilaIntelligencePage() {
 
             <h2 className="mx-auto mt-6 max-w-4xl text-4xl font-semibold tracking-[-0.05em] sm:text-6xl">
               Your next idea can become
-
               <span className="block text-neutral-600">
                 a real intelligent product.
               </span>
             </h2>
 
             <p className="mx-auto mt-7 max-w-xl leading-8 text-neutral-400">
-              Tell Aila what you want to create
-              and start turning the idea into a
-              real website, application, AI
-              solution or automation system.
+              Tell Aila what you want to create and start
+              turning the idea into a real website,
+              application, AI solution or automation system.
             </p>
 
             <Link
