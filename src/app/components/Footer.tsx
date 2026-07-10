@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { track } from "@vercel/analytics";
@@ -20,7 +20,18 @@ const productLinks = [
     label: "Aila Automation",
     href: "/products/automation",
   },
-];
+  {
+    label: "AilaSites",
+    href: "/products/sites",
+  },
+  {
+    label: "AilaFlow",
+    href: "/products/flow",
+  },
+  {
+    label: "AilaApps",
+    href: "/products/apps",
+  },];
 
 const companyLinks = [
   {
@@ -223,7 +234,7 @@ export default function Footer() {
                     aria-hidden="true"
                     className="text-neutral-700 transition group-hover:text-cyan-300"
                   >
-                    ↗
+                    â†—
                   </span>
                 </a>
               ))}
@@ -233,7 +244,7 @@ export default function Footer() {
 
         <div className="mt-20 flex flex-col gap-5 border-t border-white/[0.07] pt-8 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs text-neutral-700">
-            © {new Date().getFullYear()} Aila Ecosystem.
+            Â© {new Date().getFullYear()} Aila Ecosystem.
             All rights reserved.
           </p>
 
