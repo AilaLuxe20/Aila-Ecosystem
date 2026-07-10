@@ -170,7 +170,7 @@ export default function Home() {
                   </h2>
 
                   <p className="mt-2 text-neutral-400">
-                    iOS â€¢ Android
+                    iOS • Android
                   </p>
                 </div>
               </div>
@@ -419,3 +419,4 @@ export default function Home() {
     </main>
   );
 }
+
