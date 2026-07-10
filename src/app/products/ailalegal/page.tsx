@@ -1,8 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
-import DocumentUpload from "./components/DocumentUpload";
+import {
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import DocumentUpload, {
+  type LegalDocumentContext,
+} from "./components/DocumentUpload";
 
 type Message = {
   role: "user" | "assistant";
@@ -36,28 +42,45 @@ const capabilities = [
   },
 ];
 
-const suggestions = [
+const generalSuggestions = [
   "What should I check before signing a contract?",
   "Explain a termination clause",
   "What are common contract risks?",
 ];
 
+const documentSuggestions = [
+  "Summarize this document",
+  "What are the biggest risks?",
+  "Explain the termination terms",
+  "What should I review carefully?",
+];
+
 export default function AilaLegalPage() {
   const [input, setInput] = useState("");
 
-  const [messages, setMessages] = useState<Message[]>([
+  const [messages, setMessages] = useState<
+    Message[]
+  >([
     {
       role: "assistant",
       content:
-        "Welcome to AilaLegal AI. I can help you understand contracts, documents, clauses and potential review points. How can I assist you?",
+        "Welcome to AilaLegal AI. I can help you understand contracts, documents, clauses and potential review points. Upload a document or ask me a legal information question.",
     },
   ]);
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] =
+    useState(false);
 
-  const chatEndRef = useRef<HTMLDivElement | null>(
-    null
-  );
+  const [
+    documentContext,
+    setDocumentContext,
+  ] =
+    useState<LegalDocumentContext | null>(
+      null
+    );
+
+  const chatEndRef =
+    useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({
@@ -65,13 +88,32 @@ export default function AilaLegalPage() {
     });
   }, [messages, loading]);
 
+  function handleDocumentAnalyzed(
+    document: LegalDocumentContext
+  ) {
+    setDocumentContext(document);
+
+    setMessages((previous) => [
+      ...previous,
+      {
+        role: "assistant",
+        content: `Document connected successfully: ${document.fileName}. I now have the document analysis in context. Ask me to summarize it, explain clauses, identify risks or highlight important review points.`,
+      },
+    ]);
+  }
+
+  function handleDocumentRemoved() {
+    setDocumentContext(null);
+  }
+
   async function sendMessage(
     customMessage?: string
   ) {
-    const messageToSend =
-      customMessage || input;
+    const messageToSend = (
+      customMessage || input
+    ).trim();
 
-    if (!messageToSend.trim() || loading) {
+    if (!messageToSend || loading) {
       return;
     }
 
@@ -94,14 +136,23 @@ export default function AilaLegalPage() {
         "/api/legal-chat",
         {
           method: "POST",
-
           headers: {
             "Content-Type":
               "application/json",
           },
-
           body: JSON.stringify({
             messages: updatedMessages,
+            documentContext:
+              documentContext
+                ? {
+                    fileName:
+                      documentContext.fileName,
+                    fileType:
+                      documentContext.fileType,
+                    analysis:
+                      documentContext.analysis,
+                  }
+                : null,
           }),
         }
       );
@@ -121,7 +172,8 @@ export default function AilaLegalPage() {
         {
           role: "assistant",
           content:
-            data.message ||
+            data?.message ||
+            data?.reply ||
             "I am ready to help you review the legal information.",
         },
       ]);
@@ -143,6 +195,11 @@ export default function AilaLegalPage() {
       setLoading(false);
     }
   }
+
+  const activeSuggestions =
+    documentContext
+      ? documentSuggestions
+      : generalSuggestions;
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#030303] text-white">
@@ -183,8 +240,8 @@ export default function AilaLegalPage() {
           <p className="mt-8 max-w-2xl text-lg leading-8 text-neutral-400">
             AilaLegal AI is an intelligent legal
             technology workspace for document
-            understanding, contract analysis and
-            legal information assistance.
+            understanding, contract analysis and legal
+            information assistance.
           </p>
         </div>
       </section>
@@ -202,12 +259,24 @@ export default function AilaLegalPage() {
             </h2>
           </div>
 
-          <div className="flex items-center gap-2 rounded-full border border-white/[0.07] bg-white/[0.025] px-4 py-2">
-            <span className="h-1.5 w-1.5 rounded-full bg-green-400 shadow-[0_0_10px_rgba(74,222,128,0.8)]" />
+          <div className="flex flex-wrap items-center gap-3">
+            {documentContext && (
+              <div className="flex max-w-xs items-center gap-2 rounded-full border border-cyan-300/15 bg-cyan-300/[0.05] px-4 py-2">
+                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-300 shadow-[0_0_10px_rgba(103,232,249,0.8)]" />
 
-            <span className="text-[9px] uppercase tracking-[0.18em] text-neutral-500">
-              Secure Session Active
-            </span>
+                <span className="truncate text-[9px] uppercase tracking-[0.16em] text-cyan-200/70">
+                  {documentContext.fileName}
+                </span>
+              </div>
+            )}
+
+            <div className="flex items-center gap-2 rounded-full border border-white/[0.07] bg-white/[0.025] px-4 py-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-green-400 shadow-[0_0_10px_rgba(74,222,128,0.8)]" />
+
+              <span className="text-[9px] uppercase tracking-[0.18em] text-neutral-500">
+                Secure Session Active
+              </span>
+            </div>
           </div>
         </div>
 
@@ -229,13 +298,23 @@ export default function AilaLegalPage() {
                   </p>
 
                   <p className="mt-1 text-xs text-neutral-600">
-                    Legal conversation workspace
+                    {documentContext
+                      ? `Document context active · ${documentContext.fileName}`
+                      : "Legal conversation workspace"}
                   </p>
                 </div>
               </div>
 
-              <span className="hidden text-xs text-neutral-700 sm:block">
-                AI ASSISTANT
+              <span
+                className={`hidden rounded-full border px-3 py-1.5 text-[9px] uppercase tracking-[0.16em] sm:block ${
+                  documentContext
+                    ? "border-cyan-300/15 bg-cyan-300/[0.05] text-cyan-200/70"
+                    : "border-white/[0.06] text-neutral-700"
+                }`}
+              >
+                {documentContext
+                  ? "Context Active"
+                  : "AI Assistant"}
               </span>
             </div>
 
@@ -252,7 +331,7 @@ export default function AilaLegalPage() {
                     }`}
                   >
                     <div
-                      className={`max-w-[88%] rounded-3xl px-5 py-4 text-sm leading-7 sm:max-w-[75%] ${
+                      className={`max-w-[88%] whitespace-pre-wrap rounded-3xl px-5 py-4 text-sm leading-7 sm:max-w-[75%] ${
                         message.role === "user"
                           ? "rounded-br-md bg-white text-black"
                           : "rounded-bl-md border border-white/[0.07] bg-white/[0.035] text-neutral-300"
@@ -267,10 +346,16 @@ export default function AilaLegalPage() {
               {loading && (
                 <div className="flex justify-start">
                   <div className="flex items-center gap-3 rounded-3xl rounded-bl-md border border-white/[0.07] bg-white/[0.035] px-5 py-4">
-                    <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-cyan-300" />
+                    <div className="flex gap-1">
+                      <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-cyan-300" />
+                      <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-blue-300 [animation-delay:150ms]" />
+                      <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-purple-300 [animation-delay:300ms]" />
+                    </div>
 
                     <span className="text-sm text-neutral-500">
-                      AilaLegal is analyzing...
+                      {documentContext
+                        ? "AilaLegal is reviewing the document..."
+                        : "AilaLegal is analyzing..."}
                     </span>
                   </div>
                 </div>
@@ -281,16 +366,24 @@ export default function AilaLegalPage() {
 
             {/* SUGGESTIONS */}
             <div className="border-t border-white/[0.07] px-5 pt-5 sm:px-8">
+              {documentContext && (
+                <div className="mb-4 flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-cyan-300" />
+
+                  <p className="text-[9px] uppercase tracking-[0.18em] text-cyan-200/50">
+                    Ask about the connected document
+                  </p>
+                </div>
+              )}
+
               <div className="flex flex-wrap gap-2">
-                {suggestions.map(
+                {activeSuggestions.map(
                   (suggestion) => (
                     <button
                       key={suggestion}
                       type="button"
                       onClick={() =>
-                        sendMessage(
-                          suggestion
-                        )
+                        sendMessage(suggestion)
                       }
                       disabled={loading}
                       className="rounded-full border border-white/[0.08] bg-white/[0.025] px-4 py-2 text-xs text-neutral-500 transition hover:border-cyan-300/20 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
@@ -308,50 +401,56 @@ export default function AilaLegalPage() {
                 <input
                   value={input}
                   onChange={(event) =>
-                    setInput(
-                      event.target.value
-                    )
+                    setInput(event.target.value)
                   }
                   onKeyDown={(event) => {
                     if (
-                      event.key === "Enter"
+                      event.key === "Enter" &&
+                      !event.shiftKey
                     ) {
+                      event.preventDefault();
                       sendMessage();
                     }
                   }}
-                  placeholder="Ask AilaLegal about a contract, clause or legal document..."
+                  placeholder={
+                    documentContext
+                      ? "Ask AilaLegal about this document..."
+                      : "Ask AilaLegal about a contract, clause or legal document..."
+                  }
                   disabled={loading}
                   className="min-w-0 flex-1 bg-transparent px-4 py-3 text-sm text-white outline-none placeholder:text-neutral-700 disabled:opacity-50"
                 />
 
                 <button
                   type="button"
-                  onClick={() =>
-                    sendMessage()
-                  }
+                  onClick={() => sendMessage()}
                   disabled={
-                    loading ||
-                    !input.trim()
+                    loading || !input.trim()
                   }
                   className="rounded-xl bg-white px-5 py-3 text-sm font-semibold text-black transition hover:scale-[1.03] disabled:cursor-not-allowed disabled:opacity-30"
                 >
-                  {loading
-                    ? "..."
-                    : "Send"}
+                  {loading ? "..." : "Send"}
                 </button>
               </div>
 
               <p className="mt-3 text-center text-[10px] leading-5 text-neutral-700">
-                AilaLegal provides general
-                information and document
-                assistance, not legal advice.
+                AilaLegal provides general information
+                and document assistance, not legal
+                advice.
               </p>
             </div>
           </div>
 
           {/* DOCUMENT INTELLIGENCE */}
           <div className="min-w-0">
-            <DocumentUpload />
+            <DocumentUpload
+              onDocumentAnalyzed={
+                handleDocumentAnalyzed
+              }
+              onDocumentRemoved={
+                handleDocumentRemoved
+              }
+            />
           </div>
         </div>
       </section>
@@ -373,45 +472,36 @@ export default function AilaLegalPage() {
             </h2>
 
             <p className="mt-7 max-w-md leading-8 text-neutral-500">
-              AilaLegal transforms complex
-              documents into clearer information
-              so important clauses, risks and
-              review points are easier to
-              understand.
+              AilaLegal transforms complex documents
+              into clearer information so important
+              clauses, risks and review points are
+              easier to understand.
             </p>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
-            {capabilities.map(
-              (capability) => (
-                <div
-                  key={capability.title}
-                  className="group rounded-[28px] border border-white/[0.08] bg-white/[0.025] p-7 transition duration-500 hover:-translate-y-1 hover:border-cyan-300/20 hover:bg-cyan-300/[0.035]"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-neutral-700">
-                      {
-                        capability.number
-                      }
-                    </span>
+            {capabilities.map((capability) => (
+              <div
+                key={capability.title}
+                className="group rounded-[28px] border border-white/[0.08] bg-white/[0.025] p-7 transition duration-500 hover:-translate-y-1 hover:border-cyan-300/20 hover:bg-cyan-300/[0.035]"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-neutral-700">
+                    {capability.number}
+                  </span>
 
-                    <div className="h-2 w-2 rounded-full border border-neutral-700 transition group-hover:border-cyan-300 group-hover:bg-cyan-300 group-hover:shadow-[0_0_15px_rgba(103,232,249,0.8)]" />
-                  </div>
-
-                  <h3 className="mt-12 text-xl font-medium">
-                    {
-                      capability.title
-                    }
-                  </h3>
-
-                  <p className="mt-4 text-sm leading-7 text-neutral-500">
-                    {
-                      capability.description
-                    }
-                  </p>
+                  <div className="h-2 w-2 rounded-full border border-neutral-700 transition group-hover:border-cyan-300 group-hover:bg-cyan-300 group-hover:shadow-[0_0_15px_rgba(103,232,249,0.8)]" />
                 </div>
-              )
-            )}
+
+                <h3 className="mt-12 text-xl font-medium">
+                  {capability.title}
+                </h3>
+
+                <p className="mt-4 text-sm leading-7 text-neutral-500">
+                  {capability.description}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -436,8 +526,8 @@ export default function AilaLegalPage() {
 
             <p className="mx-auto mt-7 max-w-xl leading-8 text-neutral-400">
               Create intelligent legal workflows,
-              document systems and AI-powered
-              digital experiences with Aila.
+              document systems and AI-powered digital
+              experiences with Aila.
             </p>
 
             <div className="mt-10 flex flex-wrap justify-center gap-4">

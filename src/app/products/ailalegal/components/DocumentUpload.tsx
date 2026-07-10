@@ -14,10 +14,27 @@ type AnalysisState =
   | "complete"
   | "error";
 
+export type LegalDocumentContext = {
+  fileName: string;
+  fileType: string;
+  fileSize: number;
+  analysis: string;
+};
+
+type DocumentUploadProps = {
+  onDocumentAnalyzed?: (
+    document: LegalDocumentContext
+  ) => void;
+  onDocumentRemoved?: () => void;
+};
+
 const acceptedFileTypes =
   ".pdf,.txt,.doc,.docx";
 
-export default function DocumentUpload() {
+export default function DocumentUpload({
+  onDocumentAnalyzed,
+  onDocumentRemoved,
+}: DocumentUploadProps) {
   const [file, setFile] =
     useState<File | null>(null);
 
@@ -43,6 +60,8 @@ export default function DocumentUpload() {
     setFile(selectedFile);
     setAnalysis("");
     setStatus("ready");
+
+    onDocumentRemoved?.();
   }
 
   function handleFileChange(
@@ -82,6 +101,8 @@ export default function DocumentUpload() {
     setFile(null);
     setAnalysis("");
     setStatus("idle");
+
+    onDocumentRemoved?.();
 
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
@@ -131,29 +152,42 @@ export default function DocumentUpload() {
       if (!response.ok) {
         throw new Error(
           data?.message ||
+            data?.error ||
             "Document analysis failed."
         );
       }
 
-      setAnalysis(
+      const analysisResult =
+        data?.analysis ||
         data?.message ||
-          "Document analysis completed."
-      );
+        data?.result ||
+        "Document analysis completed.";
 
+      setAnalysis(analysisResult);
       setStatus("complete");
+
+      onDocumentAnalyzed?.({
+        fileName: file.name,
+        fileType:
+          file.type || "Unknown document type",
+        fileSize: file.size,
+        analysis: analysisResult,
+      });
     } catch (error) {
       console.error(
         "AilaLegal Upload Error:",
         error
       );
 
-      setAnalysis(
+      const errorMessage =
         error instanceof Error
           ? error.message
-          : "Document analysis failed."
-      );
+          : "Document analysis failed.";
 
+      setAnalysis(errorMessage);
       setStatus("error");
+
+      onDocumentRemoved?.();
     }
   }
 
@@ -216,9 +250,8 @@ export default function DocumentUpload() {
               </h3>
 
               <p className="mx-auto mt-3 max-w-xs text-sm leading-6 text-neutral-600">
-                Drop a contract, agreement or
-                legal document here for
-                intelligent analysis.
+                Drop a contract, agreement or legal
+                document here for intelligent analysis.
               </p>
 
               <button
@@ -308,7 +341,7 @@ export default function DocumentUpload() {
                       {status === "analyzing"
                         ? "Analyzing"
                         : status === "complete"
-                          ? "Analysis Complete"
+                          ? "Connected to AilaLegal"
                           : status === "error"
                             ? "Analysis Failed"
                             : "Ready for Analysis"}
@@ -348,6 +381,27 @@ export default function DocumentUpload() {
               </button>
             )}
 
+            {/* CONNECTED STATUS */}
+            {status === "complete" && (
+              <div className="mt-4 rounded-[28px] border border-green-400/10 bg-green-400/[0.025] p-5">
+                <div className="flex items-start gap-3">
+                  <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-green-400 shadow-[0_0_12px_rgba(74,222,128,0.7)]" />
+
+                  <div>
+                    <p className="text-sm font-medium text-white">
+                      Document connected to AilaLegal
+                    </p>
+
+                    <p className="mt-2 text-xs leading-6 text-neutral-500">
+                      Analysis is complete. You can now
+                      ask AilaLegal questions about this
+                      exact document.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* ANALYSIS RESULT */}
             {analysis && (
               <div
@@ -376,7 +430,7 @@ export default function DocumentUpload() {
 
                   {status === "complete" && (
                     <span className="text-[9px] uppercase tracking-[0.16em] text-green-400/60">
-                      Complete
+                      AI Context Active
                     </span>
                   )}
                 </div>
@@ -408,9 +462,8 @@ export default function DocumentUpload() {
 
           <p className="text-[11px] leading-5 text-neutral-700">
             Documents are processed for analysis.
-            AilaLegal provides general information
-            and document assistance, not legal
-            advice.
+            AilaLegal provides general information and
+            document assistance, not legal advice.
           </p>
         </div>
       </div>
