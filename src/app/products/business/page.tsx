@@ -12,38 +12,65 @@ type Message = {
   content: string;
 };
 
-const capabilities = [
-  {
-    number: "01",
-    title: "Business Intelligence",
-    description:
-      "Turn business information into clear insights, patterns and opportunities for better decisions.",
-  },
-  {
-    number: "02",
-    title: "AI Assistants",
-    description:
-      "Create intelligent assistants that support teams, customers and daily business operations.",
-  },
-  {
-    number: "03",
-    title: "Workflow Intelligence",
-    description:
-      "Identify repetitive processes and transform them into smarter, more efficient digital workflows.",
-  },
-  {
-    number: "04",
-    title: "Customer Intelligence",
-    description:
-      "Understand customer needs, improve experiences and create more intelligent interactions.",
-  },
-];
-
 const suggestions = [
   "Analyze my business",
   "Find automation opportunities",
   "Help me validate an idea",
   "How can AI improve my company?",
+];
+
+const discoverySteps = [
+  {
+    number: "01",
+    title: "Understand",
+    description:
+      "Map the business, customers and current operations.",
+  },
+  {
+    number: "02",
+    title: "Discover",
+    description:
+      "Find friction, repeated work and missed opportunities.",
+  },
+  {
+    number: "03",
+    title: "Design",
+    description:
+      "Turn the strongest opportunities into practical systems.",
+  },
+  {
+    number: "04",
+    title: "Execute",
+    description:
+      "Move from insight to software, AI and automation.",
+  },
+];
+
+const capabilities = [
+  {
+    number: "01",
+    title: "Business Intelligence",
+    description:
+      "Turn business challenges into clear insights, opportunities and practical next moves.",
+  },
+  {
+    number: "02",
+    title: "AI Opportunity Discovery",
+    description:
+      "Identify where AI can create meaningful value instead of adding unnecessary complexity.",
+  },
+  {
+    number: "03",
+    title: "Workflow Intelligence",
+    description:
+      "Discover repetitive processes and transform them into smarter connected workflows.",
+  },
+  {
+    number: "04",
+    title: "Product Strategy",
+    description:
+      "Shape business ideas into focused digital products, platforms and intelligent experiences.",
+  },
 ];
 
 export default function AilaBusinessPage() {
@@ -148,17 +175,33 @@ export default function AilaBusinessPage() {
     }
   }
 
+  function resetConversation() {
+    if (loading) {
+      return;
+    }
+
+    setMessages([
+      {
+        role: "assistant",
+        content:
+          "Tell me about your business, idea or biggest operational challenge. I’ll help you identify the strongest opportunities for growth, AI and automation.",
+      },
+    ]);
+
+    setInput("");
+  }
+
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#030303] text-white">
       {/* BACKGROUND */}
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:72px_72px]" />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.018)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.018)_1px,transparent_1px)] bg-[size:72px_72px]" />
 
-      <div className="pointer-events-none absolute left-1/2 top-[-250px] h-[700px] w-[900px] -translate-x-1/2 rounded-full bg-blue-500/[0.1] blur-[180px]" />
+      <div className="pointer-events-none absolute left-1/2 top-[-300px] h-[800px] w-[1000px] -translate-x-1/2 rounded-full bg-blue-500/[0.1] blur-[190px]" />
 
-      <div className="pointer-events-none absolute right-[-250px] top-[700px] h-[500px] w-[500px] rounded-full bg-purple-500/[0.08] blur-[160px]" />
+      <div className="pointer-events-none absolute right-[-300px] top-[850px] h-[600px] w-[600px] rounded-full bg-purple-500/[0.07] blur-[180px]" />
 
       {/* HERO */}
-      <section className="relative mx-auto max-w-7xl px-6 pb-20 pt-36">
+      <section className="relative mx-auto max-w-7xl px-6 pb-24 pt-36">
         <div className="max-w-5xl">
           <div className="inline-flex items-center gap-3 rounded-full border border-blue-300/15 bg-blue-300/[0.04] px-4 py-2">
             <span className="relative flex h-2 w-2">
@@ -176,19 +219,20 @@ export default function AilaBusinessPage() {
             Aila Ecosystem / Business AI
           </p>
 
-          <h1 className="mt-6 max-w-4xl text-5xl font-semibold leading-[0.95] tracking-[-0.06em] sm:text-7xl lg:text-8xl">
-            Smarter systems.
+          <h1 className="mt-6 max-w-5xl text-5xl font-semibold leading-[0.94] tracking-[-0.065em] sm:text-7xl lg:text-8xl">
+            Understand the business.
 
             <span className="block bg-gradient-to-r from-blue-300 via-cyan-300 to-purple-400 bg-clip-text text-transparent">
-              Better business.
+              Discover what comes next.
             </span>
           </h1>
 
           <p className="mt-8 max-w-2xl text-lg leading-8 text-neutral-400">
-            Describe your business, idea or operational
-            challenge. Aila Business AI discovers
-            opportunities for intelligent software,
-            automation and better workflows.
+            Aila Business AI turns business
+            challenges, ideas and inefficient
+            operations into clearer opportunities
+            for intelligent software, AI and
+            automation.
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4">
@@ -200,19 +244,50 @@ export default function AilaBusinessPage() {
             </a>
 
             <Link
-              href="/#products"
+              href="/#start-project"
               className="rounded-full border border-white/[0.1] bg-white/[0.03] px-8 py-4 text-neutral-300 transition duration-300 hover:bg-white/[0.07]"
             >
-              Explore Ecosystem
+              Build With Aila
             </Link>
           </div>
         </div>
+
+        {/* HERO SIGNALS */}
+        <div className="mt-20 grid gap-px overflow-hidden rounded-[32px] border border-white/[0.07] bg-white/[0.07] sm:grid-cols-3">
+          {[
+            {
+              label: "Mode",
+              value: "Live Discovery",
+            },
+            {
+              label: "Focus",
+              value: "Business Opportunity",
+            },
+            {
+              label: "Output",
+              value: "Practical Next Move",
+            },
+          ].map((item) => (
+            <div
+              key={item.label}
+              className="bg-[#070707] px-6 py-6"
+            >
+              <p className="text-[10px] uppercase tracking-[0.22em] text-neutral-700">
+                {item.label}
+              </p>
+
+              <p className="mt-3 text-sm text-neutral-300">
+                {item.value}
+              </p>
+            </div>
+          ))}
+        </div>
       </section>
 
-      {/* LIVE BUSINESS INTELLIGENCE */}
+      {/* LIVE INTELLIGENCE */}
       <section
         id="business-intelligence"
-        className="relative mx-auto max-w-7xl px-6 py-16"
+        className="relative mx-auto max-w-7xl px-6 py-20"
       >
         <div className="mb-10 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
           <div>
@@ -225,7 +300,7 @@ export default function AilaBusinessPage() {
             </h2>
           </div>
 
-          <div className="flex items-center gap-2 rounded-full border border-green-400/10 bg-green-400/[0.04] px-4 py-2">
+          <div className="flex w-fit items-center gap-2 rounded-full border border-green-400/10 bg-green-400/[0.04] px-4 py-2">
             <span className="relative flex h-1.5 w-1.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-60" />
 
@@ -238,7 +313,7 @@ export default function AilaBusinessPage() {
           </div>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-[0.7fr_1.3fr]">
+        <div className="grid gap-6 lg:grid-cols-[0.72fr_1.28fr]">
           {/* DISCOVERY PANEL */}
           <div className="rounded-[36px] border border-white/[0.09] bg-[#080808]/90 p-6 shadow-[0_40px_120px_rgba(0,0,0,0.55)] backdrop-blur-2xl sm:p-8">
             <div className="flex items-center gap-4">
@@ -260,24 +335,26 @@ export default function AilaBusinessPage() {
             </div>
 
             <div className="mt-8 space-y-3">
-              {[
-                "Understand your business",
-                "Identify operational friction",
-                "Discover automation opportunities",
-                "Find meaningful AI use cases",
-                "Define the smartest next move",
-              ].map((item, index) => (
+              {discoverySteps.map((step) => (
                 <div
-                  key={item}
-                  className="flex items-center gap-4 rounded-2xl border border-white/[0.06] bg-white/[0.02] p-4"
+                  key={step.number}
+                  className="group rounded-2xl border border-white/[0.06] bg-white/[0.02] p-4 transition hover:border-blue-300/15 hover:bg-blue-300/[0.025]"
                 >
-                  <span className="text-[10px] text-neutral-700">
-                    0{index + 1}
-                  </span>
+                  <div className="flex items-start gap-4">
+                    <span className="pt-0.5 text-[10px] text-neutral-700">
+                      {step.number}
+                    </span>
 
-                  <span className="text-sm text-neutral-400">
-                    {item}
-                  </span>
+                    <div>
+                      <p className="text-sm text-neutral-300">
+                        {step.title}
+                      </p>
+
+                      <p className="mt-2 text-xs leading-5 text-neutral-600">
+                        {step.description}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -288,17 +365,18 @@ export default function AilaBusinessPage() {
               </p>
 
               <p className="mt-3 text-sm leading-7 text-neutral-400">
-                The strongest AI opportunities usually
-                begin where work is repetitive, slow,
-                fragmented or difficult to scale.
+                The strongest opportunities often
+                appear where work is repetitive,
+                fragmented, slow or difficult to
+                scale.
               </p>
             </div>
           </div>
 
-          {/* LIVE AI CHAT */}
+          {/* AI WORKSPACE */}
           <div className="overflow-hidden rounded-[36px] border border-white/[0.09] bg-[#080808]/90 shadow-[0_40px_120px_rgba(0,0,0,0.55)] backdrop-blur-2xl">
             {/* HEADER */}
-            <div className="flex items-center justify-between border-b border-white/[0.07] px-6 py-5 sm:px-8">
+            <div className="flex items-center justify-between border-b border-white/[0.07] px-5 py-5 sm:px-8">
               <div className="flex items-center gap-4">
                 <div className="relative flex h-11 w-11 items-center justify-center rounded-2xl border border-cyan-300/15 bg-cyan-300/[0.05]">
                   <div className="absolute h-5 w-5 rounded-full bg-cyan-300/[0.1] blur-md" />
@@ -317,13 +395,18 @@ export default function AilaBusinessPage() {
                 </div>
               </div>
 
-              <span className="hidden rounded-full border border-blue-300/10 bg-blue-300/[0.04] px-3 py-1.5 text-[9px] uppercase tracking-[0.16em] text-blue-300/60 sm:block">
-                Live AI
-              </span>
+              <button
+                type="button"
+                onClick={resetConversation}
+                disabled={loading}
+                className="rounded-full border border-white/[0.08] bg-white/[0.025] px-3 py-2 text-[9px] uppercase tracking-[0.16em] text-neutral-600 transition hover:border-blue-300/20 hover:text-white disabled:opacity-30"
+              >
+                New Analysis
+              </button>
             </div>
 
             {/* MESSAGES */}
-            <div className="h-[500px] space-y-5 overflow-y-auto p-5 sm:p-8">
+            <div className="h-[520px] space-y-5 overflow-y-auto p-5 sm:p-8">
               {messages.map(
                 (message, index) => (
                   <div
@@ -335,7 +418,7 @@ export default function AilaBusinessPage() {
                     }`}
                   >
                     <div
-                      className={`max-w-[88%] whitespace-pre-wrap rounded-3xl px-5 py-4 text-sm leading-7 sm:max-w-[78%] ${
+                      className={`max-w-[90%] whitespace-pre-wrap rounded-3xl px-5 py-4 text-sm leading-7 sm:max-w-[80%] ${
                         message.role === "user"
                           ? "rounded-br-md bg-white text-black"
                           : "rounded-bl-md border border-white/[0.07] bg-white/[0.035] text-neutral-300"
@@ -352,12 +435,14 @@ export default function AilaBusinessPage() {
                   <div className="flex items-center gap-3 rounded-3xl rounded-bl-md border border-white/[0.07] bg-white/[0.035] px-5 py-4">
                     <div className="flex gap-1">
                       <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-blue-300" />
+
                       <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-cyan-300 [animation-delay:150ms]" />
+
                       <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-purple-300 [animation-delay:300ms]" />
                     </div>
 
                     <span className="text-xs text-neutral-600">
-                      Aila is analyzing your business
+                      Aila is analyzing
                     </span>
                   </div>
                 </div>
@@ -425,6 +510,44 @@ export default function AilaBusinessPage() {
         </div>
       </section>
 
+      {/* HOW IT THINKS */}
+      <section className="relative mx-auto max-w-7xl px-6 py-28">
+        <div className="max-w-3xl">
+          <p className="text-sm uppercase tracking-[0.3em] text-blue-300/60">
+            Intelligence Process
+          </p>
+
+          <h2 className="mt-6 text-4xl font-semibold tracking-[-0.05em] sm:text-6xl">
+            From business problem
+
+            <span className="block text-neutral-600">
+              to practical opportunity.
+            </span>
+          </h2>
+        </div>
+
+        <div className="mt-14 grid gap-px overflow-hidden rounded-[36px] border border-white/[0.07] bg-white/[0.07] lg:grid-cols-4">
+          {discoverySteps.map((step) => (
+            <div
+              key={step.number}
+              className="group bg-[#070707] p-7 transition duration-500 hover:bg-blue-300/[0.035]"
+            >
+              <span className="text-xs text-neutral-700">
+                {step.number}
+              </span>
+
+              <h3 className="mt-16 text-xl font-medium">
+                {step.title}
+              </h3>
+
+              <p className="mt-4 text-sm leading-7 text-neutral-500">
+                {step.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* CAPABILITIES */}
       <section className="relative mx-auto max-w-7xl px-6 py-28">
         <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
@@ -437,15 +560,14 @@ export default function AilaBusinessPage() {
               AI built around
 
               <span className="block text-neutral-600">
-                your business.
+                real business.
               </span>
             </h2>
 
             <p className="mt-7 max-w-md leading-8 text-neutral-500">
               Every organization works differently.
-              Aila Business AI is designed around real
-              operations, real information and real
-              opportunities for improvement.
+              Aila discovers what matters before
+              recommending software, AI or automation.
             </p>
           </div>
 
@@ -487,17 +609,17 @@ export default function AilaBusinessPage() {
             </p>
 
             <h2 className="mx-auto mt-6 max-w-4xl text-4xl font-semibold tracking-[-0.05em] sm:text-6xl">
-              What could intelligence
+              Intelligence should lead
 
               <span className="block text-neutral-600">
-                change in your business?
+                to something real.
               </span>
             </h2>
 
             <p className="mx-auto mt-7 max-w-xl leading-8 text-neutral-400">
-              Tell Aila how your business works and
-              discover where intelligent software can
-              create the most value.
+              Discover the opportunity with Aila,
+              then turn it into intelligent software,
+              automation or a custom digital product.
             </p>
 
             <Link
