@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import {
@@ -63,7 +63,7 @@ export default function AilaAutomationPage() {
     {
       role: "assistant",
       content:
-        "Tell me about a repetitive task or manual process in your business. I’ll help you turn it into a smarter connected workflow.",
+        "Tell me about a repetitive task or manual process in your business. Iâ€™ll help you turn it into a smarter connected workflow.",
     },
   ]);
 
@@ -155,6 +155,24 @@ export default function AilaAutomationPage() {
       setLoading(false);
     }
   }
+
+
+  function resetConversation() {
+    if (loading) {
+      return;
+    }
+
+    setMessages([
+      {
+        role: "assistant",
+        content:
+          "Tell me about a repetitive task or manual process in your business. I’ll help you turn it into a smarter connected workflow.",
+      },
+    ]);
+
+    setInput("");
+  }
+
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#030303] text-white">
@@ -316,10 +334,14 @@ export default function AilaAutomationPage() {
                   </p>
                 </div>
               </div>
-
-              <span className="hidden rounded-full border border-purple-300/10 bg-purple-300/[0.04] px-3 py-1.5 text-[9px] uppercase tracking-[0.16em] text-purple-300/60 sm:block">
-                Live AI
-              </span>
+              <button
+                type="button"
+                onClick={resetConversation}
+                disabled={loading}
+                className="rounded-full border border-white/[0.08] bg-white/[0.025] px-3 py-2 text-[9px] uppercase tracking-[0.16em] text-neutral-600 transition hover:border-purple-300/20 hover:text-white disabled:opacity-30"
+              >
+                New Workflow
+              </button>
             </div>
 
             <div className="h-[500px] space-y-5 overflow-y-auto p-5 sm:p-8">
@@ -573,3 +595,7 @@ export default function AilaAutomationPage() {
     </main>
   );
 }
+
+
+
+
