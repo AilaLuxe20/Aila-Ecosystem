@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { track } from "@vercel/analytics";
 
 const productLinks = [
   {
@@ -62,6 +65,16 @@ const socialLinks = [
 ];
 
 export default function Footer() {
+  function trackClick(
+    eventName: string,
+    destination: string
+  ) {
+    track(eventName, {
+      destination,
+      location: "footer",
+    });
+  }
+
   return (
     <footer className="relative overflow-hidden border-t border-white/[0.07] bg-[#030303]">
       <div className="pointer-events-none absolute bottom-[-300px] left-1/2 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-cyan-500/[0.06] blur-[160px]" />
@@ -102,6 +115,12 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Chat with Aila Ecosystem on WhatsApp"
+              onClick={() =>
+                trackClick(
+                  "whatsapp_clicked",
+                  "WhatsApp"
+                )
+              }
               className="mt-7 inline-flex items-center gap-3 rounded-full border border-green-400/20 bg-green-400/[0.06] px-5 py-3 text-sm font-medium text-green-300 transition duration-300 hover:-translate-y-0.5 hover:border-green-400/40 hover:bg-green-400/[0.1]"
             >
               <span className="relative flex h-2 w-2">
@@ -137,6 +156,12 @@ export default function Footer() {
                 <Link
                   key={item.label}
                   href={item.href}
+                  onClick={() =>
+                    trackClick(
+                      "product_clicked",
+                      item.label
+                    )
+                  }
                   className="w-fit text-sm text-neutral-500 transition hover:translate-x-1 hover:text-white"
                 >
                   {item.label}
@@ -156,6 +181,12 @@ export default function Footer() {
                 <Link
                   key={item.label}
                   href={item.href}
+                  onClick={() =>
+                    trackClick(
+                      "navigation_clicked",
+                      item.label
+                    )
+                  }
                   className="w-fit text-sm text-neutral-500 transition hover:translate-x-1 hover:text-white"
                 >
                   {item.label}
@@ -178,6 +209,12 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`Visit Aila Ecosystem on ${item.label}`}
+                  onClick={() =>
+                    trackClick(
+                      "social_link_clicked",
+                      item.label
+                    )
+                  }
                   className="group flex w-fit items-center gap-2 text-sm text-neutral-500 transition hover:translate-x-1 hover:text-white"
                 >
                   {item.label}

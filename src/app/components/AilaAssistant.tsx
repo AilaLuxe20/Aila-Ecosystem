@@ -5,6 +5,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { track } from "@vercel/analytics";
 
 type Message = {
   role: "user" | "assistant";
@@ -53,6 +54,16 @@ export default function AilaAssistant() {
     if (!messageToSend || loading) {
       return;
     }
+
+    track("aila_ai_message_sent", {
+      source: customMessage
+        ? "suggestion"
+        : "typed_message",
+      conversationMessageNumber:
+        messages.filter(
+          (message) => message.role === "user"
+        ).length + 1,
+    });
 
     const userMessage: Message = {
       role: "user",
