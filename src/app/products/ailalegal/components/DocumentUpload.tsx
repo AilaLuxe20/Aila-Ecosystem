@@ -28,8 +28,7 @@ type DocumentUploadProps = {
   onDocumentRemoved?: () => void;
 };
 
-const acceptedFileTypes =
-  ".pdf,.txt,.doc,.docx";
+const acceptedFileTypes = ".pdf,.txt";
 
 export default function DocumentUpload({
   onDocumentAnalyzed,
@@ -265,7 +264,7 @@ export default function DocumentUpload({
               </button>
 
               <p className="mt-4 text-[10px] uppercase tracking-[0.16em] text-neutral-700">
-                PDF · TXT · DOC · DOCX
+                PDF · TXT · MAX 10 MB
               </p>
             </div>
           </div>
