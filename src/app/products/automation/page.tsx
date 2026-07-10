@@ -1,4 +1,16 @@
+"use client";
+
 import Link from "next/link";
+import {
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+
+type Message = {
+  role: "user" | "assistant";
+  content: string;
+};
 
 const workflows = [
   {
@@ -27,41 +39,123 @@ const workflows = [
   },
 ];
 
-const automationSteps = [
-  {
-    label: "New request received",
-    status: "Complete",
-  },
-  {
-    label: "Aila classified request",
-    status: "Complete",
-  },
-  {
-    label: "Customer data enriched",
-    status: "Complete",
-  },
-  {
-    label: "Workflow assigned",
-    status: "Running",
-  },
+const suggestions = [
+  "Automate my customer follow-ups",
+  "I manually process documents",
+  "Find repetitive work in my business",
+  "Design an AI workflow",
 ];
 
-const metrics = [
-  {
-    value: "1,284",
-    label: "Tasks automated",
-  },
-  {
-    value: "96.8%",
-    label: "Success rate",
-  },
-  {
-    value: "412h",
-    label: "Time recovered",
-  },
+const discoverySteps = [
+  "Discover the trigger",
+  "Understand the information",
+  "Identify decisions and rules",
+  "Design automated actions",
+  "Define the desired result",
 ];
 
 export default function AilaAutomationPage() {
+  const [input, setInput] = useState("");
+
+  const [messages, setMessages] = useState<
+    Message[]
+  >([
+    {
+      role: "assistant",
+      content:
+        "Tell me about a repetitive task or manual process in your business. I’ll help you turn it into a smarter connected workflow.",
+    },
+  ]);
+
+  const [loading, setLoading] =
+    useState(false);
+
+  const chatEndRef =
+    useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({
+      behavior: "smooth",
+    });
+  }, [messages, loading]);
+
+  async function sendMessage(
+    customMessage?: string
+  ) {
+    const messageToSend = (
+      customMessage || input
+    ).trim();
+
+    if (!messageToSend || loading) {
+      return;
+    }
+
+    const userMessage: Message = {
+      role: "user",
+      content: messageToSend,
+    };
+
+    const updatedMessages = [
+      ...messages,
+      userMessage,
+    ];
+
+    setMessages(updatedMessages);
+    setInput("");
+    setLoading(true);
+
+    try {
+      const response = await fetch(
+        "/api/automation-chat",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type":
+              "application/json",
+          },
+          body: JSON.stringify({
+            messages: updatedMessages,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data?.error ||
+            "Aila Automation could not respond."
+        );
+      }
+
+      setMessages((previous) => [
+        ...previous,
+        {
+          role: "assistant",
+          content:
+            data?.message ||
+            "Tell me more about the process you want to automate.",
+        },
+      ]);
+    } catch (error) {
+      console.error(
+        "Aila Automation Error:",
+        error
+      );
+
+      setMessages((previous) => [
+        ...previous,
+        {
+          role: "assistant",
+          content:
+            "I could not connect to the automation engine right now. Please try again.",
+        },
+      ]);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#030303] text-white">
       {/* BACKGROUND */}
@@ -69,20 +163,19 @@ export default function AilaAutomationPage() {
 
       <div className="pointer-events-none absolute left-1/2 top-[-300px] h-[800px] w-[1000px] -translate-x-1/2 rounded-full bg-purple-500/[0.1] blur-[190px]" />
 
-      <div className="pointer-events-none absolute left-[-300px] top-[700px] h-[600px] w-[600px] rounded-full bg-cyan-500/[0.06] blur-[180px]" />
+      <div className="pointer-events-none absolute left-[-300px] top-[900px] h-[600px] w-[600px] rounded-full bg-cyan-500/[0.06] blur-[180px]" />
 
       {/* HERO */}
-      <section className="relative mx-auto grid min-h-screen max-w-7xl gap-16 px-6 pb-24 pt-36 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-        <div>
+      <section className="relative mx-auto max-w-7xl px-6 pb-20 pt-36">
+        <div className="max-w-5xl">
           <div className="inline-flex items-center gap-3 rounded-full border border-purple-300/15 bg-purple-300/[0.04] px-4 py-2">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-purple-400 opacity-60" />
-
               <span className="relative inline-flex h-2 w-2 rounded-full bg-purple-400" />
             </span>
 
             <span className="text-xs uppercase tracking-[0.24em] text-purple-200/70">
-              Automation Engine Online
+              Automation Intelligence Online
             </span>
           </div>
 
@@ -90,27 +183,28 @@ export default function AilaAutomationPage() {
             Aila Ecosystem / Automation
           </p>
 
-          <h1 className="mt-6 max-w-3xl text-5xl font-semibold leading-[0.95] tracking-[-0.06em] sm:text-7xl lg:text-8xl">
-            Work flows.
+          <h1 className="mt-6 max-w-5xl text-5xl font-semibold leading-[0.95] tracking-[-0.06em] sm:text-7xl lg:text-8xl">
+            Show Aila the work.
 
             <span className="block bg-gradient-to-r from-purple-300 via-blue-300 to-cyan-300 bg-clip-text text-transparent">
-              Intelligence moves.
+              Build the workflow.
             </span>
           </h1>
 
-          <p className="mt-8 max-w-xl text-lg leading-8 text-neutral-400">
-            Aila Automation transforms repetitive business processes into
-            intelligent systems that move information, complete tasks and keep
-            operations running.
+          <p className="mt-8 max-w-2xl text-lg leading-8 text-neutral-400">
+            Describe the repetitive work inside your
+            business. Aila discovers the trigger,
+            decisions, actions and intelligent workflow
+            that could automate it.
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4">
-            <Link
-              href="/#start-project"
+            <a
+              href="#automation-workspace"
               className="rounded-full bg-white px-8 py-4 font-semibold text-black transition duration-300 hover:scale-105"
             >
-              Automate with Aila
-            </Link>
+              Discover My Workflow
+            </a>
 
             <Link
               href="/#products"
@@ -120,141 +214,215 @@ export default function AilaAutomationPage() {
             </Link>
           </div>
         </div>
+      </section>
 
-        {/* AUTOMATION ENGINE */}
-        <div className="relative">
-          <div className="pointer-events-none absolute inset-0 rounded-full bg-purple-500/[0.08] blur-[110px]" />
+      {/* LIVE AUTOMATION WORKSPACE */}
+      <section
+        id="automation-workspace"
+        className="relative mx-auto max-w-7xl px-6 py-16"
+      >
+        <div className="mb-10 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="text-xs uppercase tracking-[0.3em] text-purple-300/60">
+              Live Workflow Discovery
+            </p>
 
-          <div className="relative overflow-hidden rounded-[36px] border border-white/[0.09] bg-[#080808]/90 shadow-[0_40px_120px_rgba(0,0,0,0.65)] backdrop-blur-2xl">
-            {/* HEADER */}
-            <div className="flex items-center justify-between border-b border-white/[0.07] px-6 py-5 sm:px-8">
+            <h2 className="mt-4 text-3xl font-semibold tracking-[-0.04em] sm:text-5xl">
+              Turn repetition into a system.
+            </h2>
+          </div>
+
+          <div className="flex items-center gap-2 rounded-full border border-green-400/10 bg-green-400/[0.04] px-4 py-2">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-60" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-green-400" />
+            </span>
+
+            <span className="text-[9px] uppercase tracking-[0.18em] text-green-300/60">
+              Engine Active
+            </span>
+          </div>
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-[0.7fr_1.3fr]">
+          {/* DISCOVERY PANEL */}
+          <div className="rounded-[36px] border border-white/[0.09] bg-[#080808]/90 p-6 shadow-[0_40px_120px_rgba(0,0,0,0.55)] backdrop-blur-2xl sm:p-8">
+            <div className="flex items-center gap-4">
+              <div className="relative flex h-12 w-12 items-center justify-center rounded-2xl border border-purple-300/15 bg-purple-300/[0.05]">
+                <div className="absolute h-6 w-6 rounded-full bg-purple-300/[0.12] blur-lg" />
+                <div className="relative h-2.5 w-2.5 rounded-full bg-purple-300 shadow-[0_0_20px_rgba(216,180,254,0.95)]" />
+              </div>
+
               <div>
                 <p className="text-sm font-medium">
-                  Intelligent Workflow
+                  Workflow Discovery
                 </p>
 
                 <p className="mt-1 text-xs text-neutral-600">
-                  Customer request automation
+                  From manual process to intelligent system
                 </p>
-              </div>
-
-              <div className="flex items-center gap-2 rounded-full border border-green-400/10 bg-green-400/[0.04] px-3 py-1.5">
-                <span className="h-1.5 w-1.5 rounded-full bg-green-400 shadow-[0_0_10px_rgba(74,222,128,0.8)]" />
-
-                <span className="text-[9px] uppercase tracking-[0.18em] text-green-300/60">
-                  Running
-                </span>
               </div>
             </div>
 
-            {/* ENGINE BODY */}
-            <div className="p-6 sm:p-8">
-              <div className="grid gap-3 sm:grid-cols-3">
-                {metrics.map((metric) => (
+            <div className="mt-8 space-y-3">
+              {discoverySteps.map(
+                (step, index) => (
                   <div
-                    key={metric.label}
-                    className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5"
+                    key={step}
+                    className="flex items-center gap-4 rounded-2xl border border-white/[0.06] bg-white/[0.02] p-4"
                   >
-                    <p className="text-2xl font-semibold tracking-[-0.04em]">
-                      {metric.value}
-                    </p>
+                    <span className="text-[10px] text-neutral-700">
+                      0{index + 1}
+                    </span>
 
-                    <p className="mt-2 text-xs text-neutral-600">
-                      {metric.label}
-                    </p>
+                    <span className="text-sm text-neutral-400">
+                      {step}
+                    </span>
                   </div>
-                ))}
-              </div>
+                )
+              )}
+            </div>
 
-              {/* WORKFLOW */}
-              <div className="mt-4 rounded-3xl border border-white/[0.07] bg-white/[0.02] p-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-neutral-300">
-                      Active Sequence
-                    </p>
+            <div className="mt-6 rounded-3xl border border-purple-300/10 bg-purple-300/[0.035] p-6">
+              <p className="text-xs uppercase tracking-[0.2em] text-purple-300/50">
+                Aila Automation
+              </p>
 
-                    <p className="mt-1 text-xs text-neutral-600">
-                      Workflow ID · AILA-2841
-                    </p>
-                  </div>
+              <p className="mt-3 text-sm leading-7 text-neutral-400">
+                The best automation opportunities often
+                begin with work that repeats, moves
+                information between systems or delays
+                people unnecessarily.
+              </p>
+            </div>
+          </div>
 
-                  <span className="text-xs text-purple-300/60">
-                    75%
-                  </span>
+          {/* LIVE AI */}
+          <div className="overflow-hidden rounded-[36px] border border-white/[0.09] bg-[#080808]/90 shadow-[0_40px_120px_rgba(0,0,0,0.55)] backdrop-blur-2xl">
+            <div className="flex items-center justify-between border-b border-white/[0.07] px-6 py-5 sm:px-8">
+              <div className="flex items-center gap-4">
+                <div className="relative flex h-11 w-11 items-center justify-center rounded-2xl border border-purple-300/15 bg-purple-300/[0.05]">
+                  <div className="absolute h-5 w-5 rounded-full bg-purple-300/[0.1] blur-md" />
+                  <div className="relative h-2.5 w-2.5 rounded-full bg-purple-300 shadow-[0_0_18px_rgba(216,180,254,0.9)]" />
                 </div>
 
-                <div className="mt-7 space-y-3">
-                  {automationSteps.map((step, index) => {
-                    const isRunning =
-                      step.status === "Running";
+                <div>
+                  <p className="text-sm font-medium">
+                    Aila Automation
+                  </p>
 
-                    return (
-                      <div
-                        key={step.label}
-                        className="group flex items-center gap-4 rounded-2xl border border-white/[0.06] bg-black/30 p-4 transition duration-300 hover:border-purple-300/15"
-                      >
-                        <div
-                          className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border text-xs ${
-                            isRunning
-                              ? "border-purple-300/20 bg-purple-300/[0.06] text-purple-300"
-                              : "border-green-300/15 bg-green-300/[0.04] text-green-400"
-                          }`}
-                        >
-                          {isRunning ? "•••" : "✓"}
-                        </div>
-
-                        <div className="min-w-0 flex-1">
-                          <p className="text-sm text-neutral-300">
-                            {step.label}
-                          </p>
-
-                          <p
-                            className={`mt-1 text-xs ${
-                              isRunning
-                                ? "text-purple-300/60"
-                                : "text-neutral-700"
-                            }`}
-                          >
-                            {step.status}
-                          </p>
-                        </div>
-
-                        <span className="text-xs text-neutral-700">
-                          0{index + 1}
-                        </span>
-                      </div>
-                    );
-                  })}
+                  <p className="mt-1 text-xs text-neutral-600">
+                    Intelligent workflow architect
+                  </p>
                 </div>
               </div>
 
-              {/* AILA AUTOMATION INSIGHT */}
-              <div className="mt-4 rounded-3xl border border-purple-300/10 bg-purple-300/[0.035] p-6">
-                <div className="flex items-start gap-4">
-                  <div className="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-purple-300/10 bg-purple-300/[0.04]">
-                    <div className="h-2 w-2 rounded-full bg-purple-300 shadow-[0_0_14px_rgba(216,180,254,0.9)]" />
+              <span className="hidden rounded-full border border-purple-300/10 bg-purple-300/[0.04] px-3 py-1.5 text-[9px] uppercase tracking-[0.16em] text-purple-300/60 sm:block">
+                Live AI
+              </span>
+            </div>
+
+            <div className="h-[500px] space-y-5 overflow-y-auto p-5 sm:p-8">
+              {messages.map(
+                (message, index) => (
+                  <div
+                    key={`${message.role}-${index}`}
+                    className={`flex ${
+                      message.role === "user"
+                        ? "justify-end"
+                        : "justify-start"
+                    }`}
+                  >
+                    <div
+                      className={`max-w-[88%] whitespace-pre-wrap rounded-3xl px-5 py-4 text-sm leading-7 sm:max-w-[78%] ${
+                        message.role === "user"
+                          ? "rounded-br-md bg-white text-black"
+                          : "rounded-bl-md border border-white/[0.07] bg-white/[0.035] text-neutral-300"
+                      }`}
+                    >
+                      {message.content}
+                    </div>
                   </div>
+                )
+              )}
 
-                  <div>
-                    <p className="text-xs uppercase tracking-[0.2em] text-purple-300/50">
-                      Aila Automation
-                    </p>
+              {loading && (
+                <div className="flex justify-start">
+                  <div className="flex items-center gap-3 rounded-3xl rounded-bl-md border border-white/[0.07] bg-white/[0.035] px-5 py-4">
+                    <div className="flex gap-1">
+                      <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-purple-300" />
+                      <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-blue-300 [animation-delay:150ms]" />
+                      <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-cyan-300 [animation-delay:300ms]" />
+                    </div>
 
-                    <p className="mt-3 text-sm leading-7 text-neutral-400">
-                      The request has been classified and enriched. Aila is now
-                      routing it to the correct workflow without manual
-                      intervention.
-                    </p>
+                    <span className="text-xs text-neutral-600">
+                      Aila is designing the workflow
+                    </span>
                   </div>
                 </div>
+              )}
+
+              <div ref={chatEndRef} />
+            </div>
+
+            <div className="border-t border-white/[0.07] px-5 pt-5 sm:px-8">
+              <div className="flex flex-wrap gap-2">
+                {suggestions.map(
+                  (suggestion) => (
+                    <button
+                      key={suggestion}
+                      type="button"
+                      onClick={() =>
+                        sendMessage(suggestion)
+                      }
+                      disabled={loading}
+                      className="rounded-full border border-white/[0.08] bg-white/[0.025] px-4 py-2 text-xs text-neutral-500 transition hover:border-purple-300/20 hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
+                    >
+                      {suggestion}
+                    </button>
+                  )
+                )}
+              </div>
+            </div>
+
+            <div className="p-5 sm:p-8">
+              <div className="flex gap-2 rounded-2xl border border-white/[0.09] bg-black/40 p-2 transition focus-within:border-purple-300/25">
+                <input
+                  value={input}
+                  onChange={(event) =>
+                    setInput(event.target.value)
+                  }
+                  onKeyDown={(event) => {
+                    if (
+                      event.key === "Enter" &&
+                      !event.shiftKey
+                    ) {
+                      event.preventDefault();
+                      sendMessage();
+                    }
+                  }}
+                  placeholder="Describe repetitive work you want to automate..."
+                  disabled={loading}
+                  className="min-w-0 flex-1 bg-transparent px-4 py-3 text-sm text-white outline-none placeholder:text-neutral-700 disabled:opacity-50"
+                />
+
+                <button
+                  type="button"
+                  onClick={() => sendMessage()}
+                  disabled={
+                    loading || !input.trim()
+                  }
+                  className="rounded-xl bg-white px-5 py-3 text-sm font-semibold text-black transition hover:scale-[1.03] disabled:cursor-not-allowed disabled:opacity-30"
+                >
+                  {loading ? "..." : "Discover"}
+                </button>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* AUTOMATION FLOW */}
+      {/* FLOW */}
       <section className="relative mx-auto max-w-7xl px-6 py-28">
         <div className="text-center">
           <p className="text-sm uppercase tracking-[0.3em] text-purple-300/60">
@@ -282,13 +450,13 @@ export default function AilaAutomationPage() {
               number: "02",
               title: "Understand",
               description:
-                "Aila analyzes the information and determines what should happen next.",
+                "Aila analyzes information and determines what should happen next.",
             },
             {
               number: "03",
               title: "Act",
               description:
-                "Connected systems, tools and AI agents complete the required tasks.",
+                "Connected systems and intelligent agents complete the required tasks.",
             },
             {
               number: "04",
@@ -299,25 +467,21 @@ export default function AilaAutomationPage() {
           ].map((step) => (
             <div
               key={step.number}
-              className="group relative overflow-hidden rounded-[28px] border border-white/[0.08] bg-white/[0.025] p-7 transition duration-500 hover:-translate-y-1 hover:border-purple-300/20 hover:bg-purple-300/[0.035]"
+              className="group rounded-[28px] border border-white/[0.08] bg-white/[0.025] p-7 transition duration-500 hover:-translate-y-1 hover:border-purple-300/20 hover:bg-purple-300/[0.035]"
             >
-              <div className="pointer-events-none absolute right-[-50px] top-[-50px] h-32 w-32 rounded-full bg-purple-500/[0.06] blur-[50px] transition duration-500 group-hover:bg-purple-500/[0.12]" />
+              <span className="text-xs text-neutral-700">
+                {step.number}
+              </span>
 
-              <div className="relative">
-                <span className="text-xs text-neutral-700">
-                  {step.number}
-                </span>
+              <div className="mt-12 h-px w-full bg-gradient-to-r from-purple-300/40 to-transparent" />
 
-                <div className="mt-12 h-px w-full bg-gradient-to-r from-purple-300/40 to-transparent" />
+              <h3 className="mt-8 text-xl font-medium">
+                {step.title}
+              </h3>
 
-                <h3 className="mt-8 text-xl font-medium">
-                  {step.title}
-                </h3>
-
-                <p className="mt-4 text-sm leading-7 text-neutral-500">
-                  {step.description}
-                </p>
-              </div>
+              <p className="mt-4 text-sm leading-7 text-neutral-500">
+                {step.description}
+              </p>
             </div>
           ))}
         </div>
@@ -340,8 +504,9 @@ export default function AilaAutomationPage() {
             </h2>
 
             <p className="mt-7 max-w-md leading-8 text-neutral-500">
-              Aila connects the processes behind your business and turns
-              repetitive work into intelligent digital systems.
+              Aila connects the processes behind your
+              business and turns repetitive work into
+              intelligent digital systems.
             </p>
           </div>
 
@@ -356,7 +521,7 @@ export default function AilaAutomationPage() {
                     {workflow.number}
                   </span>
 
-                  <div className="h-2 w-2 rounded-full border border-neutral-700 transition group-hover:border-purple-300 group-hover:bg-purple-300 group-hover:shadow-[0_0_15px_rgba(216,180,254,0.8)]" />
+                  <div className="h-2 w-2 rounded-full border border-neutral-700 transition group-hover:border-purple-300 group-hover:bg-purple-300" />
                 </div>
 
                 <h3 className="mt-12 text-xl font-medium">
@@ -372,7 +537,7 @@ export default function AilaAutomationPage() {
         </div>
       </section>
 
-      {/* FINAL CTA */}
+      {/* CTA */}
       <section className="relative mx-auto max-w-6xl px-6 py-32">
         <div className="relative overflow-hidden rounded-[40px] border border-white/[0.09] bg-white/[0.025] px-6 py-20 text-center backdrop-blur-2xl sm:px-12">
           <div className="pointer-events-none absolute left-1/2 top-[-300px] h-[600px] w-[800px] -translate-x-1/2 rounded-full bg-purple-500/[0.12] blur-[170px]" />
@@ -391,8 +556,9 @@ export default function AilaAutomationPage() {
             </h2>
 
             <p className="mx-auto mt-7 max-w-xl leading-8 text-neutral-400">
-              Show Aila the repetitive work inside your business and build an
-              intelligent system that handles it.
+              Show Aila the repetitive work inside your
+              business and discover the intelligent system
+              that could handle it.
             </p>
 
             <Link
