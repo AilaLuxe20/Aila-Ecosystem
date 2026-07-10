@@ -5,8 +5,15 @@ type LegalMessage = {
   content: string;
 };
 
+type LegalDocumentContext = {
+  fileName: string;
+  fileType?: string;
+  analysis: string;
+};
+
 const MAX_MESSAGES = 20;
 const MAX_MESSAGE_LENGTH = 6000;
+const MAX_DOCUMENT_CONTEXT_LENGTH = 24000;
 
 export async function POST(req: Request) {
   try {
@@ -100,24 +107,81 @@ export async function POST(req: Request) {
       );
     }
 
-    const aiResponse = await fetch(
-      "https://openrouter.ai/api/v1/chat/completions",
-      {
-        method: "POST",
+    let documentContext:
+      | LegalDocumentContext
+      | null = null;
 
-        headers: {
-          Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
-          "Content-Type": "application/json",
-        },
+    if (
+      typeof body?.documentContext ===
+        "object" &&
+      body.documentContext !== null &&
+      typeof body.documentContext
+        .fileName === "string" &&
+      typeof body.documentContext
+        .analysis === "string" &&
+      body.documentContext.analysis.trim()
+        .length > 0
+    ) {
+      documentContext = {
+        fileName:
+          body.documentContext.fileName
+            .trim()
+            .slice(0, 300),
 
-        body: JSON.stringify({
-          model: "openai/gpt-4.1-mini",
+        fileType:
+          typeof body.documentContext
+            .fileType === "string"
+            ? body.documentContext.fileType
+                .trim()
+                .slice(0, 200)
+            : undefined,
 
-          messages: [
-            {
-              role: "system",
+        analysis:
+          body.documentContext.analysis
+            .trim()
+            .slice(
+              0,
+              MAX_DOCUMENT_CONTEXT_LENGTH
+            ),
+      };
+    }
 
-              content: `
+    const documentInstructions =
+      documentContext
+        ? `
+A DOCUMENT IS CURRENTLY CONNECTED TO THIS CONVERSATION.
+
+DOCUMENT NAME:
+${documentContext.fileName}
+
+DOCUMENT TYPE:
+${documentContext.fileType || "Unknown"}
+
+DOCUMENT ANALYSIS:
+--- BEGIN DOCUMENT ANALYSIS ---
+${documentContext.analysis}
+--- END DOCUMENT ANALYSIS ---
+
+DOCUMENT CONTEXT RULES:
+
+- Use the connected document analysis when answering questions about "this document", "this contract", "the agreement", "the file" or similar references.
+- Base document-specific answers only on information actually present in the connected document analysis.
+- Do not invent clauses, dates, names, obligations, penalties, risks or terms that are not present.
+- If the analysis does not contain enough information to answer accurately, say so clearly.
+- Clearly separate what the document says from general legal information.
+- When summarizing the document, identify the main purpose, important obligations, dates, notice periods, termination terms, payment terms and potential review points when those details are available.
+- When identifying risks, explain why each point may deserve closer review.
+- When the user asks about a clause, explain it in plain language.
+- Quote only short necessary excerpts from the supplied document analysis.
+- Do not claim to have reviewed the original document beyond the connected analysis provided to you.
+        `.trim()
+        : `
+NO DOCUMENT IS CURRENTLY CONNECTED.
+
+If the user asks about "this document", "this contract", "the agreement" or a specific clause without providing the text, explain that no document is currently connected and ask them to upload the document or paste the exact wording.
+        `.trim();
+
+    const systemPrompt = `
 You are AilaLegal AI, the legal intelligence assistant inside the Aila Ecosystem.
 
 Your purpose is to help users understand:
@@ -159,13 +223,12 @@ IMPORTANT RULES:
 - Never claim certainty when jurisdiction or facts are unclear.
 - If the answer depends on a country, state or jurisdiction and the user has not provided it, explain that the rules may differ by location.
 - If a document clause has not been provided, do not pretend to have seen it.
-- If the user asks about a specific clause, encourage them to paste the exact wording when necessary.
 - Clearly distinguish general information from professional legal advice.
 - Do not tell the user that a contract is definitely valid, invalid, enforceable or unenforceable.
 - Do not promise legal outcomes.
 - For urgent legal deadlines, criminal matters, court proceedings, immigration matters or serious disputes, recommend speaking with a qualified lawyer in the relevant jurisdiction.
 
-When reviewing information from a user:
+When reviewing document information:
 
 1. Explain what it means.
 2. Identify important obligations or risks.
@@ -176,14 +239,34 @@ When reviewing information from a user:
 Do not repeat a legal disclaimer in every paragraph.
 
 When appropriate, end with one short sentence stating that the response is general legal information, not legal advice.
-              `.trim(),
+
+${documentInstructions}
+    `.trim();
+
+    const aiResponse = await fetch(
+      "https://openrouter.ai/api/v1/chat/completions",
+      {
+        method: "POST",
+
+        headers: {
+          Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify({
+          model: "openai/gpt-4.1-mini",
+
+          messages: [
+            {
+              role: "system",
+              content: systemPrompt,
             },
 
             ...messages,
           ],
 
           max_tokens: 1400,
-          temperature: 0.25,
+          temperature: 0.2,
         }),
       }
     );
@@ -241,6 +324,10 @@ When appropriate, end with one short sentence stating that the response is gener
       {
         success: true,
         message: reply.trim(),
+        documentContextActive:
+          Boolean(documentContext),
+        documentName:
+          documentContext?.fileName || null,
       },
       {
         status: 200,
