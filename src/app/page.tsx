@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import AilaAssistant from "./components/AilaAssistant";
 import EcosystemCards from "./components/EcosystemCards";
 import AnimatedSection from "./components/AnimatedSection";
@@ -170,7 +170,7 @@ export default function Home() {
                   </h2>
 
                   <p className="mt-2 text-neutral-400">
-                    iOS • Android
+                    iOS â€¢ Android
                   </p>
                 </div>
               </div>
@@ -325,7 +325,7 @@ export default function Home() {
                       </span>
 
                       <span className="text-xl text-neutral-600 transition duration-300 group-hover:translate-x-1 group-hover:text-cyan-300">
-                        →
+                        â†’
                       </span>
                     </div>
                   </div>
@@ -381,9 +381,11 @@ export default function Home() {
       </section>
 
       {/* PROJECT INQUIRY */}
-      <AnimatedSection>
-        <ProjectInquiry />
-      </AnimatedSection>
+      <section id="start-project">
+        <AnimatedSection>
+          <ProjectInquiry />
+        </AnimatedSection>
+      </section>
 
       {/* FINAL CTA */}
       <section className="mx-auto max-w-6xl px-6 pb-40 pt-20">
