@@ -63,7 +63,7 @@ export default function AilaAutomationPage() {
     {
       role: "assistant",
       content:
-        "Tell me about a repetitive task or manual process in your business. Iâ€™ll help you turn it into a smarter connected workflow.",
+        "Tell me about a repetitive task or manual process in your business. I’ll help you turn it into a smarter connected workflow.",
     },
   ]);
 
@@ -595,6 +595,7 @@ export default function AilaAutomationPage() {
     </main>
   );
 }
+
 
 
 
