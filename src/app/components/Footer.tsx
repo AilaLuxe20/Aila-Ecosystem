@@ -234,7 +234,7 @@ export default function Footer() {
                     aria-hidden="true"
                     className="text-neutral-700 transition group-hover:text-cyan-300"
                   >
-                    â†—
+                    ↗
                   </span>
                 </a>
               ))}
@@ -244,7 +244,7 @@ export default function Footer() {
 
         <div className="mt-20 flex flex-col gap-5 border-t border-white/[0.07] pt-8 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs text-neutral-700">
-            Â© {new Date().getFullYear()} Aila Ecosystem.
+            © {new Date().getFullYear()} Aila Ecosystem.
             All rights reserved.
           </p>
 
@@ -256,3 +256,4 @@ export default function Footer() {
     </footer>
   );
 }
+
