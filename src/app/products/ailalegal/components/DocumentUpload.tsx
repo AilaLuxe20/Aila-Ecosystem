@@ -22,17 +22,17 @@ export type LegalDocumentContext = {
 };
 
 type DocumentUploadProps = {
-  onDocumentAnalyzed?: (
+  documentAnalyzedAction?: (
     document: LegalDocumentContext
   ) => void;
-  onDocumentRemoved?: () => void;
+  documentRemovedAction?: () => void;
 };
 
 const acceptedFileTypes = ".pdf,.txt";
 
 export default function DocumentUpload({
-  onDocumentAnalyzed,
-  onDocumentRemoved,
+  documentAnalyzedAction,
+  documentRemovedAction,
 }: DocumentUploadProps) {
   const [file, setFile] =
     useState<File | null>(null);
@@ -60,7 +60,7 @@ export default function DocumentUpload({
     setAnalysis("");
     setStatus("ready");
 
-    onDocumentRemoved?.();
+    documentRemovedAction?.();
   }
 
   function handleFileChange(
@@ -101,7 +101,7 @@ export default function DocumentUpload({
     setAnalysis("");
     setStatus("idle");
 
-    onDocumentRemoved?.();
+    documentRemovedAction?.();
 
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
@@ -165,7 +165,7 @@ export default function DocumentUpload({
       setAnalysis(analysisResult);
       setStatus("complete");
 
-      onDocumentAnalyzed?.({
+      documentAnalyzedAction?.({
         fileName: file.name,
         fileType:
           file.type || "Unknown document type",
@@ -186,7 +186,7 @@ export default function DocumentUpload({
       setAnalysis(errorMessage);
       setStatus("error");
 
-      onDocumentRemoved?.();
+      documentRemovedAction?.();
     }
   }
 

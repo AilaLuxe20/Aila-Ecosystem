@@ -444,10 +444,10 @@ export default function AilaLegalPage() {
           {/* DOCUMENT INTELLIGENCE */}
           <div className="min-w-0">
             <DocumentUpload
-              onDocumentAnalyzed={
+              documentAnalyzedAction={
                 handleDocumentAnalyzed
               }
-              onDocumentRemoved={
+              documentRemovedAction={
                 handleDocumentRemoved
               }
             />
@@ -551,3 +551,4 @@ export default function AilaLegalPage() {
     </main>
   );
 }
+
