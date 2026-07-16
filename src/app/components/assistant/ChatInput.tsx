@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 type Props={
 sendAction:(message:string)=>void;
@@ -16,21 +16,15 @@ voiceText=""
 
 const[text,setText]=useState("");
 
-useEffect(()=>{
-
-if(voiceText.trim()){
-
-setText(voiceText);
-
-}
-
-},[voiceText]);
+const draftText=text || voiceText;
 
 function submit(){
 
-if(!text.trim()) return;
+const message=draftText.trim();
 
-sendAction(text);
+if(!message) return;
+
+sendAction(message);
 
 setText("");
 
@@ -44,7 +38,7 @@ return(
 
 <textarea
 rows={2}
-value={text}
+value={draftText}
 onChange={(e)=>setText(e.target.value)}
 onKeyDown={(e)=>{
 

@@ -57,27 +57,27 @@ const products = [
 
 export default function ProductsPage() {
   return (
-    <main className="min-h-screen bg-[#050816] text-white">
-      <section className="mx-auto max-w-7xl px-6 py-28">
+    <main className="enterprise-page min-h-screen text-white">
+      <section className="mx-auto max-w-7xl px-8 py-16 md:py-24">
 
-        <div className="text-center">
-          <p className="uppercase tracking-[0.45em] text-cyan-400">
+        <div className="mx-auto max-w-4xl text-center">
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--aila-gold)]">
             PRODUCTS
           </p>
 
-          <h1 className="mt-5 text-7xl font-black">
+          <h1 className="mt-4 text-4xl font-semibold tracking-[-0.04em] md:text-6xl">
             AI Products
             <br />
-            Built For The Future
+            Built for Enterprise Work
           </h1>
 
-          <p className="mx-auto mt-8 max-w-3xl text-xl leading-9 text-slate-300">
+          <p className="mx-auto mt-6 max-w-3xl text-base leading-8 text-white/62 md:text-lg">
             Premium software engineered by Aila Ecosystem for startups,
             enterprises and governments.
           </p>
         </div>
 
-        <div className="mt-24 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
 
           {products.map((product) => {
 
@@ -87,28 +87,28 @@ export default function ProductsPage() {
 
               <div
                 key={product.title}
-                className="rounded-[30px] border border-white/10 bg-white/5 p-8 transition hover:-translate-y-3 hover:border-cyan-400"
+                className="enterprise-card group rounded-[16px] p-6 transition duration-300 hover:-translate-y-1 hover:border-[var(--aila-gold)]/35"
               >
 
-                <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-cyan-500/10">
-                  <Icon className="h-10 w-10 text-cyan-400" />
+                <div className="flex h-14 w-14 items-center justify-center rounded-[14px] border border-white/10 bg-white/[0.05]">
+                  <Icon className="h-7 w-7 text-[var(--aila-gold)]" />
                 </div>
 
-                <h2 className="mt-8 text-3xl font-black">
+                <h2 className="mt-8 text-2xl font-semibold tracking-[-0.02em]">
                   {product.title}
                 </h2>
 
-                <p className="mt-5 leading-8 text-slate-400">
+                <p className="mt-4 min-h-[56px] leading-7 text-white/58">
                   {product.description}
                 </p>
 
-                <span className="mt-6 inline-flex rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-2 text-sm text-cyan-300">
+                <span className="mt-6 inline-flex rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-white/55">
                   {product.status}
                 </span>
 
                 <Link
                   href="/contact"
-                  className="mt-8 flex items-center font-semibold text-cyan-400"
+                  className="enterprise-focus mt-8 inline-flex items-center rounded-[10px] bg-white px-4 py-2.5 text-sm font-semibold text-black transition hover:bg-[var(--aila-gold)]"
                 >
                   Request Demo
 

@@ -9,7 +9,7 @@ Welcome
 </p>
 
 <h1 className="mt-5 text-6xl font-black">
-Hello, I'm Aila
+Hello, I&apos;m Aila
 </h1>
 
 <p className="mx-auto mt-6 max-w-3xl text-xl leading-9 text-slate-300">

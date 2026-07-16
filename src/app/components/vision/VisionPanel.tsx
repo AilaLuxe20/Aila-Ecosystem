@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import ImageUpload from "./ImageUpload";
 import { useVision } from "@/hooks/useVision";
 
@@ -18,9 +19,12 @@ export default function VisionPanel() {
       <ImageUpload onSelectAction={select} />
 
       {preview && (
-        <img
+        <Image
           src={preview}
           alt="Preview"
+          width={1200}
+          height={800}
+          unoptimized
           className="w-full rounded-3xl border border-white/10"
         />
       )}

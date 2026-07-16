@@ -1,18 +1,21 @@
 "use client";
 
 import {
-  ChangeEvent,
-  DragEvent,
+  type ChangeEvent,
+  type DragEvent,
   useRef,
   useState,
 } from "react";
+import { motion } from "framer-motion";
+import {
+  CheckCircle2,
+  FileText,
+  Loader2,
+  UploadCloud,
+  X,
+} from "lucide-react";
 
-type AnalysisState =
-  | "idle"
-  | "ready"
-  | "analyzing"
-  | "complete"
-  | "error";
+type AnalysisState = "idle" | "ready" | "analyzing" | "complete" | "error";
 
 export type LegalDocumentContext = {
   fileName: string;
@@ -22,36 +25,35 @@ export type LegalDocumentContext = {
 };
 
 type DocumentUploadProps = {
-  documentAnalyzedAction?: (
-    document: LegalDocumentContext
-  ) => void;
+  documentAnalyzedAction?: (document: LegalDocumentContext) => void;
   documentRemovedAction?: () => void;
 };
 
 const acceptedFileTypes = ".pdf,.txt";
 
+function formatFileSize(bytes: number) {
+  if (bytes < 1024) {
+    return `${bytes} B`;
+  }
+
+  if (bytes < 1024 * 1024) {
+    return `${(bytes / 1024).toFixed(1)} KB`;
+  }
+
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
+
 export default function DocumentUpload({
   documentAnalyzedAction,
   documentRemovedAction,
 }: DocumentUploadProps) {
-  const [file, setFile] =
-    useState<File | null>(null);
+  const [file, setFile] = useState<File | null>(null);
+  const [status, setStatus] = useState<AnalysisState>("idle");
+  const [analysis, setAnalysis] = useState("");
+  const [dragging, setDragging] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const [status, setStatus] =
-    useState<AnalysisState>("idle");
-
-  const [analysis, setAnalysis] =
-    useState("");
-
-  const [dragging, setDragging] =
-    useState(false);
-
-  const fileInputRef =
-    useRef<HTMLInputElement | null>(null);
-
-  function selectFile(
-    selectedFile: File | null
-  ) {
+  function selectFile(selectedFile: File | null) {
     if (!selectedFile) {
       return;
     }
@@ -59,70 +61,38 @@ export default function DocumentUpload({
     setFile(selectedFile);
     setAnalysis("");
     setStatus("ready");
-
     documentRemovedAction?.();
   }
 
-  function handleFileChange(
-    event: ChangeEvent<HTMLInputElement>
-  ) {
-    selectFile(
-      event.target.files?.[0] || null
-    );
+  function handleFileChange(event: ChangeEvent<HTMLInputElement>) {
+    selectFile(event.target.files?.[0] || null);
   }
 
-  function handleDragOver(
-    event: DragEvent<HTMLDivElement>
-  ) {
+  function handleDragOver(event: DragEvent<HTMLDivElement>) {
     event.preventDefault();
     setDragging(true);
   }
 
-  function handleDragLeave(
-    event: DragEvent<HTMLDivElement>
-  ) {
+  function handleDragLeave(event: DragEvent<HTMLDivElement>) {
     event.preventDefault();
     setDragging(false);
   }
 
-  function handleDrop(
-    event: DragEvent<HTMLDivElement>
-  ) {
+  function handleDrop(event: DragEvent<HTMLDivElement>) {
     event.preventDefault();
     setDragging(false);
-
-    selectFile(
-      event.dataTransfer.files?.[0] || null
-    );
+    selectFile(event.dataTransfer.files?.[0] || null);
   }
 
   function removeFile() {
     setFile(null);
     setAnalysis("");
     setStatus("idle");
-
     documentRemovedAction?.();
 
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
-  }
-
-  function formatFileSize(bytes: number) {
-    if (bytes < 1024) {
-      return `${bytes} B`;
-    }
-
-    if (bytes < 1024 * 1024) {
-      return `${(
-        bytes / 1024
-      ).toFixed(1)} KB`;
-    }
-
-    return `${(
-      bytes /
-      (1024 * 1024)
-    ).toFixed(1)} MB`;
   }
 
   async function upload() {
@@ -135,24 +105,18 @@ export default function DocumentUpload({
 
     try {
       const formData = new FormData();
-
       formData.append("file", file);
 
-      const response = await fetch(
-        "/api/legal-upload",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
+      const response = await fetch("/api/legal-upload", {
+        method: "POST",
+        body: formData,
+      });
 
       const data = await response.json();
 
       if (!response.ok) {
         throw new Error(
-          data?.message ||
-            data?.error ||
-            "Document analysis failed."
+          data?.message || data?.error || "Document analysis failed.",
         );
       }
 
@@ -164,109 +128,78 @@ export default function DocumentUpload({
 
       setAnalysis(analysisResult);
       setStatus("complete");
-
       documentAnalyzedAction?.({
         fileName: file.name,
-        fileType:
-          file.type || "Unknown document type",
+        fileType: file.type || "Unknown document type",
         fileSize: file.size,
         analysis: analysisResult,
       });
     } catch (error) {
-      console.error(
-        "AilaLegal Upload Error:",
-        error
-      );
+      console.error("AilaLegal Upload Error:", error);
 
       const errorMessage =
-        error instanceof Error
-          ? error.message
-          : "Document analysis failed.";
+        error instanceof Error ? error.message : "Document analysis failed.";
 
       setAnalysis(errorMessage);
       setStatus("error");
-
       documentRemovedAction?.();
     }
   }
 
   return (
-    <div className="overflow-hidden rounded-[36px] border border-white/[0.09] bg-[#080808]/90 shadow-[0_40px_120px_rgba(0,0,0,0.55)] backdrop-blur-2xl">
-      {/* HEADER */}
-      <div className="border-b border-white/[0.07] px-6 py-5">
-        <div className="flex items-center justify-between gap-4">
-          <div>
-            <p className="text-sm font-medium text-white">
-              Document Intelligence
-            </p>
-
-            <p className="mt-1 text-xs text-neutral-600">
-              AI-powered legal document analysis
-            </p>
-          </div>
-
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-cyan-300/10 bg-cyan-300/[0.04]">
-            <div className="h-2 w-2 rounded-full bg-cyan-300 shadow-[0_0_14px_rgba(103,232,249,0.9)]" />
-          </div>
+    <section className="enterprise-card overflow-hidden rounded-[16px]">
+      <div className="flex items-start justify-between gap-4 border-b border-white/10 p-6">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--aila-gold)]">
+            Intake
+          </p>
+          <h2 className="mt-2 text-xl font-semibold text-white">
+            Document Upload
+          </h2>
         </div>
+
+        <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs font-medium text-white/55">
+          PDF / TXT
+        </span>
       </div>
 
       <div className="p-6">
-        {/* UPLOAD AREA */}
         {!file && (
           <div
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
-            className={`relative flex min-h-[290px] flex-col items-center justify-center overflow-hidden rounded-[28px] border border-dashed p-8 text-center transition duration-300 ${
+            className={`relative flex min-h-[336px] flex-col items-center justify-center rounded-[14px] border border-dashed p-6 text-center transition ${
               dragging
-                ? "border-cyan-300/50 bg-cyan-300/[0.07]"
-                : "border-white/[0.12] bg-white/[0.02] hover:border-cyan-300/25 hover:bg-cyan-300/[0.025]"
+                ? "border-[var(--aila-gold)] bg-[var(--aila-gold)]/12"
+                : "border-white/14 bg-black/20 hover:border-[var(--aila-gold)]/45 hover:bg-white/[0.035]"
             }`}
           >
-            <div className="pointer-events-none absolute left-1/2 top-[-120px] h-64 w-64 -translate-x-1/2 rounded-full bg-cyan-500/[0.08] blur-[80px]" />
+            <motion.div
+              animate={{ y: dragging ? -4 : 0, scale: dragging ? 1.03 : 1 }}
+              transition={{ duration: 0.2 }}
+              className="flex h-16 w-16 items-center justify-center rounded-[16px] border border-white/10 bg-white/[0.06]"
+            >
+              <UploadCloud className="h-7 w-7 text-[var(--aila-gold)]" />
+            </motion.div>
 
-            <div className="relative">
-              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-3xl border border-white/[0.08] bg-white/[0.035]">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  aria-hidden="true"
-                  className="h-7 w-7 text-neutral-400"
-                >
-                  <path
-                    d="M12 16V4M12 4L7.5 8.5M12 4L16.5 8.5M5 14V18C5 19.1046 5.89543 20 7 20H17C18.1046 20 19 19.1046 19 18V14"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
+            <h3 className="mt-6 text-xl font-semibold text-white">
+              Drop contract files here
+            </h3>
+            <p className="mt-3 max-w-sm text-sm leading-6 text-white/55">
+              Upload a contract, agreement or legal document for secure AI
+              analysis and clause-level review.
+            </p>
 
-              <h3 className="mt-6 text-lg font-medium text-white">
-                Upload legal document
-              </h3>
+            <button
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+              className="enterprise-focus mt-6 rounded-[10px] bg-white px-5 py-3 text-sm font-semibold text-black transition hover:bg-[var(--aila-gold)]"
+            >
+              Choose Document
+            </button>
 
-              <p className="mx-auto mt-3 max-w-xs text-sm leading-6 text-neutral-600">
-                Drop a contract, agreement or legal
-                document here for intelligent analysis.
-              </p>
-
-              <button
-                type="button"
-                onClick={() =>
-                  fileInputRef.current?.click()
-                }
-                className="mt-6 rounded-full border border-white/[0.09] bg-white px-6 py-3 text-sm font-semibold text-black transition hover:scale-[1.03]"
-              >
-                Choose Document
-              </button>
-
-              <p className="mt-4 text-[10px] uppercase tracking-[0.16em] text-neutral-700">
-                PDF · TXT · MAX 10 MB
-              </p>
-            </div>
+            <p className="mt-4 text-xs text-white/38">Maximum size 10 MB</p>
           </div>
         )}
 
@@ -279,71 +212,42 @@ export default function DocumentUpload({
           className="hidden"
         />
 
-        {/* SELECTED FILE */}
         {file && (
           <div>
-            <div className="rounded-[28px] border border-white/[0.08] bg-white/[0.025] p-5">
+            <div className="rounded-[14px] border border-white/10 bg-white/[0.045] p-4">
               <div className="flex items-start gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-cyan-300/10 bg-cyan-300/[0.04]">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    aria-hidden="true"
-                    className="h-6 w-6 text-cyan-300/70"
-                  >
-                    <path
-                      d="M7 3H14L19 8V21H7V3Z"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinejoin="round"
-                    />
-
-                    <path
-                      d="M14 3V8H19"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinejoin="round"
-                    />
-
-                    <path
-                      d="M10 13H16M10 17H16"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                    />
-                  </svg>
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[12px] bg-white/[0.08] text-[var(--aila-gold)]">
+                  <FileText className="h-5 w-5" />
                 </div>
 
                 <div className="min-w-0 flex-1">
-                  <p className="truncate text-sm font-medium text-white">
+                  <p className="truncate text-sm font-semibold text-white">
                     {file.name}
                   </p>
-
-                  <p className="mt-1 text-xs text-neutral-600">
+                  <p className="mt-1 text-xs text-white/45">
                     {formatFileSize(file.size)}
                   </p>
 
                   <div className="mt-4 flex items-center gap-2">
                     <span
-                      className={`h-1.5 w-1.5 rounded-full ${
+                      className={`h-2 w-2 rounded-full ${
                         status === "analyzing"
-                          ? "animate-pulse bg-purple-400"
+                          ? "animate-pulse bg-[#b08d2c]"
                           : status === "complete"
-                            ? "bg-green-400"
+                            ? "bg-emerald-500"
                             : status === "error"
-                              ? "bg-red-400"
-                              : "bg-cyan-300"
+                              ? "bg-red-500"
+                              : "bg-[#111312]"
                       }`}
                     />
-
-                    <span className="text-[10px] uppercase tracking-[0.16em] text-neutral-600">
+                    <span className="text-xs font-medium uppercase tracking-[0.12em] text-white/45">
                       {status === "analyzing"
                         ? "Analyzing"
                         : status === "complete"
-                          ? "Connected to AilaLegal"
+                          ? "Connected"
                           : status === "error"
-                            ? "Analysis Failed"
-                            : "Ready for Analysis"}
+                            ? "Analysis failed"
+                            : "Ready"}
                     </span>
                   </div>
                 </div>
@@ -353,25 +257,23 @@ export default function DocumentUpload({
                   onClick={removeFile}
                   disabled={status === "analyzing"}
                   aria-label="Remove document"
-                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/[0.08] text-neutral-600 transition hover:border-red-400/20 hover:text-red-300 disabled:cursor-not-allowed disabled:opacity-30"
+                  className="enterprise-focus flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px] border border-white/10 text-white/45 transition hover:border-red-300/40 hover:text-red-300 disabled:cursor-not-allowed disabled:opacity-40"
                 >
-                  ×
+                  <X className="h-4 w-4" />
                 </button>
               </div>
             </div>
 
-            {/* ANALYZE BUTTON */}
             {status !== "complete" && (
               <button
                 type="button"
                 onClick={upload}
                 disabled={status === "analyzing"}
-                className="mt-4 flex w-full items-center justify-center gap-3 rounded-2xl bg-white px-6 py-4 text-sm font-semibold text-black transition hover:scale-[1.01] disabled:cursor-not-allowed disabled:opacity-60"
+                className="enterprise-focus mt-4 flex w-full items-center justify-center gap-2 rounded-[10px] bg-white px-5 py-3.5 text-sm font-semibold text-black transition hover:bg-[var(--aila-gold)] disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {status === "analyzing" && (
-                  <span className="h-4 w-4 animate-spin rounded-full border-2 border-black/20 border-t-black" />
+                  <Loader2 className="h-4 w-4 animate-spin" />
                 )}
-
                 {status === "analyzing"
                   ? "AilaLegal is analyzing..."
                   : status === "error"
@@ -380,92 +282,56 @@ export default function DocumentUpload({
               </button>
             )}
 
-            {/* CONNECTED STATUS */}
             {status === "complete" && (
-              <div className="mt-4 rounded-[28px] border border-green-400/10 bg-green-400/[0.025] p-5">
+              <div className="mt-4 rounded-[14px] border border-emerald-400/20 bg-emerald-400/10 p-4">
                 <div className="flex items-start gap-3">
-                  <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-green-400 shadow-[0_0_12px_rgba(74,222,128,0.7)]" />
-
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600" />
                   <div>
-                    <p className="text-sm font-medium text-white">
+                    <p className="text-sm font-semibold text-white">
                       Document connected to AilaLegal
                     </p>
-
-                    <p className="mt-2 text-xs leading-6 text-neutral-500">
-                      Analysis is complete. You can now
-                      ask AilaLegal questions about this
-                      exact document.
+                    <p className="mt-1 text-sm leading-6 text-white/55">
+                      Analysis is complete. The assistant can now answer
+                      questions against this document context.
                     </p>
                   </div>
                 </div>
               </div>
             )}
 
-            {/* ANALYSIS RESULT */}
             {analysis && (
               <div
-                className={`mt-4 overflow-hidden rounded-[28px] border ${
+                className={`mt-4 overflow-hidden rounded-[14px] border ${
                   status === "error"
-                    ? "border-red-400/15 bg-red-400/[0.03]"
-                    : "border-cyan-300/10 bg-cyan-300/[0.025]"
+                    ? "border-red-300/25 bg-red-400/10"
+                    : "border-white/10 bg-black/20"
                 }`}
               >
-                <div className="flex items-center justify-between border-b border-white/[0.06] px-5 py-4">
-                  <div className="flex items-center gap-3">
-                    <span
-                      className={`h-2 w-2 rounded-full ${
-                        status === "error"
-                          ? "bg-red-400"
-                          : "bg-cyan-300 shadow-[0_0_12px_rgba(103,232,249,0.8)]"
-                      }`}
-                    />
-
-                    <p className="text-xs uppercase tracking-[0.18em] text-neutral-500">
-                      {status === "error"
-                        ? "Analysis Error"
-                        : "AilaLegal Analysis"}
-                    </p>
-                  </div>
-
-                  {status === "complete" && (
-                    <span className="text-[9px] uppercase tracking-[0.16em] text-green-400/60">
-                      AI Context Active
-                    </span>
-                  )}
+                <div className="border-b border-white/10 px-4 py-3">
+                  <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/45">
+                    {status === "error" ? "Analysis Error" : "AI Analysis"}
+                  </p>
                 </div>
-
-                <div className="max-h-[430px] overflow-y-auto p-5">
-                  <div className="whitespace-pre-wrap text-sm leading-7 text-neutral-400">
+                <div className="max-h-[240px] overflow-y-auto p-4">
+                  <div className="whitespace-pre-wrap text-sm leading-6 text-white/68">
                     {analysis}
                   </div>
                 </div>
               </div>
             )}
 
-            {/* NEW DOCUMENT */}
             {status === "complete" && (
               <button
                 type="button"
                 onClick={removeFile}
-                className="mt-4 w-full rounded-2xl border border-white/[0.08] bg-white/[0.025] px-6 py-4 text-sm text-neutral-400 transition hover:border-cyan-300/20 hover:text-white"
+                className="enterprise-focus mt-4 w-full rounded-[10px] border border-white/10 bg-white/[0.04] px-5 py-3 text-sm font-semibold text-white transition hover:border-[var(--aila-gold)]/35 hover:bg-white/[0.07]"
               >
                 Analyze Another Document
               </button>
             )}
           </div>
         )}
-
-        {/* SECURITY NOTE */}
-        <div className="mt-5 flex items-start gap-3 rounded-2xl border border-white/[0.06] bg-black/30 p-4">
-          <div className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-green-400/70" />
-
-          <p className="text-[11px] leading-5 text-neutral-700">
-            Documents are processed for analysis.
-            AilaLegal provides general information and
-            document assistance, not legal advice.
-          </p>
-        </div>
       </div>
-    </div>
+    </section>
   );
 }

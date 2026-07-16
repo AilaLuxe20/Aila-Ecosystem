@@ -14,7 +14,7 @@ Welcome Back, Favour ??
 
 <p className="mt-6 max-w-3xl text-lg leading-9 text-slate-300">
 
-I'm ready to help you build apps, websites, AI systems, automate businesses, analyze documents and grow Aila Ecosystem.
+I&apos;m ready to help you build apps, websites, AI systems, automate businesses, analyze documents and grow Aila Ecosystem.
 
 </p>
 

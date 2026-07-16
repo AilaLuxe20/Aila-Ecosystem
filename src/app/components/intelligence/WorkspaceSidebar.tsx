@@ -1,15 +1,16 @@
 "use client";
 
 import {
-BrainCircuit,
-Bot,
-Scale,
-Settings,
-Briefcase,
-Sparkles
+  type LucideIcon,
+  BrainCircuit,
+  Bot,
+  Scale,
+  Settings,
+  Briefcase,
+  Sparkles
 } from "lucide-react";
 
-const items=[
+const items: Array<[string, LucideIcon]> = [
 ["Assistant",BrainCircuit],
 ["Automation",Bot],
 ["Legal",Scale],
@@ -37,7 +38,7 @@ AILA
 
 <div className="space-y-3">
 
-{items.map(([title,Icon]:any)=>(
+{items.map(([title,Icon])=>(
 
 <button
 key={title}

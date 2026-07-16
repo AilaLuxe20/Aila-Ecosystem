@@ -8,7 +8,7 @@ import NoiseOverlay from "./NoiseOverlay";
 
 export default function BackgroundEngine() {
   return (
-    <div className="fixed inset-0 -z-50 overflow-hidden bg-[#050816]">
+    <div className="fixed inset-0 -z-50 overflow-hidden bg-[#060709]">
 
       <Nebula />
 

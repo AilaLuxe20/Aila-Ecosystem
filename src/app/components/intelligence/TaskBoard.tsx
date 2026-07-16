@@ -13,7 +13,7 @@ return(
 <div className="rounded-3xl border border-white/10 bg-white/5 p-8">
 
 <h2 className="mb-8 text-2xl font-bold">
-Today's Tasks
+Today&apos;s Tasks
 </h2>
 
 <div className="space-y-4">

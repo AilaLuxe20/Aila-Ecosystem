@@ -7,7 +7,7 @@ Hello ??
 </h1>
 
 <h2 className="mt-4 text-3xl font-bold">
-I'm Aila Intelligence
+I&apos;m Aila Intelligence
 </h2>
 
 <p className="mt-6 max-w-3xl text-lg leading-9 text-slate-300">
