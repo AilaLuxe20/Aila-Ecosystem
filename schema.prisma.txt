@@ -5,7 +5,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  // The 'url' property has been removed to comply with Prisma 7 configuration requirements
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -61,15 +61,15 @@ model VerificationToken {
 }
 
 model Conversation {
-  id        String   @id @default(cuid())
+  id        String    @id @default(cuid())
   userId    String
-  mode      String   @default("intelligence")
+  mode      String    @default("intelligence") // intelligence | legal | business | automation
   title     String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 
-  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  messages Message[]
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages  Message[]
 
   @@index([userId])
   @@map("conversations")
@@ -93,7 +93,7 @@ model LegalDocument {
   fileName       String
   fileSize       Int
   mimeType       String
-  fileType       String
+  fileType       String   // Added to resolve type mismatch
   content        String   @db.Text
   summary        String?  @db.Text
   conversationId String?
@@ -111,12 +111,12 @@ model ProjectInquiry {
   name        String
   email       String
   company     String?
-  idea        String
+  idea        String   // Added to resolve type mismatch
   projectType String
   budget      String?
   timeline    String?
   description String   @db.Text
-  status      String   @default("new")
+  status      String   @default("new") // new | reviewed | contacted | closed
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 

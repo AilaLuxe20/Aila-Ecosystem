@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import { auth } from "@/auth";
+import { prisma } from "@/lib/prisma";
 
 type ChatMessage = {
   role: "user" | "assistant";
@@ -12,17 +14,14 @@ export async function POST(req: Request) {
   try {
     if (!process.env.OPENROUTER_API_KEY) {
       console.error("Missing OPENROUTER_API_KEY");
-
       return NextResponse.json(
-        {
-          error:
-            "Aila Intelligence is not configured.",
-        },
-        {
-          status: 500,
-        }
+        { error: "Aila Intelligence is not configured." },
+        { status: 500 }
       );
     }
+
+    const session = await auth();
+    const userId = session?.user?.id;
 
     const body: unknown = await req.json();
 
@@ -30,109 +29,92 @@ export async function POST(req: Request) {
       typeof body !== "object" ||
       body === null ||
       !("messages" in body) ||
-      !Array.isArray(body.messages)
+      !Array.isArray((body as { messages: unknown }).messages)
     ) {
       return NextResponse.json(
-        {
-          error:
-            "A valid conversation is required.",
-        },
-        {
-          status: 400,
-        }
+        { error: "A valid conversation is required." },
+        { status: 400 }
       );
     }
 
-    const rawMessages: unknown[] =
-      body.messages;
+    const rawBody = body as { messages: unknown[]; conversationId?: string };
+    const conversationId: string | undefined = rawBody.conversationId;
 
-    const messages: ChatMessage[] =
-      rawMessages
-        .filter(
-          (
-            message: unknown
-          ): message is ChatMessage => {
-            if (
-              typeof message !== "object" ||
-              message === null
-            ) {
-              return false;
-            }
-
-            const candidate =
-              message as Partial<ChatMessage>;
-
-            return (
-              (candidate.role === "user" ||
-                candidate.role ===
-                  "assistant") &&
-              typeof candidate.content ===
-                "string" &&
-              candidate.content.trim().length >
-                0
-            );
-          }
-        )
-        .slice(-MAX_MESSAGES)
-        .map(
-          (
-            message: ChatMessage
-          ): ChatMessage => ({
-            role: message.role,
-            content: message.content
-              .trim()
-              .slice(
-                0,
-                MAX_MESSAGE_LENGTH
-              ),
-          })
+    const messages: ChatMessage[] = rawBody.messages
+      .filter((message: unknown): message is ChatMessage => {
+        if (typeof message !== "object" || message === null) return false;
+        const candidate = message as Partial<ChatMessage>;
+        return (
+          (candidate.role === "user" || candidate.role === "assistant") &&
+          typeof candidate.content === "string" &&
+          candidate.content.trim().length > 0
         );
+      })
+      .slice(-MAX_MESSAGES)
+      .map((message: ChatMessage): ChatMessage => ({
+        role: message.role,
+        content: message.content.trim().slice(0, MAX_MESSAGE_LENGTH),
+      }));
 
     if (messages.length === 0) {
       return NextResponse.json(
-        {
-          error:
-            "Please send Aila a message.",
-        },
-        {
-          status: 400,
-        }
+        { error: "Please send Aila a message." },
+        { status: 400 }
       );
     }
 
-    const lastMessage =
-      messages[messages.length - 1];
+    const lastMessage = messages[messages.length - 1];
 
     if (lastMessage.role !== "user") {
       return NextResponse.json(
-        {
-          error:
-            "The latest message must come from the user.",
-        },
-        {
-          status: 400,
-        }
+        { error: "The latest message must come from the user." },
+        { status: 400 }
       );
+    }
+
+    let activeConversationId: string | null = null;
+
+    if (userId) {
+      if (conversationId) {
+        const existing = await prisma.conversation.findFirst({
+          where: { id: conversationId, userId },
+        });
+        activeConversationId = existing?.id ?? null;
+      }
+
+      if (!activeConversationId) {
+        const created = await prisma.conversation.create({
+          data: {
+            userId,
+            mode: "intelligence",
+            title: lastMessage.content.slice(0, 60),
+          },
+        });
+        activeConversationId = created.id;
+      }
+
+      await prisma.message.create({
+        data: {
+          conversationId: activeConversationId,
+          role: "user",
+          content: lastMessage.content,
+        },
+      });
     }
 
     const aiResponse = await fetch(
       "https://openrouter.ai/api/v1/chat/completions",
       {
         method: "POST",
-
         headers: {
           Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
-          "Content-Type":
-            "application/json",
+          "Content-Type": "application/json",
         },
-
         body: JSON.stringify({
           model: "openai/gpt-4.1-mini",
-
           messages: [
             {
               role: "system",
-
               content: `
 You are Aila Intelligence, the intelligent guide inside Aila Ecosystem.
 
@@ -222,10 +204,8 @@ IMPORTANT RULES:
 You are Aila Intelligence inside Aila Ecosystem.
               `.trim(),
             },
-
             ...messages,
           ],
-
           max_tokens: 700,
           temperature: 0.5,
         }),
@@ -235,67 +215,49 @@ You are Aila Intelligence inside Aila Ecosystem.
     const data = await aiResponse.json();
 
     if (!aiResponse.ok) {
-      console.error(
-        "Aila Intelligence API Error:",
-        data
-      );
-
+      console.error("Aila Intelligence API Error:", data);
       const providerMessage =
-        typeof data?.error?.message ===
-        "string"
-          ? data.error.message
-          : "";
-
+        typeof data?.error?.message === "string" ? data.error.message : "";
       return NextResponse.json(
         {
           error:
             providerMessage ||
             "Aila Intelligence could not respond right now.",
         },
-        {
-          status: aiResponse.status,
-        }
+        { status: aiResponse.status }
       );
     }
 
-    const reply =
-      data?.choices?.[0]?.message?.content;
+    const reply = data?.choices?.[0]?.message?.content;
 
-    if (
-      typeof reply !== "string" ||
-      !reply.trim()
-    ) {
-      console.error(
-        "Aila Intelligence Empty Response:",
-        data
-      );
-
+    if (typeof reply !== "string" || !reply.trim()) {
+      console.error("Aila Intelligence Empty Response:", data);
       return NextResponse.json(
-        {
-          error:
-            "Aila Intelligence did not receive a valid response.",
-        },
-        {
-          status: 502,
-        }
+        { error: "Aila Intelligence did not receive a valid response." },
+        { status: 502 }
       );
+    }
+
+    if (userId && activeConversationId) {
+      await prisma.message.create({
+        data: {
+          conversationId: activeConversationId,
+          role: "assistant",
+          content: reply.trim(),
+        },
+      });
     }
 
     return NextResponse.json(
       {
         success: true,
         reply: reply.trim(),
+        conversationId: activeConversationId,
       },
-      {
-        status: 200,
-      }
+      { status: 200 }
     );
   } catch (error: unknown) {
-    console.error(
-      "Aila Intelligence Error:",
-      error
-    );
-
+    console.error("Aila Intelligence Error:", error);
     return NextResponse.json(
       {
         error:
@@ -303,9 +265,7 @@ You are Aila Intelligence inside Aila Ecosystem.
             ? error.message
             : "Aila Intelligence could not respond right now.",
       },
-      {
-        status: 500,
-      }
+      { status: 500 }
     );
   }
 }

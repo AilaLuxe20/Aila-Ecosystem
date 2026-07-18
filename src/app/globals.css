@@ -1,118 +1,30 @@
-@import "tailwindcss";
+﻿@import 'tailwindcss';
 
-:root {
-  --background: #030303;
-  --foreground: #ffffff;
-  --surface: rgba(255, 255, 255, 0.025);
-  --border: rgba(255, 255, 255, 0.08);
+@theme {
+  --color-luxury-gold: #c5a059;
+  --color-luxury-cyan: #00f2ff;
+  --color-luxury-violet: #7000ff;
+  --color-bg-deep: #020202;
+  --color-surface-glass: rgba(255, 255, 255, 0.03);
+  --color-border-glass: rgba(255, 255, 255, 0.08);
 }
 
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-  background: var(--background);
-}
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  overflow-x: hidden;
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-button,
-a,
-input,
-textarea {
-  font: inherit;
-}
-
-button,
-a {
-  -webkit-tap-highlight-color: transparent;
-}
-
-button {
-  cursor: pointer;
-}
-
-button:disabled {
-  cursor: not-allowed;
-}
-
-::selection {
-  background: rgba(103, 232, 249, 0.22);
-  color: #ffffff;
-}
-
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #050505;
-}
-
-::-webkit-scrollbar-thumb {
-  border: 2px solid #050505;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.16);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.26);
-}
-
-a,
-button {
-  transition-property:
-    color,
-    background-color,
-    border-color,
-    opacity,
-    transform,
-    box-shadow;
-}
-
-input::placeholder,
-textarea::placeholder {
-  color: rgba(255, 255, 255, 0.22);
-}
-
-input:focus,
-textarea:focus,
-button:focus-visible,
-a:focus-visible {
-  outline: none;
-}
-
-button:focus-visible,
-a:focus-visible {
-  box-shadow:
-    0 0 0 2px #030303,
-    0 0 0 4px rgba(103, 232, 249, 0.5);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
+@layer base {
+  body {
+    @apply bg-bg-deep text-white font-sans antialiased selection:bg-luxury-gold/20 scroll-smooth;
   }
+}
 
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+@layer components {
+  .glass-panel {
+    @apply bg-surface-glass backdrop-blur-2xl border border-border-glass rounded-3xl p-8;
+  }
+  .nav-link {
+    @apply block text-lg font-medium text-white/40 hover:text-luxury-cyan transition-all duration-300;
+  }
+  .aila-orb {
+    @apply w-20 h-20 rounded-full bg-gradient-to-br from-luxury-violet via-luxury-cyan to-luxury-gold blur-2xl animate-pulse;
+    /* Native CSS ensures zero build errors */
+    box-shadow: 0 0 50px rgba(0, 242, 255, 0.4), 0 0 20px rgba(112, 0, 255, 0.2);
   }
 }

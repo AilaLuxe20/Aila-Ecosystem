@@ -1,4 +1,6 @@
 ﻿import { NextResponse } from "next/server";
+import { auth } from "@/auth";
+import { prisma } from "@/lib/prisma";
 
 type LegalMessage = {
   role: "user" | "assistant";
@@ -19,136 +21,81 @@ export async function POST(req: Request) {
   try {
     if (!process.env.OPENROUTER_API_KEY) {
       console.error("Missing OPENROUTER_API_KEY");
-
       return NextResponse.json(
-        {
-          message:
-            "AilaLegal Intelligence is not configured.",
-        },
-        {
-          status: 500,
-        }
+        { message: "AilaLegal Intelligence is not configured." },
+        { status: 500 }
       );
     }
+
+    const session = await auth();
+    const userId = session?.user?.id;
 
     const body = await req.json();
 
     if (!Array.isArray(body?.messages)) {
       return NextResponse.json(
-        {
-          message:
-            "A valid conversation is required.",
-        },
-        {
-          status: 400,
-        }
+        { message: "A valid conversation is required." },
+        { status: 400 }
       );
     }
 
-    const messages: LegalMessage[] =
-      body.messages
-        .filter(
-          (
-            message: unknown
-          ): message is LegalMessage => {
-            if (
-              typeof message !== "object" ||
-              message === null
-            ) {
-              return false;
-            }
+    const conversationId: string | undefined = body?.conversationId;
 
-            const candidate =
-              message as Partial<LegalMessage>;
-
-            return (
-              (candidate.role === "user" ||
-                candidate.role ===
-                  "assistant") &&
-              typeof candidate.content ===
-                "string" &&
-              candidate.content.trim().length >
-                0
-            );
-          }
-        )
-        .slice(-MAX_MESSAGES)
-        .map((message: LegalMessage) => ({
-          role: message.role,
-          content: message.content
-            .trim()
-            .slice(0, MAX_MESSAGE_LENGTH),
-        }));
+    const messages: LegalMessage[] = body.messages
+      .filter((message: unknown): message is LegalMessage => {
+        if (typeof message !== "object" || message === null) return false;
+        const candidate = message as Partial<LegalMessage>;
+        return (
+          (candidate.role === "user" || candidate.role === "assistant") &&
+          typeof candidate.content === "string" &&
+          candidate.content.trim().length > 0
+        );
+      })
+      .slice(-MAX_MESSAGES)
+      .map((message: LegalMessage) => ({
+        role: message.role,
+        content: message.content.trim().slice(0, MAX_MESSAGE_LENGTH),
+      }));
 
     if (messages.length === 0) {
       return NextResponse.json(
-        {
-          message:
-            "Please ask AilaLegal a question.",
-        },
-        {
-          status: 400,
-        }
+        { message: "Please ask AilaLegal a question." },
+        { status: 400 }
       );
     }
 
-    const lastMessage =
-      messages[messages.length - 1];
+    const lastMessage = messages[messages.length - 1];
 
     if (lastMessage.role !== "user") {
       return NextResponse.json(
-        {
-          message:
-            "The latest conversation message must come from the user.",
-        },
-        {
-          status: 400,
-        }
+        { message: "The latest conversation message must come from the user." },
+        { status: 400 }
       );
     }
 
-    let documentContext:
-      | LegalDocumentContext
-      | null = null;
+    let documentContext: LegalDocumentContext | null = null;
 
     if (
-      typeof body?.documentContext ===
-        "object" &&
+      typeof body?.documentContext === "object" &&
       body.documentContext !== null &&
-      typeof body.documentContext
-        .fileName === "string" &&
-      typeof body.documentContext
-        .analysis === "string" &&
-      body.documentContext.analysis.trim()
-        .length > 0
+      typeof body.documentContext.fileName === "string" &&
+      typeof body.documentContext.analysis === "string" &&
+      body.documentContext.analysis.trim().length > 0
     ) {
       documentContext = {
-        fileName:
-          body.documentContext.fileName
-            .trim()
-            .slice(0, 300),
-
+        fileName: body.documentContext.fileName.trim().slice(0, 300),
         fileType:
-          typeof body.documentContext
-            .fileType === "string"
-            ? body.documentContext.fileType
-                .trim()
-                .slice(0, 200)
+          typeof body.documentContext.fileType === "string"
+            ? body.documentContext.fileType.trim().slice(0, 200)
             : undefined,
-
-        analysis:
-          body.documentContext.analysis
-            .trim()
-            .slice(
-              0,
-              MAX_DOCUMENT_CONTEXT_LENGTH
-            ),
+        analysis: body.documentContext.analysis
+          .trim()
+          .slice(0, MAX_DOCUMENT_CONTEXT_LENGTH),
       };
     }
 
-    const documentInstructions =
-      documentContext
-        ? `
+    const documentInstructions = documentContext
+      ? `
 A DOCUMENT IS CURRENTLY CONNECTED TO THIS CONVERSATION.
 
 DOCUMENT NAME:
@@ -174,12 +121,12 @@ DOCUMENT CONTEXT RULES:
 - When the user asks about a clause, explain it in plain language.
 - Quote only short necessary excerpts from the supplied document analysis.
 - Do not claim to have reviewed the original document beyond the connected analysis provided to you.
-        `.trim()
-        : `
+      `.trim()
+      : `
 NO DOCUMENT IS CURRENTLY CONNECTED.
 
 If the user asks about "this document", "this contract", "the agreement" or a specific clause without providing the text, explain that no document is currently connected and ask them to upload the document or paste the exact wording.
-        `.trim();
+      `.trim();
 
     const systemPrompt = `
 You are AilaLegal AI, the legal intelligence assistant inside the Aila Ecosystem.
@@ -243,28 +190,50 @@ When appropriate, end with one short sentence stating that the response is gener
 ${documentInstructions}
     `.trim();
 
+    let activeConversationId: string | null = null;
+
+    if (userId) {
+      if (conversationId) {
+        const existing = await prisma.conversation.findFirst({
+          where: { id: conversationId, userId },
+        });
+        activeConversationId = existing?.id ?? null;
+      }
+
+      if (!activeConversationId) {
+        const created = await prisma.conversation.create({
+          data: {
+            userId,
+            mode: "legal",
+            title: lastMessage.content.slice(0, 60),
+          },
+        });
+        activeConversationId = created.id;
+      }
+
+      await prisma.message.create({
+        data: {
+          conversationId: activeConversationId,
+          role: "user",
+          content: lastMessage.content,
+        },
+      });
+    }
+
     const aiResponse = await fetch(
       "https://openrouter.ai/api/v1/chat/completions",
       {
         method: "POST",
-
         headers: {
           Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
           "Content-Type": "application/json",
         },
-
         body: JSON.stringify({
           model: "openai/gpt-4.1-mini",
-
           messages: [
-            {
-              role: "system",
-              content: systemPrompt,
-            },
-
+            { role: "system", content: systemPrompt },
             ...messages,
           ],
-
           max_tokens: 1400,
           temperature: 0.2,
         }),
@@ -274,71 +243,53 @@ ${documentInstructions}
     const data = await aiResponse.json();
 
     if (!aiResponse.ok) {
-      console.error(
-        "AilaLegal OpenRouter Error:",
-        data
-      );
-
+      console.error("AilaLegal OpenRouter Error:", data);
       const providerMessage =
-        typeof data?.error?.message ===
-        "string"
-          ? data.error.message
-          : "";
-
+        typeof data?.error?.message === "string" ? data.error.message : "";
       return NextResponse.json(
         {
           message:
-            providerMessage ||
-            "AilaLegal could not respond right now.",
+            providerMessage || "AilaLegal could not respond right now.",
         },
-        {
-          status: aiResponse.status,
-        }
+        { status: aiResponse.status }
       );
     }
 
-    const reply =
-      data?.choices?.[0]?.message?.content;
+    const reply = data?.choices?.[0]?.message?.content;
 
-    if (
-      typeof reply !== "string" ||
-      !reply.trim()
-    ) {
-      console.error(
-        "AilaLegal Empty Response:",
-        data
-      );
-
+    if (typeof reply !== "string" || !reply.trim()) {
+      console.error("AilaLegal Empty Response:", data);
       return NextResponse.json(
         {
           message:
             "AilaLegal completed the request but did not receive a valid response.",
         },
-        {
-          status: 502,
-        }
+        { status: 502 }
       );
+    }
+
+    if (userId && activeConversationId) {
+      await prisma.message.create({
+        data: {
+          conversationId: activeConversationId,
+          role: "assistant",
+          content: reply.trim(),
+        },
+      });
     }
 
     return NextResponse.json(
       {
         success: true,
         message: reply.trim(),
-        documentContextActive:
-          Boolean(documentContext),
-        documentName:
-          documentContext?.fileName || null,
+        conversationId: activeConversationId,
+        documentContextActive: Boolean(documentContext),
+        documentName: documentContext?.fileName || null,
       },
-      {
-        status: 200,
-      }
+      { status: 200 }
     );
   } catch (error: unknown) {
-    console.error(
-      "AilaLegal Chat API Error:",
-      error
-    );
-
+    console.error("AilaLegal Chat API Error:", error);
     return NextResponse.json(
       {
         message:
@@ -346,9 +297,7 @@ ${documentInstructions}
             ? error.message
             : "AilaLegal could not respond right now.",
       },
-      {
-        status: 500,
-      }
+      { status: 500 }
     );
   }
 }

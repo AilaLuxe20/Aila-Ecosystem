@@ -1,133 +1,31 @@
-import type { Metadata, Viewport } from "next";
-import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import "./globals.css";
+﻿import './globals.css';
 
-const siteUrl = "https://ailaluxe.com";
-
-export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
-
-  title: {
-    default: "Aila Ecosystem | AI Software Company",
-    template: "%s | Aila Ecosystem",
-  },
-
-  description:
-    "Aila Ecosystem builds AI-powered websites, web applications, mobile apps, intelligent automation systems and premium digital experiences.",
-
-  applicationName: "Aila Ecosystem",
-
-  keywords: [
-    "Aila Ecosystem",
-    "AI software company",
-    "AI development",
-    "AI solutions",
-    "AI agents",
-    "business automation",
-    "website development",
-    "web application development",
-    "mobile app development",
-    "Next.js development",
-    "software company",
-    "digital transformation",
-  ],
-
-  authors: [
-    {
-      name: "Aila Ecosystem",
-      url: siteUrl,
-    },
-  ],
-
-  creator: "Aila Ecosystem",
-  publisher: "Aila Ecosystem",
-
-  alternates: {
-    canonical: "/",
-  },
-
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: siteUrl,
-    siteName: "Aila Ecosystem",
-    title: "Aila Ecosystem | Build the Future with AI",
-    description:
-      "AI-powered websites, applications, automation systems and intelligent digital experiences for modern businesses.",
-  },
-
-  twitter: {
-    card: "summary_large_image",
-    title: "Aila Ecosystem | Build the Future with AI",
-    description:
-      "AI-powered websites, applications, automation systems and intelligent digital experiences.",
-  },
-
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-      "max-video-preview": -1,
-    },
-  },
-
-  category: "technology",
-};
-
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  themeColor: "#030303",
-  colorScheme: "dark",
-};
-
-const organizationSchema = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "Aila Ecosystem",
-  url: siteUrl,
-  description:
-    "An intelligent software company building AI-powered websites, applications, automation systems and digital experiences.",
-};
-
-const websiteSchema = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: "Aila Ecosystem",
-  url: siteUrl,
-};
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="bg-black text-white antialiased">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationSchema),
-          }}
-        />
-
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(websiteSchema),
-          }}
-        />
-
-        {children}
-
-        <Analytics />
-        <SpeedInsights />
+    <html lang='en' className='dark'>
+      <body className='bg-[#020202] text-white'>
+        <div className='flex h-screen overflow-hidden'>
+          <aside className='w-72 border-r border-white/5 p-10 flex flex-col'>
+            <div className='text-4xl font-black italic text-luxury-gold tracking-tighter mb-20'>AILA</div>
+            <nav className='space-y-8'>
+              {['Intelligence', 'Legal', 'Business', 'Automation', 'Sites', 'Apps'].map((item) => (
+                <a key={item} href={'/' + item.toLowerCase()} className='block text-lg font-medium text-white/40 hover:text-luxury-cyan transition-all duration-300'>
+                  {item}
+                </a>
+              ))}
+            </nav>
+            <div className='mt-auto p-6 glass-panel'>
+              <p className='text-xs font-mono text-white/20 uppercase tracking-widest'>System Status</p>
+              <div className='text-luxury-cyan mt-2'>● Neural Core Online</div>
+            </div>
+          </aside>
+          <main className='flex-1 overflow-y-auto p-16'>
+            {children}
+          </main>
+          <div className='fixed bottom-12 right-12'>
+            <div className='aila-orb' />
+          </div>
+        </div>
       </body>
     </html>
   );

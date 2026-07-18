@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import { auth } from "@/auth";
+import { prisma } from "@/lib/prisma";
 
 const AILA_AUTOMATION_SYSTEM_PROMPT = `
 You are Aila Automation, the intelligent workflow discovery system inside Aila Ecosystem.
@@ -224,25 +226,24 @@ type ChatMessage = {
 
 export async function POST(req: Request) {
   try {
+    const session = await auth();
+    const userId = session?.user?.id;
+
     const body = await req.json();
     const messages = body?.messages;
+    const conversationId: string | undefined = body?.conversationId;
 
     if (!Array.isArray(messages) || messages.length === 0) {
       return NextResponse.json(
-        {
-          error: "Messages are required.",
-        },
-        {
-          status: 400,
-        }
+        { error: "Messages are required." },
+        { status: 400 }
       );
     }
 
     const validMessages: ChatMessage[] = messages
       .filter(
         (message): message is ChatMessage =>
-          (message?.role === "user" ||
-            message?.role === "assistant") &&
+          (message?.role === "user" || message?.role === "assistant") &&
           typeof message?.content === "string" &&
           message.content.trim().length > 0
       )
@@ -254,26 +255,50 @@ export async function POST(req: Request) {
 
     if (validMessages.length === 0) {
       return NextResponse.json(
-        {
-          error: "No valid messages were provided.",
-        },
-        {
-          status: 400,
-        }
+        { error: "No valid messages were provided." },
+        { status: 400 }
       );
     }
 
     if (!process.env.OPENROUTER_API_KEY) {
       console.error("OPENROUTER_API_KEY is missing");
-
       return NextResponse.json(
-        {
-          error: "Aila Automation is not configured yet.",
-        },
-        {
-          status: 500,
-        }
+        { error: "Aila Automation is not configured yet." },
+        { status: 500 }
       );
+    }
+
+    const latestUserMessage = validMessages[validMessages.length - 1];
+
+    // Resolve or create the conversation for logged-in users only
+    let activeConversationId: string | null = null;
+
+    if (userId) {
+      if (conversationId) {
+        const existing = await prisma.conversation.findFirst({
+          where: { id: conversationId, userId },
+        });
+        activeConversationId = existing?.id ?? null;
+      }
+
+      if (!activeConversationId) {
+        const created = await prisma.conversation.create({
+          data: {
+            userId,
+            mode: "automation",
+            title: latestUserMessage.content.slice(0, 60),
+          },
+        });
+        activeConversationId = created.id;
+      }
+
+      await prisma.message.create({
+        data: {
+          conversationId: activeConversationId,
+          role: "user",
+          content: latestUserMessage.content,
+        },
+      });
     }
 
     const response = await fetch(
@@ -289,10 +314,7 @@ export async function POST(req: Request) {
           temperature: 0.45,
           max_tokens: 1400,
           messages: [
-            {
-              role: "system",
-              content: AILA_AUTOMATION_SYSTEM_PROMPT,
-            },
+            { role: "system", content: AILA_AUTOMATION_SYSTEM_PROMPT },
             ...validMessages,
           ],
         }),
@@ -303,16 +325,13 @@ export async function POST(req: Request) {
 
     if (!response.ok) {
       console.error("Aila Automation OpenRouter Error:", data);
-
       return NextResponse.json(
         {
           error:
             data?.error?.message ||
             "Aila Automation is temporarily unavailable.",
         },
-        {
-          status: response.status,
-        }
+        { status: response.status }
       );
     }
 
@@ -320,29 +339,30 @@ export async function POST(req: Request) {
 
     if (!message) {
       return NextResponse.json(
-        {
-          error: "Aila Automation returned an empty response.",
-        },
-        {
-          status: 502,
-        }
+        { error: "Aila Automation returned an empty response." },
+        { status: 502 }
       );
+    }
+
+    if (userId && activeConversationId) {
+      await prisma.message.create({
+        data: {
+          conversationId: activeConversationId,
+          role: "assistant",
+          content: message,
+        },
+      });
     }
 
     return NextResponse.json({
       message,
+      conversationId: activeConversationId,
     });
   } catch (error) {
     console.error("Aila Automation API Error:", error);
-
     return NextResponse.json(
-      {
-        error:
-          "Aila Automation encountered an unexpected error.",
-      },
-      {
-        status: 500,
-      }
+      { error: "Aila Automation encountered an unexpected error." },
+      { status: 500 }
     );
   }
 }
