@@ -8,13 +8,13 @@ export async function streamAilaResponse(
   const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
     method: 'POST',
     headers: {
-      'Authorization': \Bearer \\,
+      'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       model: 'google/gemini-2.0-pro-exp-02-05',
       messages: [
-        { role: 'system', content: \You are Aila. Product Context: \\ },
+        { role: 'system', content: `You are Aila. Product Context: ${productId}` },
         ...messages,
       ],
       stream: true,

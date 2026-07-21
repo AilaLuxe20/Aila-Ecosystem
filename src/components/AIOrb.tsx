@@ -1,0 +1,260 @@
+"use client";
+import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useOrb } from "@/core/OrbContext";
+
+export default function AIOrb() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [blinking, setBlinking] = useState(false);
+  const [input, setInput] = useState("");
+  const animationRef = useRef<number | undefined>(undefined);
+  const {
+    isOpen,
+    setIsOpen,
+    messages,
+    addMessage,
+    isSpeaking,
+    setSpeaking,
+    isListening,
+    setListening,
+  } = useOrb();
+
+  useEffect(() => {
+    const blinkInterval = setInterval(() => {
+      setBlinking(true);
+      setTimeout(() => setBlinking(false), 150);
+    }, 5000);
+    return () => clearInterval(blinkInterval);
+  }, []);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let frameCount = 0;
+
+    const draw = () => {
+      const w = canvas.width;
+      const h = canvas.height;
+
+      const bgGradient = ctx.createLinearGradient(0, 0, w, h);
+      bgGradient.addColorStop(0, "#1a1a2e");
+      bgGradient.addColorStop(0.5, "#16213e");
+      bgGradient.addColorStop(1, "#0f3460");
+      ctx.fillStyle = bgGradient;
+      ctx.fillRect(0, 0, w, h);
+
+      const headX = w / 2;
+      const headY = h / 2;
+      const headRadius = 35;
+
+      const breathScale = 1 + Math.sin(frameCount * 0.02) * 0.02;
+
+      ctx.save();
+      ctx.translate(headX, headY);
+      ctx.scale(breathScale, breathScale);
+
+      const skinGradient = ctx.createRadialGradient(0, -10, 10, 0, 0, headRadius);
+      skinGradient.addColorStop(0, "#f5d5b8");
+      skinGradient.addColorStop(0.6, "#e8c4a0");
+      skinGradient.addColorStop(1, "#d4a574");
+      ctx.fillStyle = skinGradient;
+      ctx.beginPath();
+      ctx.arc(0, 0, headRadius, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = "#2a1a1a";
+      ctx.beginPath();
+      ctx.ellipse(0, -25, 40, 28, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      const eyeSpacing = 15;
+      const eyeY = -8;
+      const irisX = Math.sin(frameCount * 0.03) * 2;
+
+      ctx.fillStyle = "#ffffff";
+      ctx.beginPath();
+      ctx.ellipse(-eyeSpacing, eyeY, 7, 9, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = "#4a3728";
+      ctx.beginPath();
+      ctx.arc(-eyeSpacing + irisX, eyeY, 4, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = "#ffffff";
+      ctx.beginPath();
+      ctx.ellipse(eyeSpacing, eyeY, 7, 9, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = "#4a3728";
+      ctx.beginPath();
+      ctx.arc(eyeSpacing + irisX, eyeY, 4, 0, Math.PI * 2);
+      ctx.fill();
+
+      if (blinking) {
+        ctx.fillStyle = "#e8c4a0";
+        ctx.beginPath();
+        ctx.ellipse(-eyeSpacing, eyeY, 7, 9, 0, 0, Math.PI);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.ellipse(eyeSpacing, eyeY, 7, 9, 0, 0, Math.PI);
+        ctx.fill();
+      }
+
+      const mouthOpen = isSpeaking ? Math.sin(frameCount * 0.08) * 0.3 + 0.3 : 0;
+      ctx.strokeStyle = "#8b4545";
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.ellipse(0, 12, 12, 5 + mouthOpen * 3, 0, 0, Math.PI);
+      ctx.stroke();
+
+      ctx.restore();
+
+      if (isSpeaking || isListening) {
+        ctx.shadowColor = isSpeaking ? "rgba(201, 168, 76, 0.4)" : "rgba(6, 182, 212, 0.4)";
+        ctx.shadowBlur = 20;
+        ctx.strokeStyle = isSpeaking ? "rgba(201, 168, 76, 0.3)" : "rgba(6, 182, 212, 0.3)";
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.arc(headX, headY, headRadius + 12, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+
+      frameCount++;
+      animationRef.current = requestAnimationFrame(draw);
+    };
+
+    draw();
+
+    return () => {
+      if (animationRef.current) cancelAnimationFrame(animationRef.current);
+    };
+  }, [isSpeaking, isListening, blinking]);
+
+  const handleSend = async (text: string) => {
+    if (!text.trim()) return;
+    addMessage("user", text);
+    setInput("");
+    setSpeaking(true);
+
+    try {
+      const res = await fetch("/api/avatar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: [...messages, { role: "user", content: text }] }),
+      });
+      const data = await res.json();
+      const reply = data.reply || "System processing.";
+      addMessage("assistant", reply);
+    } catch (error) {
+      addMessage("assistant", "Connection interrupted.");
+    }
+
+    setSpeaking(false);
+  };
+
+  return (
+    <div style={{ position: "fixed", bottom: "2rem", right: "2rem", zIndex: 9999 }}>
+      <motion.button
+        onClick={() => setIsOpen(!isOpen)}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+        style={{
+          width: 90,
+          height: 90,
+          borderRadius: "50%",
+          border: isSpeaking ? "2px solid #c9a84c" : "2px solid rgba(201,168,76,0.3)",
+          background: "rgba(2, 6, 23, 0.8)",
+          backdropFilter: "blur(10px)",
+          boxShadow: isSpeaking
+            ? "0 0 30px rgba(201,168,76,0.5), 0 0 60px rgba(139,92,246,0.2)"
+            : "0 0 20px rgba(139,92,246,0.2)",
+          cursor: "pointer",
+          padding: 0,
+          overflow: "hidden",
+          transition: "all 0.4s ease",
+        }}
+      >
+        <canvas ref={canvasRef} width={90} height={90} style={{ display: "block", width: "100%", height: "100%" }} />
+      </motion.button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.9 }}
+            style={{
+              position: "absolute",
+              bottom: "110px",
+              right: 0,
+              width: "320px",
+              height: "400px",
+              background: "rgba(2, 6, 23, 0.95)",
+              backdropFilter: "blur(20px)",
+              border: "1px solid rgba(201,168,76,0.2)",
+              borderRadius: "12px",
+              padding: "1rem",
+              display: "flex",
+              flexDirection: "column",
+              gap: "1rem",
+            }}
+          >
+            <div style={{ flex: 1, overflowY: "auto", display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+              {messages.length === 0 ? (
+                <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.85rem" }}>Awaiting query...</p>
+              ) : (
+                messages.map((msg, i) => (
+                  <div key={i}>
+                    <p style={{ fontSize: "7px", color: msg.role === "user" ? "#164e63" : "#7a6130", letterSpacing: "0.2em", marginBottom: "2px", textTransform: "uppercase" }}>
+                      {msg.role === "user" ? "USER" : "AILA"}
+                    </p>
+                    <p style={{ fontSize: "0.8rem", color: msg.role === "user" ? "#64748b" : "#f1f5f9", lineHeight: 1.5 }}>
+                      {msg.content}
+                    </p>
+                  </div>
+                ))
+              )}
+            </div>
+
+            <div style={{ display: "flex", gap: "0.5rem" }}>
+              <input
+                type="text"
+                placeholder="Query..."
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleSend(input)}
+                style={{
+                  flex: 1,
+                  background: "rgba(0,0,0,0.3)",
+                  border: "1px solid rgba(255,255,255,0.06)",
+                  borderRadius: "6px",
+                  padding: "0.5rem 0.75rem",
+                  color: "#f1f5f9",
+                  fontSize: "0.8rem",
+                  outline: "none",
+                }}
+              />
+              <button
+                onClick={() => handleSend(input)}
+                style={{
+                  padding: "0.5rem 0.75rem",
+                  background: "transparent",
+                  border: "1px solid rgba(201,168,76,0.2)",
+                  color: "#c9a84c",
+                  borderRadius: "6px",
+                  cursor: "pointer",
+                  fontSize: "0.8rem",
+                }}
+              >
+                Send
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}

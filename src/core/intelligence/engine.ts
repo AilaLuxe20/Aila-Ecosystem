@@ -2,7 +2,6 @@
  * Aila Neural Engine
  * Core asynchronous stream processor for real-time intelligence.
  */
-
 export interface NeuralMessage {
   role: 'user' | 'assistant';
   content: string;
@@ -12,7 +11,7 @@ export async function processIntelligenceStream(messages: NeuralMessage[]) {
   const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
     method: 'POST',
     headers: {
-      'Authorization': \Bearer \\,
+      'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
@@ -24,10 +23,8 @@ export async function processIntelligenceStream(messages: NeuralMessage[]) {
       stream: true,
     }),
   });
-
   if (!response.ok) {
     throw new Error('Neural Engine connection failed.');
   }
-
   return response.body;
 }
