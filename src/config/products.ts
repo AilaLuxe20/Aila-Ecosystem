@@ -1,32 +1,47 @@
 import {
-    Brain,
-    Scale,
-    BriefcaseBusiness,
-    Bot,
-    Globe,
     AppWindow,
-    GitBranch,
-    Code2,
-    HeartPulse,
-    Truck,
-    ShoppingCart,
-    Landmark,
-    Users,
     BarChart3,
-    Megaphone,
-    Share2,
-    Cloud,
-    Folder,
+    Bot,
+    Brain,
+    BriefcaseBusiness,
     Calendar,
-    Mail,
-    Video,
+    Cloud,
+    Code2,
+    Folder,
+    GitBranch,
+    Globe,
+    HeartPulse,
     KeyRound,
-    Wrench,
+    Landmark,
+    Mail,
+    Megaphone,
+    Scale,
     Settings,
+    Share2,
+    ShoppingCart,
+    Truck,
+    Users,
+    Video,
+    Wrench,
 } from "lucide-react";
 
-export const products = [
-    // Existing Products
+export type ProductStatus =
+    | "live"
+    | "building"
+    | "system";
+
+export interface Product {
+    id: string;
+    name: string;
+    href: string;
+    icon: any;
+    status: ProductStatus;
+    description: string;
+}
+
+export const products: Product[] = [
+    // LIVE PRODUCTS
+
     {
         id: "intelligence",
         name: "Aila Intelligence",
@@ -84,13 +99,14 @@ export const products = [
         description: "Business process management.",
     },
 
-    // Future Products
+    // BUILDING PRODUCTS
+
     {
         id: "coding",
         name: "Aila Coding",
         href: "/products/coding",
         icon: Code2,
-        status: "coming-soon",
+        status: "building",
         description: "AI software engineering.",
     },
     {
@@ -98,7 +114,7 @@ export const products = [
         name: "Aila Health",
         href: "/products/health",
         icon: HeartPulse,
-        status: "coming-soon",
+        status: "building",
         description: "Healthcare intelligence.",
     },
     {
@@ -106,39 +122,39 @@ export const products = [
         name: "Aila Shipping",
         href: "/products/shipping",
         icon: Truck,
-        status: "coming-soon",
-        description: "Logistics platform.",
+        status: "building",
+        description: "Global logistics platform.",
     },
     {
         id: "commerce",
         name: "Aila Commerce",
         href: "/products/commerce",
         icon: ShoppingCart,
-        status: "coming-soon",
-        description: "Commerce ecosystem.",
+        status: "building",
+        description: "Commerce operating system.",
     },
     {
         id: "finance",
         name: "Aila Finance",
         href: "/products/finance",
         icon: Landmark,
-        status: "coming-soon",
-        description: "Financial platform.",
+        status: "building",
+        description: "Financial intelligence platform.",
     },
     {
         id: "crm",
         name: "Aila CRM",
         href: "/products/crm",
         icon: Users,
-        status: "coming-soon",
-        description: "Customer relationship management.",
+        status: "building",
+        description: "Customer relationship platform.",
     },
     {
         id: "analytics",
         name: "Aila Analytics",
         href: "/products/analytics",
         icon: BarChart3,
-        status: "coming-soon",
+        status: "building",
         description: "Business analytics.",
     },
     {
@@ -146,7 +162,7 @@ export const products = [
         name: "Aila Ads",
         href: "/products/ads",
         icon: Megaphone,
-        status: "coming-soon",
+        status: "building",
         description: "Advertising platform.",
     },
     {
@@ -154,15 +170,15 @@ export const products = [
         name: "Aila Social",
         href: "/products/social",
         icon: Share2,
-        status: "coming-soon",
-        description: "Social platform.",
+        status: "building",
+        description: "Social media platform.",
     },
     {
         id: "cloud",
         name: "Aila Cloud",
         href: "/products/cloud",
         icon: Cloud,
-        status: "coming-soon",
+        status: "building",
         description: "Cloud infrastructure.",
     },
     {
@@ -170,15 +186,15 @@ export const products = [
         name: "Aila Files",
         href: "/products/files",
         icon: Folder,
-        status: "coming-soon",
-        description: "File management.",
+        status: "building",
+        description: "Enterprise file management.",
     },
     {
         id: "calendar",
         name: "Aila Calendar",
         href: "/products/calendar",
         icon: Calendar,
-        status: "coming-soon",
+        status: "building",
         description: "Scheduling platform.",
     },
     {
@@ -186,23 +202,23 @@ export const products = [
         name: "Aila Mail",
         href: "/products/email",
         icon: Mail,
-        status: "coming-soon",
-        description: "Enterprise email.",
+        status: "building",
+        description: "Enterprise mail.",
     },
     {
         id: "meetings",
         name: "Aila Meetings",
         href: "/products/meetings",
         icon: Video,
-        status: "coming-soon",
-        description: "Meetings platform.",
+        status: "building",
+        description: "Video meetings.",
     },
     {
         id: "api",
         name: "Aila API",
         href: "/products/api",
         icon: KeyRound,
-        status: "coming-soon",
+        status: "building",
         description: "Developer APIs.",
     },
     {
@@ -210,9 +226,12 @@ export const products = [
         name: "Aila Developer",
         href: "/products/developer",
         icon: Wrench,
-        status: "coming-soon",
-        description: "Developer tools.",
+        status: "building",
+        description: "Developer workspace.",
     },
+
+    // SYSTEM
+
     {
         id: "settings",
         name: "Settings",
