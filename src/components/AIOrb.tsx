@@ -7,7 +7,7 @@ export default function AIOrb() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [blinking, setBlinking] = useState(false);
   const [input, setInput] = useState("");
-  const animationRef = useRef<number | undefined>(undefined);
+  const animationRef = useRef<number | null>(null);
   const {
     isOpen,
     setIsOpen,
@@ -129,7 +129,9 @@ export default function AIOrb() {
     draw();
 
     return () => {
-      if (animationRef.current) cancelAnimationFrame(animationRef.current);
+      if (animationRef.current !== null) {
+        cancelAnimationFrame(animationRef.current);
+      }
     };
   }, [isSpeaking, isListening, blinking]);
 

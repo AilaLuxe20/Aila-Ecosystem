@@ -19,49 +19,20 @@ import {
 } from "lucide-react";
 
 import AIOrb from "@/components/AIOrb";
+import { products } from "@/config/products";
 import "../../../styles/workspace.css";
 
 type Props = {
   children: React.ReactNode;
 };
 
-const navigation = [
-  {
-    title: "Dashboard",
-    href: "/dashboard",
-    icon: LayoutDashboard,
-  },
-  {
-    title: "Intelligence",
-    href: "/intelligence",
-    icon: Brain,
-  },
-  {
-    title: "Legal",
-    href: "/legal",
-    icon: Scale,
-  },
-  {
-    title: "Business",
-    href: "/business",
-    icon: BriefcaseBusiness,
-  },
-  {
-    title: "Automation",
-    href: "/automation",
-    icon: Bot,
-  },
-  {
-    title: "Sites",
-    href: "/sites",
-    icon: Globe,
-  },
-  {
-    title: "Apps",
-    href: "/apps",
-    icon: AppWindow,
-  },
-];
+const navigation = products
+  .filter((product) => product.status === "live")
+  .map((product) => ({
+    title: product.name.replace("Aila ", ""),
+    href: product.href,
+    icon: product.icon,
+  }));
 
 export default function WorkspaceShell({ children }: Props) {
   const pathname = usePathname();
@@ -87,7 +58,7 @@ export default function WorkspaceShell({ children }: Props) {
         <nav className="aila-nav">
           {navigation.map((item) => {
             const Icon = item.icon;
-            const active = pathname === item.href;
+            const active = pathname === item.href || pathname.startsWith(item.href + "/");
 
             return (
               <Link
@@ -185,3 +156,5 @@ export default function WorkspaceShell({ children }: Props) {
     </div>
   );
 }
+
+
