@@ -5,52 +5,52 @@ import {
     Scale,
     Briefcase,
     Bot,
-    Activity,
-    ArrowUpRight,
+    HeartPulse,
+    Globe,
 } from "lucide-react";
 
 const stats = [
     {
-        title: "AI Conversations",
-        value: "2,847",
-        change: "+18%",
+        title: "Aila Intelligence",
+        value: "Online",
+        subtitle: "Enterprise AI",
         icon: Brain,
         color: "text-cyan-400",
     },
     {
-        title: "Legal Analyses",
-        value: "314",
-        change: "+12%",
+        title: "Aila Legal",
+        value: "Ready",
+        subtitle: "Legal Intelligence",
         icon: Scale,
         color: "text-violet-400",
     },
     {
-        title: "Business Reports",
-        value: "126",
-        change: "+9%",
+        title: "Aila Business",
+        value: "Ready",
+        subtitle: "Business Platform",
         icon: Briefcase,
         color: "text-emerald-400",
     },
     {
-        title: "Automations",
-        value: "48",
-        change: "+22%",
+        title: "Aila Automation",
+        value: "Ready",
+        subtitle: "AI Workflows",
         icon: Bot,
         color: "text-orange-400",
     },
     {
-        title: "System Health",
-        value: "99.9%",
-        change: "Stable",
-        icon: Activity,
-        color: "text-green-400",
+        title: "Aila Health",
+        value: "Ready",
+        subtitle: "Healthcare AI",
+        icon: HeartPulse,
+        color: "text-red-400",
     },
     {
-        title: "Workspace Growth",
-        value: "+31%",
-        change: "This Month",
-        icon: ArrowUpRight,
-        color: "text-pink-400",
+        title: "Platform Status",
+        value: "Operational",
+        subtitle: "Aila Ecosystem",
+        icon: Globe,
+        color: "text-green-400",
     },
 ];
 
@@ -63,22 +63,24 @@ export default function StatsGrid() {
                 return (
                     <div
                         key={stat.title}
-                        className="group rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-cyan-400/30 hover:bg-white/10"
+                        className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-cyan-400/30 hover:bg-white/10"
                     >
-                        <div className="flex items-center justify-between">
+                        <div className="flex items-start justify-between">
 
                             <div>
+
                                 <p className="text-sm text-white/50">
                                     {stat.title}
                                 </p>
 
-                                <h2 className="mt-3 text-4xl font-bold text-white">
+                                <h2 className="mt-3 text-3xl font-bold text-white">
                                     {stat.value}
                                 </h2>
 
-                                <p className={`mt-2 text-sm font-medium ${stat.color}`}>
-                                    {stat.change}
+                                <p className={`mt-2 text-sm ${stat.color}`}>
+                                    {stat.subtitle}
                                 </p>
+
                             </div>
 
                             <div
