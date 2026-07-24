@@ -156,10 +156,6 @@ export default function GlobalSearch() {
     openWorkspace,
   ]);
 
-  useEffect(() => {
-    setSelected(0);
-  }, [query]);
-
   const getTypeLabel = (type: SearchResult["type"]) => {
     switch (type) {
       case "product":
@@ -222,7 +218,10 @@ export default function GlobalSearch() {
               <input
                 type="text"
                 value={query}
-                onChange={(event) => setQuery(event.target.value)}
+                onChange={(event) => {
+                  setQuery(event.target.value);
+                  setSelected(0);
+                }}
                 placeholder="Search across Aila..."
                 className="w-full bg-transparent py-3 pl-12 pr-4 text-sm text-white placeholder:text-white/40 outline-none"
                 autoFocus

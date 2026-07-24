@@ -26,6 +26,7 @@ import {
     Video,
     Wrench,
 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 export type ProductStatus =
     | "live"
@@ -36,7 +37,7 @@ export interface Product {
     id: string;
     name: string;
     href: string;
-    icon: any;
+    icon: LucideIcon;
     status: ProductStatus;
     description: string;
 }

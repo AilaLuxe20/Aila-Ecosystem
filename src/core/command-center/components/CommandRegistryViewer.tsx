@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { commandRegistry } from "@/core/command-center/CommandRegistry";
 import type { Command, CommandCategory } from "@/core/command-center/types";
 
@@ -15,11 +15,7 @@ const CATEGORY_LABELS: Record<CommandCategory, string> = {
 };
 
 export default function CommandRegistryViewer() {
-  const [commands, setCommands] = useState<Command[]>([]);
-
-  useEffect(() => {
-    setCommands(commandRegistry.getAll());
-  }, []);
+  const [commands] = useState(() => commandRegistry.getAll());
 
   const grouped = commands.reduce(
     (acc, cmd) => {

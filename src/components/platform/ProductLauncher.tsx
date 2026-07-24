@@ -83,10 +83,6 @@ export default function ProductLauncher() {
         closeLauncher,
     ]);
 
-    useEffect(() => {
-        setSelected(0);
-    }, [query]);
-
     return (
         <AnimatePresence>
             {state.launcherOpen && (
@@ -120,7 +116,10 @@ export default function ProductLauncher() {
                     >
                         <LauncherSearch
                             value={query}
-                            onChange={setQuery}
+                            onChange={(value) => {
+                                setQuery(value);
+                                setSelected(0);
+                            }}
                         />
 
                         <div className="max-h-[450px] overflow-y-auto p-2">

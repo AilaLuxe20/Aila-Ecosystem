@@ -96,10 +96,6 @@ export default function ProductLauncher() {
     closeLauncher,
   ]);
 
-  useEffect(() => {
-    setSelected(0);
-  }, [query]);
-
   return (
     <AnimatePresence>
       {state.launcherOpen && (
@@ -140,7 +136,10 @@ export default function ProductLauncher() {
               <input
                 type="text"
                 value={query}
-                onChange={(event) => setQuery(event.target.value)}
+                onChange={(event) => {
+                  setQuery(event.target.value);
+                  setSelected(0);
+                }}
                 placeholder="Search products..."
                 className="w-full bg-transparent py-3 pl-12 pr-4 text-sm text-white placeholder:text-white/40 outline-none"
                 autoFocus
