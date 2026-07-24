@@ -1,0 +1,3 @@
+// ... existing code ...
+
+// Complete command center files: commands, types, exports, etc.

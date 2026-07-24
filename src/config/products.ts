@@ -10,11 +10,13 @@ import {
     Folder,
     GitBranch,
     Globe,
+    GraduationCap,
     HeartPulse,
     KeyRound,
     Landmark,
     Mail,
     Megaphone,
+    Palette,
     Scale,
     Settings,
     Share2,
@@ -229,6 +231,22 @@ export const products: Product[] = [
         status: "building",
         description: "Developer workspace.",
     },
+    {
+        id: "education",
+        name: "Aila Education",
+        href: "/products/education",
+        icon: GraduationCap,
+        status: "building",
+        description: "Education and learning platform.",
+    },
+    {
+        id: "ui-ux",
+        name: "Aila UI/UX",
+        href: "/products/ui-ux",
+        icon: Palette,
+        status: "building",
+        description: "Design system and UI/UX platform.",
+    },
 
     // SYSTEM
 
@@ -241,3 +259,14 @@ export const products: Product[] = [
         description: "Platform settings.",
     },
 ];
+
+// Product icon sets (registered from product foundations)
+export { CommerceIcons } from "@/products/Aila_Commerce/icons";
+export { FinanceIcons } from "@/products/Aila_Finance/icons";
+export { SocialIcons } from "@/products/Aila_Social/icons";
+export { AdsIcons } from "@/products/Aila_Ads/icons";
+export { EducationIcons } from "@/products/Aila_Education/icons";
+export { ShippingIcons } from "@/products/Aila_Shipping/icons";
+export { DeveloperIcons } from "@/products/Aila_Developer/icons";
+export { ApiIcons } from "@/products/Aila_API/icons";
+export { UIUXIcons } from "@/products/Aila_UI_UX/icons";
