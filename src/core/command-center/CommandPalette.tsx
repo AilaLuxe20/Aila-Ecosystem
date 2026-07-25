@@ -19,7 +19,7 @@ import { Search, X } from "lucide-react";
 import { commandRegistry } from "./CommandRegistry";
 import { commandSearch } from "./CommandSearch";
 import { registerDefaultCommands } from "./defaultCommands";
-import type { Command, CommandCategory } from "./types";
+import type { Command } from "./types";
 import { COMMAND_CATEGORY_LABELS } from "./CommandCategory";
 
 interface CommandPaletteProps {
@@ -214,7 +214,7 @@ export default function CommandPalette({
                     {COMMAND_CATEGORY_LABELS[category] ||
                       category}
                   </h3>
-                  {commands.map((command, index) => (
+                  {commands.map((command) => (
                     <div
                       key={command.id}
                       onClick={() => handleExecute(command)}

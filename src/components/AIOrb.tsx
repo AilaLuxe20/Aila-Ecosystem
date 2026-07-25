@@ -16,7 +16,6 @@ export default function AIOrb() {
     isSpeaking,
     setSpeaking,
     isListening,
-    setListening,
   } = useOrb();
 
   useEffect(() => {
@@ -150,7 +149,7 @@ export default function AIOrb() {
       const data = await res.json();
       const reply = data.reply || "System processing.";
       addMessage("assistant", reply);
-    } catch (error) {
+    } catch {
       addMessage("assistant", "Connection interrupted.");
     }
 

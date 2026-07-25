@@ -10,7 +10,7 @@ export default function IntelligenceDashboard() {
     setMessages(newMessages);
     setInput('');
 
-    const res = await fetch('/api/intelligence', {
+    await fetch('/api/intelligence', {
       method: 'POST',
       body: JSON.stringify({ messages: newMessages }),
     });

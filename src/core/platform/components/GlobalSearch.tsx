@@ -16,7 +16,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
-import { Command, Search, X } from "lucide-react";
+import { Search, X } from "lucide-react";
 
 import { products } from "@/config/products";
 import { commandRegistry } from "@/core/command-center/CommandRegistry";

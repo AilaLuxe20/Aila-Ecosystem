@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 
@@ -22,7 +22,7 @@ export default function RegisterForm() {
     const {
         register,
         handleSubmit,
-        watch,
+        control,
         formState: { errors },
     } = useForm<RegisterFormData>({
         resolver: zodResolver(registerSchema),
@@ -35,7 +35,7 @@ export default function RegisterForm() {
         },
     });
 
-    const password = watch("password");
+    const password = useWatch({ control, name: "password" });
 
     async function onSubmit(data: RegisterFormData) {
         setLoading(true);

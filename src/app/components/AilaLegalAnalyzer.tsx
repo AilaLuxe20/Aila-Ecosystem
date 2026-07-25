@@ -29,7 +29,6 @@ export default function AilaLegalAnalyzer() {
   const [uploadState, setUploadState] = useState<UploadState>("idle");
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [documentContext, setDocumentContext] = useState<DocumentContext | null>(null);
-  const [legalDocumentId, setLegalDocumentId] = useState<string | null>(null);
 
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -95,10 +94,6 @@ export default function AilaLegalAnalyzer() {
       setDocumentContext(context);
       setUploadState("ready");
 
-      if (data.legalDocumentId) {
-        setLegalDocumentId(data.legalDocumentId);
-      }
-
       setMessages([
         {
           role: "assistant",
@@ -137,7 +132,6 @@ export default function AilaLegalAnalyzer() {
 
   function clearDocument() {
     setDocumentContext(null);
-    setLegalDocumentId(null);
     setUploadState("idle");
     setUploadError(null);
     setMessages([

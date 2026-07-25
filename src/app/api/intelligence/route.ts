@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
     return new Response(response.body, {
       headers: { 'Content-Type': 'text/event-stream' },
     });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'Aila Connection Failed' }, { status: 500 });
   }
 }

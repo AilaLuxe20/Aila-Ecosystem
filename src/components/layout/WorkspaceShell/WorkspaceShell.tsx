@@ -5,13 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import {
-  LayoutDashboard,
-  Brain,
-  Scale,
-  BriefcaseBusiness,
-  Bot,
-  Globe,
-  AppWindow,
   Search,
   Bell,
   Settings,

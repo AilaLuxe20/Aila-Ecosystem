@@ -35,8 +35,8 @@ export default function AIProviderManager() {
 
   useEffect(() => {
     const checkProviders = async () => {
-      const updated = await Promise.all(
-        providers.map(async (p) => {
+        const updated = await Promise.all(
+          PROVIDERS.map(async (p) => {
           try {
             const res = await fetch(
               `/api/command-center/providers/${p.id}/status`

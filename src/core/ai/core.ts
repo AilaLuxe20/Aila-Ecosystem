@@ -2,8 +2,7 @@
 
 export async function streamAilaResponse(
   messages: AilaMessage[],
-  productId: string,
-  userContext: { userId: string; workspaceId: string }
+  productId: string
 ) {
   const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
     method: 'POST',
