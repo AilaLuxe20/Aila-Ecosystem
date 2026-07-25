@@ -1,8 +1,8 @@
 import Link from "next/link";
-import AilaAssistant from "./components/AilaAssistant";
-import EcosystemCards from "./components/EcosystemCards";
-import AnimatedSection from "./components/AnimatedSection";
-import ProjectInquiry from "./components/ProjectInquiry";
+import ChatInterface from "@/components/ai/ChatInterface";
+import EcosystemCards from "@/components/shared/EcosystemCards";
+import AnimatedSection from "@/components/ui/AnimatedSection";
+import ProjectInquiry from "@/components/forms/ProjectInquiry";
 
 const services = [
   {
@@ -178,7 +178,7 @@ export default function Home() {
           </AnimatedSection>
 
           <AnimatedSection>
-            <AilaAssistant />
+            <ChatInterface mode="intelligence" />
           </AnimatedSection>
         </div>
       </section>

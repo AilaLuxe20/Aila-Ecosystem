@@ -1,0 +1,139 @@
+/**
+ * Core constants shared across the Aila Ecosystem.
+ */
+
+export const SITE_URL = "https://ailaluxe.com";
+
+export const SITE_NAME = "Aila Ecosystem";
+
+export const MAX_MESSAGES = 20;
+
+export const MAX_MESSAGE_LENGTH = 5000;
+
+export const MAX_DOCUMENT_SIZE = 10 * 1024 * 1024; // 10 MB
+
+export const ALLOWED_FILE_TYPES = [
+  "application/pdf",
+  "text/plain",
+];
+
+export const AI_MODEL = "openai/gpt-4.1-mini";
+
+export const MODE_CONFIG = {
+  intelligence: {
+    maxTokens: 700,
+    temperature: 0.5,
+  },
+  legal: {
+    maxTokens: 1400,
+    temperature: 0.25,
+  },
+  business: {
+    maxTokens: 1200,
+    temperature: 0.6,
+  },
+  automation: {
+    maxTokens: 1400,
+    temperature: 0.45,
+  },
+} as const;
+
+export const PRODUCT_NAVIGATION = [
+  {
+    name: "Intelligence",
+    mobileName: "AI",
+    href: "/products/intelligence",
+    dot: "bg-cyan-300 shadow-[0_0_14px_rgba(103,232,249,0.9)]",
+    activeBorder: "border-cyan-300/20",
+    activeBackground: "bg-cyan-300/[0.08]",
+    activeText: "text-cyan-100",
+  },
+  {
+    name: "Legal",
+    mobileName: "Legal",
+    href: "/products/ailalegal",
+    dot: "bg-blue-300 shadow-[0_0_14px_rgba(147,197,253,0.9)]",
+    activeBorder: "border-blue-300/20",
+    activeBackground: "bg-blue-300/[0.08]",
+    activeText: "text-blue-100",
+  },
+  {
+    name: "Business",
+    mobileName: "Business",
+    href: "/products/business",
+    dot: "bg-purple-300 shadow-[0_0_14px_rgba(216,180,254,0.9)]",
+    activeBorder: "border-purple-300/20",
+    activeBackground: "bg-purple-300/[0.08]",
+    activeText: "text-purple-100",
+  },
+  {
+    name: "Automation",
+    mobileName: "Auto",
+    href: "/products/automation",
+    dot: "bg-violet-300 shadow-[0_0_14px_rgba(196,181,253,0.9)]",
+    activeBorder: "border-violet-300/20",
+    activeBackground: "bg-violet-300/[0.08]",
+    activeText: "text-violet-100",
+  },
+] as const;
+
+export const PLATFORM_NAVIGATION = [
+  {
+    name: "Commerce",
+    href: "/products/commerce",
+    dot: "bg-emerald-300 shadow-[0_0_14px_rgba(34,197,94,0.9)]",
+    activeBorder: "border-emerald-300/20",
+    activeBackground: "bg-emerald-300/[0.08]",
+    activeText: "text-emerald-100",
+  },
+  {
+    name: "Ads",
+    href: "/products/ads",
+    dot: "bg-amber-300 shadow-[0_0_14px_rgba(245,158,11,0.9)]",
+    activeBorder: "border-amber-300/20",
+    activeBackground: "bg-amber-300/[0.08]",
+    activeText: "text-amber-100",
+  },
+  {
+    name: "Calendar",
+    href: "/products/calendar",
+    dot: "bg-rose-300 shadow-[0_0_14px_rgba(244,63,94,0.9)]",
+    activeBorder: "border-rose-300/20",
+    activeBackground: "bg-rose-300/[0.08]",
+    activeText: "text-rose-100",
+  },
+  {
+    name: "Sites",
+    href: "/products/sites",
+    dot: "bg-teal-300 shadow-[0_0_14px_rgba(20,181,169,0.9)]",
+    activeBorder: "border-teal-300/20",
+    activeBackground: "bg-teal-300/[0.08]",
+    activeText: "text-teal-100",
+  },
+  {
+    name: "Apps",
+    href: "/products/apps",
+    dot: "bg-indigo-300 shadow-[0_0_14px_rgba(129,140,249,0.9)]",
+    activeBorder: "border-indigo-300/20",
+    activeBackground: "bg-indigo-300/[0.08]",
+    activeText: "text-indigo-100",
+  },
+  {
+    name: "Flow",
+    href: "/products/flow",
+    dot: "bg-fuchsia-300 shadow-[0_0_14px_rgba(217,70,239,0.9)]",
+    activeBorder: "border-fuchsia-300/20",
+    activeBackground: "bg-fuchsia-300/[0.08]",
+    activeText: "text-fuchsia-100",
+  },
+] as const;
+
+export const ALL_PRODUCTS = [...PRODUCT_NAVIGATION, ...PLATFORM_NAVIGATION];
+
+export const PROJECT_TYPES = [
+  "Website",
+  "Web App",
+  "Mobile App",
+  "AI Solution",
+  "Automation",
+] as const;
