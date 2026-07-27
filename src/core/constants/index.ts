@@ -80,6 +80,7 @@ export const PRODUCT_NAVIGATION = [
 export const PLATFORM_NAVIGATION = [
   {
     name: "Commerce",
+    mobileName: "Com",
     href: "/products/commerce",
     dot: "bg-emerald-300 shadow-[0_0_14px_rgba(34,197,94,0.9)]",
     activeBorder: "border-emerald-300/20",
@@ -88,6 +89,7 @@ export const PLATFORM_NAVIGATION = [
   },
   {
     name: "Ads",
+    mobileName: "Ads",
     href: "/products/ads",
     dot: "bg-amber-300 shadow-[0_0_14px_rgba(245,158,11,0.9)]",
     activeBorder: "border-amber-300/20",
@@ -96,6 +98,7 @@ export const PLATFORM_NAVIGATION = [
   },
   {
     name: "Calendar",
+    mobileName: "Cal",
     href: "/products/calendar",
     dot: "bg-rose-300 shadow-[0_0_14px_rgba(244,63,94,0.9)]",
     activeBorder: "border-rose-300/20",
@@ -104,6 +107,7 @@ export const PLATFORM_NAVIGATION = [
   },
   {
     name: "Sites",
+    mobileName: "Sites",
     href: "/products/sites",
     dot: "bg-teal-300 shadow-[0_0_14px_rgba(20,181,169,0.9)]",
     activeBorder: "border-teal-300/20",
@@ -112,6 +116,7 @@ export const PLATFORM_NAVIGATION = [
   },
   {
     name: "Apps",
+    mobileName: "Apps",
     href: "/products/apps",
     dot: "bg-indigo-300 shadow-[0_0_14px_rgba(129,140,249,0.9)]",
     activeBorder: "border-indigo-300/20",
@@ -120,6 +125,7 @@ export const PLATFORM_NAVIGATION = [
   },
   {
     name: "Flow",
+    mobileName: "Flow",
     href: "/products/flow",
     dot: "bg-fuchsia-300 shadow-[0_0_14px_rgba(217,70,239,0.9)]",
     activeBorder: "border-fuchsia-300/20",
