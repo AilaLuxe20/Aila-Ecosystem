@@ -1,4 +1,5 @@
-import type { Metadata, Viewport } from "next";
+﻿import type { Metadata, Viewport } from "next";
+import { ClerkProvider } from "@clerk/nextjs";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
@@ -118,28 +119,29 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="bg-black text-white antialiased">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationSchema),
-          }}
-        />
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body className="bg-black text-white antialiased">
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(organizationSchema),
+            }}
+          />
 
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(websiteSchema),
-          }}
-        />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(websiteSchema),
+            }}
+          />
 
-        {children}
+          {children}
 
-        <Analytics />
-
-        <SpeedInsights />
-      </body>
-    </html>
+          <Analytics />
+          <SpeedInsights />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
