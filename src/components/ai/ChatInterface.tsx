@@ -111,6 +111,7 @@ export default function ChatInterface({
   );
 
   const chatEndRef = useRef<HTMLDivElement | null>(null);
+  const [typing, setTyping] = useState(false);
 
   const resolvedSuggestions = suggestions ?? defaultSuggestions[mode];
   const resolvedPlaceholder = placeholder ?? defaultPlaceholders[mode];
@@ -122,12 +123,12 @@ export default function ChatInterface({
     chatEndRef.current?.scrollIntoView({
       behavior: "smooth",
     });
-  }, [messages]);
+  }, [messages, typing]);
 
   function sendMessage(customMessage?: string) {
     const messageToSend = (customMessage || input).trim();
 
-    if (!messageToSend) {
+    if (!messageToSend || typing) {
       return;
     }
 
@@ -138,6 +139,19 @@ export default function ChatInterface({
 
     setMessages((previous) => [...previous, userMessage]);
     setInput("");
+    setTyping(true);
+
+    setTimeout(() => {
+      setTyping(false);
+      setMessages((previous) => [
+        ...previous,
+        {
+          role: "assistant",
+          content:
+            "I'm not connected to AI yet. This is a placeholder response.",
+        },
+      ]);
+    }, 1000);
   }
 
   return (
@@ -208,6 +222,21 @@ export default function ChatInterface({
             </div>
           ))}
 
+          {typing && (
+            <div className="flex justify-start">
+              <div className="flex items-center gap-3 rounded-3xl rounded-bl-md border border-white/[0.07] bg-white/[0.035] px-5 py-4">
+                <div className="flex gap-1">
+                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-cyan-300" />
+                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-blue-300 [animation-delay:150ms]" />
+                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-purple-300 [animation-delay:300ms]" />
+                </div>
+                <span className="text-xs text-neutral-600">
+                  Aila is typing...
+                </span>
+              </div>
+            </div>
+          )}
+
           <div ref={chatEndRef} />
         </div>
 
@@ -220,7 +249,8 @@ export default function ChatInterface({
                   key={suggestion}
                   type="button"
                   onClick={() => sendMessage(suggestion)}
-                  className="rounded-full border border-white/[0.08] bg-white/[0.025] px-4 py-2 text-xs text-neutral-500 transition hover:border-cyan-300/20 hover:text-white"
+                  disabled={typing}
+                  className="rounded-full border border-white/[0.08] bg-white/[0.025] px-4 py-2 text-xs text-neutral-500 transition hover:border-cyan-300/20 hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
                 >
                   {suggestion}
                 </button>
@@ -249,7 +279,7 @@ export default function ChatInterface({
             <button
               type="button"
               onClick={() => sendMessage()}
-              disabled={!input.trim()}
+              disabled={!input.trim() || typing}
               className="rounded-xl bg-white px-5 py-3 text-sm font-semibold text-black transition hover:scale-[1.03] disabled:cursor-not-allowed disabled:opacity-30"
             >
               Send
