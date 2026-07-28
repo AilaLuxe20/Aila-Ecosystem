@@ -20,7 +20,6 @@ type ChatInterfaceProps = {
   messagesHeight?: string;
   showSuggestions?: boolean;
   showHeader?: boolean;
-  endpoint?: string;
 };
 
 const defaultSuggestions: Record<AilaMode, string[]> = {
@@ -93,7 +92,6 @@ export default function ChatInterface({
   messagesHeight = "h-[400px]",
   showSuggestions = true,
   showHeader = true,
-  endpoint,
 }: ChatInterfaceProps) {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>(
@@ -112,7 +110,6 @@ export default function ChatInterface({
     ]
   );
 
-  const [loading, setLoading] = useState(false);
   const chatEndRef = useRef<HTMLDivElement | null>(null);
 
   const resolvedSuggestions = suggestions ?? defaultSuggestions[mode];
@@ -120,18 +117,17 @@ export default function ChatInterface({
   const resolvedHeader = headerTitle
     ? { title: headerTitle, subtitle: headerSubtitle ?? "" }
     : defaultHeaders[mode];
-  const resolvedEndpoint = endpoint ?? "/api/ai";
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({
       behavior: "smooth",
     });
-  }, [messages, loading]);
+  }, [messages]);
 
-  async function sendMessage(customMessage?: string) {
+  function sendMessage(customMessage?: string) {
     const messageToSend = (customMessage || input).trim();
 
-    if (!messageToSend || loading) {
+    if (!messageToSend) {
       return;
     }
 
@@ -140,58 +136,8 @@ export default function ChatInterface({
       content: messageToSend,
     };
 
-    const updatedMessages = [...messages, userMessage];
-
-    setMessages(updatedMessages);
+    setMessages((previous) => [...previous, userMessage]);
     setInput("");
-    setLoading(true);
-
-    try {
-      const response = await fetch(resolvedEndpoint, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          mode,
-          messages: updatedMessages,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(
-          data?.error ||
-            data?.message ||
-            "Aila Intelligence could not respond."
-        );
-      }
-
-      setMessages((previous) => [
-        ...previous,
-        {
-          role: "assistant",
-          content:
-            data?.reply ||
-            data?.message ||
-            "Tell me more about what you want to create.",
-        },
-      ]);
-    } catch (error) {
-      console.error("Aila AI Engine Error:", error);
-
-      setMessages((previous) => [
-        ...previous,
-        {
-          role: "assistant",
-          content:
-            "I could not connect right now. Please try again.",
-        },
-      ]);
-    } finally {
-      setLoading(false);
-    }
   }
 
   return (
@@ -262,24 +208,6 @@ export default function ChatInterface({
             </div>
           ))}
 
-          {loading && (
-            <div className="flex justify-start">
-              <div className="flex items-center gap-3 rounded-3xl rounded-bl-md border border-white/[0.07] bg-white/[0.035] px-5 py-4">
-                <div className="flex gap-1">
-                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-cyan-300" />
-
-                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-blue-300 [animation-delay:150ms]" />
-
-                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-purple-300 [animation-delay:300ms]" />
-                </div>
-
-                <span className="text-xs text-neutral-600">
-                  Aila is thinking
-                </span>
-              </div>
-            </div>
-          )}
-
           <div ref={chatEndRef} />
         </div>
 
@@ -292,8 +220,7 @@ export default function ChatInterface({
                   key={suggestion}
                   type="button"
                   onClick={() => sendMessage(suggestion)}
-                  disabled={loading}
-                  className="rounded-full border border-white/[0.08] bg-white/[0.025] px-4 py-2 text-xs text-neutral-500 transition hover:border-cyan-300/20 hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
+                  className="rounded-full border border-white/[0.08] bg-white/[0.025] px-4 py-2 text-xs text-neutral-500 transition hover:border-cyan-300/20 hover:text-white"
                 >
                   {suggestion}
                 </button>
@@ -305,32 +232,27 @@ export default function ChatInterface({
         {/* INPUT */}
         <div className="p-5 sm:p-6">
           <div className="flex gap-2 rounded-2xl border border-white/[0.09] bg-black/40 p-2 transition focus-within:border-cyan-300/25">
-            <input
+            <textarea
               value={input}
-              onChange={(event) =>
-                setInput(event.target.value)
-              }
+              onChange={(event) => setInput(event.target.value)}
               onKeyDown={(event) => {
-                if (
-                  event.key === "Enter" &&
-                  !event.shiftKey
-                ) {
+                if (event.key === "Enter" && !event.shiftKey) {
                   event.preventDefault();
                   sendMessage();
                 }
               }}
               placeholder={resolvedPlaceholder}
-              disabled={loading}
-              className="min-w-0 flex-1 bg-transparent px-4 py-3 text-sm text-white outline-none placeholder:text-neutral-700 disabled:opacity-50"
+              rows={1}
+              className="min-w-0 flex-1 resize-none bg-transparent px-4 py-3 text-sm text-white outline-none placeholder:text-neutral-700"
             />
 
             <button
               type="button"
               onClick={() => sendMessage()}
-              disabled={loading || !input.trim()}
+              disabled={!input.trim()}
               className="rounded-xl bg-white px-5 py-3 text-sm font-semibold text-black transition hover:scale-[1.03] disabled:cursor-not-allowed disabled:opacity-30"
             >
-              {loading ? "..." : "Send"}
+              Send
             </button>
           </div>
         </div>
