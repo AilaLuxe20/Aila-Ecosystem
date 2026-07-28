@@ -6,6 +6,8 @@ import {
   useState,
 } from "react";
 import type { ChatMessage, AilaMode } from "@/core/types";
+import ChatMessages from "./ChatMessages";
+import ChatInput from "./ChatInput";
 
 type ChatInterfaceProps = {
   mode: AilaMode;
@@ -78,6 +80,10 @@ const defaultHeaders: Record<AilaMode, { title: string; subtitle: string }> = {
  * Reusable across all Aila products. Products specify only a mode
  * and the component handles the rest — API calls, suggestions,
  * styling, and behaviour.
+ *
+ * This file is the controller: it owns the conversation state
+ * (input, messages, typing) and delegates rendering to the
+ * presentational sub-components (ChatMessages, ChatInput, …).
  */
 export default function ChatInterface({
   mode,
@@ -200,45 +206,12 @@ export default function ChatInterface({
         )}
 
         {/* MESSAGES */}
-        <div className={`${messagesHeight} space-y-5 overflow-y-auto p-5 sm:p-6`}>
-          {messages.map((message, index) => (
-            <div
-              key={`${message.role}-${index}`}
-              className={`flex ${
-                message.role === "user"
-                  ? "justify-end"
-                  : "justify-start"
-              }`}
-            >
-              <div
-                className={`max-w-[88%] rounded-3xl px-5 py-4 text-sm leading-7 sm:max-w-[80%] ${
-                  message.role === "user"
-                    ? "rounded-br-md bg-white text-black"
-                    : "rounded-bl-md border border-white/[0.07] bg-white/[0.035] text-neutral-300"
-                }`}
-              >
-                {message.content}
-              </div>
-            </div>
-          ))}
-
-          {typing && (
-            <div className="flex justify-start">
-              <div className="flex items-center gap-3 rounded-3xl rounded-bl-md border border-white/[0.07] bg-white/[0.035] px-5 py-4">
-                <div className="flex gap-1">
-                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-cyan-300" />
-                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-blue-300 [animation-delay:150ms]" />
-                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-purple-300 [animation-delay:300ms]" />
-                </div>
-                <span className="text-xs text-neutral-600">
-                  Aila is typing...
-                </span>
-              </div>
-            </div>
-          )}
-
-          <div ref={chatEndRef} />
-        </div>
+        <ChatMessages
+          messages={messages}
+          typing={typing}
+          messagesHeight={messagesHeight}
+          chatEndRef={chatEndRef}
+        />
 
         {/* SUGGESTIONS */}
         {showSuggestions && resolvedSuggestions && (
@@ -260,32 +233,19 @@ export default function ChatInterface({
         )}
 
         {/* INPUT */}
-        <div className="p-5 sm:p-6">
-          <div className="flex gap-2 rounded-2xl border border-white/[0.09] bg-black/40 p-2 transition focus-within:border-cyan-300/25">
-            <textarea
-              value={input}
-              onChange={(event) => setInput(event.target.value)}
-              onKeyDown={(event) => {
-                if (event.key === "Enter" && !event.shiftKey) {
-                  event.preventDefault();
-                  sendMessage();
-                }
-              }}
-              placeholder={resolvedPlaceholder}
-              rows={1}
-              className="min-w-0 flex-1 resize-none bg-transparent px-4 py-3 text-sm text-white outline-none placeholder:text-neutral-700"
-            />
-
-            <button
-              type="button"
-              onClick={() => sendMessage()}
-              disabled={!input.trim() || typing}
-              className="rounded-xl bg-white px-5 py-3 text-sm font-semibold text-black transition hover:scale-[1.03] disabled:cursor-not-allowed disabled:opacity-30"
-            >
-              Send
-            </button>
-          </div>
-        </div>
+        <ChatInput
+          input={input}
+          placeholder={resolvedPlaceholder}
+          typing={typing}
+          onChange={setInput}
+          onSend={() => sendMessage()}
+          onKeyDown={(event) => {
+            if (event.key === "Enter" && !event.shiftKey) {
+              event.preventDefault();
+              sendMessage();
+            }
+          }}
+        />
       </div>
     </div>
   );
