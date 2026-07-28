@@ -131,7 +131,7 @@ export default function ChatInterface({
     });
   }, [messages, typing]);
 
-  function sendMessage(customMessage?: string) {
+  async function sendMessage(customMessage?: string) {
     const messageToSend = (customMessage || input).trim();
 
     if (!messageToSend || typing) {
@@ -143,21 +143,48 @@ export default function ChatInterface({
       content: messageToSend,
     };
 
-    setMessages((previous) => [...previous, userMessage]);
+    const updatedMessages = [...messages, userMessage];
+
+    setMessages(updatedMessages);
     setInput("");
     setTyping(true);
 
-    setTimeout(() => {
+    try {
+      const response = await fetch("/api/ai", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          mode,
+          messages: updatedMessages,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Aila Intelligence could not respond.");
+      }
+
+      const data = await response.json();
+
       setTyping(false);
       setMessages((previous) => [
         ...previous,
         {
           role: "assistant",
-          content:
-            "I'm not connected to AI yet. This is a placeholder response.",
+          content: data.reply,
         },
       ]);
-    }, 1000);
+    } catch {
+      setTyping(false);
+      setMessages((previous) => [
+        ...previous,
+        {
+          role: "assistant",
+          content: "Sorry, something went wrong. Please try again.",
+        },
+      ]);
+    }
   }
 
   return (
