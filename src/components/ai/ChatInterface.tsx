@@ -119,6 +119,44 @@ export default function ChatInterface({
   const chatEndRef = useRef<HTMLDivElement | null>(null);
   const [typing, setTyping] = useState(false);
 
+  useEffect(() => {
+    const STORAGE_KEY = `aila-chat-${mode}`;
+
+    const saved = localStorage.getItem(STORAGE_KEY);
+
+    if (!saved) return;
+
+    try {
+      const parsed = JSON.parse(saved);
+
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        setMessages(parsed);
+      }
+    } catch {
+      console.warn("Unable to restore previous conversation.");
+    }
+  }, [mode]);
+
+  const [sessionId] = useState(() => {
+    if (typeof window === "undefined") {
+      return crypto.randomUUID();
+    }
+
+    const STORAGE_KEY = `aila-session-${mode}`;
+
+    const existing = localStorage.getItem(STORAGE_KEY);
+
+    if (existing) {
+      return existing;
+    }
+
+    const id = crypto.randomUUID();
+
+    localStorage.setItem(STORAGE_KEY, id);
+
+    return id;
+  });
+
   const resolvedSuggestions = suggestions ?? defaultSuggestions[mode];
   const resolvedPlaceholder = placeholder ?? defaultPlaceholders[mode];
   const resolvedHeader = headerTitle
