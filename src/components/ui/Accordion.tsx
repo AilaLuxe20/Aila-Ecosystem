@@ -20,8 +20,7 @@ import { focusRing } from "./variants";
 export const Accordion = AccordionPrimitive.Root;
 
 /** Props for {@link AccordionItem}. */
-export interface AccordionItemProps
-  extends React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item> {}
+export type AccordionItemProps = React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>;
 
 /**
  * A single collapsible section.

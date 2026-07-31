@@ -53,7 +53,10 @@ export function useStorage<T>(
 
     try {
       const raw = storage.getItem(key);
-      if (raw !== null) setValue(JSON.parse(raw) as T);
+      if (raw !== null) {
+        const parsed = JSON.parse(raw) as T;
+        queueMicrotask(() => setValue(parsed));
+      }
     } catch (error) {
       storageLogger.warn("Failed to read stored value.", { key, area, error: String(error) });
     }

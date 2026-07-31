@@ -69,7 +69,7 @@ export function PanelLayout({
 }
 
 /** Props for {@link ResizablePanel}. */
-export interface ResizablePanelProps extends React.ComponentPropsWithoutRef<typeof Panel> {}
+export type ResizablePanelProps = React.ComponentPropsWithoutRef<typeof Panel>;
 
 /**
  * A single resizable region within a {@link PanelLayout}.

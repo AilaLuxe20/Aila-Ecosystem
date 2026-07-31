@@ -115,7 +115,7 @@ export function useAsync<T, TArgs extends readonly unknown[] = []>(
   }, []);
 
   useEffect(() => {
-    if (immediate) void execute(...immediate);
+    if (immediate) queueMicrotask(() => void execute(...immediate));
   }, [immediate, execute]);
 
   useEffect(() => () => controllerRef.current?.abort(), []);

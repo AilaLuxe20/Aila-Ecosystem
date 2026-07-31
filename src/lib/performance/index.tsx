@@ -71,11 +71,17 @@ export function useDeepMemo<T, D>(factory: () => T, dependency: D): T {
   const dependencyRef = useRef<D>(dependency);
   const valueRef = useRef<T | undefined>(undefined);
 
+  // Intentional memo pattern: refs store the previous dependency and computed
+  // value so the factory only re-runs when the dependency changes structurally.
+  // eslint-disable-next-line react-hooks/refs
   if (valueRef.current === undefined || !deepEqual(dependencyRef.current, dependency)) {
+    // eslint-disable-next-line react-hooks/refs
     dependencyRef.current = dependency;
+    // eslint-disable-next-line react-hooks/refs
     valueRef.current = factory();
   }
 
+  // eslint-disable-next-line react-hooks/refs
   return valueRef.current;
 }
 
@@ -92,10 +98,15 @@ export function useDeepMemo<T, D>(factory: () => T, dependency: D): T {
 export function useStableValue<T>(value: T): T {
   const ref = useRef<T>(value);
 
+  // Intentional memo pattern: ref stores the previous value so the reference
+  // only changes when the contents change structurally.
+  // eslint-disable-next-line react-hooks/refs
   if (!deepEqual(ref.current, value)) {
+    // eslint-disable-next-line react-hooks/refs
     ref.current = value;
   }
 
+  // eslint-disable-next-line react-hooks/refs
   return ref.current;
 }
 
@@ -174,7 +185,10 @@ export function useAnimationFrame<TArgs extends readonly unknown[]>(
 ): (...args: TArgs) => void {
   const frameRef = useRef<number | null>(null);
   const callbackRef = useRef(callback);
-  callbackRef.current = callback;
+
+  useEffect(() => {
+    callbackRef.current = callback;
+  }, [callback]);
 
   useEffect(
     () => () => {

@@ -1,0 +1,11 @@
+2026.07.29 21:27:55 INFO  Tracing is disabled for protocol LSP. To enable tracing of incoming and outgoing JSON messages, create an empty file at c:\Users\karma\aila\.metals\lsp.trace.json or C:\Users\karma\AppData\Local\scalameta\metals\cache\lsp.trace.json
+2026.07.29 21:28:00 INFO  logging to files C:\Users\karma\aila\.metals\metals.log
+2026.07.29 21:28:00 INFO  Started: Metals version 1.6.8 in folders 'C:\Users\karma\aila' for client Visual Studio Code 1.131.0.
+2026.07.29 21:28:00 INFO  Memory monitor started
+2026.07.29 21:28:03 WARN  Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026.07.29 21:28:04 WARN  no build tool detected in workspace 'C:\Users\karma\aila'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+2026.07.29 21:28:04 WARN  Build server is not auto-connectable.
+Jul 30, 2026 5:32:53 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Jul 31, 2026 12:26:11 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace

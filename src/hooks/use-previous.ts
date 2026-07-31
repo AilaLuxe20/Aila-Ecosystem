@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useState } from "react";
 
 /**
  * Returns the value from the previous render.
@@ -13,11 +13,13 @@ import { useEffect, useRef } from "react";
  * const isIncreasing = previousCount !== undefined && count > previousCount;
  */
 export function usePrevious<T>(value: T): T | undefined {
-  const ref = useRef<T | undefined>(undefined);
+  const [previous, setPrevious] = useState<T | undefined>(undefined);
+  const [current, setCurrent] = useState<T>(value);
 
-  useEffect(() => {
-    ref.current = value;
-  }, [value]);
+  if (value !== current) {
+    setPrevious(current);
+    setCurrent(value);
+  }
 
-  return ref.current;
+  return previous;
 }

@@ -108,8 +108,7 @@ export const HoverCardContent = forwardRef<
 });
 
 /** Props for {@link HoverCardRoot}. */
-export interface HoverCardRootProps
-  extends React.ComponentPropsWithoutRef<typeof HoverCardPrimitive.Root> {}
+export type HoverCardRootProps = React.ComponentPropsWithoutRef<typeof HoverCardPrimitive.Root>;
 
 /**
  * A hover card with platform-standard open and close delays.

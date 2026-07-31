@@ -142,8 +142,10 @@ export function useForm<TValues extends FormValues>(
     const draft = readDraft<TValues>(draftKey);
     if (!draft) return;
 
-    setValuesState(draft);
-    setHasRestoredDraft(true);
+    queueMicrotask(() => {
+      setValuesState(draft);
+      setHasRestoredDraft(true);
+    });
     formLogger.debug("Restored form draft.", { draftKey });
   }, [draftKey]);
 

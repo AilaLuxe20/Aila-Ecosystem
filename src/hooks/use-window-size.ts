@@ -23,11 +23,11 @@ export function useWindowSize(throttleMs = 150): WindowSize {
   const [size, setSize] = useState<WindowSize>({ width: 0, height: 0 });
 
   const handleResize = useThrottledCallback(() => {
-    setSize({ width: window.innerWidth, height: window.innerHeight });
+    queueMicrotask(() => setSize({ width: window.innerWidth, height: window.innerHeight }));
   }, throttleMs);
 
   useEffect(() => {
-    setSize({ width: window.innerWidth, height: window.innerHeight });
+    queueMicrotask(() => setSize({ width: window.innerWidth, height: window.innerHeight }));
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);

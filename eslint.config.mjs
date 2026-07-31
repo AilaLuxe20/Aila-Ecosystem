@@ -27,6 +27,9 @@ const eslintConfig = defineConfig([
     ".turbo/**",
     ".vercel/**",
     "dist/**",
+
+    // Separate workspace project (has its own .next build artifacts)
+    "clerk-nextjs/**",
   ]),
 ]);
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { useLatestRef } from "./use-latest-ref";
 
@@ -95,5 +95,5 @@ export function useDebouncedCallback<TArgs extends readonly unknown[]>(
     [delayMs, callbackRef],
   );
 
-  return Object.assign(debounced, { cancel, flush, isPending });
+  return useMemo(() => Object.assign(debounced, { cancel, flush, isPending }), [debounced, cancel, flush, isPending]);
 }

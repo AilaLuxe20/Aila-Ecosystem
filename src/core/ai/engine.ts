@@ -146,6 +146,7 @@ ${documentText.trim().slice(0, 14000)}`;
       ],
       max_tokens: promptConfig.maxTokens,
       temperature: promptConfig.temperature,
+
     }),
   });
 
@@ -291,3 +292,6 @@ ${documentText}
  * Delegates to the document context manager.
  */
 export { getDocument, hasDocument, saveDocument, clearDocument };
+
+
+

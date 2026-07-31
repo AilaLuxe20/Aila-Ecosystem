@@ -149,7 +149,7 @@ export function CodeBlock({
 }
 
 /** Props for {@link InlineCode}. */
-export interface InlineCodeProps extends React.HTMLAttributes<HTMLElement> {}
+export type InlineCodeProps = React.HTMLAttributes<HTMLElement>;
 
 /**
  * A short code fragment rendered inline with prose.

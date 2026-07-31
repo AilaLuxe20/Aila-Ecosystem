@@ -17,6 +17,10 @@ export interface AIResponse {
   error?: string;
 }
 
+export interface AIStreamChunk {
+  content: string;
+}
+
 export interface AIPromptConfig {
   systemPrompt: string;
   maxTokens: number;

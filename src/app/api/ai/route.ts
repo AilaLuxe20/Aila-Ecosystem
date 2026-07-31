@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { ChatMessage, AilaMode } from "@/core/types";
-import { chat } from "@/core/ai/engine";
+import { orchestrate } from "@/core/ai/orchestrator";
 
 export async function POST(req: Request) {
   try {
@@ -10,7 +10,7 @@ export async function POST(req: Request) {
     const documentText: string | undefined = body?.documentText;
     const documentName: string | undefined = body?.documentName;
 
-    const result = await chat({
+    const result = await orchestrate({
       mode,
       messages,
       documentText,
@@ -36,3 +36,5 @@ export async function POST(req: Request) {
     );
   }
 }
+
+

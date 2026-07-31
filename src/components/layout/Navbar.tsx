@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useAuth, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 import { ALL_PRODUCTS } from "@/core/constants";
 
 const navigation = [
@@ -25,6 +26,7 @@ const platformProducts = ALL_PRODUCTS.slice(4);
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { isSignedIn } = useAuth();
 
   useEffect(() => {
     function handleScroll() {
@@ -127,6 +129,39 @@ export default function Navbar() {
           >
             Start a Project
           </Link>
+
+          <div className="hidden items-center gap-2 lg:flex">
+            {isSignedIn ? (
+              <UserButton
+                appearance={{
+                  elements: {
+                    avatarBox: "h-9 w-9",
+                  },
+                }}
+              />
+            ) : (
+              <>
+                <SignInButton
+                  mode="modal"
+                  appearance={{
+                    elements: {
+                      button:
+                        "rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-neutral-300 transition hover:bg-white/10",
+                    },
+                  }}
+                />
+                <SignUpButton
+                  mode="modal"
+                  appearance={{
+                    elements: {
+                      button:
+                        "rounded-full bg-white px-4 py-2 text-sm font-semibold text-black transition hover:scale-105",
+                    },
+                  }}
+                />
+              </>
+            )}
+          </div>
 
           <button
             type="button"
@@ -262,6 +297,41 @@ export default function Navbar() {
             >
               Start a Project
             </Link>
+
+            <div className="mt-6 flex flex-col gap-3">
+              {isSignedIn ? (
+                <div className="flex justify-center">
+                  <UserButton
+                    appearance={{
+                      elements: {
+                        avatarBox: "h-10 w-10",
+                      },
+                    }}
+                  />
+                </div>
+              ) : (
+                <>
+                  <SignInButton
+                    mode="modal"
+                    appearance={{
+                      elements: {
+                        button:
+                          "w-full rounded-full border border-white/10 bg-white/5 px-6 py-4 text-center text-sm font-semibold text-neutral-300 transition hover:bg-white/10",
+                      },
+                    }}
+                  />
+                  <SignUpButton
+                    mode="modal"
+                    appearance={{
+                      elements: {
+                        button:
+                          "w-full rounded-full bg-white px-6 py-4 text-center text-sm font-semibold text-black transition hover:scale-105",
+                      },
+                    }}
+                  />
+                </>
+              )}
+            </div>
 
             <div className="mt-8 flex items-center justify-between">
               <p className="text-xs text-neutral-700">
