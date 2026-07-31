@@ -5,6 +5,7 @@ import { orchestrate } from "@/core/ai/orchestrator";
 export async function POST(req: Request) {
   try {
     const body = await req.json();
+
     const mode: AilaMode = body?.mode ?? "intelligence";
     const messages: ChatMessage[] = body?.messages ?? [];
     const documentText: string | undefined = body?.documentText;
@@ -19,7 +20,9 @@ export async function POST(req: Request) {
 
     if (!result.success) {
       return NextResponse.json(
-        { error: result.error || "Aila Intelligence could not respond." },
+        {
+          error: result.error ?? "Aila Intelligence could not respond.",
+        },
         { status: 500 }
       );
     }
@@ -30,14 +33,12 @@ export async function POST(req: Request) {
     });
   } catch (error) {
     console.error("Aila AI API Error:", error);
+
     return NextResponse.json(
-      { error: "Aila Intelligence encountered an unexpected error." },
+      {
+        error: "Aila Intelligence encountered an unexpected error.",
+      },
       { status: 500 }
     );
   }
 }
-
-
-
-
-
