@@ -1,21 +1,22 @@
 import { NextResponse } from "next/server";
-
-import {
-  saveConversation,
-} from "@/core/ai/conversation";
+import { saveConversation } from "@/core/ai/conversation";
 
 export async function POST(req: Request) {
-  const body = await req.json();
 
-  const conversations = body.conversations ?? [];
+    const { conversations = [] } = await req.json();
 
-  for (const conversation of conversations) {
-    saveConversation(conversation);
-  }
+    for (const conversation of conversations) {
 
-  return NextResponse.json({
-    success: true,
-    imported: conversations.length,
-  });
+        saveConversation(
+            conversation.id,
+            conversation.messages ?? []
+        );
+
+    }
+
+    return NextResponse.json({
+        success: true,
+        imported: conversations.length
+    });
+
 }
-

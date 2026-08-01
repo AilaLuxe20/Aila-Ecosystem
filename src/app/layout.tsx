@@ -2,7 +2,18 @@
 import { ClerkProvider } from "@clerk/nextjs";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+
+const geistSans = Geist({
+  subsets: ["latin"],
+  variable: "--font-geist-sans",
+});
+
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
+});
 
 const siteUrl = "https://ailaluxe.com";
 
@@ -25,20 +36,10 @@ export const metadata: Metadata = {
     "AI development",
     "AI solutions",
     "AI agents",
-    "business automation",
-    "website development",
-    "web application development",
-    "mobile app development",
-    "Next.js development",
-    "software company",
-    "digital transformation",
-  ],
-
-  authors: [
-    {
-      name: "Aila Ecosystem",
-      url: siteUrl,
-    },
+    "Business automation",
+    "Website development",
+    "Mobile app development",
+    "Next.js",
   ],
 
   creator: "Aila Ecosystem",
@@ -50,12 +51,11 @@ export const metadata: Metadata = {
 
   openGraph: {
     type: "website",
-    locale: "en_US",
     url: siteUrl,
-    siteName: "Aila Ecosystem",
     title: "Aila Ecosystem | Build the Future with AI",
     description:
-      "AI-powered websites, applications, automation systems and intelligent digital experiences for modern businesses.",
+      "AI-powered websites, applications, automation systems and intelligent digital experiences.",
+    siteName: "Aila Ecosystem",
   },
 
   twitter: {
@@ -64,20 +64,6 @@ export const metadata: Metadata = {
     description:
       "AI-powered websites, applications, automation systems and intelligent digital experiences.",
   },
-
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-      "max-video-preview": -1,
-    },
-  },
-
-  category: "technology",
 };
 
 export const viewport: Viewport = {
@@ -92,16 +78,6 @@ const organizationSchema = {
   "@type": "Organization",
   name: "Aila Ecosystem",
   url: siteUrl,
-  description:
-    "An intelligent software company building AI-powered websites, applications, automation systems and digital experiences.",
-  knowsAbout: [
-    "Artificial Intelligence",
-    "Web Development",
-    "Mobile Application Development",
-    "Business Automation",
-    "AI Agents",
-    "Software Development",
-  ],
 };
 
 const websiteSchema = {
@@ -109,19 +85,21 @@ const websiteSchema = {
   "@type": "WebSite",
   name: "Aila Ecosystem",
   url: siteUrl,
-  description:
-    "Build AI-powered websites, applications, automation systems and intelligent digital experiences.",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
-        <body className="bg-black text-white antialiased">
+      <html
+        lang="en"
+        suppressHydrationWarning
+        className={`${geistSans.variable} ${geistMono.variable}`}
+      >
+        <body className="min-h-screen bg-black text-white antialiased">
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{
