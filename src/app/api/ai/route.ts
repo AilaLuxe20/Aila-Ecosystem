@@ -10,7 +10,6 @@ export async function POST(req: Request) {
     const messages: ChatMessage[] = body?.messages ?? [];
     const documentText: string | undefined = body?.documentText;
     const documentName: string | undefined = body?.documentName;
-    const sessionId: string | undefined = body?.sessionId;
 
     const result = await orchestrate({
       mode,
@@ -42,4 +41,13 @@ export async function POST(req: Request) {
       { status: 500 }
     );
   }
+<<<<<<< HEAD
 }
+=======
+}
+
+
+
+
+
+>>>>>>> 6d08bcd (Apply Cline and agent changes to main worktree)

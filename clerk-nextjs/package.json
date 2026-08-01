@@ -10,10 +10,14 @@
   },
   "dependencies": {
 <<<<<<< HEAD
+<<<<<<< HEAD
     "@clerk/nextjs": "^7.6.4",
 =======
     "@clerk/nextjs": "^7.6.2",
 >>>>>>> c7d33f1 (feat: AI orchestrator architecture, auth routes, UI improvements, and project updates)
+=======
+    "@clerk/nextjs": "^7.6.4",
+>>>>>>> 6d08bcd (Apply Cline and agent changes to main worktree)
     "next": "16.2.12",
     "react": "19.2.4",
     "react-dom": "19.2.4"
