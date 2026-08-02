@@ -35,14 +35,16 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.62.1",
-    "@tailwindcss/postcss": "^4",
+    "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^9",
+    "autoprefixer": "^10.5.4",
+    "eslint": "^9.39.5",
     "eslint-config-next": "16.2.10",
+    "postcss": "^8.5.25",
     "prisma": "^7.9.0",
-    "tailwindcss": "^4",
+    "tailwindcss": "^4.3.3",
     "typescript": "^5"
   }
 }
