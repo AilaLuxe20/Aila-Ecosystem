@@ -39,11 +39,11 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 7.9.0
+ * Prisma Client JS version: 7.9.1
  * Query Engine version: e922089b7d7502aff4249d5da3420f6fa55fc6ad
  */
 Prisma.prismaVersion = {
-  client: "7.9.0",
+  client: "7.9.1",
   engine: "e922089b7d7502aff4249d5da3420f6fa55fc6ad"
 }
 
@@ -210,7 +210,7 @@ exports.Prisma.ModelName = {
  */
 const config = {
   "previewFeatures": [],
-  "clientVersion": "7.9.0",
+  "clientVersion": "7.9.1",
   "engineVersion": "e922089b7d7502aff4249d5da3420f6fa55fc6ad",
   "activeProvider": "postgresql",
   "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  // The 'url' property has been removed to comply with Prisma 7 configuration requirements\n}\n\nmodel User {\n  id               String           @id @default(cuid())\n  name             String?\n  email            String           @unique\n  emailVerified    DateTime?\n  image            String?\n  password         String?\n  accounts         Account[]\n  sessions         Session[]\n  conversations    Conversation[]\n  legalDocuments   LegalDocument[]\n  projectInquiries ProjectInquiry[]\n  createdAt        DateTime         @default(now())\n  updatedAt        DateTime         @updatedAt\n}\n\nmodel Account {\n  id                String  @id @default(cuid())\n  userId            String\n  type              String\n  provider          String\n  providerAccountId String\n  refresh_token     String?\n  access_token      String?\n  expires_at        Int?\n  token_type        String?\n  scope             String?\n  id_token          String?\n  session_state     String?\n\n  user User @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@unique([provider, providerAccountId])\n}\n\nmodel Session {\n  id           String   @id @default(cuid())\n  sessionToken String   @unique\n  userId       String\n  expires      DateTime\n\n  user User @relation(fields: [userId], references: [id], onDelete: Cascade)\n}\n\nmodel VerificationToken {\n  identifier String\n  token      String   @unique\n  expires    DateTime\n\n  @@unique([identifier, token])\n}\n\nmodel Conversation {\n  id        String   @id @default(cuid())\n  userId    String\n  mode      String   @default(\"intelligence\")\n  title     String?\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)\n  messages Message[]\n\n  @@index([userId])\n  @@map(\"conversations\")\n}\n\nmodel Message {\n  id             String   @id @default(cuid())\n  conversationId String\n  role           String\n  content        String   @db.Text\n  createdAt      DateTime @default(now())\n\n  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)\n\n  @@index([conversationId])\n}\n\nmodel LegalDocument {\n  id             String   @id @default(cuid())\n  userId         String\n  fileName       String\n  fileSize       Int\n  mimeType       String\n  fileType       String\n  content        String   @db.Text\n  summary        String?  @db.Text\n  conversationId String?\n  createdAt      DateTime @default(now())\n  updatedAt      DateTime @updatedAt\n\n  user User @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@map(\"legal_documents\")\n}\n\nmodel ProjectInquiry {\n  id          String   @id @default(cuid())\n  userId      String?\n  name        String\n  email       String\n  company     String?\n  idea        String\n  projectType String\n  budget      String?\n  timeline    String?\n  description String   @db.Text\n  status      String   @default(\"new\")\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n\n  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)\n\n  @@map(\"project_inquiries\")\n}\n"
