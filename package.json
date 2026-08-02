@@ -35,11 +35,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.62.1",
-<<<<<<< HEAD
-    "@tailwindcss/postcss": "^4.1.13",
-=======
-    "@tailwindcss/postcss": "^4",
->>>>>>> b9c29b8 (test: add end-to-end production verification)
+    "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
