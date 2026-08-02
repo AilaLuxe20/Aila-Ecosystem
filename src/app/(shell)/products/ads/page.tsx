@@ -1,30 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import ProductShowcase from "@/components/shared/ProductShowcase";
-
-const adsFeatures = [
-  {
-    title: "Campaign Management",
-    description:
-      "Create and manage ad campaigns across all channels with unified controls and scheduling.",
-  },
-  {
-    title: "Audience Targeting",
-    description:
-      "Precise targeting using AI-powered audience insights, behavioural data, and lookalike modelling.",
-  },
-  {
-    title: "Performance Analytics",
-    description:
-      "Real-time metrics and ROI tracking with actionable insights for campaign optimisation.",
-  },
-  {
-    title: "Budget Optimization",
-    description:
-      "Automatic budget allocation across campaigns to maximise results and minimise waste.",
-  },
-];
+import ChatInterface from "@/components/ai/ChatInterface";
 
 const adsCapabilities = [
   {
@@ -132,15 +109,14 @@ export default function AilaAdsPage() {
           </div>
         </div>
 
-        {/* ADS SHOWCASE */}
+        {/* ADS CHAT */}
         <div className="relative">
           <div className="pointer-events-none absolute inset-0 rounded-full bg-amber-500/[0.08] blur-[110px]" />
 
-          <ProductShowcase
-            title="Aila Ads"
-            subtitle="Intelligent advertising platform"
-            features={adsFeatures}
-            accent="amber"
+          <ChatInterface
+            mode="ads"
+            containerClassName="h-[600px]"
+            messagesHeight="h-[400px]"
           />
         </div>
       </section>

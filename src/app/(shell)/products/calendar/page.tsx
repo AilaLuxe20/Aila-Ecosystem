@@ -1,30 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import ProductShowcase from "@/components/shared/ProductShowcase";
-
-const calendarFeatures = [
-  {
-    title: "Smart Scheduling",
-    description:
-      "AI-powered scheduling that finds the best times for meetings across timezones and availability.",
-  },
-  {
-    title: "Event Management",
-    description:
-      "Create, manage, and track events with automated reminders and resource allocation.",
-  },
-  {
-    title: "Team Coordination",
-    description:
-      "Shared calendars and resource management for teams with role-based permissions.",
-  },
-  {
-    title: "Integration Sync",
-    description:
-      "Seamless sync with email, CRM, project management, and other connected tools.",
-  },
-];
+import ChatInterface from "@/components/ai/ChatInterface";
 
 const calendarCapabilities = [
   {
@@ -132,15 +109,14 @@ export default function AilaCalendarPage() {
           </div>
         </div>
 
-        {/* CALENDAR SHOWCASE */}
+        {/* CALENDAR CHAT */}
         <div className="relative">
           <div className="pointer-events-none absolute inset-0 rounded-full bg-rose-500/[0.08] blur-[110px]" />
 
-          <ProductShowcase
-            title="Aila Calendar"
-            subtitle="Intelligent scheduling platform"
-            features={calendarFeatures}
-            accent="rose"
+          <ChatInterface
+            mode="calendar"
+            containerClassName="h-[600px]"
+            messagesHeight="h-[400px]"
           />
         </div>
       </section>

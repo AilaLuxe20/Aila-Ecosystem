@@ -46,6 +46,36 @@ const defaultSuggestions: Record<AilaMode, string[]> = {
     "How can I automate customer follow-ups?",
     "What processes can be automated?",
   ],
+  ads: [
+    "Help me plan an ad campaign",
+    "How should I target my audience?",
+    "Where should I allocate my budget?",
+  ],
+  apps: [
+    "I have an app idea",
+    "Web, iOS, or Android — what fits me?",
+    "What should my MVP include?",
+  ],
+  calendar: [
+    "Help me plan a booking workflow",
+    "How can I reduce scheduling back-and-forth?",
+    "What reminders should I set up?",
+  ],
+  commerce: [
+    "I want to sell online",
+    "How can I improve my checkout?",
+    "How do I increase conversion?",
+  ],
+  flow: [
+    "Map out my current process",
+    "Where is my workflow breaking down?",
+    "Help me connect two tools together",
+  ],
+  sites: [
+    "I need a new website",
+    "What pages should my site have?",
+    "Help me plan my site structure",
+  ],
 };
 
 const defaultPlaceholders: Record<AilaMode, string> = {
@@ -53,6 +83,12 @@ const defaultPlaceholders: Record<AilaMode, string> = {
   legal: "Ask AilaLegal about a contract, clause or legal document...",
   business: "Ask Aila Business AI...",
   automation: "Describe a process to automate...",
+  ads: "Ask Aila Ads about a campaign...",
+  apps: "Tell Aila Apps about your app idea...",
+  calendar: "Ask Aila Calendar about scheduling...",
+  commerce: "Ask Aila Commerce about your store...",
+  flow: "Describe a workflow to connect...",
+  sites: "Tell Aila Sites about your website...",
 };
 
 const defaultHeaders: Record<AilaMode, { title: string; subtitle: string }> = {
@@ -72,6 +108,49 @@ const defaultHeaders: Record<AilaMode, { title: string; subtitle: string }> = {
     title: "Aila Automation",
     subtitle: "Workflow discovery assistant",
   },
+  ads: {
+    title: "Aila Ads",
+    subtitle: "Advertising intelligence assistant",
+  },
+  apps: {
+    title: "Aila Apps",
+    subtitle: "App planning assistant",
+  },
+  calendar: {
+    title: "Aila Calendar",
+    subtitle: "Scheduling assistant",
+  },
+  commerce: {
+    title: "Aila Commerce",
+    subtitle: "Commerce intelligence assistant",
+  },
+  flow: {
+    title: "Aila Flow",
+    subtitle: "Connected process assistant",
+  },
+  sites: {
+    title: "Aila Sites",
+    subtitle: "Website planning assistant",
+  },
+};
+
+const defaultWelcomeMessages: Record<AilaMode, string> = {
+  intelligence:
+    "Welcome. I am Aila Intelligence, the intelligence layer of the Aila Ecosystem. Tell me what you want to build, improve or automate.",
+  legal:
+    "Welcome to AilaLegal AI. I can help you understand contracts, documents, clauses and potential review points. How can I assist you?",
+  business:
+    "Hello, I am Aila Business AI. How can I help your business today?",
+  automation:
+    "Hello, I am Aila Automation. Tell me about a process you want to automate.",
+  ads: "Hello, I am Aila Ads. Tell me about the campaign you want to plan.",
+  apps: "Hello, I am Aila Apps. Tell me about the app you want to build.",
+  calendar:
+    "Hello, I am Aila Calendar. Tell me about the scheduling workflow you need.",
+  commerce:
+    "Hello, I am Aila Commerce. Tell me about the store you want to build or improve.",
+  flow: "Hello, I am Aila Flow. Tell me about the process you want to connect.",
+  sites: "Hello, I am Aila Sites. Tell me about the website you want to build.",
 };
 
 /**
@@ -104,14 +183,7 @@ export default function ChatInterface({
     initialMessages ?? [
       {
         role: "assistant",
-        content:
-          mode === "intelligence"
-            ? "Welcome. I am Aila Intelligence, the intelligence layer of the Aila Ecosystem. Tell me what you want to build, improve or automate."
-            : mode === "legal"
-              ? "Welcome to AilaLegal AI. I can help you understand contracts, documents, clauses and potential review points. How can I assist you?"
-              : mode === "business"
-                ? "Hello, I am Aila Business AI. How can I help your business today?"
-                : "Hello, I am Aila Automation. Tell me about a process you want to automate.",
+        content: defaultWelcomeMessages[mode],
       },
     ]
   );
@@ -315,4 +387,3 @@ export default function ChatInterface({
     </div>
   );
 }
-

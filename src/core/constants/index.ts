@@ -36,6 +36,30 @@ export const MODE_CONFIG = {
     maxTokens: 1400,
     temperature: 0.45,
   },
+  ads: {
+    maxTokens: 900,
+    temperature: 0.5,
+  },
+  apps: {
+    maxTokens: 1000,
+    temperature: 0.45,
+  },
+  calendar: {
+    maxTokens: 700,
+    temperature: 0.4,
+  },
+  commerce: {
+    maxTokens: 1000,
+    temperature: 0.5,
+  },
+  flow: {
+    maxTokens: 1200,
+    temperature: 0.45,
+  },
+  sites: {
+    maxTokens: 900,
+    temperature: 0.5,
+  },
 } as const;
 
 export const PRODUCT_NAVIGATION = [

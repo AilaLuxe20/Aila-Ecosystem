@@ -6,7 +6,13 @@ export type AilaMode =
   | "intelligence"
   | "legal"
   | "business"
-  | "automation";
+  | "automation"
+  | "ads"
+  | "apps"
+  | "calendar"
+  | "commerce"
+  | "flow"
+  | "sites";
 
 export type ChatRole = "user" | "assistant";
 
@@ -36,5 +42,3 @@ export interface AnalysisResult {
   keyClauses: string[];
   recommendations: string[];
 }
-
-

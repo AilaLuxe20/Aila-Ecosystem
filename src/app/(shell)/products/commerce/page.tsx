@@ -1,30 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import ProductShowcase from "@/components/shared/ProductShowcase";
-
-const commerceFeatures = [
-  {
-    title: "Product Catalog",
-    description:
-      "Manage your entire product catalog with AI-powered categorization, inventory tracking, and smart search.",
-  },
-  {
-    title: "Intelligent Pricing",
-    description:
-      "Dynamic pricing based on demand, competition, inventory levels, and customer behaviour.",
-  },
-  {
-    title: "Order Processing",
-    description:
-      "Streamlined order management from payment to fulfillment with automated workflows.",
-  },
-  {
-    title: "Analytics Dashboard",
-    description:
-      "Real-time insights into sales, traffic, conversion, and customer behaviour.",
-  },
-];
+import ChatInterface from "@/components/ai/ChatInterface";
 
 const commerceCapabilities = [
   {
@@ -132,15 +109,14 @@ export default function AilaCommercePage() {
           </div>
         </div>
 
-        {/* COMMERCE SHOWCASE */}
+        {/* COMMERCE CHAT */}
         <div className="relative">
           <div className="pointer-events-none absolute inset-0 rounded-full bg-emerald-500/[0.08] blur-[110px]" />
 
-          <ProductShowcase
-            title="Aila Commerce"
-            subtitle="Intelligent commerce platform"
-            features={commerceFeatures}
-            accent="emerald"
+          <ChatInterface
+            mode="commerce"
+            containerClassName="h-[600px]"
+            messagesHeight="h-[400px]"
           />
         </div>
       </section>

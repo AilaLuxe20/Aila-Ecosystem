@@ -1,30 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import ProductShowcase from "@/components/shared/ProductShowcase";
-
-const appsFeatures = [
-  {
-    title: "Cross-Platform Development",
-    description:
-      "Build once and deploy to iOS, Android, and web with a single, unified codebase.",
-  },
-  {
-    title: "Native Performance",
-    description:
-      "Near-native performance with optimised rendering, fast startup, and smooth animations.",
-  },
-  {
-    title: "Real-time Data",
-    description:
-      "Live data synchronization across all platforms with offline support and conflict resolution.",
-  },
-  {
-    title: "Push Notifications",
-    description:
-      "Targeted push notifications with analytics, A/B testing, and personalisation.",
-  },
-];
+import ChatInterface from "@/components/ai/ChatInterface";
 
 const appsCapabilities = [
   {
@@ -132,15 +109,14 @@ export default function AilaAppsPage() {
           </div>
         </div>
 
-        {/* APPS SHOWCASE */}
+        {/* APPS CHAT */}
         <div className="relative">
           <div className="pointer-events-none absolute inset-0 rounded-full bg-indigo-500/[0.08] blur-[110px]" />
 
-          <ProductShowcase
-            title="Aila Apps"
-            subtitle="Intelligent app development"
-            features={appsFeatures}
-            accent="indigo"
+          <ChatInterface
+            mode="apps"
+            containerClassName="h-[600px]"
+            messagesHeight="h-[400px]"
           />
         </div>
       </section>
