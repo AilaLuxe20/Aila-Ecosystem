@@ -130,7 +130,7 @@ export default function ChatInterface({
       const parsed = JSON.parse(saved);
 
       if (Array.isArray(parsed) && parsed.length > 0) {
-        setMessages(parsed);
+        queueMicrotask(() => setMessages(parsed));
       }
     } catch {
       console.warn("Unable to restore previous conversation.");

@@ -46,11 +46,4 @@ export async function orchestrate(
       "Aila Orchestrator encountered an unexpected error."
     );
   }
-<<<<<<< HEAD
 }
-=======
-}
-
-
-
->>>>>>> 914997d (fix: restore AI conversation and session modules)

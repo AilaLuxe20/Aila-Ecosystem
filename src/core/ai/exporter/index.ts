@@ -1,5 +1,5 @@
-export function exportConversation(messages:any[]){
+import type { ChatMessage } from "@/core/types";
 
-    return JSON.stringify(messages,null,2);
-
+export function exportConversation(messages: ChatMessage[]) {
+    return JSON.stringify(messages, null, 2);
 }

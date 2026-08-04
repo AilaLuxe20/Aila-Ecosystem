@@ -1,14 +1,11 @@
-export function conversationMetrics(messages:any[]){
+import type { ChatMessage } from "@/core/types";
 
-    return{
-
-        messages:messages.length,
-
-        characters:messages.reduce(
-            (a,m)=>a+(m.content?.length ?? 0),
+export function conversationMetrics(messages: ChatMessage[]) {
+    return {
+        messages: messages.length,
+        characters: messages.reduce(
+            (a, m) => a + (m.content?.length ?? 0),
             0
         )
-
     };
-
 }

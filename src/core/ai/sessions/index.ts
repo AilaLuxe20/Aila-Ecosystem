@@ -1,35 +1,30 @@
 import type { ChatMessage } from "@/core/types";
 
-const sessions = new Map<string, ChatMessage[]>();
-
-export function saveSession(id: string, messages: ChatMessage[]) {
-
-    sessions.set(id, messages);
-
+interface Session {
+  id: string;
+  messages: ChatMessage[];
 }
+
+const sessions = new Map<string, Session>();
 
 export function getSession(id: string): ChatMessage[] {
-
-    return sessions.get(id) ?? [];
-
+  return sessions.get(id)?.messages ?? [];
 }
 
-export function createSession(id: string) {
-
-    if (!sessions.has(id)) {
-        sessions.set(id, []);
-    }
-
+export function saveSession(id: string, messages: ChatMessage[]): void {
+  sessions.set(id, { id, messages });
 }
 
-export function getSessions() {
-
-    return [...sessions.keys()];
-
+export function getSessions(): Session[] {
+  return [...sessions.values()];
 }
 
-export function deleteSession(id: string) {
+export function createSession(id: string): void {
+  if (!sessions.has(id)) {
+    sessions.set(id, { id, messages: [] });
+  }
+}
 
-    sessions.delete(id);
-
+export function deleteSession(id: string): void {
+  sessions.delete(id);
 }

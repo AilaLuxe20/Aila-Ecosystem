@@ -77,8 +77,7 @@ export function useDeepMemo<T, D>(factory: () => T, dependency: D): T {
   if (valueRef.current === undefined || !deepEqual(dependencyRef.current, dependency)) {
     // eslint-disable-next-line react-hooks/refs
     dependencyRef.current = dependency;
-    // eslint-disable-next-line react-hooks/refs
-    valueRef.current = factory();
+  valueRef.current = factory();
   }
 
   // eslint-disable-next-line react-hooks/refs

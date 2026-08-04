@@ -41,13 +41,4 @@ export async function POST(req: Request) {
       { status: 500 }
     );
   }
-<<<<<<< HEAD
 }
-=======
-}
-
-
-
-
-
->>>>>>> 6d08bcd (Apply Cline and agent changes to main worktree)

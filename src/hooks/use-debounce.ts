@@ -80,8 +80,8 @@ export function useDebouncedCallback<TArgs extends readonly unknown[]>(
 
   useEffect(() => cancel, [cancel]);
 
-  const debounced = useCallback(
-    (...args: TArgs) => {
+  return useMemo<DebouncedCallback<TArgs>>(() => {
+    const fn = ((...args: TArgs): void => {
       pendingArgsRef.current = args;
 
       if (timerRef.current !== null) clearTimeout(timerRef.current);
@@ -91,9 +91,12 @@ export function useDebouncedCallback<TArgs extends readonly unknown[]>(
         pendingArgsRef.current = null;
         callbackRef.current(...args);
       }, delayMs);
-    },
-    [delayMs, callbackRef],
-  );
+    }) as DebouncedCallback<TArgs>;
 
-  return useMemo(() => Object.assign(debounced, { cancel, flush, isPending }), [debounced, cancel, flush, isPending]);
+    fn.cancel = cancel;
+    fn.flush = flush;
+    fn.isPending = isPending;
+
+    return fn;
+  }, [delayMs, callbackRef, cancel, flush, isPending]);
 }

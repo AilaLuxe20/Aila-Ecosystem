@@ -417,10 +417,3 @@ export default function Home() {
     </main>
   );
 }
-
-
-
-<<<<<<< HEAD
-
-=======
->>>>>>> 6d08bcd (Apply Cline and agent changes to main worktree)

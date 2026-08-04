@@ -28,8 +28,9 @@ const eslintConfig = defineConfig([
     ".vercel/**",
     "dist/**",
 
-    // Separate workspace project (has its own .next build artifacts)
+    // Separate workspace projects (have their own .next build artifacts)
     "clerk-nextjs/**",
+    "my-app/**",
   ]),
 ]);
 

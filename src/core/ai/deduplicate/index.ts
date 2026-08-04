@@ -1,17 +1,15 @@
-export function deduplicateMessages(messages:any[]){
+import type { ChatMessage } from "@/core/types";
 
-    const seen=new Set<string>();
+export function deduplicateMessages(messages: ChatMessage[]) {
+    const seen = new Set<string>();
 
-    return messages.filter(message=>{
+    return messages.filter(message => {
+        const key = JSON.stringify(message);
 
-        const key=JSON.stringify(message);
-
-        if(seen.has(key)) return false;
+        if (seen.has(key)) return false;
 
         seen.add(key);
 
         return true;
-
     });
-
 }
