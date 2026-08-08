@@ -42,3 +42,8 @@ next-env.d.ts
 
 .vercel
 .env*
+
+route-backup-*.zip
+route-usage-audit.csv
+routes-to-delete.csv
+replacements.txt
