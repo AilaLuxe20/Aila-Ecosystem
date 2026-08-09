@@ -47,3 +47,9 @@ route-backup-*.zip
 route-usage-audit.csv
 routes-to-delete.csv
 replacements.txt
+
+# stray backup/scaffold artifacts
+*.bak
+my-app/
+build_output.txt
+globals.txt
