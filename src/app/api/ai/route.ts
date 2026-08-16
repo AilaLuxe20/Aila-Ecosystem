@@ -1,7 +1,10 @@
 import { NextResponse } from "next/server";
 import type { ChatMessage, AilaMode } from "@/core/types";
 import { orchestrate } from "@/core/ai/orchestrator";
-import { AilaAuthenticationError, requirePrismaUser } from "@/core/auth/clerk-user";
+import {
+  AilaAuthenticationError,
+  requirePrismaUser,
+} from "@/core/auth/clerk-user";
 import {
   appendConversationMessages,
   ensureUserConversation,
@@ -33,22 +36,40 @@ export async function POST(req: Request) {
     const body = await req.json();
 
     const mode = resolveMode(body?.mode);
-    const messages: ChatMessage[] = body?.messages ?? [];
+    const messages: ChatMessage[] = Array.isArray(body?.messages)
+      ? body.messages
+      : [];
+
     const conversationId: string | undefined =
       typeof body?.conversationId === "string"
         ? body.conversationId
         : typeof body?.sessionId === "string"
           ? body.sessionId
           : undefined;
-    const documentText: string | undefined = body?.documentText;
-    const documentName: string | undefined = body?.documentName;
+
+    const documentText: string | undefined =
+      typeof body?.documentText === "string"
+        ? body.documentText
+        : undefined;
+
+    const documentName: string | undefined =
+      typeof body?.documentName === "string"
+        ? body.documentName
+        : undefined;
+
     const latestUserMessage = [...messages]
       .reverse()
-      .find((message) => message.role === "user" && message.content.trim());
+      .find(
+        (message) =>
+          message?.role === "user" &&
+          typeof message.content === "string" &&
+          message.content.trim()
+      );
 
     if (!latestUserMessage) {
       return NextResponse.json(
         {
+          success: false,
           error: "Please send Aila a message.",
         },
         { status: 400 }
@@ -65,9 +86,25 @@ export async function POST(req: Request) {
     if (!conversation) {
       return NextResponse.json(
         {
+          success: false,
           error: "Conversation not found.",
         },
         { status: 404 }
+      );
+    }
+
+    /*
+     * A conversation belongs permanently to the mode in which it
+     * was created. Do not allow a client to reuse an Intelligence
+     * conversation as Legal, Business, etc.
+     */
+    if (conversation.mode !== mode) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "This conversation belongs to a different Aila workspace.",
+        },
+        { status: 409 }
       );
     }
 
@@ -78,6 +115,7 @@ export async function POST(req: Request) {
     if (history === null) {
       return NextResponse.json(
         {
+          success: false,
           error: "Conversation not found.",
         },
         { status: 404 }
@@ -98,6 +136,7 @@ export async function POST(req: Request) {
     if (!result.success) {
       return NextResponse.json(
         {
+          success: false,
           error: result.error ?? "Aila Intelligence could not respond.",
         },
         { status: 500 }
@@ -124,6 +163,7 @@ export async function POST(req: Request) {
     if (error instanceof AilaAuthenticationError) {
       return NextResponse.json(
         {
+          success: false,
           error: error.message,
         },
         { status: 401 }
@@ -134,6 +174,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json(
       {
+        success: false,
         error: "Aila Intelligence encountered an unexpected error.",
       },
       { status: 500 }

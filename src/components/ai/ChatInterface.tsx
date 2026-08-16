@@ -397,18 +397,36 @@ export default function ChatInterface({
         }),
       });
 
+      const data = await response.json().catch(() => null);
+
       if (!response.ok) {
-        throw new Error("Aila Intelligence could not respond.");
+        const serverError =
+          typeof data?.error === "string"
+            ? data.error
+            : `Aila could not respond (${response.status}).`;
+
+        throw new Error(serverError);
       }
 
-      const data = await response.json();
+      if (
+        !data ||
+        typeof data.reply !== "string" ||
+        data.reply.trim().length === 0
+      ) {
+        throw new Error("Aila returned an empty response.");
+      }
 
       if (typeof data.conversationId === "string") {
         setConversationId(data.conversationId);
-        localStorage.setItem(`aila-session-${mode}`, data.conversationId);
+
+        localStorage.setItem(
+          `aila-session-${mode}`,
+          data.conversationId
+        );
       }
 
       setTyping(false);
+
       setMessages((previous) => [
         ...previous,
         {
@@ -416,19 +434,25 @@ export default function ChatInterface({
           content: data.reply,
         },
       ]);
+
       void refreshConversations();
-    } catch {
+    } catch (error) {
       setTyping(false);
+
+      const message =
+        error instanceof Error && error.message.trim()
+          ? error.message
+          : "Aila Intelligence could not respond. Please try again.";
+
       setMessages((previous) => [
         ...previous,
         {
           role: "assistant",
-          content: "Sorry, something went wrong. Please try again.",
+          content: message,
         },
       ]);
     }
   }
-
   return (
     <div
       className={`relative overflow-hidden rounded-[36px] border border-white/[0.09] bg-[#080808]/90 shadow-[0_40px_120px_rgba(0,0,0,0.65)] backdrop-blur-2xl ${containerClassName}`}
@@ -610,3 +634,4 @@ export default function ChatInterface({
     </div>
   );
 }
+
