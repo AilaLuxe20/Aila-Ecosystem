@@ -125,6 +125,7 @@ export default function AilaIntelligencePage() {
             containerClassName="h-[600px]"
             messagesHeight="h-[400px]"
             suggestions={suggestions}
+            showConversationHistory
           />
         </div>
       </section>

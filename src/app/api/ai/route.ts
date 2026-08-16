@@ -1,19 +1,96 @@
 import { NextResponse } from "next/server";
 import type { ChatMessage, AilaMode } from "@/core/types";
 import { orchestrate } from "@/core/ai/orchestrator";
+import { AilaAuthenticationError, requirePrismaUser } from "@/core/auth/clerk-user";
+import {
+  appendConversationMessages,
+  ensureUserConversation,
+  getUserConversationMessages,
+} from "@/core/ai/conversation/service";
+
+const AILA_MODES = new Set<AilaMode>([
+  "intelligence",
+  "legal",
+  "business",
+  "automation",
+  "ads",
+  "apps",
+  "calendar",
+  "commerce",
+  "flow",
+  "sites",
+]);
+
+function resolveMode(value: unknown): AilaMode {
+  return typeof value === "string" && AILA_MODES.has(value as AilaMode)
+    ? (value as AilaMode)
+    : "intelligence";
+}
 
 export async function POST(req: Request) {
   try {
+    const user = await requirePrismaUser();
     const body = await req.json();
 
-    const mode: AilaMode = body?.mode ?? "intelligence";
+    const mode = resolveMode(body?.mode);
     const messages: ChatMessage[] = body?.messages ?? [];
+    const conversationId: string | undefined =
+      typeof body?.conversationId === "string"
+        ? body.conversationId
+        : typeof body?.sessionId === "string"
+          ? body.sessionId
+          : undefined;
     const documentText: string | undefined = body?.documentText;
     const documentName: string | undefined = body?.documentName;
+    const latestUserMessage = [...messages]
+      .reverse()
+      .find((message) => message.role === "user" && message.content.trim());
+
+    if (!latestUserMessage) {
+      return NextResponse.json(
+        {
+          error: "Please send Aila a message.",
+        },
+        { status: 400 }
+      );
+    }
+
+    const conversation = await ensureUserConversation({
+      userId: user.id,
+      conversationId,
+      mode,
+      firstMessage: latestUserMessage,
+    });
+
+    if (!conversation) {
+      return NextResponse.json(
+        {
+          error: "Conversation not found.",
+        },
+        { status: 404 }
+      );
+    }
+
+    const history = conversationId
+      ? await getUserConversationMessages(user.id, conversation.id)
+      : [];
+
+    if (history === null) {
+      return NextResponse.json(
+        {
+          error: "Conversation not found.",
+        },
+        { status: 404 }
+      );
+    }
+
+    const conversationMessages = [...history, latestUserMessage];
 
     const result = await orchestrate({
       mode,
-      messages,
+      messages: conversationMessages,
+      conversationId: conversation.id,
+      sessionId: conversation.id,
       documentText,
       documentName,
     });
@@ -27,11 +104,32 @@ export async function POST(req: Request) {
       );
     }
 
+    const assistantMessage: ChatMessage = {
+      role: "assistant",
+      content: result.reply,
+    };
+
+    await appendConversationMessages(conversation.id, [
+      latestUserMessage,
+      assistantMessage,
+    ]);
+
     return NextResponse.json({
       success: true,
+      conversationId: conversation.id,
+      sessionId: conversation.id,
       reply: result.reply,
     });
   } catch (error) {
+    if (error instanceof AilaAuthenticationError) {
+      return NextResponse.json(
+        {
+          error: error.message,
+        },
+        { status: 401 }
+      );
+    }
+
     console.error("Aila AI API Error:", error);
 
     return NextResponse.json(

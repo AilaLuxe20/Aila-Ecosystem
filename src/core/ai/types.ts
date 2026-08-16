@@ -7,6 +7,7 @@ import type { ChatMessage, AilaMode } from "@/core/types";
 export interface AIRequest {
   mode: AilaMode;
   messages: ChatMessage[];
+  conversationId?: string;
   sessionId?: string;
   documentText?: string;
   documentName?: string;

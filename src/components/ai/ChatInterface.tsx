@@ -1,13 +1,23 @@
 "use client";
 
 import {
+  useCallback,
   useEffect,
   useRef,
   useState,
 } from "react";
+import { MessageSquare, Plus, Trash2 } from "lucide-react";
 import type { ChatMessage, AilaMode } from "@/core/types";
 import ChatMessages from "./ChatMessages";
 import ChatInput from "./ChatInput";
+
+type ConversationSummary = {
+  id: string;
+  mode: string;
+  title: string | null;
+  updatedAt: string;
+  messageCount: number;
+};
 
 type ChatInterfaceProps = {
   mode: AilaMode;
@@ -22,6 +32,7 @@ type ChatInterfaceProps = {
   messagesHeight?: string;
   showSuggestions?: boolean;
   showHeader?: boolean;
+  showConversationHistory?: boolean;
 };
 
 const defaultSuggestions: Record<AilaMode, string[]> = {
@@ -177,6 +188,7 @@ export default function ChatInterface({
   messagesHeight = "h-[400px]",
   showSuggestions = true,
   showHeader = true,
+  showConversationHistory = false,
 }: ChatInterfaceProps) {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>(
@@ -190,6 +202,11 @@ export default function ChatInterface({
 
   const chatEndRef = useRef<HTMLDivElement | null>(null);
   const [typing, setTyping] = useState(false);
+  const [conversationId, setConversationId] = useState<string | null>(null);
+  const [conversations, setConversations] = useState<ConversationSummary[]>([]);
+  const [conversationListStatus, setConversationListStatus] = useState<
+    "idle" | "loading" | "ready" | "signed-out" | "error"
+  >("idle");
 
   useEffect(() => {
     const STORAGE_KEY = `aila-chat-${mode}`;
@@ -209,25 +226,59 @@ export default function ChatInterface({
     }
   }, [mode]);
 
-  const [sessionId] = useState(() => {
+  useEffect(() => {
     if (typeof window === "undefined") {
-      return crypto.randomUUID();
+      return;
+    }
+
+    localStorage.setItem(`aila-chat-${mode}`, JSON.stringify(messages));
+  }, [messages, mode]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
     }
 
     const STORAGE_KEY = `aila-session-${mode}`;
-
     const existing = localStorage.getItem(STORAGE_KEY);
 
     if (existing) {
-      return existing;
+      queueMicrotask(() => setConversationId(existing));
+    }
+  }, [mode]);
+
+  const refreshConversations = useCallback(async () => {
+    if (!showConversationHistory) {
+      return;
     }
 
-    const id = crypto.randomUUID();
+    setConversationListStatus("loading");
 
-    localStorage.setItem(STORAGE_KEY, id);
+    try {
+      const response = await fetch("/api/ai/conversation/list");
 
-    return id;
-  });
+      if (response.status === 401) {
+        setConversationListStatus("signed-out");
+        setConversations([]);
+        return;
+      }
+
+      if (!response.ok) {
+        throw new Error("Unable to load conversations.");
+      }
+
+      const data = await response.json();
+
+      setConversations(Array.isArray(data.conversations) ? data.conversations : []);
+      setConversationListStatus("ready");
+    } catch {
+      setConversationListStatus("error");
+    }
+  }, [showConversationHistory]);
+
+  useEffect(() => {
+    queueMicrotask(() => void refreshConversations());
+  }, [refreshConversations]);
 
   const resolvedSuggestions = suggestions ?? defaultSuggestions[mode];
   const resolvedPlaceholder = placeholder ?? defaultPlaceholders[mode];
@@ -240,6 +291,79 @@ export default function ChatInterface({
       behavior: "smooth",
     });
   }, [messages, typing]);
+
+  function resetConversation() {
+    setConversationId(null);
+    setMessages([
+      {
+        role: "assistant",
+        content: defaultWelcomeMessages[mode],
+      },
+    ]);
+
+    if (typeof window !== "undefined") {
+      localStorage.removeItem(`aila-session-${mode}`);
+      localStorage.removeItem(`aila-chat-${mode}`);
+    }
+  }
+
+  async function loadConversation(id: string) {
+    if (typing) {
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `/api/ai/conversation?conversationId=${encodeURIComponent(id)}`
+      );
+
+      if (!response.ok) {
+        throw new Error("Unable to load conversation.");
+      }
+
+      const data = await response.json();
+      const loadedMessages = data?.conversation?.messages;
+
+      if (Array.isArray(loadedMessages)) {
+        setConversationId(id);
+        setMessages(loadedMessages);
+        localStorage.setItem(`aila-session-${mode}`, id);
+      }
+    } catch {
+      setConversationListStatus("error");
+    }
+  }
+
+  async function deleteConversation(id: string) {
+    if (typing) {
+      return;
+    }
+
+    const previous = conversations;
+    setConversations((current) =>
+      current.filter((conversation) => conversation.id !== id)
+    );
+
+    if (conversationId === id) {
+      resetConversation();
+    }
+
+    try {
+      const response = await fetch(
+        `/api/ai/conversation?conversationId=${encodeURIComponent(id)}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Unable to delete conversation.");
+      }
+    } catch {
+      setConversations(previous);
+      setConversationListStatus("error");
+    }
+  }
 
   async function sendMessage(customMessage?: string) {
     const messageToSend = (customMessage || input).trim();
@@ -267,6 +391,8 @@ export default function ChatInterface({
         },
         body: JSON.stringify({
           mode,
+          conversationId,
+          sessionId: conversationId,
           messages: updatedMessages,
         }),
       });
@@ -277,6 +403,11 @@ export default function ChatInterface({
 
       const data = await response.json();
 
+      if (typeof data.conversationId === "string") {
+        setConversationId(data.conversationId);
+        localStorage.setItem(`aila-session-${mode}`, data.conversationId);
+      }
+
       setTyping(false);
       setMessages((previous) => [
         ...previous,
@@ -285,6 +416,7 @@ export default function ChatInterface({
           content: data.reply,
         },
       ]);
+      void refreshConversations();
     } catch {
       setTyping(false);
       setMessages((previous) => [
@@ -304,7 +436,97 @@ export default function ChatInterface({
       {/* GLOW */}
       <div className="pointer-events-none absolute left-1/2 top-[-180px] h-80 w-80 -translate-x-1/2 rounded-full bg-cyan-500/[0.12] blur-[100px]" />
 
-      <div className="relative">
+      <div
+        className={`relative ${showConversationHistory ? "grid min-h-full lg:grid-cols-[250px_minmax(0,1fr)]" : ""}`}
+      >
+        {showConversationHistory && (
+          <aside className="border-b border-white/[0.07] bg-black/20 p-4 lg:border-b-0 lg:border-r">
+            <div className="flex items-center justify-between gap-3">
+              <div>
+                <p className="text-xs font-medium text-white">Conversations</p>
+                <p className="mt-1 text-[11px] text-neutral-600">
+                  Saved intelligence threads
+                </p>
+              </div>
+
+              <button
+                type="button"
+                onClick={resetConversation}
+                disabled={typing}
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.03] text-neutral-400 transition hover:border-cyan-300/30 hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
+                aria-label="Start new conversation"
+                title="Start new conversation"
+              >
+                <Plus className="h-4 w-4" />
+              </button>
+            </div>
+
+            <div className="mt-4 max-h-52 space-y-1 overflow-y-auto pr-1 lg:max-h-[500px]">
+              {conversationListStatus === "loading" && (
+                <p className="px-2 py-3 text-xs text-neutral-600">Loading...</p>
+              )}
+
+              {conversationListStatus === "signed-out" && (
+                <p className="px-2 py-3 text-xs leading-5 text-neutral-600">
+                  Sign in to save and reopen conversations.
+                </p>
+              )}
+
+              {conversationListStatus === "error" && (
+                <p className="px-2 py-3 text-xs leading-5 text-red-300/70">
+                  Conversation history is unavailable.
+                </p>
+              )}
+
+              {conversationListStatus === "ready" && conversations.length === 0 && (
+                <p className="px-2 py-3 text-xs leading-5 text-neutral-600">
+                  No saved conversations yet.
+                </p>
+              )}
+
+              {conversations.map((conversation) => (
+                <div
+                  key={conversation.id}
+                  className={`group flex items-center gap-2 rounded-2xl border px-2 py-2 transition ${
+                    conversation.id === conversationId
+                      ? "border-cyan-300/20 bg-cyan-300/[0.06]"
+                      : "border-transparent hover:border-white/[0.08] hover:bg-white/[0.03]"
+                  }`}
+                >
+                  <button
+                    type="button"
+                    onClick={() => loadConversation(conversation.id)}
+                    disabled={typing}
+                    className="flex min-w-0 flex-1 items-center gap-2 text-left disabled:cursor-not-allowed"
+                  >
+                    <MessageSquare className="h-4 w-4 shrink-0 text-cyan-300/60" />
+                    <span className="min-w-0">
+                      <span className="block truncate text-xs text-neutral-300">
+                        {conversation.title ?? "New conversation"}
+                      </span>
+                      <span className="mt-0.5 block text-[10px] text-neutral-700">
+                        {conversation.messageCount} messages
+                      </span>
+                    </span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => deleteConversation(conversation.id)}
+                    disabled={typing}
+                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-neutral-700 opacity-0 transition hover:bg-red-400/10 hover:text-red-300 group-hover:opacity-100 disabled:cursor-not-allowed"
+                    aria-label="Delete conversation"
+                    title="Delete conversation"
+                  >
+                    <Trash2 className="h-3.5 w-3.5" />
+                  </button>
+                </div>
+              ))}
+            </div>
+          </aside>
+        )}
+
+        <div className="min-w-0">
         {/* HEADER */}
         {showHeader && (
           <div className="flex items-center justify-between border-b border-white/[0.07] px-6 py-5">
@@ -383,6 +605,7 @@ export default function ChatInterface({
             }
           }}
         />
+        </div>
       </div>
     </div>
   );
