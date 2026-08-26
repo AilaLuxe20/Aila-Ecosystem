@@ -202,6 +202,7 @@ export default function ChatInterface({
 
   const chatEndRef = useRef<HTMLDivElement | null>(null);
   const [typing, setTyping] = useState(false);
+  const [sendError, setSendError] = useState<string | null>(null);
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [conversations, setConversations] = useState<ConversationSummary[]>([]);
   const [conversationListStatus, setConversationListStatus] = useState<
@@ -255,7 +256,9 @@ export default function ChatInterface({
     setConversationListStatus("loading");
 
     try {
-      const response = await fetch("/api/ai/conversation/list");
+      const response = await fetch(
+        `/api/ai/conversation/list?mode=${encodeURIComponent(mode)}`
+      );
 
       if (response.status === 401) {
         setConversationListStatus("signed-out");
@@ -274,7 +277,7 @@ export default function ChatInterface({
     } catch {
       setConversationListStatus("error");
     }
-  }, [showConversationHistory]);
+  }, [mode, showConversationHistory]);
 
   useEffect(() => {
     queueMicrotask(() => void refreshConversations());
@@ -294,6 +297,7 @@ export default function ChatInterface({
 
   function resetConversation() {
     setConversationId(null);
+    setSendError(null);
     setMessages([
       {
         role: "assistant",
@@ -326,6 +330,7 @@ export default function ChatInterface({
 
       if (Array.isArray(loadedMessages)) {
         setConversationId(id);
+        setSendError(null);
         setMessages(loadedMessages);
         localStorage.setItem(`aila-session-${mode}`, id);
       }
@@ -372,6 +377,7 @@ export default function ChatInterface({
       return;
     }
 
+    const previousMessages = messages;
     const userMessage: ChatMessage = {
       role: "user",
       content: messageToSend,
@@ -381,6 +387,7 @@ export default function ChatInterface({
 
     setMessages(updatedMessages);
     setInput("");
+    setSendError(null);
     setTyping(true);
 
     try {
@@ -399,11 +406,17 @@ export default function ChatInterface({
 
       const data = await response.json().catch(() => null);
 
-      if (!response.ok) {
+      if (!response.ok || data?.success === false) {
         const serverError =
-          typeof data?.error === "string"
-            ? data.error
-            : `Aila could not respond (${response.status}).`;
+          typeof data?.error?.message === "string"
+            ? data.error.message
+            : typeof data?.error === "string"
+              ? data.error
+              : response.status === 401
+                ? "Sign in to continue chatting with Aila."
+                : response.status === 429
+                  ? "Too many requests. Please try again shortly."
+                  : `Aila could not respond (${response.status}).`;
 
         throw new Error(serverError);
       }
@@ -427,8 +440,8 @@ export default function ChatInterface({
 
       setTyping(false);
 
-      setMessages((previous) => [
-        ...previous,
+      setMessages((current) => [
+        ...current,
         {
           role: "assistant",
           content: data.reply,
@@ -438,19 +451,15 @@ export default function ChatInterface({
       void refreshConversations();
     } catch (error) {
       setTyping(false);
+      setMessages(previousMessages);
+      setInput(messageToSend);
 
       const message =
         error instanceof Error && error.message.trim()
           ? error.message
           : "Aila Intelligence could not respond. Please try again.";
 
-      setMessages((previous) => [
-        ...previous,
-        {
-          role: "assistant",
-          content: message,
-        },
-      ]);
+      setSendError(message);
     }
   }
   return (
@@ -612,6 +621,12 @@ export default function ChatInterface({
                 </button>
               ))}
             </div>
+          </div>
+        )}
+
+        {sendError && (
+          <div className="px-5 pt-3 sm:px-6" role="alert">
+            <p className="text-xs leading-5 text-red-300/80">{sendError}</p>
           </div>
         )}
 

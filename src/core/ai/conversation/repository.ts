@@ -47,10 +47,14 @@ export async function findConversationForUser(userId: string, conversationId: st
   });
 }
 
-export async function listConversationsForUser(userId: string) {
+export async function listConversationsForUser(
+  userId: string,
+  mode?: AilaMode
+) {
   return prisma.conversation.findMany({
     where: {
       userId,
+      ...(mode ? { mode } : {}),
     },
     orderBy: {
       updatedAt: "desc",

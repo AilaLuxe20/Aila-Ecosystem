@@ -25,9 +25,10 @@ export async function getUserConversationMessages(
 }
 
 export async function listUserConversations(
-  userId: string
+  userId: string,
+  mode?: AilaMode
 ): Promise<ConversationSummary[]> {
-  const conversations = await listConversationsForUser(userId);
+  const conversations = await listConversationsForUser(userId, mode);
 
   return conversations.map((conversation) => ({
     id: conversation.id,
@@ -60,6 +61,15 @@ export async function ensureUserConversation({
     return null;
   }
 
+  return createConversationForUser(userId, mode, firstMessage);
+}
+
+/** Creates a conversation for the authenticated user (used after AI succeeds). */
+export async function createUserConversation(
+  userId: string,
+  mode: AilaMode,
+  firstMessage?: ChatMessage
+) {
   return createConversationForUser(userId, mode, firstMessage);
 }
 

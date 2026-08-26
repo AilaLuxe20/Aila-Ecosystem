@@ -153,29 +153,29 @@ ${documentText.trim().slice(0, 14000)}`;
   const data = await aiResponse.json();
 
   if (!aiResponse.ok) {
-    console.error("Aila AI Engine API Error:", data);
-
-    const providerMessage =
-      typeof data?.error?.message === "string"
-        ? data.error.message
-        : "";
+    console.error("Aila AI Engine API Error:", {
+      status: aiResponse.status,
+    });
 
     return {
       success: false,
       reply: "",
-      error: providerMessage || "Aila Intelligence could not respond right now.",
+      error: "Aila Intelligence could not respond right now.",
     };
   }
 
   const reply = data?.choices?.[0]?.message?.content;
 
   if (typeof reply !== "string" || !reply.trim()) {
-    console.error("Aila AI Engine Empty Response:", data);
+    console.error("Aila AI Engine Empty Response:", {
+      status: aiResponse.status,
+      hasChoices: Array.isArray(data?.choices),
+    });
 
     return {
       success: false,
       reply: "",
-      error: "Aila Intelligence did not receive a valid response.",
+      error: "Aila Intelligence could not respond right now.",
     };
   }
 
@@ -255,29 +255,29 @@ ${documentText}
   const data = await aiResponse.json();
 
   if (!aiResponse.ok) {
-    console.error("Aila Document Analysis API Error:", data);
-
-    const providerMessage =
-      typeof data?.error?.message === "string"
-        ? data.error.message
-        : "";
+    console.error("Aila Document Analysis API Error:", {
+      status: aiResponse.status,
+    });
 
     return {
       success: false,
       reply: "",
-      error: providerMessage || "Aila could not analyze the document right now.",
+      error: "Aila could not analyze the document right now.",
     };
   }
 
   const analysis = data?.choices?.[0]?.message?.content;
 
   if (typeof analysis !== "string" || !analysis.trim()) {
-    console.error("Aila Document Analysis Empty Response:", data);
+    console.error("Aila Document Analysis Empty Response:", {
+      status: aiResponse.status,
+      hasChoices: Array.isArray(data?.choices),
+    });
 
     return {
       success: false,
       reply: "",
-      error: "Aila completed the request but did not receive a valid analysis.",
+      error: "Aila could not analyze the document right now.",
     };
   }
 
