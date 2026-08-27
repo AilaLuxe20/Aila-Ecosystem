@@ -1,4 +1,4 @@
-﻿import type { Metadata, Viewport } from "next";
+import type { Metadata, Viewport } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -38,8 +38,18 @@ export const metadata: Metadata = {
     "AI agents",
     "Business automation",
     "Website development",
+    "web application development",
     "Mobile app development",
-    "Next.js",
+    "Next.js development",
+    "software company",
+    "digital transformation",
+  ],
+
+  authors: [
+    {
+      name: "Aila Ecosystem",
+      url: siteUrl,
+    },
   ],
 
   creator: "Aila Ecosystem",
@@ -51,11 +61,12 @@ export const metadata: Metadata = {
 
   openGraph: {
     type: "website",
+    locale: "en_US",
     url: siteUrl,
+    siteName: "Aila Ecosystem",
     title: "Aila Ecosystem | Build the Future with AI",
     description:
-      "AI-powered websites, applications, automation systems and intelligent digital experiences.",
-    siteName: "Aila Ecosystem",
+      "AI-powered websites, applications, automation systems and intelligent digital experiences for modern businesses.",
   },
 
   twitter: {
@@ -64,6 +75,20 @@ export const metadata: Metadata = {
     description:
       "AI-powered websites, applications, automation systems and intelligent digital experiences.",
   },
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+
+  category: "technology",
 };
 
 export const viewport: Viewport = {
@@ -78,6 +103,8 @@ const organizationSchema = {
   "@type": "Organization",
   name: "Aila Ecosystem",
   url: siteUrl,
+  description:
+    "An intelligent software company building AI-powered websites, applications, automation systems and digital experiences.",
 };
 
 const websiteSchema = {

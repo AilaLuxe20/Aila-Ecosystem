@@ -232,7 +232,7 @@ export default function DocumentUpload() {
               </button>
 
               <p className="mt-4 text-[10px] uppercase tracking-[0.16em] text-neutral-700">
-                PDF · TXT
+                PDF · TXT · MAX 10 MB
               </p>
             </div>
           </div>
@@ -408,7 +408,7 @@ export default function DocumentUpload() {
 
           <p className="text-[11px] leading-5 text-neutral-700">
             Documents are processed for analysis.
-            Aila provides general information
+            AilaLegal provides general information
             and document assistance, not legal
             advice.
           </p>
