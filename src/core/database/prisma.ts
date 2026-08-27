@@ -1,8 +1,7 @@
 /**
  * Prisma database client singleton.
  *
- * Preserves the existing Prisma schema and generated client.
- * Do NOT regenerate models, rename tables, or change the schema.
+ * Prisma client singleton for the schema in prisma/schema.prisma.
  */
 
 import { PrismaClient } from "@/generated/prisma";

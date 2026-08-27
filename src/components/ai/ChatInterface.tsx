@@ -6,10 +6,12 @@ import {
   useRef,
   useState,
 } from "react";
+import { useAuth } from "@clerk/nextjs";
 import { MessageSquare, Plus, Trash2 } from "lucide-react";
 import type { ChatMessage, AilaMode } from "@/core/types";
+import { iterateAilaSse, isAbortError } from "@/core/ai/streaming/parse";
 import ChatMessages from "./ChatMessages";
-import ChatInput from "./ChatInput";
+import ChatInput, { type ChatAttachment } from "./ChatInput";
 
 type ConversationSummary = {
   id: string;
@@ -164,6 +166,155 @@ const defaultWelcomeMessages: Record<AilaMode, string> = {
   sites: "Hello, I am Aila Sites. Tell me about the website you want to build.",
 };
 
+function sessionStorageKey(mode: AilaMode) {
+  return `aila-session-${mode}`;
+}
+
+function draftStorageKey(mode: AilaMode) {
+  return `aila-chat-${mode}`;
+}
+
+function welcomeMessages(mode: AilaMode): ChatMessage[] {
+  return [
+    {
+      role: "assistant",
+      content: defaultWelcomeMessages[mode],
+    },
+  ];
+}
+
+function readStoredSessionId(mode: AilaMode): string | null {
+  if (typeof window === "undefined") {
+    return null;
+  }
+
+  const value = localStorage.getItem(sessionStorageKey(mode));
+  return value && value.trim() ? value.trim() : null;
+}
+
+function writeStoredSessionId(mode: AilaMode, id: string | null) {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  if (!id) {
+    localStorage.removeItem(sessionStorageKey(mode));
+    return;
+  }
+
+  localStorage.setItem(sessionStorageKey(mode), id);
+}
+
+function clearDraftMessages(mode: AilaMode) {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  localStorage.removeItem(draftStorageKey(mode));
+}
+
+function toClientMessages(value: unknown): ChatMessage[] {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+
+  const messages: ChatMessage[] = [];
+
+  for (const item of value) {
+    if (!item || typeof item !== "object") {
+      continue;
+    }
+
+    const role = "role" in item ? item.role : null;
+    const content = "content" in item ? item.content : null;
+
+    if (
+      (role === "user" || role === "assistant") &&
+      typeof content === "string"
+    ) {
+      messages.push({ role, content });
+    }
+  }
+
+  return messages;
+}
+
+function readDraftMessages(mode: AilaMode): ChatMessage[] | null {
+  if (typeof window === "undefined") {
+    return null;
+  }
+
+  const saved = localStorage.getItem(draftStorageKey(mode));
+
+  if (!saved) {
+    return null;
+  }
+
+  try {
+    const messages = toClientMessages(JSON.parse(saved));
+    return messages.length > 0 ? messages : null;
+  } catch {
+    return null;
+  }
+}
+
+function writeDraftMessages(mode: AilaMode, messages: ChatMessage[]) {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  localStorage.setItem(draftStorageKey(mode), JSON.stringify(messages));
+}
+
+function appendAssistantDelta(
+  current: ChatMessage[],
+  delta: string
+): ChatMessage[] {
+  const next = [...current];
+  const last = next[next.length - 1];
+
+  if (last?.role === "assistant") {
+    next[next.length - 1] = {
+      role: "assistant",
+      content: last.content + delta,
+    };
+    return next;
+  }
+
+  next.push({ role: "assistant", content: delta });
+  return next;
+}
+
+function jsonErrorMessage(
+  data: unknown,
+  status: number
+): string {
+  if (data && typeof data === "object") {
+    const error = "error" in data ? data.error : null;
+
+    if (error && typeof error === "object" && "message" in error) {
+      const message = error.message;
+      if (typeof message === "string" && message.trim()) {
+        return message;
+      }
+    }
+
+    if (typeof error === "string" && error.trim()) {
+      return error;
+    }
+  }
+
+  if (status === 401) {
+    return "Sign in to continue chatting with Aila.";
+  }
+
+  if (status === 429) {
+    return "Too many requests. Please try again shortly.";
+  }
+
+  return `Aila could not respond (${status}).`;
+}
+
 /**
  * Single premium chat component.
  *
@@ -171,9 +322,9 @@ const defaultWelcomeMessages: Record<AilaMode, string> = {
  * and the component handles the rest — API calls, suggestions,
  * styling, and behaviour.
  *
- * This file is the controller: it owns the conversation state
- * (input, messages, typing) and delegates rendering to the
- * presentational sub-components (ChatMessages, ChatInput, …).
+ * For authenticated users, the database is the source of truth for
+ * conversation history. localStorage only remembers the active
+ * conversationId and temporary signed-out drafts.
  */
 export default function ChatInterface({
   mode,
@@ -190,62 +341,77 @@ export default function ChatInterface({
   showHeader = true,
   showConversationHistory = false,
 }: ChatInterfaceProps) {
+  const { isLoaded: isAuthLoaded, isSignedIn } = useAuth();
+
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>(
-    initialMessages ?? [
-      {
-        role: "assistant",
-        content: defaultWelcomeMessages[mode],
-      },
-    ]
+    initialMessages ?? welcomeMessages(mode)
   );
 
   const chatEndRef = useRef<HTMLDivElement | null>(null);
   const [typing, setTyping] = useState(false);
+  const [generating, setGenerating] = useState(false);
   const [sendError, setSendError] = useState<string | null>(null);
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [conversations, setConversations] = useState<ConversationSummary[]>([]);
   const [conversationListStatus, setConversationListStatus] = useState<
     "idle" | "loading" | "ready" | "signed-out" | "error"
   >("idle");
+  const [conversationLoadStatus, setConversationLoadStatus] = useState<
+    "idle" | "loading" | "ready" | "error"
+  >("idle");
+  const [conversationLoadError, setConversationLoadError] = useState<
+    string | null
+  >(null);
+  const [failedConversationId, setFailedConversationId] = useState<
+    string | null
+  >(null);
+  const [hasHydrated, setHasHydrated] = useState(false);
+  const [attachment, setAttachment] = useState<ChatAttachment | null>(null);
+
+  const loadAbortRef = useRef<AbortController | null>(null);
+  const listAbortRef = useRef<AbortController | null>(null);
+  const sendAbortRef = useRef<AbortController | null>(null);
+  const syncGenerationRef = useRef(0);
+  const attachmentGenerationRef = useRef(0);
+  const conversationIdRef = useRef<string | null>(null);
+  const typingRef = useRef(false);
+  const generatingRef = useRef(false);
 
   useEffect(() => {
-    const STORAGE_KEY = `aila-chat-${mode}`;
-
-    const saved = localStorage.getItem(STORAGE_KEY);
-
-    if (!saved) return;
-
-    try {
-      const parsed = JSON.parse(saved);
-
-      if (Array.isArray(parsed) && parsed.length > 0) {
-        queueMicrotask(() => setMessages(parsed));
-      }
-    } catch {
-      console.warn("Unable to restore previous conversation.");
-    }
-  }, [mode]);
+    conversationIdRef.current = conversationId;
+  }, [conversationId]);
 
   useEffect(() => {
-    if (typeof window === "undefined") {
-      return;
-    }
-
-    localStorage.setItem(`aila-chat-${mode}`, JSON.stringify(messages));
-  }, [messages, mode]);
+    typingRef.current = typing;
+  }, [typing]);
 
   useEffect(() => {
-    if (typeof window === "undefined") {
-      return;
-    }
+    generatingRef.current = generating;
+  }, [generating]);
 
-    const STORAGE_KEY = `aila-session-${mode}`;
-    const existing = localStorage.getItem(STORAGE_KEY);
+  const beginFreshConversation = useCallback(() => {
+    syncGenerationRef.current += 1;
+    loadAbortRef.current?.abort();
+    loadAbortRef.current = null;
+    sendAbortRef.current?.abort();
+    sendAbortRef.current = null;
 
-    if (existing) {
-      queueMicrotask(() => setConversationId(existing));
-    }
+    generatingRef.current = false;
+    typingRef.current = false;
+    attachmentGenerationRef.current += 1;
+    setGenerating(false);
+    setTyping(false);
+    setConversationId(null);
+    conversationIdRef.current = null;
+    setSendError(null);
+    setConversationLoadError(null);
+    setFailedConversationId(null);
+    setConversationLoadStatus("idle");
+    setAttachment(null);
+    setMessages(welcomeMessages(mode));
+    writeStoredSessionId(mode, null);
+    clearDraftMessages(mode);
   }, [mode]);
 
   const refreshConversations = useCallback(async () => {
@@ -253,12 +419,21 @@ export default function ChatInterface({
       return;
     }
 
+    listAbortRef.current?.abort();
+    const controller = new AbortController();
+    listAbortRef.current = controller;
+
     setConversationListStatus("loading");
 
     try {
       const response = await fetch(
-        `/api/ai/conversation/list?mode=${encodeURIComponent(mode)}`
+        `/api/ai/conversation/list?mode=${encodeURIComponent(mode)}`,
+        { signal: controller.signal }
       );
+
+      if (controller.signal.aborted) {
+        return;
+      }
 
       if (response.status === 401) {
         setConversationListStatus("signed-out");
@@ -272,16 +447,245 @@ export default function ChatInterface({
 
       const data = await response.json();
 
-      setConversations(Array.isArray(data.conversations) ? data.conversations : []);
+      if (controller.signal.aborted) {
+        return;
+      }
+
+      const listed = Array.isArray(data.conversations)
+        ? data.conversations
+        : [];
+
+      setConversations(
+        listed.filter(
+          (conversation: ConversationSummary) => conversation.mode === mode
+        )
+      );
       setConversationListStatus("ready");
-    } catch {
+    } catch (error) {
+      if (controller.signal.aborted) {
+        return;
+      }
+
+      if (error instanceof DOMException && error.name === "AbortError") {
+        return;
+      }
+
       setConversationListStatus("error");
     }
   }, [mode, showConversationHistory]);
 
+  const loadConversation = useCallback(
+    async (id: string) => {
+      if (generatingRef.current || typingRef.current) {
+        return;
+      }
+
+      const generation = ++syncGenerationRef.current;
+      attachmentGenerationRef.current += 1;
+      loadAbortRef.current?.abort();
+      const controller = new AbortController();
+      loadAbortRef.current = controller;
+
+      setConversationLoadStatus("loading");
+      setConversationLoadError(null);
+      setFailedConversationId(null);
+      setSendError(null);
+
+      const isStale = () =>
+        controller.signal.aborted || syncGenerationRef.current !== generation;
+
+      try {
+        const response = await fetch(
+          `/api/ai/conversation?conversationId=${encodeURIComponent(id)}&mode=${encodeURIComponent(mode)}`,
+          { signal: controller.signal }
+        );
+
+        if (isStale()) {
+          return;
+        }
+
+        if (response.status === 401) {
+          setConversationId(null);
+          conversationIdRef.current = null;
+          setConversationLoadStatus("idle");
+          setConversationListStatus("signed-out");
+          setConversations([]);
+          setAttachment(null);
+          return;
+        }
+
+        if (response.status === 404 || response.status === 409) {
+          beginFreshConversation();
+          void refreshConversations();
+          return;
+        }
+
+        if (!response.ok) {
+          throw new Error("Unable to load conversation.");
+        }
+
+        const data = await response.json();
+        const conversation = data?.conversation;
+
+        if (isStale()) {
+          return;
+        }
+
+        if (
+          !conversation ||
+          typeof conversation.id !== "string" ||
+          conversation.mode !== mode
+        ) {
+          beginFreshConversation();
+          void refreshConversations();
+          return;
+        }
+
+        const nextMessages = toClientMessages(conversation.messages);
+        const attachments = Array.isArray(conversation.attachments)
+          ? conversation.attachments
+          : [];
+        const firstAttachment = attachments[0];
+
+        setConversationId(conversation.id);
+        conversationIdRef.current = conversation.id;
+        setMessages(
+          nextMessages.length > 0 ? nextMessages : welcomeMessages(mode)
+        );
+
+        if (
+          firstAttachment &&
+          typeof firstAttachment.id === "string" &&
+          typeof firstAttachment.fileName === "string"
+        ) {
+          setAttachment({
+            status: "ready",
+            documentId: firstAttachment.id,
+            fileName: firstAttachment.fileName,
+            fileSize:
+              typeof firstAttachment.fileSize === "number"
+                ? firstAttachment.fileSize
+                : 0,
+            truncated: Boolean(firstAttachment.truncated),
+          });
+        } else {
+          setAttachment(null);
+        }
+        writeStoredSessionId(mode, conversation.id);
+        clearDraftMessages(mode);
+        setConversationLoadStatus("ready");
+      } catch (error) {
+        if (isStale()) {
+          return;
+        }
+
+        if (error instanceof DOMException && error.name === "AbortError") {
+          return;
+        }
+
+        setConversationLoadStatus("error");
+        setFailedConversationId(id);
+        setConversationLoadError(
+          error instanceof Error && error.message.trim()
+            ? error.message
+            : "Unable to load conversation."
+        );
+      }
+    },
+    [beginFreshConversation, mode, refreshConversations]
+  );
+
+  const loadConversationRef = useRef(loadConversation);
+  useEffect(() => {
+    loadConversationRef.current = loadConversation;
+  }, [loadConversation]);
+
+  useEffect(() => {
+    if (!isAuthLoaded) {
+      return;
+    }
+
+    let cancelled = false;
+
+    async function hydrate() {
+      if (!isSignedIn) {
+        syncGenerationRef.current += 1;
+        loadAbortRef.current?.abort();
+        loadAbortRef.current = null;
+        sendAbortRef.current?.abort();
+        sendAbortRef.current = null;
+
+        generatingRef.current = false;
+        typingRef.current = false;
+        setGenerating(false);
+        setTyping(false);
+        setConversationId(null);
+        conversationIdRef.current = null;
+        setConversationLoadStatus("idle");
+        setConversationLoadError(null);
+        setFailedConversationId(null);
+        setAttachment(null);
+
+        const draft = readDraftMessages(mode);
+        if (!cancelled) {
+          setMessages(draft && draft.length > 0 ? draft : welcomeMessages(mode));
+          setHasHydrated(true);
+        }
+        return;
+      }
+
+      // Authenticated: never treat cached messages as authoritative.
+      clearDraftMessages(mode);
+
+      const storedId = readStoredSessionId(mode);
+
+      if (!storedId) {
+        if (!cancelled) {
+          setConversationId(null);
+          conversationIdRef.current = null;
+          setMessages(welcomeMessages(mode));
+          setConversationLoadStatus("idle");
+          setHasHydrated(true);
+        }
+        return;
+      }
+
+      if (!cancelled) {
+        setHasHydrated(true);
+        await loadConversationRef.current(storedId);
+      }
+    }
+
+    void hydrate();
+
+    return () => {
+      cancelled = true;
+      syncGenerationRef.current += 1;
+      loadAbortRef.current?.abort();
+      listAbortRef.current?.abort();
+      sendAbortRef.current?.abort();
+    };
+  }, [isAuthLoaded, isSignedIn, mode]);
+
   useEffect(() => {
     queueMicrotask(() => void refreshConversations());
   }, [refreshConversations]);
+
+  // Signed-out draft continuity only — never used as source of truth when signed in.
+  useEffect(() => {
+    if (!hasHydrated || !isAuthLoaded || isSignedIn || conversationId) {
+      return;
+    }
+
+    writeDraftMessages(mode, messages);
+  }, [
+    conversationId,
+    hasHydrated,
+    isAuthLoaded,
+    isSignedIn,
+    messages,
+    mode,
+  ]);
 
   const resolvedSuggestions = suggestions ?? defaultSuggestions[mode];
   const resolvedPlaceholder = placeholder ?? defaultPlaceholders[mode];
@@ -293,65 +697,31 @@ export default function ChatInterface({
     chatEndRef.current?.scrollIntoView({
       behavior: "smooth",
     });
-  }, [messages, typing]);
+  }, [messages, typing, generating, conversationLoadStatus]);
 
   function resetConversation() {
-    setConversationId(null);
-    setSendError(null);
-    setMessages([
-      {
-        role: "assistant",
-        content: defaultWelcomeMessages[mode],
-      },
-    ]);
-
-    if (typeof window !== "undefined") {
-      localStorage.removeItem(`aila-session-${mode}`);
-      localStorage.removeItem(`aila-chat-${mode}`);
-    }
-  }
-
-  async function loadConversation(id: string) {
-    if (typing) {
-      return;
-    }
-
-    try {
-      const response = await fetch(
-        `/api/ai/conversation?conversationId=${encodeURIComponent(id)}`
-      );
-
-      if (!response.ok) {
-        throw new Error("Unable to load conversation.");
-      }
-
-      const data = await response.json();
-      const loadedMessages = data?.conversation?.messages;
-
-      if (Array.isArray(loadedMessages)) {
-        setConversationId(id);
-        setSendError(null);
-        setMessages(loadedMessages);
-        localStorage.setItem(`aila-session-${mode}`, id);
-      }
-    } catch {
-      setConversationListStatus("error");
-    }
+    beginFreshConversation();
   }
 
   async function deleteConversation(id: string) {
-    if (typing) {
+    if (generating || typing || conversationLoadStatus === "loading") {
       return;
     }
 
     const previous = conversations;
+    const wasActive = conversationId === id;
+    const previousMessages = messages;
+    const previousConversationId = conversationId;
+
     setConversations((current) =>
       current.filter((conversation) => conversation.id !== id)
     );
 
-    if (conversationId === id) {
-      resetConversation();
+    if (wasActive) {
+      beginFreshConversation();
     }
+
+    const generation = syncGenerationRef.current;
 
     try {
       const response = await fetch(
@@ -364,16 +734,107 @@ export default function ChatInterface({
       if (!response.ok) {
         throw new Error("Unable to delete conversation.");
       }
+
+      const data = await response.json().catch(() => null);
+
+      if (data?.deleted !== true) {
+        throw new Error("Unable to delete conversation.");
+      }
     } catch {
       setConversations(previous);
+
+      if (wasActive && syncGenerationRef.current === generation) {
+        setConversationId(previousConversationId);
+        conversationIdRef.current = previousConversationId;
+        setMessages(previousMessages);
+        writeStoredSessionId(mode, previousConversationId);
+        setConversationLoadStatus("ready");
+      }
+
       setConversationListStatus("error");
+    }
+  }
+
+  async function reconcileAbortedGeneration({
+    conversationId: id,
+    previousMessages,
+    messageToSend,
+    sendGeneration,
+  }: {
+    conversationId: string;
+    previousMessages: ChatMessage[];
+    messageToSend: string;
+    sendGeneration: number;
+  }) {
+    const isCurrent = () => syncGenerationRef.current === sendGeneration;
+
+    try {
+      const response = await fetch(
+        `/api/ai/conversation?conversationId=${encodeURIComponent(id)}&mode=${encodeURIComponent(mode)}`
+      );
+
+      if (!isCurrent()) {
+        return;
+      }
+
+      if (!response.ok) {
+        setMessages(previousMessages);
+        setInput((current) => (current.trim() ? current : messageToSend));
+        return;
+      }
+
+      const data = await response.json();
+      const conversation = data?.conversation;
+
+      if (!isCurrent()) {
+        return;
+      }
+
+      if (
+        !conversation ||
+        typeof conversation.id !== "string" ||
+        conversation.mode !== mode
+      ) {
+        setMessages(previousMessages);
+        setInput((current) => (current.trim() ? current : messageToSend));
+        return;
+      }
+
+      const nextMessages = toClientMessages(conversation.messages);
+      const persistedNewTurn = nextMessages.length > previousMessages.length;
+
+      setConversationId(conversation.id);
+      conversationIdRef.current = conversation.id;
+      setMessages(
+        nextMessages.length > 0 ? nextMessages : welcomeMessages(mode)
+      );
+      writeStoredSessionId(mode, conversation.id);
+      clearDraftMessages(mode);
+
+      if (!persistedNewTurn) {
+        setInput((current) => (current.trim() ? current : messageToSend));
+      }
+    } catch {
+      if (!isCurrent()) {
+        return;
+      }
+
+      setMessages(previousMessages);
+      setInput((current) => (current.trim() ? current : messageToSend));
     }
   }
 
   async function sendMessage(customMessage?: string) {
     const messageToSend = (customMessage || input).trim();
 
-    if (!messageToSend || typing) {
+    if (
+      !messageToSend ||
+      generating ||
+      typing ||
+      conversationLoadStatus === "loading" ||
+      attachment?.status === "uploading" ||
+      attachment?.status === "processing"
+    ) {
       return;
     }
 
@@ -385,83 +846,344 @@ export default function ChatInterface({
 
     const updatedMessages = [...messages, userMessage];
 
+    // A send is a newer action than an in-flight load or delete rollback.
+    const sendGeneration = ++syncGenerationRef.current;
+    loadAbortRef.current?.abort();
+    loadAbortRef.current = null;
+    sendAbortRef.current?.abort();
+
+    const controller = new AbortController();
+    sendAbortRef.current = controller;
+
+    const conversationIdAtSend = conversationId;
+    const isCurrent = () => syncGenerationRef.current === sendGeneration;
+    let receivedDone = false;
+
     setMessages(updatedMessages);
     setInput("");
     setSendError(null);
+    generatingRef.current = true;
+    typingRef.current = true;
+    setGenerating(true);
     setTyping(true);
+
+    const restoreAfterFailure = (errorMessage: string | null) => {
+      if (!isCurrent()) {
+        return;
+      }
+
+      generatingRef.current = false;
+      typingRef.current = false;
+      setGenerating(false);
+      setTyping(false);
+      setMessages(previousMessages);
+      setInput((current) => (current.trim() ? current : messageToSend));
+
+      if (errorMessage) {
+        setSendError(errorMessage);
+      }
+    };
 
     try {
       const response = await fetch("/api/ai", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Accept: "text/event-stream, application/json",
         },
+        signal: controller.signal,
         body: JSON.stringify({
           mode,
           conversationId,
           sessionId: conversationId,
           messages: updatedMessages,
+          ...(mode === "intelligence" &&
+          attachment?.status === "ready" &&
+          attachment.documentId
+            ? { documentIds: [attachment.documentId] }
+            : {}),
         }),
       });
 
-      const data = await response.json().catch(() => null);
-
-      if (!response.ok || data?.success === false) {
-        const serverError =
-          typeof data?.error?.message === "string"
-            ? data.error.message
-            : typeof data?.error === "string"
-              ? data.error
-              : response.status === 401
-                ? "Sign in to continue chatting with Aila."
-                : response.status === 429
-                  ? "Too many requests. Please try again shortly."
-                  : `Aila could not respond (${response.status}).`;
-
-        throw new Error(serverError);
+      if (!isCurrent()) {
+        return;
       }
 
-      if (
-        !data ||
-        typeof data.reply !== "string" ||
-        data.reply.trim().length === 0
-      ) {
-        throw new Error("Aila returned an empty response.");
+      const contentType = response.headers.get("content-type") ?? "";
+      const isSse = contentType.includes("text/event-stream");
+
+      if (!isSse) {
+        const data = await response.json().catch(() => null);
+
+        if (!response.ok || data?.success === false) {
+          throw new Error(jsonErrorMessage(data, response.status));
+        }
+
+        if (
+          !data ||
+          typeof data.reply !== "string" ||
+          data.reply.trim().length === 0
+        ) {
+          throw new Error("Aila returned an empty response.");
+        }
+
+        if (typeof data.conversationId === "string") {
+          setConversationId(data.conversationId);
+          conversationIdRef.current = data.conversationId;
+          writeStoredSessionId(mode, data.conversationId);
+          clearDraftMessages(mode);
+        }
+
+        generatingRef.current = false;
+        typingRef.current = false;
+        setFailedConversationId(null);
+        setConversationLoadError(null);
+        setGenerating(false);
+        setTyping(false);
+        setMessages((current) => [
+          ...current,
+          {
+            role: "assistant",
+            content: data.reply,
+          },
+        ]);
+        void refreshConversations();
+        return;
       }
 
-      if (typeof data.conversationId === "string") {
-        setConversationId(data.conversationId);
-
-        localStorage.setItem(
-          `aila-session-${mode}`,
-          data.conversationId
-        );
+      if (!response.ok || !response.body) {
+        throw new Error(jsonErrorMessage(null, response.status));
       }
 
       setTyping(false);
-
       setMessages((current) => [
         ...current,
-        {
-          role: "assistant",
-          content: data.reply,
-        },
+        { role: "assistant", content: "" },
       ]);
 
-      void refreshConversations();
+      for await (const event of iterateAilaSse(
+        response.body,
+        controller.signal
+      )) {
+        if (!isCurrent()) {
+          controller.abort();
+          return;
+        }
+
+        if (event.type === "delta") {
+          setMessages((current) =>
+            appendAssistantDelta(current, event.content)
+          );
+          continue;
+        }
+
+        if (event.type === "error") {
+          throw new Error(event.error.message);
+        }
+
+        receivedDone = true;
+        generatingRef.current = false;
+        typingRef.current = false;
+        setTyping(false);
+        setGenerating(false);
+        setFailedConversationId(null);
+        setConversationLoadError(null);
+        setConversationId(event.conversationId);
+        conversationIdRef.current = event.conversationId;
+        writeStoredSessionId(mode, event.conversationId);
+        clearDraftMessages(mode);
+        setMessages((current) => {
+          const next = [...current];
+          const last = next[next.length - 1];
+
+          if (last?.role === "assistant") {
+            next[next.length - 1] = {
+              role: "assistant",
+              content: event.reply,
+            };
+            return next;
+          }
+
+          next.push({ role: "assistant", content: event.reply });
+          return next;
+        });
+        void refreshConversations();
+      }
+
+      if (!isCurrent()) {
+        return;
+      }
+
+      if (!receivedDone) {
+        throw new Error("Aila Intelligence could not respond right now.");
+      }
     } catch (error) {
-      setTyping(false);
-      setMessages(previousMessages);
-      setInput(messageToSend);
+      if (!isCurrent()) {
+        return;
+      }
+
+      if (isAbortError(error) || controller.signal.aborted) {
+        if (receivedDone) {
+          generatingRef.current = false;
+          typingRef.current = false;
+          setGenerating(false);
+          setTyping(false);
+          return;
+        }
+
+        if (conversationIdAtSend) {
+          generatingRef.current = false;
+          typingRef.current = false;
+          setGenerating(false);
+          setTyping(false);
+          void reconcileAbortedGeneration({
+            conversationId: conversationIdAtSend,
+            previousMessages,
+            messageToSend,
+            sendGeneration,
+          });
+          return;
+        }
+
+        restoreAfterFailure(null);
+        void refreshConversations();
+        return;
+      }
+
+      if (error instanceof TypeError) {
+        restoreAfterFailure(
+          "Aila Intelligence could not respond. Please try again."
+        );
+        return;
+      }
 
       const message =
         error instanceof Error && error.message.trim()
           ? error.message
           : "Aila Intelligence could not respond. Please try again.";
 
-      setSendError(message);
+      restoreAfterFailure(message);
+    } finally {
+      if (sendAbortRef.current === controller) {
+        sendAbortRef.current = null;
+      }
+
+      if (isCurrent()) {
+        generatingRef.current = false;
+        typingRef.current = false;
+        setGenerating(false);
+        setTyping(false);
+      }
     }
   }
+
+  function stopGeneration() {
+    sendAbortRef.current?.abort();
+  }
+
+  async function attachFile(file: File) {
+    if (mode !== "intelligence" || generatingRef.current) {
+      return;
+    }
+
+    if (!isSignedIn) {
+      setAttachment({
+        status: "error",
+        fileName: file.name,
+        fileSize: file.size,
+        message: "Sign in to attach files.",
+      });
+      return;
+    }
+
+    const generation = ++attachmentGenerationRef.current;
+    setAttachment({
+      status: "uploading",
+      fileName: file.name,
+      fileSize: file.size,
+    });
+    setSendError(null);
+
+    const isCurrent = () => attachmentGenerationRef.current === generation;
+
+    try {
+      setAttachment({
+        status: "processing",
+        fileName: file.name,
+        fileSize: file.size,
+      });
+
+      const formData = new FormData();
+      formData.append("file", file);
+      if (conversationIdRef.current) {
+        formData.append("conversationId", conversationIdRef.current);
+      }
+
+      const response = await fetch("/api/ai/intelligence/document", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json().catch(() => null);
+
+      if (!isCurrent()) {
+        return;
+      }
+
+      if (!response.ok || data?.success === false) {
+        throw new Error(jsonErrorMessage(data, response.status));
+      }
+
+      const document = data?.document;
+      if (!document || typeof document.id !== "string") {
+        throw new Error("Aila could not attach this file.");
+      }
+
+      setAttachment({
+        status: "ready",
+        documentId: document.id,
+        fileName:
+          typeof document.fileName === "string" ? document.fileName : file.name,
+        fileSize:
+          typeof document.fileSize === "number" ? document.fileSize : file.size,
+        truncated: Boolean(document.truncated),
+      });
+    } catch (error) {
+      if (!isCurrent()) {
+        return;
+      }
+
+      setAttachment({
+        status: "error",
+        fileName: file.name,
+        fileSize: file.size,
+        message:
+          error instanceof Error && error.message.trim()
+            ? error.message
+            : "Aila could not attach this file.",
+      });
+    }
+  }
+
+  function removeAttachment() {
+    const current = attachment;
+    attachmentGenerationRef.current += 1;
+    setAttachment(null);
+
+    if (current?.status === "ready" && current.documentId) {
+      void fetch(
+        `/api/ai/intelligence/document?documentId=${encodeURIComponent(current.documentId)}`,
+        { method: "DELETE" }
+      );
+    }
+  }
+
+  const isConversationLoading = conversationLoadStatus === "loading";
+  const attachmentBusy =
+    attachment?.status === "uploading" || attachment?.status === "processing";
+  const inputDisabled =
+    generating || typing || isConversationLoading || attachmentBusy;
+
   return (
     <div
       className={`relative overflow-hidden rounded-[36px] border border-white/[0.09] bg-[#080808]/90 shadow-[0_40px_120px_rgba(0,0,0,0.65)] backdrop-blur-2xl ${containerClassName}`}
@@ -485,7 +1207,7 @@ export default function ChatInterface({
               <button
                 type="button"
                 onClick={resetConversation}
-                disabled={typing}
+                disabled={inputDisabled}
                 className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.03] text-neutral-400 transition hover:border-cyan-300/30 hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
                 aria-label="Start new conversation"
                 title="Start new conversation"
@@ -506,9 +1228,18 @@ export default function ChatInterface({
               )}
 
               {conversationListStatus === "error" && (
-                <p className="px-2 py-3 text-xs leading-5 text-red-300/70">
-                  Conversation history is unavailable.
-                </p>
+                <div className="space-y-2 px-2 py-3">
+                  <p className="text-xs leading-5 text-red-300/70">
+                    Conversation history is unavailable.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => void refreshConversations()}
+                    className="text-[11px] text-cyan-300/80 underline-offset-2 hover:underline"
+                  >
+                    Retry
+                  </button>
+                </div>
               )}
 
               {conversationListStatus === "ready" && conversations.length === 0 && (
@@ -528,8 +1259,8 @@ export default function ChatInterface({
                 >
                   <button
                     type="button"
-                    onClick={() => loadConversation(conversation.id)}
-                    disabled={typing}
+                    onClick={() => void loadConversation(conversation.id)}
+                    disabled={inputDisabled}
                     className="flex min-w-0 flex-1 items-center gap-2 text-left disabled:cursor-not-allowed"
                   >
                     <MessageSquare className="h-4 w-4 shrink-0 text-cyan-300/60" />
@@ -545,8 +1276,8 @@ export default function ChatInterface({
 
                   <button
                     type="button"
-                    onClick={() => deleteConversation(conversation.id)}
-                    disabled={typing}
+                    onClick={() => void deleteConversation(conversation.id)}
+                    disabled={inputDisabled}
                     className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-neutral-700 opacity-0 transition hover:bg-red-400/10 hover:text-red-300 group-hover:opacity-100 disabled:cursor-not-allowed"
                     aria-label="Delete conversation"
                     title="Delete conversation"
@@ -597,6 +1328,12 @@ export default function ChatInterface({
           </div>
         )}
 
+        {isConversationLoading && (
+          <div className="border-b border-white/[0.07] px-5 py-3 sm:px-6">
+            <p className="text-xs text-neutral-500">Loading conversation...</p>
+          </div>
+        )}
+
         {/* MESSAGES */}
         <ChatMessages
           messages={messages}
@@ -613,8 +1350,8 @@ export default function ChatInterface({
                 <button
                   key={suggestion}
                   type="button"
-                  onClick={() => sendMessage(suggestion)}
-                  disabled={typing}
+                  onClick={() => void sendMessage(suggestion)}
+                  disabled={inputDisabled}
                   className="rounded-full border border-white/[0.08] bg-white/[0.025] px-4 py-2 text-xs text-neutral-500 transition hover:border-cyan-300/20 hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
                 >
                   {suggestion}
@@ -624,9 +1361,28 @@ export default function ChatInterface({
           </div>
         )}
 
-        {sendError && (
-          <div className="px-5 pt-3 sm:px-6" role="alert">
-            <p className="text-xs leading-5 text-red-300/80">{sendError}</p>
+        {(sendError || conversationLoadError) && (
+          <div className="space-y-2 px-5 pt-3 sm:px-6" role="alert">
+            {conversationLoadError && (
+              <div className="flex flex-wrap items-center gap-3">
+                <p className="text-xs leading-5 text-red-300/80">
+                  {conversationLoadError}
+                </p>
+                {failedConversationId && (
+                  <button
+                    type="button"
+                    onClick={() => void loadConversation(failedConversationId)}
+                    disabled={inputDisabled}
+                    className="text-[11px] text-cyan-300/80 underline-offset-2 hover:underline disabled:opacity-40"
+                  >
+                    Retry
+                  </button>
+                )}
+              </div>
+            )}
+            {sendError && (
+              <p className="text-xs leading-5 text-red-300/80">{sendError}</p>
+            )}
           </div>
         )}
 
@@ -634,13 +1390,23 @@ export default function ChatInterface({
         <ChatInput
           input={input}
           placeholder={resolvedPlaceholder}
-          typing={typing}
+          typing={inputDisabled}
+          generating={generating}
+          attachment={mode === "intelligence" ? attachment : null}
+          allowAttachments={mode === "intelligence"}
           onChange={setInput}
-          onSend={() => sendMessage()}
+          onSend={() => void sendMessage()}
+          onStop={stopGeneration}
+          onAttachFile={(file) => void attachFile(file)}
+          onRemoveAttachment={removeAttachment}
           onKeyDown={(event) => {
+            if (generating) {
+              return;
+            }
+
             if (event.key === "Enter" && !event.shiftKey) {
               event.preventDefault();
-              sendMessage();
+              void sendMessage();
             }
           }}
         />
@@ -649,4 +1415,3 @@ export default function ChatInterface({
     </div>
   );
 }
-

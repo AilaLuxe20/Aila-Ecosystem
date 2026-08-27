@@ -1,11 +1,14 @@
 import { NextResponse } from "next/server";
-import { AilaAuthenticationError, requirePrismaUser } from "@/core/auth/clerk-user";
+
+import { ailaModeQuerySchema } from "@/core/ai/chat-api";
 import {
   deleteUserConversation,
   ensureUserConversation,
   getUserConversation,
 } from "@/core/ai/conversation/service";
+import { AilaAuthenticationError, requirePrismaUser } from "@/core/auth/clerk-user";
 import type { AilaMode } from "@/core/types";
+import { ERROR_CODES } from "@/lib/errors/app-error";
 
 const AILA_MODES = new Set<AilaMode>([
   "intelligence",
@@ -32,6 +35,7 @@ export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
     const conversationId =
       searchParams.get("conversationId") ?? searchParams.get("id");
+    const modeParam = searchParams.get("mode");
 
     if (!conversationId) {
       return NextResponse.json(
@@ -42,6 +46,27 @@ export async function GET(req: Request) {
       );
     }
 
+    let requestedMode: ReturnType<typeof ailaModeQuerySchema.parse> | undefined;
+
+    if (modeParam) {
+      const parsedMode = ailaModeQuerySchema.safeParse(modeParam);
+
+      if (!parsedMode.success) {
+        return NextResponse.json(
+          {
+            success: false,
+            error: {
+              code: ERROR_CODES.VALIDATION_FAILED,
+              message: "Invalid conversation mode.",
+            },
+          },
+          { status: 400 }
+        );
+      }
+
+      requestedMode = parsedMode.data;
+    }
+
     const conversation = await getUserConversation(user.id, conversationId);
 
     if (!conversation) {
@@ -50,6 +75,19 @@ export async function GET(req: Request) {
           error: "Conversation not found.",
         },
         { status: 404 }
+      );
+    }
+
+    if (requestedMode && conversation.mode !== requestedMode) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: {
+            code: ERROR_CODES.CONFLICT,
+            message: "This conversation belongs to a different Aila workspace.",
+          },
+        },
+        { status: 409 }
       );
     }
 

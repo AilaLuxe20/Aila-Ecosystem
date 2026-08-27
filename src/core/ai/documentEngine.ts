@@ -68,13 +68,32 @@ export async function extractTextFromFile(file: File): Promise<string> {
 
   if (isPdf) {
     const buffer = await file.arrayBuffer();
-    const { text } = await extractText(new Uint8Array(buffer), {
-      mergePages: true,
-    });
-    return text;
+    return extractPdfTextFromBytes(new Uint8Array(buffer));
   }
 
   return await file.text();
+}
+
+/**
+ * Extract PDF text without touching process-global document state.
+ * Used by Legal processing and Intelligence attachments.
+ */
+export async function extractPdfTextFromBytes(
+  bytes: Uint8Array
+): Promise<string> {
+  const { text } = await extractText(bytes, {
+    mergePages: true,
+  });
+  return text;
+}
+
+export async function extractPdfPagesFromBytes(bytes: Uint8Array): Promise<{
+  text: string;
+  totalPages: number;
+}> {
+  return extractText(bytes, {
+    mergePages: true,
+  });
 }
 
 /**
@@ -129,9 +148,9 @@ export async function extractPdf(file: File): Promise<{
   }
 
   const buffer = await file.arrayBuffer();
-  const { text, totalPages } = await extractText(new Uint8Array(buffer), {
-    mergePages: true,
-  });
+  const { text, totalPages } = await extractPdfPagesFromBytes(
+    new Uint8Array(buffer)
+  );
 
   const cleanText = text.trim();
 

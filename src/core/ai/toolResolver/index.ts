@@ -1,5 +1,5 @@
-import { Tools } from "@/core/ai/tools";
+import { getRegisteredTool } from "@/core/ai/orchestrator/tools/registry";
 
-export function resolveTool(id:string){
-    return Tools.find(tool=>tool.id===id);
+export function resolveTool(id: string) {
+  return getRegisteredTool(id);
 }

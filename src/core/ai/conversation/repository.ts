@@ -43,6 +43,19 @@ export async function findConversationForUser(userId: string, conversationId: st
           createdAt: "asc",
         },
       },
+      intelligenceDocuments: {
+        orderBy: {
+          createdAt: "asc",
+        },
+        select: {
+          id: true,
+          fileName: true,
+          fileSize: true,
+          kind: true,
+          truncated: true,
+          extractedCharCount: true,
+        },
+      },
     },
   });
 }
@@ -136,5 +149,13 @@ export function mapPersistedConversation(
     messages: conversation.messages
       .map(toChatMessage)
       .filter((message): message is ChatMessage => message !== null),
+    attachments: conversation.intelligenceDocuments.map((document) => ({
+      id: document.id,
+      fileName: document.fileName,
+      fileSize: document.fileSize,
+      kind: document.kind,
+      truncated: document.truncated,
+      extractedCharCount: document.extractedCharCount,
+    })),
   };
 }

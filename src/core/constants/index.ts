@@ -17,7 +17,32 @@ export const ALLOWED_FILE_TYPES = [
   "text/plain",
 ];
 
+/** Intelligence chat attachments. Legal upload limits stay on ALLOWED_FILE_TYPES. */
+export const INTELLIGENCE_ALLOWED_EXTENSIONS = [
+  "pdf",
+  "txt",
+  "csv",
+  "json",
+  "md",
+  "markdown",
+] as const;
+
+export const MAX_INTELLIGENCE_ATTACHMENTS = 1;
+
+/** Hard cap on stored extracted text. Excess is dropped and flagged. */
+export const MAX_EXTRACTED_TEXT_CHARS = 100_000;
+
+/** Maximum characters injected into the model prompt from an attached file. */
+export const MAX_DOCUMENT_CONTEXT_CHARS = 8_000;
+
+export const MAX_FILENAME_LENGTH = 255;
+
+export const INTELLIGENCE_EXTRACT_TIMEOUT_MS = 20_000;
+
 export const AI_MODEL = "openai/gpt-4.1-mini";
+
+/** Maximum tool rounds per Intelligence request. Prevents unbounded loops. */
+export const MAX_TOOL_ITERATIONS = 3;
 
 export const MODE_CONFIG = {
   intelligence: {

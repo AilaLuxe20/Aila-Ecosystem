@@ -11,6 +11,11 @@ export interface AIRequest {
   sessionId?: string;
   documentText?: string;
   documentName?: string;
+  /** Intelligence attachments only. Never taken from the client document body. */
+  documentKind?: string;
+  documentToolText?: string;
+  /** Authenticated Prisma user id. Required before Intelligence tools run. */
+  userId?: string;
 }
 
 export interface AIResponse {

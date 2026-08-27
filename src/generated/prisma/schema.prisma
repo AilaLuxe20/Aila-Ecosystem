@@ -9,19 +9,20 @@ datasource db {
 }
 
 model User {
-  id               String           @id @default(cuid())
-  name             String?
-  email            String           @unique
-  emailVerified    DateTime?
-  image            String?
-  password         String?
-  accounts         Account[]
-  sessions         Session[]
-  conversations    Conversation[]
-  legalDocuments   LegalDocument[]
-  projectInquiries ProjectInquiry[]
-  createdAt        DateTime         @default(now())
-  updatedAt        DateTime         @updatedAt
+  id                    String                 @id @default(cuid())
+  name                  String?
+  email                 String                 @unique
+  emailVerified         DateTime?
+  image                 String?
+  password              String?
+  accounts              Account[]
+  sessions              Session[]
+  conversations         Conversation[]
+  legalDocuments        LegalDocument[]
+  intelligenceDocuments IntelligenceDocument[]
+  projectInquiries      ProjectInquiry[]
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
 }
 
 model Account {
@@ -68,8 +69,9 @@ model Conversation {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  messages Message[]
+  user                  User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages              Message[]
+  intelligenceDocuments IntelligenceDocument[]
 
   @@index([userId])
   @@map("conversations")
@@ -103,6 +105,28 @@ model LegalDocument {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("legal_documents")
+}
+
+model IntelligenceDocument {
+  id                 String   @id @default(cuid())
+  userId             String
+  conversationId     String?
+  fileName           String
+  fileSize           Int
+  mimeType           String
+  kind               String
+  extractedText      String   @db.Text
+  extractedCharCount Int
+  truncated          Boolean  @default(false)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  conversation Conversation? @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([conversationId])
+  @@map("intelligence_documents")
 }
 
 model ProjectInquiry {

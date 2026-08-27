@@ -1,9 +1,9 @@
-import { orchestrate } from "@/core/ai/orchestrator";
+import { orchestrateStream } from "@/core/ai/orchestrator";
 import {
   aiChatRateLimiter,
   aiChatRequestSchema,
   aiFailure,
-  aiSuccess,
+  aiStreamResponse,
   extractLatestUserMessage,
   resolveConversationId,
 } from "@/core/ai/chat-api";
@@ -17,6 +17,18 @@ import {
   requirePrismaUser,
 } from "@/core/auth/clerk-user";
 import type { ChatMessage } from "@/core/types";
+import {
+  attachIntelligenceDocuments,
+  buildIntelligenceChatContext,
+  formatDocumentPromptBlock,
+  resolveIntelligenceDocuments,
+} from "@/core/ai/intelligence/files";
+import {
+  encodeSseData,
+  isAbortError,
+  runStreamingChatSession,
+  type AilaChatStreamEvent,
+} from "@/core/ai/streaming";
 import { ERROR_CODES } from "@/lib/errors/app-error";
 import { createLogger } from "@/lib/logger/logger";
 
@@ -118,62 +130,155 @@ export async function POST(req: Request) {
     // Server history only — never trust client-provided prior turns.
     const conversationMessages = [...history, latestUserMessage];
 
-    const result = await orchestrate({
-      mode,
-      messages: conversationMessages,
-      conversationId: existingConversation?.id,
-      sessionId: existingConversation?.id,
-      documentText: body.documentText ?? undefined,
-      documentName: body.documentName ?? undefined,
-    });
+    let documentText = body.documentText ?? undefined;
+    let documentName = body.documentName ?? undefined;
+    let documentKind: string | undefined;
+    let documentToolText: string | undefined;
+    let intelligenceDocumentIds: string[] = [];
 
-    if (!result.success) {
-      log.error("AI chat orchestration failed", undefined, {
+    if (mode === "intelligence") {
+      // Intelligence never trusts client-supplied document bodies.
+      documentText = undefined;
+      documentName = undefined;
+
+      const resolvedDocuments = await resolveIntelligenceDocuments({
         userId: user.id,
         conversationId: existingConversation?.id,
-        mode,
-        isNewConversation: !existingConversation,
+        documentIds: body.documentIds,
       });
 
-      return aiFailure(
-        502,
-        ERROR_CODES.EXTERNAL_SERVICE_ERROR,
-        "Aila Intelligence could not respond right now."
-      );
+      if (!resolvedDocuments.ok) {
+        return aiFailure(
+          resolvedDocuments.status,
+          resolvedDocuments.code,
+          resolvedDocuments.message,
+          { rateLimit }
+        );
+      }
+
+      const intelligenceContext = buildIntelligenceChatContext({
+        records: resolvedDocuments.records,
+        query: latestUserMessage.content,
+      });
+
+      if (intelligenceContext) {
+        documentText = formatDocumentPromptBlock(intelligenceContext);
+        documentName = intelligenceContext.fileName;
+        documentKind = intelligenceContext.kind;
+        documentToolText = intelligenceContext.toolText;
+        intelligenceDocumentIds = resolvedDocuments.records.map(
+          (record) => record.id
+        );
+      }
     }
 
-    const assistantMessage: ChatMessage = {
-      role: "assistant",
-      content: result.reply,
-    };
+    const encoder = new TextEncoder();
+    const stream = new ReadableStream<Uint8Array>({
+      async start(controller) {
+        const emit = (event: AilaChatStreamEvent) => {
+          // Deltas are live UI only. `done` is the commit notification and
+          // must still be written if the client aborted during persist.
+          if (req.signal.aborted && event.type !== "done") {
+            return;
+          }
 
-    const conversation =
-      existingConversation ??
-      (await createUserConversation(
-        user.id,
-        mode,
-        latestUserMessage
-      ));
+          try {
+            controller.enqueue(encoder.encode(encodeSseData(event)));
+          } catch {
+            // Stream already cancelled; the client will reconcile from DB.
+          }
+        };
 
-    await appendConversationMessages(conversation.id, [
-      latestUserMessage,
-      assistantMessage,
-    ]);
+        try {
+          await runStreamingChatSession({
+            signal: req.signal,
+            emit,
+            generate: orchestrateStream(
+              {
+                mode,
+                messages: conversationMessages,
+                conversationId: existingConversation?.id,
+                sessionId: existingConversation?.id,
+                documentText,
+                documentName,
+                documentKind,
+                documentToolText,
+                userId: user.id,
+              },
+              { signal: req.signal }
+            ),
+            persist: async (reply) => {
+              /*
+               * Persist once after a completed, non-empty generation.
+               * Cancelled or partial streams are not written: the Message
+               * model has no cancelled flag, so a partial assistant turn
+               * would look like a finished reply.
+               */
+              const assistantMessage: ChatMessage = {
+                role: "assistant",
+                content: reply,
+              };
 
-    return aiSuccess(
-      {
-        conversationId: conversation.id,
-        sessionId: conversation.id,
-        reply: result.reply,
+              const conversation =
+                existingConversation ??
+                (await createUserConversation(
+                  user.id,
+                  mode,
+                  latestUserMessage
+                ));
+
+              await appendConversationMessages(conversation.id, [
+                latestUserMessage,
+                assistantMessage,
+              ]);
+
+              if (
+                mode === "intelligence" &&
+                intelligenceDocumentIds.length > 0
+              ) {
+                await attachIntelligenceDocuments({
+                  userId: user.id,
+                  conversationId: conversation.id,
+                  documentIds: intelligenceDocumentIds,
+                });
+              }
+
+              return {
+                conversationId: conversation.id,
+                sessionId: conversation.id,
+              };
+            },
+          });
+        } catch (error) {
+          if (isAbortError(error) || req.signal.aborted) {
+            return;
+          }
+
+          log.error("AI chat stream unexpected error", error, {
+            userId: user.id,
+            conversationId: existingConversation?.id,
+            mode,
+          });
+
+          emit({
+            type: "error",
+            error: {
+              code: ERROR_CODES.INTERNAL_ERROR,
+              message:
+                "Aila Intelligence encountered an unexpected error.",
+            },
+          });
+        } finally {
+          try {
+            controller.close();
+          } catch {
+            // Stream may already be closed after client abort.
+          }
+        }
       },
-      {
-        headers: {
-          "RateLimit-Limit": String(rateLimit.limit),
-          "RateLimit-Remaining": String(rateLimit.remaining),
-          "RateLimit-Reset": String(Math.ceil(rateLimit.resetAt / 1000)),
-        },
-      }
-    );
+    });
+
+    return aiStreamResponse(stream, rateLimit);
   } catch (error) {
     if (error instanceof AilaAuthenticationError) {
       return aiFailure(

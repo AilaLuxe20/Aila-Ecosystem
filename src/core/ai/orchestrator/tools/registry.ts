@@ -1,4 +1,12 @@
 import type { ExecutionPlan } from "../planner/planner";
+import { analyzeDataTool } from "./analyze-data";
+import { analyzeTextTool } from "./analyze-text";
+import { calculatorTool } from "./calculator-tool";
+import { webResearchTool } from "./web-research";
+import {
+  isIntelligenceToolName,
+  type IntelligenceToolName,
+} from "./contract";
 
 export interface AilaTool {
   id: string;
@@ -6,55 +14,43 @@ export interface AilaTool {
   enabled: boolean;
 }
 
-const tools: AilaTool[] = [
-  {
-    id: "chat",
-    name: "General Chat",
-    enabled: true,
-  },
-  {
-    id: "documents",
-    name: "Document Intelligence",
-    enabled: true,
-  },
-  {
-    id: "legal",
-    name: "Legal Analysis",
-    enabled: true,
-  },
-  {
-    id: "business",
-    name: "Business Intelligence",
-    enabled: true,
-  },
-  {
-    id: "automation",
-    name: "Workflow Automation",
-    enabled: true,
-  },
+const registeredTools = [
+  webResearchTool,
+  analyzeTextTool,
+  analyzeDataTool,
+  calculatorTool,
 ];
 
+const toolsByName = new Map(
+  registeredTools.map((tool) => [tool.name, tool])
+);
+
+export function listRegisteredTools() {
+  return [...registeredTools];
+}
+
+export function getRegisteredTool(name: string) {
+  if (!isIntelligenceToolName(name)) {
+    return undefined;
+  }
+  return toolsByName.get(name as IntelligenceToolName);
+}
+
 export function getAvailableTools(): AilaTool[] {
-  return tools.filter((tool) => tool.enabled);
+  return listRegisteredTools().map((tool) => ({
+    id: tool.name,
+    name: tool.name,
+    enabled: true,
+  }));
 }
 
 export function resolveTools(plan: ExecutionPlan): AilaTool[] {
-  return getAvailableTools().filter((tool) => {
-    switch (plan.route) {
-      case "legal":
-        return tool.id === "legal" || tool.id === "documents";
+  const available = getAvailableTools();
 
-      case "document":
-        return tool.id === "documents";
-
-      case "business":
-        return tool.id === "business";
-
-      case "automation":
-        return tool.id === "automation";
-
-      default:
-        return tool.id === "chat";
-    }
-  });
+  switch (plan.route) {
+    case "document":
+      return available.filter((tool) => tool.id === "analyze_text");
+    default:
+      return available;
+  }
 }

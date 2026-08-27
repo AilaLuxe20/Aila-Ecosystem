@@ -190,6 +190,21 @@ exports.Prisma.LegalDocumentScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.IntelligenceDocumentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  conversationId: 'conversationId',
+  fileName: 'fileName',
+  fileSize: 'fileSize',
+  mimeType: 'mimeType',
+  kind: 'kind',
+  extractedText: 'extractedText',
+  extractedCharCount: 'extractedCharCount',
+  truncated: 'truncated',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.ProjectInquiryScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -230,6 +245,7 @@ exports.Prisma.ModelName = {
   Conversation: 'Conversation',
   Message: 'Message',
   LegalDocument: 'LegalDocument',
+  IntelligenceDocument: 'IntelligenceDocument',
   ProjectInquiry: 'ProjectInquiry'
 };
 

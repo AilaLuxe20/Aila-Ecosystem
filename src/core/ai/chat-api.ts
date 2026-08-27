@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 
 import {
+  MAX_INTELLIGENCE_ATTACHMENTS,
   MAX_MESSAGE_LENGTH,
   MAX_MESSAGES,
 } from "@/core/constants";
@@ -34,6 +35,8 @@ export const AILA_MODE_VALUES = [
   "sites",
 ] as const satisfies readonly AilaMode[];
 
+export const ailaModeQuerySchema = z.enum(AILA_MODE_VALUES);
+
 const chatMessageSchema = z.object({
   role: z.enum(["user", "assistant"]),
   content: z.string().max(MAX_MESSAGE_LENGTH),
@@ -54,6 +57,10 @@ export const aiChatRequestSchema = z
       .max(config.documents.maxTextLength)
       .nullish(),
     documentName: z.string().trim().max(255).nullish(),
+    documentIds: z
+      .array(z.string().trim().min(1).max(128))
+      .max(MAX_INTELLIGENCE_ATTACHMENTS)
+      .optional(),
   })
   .strict();
 
@@ -65,6 +72,7 @@ export type AiErrorCode =
   | typeof ERROR_CODES.NOT_FOUND
   | typeof ERROR_CODES.CONFLICT
   | typeof ERROR_CODES.RATE_LIMITED
+  | typeof ERROR_CODES.TIMEOUT
   | typeof ERROR_CODES.EXTERNAL_SERVICE_ERROR
   | typeof ERROR_CODES.CONFIGURATION_ERROR
   | typeof ERROR_CODES.INTERNAL_ERROR;
@@ -87,6 +95,12 @@ export type AiFailureBody = {
 /** Process-local limiter for AI chat. Keyed by authenticated Prisma user id. */
 export const aiChatRateLimiter = new MemoryRateLimiter({
   limit: 30,
+  windowMs: 60_000,
+});
+
+/** Process-local limiter for Intelligence file uploads. */
+export const aiDocumentRateLimiter = new MemoryRateLimiter({
+  limit: 10,
   windowMs: 60_000,
 });
 
@@ -165,4 +179,36 @@ export function aiFailure(
   );
 }
 
-export const ailaModeQuerySchema = z.enum(AILA_MODE_VALUES);
+export const AI_STREAM_CONTENT_TYPE = "text/event-stream; charset=utf-8";
+
+export type AiStreamEvent =
+  | { type: "delta"; content: string }
+  | {
+      type: "done";
+      conversationId: string;
+      sessionId: string;
+      reply: string;
+    }
+  | {
+      type: "error";
+      error: {
+        code: AiErrorCode | ErrorCode;
+        message: string;
+      };
+    };
+
+export function aiStreamResponse(
+  stream: ReadableStream<Uint8Array>,
+  rateLimit: RateLimitResult
+): Response {
+  return new Response(stream, {
+    status: 200,
+    headers: {
+      "Content-Type": AI_STREAM_CONTENT_TYPE,
+      "Cache-Control": "no-cache, no-transform",
+      Connection: "keep-alive",
+      "X-Accel-Buffering": "no",
+      ...rateLimitHeaders(rateLimit),
+    },
+  });
+}

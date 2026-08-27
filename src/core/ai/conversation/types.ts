@@ -1,5 +1,14 @@
 import type { ChatMessage } from "@/core/types";
 
+export interface IntelligenceAttachmentSummary {
+  id: string;
+  fileName: string;
+  fileSize: number;
+  kind: string;
+  truncated: boolean;
+  extractedCharCount: number;
+}
+
 export interface Conversation {
   id: string;
   mode: string;
@@ -7,6 +16,7 @@ export interface Conversation {
   createdAt: string;
   updatedAt: string;
   messages: ChatMessage[];
+  attachments: IntelligenceAttachmentSummary[];
 }
 
 export interface ConversationSummary {

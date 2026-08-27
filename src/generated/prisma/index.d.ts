@@ -49,6 +49,11 @@ export type Message = $Result.DefaultSelection<Prisma.$MessagePayload>
  */
 export type LegalDocument = $Result.DefaultSelection<Prisma.$LegalDocumentPayload>
 /**
+ * Model IntelligenceDocument
+ * 
+ */
+export type IntelligenceDocument = $Result.DefaultSelection<Prisma.$IntelligenceDocumentPayload>
+/**
  * Model ProjectInquiry
  * 
  */
@@ -244,6 +249,16 @@ export class PrismaClient<
     * ```
     */
   get legalDocument(): Prisma.LegalDocumentDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.intelligenceDocument`: Exposes CRUD operations for the **IntelligenceDocument** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more IntelligenceDocuments
+    * const intelligenceDocuments = await prisma.intelligenceDocument.findMany()
+    * ```
+    */
+  get intelligenceDocument(): Prisma.IntelligenceDocumentDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.projectInquiry`: Exposes CRUD operations for the **ProjectInquiry** model.
@@ -708,6 +723,7 @@ export namespace Prisma {
     Conversation: 'Conversation',
     Message: 'Message',
     LegalDocument: 'LegalDocument',
+    IntelligenceDocument: 'IntelligenceDocument',
     ProjectInquiry: 'ProjectInquiry'
   };
 
@@ -724,7 +740,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "account" | "session" | "verificationToken" | "conversation" | "message" | "legalDocument" | "projectInquiry"
+      modelProps: "user" | "account" | "session" | "verificationToken" | "conversation" | "message" | "legalDocument" | "intelligenceDocument" | "projectInquiry"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1246,6 +1262,80 @@ export namespace Prisma {
           }
         }
       }
+      IntelligenceDocument: {
+        payload: Prisma.$IntelligenceDocumentPayload<ExtArgs>
+        fields: Prisma.IntelligenceDocumentFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.IntelligenceDocumentFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntelligenceDocumentPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.IntelligenceDocumentFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntelligenceDocumentPayload>
+          }
+          findFirst: {
+            args: Prisma.IntelligenceDocumentFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntelligenceDocumentPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.IntelligenceDocumentFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntelligenceDocumentPayload>
+          }
+          findMany: {
+            args: Prisma.IntelligenceDocumentFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntelligenceDocumentPayload>[]
+          }
+          create: {
+            args: Prisma.IntelligenceDocumentCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntelligenceDocumentPayload>
+          }
+          createMany: {
+            args: Prisma.IntelligenceDocumentCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.IntelligenceDocumentCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntelligenceDocumentPayload>[]
+          }
+          delete: {
+            args: Prisma.IntelligenceDocumentDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntelligenceDocumentPayload>
+          }
+          update: {
+            args: Prisma.IntelligenceDocumentUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntelligenceDocumentPayload>
+          }
+          deleteMany: {
+            args: Prisma.IntelligenceDocumentDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.IntelligenceDocumentUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.IntelligenceDocumentUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntelligenceDocumentPayload>[]
+          }
+          upsert: {
+            args: Prisma.IntelligenceDocumentUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntelligenceDocumentPayload>
+          }
+          aggregate: {
+            args: Prisma.IntelligenceDocumentAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateIntelligenceDocument>
+          }
+          groupBy: {
+            args: Prisma.IntelligenceDocumentGroupByArgs<ExtArgs>
+            result: $Utils.Optional<IntelligenceDocumentGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.IntelligenceDocumentCountArgs<ExtArgs>
+            result: $Utils.Optional<IntelligenceDocumentCountAggregateOutputType> | number
+          }
+        }
+      }
       ProjectInquiry: {
         payload: Prisma.$ProjectInquiryPayload<ExtArgs>
         fields: Prisma.ProjectInquiryFieldRefs
@@ -1450,6 +1540,7 @@ export namespace Prisma {
     conversation?: ConversationOmit
     message?: MessageOmit
     legalDocument?: LegalDocumentOmit
+    intelligenceDocument?: IntelligenceDocumentOmit
     projectInquiry?: ProjectInquiryOmit
   }
 
@@ -1535,6 +1626,7 @@ export namespace Prisma {
     sessions: number
     conversations: number
     legalDocuments: number
+    intelligenceDocuments: number
     projectInquiries: number
   }
 
@@ -1543,6 +1635,7 @@ export namespace Prisma {
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     conversations?: boolean | UserCountOutputTypeCountConversationsArgs
     legalDocuments?: boolean | UserCountOutputTypeCountLegalDocumentsArgs
+    intelligenceDocuments?: boolean | UserCountOutputTypeCountIntelligenceDocumentsArgs
     projectInquiries?: boolean | UserCountOutputTypeCountProjectInquiriesArgs
   }
 
@@ -1588,6 +1681,13 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
+  export type UserCountOutputTypeCountIntelligenceDocumentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: IntelligenceDocumentWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
   export type UserCountOutputTypeCountProjectInquiriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ProjectInquiryWhereInput
   }
@@ -1599,10 +1699,12 @@ export namespace Prisma {
 
   export type ConversationCountOutputType = {
     messages: number
+    intelligenceDocuments: number
   }
 
   export type ConversationCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     messages?: boolean | ConversationCountOutputTypeCountMessagesArgs
+    intelligenceDocuments?: boolean | ConversationCountOutputTypeCountIntelligenceDocumentsArgs
   }
 
   // Custom InputTypes
@@ -1621,6 +1723,13 @@ export namespace Prisma {
    */
   export type ConversationCountOutputTypeCountMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MessageWhereInput
+  }
+
+  /**
+   * ConversationCountOutputType without action
+   */
+  export type ConversationCountOutputTypeCountIntelligenceDocumentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: IntelligenceDocumentWhereInput
   }
 
 
@@ -1820,6 +1929,7 @@ export namespace Prisma {
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     conversations?: boolean | User$conversationsArgs<ExtArgs>
     legalDocuments?: boolean | User$legalDocumentsArgs<ExtArgs>
+    intelligenceDocuments?: boolean | User$intelligenceDocumentsArgs<ExtArgs>
     projectInquiries?: boolean | User$projectInquiriesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
@@ -1863,6 +1973,7 @@ export namespace Prisma {
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     conversations?: boolean | User$conversationsArgs<ExtArgs>
     legalDocuments?: boolean | User$legalDocumentsArgs<ExtArgs>
+    intelligenceDocuments?: boolean | User$intelligenceDocumentsArgs<ExtArgs>
     projectInquiries?: boolean | User$projectInquiriesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -1876,6 +1987,7 @@ export namespace Prisma {
       sessions: Prisma.$SessionPayload<ExtArgs>[]
       conversations: Prisma.$ConversationPayload<ExtArgs>[]
       legalDocuments: Prisma.$LegalDocumentPayload<ExtArgs>[]
+      intelligenceDocuments: Prisma.$IntelligenceDocumentPayload<ExtArgs>[]
       projectInquiries: Prisma.$ProjectInquiryPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -2285,6 +2397,7 @@ export namespace Prisma {
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     conversations<T extends User$conversationsArgs<ExtArgs> = {}>(args?: Subset<T, User$conversationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     legalDocuments<T extends User$legalDocumentsArgs<ExtArgs> = {}>(args?: Subset<T, User$legalDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LegalDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    intelligenceDocuments<T extends User$intelligenceDocumentsArgs<ExtArgs> = {}>(args?: Subset<T, User$intelligenceDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IntelligenceDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     projectInquiries<T extends User$projectInquiriesArgs<ExtArgs> = {}>(args?: Subset<T, User$projectInquiriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectInquiryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2809,6 +2922,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: LegalDocumentScalarFieldEnum | LegalDocumentScalarFieldEnum[]
+  }
+
+  /**
+   * User.intelligenceDocuments
+   */
+  export type User$intelligenceDocumentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntelligenceDocument
+     */
+    select?: IntelligenceDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntelligenceDocument
+     */
+    omit?: IntelligenceDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntelligenceDocumentInclude<ExtArgs> | null
+    where?: IntelligenceDocumentWhereInput
+    orderBy?: IntelligenceDocumentOrderByWithRelationInput | IntelligenceDocumentOrderByWithRelationInput[]
+    cursor?: IntelligenceDocumentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: IntelligenceDocumentScalarFieldEnum | IntelligenceDocumentScalarFieldEnum[]
   }
 
   /**
@@ -6240,6 +6377,7 @@ export namespace Prisma {
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     messages?: boolean | Conversation$messagesArgs<ExtArgs>
+    intelligenceDocuments?: boolean | Conversation$intelligenceDocumentsArgs<ExtArgs>
     _count?: boolean | ConversationCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["conversation"]>
 
@@ -6276,6 +6414,7 @@ export namespace Prisma {
   export type ConversationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     messages?: boolean | Conversation$messagesArgs<ExtArgs>
+    intelligenceDocuments?: boolean | Conversation$intelligenceDocumentsArgs<ExtArgs>
     _count?: boolean | ConversationCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ConversationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6290,6 +6429,7 @@ export namespace Prisma {
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
       messages: Prisma.$MessagePayload<ExtArgs>[]
+      intelligenceDocuments: Prisma.$IntelligenceDocumentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -6694,6 +6834,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     messages<T extends Conversation$messagesArgs<ExtArgs> = {}>(args?: Subset<T, Conversation$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    intelligenceDocuments<T extends Conversation$intelligenceDocumentsArgs<ExtArgs> = {}>(args?: Subset<T, Conversation$intelligenceDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IntelligenceDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7151,6 +7292,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
+  }
+
+  /**
+   * Conversation.intelligenceDocuments
+   */
+  export type Conversation$intelligenceDocumentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntelligenceDocument
+     */
+    select?: IntelligenceDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntelligenceDocument
+     */
+    omit?: IntelligenceDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntelligenceDocumentInclude<ExtArgs> | null
+    where?: IntelligenceDocumentWhereInput
+    orderBy?: IntelligenceDocumentOrderByWithRelationInput | IntelligenceDocumentOrderByWithRelationInput[]
+    cursor?: IntelligenceDocumentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: IntelligenceDocumentScalarFieldEnum | IntelligenceDocumentScalarFieldEnum[]
   }
 
   /**
@@ -9411,6 +9576,1225 @@ export namespace Prisma {
 
 
   /**
+   * Model IntelligenceDocument
+   */
+
+  export type AggregateIntelligenceDocument = {
+    _count: IntelligenceDocumentCountAggregateOutputType | null
+    _avg: IntelligenceDocumentAvgAggregateOutputType | null
+    _sum: IntelligenceDocumentSumAggregateOutputType | null
+    _min: IntelligenceDocumentMinAggregateOutputType | null
+    _max: IntelligenceDocumentMaxAggregateOutputType | null
+  }
+
+  export type IntelligenceDocumentAvgAggregateOutputType = {
+    fileSize: number | null
+    extractedCharCount: number | null
+  }
+
+  export type IntelligenceDocumentSumAggregateOutputType = {
+    fileSize: number | null
+    extractedCharCount: number | null
+  }
+
+  export type IntelligenceDocumentMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    conversationId: string | null
+    fileName: string | null
+    fileSize: number | null
+    mimeType: string | null
+    kind: string | null
+    extractedText: string | null
+    extractedCharCount: number | null
+    truncated: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type IntelligenceDocumentMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    conversationId: string | null
+    fileName: string | null
+    fileSize: number | null
+    mimeType: string | null
+    kind: string | null
+    extractedText: string | null
+    extractedCharCount: number | null
+    truncated: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type IntelligenceDocumentCountAggregateOutputType = {
+    id: number
+    userId: number
+    conversationId: number
+    fileName: number
+    fileSize: number
+    mimeType: number
+    kind: number
+    extractedText: number
+    extractedCharCount: number
+    truncated: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type IntelligenceDocumentAvgAggregateInputType = {
+    fileSize?: true
+    extractedCharCount?: true
+  }
+
+  export type IntelligenceDocumentSumAggregateInputType = {
+    fileSize?: true
+    extractedCharCount?: true
+  }
+
+  export type IntelligenceDocumentMinAggregateInputType = {
+    id?: true
+    userId?: true
+    conversationId?: true
+    fileName?: true
+    fileSize?: true
+    mimeType?: true
+    kind?: true
+    extractedText?: true
+    extractedCharCount?: true
+    truncated?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type IntelligenceDocumentMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    conversationId?: true
+    fileName?: true
+    fileSize?: true
+    mimeType?: true
+    kind?: true
+    extractedText?: true
+    extractedCharCount?: true
+    truncated?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type IntelligenceDocumentCountAggregateInputType = {
+    id?: true
+    userId?: true
+    conversationId?: true
+    fileName?: true
+    fileSize?: true
+    mimeType?: true
+    kind?: true
+    extractedText?: true
+    extractedCharCount?: true
+    truncated?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type IntelligenceDocumentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which IntelligenceDocument to aggregate.
+     */
+    where?: IntelligenceDocumentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IntelligenceDocuments to fetch.
+     */
+    orderBy?: IntelligenceDocumentOrderByWithRelationInput | IntelligenceDocumentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: IntelligenceDocumentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IntelligenceDocuments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IntelligenceDocuments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned IntelligenceDocuments
+    **/
+    _count?: true | IntelligenceDocumentCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: IntelligenceDocumentAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: IntelligenceDocumentSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: IntelligenceDocumentMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: IntelligenceDocumentMaxAggregateInputType
+  }
+
+  export type GetIntelligenceDocumentAggregateType<T extends IntelligenceDocumentAggregateArgs> = {
+        [P in keyof T & keyof AggregateIntelligenceDocument]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateIntelligenceDocument[P]>
+      : GetScalarType<T[P], AggregateIntelligenceDocument[P]>
+  }
+
+
+
+
+  export type IntelligenceDocumentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: IntelligenceDocumentWhereInput
+    orderBy?: IntelligenceDocumentOrderByWithAggregationInput | IntelligenceDocumentOrderByWithAggregationInput[]
+    by: IntelligenceDocumentScalarFieldEnum[] | IntelligenceDocumentScalarFieldEnum
+    having?: IntelligenceDocumentScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: IntelligenceDocumentCountAggregateInputType | true
+    _avg?: IntelligenceDocumentAvgAggregateInputType
+    _sum?: IntelligenceDocumentSumAggregateInputType
+    _min?: IntelligenceDocumentMinAggregateInputType
+    _max?: IntelligenceDocumentMaxAggregateInputType
+  }
+
+  export type IntelligenceDocumentGroupByOutputType = {
+    id: string
+    userId: string
+    conversationId: string | null
+    fileName: string
+    fileSize: number
+    mimeType: string
+    kind: string
+    extractedText: string
+    extractedCharCount: number
+    truncated: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: IntelligenceDocumentCountAggregateOutputType | null
+    _avg: IntelligenceDocumentAvgAggregateOutputType | null
+    _sum: IntelligenceDocumentSumAggregateOutputType | null
+    _min: IntelligenceDocumentMinAggregateOutputType | null
+    _max: IntelligenceDocumentMaxAggregateOutputType | null
+  }
+
+  type GetIntelligenceDocumentGroupByPayload<T extends IntelligenceDocumentGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<IntelligenceDocumentGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof IntelligenceDocumentGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], IntelligenceDocumentGroupByOutputType[P]>
+            : GetScalarType<T[P], IntelligenceDocumentGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type IntelligenceDocumentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    conversationId?: boolean
+    fileName?: boolean
+    fileSize?: boolean
+    mimeType?: boolean
+    kind?: boolean
+    extractedText?: boolean
+    extractedCharCount?: boolean
+    truncated?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    conversation?: boolean | IntelligenceDocument$conversationArgs<ExtArgs>
+  }, ExtArgs["result"]["intelligenceDocument"]>
+
+  export type IntelligenceDocumentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    conversationId?: boolean
+    fileName?: boolean
+    fileSize?: boolean
+    mimeType?: boolean
+    kind?: boolean
+    extractedText?: boolean
+    extractedCharCount?: boolean
+    truncated?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    conversation?: boolean | IntelligenceDocument$conversationArgs<ExtArgs>
+  }, ExtArgs["result"]["intelligenceDocument"]>
+
+  export type IntelligenceDocumentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    conversationId?: boolean
+    fileName?: boolean
+    fileSize?: boolean
+    mimeType?: boolean
+    kind?: boolean
+    extractedText?: boolean
+    extractedCharCount?: boolean
+    truncated?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    conversation?: boolean | IntelligenceDocument$conversationArgs<ExtArgs>
+  }, ExtArgs["result"]["intelligenceDocument"]>
+
+  export type IntelligenceDocumentSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    conversationId?: boolean
+    fileName?: boolean
+    fileSize?: boolean
+    mimeType?: boolean
+    kind?: boolean
+    extractedText?: boolean
+    extractedCharCount?: boolean
+    truncated?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type IntelligenceDocumentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "conversationId" | "fileName" | "fileSize" | "mimeType" | "kind" | "extractedText" | "extractedCharCount" | "truncated" | "createdAt" | "updatedAt", ExtArgs["result"]["intelligenceDocument"]>
+  export type IntelligenceDocumentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    conversation?: boolean | IntelligenceDocument$conversationArgs<ExtArgs>
+  }
+  export type IntelligenceDocumentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    conversation?: boolean | IntelligenceDocument$conversationArgs<ExtArgs>
+  }
+  export type IntelligenceDocumentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    conversation?: boolean | IntelligenceDocument$conversationArgs<ExtArgs>
+  }
+
+  export type $IntelligenceDocumentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "IntelligenceDocument"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      conversation: Prisma.$ConversationPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      conversationId: string | null
+      fileName: string
+      fileSize: number
+      mimeType: string
+      kind: string
+      extractedText: string
+      extractedCharCount: number
+      truncated: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["intelligenceDocument"]>
+    composites: {}
+  }
+
+  type IntelligenceDocumentGetPayload<S extends boolean | null | undefined | IntelligenceDocumentDefaultArgs> = $Result.GetResult<Prisma.$IntelligenceDocumentPayload, S>
+
+  type IntelligenceDocumentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<IntelligenceDocumentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: IntelligenceDocumentCountAggregateInputType | true
+    }
+
+  export interface IntelligenceDocumentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['IntelligenceDocument'], meta: { name: 'IntelligenceDocument' } }
+    /**
+     * Find zero or one IntelligenceDocument that matches the filter.
+     * @param {IntelligenceDocumentFindUniqueArgs} args - Arguments to find a IntelligenceDocument
+     * @example
+     * // Get one IntelligenceDocument
+     * const intelligenceDocument = await prisma.intelligenceDocument.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends IntelligenceDocumentFindUniqueArgs>(args: SelectSubset<T, IntelligenceDocumentFindUniqueArgs<ExtArgs>>): Prisma__IntelligenceDocumentClient<$Result.GetResult<Prisma.$IntelligenceDocumentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one IntelligenceDocument that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {IntelligenceDocumentFindUniqueOrThrowArgs} args - Arguments to find a IntelligenceDocument
+     * @example
+     * // Get one IntelligenceDocument
+     * const intelligenceDocument = await prisma.intelligenceDocument.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends IntelligenceDocumentFindUniqueOrThrowArgs>(args: SelectSubset<T, IntelligenceDocumentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__IntelligenceDocumentClient<$Result.GetResult<Prisma.$IntelligenceDocumentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first IntelligenceDocument that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntelligenceDocumentFindFirstArgs} args - Arguments to find a IntelligenceDocument
+     * @example
+     * // Get one IntelligenceDocument
+     * const intelligenceDocument = await prisma.intelligenceDocument.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends IntelligenceDocumentFindFirstArgs>(args?: SelectSubset<T, IntelligenceDocumentFindFirstArgs<ExtArgs>>): Prisma__IntelligenceDocumentClient<$Result.GetResult<Prisma.$IntelligenceDocumentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first IntelligenceDocument that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntelligenceDocumentFindFirstOrThrowArgs} args - Arguments to find a IntelligenceDocument
+     * @example
+     * // Get one IntelligenceDocument
+     * const intelligenceDocument = await prisma.intelligenceDocument.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends IntelligenceDocumentFindFirstOrThrowArgs>(args?: SelectSubset<T, IntelligenceDocumentFindFirstOrThrowArgs<ExtArgs>>): Prisma__IntelligenceDocumentClient<$Result.GetResult<Prisma.$IntelligenceDocumentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more IntelligenceDocuments that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntelligenceDocumentFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all IntelligenceDocuments
+     * const intelligenceDocuments = await prisma.intelligenceDocument.findMany()
+     * 
+     * // Get first 10 IntelligenceDocuments
+     * const intelligenceDocuments = await prisma.intelligenceDocument.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const intelligenceDocumentWithIdOnly = await prisma.intelligenceDocument.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends IntelligenceDocumentFindManyArgs>(args?: SelectSubset<T, IntelligenceDocumentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IntelligenceDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a IntelligenceDocument.
+     * @param {IntelligenceDocumentCreateArgs} args - Arguments to create a IntelligenceDocument.
+     * @example
+     * // Create one IntelligenceDocument
+     * const IntelligenceDocument = await prisma.intelligenceDocument.create({
+     *   data: {
+     *     // ... data to create a IntelligenceDocument
+     *   }
+     * })
+     * 
+     */
+    create<T extends IntelligenceDocumentCreateArgs>(args: SelectSubset<T, IntelligenceDocumentCreateArgs<ExtArgs>>): Prisma__IntelligenceDocumentClient<$Result.GetResult<Prisma.$IntelligenceDocumentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many IntelligenceDocuments.
+     * @param {IntelligenceDocumentCreateManyArgs} args - Arguments to create many IntelligenceDocuments.
+     * @example
+     * // Create many IntelligenceDocuments
+     * const intelligenceDocument = await prisma.intelligenceDocument.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends IntelligenceDocumentCreateManyArgs>(args?: SelectSubset<T, IntelligenceDocumentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many IntelligenceDocuments and returns the data saved in the database.
+     * @param {IntelligenceDocumentCreateManyAndReturnArgs} args - Arguments to create many IntelligenceDocuments.
+     * @example
+     * // Create many IntelligenceDocuments
+     * const intelligenceDocument = await prisma.intelligenceDocument.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many IntelligenceDocuments and only return the `id`
+     * const intelligenceDocumentWithIdOnly = await prisma.intelligenceDocument.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends IntelligenceDocumentCreateManyAndReturnArgs>(args?: SelectSubset<T, IntelligenceDocumentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IntelligenceDocumentPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a IntelligenceDocument.
+     * @param {IntelligenceDocumentDeleteArgs} args - Arguments to delete one IntelligenceDocument.
+     * @example
+     * // Delete one IntelligenceDocument
+     * const IntelligenceDocument = await prisma.intelligenceDocument.delete({
+     *   where: {
+     *     // ... filter to delete one IntelligenceDocument
+     *   }
+     * })
+     * 
+     */
+    delete<T extends IntelligenceDocumentDeleteArgs>(args: SelectSubset<T, IntelligenceDocumentDeleteArgs<ExtArgs>>): Prisma__IntelligenceDocumentClient<$Result.GetResult<Prisma.$IntelligenceDocumentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one IntelligenceDocument.
+     * @param {IntelligenceDocumentUpdateArgs} args - Arguments to update one IntelligenceDocument.
+     * @example
+     * // Update one IntelligenceDocument
+     * const intelligenceDocument = await prisma.intelligenceDocument.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends IntelligenceDocumentUpdateArgs>(args: SelectSubset<T, IntelligenceDocumentUpdateArgs<ExtArgs>>): Prisma__IntelligenceDocumentClient<$Result.GetResult<Prisma.$IntelligenceDocumentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more IntelligenceDocuments.
+     * @param {IntelligenceDocumentDeleteManyArgs} args - Arguments to filter IntelligenceDocuments to delete.
+     * @example
+     * // Delete a few IntelligenceDocuments
+     * const { count } = await prisma.intelligenceDocument.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends IntelligenceDocumentDeleteManyArgs>(args?: SelectSubset<T, IntelligenceDocumentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more IntelligenceDocuments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntelligenceDocumentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many IntelligenceDocuments
+     * const intelligenceDocument = await prisma.intelligenceDocument.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends IntelligenceDocumentUpdateManyArgs>(args: SelectSubset<T, IntelligenceDocumentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more IntelligenceDocuments and returns the data updated in the database.
+     * @param {IntelligenceDocumentUpdateManyAndReturnArgs} args - Arguments to update many IntelligenceDocuments.
+     * @example
+     * // Update many IntelligenceDocuments
+     * const intelligenceDocument = await prisma.intelligenceDocument.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more IntelligenceDocuments and only return the `id`
+     * const intelligenceDocumentWithIdOnly = await prisma.intelligenceDocument.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends IntelligenceDocumentUpdateManyAndReturnArgs>(args: SelectSubset<T, IntelligenceDocumentUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IntelligenceDocumentPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one IntelligenceDocument.
+     * @param {IntelligenceDocumentUpsertArgs} args - Arguments to update or create a IntelligenceDocument.
+     * @example
+     * // Update or create a IntelligenceDocument
+     * const intelligenceDocument = await prisma.intelligenceDocument.upsert({
+     *   create: {
+     *     // ... data to create a IntelligenceDocument
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the IntelligenceDocument we want to update
+     *   }
+     * })
+     */
+    upsert<T extends IntelligenceDocumentUpsertArgs>(args: SelectSubset<T, IntelligenceDocumentUpsertArgs<ExtArgs>>): Prisma__IntelligenceDocumentClient<$Result.GetResult<Prisma.$IntelligenceDocumentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of IntelligenceDocuments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntelligenceDocumentCountArgs} args - Arguments to filter IntelligenceDocuments to count.
+     * @example
+     * // Count the number of IntelligenceDocuments
+     * const count = await prisma.intelligenceDocument.count({
+     *   where: {
+     *     // ... the filter for the IntelligenceDocuments we want to count
+     *   }
+     * })
+    **/
+    count<T extends IntelligenceDocumentCountArgs>(
+      args?: Subset<T, IntelligenceDocumentCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], IntelligenceDocumentCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a IntelligenceDocument.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntelligenceDocumentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends IntelligenceDocumentAggregateArgs>(args: Subset<T, IntelligenceDocumentAggregateArgs>): Prisma.PrismaPromise<GetIntelligenceDocumentAggregateType<T>>
+
+    /**
+     * Group by IntelligenceDocument.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntelligenceDocumentGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends IntelligenceDocumentGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: IntelligenceDocumentGroupByArgs['orderBy'] }
+        : { orderBy?: IntelligenceDocumentGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, IntelligenceDocumentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetIntelligenceDocumentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the IntelligenceDocument model
+   */
+  readonly fields: IntelligenceDocumentFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for IntelligenceDocument.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__IntelligenceDocumentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    conversation<T extends IntelligenceDocument$conversationArgs<ExtArgs> = {}>(args?: Subset<T, IntelligenceDocument$conversationArgs<ExtArgs>>): Prisma__ConversationClient<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the IntelligenceDocument model
+   */
+  interface IntelligenceDocumentFieldRefs {
+    readonly id: FieldRef<"IntelligenceDocument", 'String'>
+    readonly userId: FieldRef<"IntelligenceDocument", 'String'>
+    readonly conversationId: FieldRef<"IntelligenceDocument", 'String'>
+    readonly fileName: FieldRef<"IntelligenceDocument", 'String'>
+    readonly fileSize: FieldRef<"IntelligenceDocument", 'Int'>
+    readonly mimeType: FieldRef<"IntelligenceDocument", 'String'>
+    readonly kind: FieldRef<"IntelligenceDocument", 'String'>
+    readonly extractedText: FieldRef<"IntelligenceDocument", 'String'>
+    readonly extractedCharCount: FieldRef<"IntelligenceDocument", 'Int'>
+    readonly truncated: FieldRef<"IntelligenceDocument", 'Boolean'>
+    readonly createdAt: FieldRef<"IntelligenceDocument", 'DateTime'>
+    readonly updatedAt: FieldRef<"IntelligenceDocument", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * IntelligenceDocument findUnique
+   */
+  export type IntelligenceDocumentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntelligenceDocument
+     */
+    select?: IntelligenceDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntelligenceDocument
+     */
+    omit?: IntelligenceDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntelligenceDocumentInclude<ExtArgs> | null
+    /**
+     * Filter, which IntelligenceDocument to fetch.
+     */
+    where: IntelligenceDocumentWhereUniqueInput
+  }
+
+  /**
+   * IntelligenceDocument findUniqueOrThrow
+   */
+  export type IntelligenceDocumentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntelligenceDocument
+     */
+    select?: IntelligenceDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntelligenceDocument
+     */
+    omit?: IntelligenceDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntelligenceDocumentInclude<ExtArgs> | null
+    /**
+     * Filter, which IntelligenceDocument to fetch.
+     */
+    where: IntelligenceDocumentWhereUniqueInput
+  }
+
+  /**
+   * IntelligenceDocument findFirst
+   */
+  export type IntelligenceDocumentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntelligenceDocument
+     */
+    select?: IntelligenceDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntelligenceDocument
+     */
+    omit?: IntelligenceDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntelligenceDocumentInclude<ExtArgs> | null
+    /**
+     * Filter, which IntelligenceDocument to fetch.
+     */
+    where?: IntelligenceDocumentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IntelligenceDocuments to fetch.
+     */
+    orderBy?: IntelligenceDocumentOrderByWithRelationInput | IntelligenceDocumentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for IntelligenceDocuments.
+     */
+    cursor?: IntelligenceDocumentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IntelligenceDocuments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IntelligenceDocuments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of IntelligenceDocuments.
+     */
+    distinct?: IntelligenceDocumentScalarFieldEnum | IntelligenceDocumentScalarFieldEnum[]
+  }
+
+  /**
+   * IntelligenceDocument findFirstOrThrow
+   */
+  export type IntelligenceDocumentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntelligenceDocument
+     */
+    select?: IntelligenceDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntelligenceDocument
+     */
+    omit?: IntelligenceDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntelligenceDocumentInclude<ExtArgs> | null
+    /**
+     * Filter, which IntelligenceDocument to fetch.
+     */
+    where?: IntelligenceDocumentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IntelligenceDocuments to fetch.
+     */
+    orderBy?: IntelligenceDocumentOrderByWithRelationInput | IntelligenceDocumentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for IntelligenceDocuments.
+     */
+    cursor?: IntelligenceDocumentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IntelligenceDocuments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IntelligenceDocuments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of IntelligenceDocuments.
+     */
+    distinct?: IntelligenceDocumentScalarFieldEnum | IntelligenceDocumentScalarFieldEnum[]
+  }
+
+  /**
+   * IntelligenceDocument findMany
+   */
+  export type IntelligenceDocumentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntelligenceDocument
+     */
+    select?: IntelligenceDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntelligenceDocument
+     */
+    omit?: IntelligenceDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntelligenceDocumentInclude<ExtArgs> | null
+    /**
+     * Filter, which IntelligenceDocuments to fetch.
+     */
+    where?: IntelligenceDocumentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IntelligenceDocuments to fetch.
+     */
+    orderBy?: IntelligenceDocumentOrderByWithRelationInput | IntelligenceDocumentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing IntelligenceDocuments.
+     */
+    cursor?: IntelligenceDocumentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IntelligenceDocuments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IntelligenceDocuments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of IntelligenceDocuments.
+     */
+    distinct?: IntelligenceDocumentScalarFieldEnum | IntelligenceDocumentScalarFieldEnum[]
+  }
+
+  /**
+   * IntelligenceDocument create
+   */
+  export type IntelligenceDocumentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntelligenceDocument
+     */
+    select?: IntelligenceDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntelligenceDocument
+     */
+    omit?: IntelligenceDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntelligenceDocumentInclude<ExtArgs> | null
+    /**
+     * The data needed to create a IntelligenceDocument.
+     */
+    data: XOR<IntelligenceDocumentCreateInput, IntelligenceDocumentUncheckedCreateInput>
+  }
+
+  /**
+   * IntelligenceDocument createMany
+   */
+  export type IntelligenceDocumentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many IntelligenceDocuments.
+     */
+    data: IntelligenceDocumentCreateManyInput | IntelligenceDocumentCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * IntelligenceDocument createManyAndReturn
+   */
+  export type IntelligenceDocumentCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntelligenceDocument
+     */
+    select?: IntelligenceDocumentSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntelligenceDocument
+     */
+    omit?: IntelligenceDocumentOmit<ExtArgs> | null
+    /**
+     * The data used to create many IntelligenceDocuments.
+     */
+    data: IntelligenceDocumentCreateManyInput | IntelligenceDocumentCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntelligenceDocumentIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * IntelligenceDocument update
+   */
+  export type IntelligenceDocumentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntelligenceDocument
+     */
+    select?: IntelligenceDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntelligenceDocument
+     */
+    omit?: IntelligenceDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntelligenceDocumentInclude<ExtArgs> | null
+    /**
+     * The data needed to update a IntelligenceDocument.
+     */
+    data: XOR<IntelligenceDocumentUpdateInput, IntelligenceDocumentUncheckedUpdateInput>
+    /**
+     * Choose, which IntelligenceDocument to update.
+     */
+    where: IntelligenceDocumentWhereUniqueInput
+  }
+
+  /**
+   * IntelligenceDocument updateMany
+   */
+  export type IntelligenceDocumentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update IntelligenceDocuments.
+     */
+    data: XOR<IntelligenceDocumentUpdateManyMutationInput, IntelligenceDocumentUncheckedUpdateManyInput>
+    /**
+     * Filter which IntelligenceDocuments to update
+     */
+    where?: IntelligenceDocumentWhereInput
+    /**
+     * Limit how many IntelligenceDocuments to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * IntelligenceDocument updateManyAndReturn
+   */
+  export type IntelligenceDocumentUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntelligenceDocument
+     */
+    select?: IntelligenceDocumentSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntelligenceDocument
+     */
+    omit?: IntelligenceDocumentOmit<ExtArgs> | null
+    /**
+     * The data used to update IntelligenceDocuments.
+     */
+    data: XOR<IntelligenceDocumentUpdateManyMutationInput, IntelligenceDocumentUncheckedUpdateManyInput>
+    /**
+     * Filter which IntelligenceDocuments to update
+     */
+    where?: IntelligenceDocumentWhereInput
+    /**
+     * Limit how many IntelligenceDocuments to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntelligenceDocumentIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * IntelligenceDocument upsert
+   */
+  export type IntelligenceDocumentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntelligenceDocument
+     */
+    select?: IntelligenceDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntelligenceDocument
+     */
+    omit?: IntelligenceDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntelligenceDocumentInclude<ExtArgs> | null
+    /**
+     * The filter to search for the IntelligenceDocument to update in case it exists.
+     */
+    where: IntelligenceDocumentWhereUniqueInput
+    /**
+     * In case the IntelligenceDocument found by the `where` argument doesn't exist, create a new IntelligenceDocument with this data.
+     */
+    create: XOR<IntelligenceDocumentCreateInput, IntelligenceDocumentUncheckedCreateInput>
+    /**
+     * In case the IntelligenceDocument was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<IntelligenceDocumentUpdateInput, IntelligenceDocumentUncheckedUpdateInput>
+  }
+
+  /**
+   * IntelligenceDocument delete
+   */
+  export type IntelligenceDocumentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntelligenceDocument
+     */
+    select?: IntelligenceDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntelligenceDocument
+     */
+    omit?: IntelligenceDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntelligenceDocumentInclude<ExtArgs> | null
+    /**
+     * Filter which IntelligenceDocument to delete.
+     */
+    where: IntelligenceDocumentWhereUniqueInput
+  }
+
+  /**
+   * IntelligenceDocument deleteMany
+   */
+  export type IntelligenceDocumentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which IntelligenceDocuments to delete
+     */
+    where?: IntelligenceDocumentWhereInput
+    /**
+     * Limit how many IntelligenceDocuments to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * IntelligenceDocument.conversation
+   */
+  export type IntelligenceDocument$conversationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    where?: ConversationWhereInput
+  }
+
+  /**
+   * IntelligenceDocument without action
+   */
+  export type IntelligenceDocumentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntelligenceDocument
+     */
+    select?: IntelligenceDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntelligenceDocument
+     */
+    omit?: IntelligenceDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntelligenceDocumentInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model ProjectInquiry
    */
 
@@ -10701,6 +12085,24 @@ export namespace Prisma {
   export type LegalDocumentScalarFieldEnum = (typeof LegalDocumentScalarFieldEnum)[keyof typeof LegalDocumentScalarFieldEnum]
 
 
+  export const IntelligenceDocumentScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    conversationId: 'conversationId',
+    fileName: 'fileName',
+    fileSize: 'fileSize',
+    mimeType: 'mimeType',
+    kind: 'kind',
+    extractedText: 'extractedText',
+    extractedCharCount: 'extractedCharCount',
+    truncated: 'truncated',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type IntelligenceDocumentScalarFieldEnum = (typeof IntelligenceDocumentScalarFieldEnum)[keyof typeof IntelligenceDocumentScalarFieldEnum]
+
+
   export const ProjectInquiryScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
@@ -10792,6 +12194,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -10824,6 +12233,7 @@ export namespace Prisma {
     sessions?: SessionListRelationFilter
     conversations?: ConversationListRelationFilter
     legalDocuments?: LegalDocumentListRelationFilter
+    intelligenceDocuments?: IntelligenceDocumentListRelationFilter
     projectInquiries?: ProjectInquiryListRelationFilter
   }
 
@@ -10840,6 +12250,7 @@ export namespace Prisma {
     sessions?: SessionOrderByRelationAggregateInput
     conversations?: ConversationOrderByRelationAggregateInput
     legalDocuments?: LegalDocumentOrderByRelationAggregateInput
+    intelligenceDocuments?: IntelligenceDocumentOrderByRelationAggregateInput
     projectInquiries?: ProjectInquiryOrderByRelationAggregateInput
   }
 
@@ -10859,6 +12270,7 @@ export namespace Prisma {
     sessions?: SessionListRelationFilter
     conversations?: ConversationListRelationFilter
     legalDocuments?: LegalDocumentListRelationFilter
+    intelligenceDocuments?: IntelligenceDocumentListRelationFilter
     projectInquiries?: ProjectInquiryListRelationFilter
   }, "id" | "email">
 
@@ -11088,6 +12500,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Conversation"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     messages?: MessageListRelationFilter
+    intelligenceDocuments?: IntelligenceDocumentListRelationFilter
   }
 
   export type ConversationOrderByWithRelationInput = {
@@ -11099,6 +12512,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
     messages?: MessageOrderByRelationAggregateInput
+    intelligenceDocuments?: IntelligenceDocumentOrderByRelationAggregateInput
   }
 
   export type ConversationWhereUniqueInput = Prisma.AtLeast<{
@@ -11113,6 +12527,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Conversation"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     messages?: MessageListRelationFilter
+    intelligenceDocuments?: IntelligenceDocumentListRelationFilter
   }, "id">
 
   export type ConversationOrderByWithAggregationInput = {
@@ -11281,6 +12696,101 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"LegalDocument"> | Date | string
   }
 
+  export type IntelligenceDocumentWhereInput = {
+    AND?: IntelligenceDocumentWhereInput | IntelligenceDocumentWhereInput[]
+    OR?: IntelligenceDocumentWhereInput[]
+    NOT?: IntelligenceDocumentWhereInput | IntelligenceDocumentWhereInput[]
+    id?: StringFilter<"IntelligenceDocument"> | string
+    userId?: StringFilter<"IntelligenceDocument"> | string
+    conversationId?: StringNullableFilter<"IntelligenceDocument"> | string | null
+    fileName?: StringFilter<"IntelligenceDocument"> | string
+    fileSize?: IntFilter<"IntelligenceDocument"> | number
+    mimeType?: StringFilter<"IntelligenceDocument"> | string
+    kind?: StringFilter<"IntelligenceDocument"> | string
+    extractedText?: StringFilter<"IntelligenceDocument"> | string
+    extractedCharCount?: IntFilter<"IntelligenceDocument"> | number
+    truncated?: BoolFilter<"IntelligenceDocument"> | boolean
+    createdAt?: DateTimeFilter<"IntelligenceDocument"> | Date | string
+    updatedAt?: DateTimeFilter<"IntelligenceDocument"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    conversation?: XOR<ConversationNullableScalarRelationFilter, ConversationWhereInput> | null
+  }
+
+  export type IntelligenceDocumentOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    conversationId?: SortOrderInput | SortOrder
+    fileName?: SortOrder
+    fileSize?: SortOrder
+    mimeType?: SortOrder
+    kind?: SortOrder
+    extractedText?: SortOrder
+    extractedCharCount?: SortOrder
+    truncated?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    conversation?: ConversationOrderByWithRelationInput
+  }
+
+  export type IntelligenceDocumentWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: IntelligenceDocumentWhereInput | IntelligenceDocumentWhereInput[]
+    OR?: IntelligenceDocumentWhereInput[]
+    NOT?: IntelligenceDocumentWhereInput | IntelligenceDocumentWhereInput[]
+    userId?: StringFilter<"IntelligenceDocument"> | string
+    conversationId?: StringNullableFilter<"IntelligenceDocument"> | string | null
+    fileName?: StringFilter<"IntelligenceDocument"> | string
+    fileSize?: IntFilter<"IntelligenceDocument"> | number
+    mimeType?: StringFilter<"IntelligenceDocument"> | string
+    kind?: StringFilter<"IntelligenceDocument"> | string
+    extractedText?: StringFilter<"IntelligenceDocument"> | string
+    extractedCharCount?: IntFilter<"IntelligenceDocument"> | number
+    truncated?: BoolFilter<"IntelligenceDocument"> | boolean
+    createdAt?: DateTimeFilter<"IntelligenceDocument"> | Date | string
+    updatedAt?: DateTimeFilter<"IntelligenceDocument"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    conversation?: XOR<ConversationNullableScalarRelationFilter, ConversationWhereInput> | null
+  }, "id">
+
+  export type IntelligenceDocumentOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    conversationId?: SortOrderInput | SortOrder
+    fileName?: SortOrder
+    fileSize?: SortOrder
+    mimeType?: SortOrder
+    kind?: SortOrder
+    extractedText?: SortOrder
+    extractedCharCount?: SortOrder
+    truncated?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: IntelligenceDocumentCountOrderByAggregateInput
+    _avg?: IntelligenceDocumentAvgOrderByAggregateInput
+    _max?: IntelligenceDocumentMaxOrderByAggregateInput
+    _min?: IntelligenceDocumentMinOrderByAggregateInput
+    _sum?: IntelligenceDocumentSumOrderByAggregateInput
+  }
+
+  export type IntelligenceDocumentScalarWhereWithAggregatesInput = {
+    AND?: IntelligenceDocumentScalarWhereWithAggregatesInput | IntelligenceDocumentScalarWhereWithAggregatesInput[]
+    OR?: IntelligenceDocumentScalarWhereWithAggregatesInput[]
+    NOT?: IntelligenceDocumentScalarWhereWithAggregatesInput | IntelligenceDocumentScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"IntelligenceDocument"> | string
+    userId?: StringWithAggregatesFilter<"IntelligenceDocument"> | string
+    conversationId?: StringNullableWithAggregatesFilter<"IntelligenceDocument"> | string | null
+    fileName?: StringWithAggregatesFilter<"IntelligenceDocument"> | string
+    fileSize?: IntWithAggregatesFilter<"IntelligenceDocument"> | number
+    mimeType?: StringWithAggregatesFilter<"IntelligenceDocument"> | string
+    kind?: StringWithAggregatesFilter<"IntelligenceDocument"> | string
+    extractedText?: StringWithAggregatesFilter<"IntelligenceDocument"> | string
+    extractedCharCount?: IntWithAggregatesFilter<"IntelligenceDocument"> | number
+    truncated?: BoolWithAggregatesFilter<"IntelligenceDocument"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"IntelligenceDocument"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"IntelligenceDocument"> | Date | string
+  }
+
   export type ProjectInquiryWhereInput = {
     AND?: ProjectInquiryWhereInput | ProjectInquiryWhereInput[]
     OR?: ProjectInquiryWhereInput[]
@@ -11389,6 +12899,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     conversations?: ConversationCreateNestedManyWithoutUserInput
     legalDocuments?: LegalDocumentCreateNestedManyWithoutUserInput
+    intelligenceDocuments?: IntelligenceDocumentCreateNestedManyWithoutUserInput
     projectInquiries?: ProjectInquiryCreateNestedManyWithoutUserInput
   }
 
@@ -11405,6 +12916,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
     legalDocuments?: LegalDocumentUncheckedCreateNestedManyWithoutUserInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedCreateNestedManyWithoutUserInput
     projectInquiries?: ProjectInquiryUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -11421,6 +12933,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     conversations?: ConversationUpdateManyWithoutUserNestedInput
     legalDocuments?: LegalDocumentUpdateManyWithoutUserNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUpdateManyWithoutUserNestedInput
     projectInquiries?: ProjectInquiryUpdateManyWithoutUserNestedInput
   }
 
@@ -11437,6 +12950,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
     legalDocuments?: LegalDocumentUncheckedUpdateManyWithoutUserNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedUpdateManyWithoutUserNestedInput
     projectInquiries?: ProjectInquiryUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -11675,6 +13189,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutConversationsInput
     messages?: MessageCreateNestedManyWithoutConversationInput
+    intelligenceDocuments?: IntelligenceDocumentCreateNestedManyWithoutConversationInput
   }
 
   export type ConversationUncheckedCreateInput = {
@@ -11685,6 +13200,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     messages?: MessageUncheckedCreateNestedManyWithoutConversationInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedCreateNestedManyWithoutConversationInput
   }
 
   export type ConversationUpdateInput = {
@@ -11695,6 +13211,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutConversationsNestedInput
     messages?: MessageUpdateManyWithoutConversationNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUpdateManyWithoutConversationNestedInput
   }
 
   export type ConversationUncheckedUpdateInput = {
@@ -11705,6 +13222,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     messages?: MessageUncheckedUpdateManyWithoutConversationNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedUpdateManyWithoutConversationNestedInput
   }
 
   export type ConversationCreateManyInput = {
@@ -11881,6 +13399,109 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     conversationId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IntelligenceDocumentCreateInput = {
+    id?: string
+    fileName: string
+    fileSize: number
+    mimeType: string
+    kind: string
+    extractedText: string
+    extractedCharCount: number
+    truncated?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutIntelligenceDocumentsInput
+    conversation?: ConversationCreateNestedOneWithoutIntelligenceDocumentsInput
+  }
+
+  export type IntelligenceDocumentUncheckedCreateInput = {
+    id?: string
+    userId: string
+    conversationId?: string | null
+    fileName: string
+    fileSize: number
+    mimeType: string
+    kind: string
+    extractedText: string
+    extractedCharCount: number
+    truncated?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type IntelligenceDocumentUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    mimeType?: StringFieldUpdateOperationsInput | string
+    kind?: StringFieldUpdateOperationsInput | string
+    extractedText?: StringFieldUpdateOperationsInput | string
+    extractedCharCount?: IntFieldUpdateOperationsInput | number
+    truncated?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutIntelligenceDocumentsNestedInput
+    conversation?: ConversationUpdateOneWithoutIntelligenceDocumentsNestedInput
+  }
+
+  export type IntelligenceDocumentUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    conversationId?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    mimeType?: StringFieldUpdateOperationsInput | string
+    kind?: StringFieldUpdateOperationsInput | string
+    extractedText?: StringFieldUpdateOperationsInput | string
+    extractedCharCount?: IntFieldUpdateOperationsInput | number
+    truncated?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IntelligenceDocumentCreateManyInput = {
+    id?: string
+    userId: string
+    conversationId?: string | null
+    fileName: string
+    fileSize: number
+    mimeType: string
+    kind: string
+    extractedText: string
+    extractedCharCount: number
+    truncated?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type IntelligenceDocumentUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    mimeType?: StringFieldUpdateOperationsInput | string
+    kind?: StringFieldUpdateOperationsInput | string
+    extractedText?: StringFieldUpdateOperationsInput | string
+    extractedCharCount?: IntFieldUpdateOperationsInput | number
+    truncated?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IntelligenceDocumentUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    conversationId?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    mimeType?: StringFieldUpdateOperationsInput | string
+    kind?: StringFieldUpdateOperationsInput | string
+    extractedText?: StringFieldUpdateOperationsInput | string
+    extractedCharCount?: IntFieldUpdateOperationsInput | number
+    truncated?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12072,6 +13693,12 @@ export namespace Prisma {
     none?: LegalDocumentWhereInput
   }
 
+  export type IntelligenceDocumentListRelationFilter = {
+    every?: IntelligenceDocumentWhereInput
+    some?: IntelligenceDocumentWhereInput
+    none?: IntelligenceDocumentWhereInput
+  }
+
   export type ProjectInquiryListRelationFilter = {
     every?: ProjectInquiryWhereInput
     some?: ProjectInquiryWhereInput
@@ -12096,6 +13723,10 @@ export namespace Prisma {
   }
 
   export type LegalDocumentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type IntelligenceDocumentOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -12477,6 +14108,79 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type ConversationNullableScalarRelationFilter = {
+    is?: ConversationWhereInput | null
+    isNot?: ConversationWhereInput | null
+  }
+
+  export type IntelligenceDocumentCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    conversationId?: SortOrder
+    fileName?: SortOrder
+    fileSize?: SortOrder
+    mimeType?: SortOrder
+    kind?: SortOrder
+    extractedText?: SortOrder
+    extractedCharCount?: SortOrder
+    truncated?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type IntelligenceDocumentAvgOrderByAggregateInput = {
+    fileSize?: SortOrder
+    extractedCharCount?: SortOrder
+  }
+
+  export type IntelligenceDocumentMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    conversationId?: SortOrder
+    fileName?: SortOrder
+    fileSize?: SortOrder
+    mimeType?: SortOrder
+    kind?: SortOrder
+    extractedText?: SortOrder
+    extractedCharCount?: SortOrder
+    truncated?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type IntelligenceDocumentMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    conversationId?: SortOrder
+    fileName?: SortOrder
+    fileSize?: SortOrder
+    mimeType?: SortOrder
+    kind?: SortOrder
+    extractedText?: SortOrder
+    extractedCharCount?: SortOrder
+    truncated?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type IntelligenceDocumentSumOrderByAggregateInput = {
+    fileSize?: SortOrder
+    extractedCharCount?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type UserNullableScalarRelationFilter = {
     is?: UserWhereInput | null
     isNot?: UserWhereInput | null
@@ -12558,6 +14262,13 @@ export namespace Prisma {
     connect?: LegalDocumentWhereUniqueInput | LegalDocumentWhereUniqueInput[]
   }
 
+  export type IntelligenceDocumentCreateNestedManyWithoutUserInput = {
+    create?: XOR<IntelligenceDocumentCreateWithoutUserInput, IntelligenceDocumentUncheckedCreateWithoutUserInput> | IntelligenceDocumentCreateWithoutUserInput[] | IntelligenceDocumentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: IntelligenceDocumentCreateOrConnectWithoutUserInput | IntelligenceDocumentCreateOrConnectWithoutUserInput[]
+    createMany?: IntelligenceDocumentCreateManyUserInputEnvelope
+    connect?: IntelligenceDocumentWhereUniqueInput | IntelligenceDocumentWhereUniqueInput[]
+  }
+
   export type ProjectInquiryCreateNestedManyWithoutUserInput = {
     create?: XOR<ProjectInquiryCreateWithoutUserInput, ProjectInquiryUncheckedCreateWithoutUserInput> | ProjectInquiryCreateWithoutUserInput[] | ProjectInquiryUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ProjectInquiryCreateOrConnectWithoutUserInput | ProjectInquiryCreateOrConnectWithoutUserInput[]
@@ -12591,6 +14302,13 @@ export namespace Prisma {
     connectOrCreate?: LegalDocumentCreateOrConnectWithoutUserInput | LegalDocumentCreateOrConnectWithoutUserInput[]
     createMany?: LegalDocumentCreateManyUserInputEnvelope
     connect?: LegalDocumentWhereUniqueInput | LegalDocumentWhereUniqueInput[]
+  }
+
+  export type IntelligenceDocumentUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<IntelligenceDocumentCreateWithoutUserInput, IntelligenceDocumentUncheckedCreateWithoutUserInput> | IntelligenceDocumentCreateWithoutUserInput[] | IntelligenceDocumentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: IntelligenceDocumentCreateOrConnectWithoutUserInput | IntelligenceDocumentCreateOrConnectWithoutUserInput[]
+    createMany?: IntelligenceDocumentCreateManyUserInputEnvelope
+    connect?: IntelligenceDocumentWhereUniqueInput | IntelligenceDocumentWhereUniqueInput[]
   }
 
   export type ProjectInquiryUncheckedCreateNestedManyWithoutUserInput = {
@@ -12672,6 +14390,20 @@ export namespace Prisma {
     deleteMany?: LegalDocumentScalarWhereInput | LegalDocumentScalarWhereInput[]
   }
 
+  export type IntelligenceDocumentUpdateManyWithoutUserNestedInput = {
+    create?: XOR<IntelligenceDocumentCreateWithoutUserInput, IntelligenceDocumentUncheckedCreateWithoutUserInput> | IntelligenceDocumentCreateWithoutUserInput[] | IntelligenceDocumentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: IntelligenceDocumentCreateOrConnectWithoutUserInput | IntelligenceDocumentCreateOrConnectWithoutUserInput[]
+    upsert?: IntelligenceDocumentUpsertWithWhereUniqueWithoutUserInput | IntelligenceDocumentUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: IntelligenceDocumentCreateManyUserInputEnvelope
+    set?: IntelligenceDocumentWhereUniqueInput | IntelligenceDocumentWhereUniqueInput[]
+    disconnect?: IntelligenceDocumentWhereUniqueInput | IntelligenceDocumentWhereUniqueInput[]
+    delete?: IntelligenceDocumentWhereUniqueInput | IntelligenceDocumentWhereUniqueInput[]
+    connect?: IntelligenceDocumentWhereUniqueInput | IntelligenceDocumentWhereUniqueInput[]
+    update?: IntelligenceDocumentUpdateWithWhereUniqueWithoutUserInput | IntelligenceDocumentUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: IntelligenceDocumentUpdateManyWithWhereWithoutUserInput | IntelligenceDocumentUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: IntelligenceDocumentScalarWhereInput | IntelligenceDocumentScalarWhereInput[]
+  }
+
   export type ProjectInquiryUpdateManyWithoutUserNestedInput = {
     create?: XOR<ProjectInquiryCreateWithoutUserInput, ProjectInquiryUncheckedCreateWithoutUserInput> | ProjectInquiryCreateWithoutUserInput[] | ProjectInquiryUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ProjectInquiryCreateOrConnectWithoutUserInput | ProjectInquiryCreateOrConnectWithoutUserInput[]
@@ -12742,6 +14474,20 @@ export namespace Prisma {
     deleteMany?: LegalDocumentScalarWhereInput | LegalDocumentScalarWhereInput[]
   }
 
+  export type IntelligenceDocumentUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<IntelligenceDocumentCreateWithoutUserInput, IntelligenceDocumentUncheckedCreateWithoutUserInput> | IntelligenceDocumentCreateWithoutUserInput[] | IntelligenceDocumentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: IntelligenceDocumentCreateOrConnectWithoutUserInput | IntelligenceDocumentCreateOrConnectWithoutUserInput[]
+    upsert?: IntelligenceDocumentUpsertWithWhereUniqueWithoutUserInput | IntelligenceDocumentUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: IntelligenceDocumentCreateManyUserInputEnvelope
+    set?: IntelligenceDocumentWhereUniqueInput | IntelligenceDocumentWhereUniqueInput[]
+    disconnect?: IntelligenceDocumentWhereUniqueInput | IntelligenceDocumentWhereUniqueInput[]
+    delete?: IntelligenceDocumentWhereUniqueInput | IntelligenceDocumentWhereUniqueInput[]
+    connect?: IntelligenceDocumentWhereUniqueInput | IntelligenceDocumentWhereUniqueInput[]
+    update?: IntelligenceDocumentUpdateWithWhereUniqueWithoutUserInput | IntelligenceDocumentUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: IntelligenceDocumentUpdateManyWithWhereWithoutUserInput | IntelligenceDocumentUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: IntelligenceDocumentScalarWhereInput | IntelligenceDocumentScalarWhereInput[]
+  }
+
   export type ProjectInquiryUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<ProjectInquiryCreateWithoutUserInput, ProjectInquiryUncheckedCreateWithoutUserInput> | ProjectInquiryCreateWithoutUserInput[] | ProjectInquiryUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ProjectInquiryCreateOrConnectWithoutUserInput | ProjectInquiryCreateOrConnectWithoutUserInput[]
@@ -12805,11 +14551,25 @@ export namespace Prisma {
     connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
   }
 
+  export type IntelligenceDocumentCreateNestedManyWithoutConversationInput = {
+    create?: XOR<IntelligenceDocumentCreateWithoutConversationInput, IntelligenceDocumentUncheckedCreateWithoutConversationInput> | IntelligenceDocumentCreateWithoutConversationInput[] | IntelligenceDocumentUncheckedCreateWithoutConversationInput[]
+    connectOrCreate?: IntelligenceDocumentCreateOrConnectWithoutConversationInput | IntelligenceDocumentCreateOrConnectWithoutConversationInput[]
+    createMany?: IntelligenceDocumentCreateManyConversationInputEnvelope
+    connect?: IntelligenceDocumentWhereUniqueInput | IntelligenceDocumentWhereUniqueInput[]
+  }
+
   export type MessageUncheckedCreateNestedManyWithoutConversationInput = {
     create?: XOR<MessageCreateWithoutConversationInput, MessageUncheckedCreateWithoutConversationInput> | MessageCreateWithoutConversationInput[] | MessageUncheckedCreateWithoutConversationInput[]
     connectOrCreate?: MessageCreateOrConnectWithoutConversationInput | MessageCreateOrConnectWithoutConversationInput[]
     createMany?: MessageCreateManyConversationInputEnvelope
     connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+  }
+
+  export type IntelligenceDocumentUncheckedCreateNestedManyWithoutConversationInput = {
+    create?: XOR<IntelligenceDocumentCreateWithoutConversationInput, IntelligenceDocumentUncheckedCreateWithoutConversationInput> | IntelligenceDocumentCreateWithoutConversationInput[] | IntelligenceDocumentUncheckedCreateWithoutConversationInput[]
+    connectOrCreate?: IntelligenceDocumentCreateOrConnectWithoutConversationInput | IntelligenceDocumentCreateOrConnectWithoutConversationInput[]
+    createMany?: IntelligenceDocumentCreateManyConversationInputEnvelope
+    connect?: IntelligenceDocumentWhereUniqueInput | IntelligenceDocumentWhereUniqueInput[]
   }
 
   export type UserUpdateOneRequiredWithoutConversationsNestedInput = {
@@ -12834,6 +14594,20 @@ export namespace Prisma {
     deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
   }
 
+  export type IntelligenceDocumentUpdateManyWithoutConversationNestedInput = {
+    create?: XOR<IntelligenceDocumentCreateWithoutConversationInput, IntelligenceDocumentUncheckedCreateWithoutConversationInput> | IntelligenceDocumentCreateWithoutConversationInput[] | IntelligenceDocumentUncheckedCreateWithoutConversationInput[]
+    connectOrCreate?: IntelligenceDocumentCreateOrConnectWithoutConversationInput | IntelligenceDocumentCreateOrConnectWithoutConversationInput[]
+    upsert?: IntelligenceDocumentUpsertWithWhereUniqueWithoutConversationInput | IntelligenceDocumentUpsertWithWhereUniqueWithoutConversationInput[]
+    createMany?: IntelligenceDocumentCreateManyConversationInputEnvelope
+    set?: IntelligenceDocumentWhereUniqueInput | IntelligenceDocumentWhereUniqueInput[]
+    disconnect?: IntelligenceDocumentWhereUniqueInput | IntelligenceDocumentWhereUniqueInput[]
+    delete?: IntelligenceDocumentWhereUniqueInput | IntelligenceDocumentWhereUniqueInput[]
+    connect?: IntelligenceDocumentWhereUniqueInput | IntelligenceDocumentWhereUniqueInput[]
+    update?: IntelligenceDocumentUpdateWithWhereUniqueWithoutConversationInput | IntelligenceDocumentUpdateWithWhereUniqueWithoutConversationInput[]
+    updateMany?: IntelligenceDocumentUpdateManyWithWhereWithoutConversationInput | IntelligenceDocumentUpdateManyWithWhereWithoutConversationInput[]
+    deleteMany?: IntelligenceDocumentScalarWhereInput | IntelligenceDocumentScalarWhereInput[]
+  }
+
   export type MessageUncheckedUpdateManyWithoutConversationNestedInput = {
     create?: XOR<MessageCreateWithoutConversationInput, MessageUncheckedCreateWithoutConversationInput> | MessageCreateWithoutConversationInput[] | MessageUncheckedCreateWithoutConversationInput[]
     connectOrCreate?: MessageCreateOrConnectWithoutConversationInput | MessageCreateOrConnectWithoutConversationInput[]
@@ -12846,6 +14620,20 @@ export namespace Prisma {
     update?: MessageUpdateWithWhereUniqueWithoutConversationInput | MessageUpdateWithWhereUniqueWithoutConversationInput[]
     updateMany?: MessageUpdateManyWithWhereWithoutConversationInput | MessageUpdateManyWithWhereWithoutConversationInput[]
     deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
+  }
+
+  export type IntelligenceDocumentUncheckedUpdateManyWithoutConversationNestedInput = {
+    create?: XOR<IntelligenceDocumentCreateWithoutConversationInput, IntelligenceDocumentUncheckedCreateWithoutConversationInput> | IntelligenceDocumentCreateWithoutConversationInput[] | IntelligenceDocumentUncheckedCreateWithoutConversationInput[]
+    connectOrCreate?: IntelligenceDocumentCreateOrConnectWithoutConversationInput | IntelligenceDocumentCreateOrConnectWithoutConversationInput[]
+    upsert?: IntelligenceDocumentUpsertWithWhereUniqueWithoutConversationInput | IntelligenceDocumentUpsertWithWhereUniqueWithoutConversationInput[]
+    createMany?: IntelligenceDocumentCreateManyConversationInputEnvelope
+    set?: IntelligenceDocumentWhereUniqueInput | IntelligenceDocumentWhereUniqueInput[]
+    disconnect?: IntelligenceDocumentWhereUniqueInput | IntelligenceDocumentWhereUniqueInput[]
+    delete?: IntelligenceDocumentWhereUniqueInput | IntelligenceDocumentWhereUniqueInput[]
+    connect?: IntelligenceDocumentWhereUniqueInput | IntelligenceDocumentWhereUniqueInput[]
+    update?: IntelligenceDocumentUpdateWithWhereUniqueWithoutConversationInput | IntelligenceDocumentUpdateWithWhereUniqueWithoutConversationInput[]
+    updateMany?: IntelligenceDocumentUpdateManyWithWhereWithoutConversationInput | IntelligenceDocumentUpdateManyWithWhereWithoutConversationInput[]
+    deleteMany?: IntelligenceDocumentScalarWhereInput | IntelligenceDocumentScalarWhereInput[]
   }
 
   export type ConversationCreateNestedOneWithoutMessagesInput = {
@@ -12882,6 +14670,40 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutLegalDocumentsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutLegalDocumentsInput, UserUpdateWithoutLegalDocumentsInput>, UserUncheckedUpdateWithoutLegalDocumentsInput>
+  }
+
+  export type UserCreateNestedOneWithoutIntelligenceDocumentsInput = {
+    create?: XOR<UserCreateWithoutIntelligenceDocumentsInput, UserUncheckedCreateWithoutIntelligenceDocumentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutIntelligenceDocumentsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ConversationCreateNestedOneWithoutIntelligenceDocumentsInput = {
+    create?: XOR<ConversationCreateWithoutIntelligenceDocumentsInput, ConversationUncheckedCreateWithoutIntelligenceDocumentsInput>
+    connectOrCreate?: ConversationCreateOrConnectWithoutIntelligenceDocumentsInput
+    connect?: ConversationWhereUniqueInput
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type UserUpdateOneRequiredWithoutIntelligenceDocumentsNestedInput = {
+    create?: XOR<UserCreateWithoutIntelligenceDocumentsInput, UserUncheckedCreateWithoutIntelligenceDocumentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutIntelligenceDocumentsInput
+    upsert?: UserUpsertWithoutIntelligenceDocumentsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutIntelligenceDocumentsInput, UserUpdateWithoutIntelligenceDocumentsInput>, UserUncheckedUpdateWithoutIntelligenceDocumentsInput>
+  }
+
+  export type ConversationUpdateOneWithoutIntelligenceDocumentsNestedInput = {
+    create?: XOR<ConversationCreateWithoutIntelligenceDocumentsInput, ConversationUncheckedCreateWithoutIntelligenceDocumentsInput>
+    connectOrCreate?: ConversationCreateOrConnectWithoutIntelligenceDocumentsInput
+    upsert?: ConversationUpsertWithoutIntelligenceDocumentsInput
+    disconnect?: ConversationWhereInput | boolean
+    delete?: ConversationWhereInput | boolean
+    connect?: ConversationWhereUniqueInput
+    update?: XOR<XOR<ConversationUpdateToOneWithWhereWithoutIntelligenceDocumentsInput, ConversationUpdateWithoutIntelligenceDocumentsInput>, ConversationUncheckedUpdateWithoutIntelligenceDocumentsInput>
   }
 
   export type UserCreateNestedOneWithoutProjectInquiriesInput = {
@@ -13088,6 +14910,19 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type AccountCreateWithoutUserInput = {
     id?: string
     type: string
@@ -13155,6 +14990,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     messages?: MessageCreateNestedManyWithoutConversationInput
+    intelligenceDocuments?: IntelligenceDocumentCreateNestedManyWithoutConversationInput
   }
 
   export type ConversationUncheckedCreateWithoutUserInput = {
@@ -13164,6 +15000,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     messages?: MessageUncheckedCreateNestedManyWithoutConversationInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedCreateNestedManyWithoutConversationInput
   }
 
   export type ConversationCreateOrConnectWithoutUserInput = {
@@ -13209,6 +15046,44 @@ export namespace Prisma {
 
   export type LegalDocumentCreateManyUserInputEnvelope = {
     data: LegalDocumentCreateManyUserInput | LegalDocumentCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type IntelligenceDocumentCreateWithoutUserInput = {
+    id?: string
+    fileName: string
+    fileSize: number
+    mimeType: string
+    kind: string
+    extractedText: string
+    extractedCharCount: number
+    truncated?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    conversation?: ConversationCreateNestedOneWithoutIntelligenceDocumentsInput
+  }
+
+  export type IntelligenceDocumentUncheckedCreateWithoutUserInput = {
+    id?: string
+    conversationId?: string | null
+    fileName: string
+    fileSize: number
+    mimeType: string
+    kind: string
+    extractedText: string
+    extractedCharCount: number
+    truncated?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type IntelligenceDocumentCreateOrConnectWithoutUserInput = {
+    where: IntelligenceDocumentWhereUniqueInput
+    create: XOR<IntelligenceDocumentCreateWithoutUserInput, IntelligenceDocumentUncheckedCreateWithoutUserInput>
+  }
+
+  export type IntelligenceDocumentCreateManyUserInputEnvelope = {
+    data: IntelligenceDocumentCreateManyUserInput | IntelligenceDocumentCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -13373,6 +15248,40 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"LegalDocument"> | Date | string
   }
 
+  export type IntelligenceDocumentUpsertWithWhereUniqueWithoutUserInput = {
+    where: IntelligenceDocumentWhereUniqueInput
+    update: XOR<IntelligenceDocumentUpdateWithoutUserInput, IntelligenceDocumentUncheckedUpdateWithoutUserInput>
+    create: XOR<IntelligenceDocumentCreateWithoutUserInput, IntelligenceDocumentUncheckedCreateWithoutUserInput>
+  }
+
+  export type IntelligenceDocumentUpdateWithWhereUniqueWithoutUserInput = {
+    where: IntelligenceDocumentWhereUniqueInput
+    data: XOR<IntelligenceDocumentUpdateWithoutUserInput, IntelligenceDocumentUncheckedUpdateWithoutUserInput>
+  }
+
+  export type IntelligenceDocumentUpdateManyWithWhereWithoutUserInput = {
+    where: IntelligenceDocumentScalarWhereInput
+    data: XOR<IntelligenceDocumentUpdateManyMutationInput, IntelligenceDocumentUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type IntelligenceDocumentScalarWhereInput = {
+    AND?: IntelligenceDocumentScalarWhereInput | IntelligenceDocumentScalarWhereInput[]
+    OR?: IntelligenceDocumentScalarWhereInput[]
+    NOT?: IntelligenceDocumentScalarWhereInput | IntelligenceDocumentScalarWhereInput[]
+    id?: StringFilter<"IntelligenceDocument"> | string
+    userId?: StringFilter<"IntelligenceDocument"> | string
+    conversationId?: StringNullableFilter<"IntelligenceDocument"> | string | null
+    fileName?: StringFilter<"IntelligenceDocument"> | string
+    fileSize?: IntFilter<"IntelligenceDocument"> | number
+    mimeType?: StringFilter<"IntelligenceDocument"> | string
+    kind?: StringFilter<"IntelligenceDocument"> | string
+    extractedText?: StringFilter<"IntelligenceDocument"> | string
+    extractedCharCount?: IntFilter<"IntelligenceDocument"> | number
+    truncated?: BoolFilter<"IntelligenceDocument"> | boolean
+    createdAt?: DateTimeFilter<"IntelligenceDocument"> | Date | string
+    updatedAt?: DateTimeFilter<"IntelligenceDocument"> | Date | string
+  }
+
   export type ProjectInquiryUpsertWithWhereUniqueWithoutUserInput = {
     where: ProjectInquiryWhereUniqueInput
     update: XOR<ProjectInquiryUpdateWithoutUserInput, ProjectInquiryUncheckedUpdateWithoutUserInput>
@@ -13420,6 +15329,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     conversations?: ConversationCreateNestedManyWithoutUserInput
     legalDocuments?: LegalDocumentCreateNestedManyWithoutUserInput
+    intelligenceDocuments?: IntelligenceDocumentCreateNestedManyWithoutUserInput
     projectInquiries?: ProjectInquiryCreateNestedManyWithoutUserInput
   }
 
@@ -13435,6 +15345,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
     legalDocuments?: LegalDocumentUncheckedCreateNestedManyWithoutUserInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedCreateNestedManyWithoutUserInput
     projectInquiries?: ProjectInquiryUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -13466,6 +15377,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     conversations?: ConversationUpdateManyWithoutUserNestedInput
     legalDocuments?: LegalDocumentUpdateManyWithoutUserNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUpdateManyWithoutUserNestedInput
     projectInquiries?: ProjectInquiryUpdateManyWithoutUserNestedInput
   }
 
@@ -13481,6 +15393,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
     legalDocuments?: LegalDocumentUncheckedUpdateManyWithoutUserNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedUpdateManyWithoutUserNestedInput
     projectInquiries?: ProjectInquiryUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -13496,6 +15409,7 @@ export namespace Prisma {
     accounts?: AccountCreateNestedManyWithoutUserInput
     conversations?: ConversationCreateNestedManyWithoutUserInput
     legalDocuments?: LegalDocumentCreateNestedManyWithoutUserInput
+    intelligenceDocuments?: IntelligenceDocumentCreateNestedManyWithoutUserInput
     projectInquiries?: ProjectInquiryCreateNestedManyWithoutUserInput
   }
 
@@ -13511,6 +15425,7 @@ export namespace Prisma {
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
     legalDocuments?: LegalDocumentUncheckedCreateNestedManyWithoutUserInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedCreateNestedManyWithoutUserInput
     projectInquiries?: ProjectInquiryUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -13542,6 +15457,7 @@ export namespace Prisma {
     accounts?: AccountUpdateManyWithoutUserNestedInput
     conversations?: ConversationUpdateManyWithoutUserNestedInput
     legalDocuments?: LegalDocumentUpdateManyWithoutUserNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUpdateManyWithoutUserNestedInput
     projectInquiries?: ProjectInquiryUpdateManyWithoutUserNestedInput
   }
 
@@ -13557,6 +15473,7 @@ export namespace Prisma {
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
     legalDocuments?: LegalDocumentUncheckedUpdateManyWithoutUserNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedUpdateManyWithoutUserNestedInput
     projectInquiries?: ProjectInquiryUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -13572,6 +15489,7 @@ export namespace Prisma {
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     legalDocuments?: LegalDocumentCreateNestedManyWithoutUserInput
+    intelligenceDocuments?: IntelligenceDocumentCreateNestedManyWithoutUserInput
     projectInquiries?: ProjectInquiryCreateNestedManyWithoutUserInput
   }
 
@@ -13587,6 +15505,7 @@ export namespace Prisma {
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     legalDocuments?: LegalDocumentUncheckedCreateNestedManyWithoutUserInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedCreateNestedManyWithoutUserInput
     projectInquiries?: ProjectInquiryUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -13619,6 +15538,44 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type IntelligenceDocumentCreateWithoutConversationInput = {
+    id?: string
+    fileName: string
+    fileSize: number
+    mimeType: string
+    kind: string
+    extractedText: string
+    extractedCharCount: number
+    truncated?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutIntelligenceDocumentsInput
+  }
+
+  export type IntelligenceDocumentUncheckedCreateWithoutConversationInput = {
+    id?: string
+    userId: string
+    fileName: string
+    fileSize: number
+    mimeType: string
+    kind: string
+    extractedText: string
+    extractedCharCount: number
+    truncated?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type IntelligenceDocumentCreateOrConnectWithoutConversationInput = {
+    where: IntelligenceDocumentWhereUniqueInput
+    create: XOR<IntelligenceDocumentCreateWithoutConversationInput, IntelligenceDocumentUncheckedCreateWithoutConversationInput>
+  }
+
+  export type IntelligenceDocumentCreateManyConversationInputEnvelope = {
+    data: IntelligenceDocumentCreateManyConversationInput | IntelligenceDocumentCreateManyConversationInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutConversationsInput = {
     update: XOR<UserUpdateWithoutConversationsInput, UserUncheckedUpdateWithoutConversationsInput>
     create: XOR<UserCreateWithoutConversationsInput, UserUncheckedCreateWithoutConversationsInput>
@@ -13642,6 +15599,7 @@ export namespace Prisma {
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     legalDocuments?: LegalDocumentUpdateManyWithoutUserNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUpdateManyWithoutUserNestedInput
     projectInquiries?: ProjectInquiryUpdateManyWithoutUserNestedInput
   }
 
@@ -13657,6 +15615,7 @@ export namespace Prisma {
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     legalDocuments?: LegalDocumentUncheckedUpdateManyWithoutUserNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedUpdateManyWithoutUserNestedInput
     projectInquiries?: ProjectInquiryUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -13687,6 +15646,22 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Message"> | Date | string
   }
 
+  export type IntelligenceDocumentUpsertWithWhereUniqueWithoutConversationInput = {
+    where: IntelligenceDocumentWhereUniqueInput
+    update: XOR<IntelligenceDocumentUpdateWithoutConversationInput, IntelligenceDocumentUncheckedUpdateWithoutConversationInput>
+    create: XOR<IntelligenceDocumentCreateWithoutConversationInput, IntelligenceDocumentUncheckedCreateWithoutConversationInput>
+  }
+
+  export type IntelligenceDocumentUpdateWithWhereUniqueWithoutConversationInput = {
+    where: IntelligenceDocumentWhereUniqueInput
+    data: XOR<IntelligenceDocumentUpdateWithoutConversationInput, IntelligenceDocumentUncheckedUpdateWithoutConversationInput>
+  }
+
+  export type IntelligenceDocumentUpdateManyWithWhereWithoutConversationInput = {
+    where: IntelligenceDocumentScalarWhereInput
+    data: XOR<IntelligenceDocumentUpdateManyMutationInput, IntelligenceDocumentUncheckedUpdateManyWithoutConversationInput>
+  }
+
   export type ConversationCreateWithoutMessagesInput = {
     id?: string
     mode?: string
@@ -13694,6 +15669,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutConversationsInput
+    intelligenceDocuments?: IntelligenceDocumentCreateNestedManyWithoutConversationInput
   }
 
   export type ConversationUncheckedCreateWithoutMessagesInput = {
@@ -13703,6 +15679,7 @@ export namespace Prisma {
     title?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    intelligenceDocuments?: IntelligenceDocumentUncheckedCreateNestedManyWithoutConversationInput
   }
 
   export type ConversationCreateOrConnectWithoutMessagesInput = {
@@ -13728,6 +15705,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutConversationsNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUpdateManyWithoutConversationNestedInput
   }
 
   export type ConversationUncheckedUpdateWithoutMessagesInput = {
@@ -13737,6 +15715,7 @@ export namespace Prisma {
     title?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    intelligenceDocuments?: IntelligenceDocumentUncheckedUpdateManyWithoutConversationNestedInput
   }
 
   export type UserCreateWithoutLegalDocumentsInput = {
@@ -13751,6 +15730,7 @@ export namespace Prisma {
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     conversations?: ConversationCreateNestedManyWithoutUserInput
+    intelligenceDocuments?: IntelligenceDocumentCreateNestedManyWithoutUserInput
     projectInquiries?: ProjectInquiryCreateNestedManyWithoutUserInput
   }
 
@@ -13766,6 +15746,7 @@ export namespace Prisma {
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedCreateNestedManyWithoutUserInput
     projectInquiries?: ProjectInquiryUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -13797,6 +15778,7 @@ export namespace Prisma {
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     conversations?: ConversationUpdateManyWithoutUserNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUpdateManyWithoutUserNestedInput
     projectInquiries?: ProjectInquiryUpdateManyWithoutUserNestedInput
   }
 
@@ -13812,7 +15794,144 @@ export namespace Prisma {
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedUpdateManyWithoutUserNestedInput
     projectInquiries?: ProjectInquiryUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutIntelligenceDocumentsInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    password?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
+    legalDocuments?: LegalDocumentCreateNestedManyWithoutUserInput
+    projectInquiries?: ProjectInquiryCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutIntelligenceDocumentsInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    password?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    legalDocuments?: LegalDocumentUncheckedCreateNestedManyWithoutUserInput
+    projectInquiries?: ProjectInquiryUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutIntelligenceDocumentsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutIntelligenceDocumentsInput, UserUncheckedCreateWithoutIntelligenceDocumentsInput>
+  }
+
+  export type ConversationCreateWithoutIntelligenceDocumentsInput = {
+    id?: string
+    mode?: string
+    title?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutConversationsInput
+    messages?: MessageCreateNestedManyWithoutConversationInput
+  }
+
+  export type ConversationUncheckedCreateWithoutIntelligenceDocumentsInput = {
+    id?: string
+    userId: string
+    mode?: string
+    title?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    messages?: MessageUncheckedCreateNestedManyWithoutConversationInput
+  }
+
+  export type ConversationCreateOrConnectWithoutIntelligenceDocumentsInput = {
+    where: ConversationWhereUniqueInput
+    create: XOR<ConversationCreateWithoutIntelligenceDocumentsInput, ConversationUncheckedCreateWithoutIntelligenceDocumentsInput>
+  }
+
+  export type UserUpsertWithoutIntelligenceDocumentsInput = {
+    update: XOR<UserUpdateWithoutIntelligenceDocumentsInput, UserUncheckedUpdateWithoutIntelligenceDocumentsInput>
+    create: XOR<UserCreateWithoutIntelligenceDocumentsInput, UserUncheckedCreateWithoutIntelligenceDocumentsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutIntelligenceDocumentsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutIntelligenceDocumentsInput, UserUncheckedUpdateWithoutIntelligenceDocumentsInput>
+  }
+
+  export type UserUpdateWithoutIntelligenceDocumentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
+    legalDocuments?: LegalDocumentUpdateManyWithoutUserNestedInput
+    projectInquiries?: ProjectInquiryUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutIntelligenceDocumentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    legalDocuments?: LegalDocumentUncheckedUpdateManyWithoutUserNestedInput
+    projectInquiries?: ProjectInquiryUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type ConversationUpsertWithoutIntelligenceDocumentsInput = {
+    update: XOR<ConversationUpdateWithoutIntelligenceDocumentsInput, ConversationUncheckedUpdateWithoutIntelligenceDocumentsInput>
+    create: XOR<ConversationCreateWithoutIntelligenceDocumentsInput, ConversationUncheckedCreateWithoutIntelligenceDocumentsInput>
+    where?: ConversationWhereInput
+  }
+
+  export type ConversationUpdateToOneWithWhereWithoutIntelligenceDocumentsInput = {
+    where?: ConversationWhereInput
+    data: XOR<ConversationUpdateWithoutIntelligenceDocumentsInput, ConversationUncheckedUpdateWithoutIntelligenceDocumentsInput>
+  }
+
+  export type ConversationUpdateWithoutIntelligenceDocumentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    mode?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutConversationsNestedInput
+    messages?: MessageUpdateManyWithoutConversationNestedInput
+  }
+
+  export type ConversationUncheckedUpdateWithoutIntelligenceDocumentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    mode?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    messages?: MessageUncheckedUpdateManyWithoutConversationNestedInput
   }
 
   export type UserCreateWithoutProjectInquiriesInput = {
@@ -13828,6 +15947,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     conversations?: ConversationCreateNestedManyWithoutUserInput
     legalDocuments?: LegalDocumentCreateNestedManyWithoutUserInput
+    intelligenceDocuments?: IntelligenceDocumentCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProjectInquiriesInput = {
@@ -13843,6 +15963,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
     legalDocuments?: LegalDocumentUncheckedCreateNestedManyWithoutUserInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProjectInquiriesInput = {
@@ -13874,6 +15995,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     conversations?: ConversationUpdateManyWithoutUserNestedInput
     legalDocuments?: LegalDocumentUpdateManyWithoutUserNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProjectInquiriesInput = {
@@ -13889,6 +16011,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
     legalDocuments?: LegalDocumentUncheckedUpdateManyWithoutUserNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AccountCreateManyUserInput = {
@@ -13928,6 +16051,20 @@ export namespace Prisma {
     content: string
     summary?: string | null
     conversationId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type IntelligenceDocumentCreateManyUserInput = {
+    id?: string
+    conversationId?: string | null
+    fileName: string
+    fileSize: number
+    mimeType: string
+    kind: string
+    extractedText: string
+    extractedCharCount: number
+    truncated?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -14014,6 +16151,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     messages?: MessageUpdateManyWithoutConversationNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUpdateManyWithoutConversationNestedInput
   }
 
   export type ConversationUncheckedUpdateWithoutUserInput = {
@@ -14023,6 +16161,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     messages?: MessageUncheckedUpdateManyWithoutConversationNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedUpdateManyWithoutConversationNestedInput
   }
 
   export type ConversationUncheckedUpdateManyWithoutUserInput = {
@@ -14068,6 +16207,48 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     conversationId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IntelligenceDocumentUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    mimeType?: StringFieldUpdateOperationsInput | string
+    kind?: StringFieldUpdateOperationsInput | string
+    extractedText?: StringFieldUpdateOperationsInput | string
+    extractedCharCount?: IntFieldUpdateOperationsInput | number
+    truncated?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversation?: ConversationUpdateOneWithoutIntelligenceDocumentsNestedInput
+  }
+
+  export type IntelligenceDocumentUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    conversationId?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    mimeType?: StringFieldUpdateOperationsInput | string
+    kind?: StringFieldUpdateOperationsInput | string
+    extractedText?: StringFieldUpdateOperationsInput | string
+    extractedCharCount?: IntFieldUpdateOperationsInput | number
+    truncated?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IntelligenceDocumentUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    conversationId?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    mimeType?: StringFieldUpdateOperationsInput | string
+    kind?: StringFieldUpdateOperationsInput | string
+    extractedText?: StringFieldUpdateOperationsInput | string
+    extractedCharCount?: IntFieldUpdateOperationsInput | number
+    truncated?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -14124,6 +16305,20 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type IntelligenceDocumentCreateManyConversationInput = {
+    id?: string
+    userId: string
+    fileName: string
+    fileSize: number
+    mimeType: string
+    kind: string
+    extractedText: string
+    extractedCharCount: number
+    truncated?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type MessageUpdateWithoutConversationInput = {
     id?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
@@ -14143,6 +16338,48 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IntelligenceDocumentUpdateWithoutConversationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    mimeType?: StringFieldUpdateOperationsInput | string
+    kind?: StringFieldUpdateOperationsInput | string
+    extractedText?: StringFieldUpdateOperationsInput | string
+    extractedCharCount?: IntFieldUpdateOperationsInput | number
+    truncated?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutIntelligenceDocumentsNestedInput
+  }
+
+  export type IntelligenceDocumentUncheckedUpdateWithoutConversationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    mimeType?: StringFieldUpdateOperationsInput | string
+    kind?: StringFieldUpdateOperationsInput | string
+    extractedText?: StringFieldUpdateOperationsInput | string
+    extractedCharCount?: IntFieldUpdateOperationsInput | number
+    truncated?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IntelligenceDocumentUncheckedUpdateManyWithoutConversationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    mimeType?: StringFieldUpdateOperationsInput | string
+    kind?: StringFieldUpdateOperationsInput | string
+    extractedText?: StringFieldUpdateOperationsInput | string
+    extractedCharCount?: IntFieldUpdateOperationsInput | number
+    truncated?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 
