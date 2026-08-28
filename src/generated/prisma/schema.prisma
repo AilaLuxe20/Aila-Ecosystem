@@ -21,6 +21,7 @@ model User {
   legalDocuments        LegalDocument[]
   intelligenceDocuments IntelligenceDocument[]
   projectInquiries      ProjectInquiry[]
+  calendarEvents        CalendarEvent[]
   createdAt             DateTime               @default(now())
   updatedAt             DateTime               @updatedAt
 }
@@ -147,4 +148,25 @@ model ProjectInquiry {
   user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
 
   @@map("project_inquiries")
+}
+
+model CalendarEvent {
+  id          String    @id @default(cuid())
+  userId      String
+  title       String
+  description String?   @db.Text
+  location    String?
+  startsAt    DateTime
+  endsAt      DateTime
+  allDay      Boolean   @default(false)
+  timezone    String    @default("UTC")
+  archivedAt  DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, startsAt])
+  @@index([userId, archivedAt])
+  @@map("calendar_events")
 }

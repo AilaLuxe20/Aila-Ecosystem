@@ -221,6 +221,21 @@ exports.Prisma.ProjectInquiryScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.CalendarEventScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  title: 'title',
+  description: 'description',
+  location: 'location',
+  startsAt: 'startsAt',
+  endsAt: 'endsAt',
+  allDay: 'allDay',
+  timezone: 'timezone',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -246,7 +261,8 @@ exports.Prisma.ModelName = {
   Message: 'Message',
   LegalDocument: 'LegalDocument',
   IntelligenceDocument: 'IntelligenceDocument',
-  ProjectInquiry: 'ProjectInquiry'
+  ProjectInquiry: 'ProjectInquiry',
+  CalendarEvent: 'CalendarEvent'
 };
 
 /**
