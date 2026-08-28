@@ -9,7 +9,7 @@ import { workspaceFetch } from "@/components/workspace/api";
 import { WorkspaceShell } from "@/components/workspace/WorkspaceShell";
 import { ToastProvider } from "@/components/ui";
 
-const CARDS: Array<{ key: keyof DashboardSummary; label: string; href: string }> = [
+const CARDS: Array<{ key: keyof DashboardSummary | "billing"; label: string; href: string }> = [
   { key: "conversations", label: "Intelligence chats", href: "/products/intelligence" },
   { key: "legalConversations", label: "Legal chats", href: "/products/ailalegal" },
   { key: "contacts", label: "Business contacts", href: "/products/business" },
@@ -22,6 +22,7 @@ const CARDS: Array<{ key: keyof DashboardSummary; label: string; href: string }>
   { key: "apps", label: "Apps", href: "/products/apps" },
   { key: "sites", label: "Sites", href: "/products/sites" },
   { key: "flows", label: "Flows", href: "/products/flow" },
+  { key: "billing", label: "Billing", href: "/billing" },
 ];
 
 function DashboardWorkspaceInner(): React.JSX.Element {
@@ -76,7 +77,7 @@ function DashboardWorkspaceInner(): React.JSX.Element {
           >
             <p className="text-xs uppercase tracking-[0.18em] text-white/40">{card.label}</p>
             <p className="mt-3 text-3xl font-semibold tracking-tight">
-              {summary ? summary[card.key] : "—"}
+              {card.key === "billing" ? "Pro" : summary ? summary[card.key] : "—"}
             </p>
           </Link>
         ))}

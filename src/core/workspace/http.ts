@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 
 import { AilaAuthenticationError, requirePrismaUser } from "@/core/auth/clerk-user";
+import { assertProductEntitlement } from "@/lib/auth/require-product-access";
+import type { ProductKey } from "@/core/products/catalog";
 import { MemoryRateLimiter, rateLimitHeaders, type RateLimitResult } from "@/lib/api/rate-limit";
 import {
   AuthenticationError,
@@ -64,8 +66,12 @@ export async function readJsonBody(req: Request): Promise<unknown> {
   }
 }
 
-export async function requireWorkspaceUser() {
+export async function requireWorkspaceUser(product?: ProductKey) {
   try {
+    if (product) {
+      return await assertProductEntitlement(product);
+    }
+
     return await requirePrismaUser();
   } catch (error) {
     if (error instanceof AilaAuthenticationError) {

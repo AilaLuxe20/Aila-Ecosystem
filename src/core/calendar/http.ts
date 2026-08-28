@@ -1,9 +1,8 @@
 import { NextResponse } from "next/server";
 
-import { AilaAuthenticationError, requirePrismaUser } from "@/core/auth/clerk-user";
+import { assertProductEntitlement } from "@/lib/auth/require-product-access";
 import { MemoryRateLimiter, rateLimitHeaders, type RateLimitResult } from "@/lib/api/rate-limit";
 import {
-  AuthenticationError,
   RateLimitError,
   ValidationError,
   toAppError,
@@ -47,15 +46,7 @@ export function parseJsonBody<T>(value: unknown, schema: z.ZodType<T>): T {
 }
 
 export async function requireCalendarUser() {
-  try {
-    return await requirePrismaUser();
-  } catch (error) {
-    if (error instanceof AilaAuthenticationError) {
-      throw new AuthenticationError({ message: error.message });
-    }
-
-    throw error;
-  }
+  return assertProductEntitlement("calendar");
 }
 
 export async function enforceCalendarRateLimit(

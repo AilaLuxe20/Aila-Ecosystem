@@ -7,8 +7,9 @@ import {
   getUserConversation,
 } from "@/core/ai/conversation/service";
 import { AilaAuthenticationError, requirePrismaUser } from "@/core/auth/clerk-user";
+import { assertModeEntitlement } from "@/lib/auth/require-product-access";
 import type { AilaMode } from "@/core/types";
-import { ERROR_CODES } from "@/lib/errors/app-error";
+import { AuthorizationError, ERROR_CODES } from "@/lib/errors/app-error";
 
 const AILA_MODES = new Set<AilaMode>([
   "intelligence",
@@ -91,6 +92,8 @@ export async function GET(req: Request) {
       );
     }
 
+    await assertModeEntitlement(conversation.mode as AilaMode);
+
     return NextResponse.json({
       success: true,
       conversation,
@@ -98,6 +101,10 @@ export async function GET(req: Request) {
   } catch (error) {
     if (error instanceof AilaAuthenticationError) {
       return NextResponse.json({ error: error.message }, { status: 401 });
+    }
+
+    if (error instanceof AuthorizationError) {
+      return NextResponse.json({ error: error.message }, { status: 403 });
     }
 
     console.error("Aila Conversation API Error:", error);
@@ -113,6 +120,7 @@ export async function POST(req: Request) {
     const user = await requirePrismaUser();
     const body = await req.json().catch(() => ({}));
     const mode = resolveMode(body?.mode);
+    await assertModeEntitlement(mode);
 
     const conversation = await ensureUserConversation({
       userId: user.id,
@@ -143,6 +151,10 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: error.message }, { status: 401 });
     }
 
+    if (error instanceof AuthorizationError) {
+      return NextResponse.json({ error: error.message }, { status: 403 });
+    }
+
     console.error("Aila Conversation Create Error:", error);
     return NextResponse.json(
       { error: "Unable to create the conversation." },
@@ -167,6 +179,15 @@ export async function DELETE(req: Request) {
       );
     }
 
+    const conversation = await getUserConversation(user.id, conversationId);
+    if (!conversation) {
+      return NextResponse.json({
+        success: true,
+        deleted: false,
+      });
+    }
+
+    await assertModeEntitlement(resolveMode(conversation.mode));
     const deleted = await deleteUserConversation(user.id, conversationId);
 
     return NextResponse.json({
@@ -176,6 +197,10 @@ export async function DELETE(req: Request) {
   } catch (error) {
     if (error instanceof AilaAuthenticationError) {
       return NextResponse.json({ error: error.message }, { status: 401 });
+    }
+
+    if (error instanceof AuthorizationError) {
+      return NextResponse.json({ error: error.message }, { status: 403 });
     }
 
     console.error("Aila Conversation Delete Error:", error);

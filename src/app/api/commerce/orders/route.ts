@@ -15,7 +15,7 @@ const limits = createProductRateLimiters("commerce");
 
 export async function GET(req: Request) {
   try {
-    const user = await requireWorkspaceUser();
+    const user = await requireWorkspaceUser("commerce");
     const rateLimit = await limits.enforceRead(user.id);
     const query = parseJsonBody(
       searchParamsObject(new URL(req.url).searchParams),
@@ -30,7 +30,7 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
   try {
-    const user = await requireWorkspaceUser();
+    const user = await requireWorkspaceUser("commerce");
     const rateLimit = await limits.enforceWrite(user.id);
     const body = parseJsonBody(await readJsonBody(req), createCommerceOrderSchema);
     const order = await createUserCommerceOrder(user.id, body);

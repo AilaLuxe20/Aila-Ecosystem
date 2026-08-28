@@ -1,50 +1,19 @@
 import { UserRole } from "@/types/auth";
 
+import { PAID_PRODUCT_KEYS, PRODUCT_KEYS } from "@/core/products/catalog";
+
 export const permissions: Record<UserRole, readonly string[]> = {
   guest: [],
 
-  user: [
-    "intelligence",
-    "ailalegal",
-    "business",
-    "automation",
-    "commerce",
-    "ads",
-    "calendar",
-    "sites",
-    "apps",
-    "flow",
-  ],
+  user: ["intelligence"],
 
-  pro: [
-    "intelligence",
-    "commerce",
-    "sites",
-    "apps",
-    "flow",
-    "calendar",
-    "ads",
-    "automation",
-  ],
+  pro: [...PRODUCT_KEYS],
 
-  business: [
-    "intelligence",
-    "commerce",
-    "sites",
-    "apps",
-    "flow",
-    "calendar",
-    "ads",
-    "automation",
-    "business",
-    "ailalegal",
-  ],
+  business: [...PRODUCT_KEYS],
 
-  enterprise: [
-    "*",
-  ],
+  enterprise: ["*"],
 
-  admin: [
-    "*",
-  ],
+  admin: ["*"],
 };
+
+export const PAID_PRODUCTS = PAID_PRODUCT_KEYS;

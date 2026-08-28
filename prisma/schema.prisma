@@ -15,6 +15,7 @@ model User {
   emailVerified          DateTime?
   image                  String?
   password               String?
+  stripeCustomerId       String?                  @unique
   accounts               Account[]
   sessions               Session[]
   conversations          Conversation[]
@@ -32,6 +33,7 @@ model User {
   appListings            AppListing[]
   sites                  Site[]
   flows                  Flow[]
+  billingSubscriptions   BillingSubscription[]
   createdAt              DateTime                 @default(now())
   updatedAt              DateTime                 @updatedAt
 }
@@ -115,6 +117,7 @@ model LegalDocument {
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  @@index([userId])
   @@map("legal_documents")
 }
 
@@ -374,4 +377,23 @@ model Flow {
 
   @@index([userId, status])
   @@map("flows")
+}
+
+model BillingSubscription {
+  id                   String    @id @default(cuid())
+  userId               String
+  stripeSubscriptionId String    @unique
+  stripePriceId        String
+  stripeProductId      String?
+  plan                 String    @default("pro")
+  status               String
+  currentPeriodEnd     DateTime?
+  cancelAtPeriodEnd    Boolean   @default(false)
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, status])
+  @@map("billing_subscriptions")
 }

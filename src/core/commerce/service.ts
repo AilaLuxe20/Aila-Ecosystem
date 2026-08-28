@@ -1,6 +1,7 @@
 import Stripe from "stripe";
 
-import { getAppUrl, getStripeSecretKey } from "@/core/config";
+import { CHECKOUT_KIND_COMMERCE } from "@/core/billing/service";
+import { getAppUrl, getStripeSecretKey, getStripeWebhookSecret } from "@/core/config";
 import { prisma } from "@/core/database/prisma";
 import {
   ConfigurationError,
@@ -262,7 +263,11 @@ export async function createUserCommerceOrder(userId: string, body: CreateCommer
     ],
     success_url: `${getAppUrl()}/products/commerce?order=success&id=${order.id}`,
     cancel_url: `${getAppUrl()}/products/commerce?order=cancelled&id=${order.id}`,
-    metadata: { orderId: order.id, userId },
+    metadata: {
+      kind: CHECKOUT_KIND_COMMERCE,
+      orderId: order.id,
+      userId,
+    },
   });
 
   await prisma.commerceOrder.update({
@@ -341,7 +346,7 @@ export async function markCommerceOrderPaidFromStripe(sessionId: string) {
 }
 
 export function requireStripeWebhookSecret() {
-  const secret = process.env.STRIPE_WEBHOOK_SECRET;
+  const secret = getStripeWebhookSecret();
 
   if (!secret) {
     throw new ConfigurationError({

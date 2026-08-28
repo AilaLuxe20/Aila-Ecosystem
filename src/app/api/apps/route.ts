@@ -15,7 +15,7 @@ const limits = createProductRateLimiters("apps");
 
 export async function GET(req: Request) {
   try {
-    const user = await requireWorkspaceUser();
+    const user = await requireWorkspaceUser("apps");
     const rateLimit = await limits.enforceRead(user.id);
     const query = parseJsonBody(searchParamsObject(new URL(req.url).searchParams), listAppsQuerySchema);
     const apps = await listUserAppListings(user.id, query);
@@ -27,7 +27,7 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
   try {
-    const user = await requireWorkspaceUser();
+    const user = await requireWorkspaceUser("apps");
     const rateLimit = await limits.enforceWrite(user.id);
     const body = parseJsonBody(await readJsonBody(req), createAppListingSchema);
     const app = await createUserAppListing(user.id, body);

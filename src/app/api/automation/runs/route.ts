@@ -11,7 +11,7 @@ const limits = createProductRateLimiters("automation");
 
 export async function GET() {
   try {
-    const user = await requireWorkspaceUser();
+    const user = await requireWorkspaceUser("automation");
     const rateLimit = await limits.enforceRead(user.id);
     const runs = await listUserAutomationRuns(user.id);
     return withRateLimitHeaders(ok({ runs }), rateLimit);

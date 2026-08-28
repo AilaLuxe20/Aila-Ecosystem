@@ -15,7 +15,7 @@ type RouteContext = { params: Promise<{ id: string }> };
 
 export async function POST(_req: Request, context: RouteContext) {
   try {
-    const user = await requireWorkspaceUser();
+    const user = await requireWorkspaceUser("flow");
     const rateLimit = await limits.enforceWrite(user.id);
     const { id } = await context.params;
     const flow = await advanceUserFlow(user.id, parseJsonBody(id, flowIdSchema));

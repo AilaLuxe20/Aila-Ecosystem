@@ -139,6 +139,12 @@ export default function Navbar() {
                 >
                   Dashboard
                 </Link>
+                <Link
+                  href="/billing"
+                  className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-neutral-300 transition hover:bg-white/10"
+                >
+                  Billing
+                </Link>
                 <UserButton
                   appearance={{
                     elements: {
@@ -315,6 +321,13 @@ export default function Navbar() {
                     className="w-full rounded-full border border-white/10 bg-white/5 px-6 py-4 text-center text-sm font-semibold text-neutral-300"
                   >
                     Dashboard
+                  </Link>
+                  <Link
+                    href="/billing"
+                    onClick={() => setMenuOpen(false)}
+                    className="w-full rounded-full border border-white/10 bg-white/5 px-6 py-4 text-center text-sm font-semibold text-neutral-300"
+                  >
+                    Billing
                   </Link>
                   <UserButton
                     appearance={{

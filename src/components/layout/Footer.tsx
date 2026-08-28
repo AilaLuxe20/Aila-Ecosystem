@@ -21,6 +21,10 @@ const companyLinks = [
     href: "/dashboard",
   },
   {
+    label: "Billing",
+    href: "/billing",
+  },
+  {
     label: "Build With Aila",
     href: "/build-with-aila",
   },

@@ -1,20 +1,78 @@
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
-import { canAccess } from "@/lib/auth/can-access";
+
+import { resolveProductEntitlement } from "@/core/billing/entitlements";
+import { AilaAuthenticationError, requirePrismaUser } from "@/core/auth/clerk-user";
+import { productKeyFromMode, PRODUCTS, isProductKey, type ProductKey } from "@/core/products/catalog";
+import type { AilaMode } from "@/core/types";
+import { AuthenticationError, AuthorizationError } from "@/lib/errors/app-error";
 import type { UserRole } from "@/types/auth";
 
-export async function requireProductAccess(product: string) {
+function resolveRole(role: UserRole | undefined): UserRole {
+  return role && role !== "guest" ? role : "user";
+}
+
+export async function getActorRole(): Promise<UserRole | null> {
+  const { userId, sessionClaims } = await auth();
+  if (!userId) return null;
+  return resolveRole(sessionClaims?.metadata?.role);
+}
+
+export async function requireProductAccess(product: ProductKey) {
   const { userId, sessionClaims } = await auth();
 
   if (!userId) {
-    redirect("/sign-in");
+    redirect(`/sign-in?redirect_url=${encodeURIComponent(PRODUCTS[product].href)}`);
   }
 
-  const role = (sessionClaims?.metadata?.role as UserRole | undefined) ?? "user";
+  const role = resolveRole(sessionClaims?.metadata?.role);
+  const user = await requirePrismaUser();
+  const decision = await resolveProductEntitlement(user.id, role, product);
 
-  if (!canAccess(role, product)) {
-    redirect("/");
+  if (!decision.allowed) {
+    redirect(`/billing?product=${product}`);
   }
 
-  return { userId, role };
+  return { userId, role, user };
+}
+
+export async function assertProductEntitlement(product: ProductKey) {
+  const { userId, sessionClaims } = await auth();
+
+  if (!userId) {
+    throw new AuthenticationError();
+  }
+
+  const role = resolveRole(sessionClaims?.metadata?.role);
+  const user = await requirePrismaUser();
+  const decision = await resolveProductEntitlement(user.id, role, product);
+
+  if (!decision.allowed) {
+    throw new AuthorizationError({
+      message: "A Pro subscription is required to use this product.",
+      context: { product, reason: decision.reason },
+    });
+  }
+
+  return user;
+}
+
+export async function requireAuthenticatedPrismaUser() {
+  try {
+    return await requirePrismaUser();
+  } catch (error) {
+    if (error instanceof AilaAuthenticationError) {
+      throw new AuthenticationError({ message: error.message });
+    }
+    throw error;
+  }
+}
+
+export async function assertModeEntitlement(mode: AilaMode) {
+  return assertProductEntitlement(productKeyFromMode(mode));
+}
+
+export function parseProductQuery(value: string | null): ProductKey | null {
+  if (!value) return null;
+  return isProductKey(value) ? value : null;
 }

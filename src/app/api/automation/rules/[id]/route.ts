@@ -19,7 +19,7 @@ type RouteContext = { params: Promise<{ id: string }> };
 
 export async function PATCH(req: Request, context: RouteContext) {
   try {
-    const user = await requireWorkspaceUser();
+    const user = await requireWorkspaceUser("automation");
     const rateLimit = await limits.enforceWrite(user.id);
     const { id } = await context.params;
     const rule = await updateUserAutomationRule(
@@ -35,7 +35,7 @@ export async function PATCH(req: Request, context: RouteContext) {
 
 export async function DELETE(_req: Request, context: RouteContext) {
   try {
-    const user = await requireWorkspaceUser();
+    const user = await requireWorkspaceUser("automation");
     const rateLimit = await limits.enforceWrite(user.id);
     const { id } = await context.params;
     await deleteUserAutomationRule(user.id, parseJsonBody(id, automationIdSchema));

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
 import { getPrismaUserOrNull } from "@/core/auth/clerk-user";
-import { getResendFromEmail } from "@/core/config";
+import { getProjectInquiryEmail, getResendApiKey, getResendFromEmail } from "@/core/config";
 import { prisma } from "@/core/database/prisma";
 
 const allowedProjectTypes = [
@@ -141,9 +141,12 @@ export async function POST(req: Request) {
 
     const inquiryId = inquiry.id;
 
-    if (process.env.RESEND_API_KEY && process.env.PROJECT_INQUIRY_EMAIL) {
+    const resendApiKey = getResendApiKey();
+    const inquiryEmail = getProjectInquiryEmail();
+
+    if (resendApiKey && inquiryEmail) {
     const resend = new Resend(
-      process.env.RESEND_API_KEY
+      resendApiKey
     );
 
 
@@ -152,7 +155,7 @@ export async function POST(req: Request) {
         from: getResendFromEmail(),
 
         to: [
-          process.env.PROJECT_INQUIRY_EMAIL,
+          inquiryEmail,
         ],
 
         replyTo: email,

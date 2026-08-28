@@ -4,6 +4,7 @@
 
 import { AI_MODEL, MODE_CONFIG } from "@/core/constants";
 import type { AIModelConfig, AilaMode } from "@/core/types";
+import { getOptionalSecret, publicEnv } from "@/lib/config/env";
 
 export const config = {
   siteUrl: "https://ailaluxe.com",
@@ -28,33 +29,41 @@ export const config = {
 } as const;
 
 export function getOpenRouterApiKey(): string | undefined {
-  return process.env.OPENROUTER_API_KEY;
+  return getOptionalSecret("OPENROUTER_API_KEY");
 }
 
 export function getResendApiKey(): string | undefined {
-  return process.env.RESEND_API_KEY;
+  return getOptionalSecret("RESEND_API_KEY");
 }
 
 export function getProjectInquiryEmail(): string | undefined {
-  return process.env.PROJECT_INQUIRY_EMAIL;
+  return getOptionalSecret("PROJECT_INQUIRY_EMAIL");
 }
 
 export function getResendFromEmail(): string {
-  return process.env.RESEND_FROM_EMAIL ?? "Aila Ecosystem <onboarding@resend.dev>";
+  return getOptionalSecret("RESEND_FROM_EMAIL") ?? "Aila Ecosystem <onboarding@resend.dev>";
 }
 
 export function getStripeSecretKey(): string | undefined {
-  return process.env.STRIPE_SECRET_KEY;
+  return getOptionalSecret("STRIPE_SECRET_KEY");
 }
 
 export function getStripeWebhookSecret(): string | undefined {
-  return process.env.STRIPE_WEBHOOK_SECRET;
+  return getOptionalSecret("STRIPE_WEBHOOK_SECRET");
+}
+
+export function getStripeProPriceId(): string | undefined {
+  return getOptionalSecret("STRIPE_PRICE_PRO");
 }
 
 export function getCronSecret(): string | undefined {
-  return process.env.CRON_SECRET;
+  return getOptionalSecret("CRON_SECRET");
+}
+
+export function getClerkWebhookSecret(): string | undefined {
+  return getOptionalSecret("CLERK_WEBHOOK_SIGNING_SECRET");
 }
 
 export function getAppUrl(): string {
-  return process.env.NEXT_PUBLIC_APP_URL ?? "https://ailaluxe.com";
+  return publicEnv.NEXT_PUBLIC_APP_URL;
 }

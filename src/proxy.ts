@@ -1,8 +1,37 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-const isProtectedPage = createRouteMatcher(["/dashboard(.*)"]);
+const isPublicRoute = createRouteMatcher([
+  "/",
+  "/sign-in(.*)",
+  "/sign-up(.*)",
+  "/login(.*)",
+  "/signup(.*)",
+  "/guest(.*)",
+  "/privacy(.*)",
+  "/terms(.*)",
+  "/s(.*)",
+  "/build-with-aila(.*)",
+  "/project-discovery(.*)",
+  "/products/intelligence(.*)",
+  "/api/project-inquiry(.*)",
+  "/api/stripe/webhook(.*)",
+  "/api/webhooks/clerk(.*)",
+  "/api/cron(.*)",
+]);
 
-const isProtectedApi = createRouteMatcher([
+const isProtectedRoute = createRouteMatcher([
+  "/dashboard(.*)",
+  "/billing(.*)",
+  "/products/ailalegal(.*)",
+  "/products/business(.*)",
+  "/products/automation(.*)",
+  "/products/commerce(.*)",
+  "/products/ads(.*)",
+  "/products/calendar(.*)",
+  "/products/sites(.*)",
+  "/products/apps(.*)",
+  "/products/flow(.*)",
+  "/api/ai(.*)",
   "/api/calendar(.*)",
   "/api/business(.*)",
   "/api/automation(.*)",
@@ -12,10 +41,15 @@ const isProtectedApi = createRouteMatcher([
   "/api/sites(.*)",
   "/api/flow(.*)",
   "/api/dashboard(.*)",
+  "/api/billing(.*)",
 ]);
 
 export default clerkMiddleware(async (auth, req) => {
-  if (isProtectedPage(req) || isProtectedApi(req)) {
+  if (isPublicRoute(req)) {
+    return;
+  }
+
+  if (isProtectedRoute(req)) {
     await auth.protect();
   }
 });

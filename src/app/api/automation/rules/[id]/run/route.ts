@@ -15,7 +15,7 @@ type RouteContext = { params: Promise<{ id: string }> };
 
 export async function POST(_req: Request, context: RouteContext) {
   try {
-    const user = await requireWorkspaceUser();
+    const user = await requireWorkspaceUser("automation");
     const rateLimit = await limits.enforceWrite(user.id);
     const { id } = await context.params;
     const run = await runUserAutomationRule(user.id, parseJsonBody(id, automationIdSchema));

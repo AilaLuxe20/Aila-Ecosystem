@@ -16,7 +16,7 @@ type RouteContext = { params: Promise<{ id: string }> };
 
 export async function PATCH(req: Request, context: RouteContext) {
   try {
-    const user = await requireWorkspaceUser();
+    const user = await requireWorkspaceUser("flow");
     const rateLimit = await limits.enforceWrite(user.id);
     const { id } = await context.params;
     const flow = await updateUserFlow(
@@ -32,7 +32,7 @@ export async function PATCH(req: Request, context: RouteContext) {
 
 export async function DELETE(_req: Request, context: RouteContext) {
   try {
-    const user = await requireWorkspaceUser();
+    const user = await requireWorkspaceUser("flow");
     const rateLimit = await limits.enforceWrite(user.id);
     const { id } = await context.params;
     await deleteUserFlow(user.id, parseJsonBody(id, flowIdSchema));

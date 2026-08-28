@@ -84,6 +84,54 @@ const platforms = [
     external: false,
     accent: "from-neutral-300/20 via-neutral-500/5 to-transparent",
   },
+  {
+    title: "Aila Intelligence",
+    description:
+      "Chat, attach files, and persist conversations on your account.",
+    status: "Live Platform",
+    type: "Intelligence",
+    href: "/products/intelligence",
+    external: false,
+    accent: "from-cyan-400/20 via-blue-500/5 to-transparent",
+  },
+  {
+    title: "Aila Legal",
+    description:
+      "Upload contracts and get AI-powered analysis stored on your account.",
+    status: "Live Platform",
+    type: "Legal",
+    href: "/products/ailalegal",
+    external: false,
+    accent: "from-blue-400/20 via-indigo-500/5 to-transparent",
+  },
+  {
+    title: "Aila Automation",
+    description:
+      "Rules that send email, create calendar events, or create tasks.",
+    status: "Live Platform",
+    type: "Automation",
+    href: "/products/automation",
+    external: false,
+    accent: "from-violet-400/20 via-purple-500/5 to-transparent",
+  },
+  {
+    title: "Aila Ads",
+    description: "Plan, launch, pause, and end advertising campaigns.",
+    status: "Live Platform",
+    type: "Ads",
+    href: "/products/ads",
+    external: false,
+    accent: "from-amber-400/20 via-orange-500/5 to-transparent",
+  },
+  {
+    title: "Aila Apps",
+    description: "Describe, draft, and publish app listings on your account.",
+    status: "Live Platform",
+    type: "Apps",
+    href: "/products/apps",
+    external: false,
+    accent: "from-indigo-400/20 via-blue-500/5 to-transparent",
+  },
 ];
 
 export default function Home() {

@@ -113,6 +113,11 @@ export type Site = $Result.DefaultSelection<Prisma.$SitePayload>
  * 
  */
 export type Flow = $Result.DefaultSelection<Prisma.$FlowPayload>
+/**
+ * Model BillingSubscription
+ * 
+ */
+export type BillingSubscription = $Result.DefaultSelection<Prisma.$BillingSubscriptionPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -434,6 +439,16 @@ export class PrismaClient<
     * ```
     */
   get flow(): Prisma.FlowDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.billingSubscription`: Exposes CRUD operations for the **BillingSubscription** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BillingSubscriptions
+    * const billingSubscriptions = await prisma.billingSubscription.findMany()
+    * ```
+    */
+  get billingSubscription(): Prisma.BillingSubscriptionDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -900,7 +915,8 @@ export namespace Prisma {
     AdsCampaign: 'AdsCampaign',
     AppListing: 'AppListing',
     Site: 'Site',
-    Flow: 'Flow'
+    Flow: 'Flow',
+    BillingSubscription: 'BillingSubscription'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -916,7 +932,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "account" | "session" | "verificationToken" | "conversation" | "message" | "legalDocument" | "intelligenceDocument" | "projectInquiry" | "calendarEvent" | "businessContact" | "businessTask" | "automationRule" | "automationRun" | "commerceProduct" | "commerceOrder" | "adsCampaign" | "appListing" | "site" | "flow"
+      modelProps: "user" | "account" | "session" | "verificationToken" | "conversation" | "message" | "legalDocument" | "intelligenceDocument" | "projectInquiry" | "calendarEvent" | "businessContact" | "businessTask" | "automationRule" | "automationRun" | "commerceProduct" | "commerceOrder" | "adsCampaign" | "appListing" | "site" | "flow" | "billingSubscription"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2400,6 +2416,80 @@ export namespace Prisma {
           }
         }
       }
+      BillingSubscription: {
+        payload: Prisma.$BillingSubscriptionPayload<ExtArgs>
+        fields: Prisma.BillingSubscriptionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BillingSubscriptionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingSubscriptionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BillingSubscriptionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingSubscriptionPayload>
+          }
+          findFirst: {
+            args: Prisma.BillingSubscriptionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingSubscriptionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BillingSubscriptionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingSubscriptionPayload>
+          }
+          findMany: {
+            args: Prisma.BillingSubscriptionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingSubscriptionPayload>[]
+          }
+          create: {
+            args: Prisma.BillingSubscriptionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingSubscriptionPayload>
+          }
+          createMany: {
+            args: Prisma.BillingSubscriptionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BillingSubscriptionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingSubscriptionPayload>[]
+          }
+          delete: {
+            args: Prisma.BillingSubscriptionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingSubscriptionPayload>
+          }
+          update: {
+            args: Prisma.BillingSubscriptionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingSubscriptionPayload>
+          }
+          deleteMany: {
+            args: Prisma.BillingSubscriptionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BillingSubscriptionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BillingSubscriptionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingSubscriptionPayload>[]
+          }
+          upsert: {
+            args: Prisma.BillingSubscriptionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BillingSubscriptionPayload>
+          }
+          aggregate: {
+            args: Prisma.BillingSubscriptionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBillingSubscription>
+          }
+          groupBy: {
+            args: Prisma.BillingSubscriptionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BillingSubscriptionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BillingSubscriptionCountArgs<ExtArgs>
+            result: $Utils.Optional<BillingSubscriptionCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2543,6 +2633,7 @@ export namespace Prisma {
     appListing?: AppListingOmit
     site?: SiteOmit
     flow?: FlowOmit
+    billingSubscription?: BillingSubscriptionOmit
   }
 
   /* Types for Logging */
@@ -2640,6 +2731,7 @@ export namespace Prisma {
     appListings: number
     sites: number
     flows: number
+    billingSubscriptions: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2660,6 +2752,7 @@ export namespace Prisma {
     appListings?: boolean | UserCountOutputTypeCountAppListingsArgs
     sites?: boolean | UserCountOutputTypeCountSitesArgs
     flows?: boolean | UserCountOutputTypeCountFlowsArgs
+    billingSubscriptions?: boolean | UserCountOutputTypeCountBillingSubscriptionsArgs
   }
 
   // Custom InputTypes
@@ -2790,6 +2883,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountFlowsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: FlowWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountBillingSubscriptionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BillingSubscriptionWhereInput
   }
 
 
@@ -2947,6 +3047,7 @@ export namespace Prisma {
     emailVerified: Date | null
     image: string | null
     password: string | null
+    stripeCustomerId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -2958,6 +3059,7 @@ export namespace Prisma {
     emailVerified: Date | null
     image: string | null
     password: string | null
+    stripeCustomerId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -2969,6 +3071,7 @@ export namespace Prisma {
     emailVerified: number
     image: number
     password: number
+    stripeCustomerId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -2982,6 +3085,7 @@ export namespace Prisma {
     emailVerified?: true
     image?: true
     password?: true
+    stripeCustomerId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -2993,6 +3097,7 @@ export namespace Prisma {
     emailVerified?: true
     image?: true
     password?: true
+    stripeCustomerId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -3004,6 +3109,7 @@ export namespace Prisma {
     emailVerified?: true
     image?: true
     password?: true
+    stripeCustomerId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -3088,6 +3194,7 @@ export namespace Prisma {
     emailVerified: Date | null
     image: string | null
     password: string | null
+    stripeCustomerId: string | null
     createdAt: Date
     updatedAt: Date
     _count: UserCountAggregateOutputType | null
@@ -3116,6 +3223,7 @@ export namespace Prisma {
     emailVerified?: boolean
     image?: boolean
     password?: boolean
+    stripeCustomerId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     accounts?: boolean | User$accountsArgs<ExtArgs>
@@ -3135,6 +3243,7 @@ export namespace Prisma {
     appListings?: boolean | User$appListingsArgs<ExtArgs>
     sites?: boolean | User$sitesArgs<ExtArgs>
     flows?: boolean | User$flowsArgs<ExtArgs>
+    billingSubscriptions?: boolean | User$billingSubscriptionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3145,6 +3254,7 @@ export namespace Prisma {
     emailVerified?: boolean
     image?: boolean
     password?: boolean
+    stripeCustomerId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -3156,6 +3266,7 @@ export namespace Prisma {
     emailVerified?: boolean
     image?: boolean
     password?: boolean
+    stripeCustomerId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -3167,11 +3278,12 @@ export namespace Prisma {
     emailVerified?: boolean
     image?: boolean
     password?: boolean
+    stripeCustomerId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "password" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "password" | "stripeCustomerId" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
@@ -3190,6 +3302,7 @@ export namespace Prisma {
     appListings?: boolean | User$appListingsArgs<ExtArgs>
     sites?: boolean | User$sitesArgs<ExtArgs>
     flows?: boolean | User$flowsArgs<ExtArgs>
+    billingSubscriptions?: boolean | User$billingSubscriptionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3215,6 +3328,7 @@ export namespace Prisma {
       appListings: Prisma.$AppListingPayload<ExtArgs>[]
       sites: Prisma.$SitePayload<ExtArgs>[]
       flows: Prisma.$FlowPayload<ExtArgs>[]
+      billingSubscriptions: Prisma.$BillingSubscriptionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3223,6 +3337,7 @@ export namespace Prisma {
       emailVerified: Date | null
       image: string | null
       password: string | null
+      stripeCustomerId: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["user"]>
@@ -3636,6 +3751,7 @@ export namespace Prisma {
     appListings<T extends User$appListingsArgs<ExtArgs> = {}>(args?: Subset<T, User$appListingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AppListingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sites<T extends User$sitesArgs<ExtArgs> = {}>(args?: Subset<T, User$sitesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SitePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     flows<T extends User$flowsArgs<ExtArgs> = {}>(args?: Subset<T, User$flowsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlowPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    billingSubscriptions<T extends User$billingSubscriptionsArgs<ExtArgs> = {}>(args?: Subset<T, User$billingSubscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BillingSubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3671,6 +3787,7 @@ export namespace Prisma {
     readonly emailVerified: FieldRef<"User", 'DateTime'>
     readonly image: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
+    readonly stripeCustomerId: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
@@ -4471,6 +4588,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: FlowScalarFieldEnum | FlowScalarFieldEnum[]
+  }
+
+  /**
+   * User.billingSubscriptions
+   */
+  export type User$billingSubscriptionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingSubscription
+     */
+    select?: BillingSubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingSubscription
+     */
+    omit?: BillingSubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingSubscriptionInclude<ExtArgs> | null
+    where?: BillingSubscriptionWhereInput
+    orderBy?: BillingSubscriptionOrderByWithRelationInput | BillingSubscriptionOrderByWithRelationInput[]
+    cursor?: BillingSubscriptionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BillingSubscriptionScalarFieldEnum | BillingSubscriptionScalarFieldEnum[]
   }
 
   /**
@@ -26233,6 +26374,1147 @@ export namespace Prisma {
 
 
   /**
+   * Model BillingSubscription
+   */
+
+  export type AggregateBillingSubscription = {
+    _count: BillingSubscriptionCountAggregateOutputType | null
+    _min: BillingSubscriptionMinAggregateOutputType | null
+    _max: BillingSubscriptionMaxAggregateOutputType | null
+  }
+
+  export type BillingSubscriptionMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    stripeSubscriptionId: string | null
+    stripePriceId: string | null
+    stripeProductId: string | null
+    plan: string | null
+    status: string | null
+    currentPeriodEnd: Date | null
+    cancelAtPeriodEnd: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BillingSubscriptionMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    stripeSubscriptionId: string | null
+    stripePriceId: string | null
+    stripeProductId: string | null
+    plan: string | null
+    status: string | null
+    currentPeriodEnd: Date | null
+    cancelAtPeriodEnd: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BillingSubscriptionCountAggregateOutputType = {
+    id: number
+    userId: number
+    stripeSubscriptionId: number
+    stripePriceId: number
+    stripeProductId: number
+    plan: number
+    status: number
+    currentPeriodEnd: number
+    cancelAtPeriodEnd: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type BillingSubscriptionMinAggregateInputType = {
+    id?: true
+    userId?: true
+    stripeSubscriptionId?: true
+    stripePriceId?: true
+    stripeProductId?: true
+    plan?: true
+    status?: true
+    currentPeriodEnd?: true
+    cancelAtPeriodEnd?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BillingSubscriptionMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    stripeSubscriptionId?: true
+    stripePriceId?: true
+    stripeProductId?: true
+    plan?: true
+    status?: true
+    currentPeriodEnd?: true
+    cancelAtPeriodEnd?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BillingSubscriptionCountAggregateInputType = {
+    id?: true
+    userId?: true
+    stripeSubscriptionId?: true
+    stripePriceId?: true
+    stripeProductId?: true
+    plan?: true
+    status?: true
+    currentPeriodEnd?: true
+    cancelAtPeriodEnd?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type BillingSubscriptionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BillingSubscription to aggregate.
+     */
+    where?: BillingSubscriptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BillingSubscriptions to fetch.
+     */
+    orderBy?: BillingSubscriptionOrderByWithRelationInput | BillingSubscriptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BillingSubscriptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BillingSubscriptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BillingSubscriptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BillingSubscriptions
+    **/
+    _count?: true | BillingSubscriptionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BillingSubscriptionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BillingSubscriptionMaxAggregateInputType
+  }
+
+  export type GetBillingSubscriptionAggregateType<T extends BillingSubscriptionAggregateArgs> = {
+        [P in keyof T & keyof AggregateBillingSubscription]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBillingSubscription[P]>
+      : GetScalarType<T[P], AggregateBillingSubscription[P]>
+  }
+
+
+
+
+  export type BillingSubscriptionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BillingSubscriptionWhereInput
+    orderBy?: BillingSubscriptionOrderByWithAggregationInput | BillingSubscriptionOrderByWithAggregationInput[]
+    by: BillingSubscriptionScalarFieldEnum[] | BillingSubscriptionScalarFieldEnum
+    having?: BillingSubscriptionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BillingSubscriptionCountAggregateInputType | true
+    _min?: BillingSubscriptionMinAggregateInputType
+    _max?: BillingSubscriptionMaxAggregateInputType
+  }
+
+  export type BillingSubscriptionGroupByOutputType = {
+    id: string
+    userId: string
+    stripeSubscriptionId: string
+    stripePriceId: string
+    stripeProductId: string | null
+    plan: string
+    status: string
+    currentPeriodEnd: Date | null
+    cancelAtPeriodEnd: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: BillingSubscriptionCountAggregateOutputType | null
+    _min: BillingSubscriptionMinAggregateOutputType | null
+    _max: BillingSubscriptionMaxAggregateOutputType | null
+  }
+
+  type GetBillingSubscriptionGroupByPayload<T extends BillingSubscriptionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BillingSubscriptionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BillingSubscriptionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BillingSubscriptionGroupByOutputType[P]>
+            : GetScalarType<T[P], BillingSubscriptionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BillingSubscriptionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    stripeSubscriptionId?: boolean
+    stripePriceId?: boolean
+    stripeProductId?: boolean
+    plan?: boolean
+    status?: boolean
+    currentPeriodEnd?: boolean
+    cancelAtPeriodEnd?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["billingSubscription"]>
+
+  export type BillingSubscriptionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    stripeSubscriptionId?: boolean
+    stripePriceId?: boolean
+    stripeProductId?: boolean
+    plan?: boolean
+    status?: boolean
+    currentPeriodEnd?: boolean
+    cancelAtPeriodEnd?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["billingSubscription"]>
+
+  export type BillingSubscriptionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    stripeSubscriptionId?: boolean
+    stripePriceId?: boolean
+    stripeProductId?: boolean
+    plan?: boolean
+    status?: boolean
+    currentPeriodEnd?: boolean
+    cancelAtPeriodEnd?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["billingSubscription"]>
+
+  export type BillingSubscriptionSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    stripeSubscriptionId?: boolean
+    stripePriceId?: boolean
+    stripeProductId?: boolean
+    plan?: boolean
+    status?: boolean
+    currentPeriodEnd?: boolean
+    cancelAtPeriodEnd?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type BillingSubscriptionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "stripeSubscriptionId" | "stripePriceId" | "stripeProductId" | "plan" | "status" | "currentPeriodEnd" | "cancelAtPeriodEnd" | "createdAt" | "updatedAt", ExtArgs["result"]["billingSubscription"]>
+  export type BillingSubscriptionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type BillingSubscriptionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type BillingSubscriptionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $BillingSubscriptionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BillingSubscription"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      stripeSubscriptionId: string
+      stripePriceId: string
+      stripeProductId: string | null
+      plan: string
+      status: string
+      currentPeriodEnd: Date | null
+      cancelAtPeriodEnd: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["billingSubscription"]>
+    composites: {}
+  }
+
+  type BillingSubscriptionGetPayload<S extends boolean | null | undefined | BillingSubscriptionDefaultArgs> = $Result.GetResult<Prisma.$BillingSubscriptionPayload, S>
+
+  type BillingSubscriptionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BillingSubscriptionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BillingSubscriptionCountAggregateInputType | true
+    }
+
+  export interface BillingSubscriptionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BillingSubscription'], meta: { name: 'BillingSubscription' } }
+    /**
+     * Find zero or one BillingSubscription that matches the filter.
+     * @param {BillingSubscriptionFindUniqueArgs} args - Arguments to find a BillingSubscription
+     * @example
+     * // Get one BillingSubscription
+     * const billingSubscription = await prisma.billingSubscription.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BillingSubscriptionFindUniqueArgs>(args: SelectSubset<T, BillingSubscriptionFindUniqueArgs<ExtArgs>>): Prisma__BillingSubscriptionClient<$Result.GetResult<Prisma.$BillingSubscriptionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one BillingSubscription that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BillingSubscriptionFindUniqueOrThrowArgs} args - Arguments to find a BillingSubscription
+     * @example
+     * // Get one BillingSubscription
+     * const billingSubscription = await prisma.billingSubscription.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BillingSubscriptionFindUniqueOrThrowArgs>(args: SelectSubset<T, BillingSubscriptionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BillingSubscriptionClient<$Result.GetResult<Prisma.$BillingSubscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BillingSubscription that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BillingSubscriptionFindFirstArgs} args - Arguments to find a BillingSubscription
+     * @example
+     * // Get one BillingSubscription
+     * const billingSubscription = await prisma.billingSubscription.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BillingSubscriptionFindFirstArgs>(args?: SelectSubset<T, BillingSubscriptionFindFirstArgs<ExtArgs>>): Prisma__BillingSubscriptionClient<$Result.GetResult<Prisma.$BillingSubscriptionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BillingSubscription that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BillingSubscriptionFindFirstOrThrowArgs} args - Arguments to find a BillingSubscription
+     * @example
+     * // Get one BillingSubscription
+     * const billingSubscription = await prisma.billingSubscription.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BillingSubscriptionFindFirstOrThrowArgs>(args?: SelectSubset<T, BillingSubscriptionFindFirstOrThrowArgs<ExtArgs>>): Prisma__BillingSubscriptionClient<$Result.GetResult<Prisma.$BillingSubscriptionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more BillingSubscriptions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BillingSubscriptionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BillingSubscriptions
+     * const billingSubscriptions = await prisma.billingSubscription.findMany()
+     * 
+     * // Get first 10 BillingSubscriptions
+     * const billingSubscriptions = await prisma.billingSubscription.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const billingSubscriptionWithIdOnly = await prisma.billingSubscription.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BillingSubscriptionFindManyArgs>(args?: SelectSubset<T, BillingSubscriptionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BillingSubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a BillingSubscription.
+     * @param {BillingSubscriptionCreateArgs} args - Arguments to create a BillingSubscription.
+     * @example
+     * // Create one BillingSubscription
+     * const BillingSubscription = await prisma.billingSubscription.create({
+     *   data: {
+     *     // ... data to create a BillingSubscription
+     *   }
+     * })
+     * 
+     */
+    create<T extends BillingSubscriptionCreateArgs>(args: SelectSubset<T, BillingSubscriptionCreateArgs<ExtArgs>>): Prisma__BillingSubscriptionClient<$Result.GetResult<Prisma.$BillingSubscriptionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many BillingSubscriptions.
+     * @param {BillingSubscriptionCreateManyArgs} args - Arguments to create many BillingSubscriptions.
+     * @example
+     * // Create many BillingSubscriptions
+     * const billingSubscription = await prisma.billingSubscription.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BillingSubscriptionCreateManyArgs>(args?: SelectSubset<T, BillingSubscriptionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many BillingSubscriptions and returns the data saved in the database.
+     * @param {BillingSubscriptionCreateManyAndReturnArgs} args - Arguments to create many BillingSubscriptions.
+     * @example
+     * // Create many BillingSubscriptions
+     * const billingSubscription = await prisma.billingSubscription.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many BillingSubscriptions and only return the `id`
+     * const billingSubscriptionWithIdOnly = await prisma.billingSubscription.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BillingSubscriptionCreateManyAndReturnArgs>(args?: SelectSubset<T, BillingSubscriptionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BillingSubscriptionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a BillingSubscription.
+     * @param {BillingSubscriptionDeleteArgs} args - Arguments to delete one BillingSubscription.
+     * @example
+     * // Delete one BillingSubscription
+     * const BillingSubscription = await prisma.billingSubscription.delete({
+     *   where: {
+     *     // ... filter to delete one BillingSubscription
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BillingSubscriptionDeleteArgs>(args: SelectSubset<T, BillingSubscriptionDeleteArgs<ExtArgs>>): Prisma__BillingSubscriptionClient<$Result.GetResult<Prisma.$BillingSubscriptionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one BillingSubscription.
+     * @param {BillingSubscriptionUpdateArgs} args - Arguments to update one BillingSubscription.
+     * @example
+     * // Update one BillingSubscription
+     * const billingSubscription = await prisma.billingSubscription.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BillingSubscriptionUpdateArgs>(args: SelectSubset<T, BillingSubscriptionUpdateArgs<ExtArgs>>): Prisma__BillingSubscriptionClient<$Result.GetResult<Prisma.$BillingSubscriptionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more BillingSubscriptions.
+     * @param {BillingSubscriptionDeleteManyArgs} args - Arguments to filter BillingSubscriptions to delete.
+     * @example
+     * // Delete a few BillingSubscriptions
+     * const { count } = await prisma.billingSubscription.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BillingSubscriptionDeleteManyArgs>(args?: SelectSubset<T, BillingSubscriptionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BillingSubscriptions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BillingSubscriptionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BillingSubscriptions
+     * const billingSubscription = await prisma.billingSubscription.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BillingSubscriptionUpdateManyArgs>(args: SelectSubset<T, BillingSubscriptionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BillingSubscriptions and returns the data updated in the database.
+     * @param {BillingSubscriptionUpdateManyAndReturnArgs} args - Arguments to update many BillingSubscriptions.
+     * @example
+     * // Update many BillingSubscriptions
+     * const billingSubscription = await prisma.billingSubscription.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more BillingSubscriptions and only return the `id`
+     * const billingSubscriptionWithIdOnly = await prisma.billingSubscription.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BillingSubscriptionUpdateManyAndReturnArgs>(args: SelectSubset<T, BillingSubscriptionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BillingSubscriptionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one BillingSubscription.
+     * @param {BillingSubscriptionUpsertArgs} args - Arguments to update or create a BillingSubscription.
+     * @example
+     * // Update or create a BillingSubscription
+     * const billingSubscription = await prisma.billingSubscription.upsert({
+     *   create: {
+     *     // ... data to create a BillingSubscription
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BillingSubscription we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BillingSubscriptionUpsertArgs>(args: SelectSubset<T, BillingSubscriptionUpsertArgs<ExtArgs>>): Prisma__BillingSubscriptionClient<$Result.GetResult<Prisma.$BillingSubscriptionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of BillingSubscriptions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BillingSubscriptionCountArgs} args - Arguments to filter BillingSubscriptions to count.
+     * @example
+     * // Count the number of BillingSubscriptions
+     * const count = await prisma.billingSubscription.count({
+     *   where: {
+     *     // ... the filter for the BillingSubscriptions we want to count
+     *   }
+     * })
+    **/
+    count<T extends BillingSubscriptionCountArgs>(
+      args?: Subset<T, BillingSubscriptionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BillingSubscriptionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BillingSubscription.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BillingSubscriptionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BillingSubscriptionAggregateArgs>(args: Subset<T, BillingSubscriptionAggregateArgs>): Prisma.PrismaPromise<GetBillingSubscriptionAggregateType<T>>
+
+    /**
+     * Group by BillingSubscription.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BillingSubscriptionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BillingSubscriptionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BillingSubscriptionGroupByArgs['orderBy'] }
+        : { orderBy?: BillingSubscriptionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BillingSubscriptionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBillingSubscriptionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BillingSubscription model
+   */
+  readonly fields: BillingSubscriptionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BillingSubscription.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BillingSubscriptionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BillingSubscription model
+   */
+  interface BillingSubscriptionFieldRefs {
+    readonly id: FieldRef<"BillingSubscription", 'String'>
+    readonly userId: FieldRef<"BillingSubscription", 'String'>
+    readonly stripeSubscriptionId: FieldRef<"BillingSubscription", 'String'>
+    readonly stripePriceId: FieldRef<"BillingSubscription", 'String'>
+    readonly stripeProductId: FieldRef<"BillingSubscription", 'String'>
+    readonly plan: FieldRef<"BillingSubscription", 'String'>
+    readonly status: FieldRef<"BillingSubscription", 'String'>
+    readonly currentPeriodEnd: FieldRef<"BillingSubscription", 'DateTime'>
+    readonly cancelAtPeriodEnd: FieldRef<"BillingSubscription", 'Boolean'>
+    readonly createdAt: FieldRef<"BillingSubscription", 'DateTime'>
+    readonly updatedAt: FieldRef<"BillingSubscription", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BillingSubscription findUnique
+   */
+  export type BillingSubscriptionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingSubscription
+     */
+    select?: BillingSubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingSubscription
+     */
+    omit?: BillingSubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingSubscriptionInclude<ExtArgs> | null
+    /**
+     * Filter, which BillingSubscription to fetch.
+     */
+    where: BillingSubscriptionWhereUniqueInput
+  }
+
+  /**
+   * BillingSubscription findUniqueOrThrow
+   */
+  export type BillingSubscriptionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingSubscription
+     */
+    select?: BillingSubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingSubscription
+     */
+    omit?: BillingSubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingSubscriptionInclude<ExtArgs> | null
+    /**
+     * Filter, which BillingSubscription to fetch.
+     */
+    where: BillingSubscriptionWhereUniqueInput
+  }
+
+  /**
+   * BillingSubscription findFirst
+   */
+  export type BillingSubscriptionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingSubscription
+     */
+    select?: BillingSubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingSubscription
+     */
+    omit?: BillingSubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingSubscriptionInclude<ExtArgs> | null
+    /**
+     * Filter, which BillingSubscription to fetch.
+     */
+    where?: BillingSubscriptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BillingSubscriptions to fetch.
+     */
+    orderBy?: BillingSubscriptionOrderByWithRelationInput | BillingSubscriptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BillingSubscriptions.
+     */
+    cursor?: BillingSubscriptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BillingSubscriptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BillingSubscriptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BillingSubscriptions.
+     */
+    distinct?: BillingSubscriptionScalarFieldEnum | BillingSubscriptionScalarFieldEnum[]
+  }
+
+  /**
+   * BillingSubscription findFirstOrThrow
+   */
+  export type BillingSubscriptionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingSubscription
+     */
+    select?: BillingSubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingSubscription
+     */
+    omit?: BillingSubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingSubscriptionInclude<ExtArgs> | null
+    /**
+     * Filter, which BillingSubscription to fetch.
+     */
+    where?: BillingSubscriptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BillingSubscriptions to fetch.
+     */
+    orderBy?: BillingSubscriptionOrderByWithRelationInput | BillingSubscriptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BillingSubscriptions.
+     */
+    cursor?: BillingSubscriptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BillingSubscriptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BillingSubscriptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BillingSubscriptions.
+     */
+    distinct?: BillingSubscriptionScalarFieldEnum | BillingSubscriptionScalarFieldEnum[]
+  }
+
+  /**
+   * BillingSubscription findMany
+   */
+  export type BillingSubscriptionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingSubscription
+     */
+    select?: BillingSubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingSubscription
+     */
+    omit?: BillingSubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingSubscriptionInclude<ExtArgs> | null
+    /**
+     * Filter, which BillingSubscriptions to fetch.
+     */
+    where?: BillingSubscriptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BillingSubscriptions to fetch.
+     */
+    orderBy?: BillingSubscriptionOrderByWithRelationInput | BillingSubscriptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BillingSubscriptions.
+     */
+    cursor?: BillingSubscriptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BillingSubscriptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BillingSubscriptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BillingSubscriptions.
+     */
+    distinct?: BillingSubscriptionScalarFieldEnum | BillingSubscriptionScalarFieldEnum[]
+  }
+
+  /**
+   * BillingSubscription create
+   */
+  export type BillingSubscriptionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingSubscription
+     */
+    select?: BillingSubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingSubscription
+     */
+    omit?: BillingSubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingSubscriptionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a BillingSubscription.
+     */
+    data: XOR<BillingSubscriptionCreateInput, BillingSubscriptionUncheckedCreateInput>
+  }
+
+  /**
+   * BillingSubscription createMany
+   */
+  export type BillingSubscriptionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BillingSubscriptions.
+     */
+    data: BillingSubscriptionCreateManyInput | BillingSubscriptionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BillingSubscription createManyAndReturn
+   */
+  export type BillingSubscriptionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingSubscription
+     */
+    select?: BillingSubscriptionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingSubscription
+     */
+    omit?: BillingSubscriptionOmit<ExtArgs> | null
+    /**
+     * The data used to create many BillingSubscriptions.
+     */
+    data: BillingSubscriptionCreateManyInput | BillingSubscriptionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingSubscriptionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BillingSubscription update
+   */
+  export type BillingSubscriptionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingSubscription
+     */
+    select?: BillingSubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingSubscription
+     */
+    omit?: BillingSubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingSubscriptionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a BillingSubscription.
+     */
+    data: XOR<BillingSubscriptionUpdateInput, BillingSubscriptionUncheckedUpdateInput>
+    /**
+     * Choose, which BillingSubscription to update.
+     */
+    where: BillingSubscriptionWhereUniqueInput
+  }
+
+  /**
+   * BillingSubscription updateMany
+   */
+  export type BillingSubscriptionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BillingSubscriptions.
+     */
+    data: XOR<BillingSubscriptionUpdateManyMutationInput, BillingSubscriptionUncheckedUpdateManyInput>
+    /**
+     * Filter which BillingSubscriptions to update
+     */
+    where?: BillingSubscriptionWhereInput
+    /**
+     * Limit how many BillingSubscriptions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * BillingSubscription updateManyAndReturn
+   */
+  export type BillingSubscriptionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingSubscription
+     */
+    select?: BillingSubscriptionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingSubscription
+     */
+    omit?: BillingSubscriptionOmit<ExtArgs> | null
+    /**
+     * The data used to update BillingSubscriptions.
+     */
+    data: XOR<BillingSubscriptionUpdateManyMutationInput, BillingSubscriptionUncheckedUpdateManyInput>
+    /**
+     * Filter which BillingSubscriptions to update
+     */
+    where?: BillingSubscriptionWhereInput
+    /**
+     * Limit how many BillingSubscriptions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingSubscriptionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BillingSubscription upsert
+   */
+  export type BillingSubscriptionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingSubscription
+     */
+    select?: BillingSubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingSubscription
+     */
+    omit?: BillingSubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingSubscriptionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the BillingSubscription to update in case it exists.
+     */
+    where: BillingSubscriptionWhereUniqueInput
+    /**
+     * In case the BillingSubscription found by the `where` argument doesn't exist, create a new BillingSubscription with this data.
+     */
+    create: XOR<BillingSubscriptionCreateInput, BillingSubscriptionUncheckedCreateInput>
+    /**
+     * In case the BillingSubscription was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BillingSubscriptionUpdateInput, BillingSubscriptionUncheckedUpdateInput>
+  }
+
+  /**
+   * BillingSubscription delete
+   */
+  export type BillingSubscriptionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingSubscription
+     */
+    select?: BillingSubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingSubscription
+     */
+    omit?: BillingSubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingSubscriptionInclude<ExtArgs> | null
+    /**
+     * Filter which BillingSubscription to delete.
+     */
+    where: BillingSubscriptionWhereUniqueInput
+  }
+
+  /**
+   * BillingSubscription deleteMany
+   */
+  export type BillingSubscriptionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BillingSubscriptions to delete
+     */
+    where?: BillingSubscriptionWhereInput
+    /**
+     * Limit how many BillingSubscriptions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * BillingSubscription without action
+   */
+  export type BillingSubscriptionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BillingSubscription
+     */
+    select?: BillingSubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BillingSubscription
+     */
+    omit?: BillingSubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BillingSubscriptionInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -26253,6 +27535,7 @@ export namespace Prisma {
     emailVerified: 'emailVerified',
     image: 'image',
     password: 'password',
+    stripeCustomerId: 'stripeCustomerId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -26556,6 +27839,23 @@ export namespace Prisma {
   export type FlowScalarFieldEnum = (typeof FlowScalarFieldEnum)[keyof typeof FlowScalarFieldEnum]
 
 
+  export const BillingSubscriptionScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    stripeSubscriptionId: 'stripeSubscriptionId',
+    stripePriceId: 'stripePriceId',
+    stripeProductId: 'stripeProductId',
+    plan: 'plan',
+    status: 'status',
+    currentPeriodEnd: 'currentPeriodEnd',
+    cancelAtPeriodEnd: 'cancelAtPeriodEnd',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type BillingSubscriptionScalarFieldEnum = (typeof BillingSubscriptionScalarFieldEnum)[keyof typeof BillingSubscriptionScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -26691,6 +27991,7 @@ export namespace Prisma {
     emailVerified?: DateTimeNullableFilter<"User"> | Date | string | null
     image?: StringNullableFilter<"User"> | string | null
     password?: StringNullableFilter<"User"> | string | null
+    stripeCustomerId?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     accounts?: AccountListRelationFilter
@@ -26710,6 +28011,7 @@ export namespace Prisma {
     appListings?: AppListingListRelationFilter
     sites?: SiteListRelationFilter
     flows?: FlowListRelationFilter
+    billingSubscriptions?: BillingSubscriptionListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -26719,6 +28021,7 @@ export namespace Prisma {
     emailVerified?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
     password?: SortOrderInput | SortOrder
+    stripeCustomerId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     accounts?: AccountOrderByRelationAggregateInput
@@ -26738,11 +28041,13 @@ export namespace Prisma {
     appListings?: AppListingOrderByRelationAggregateInput
     sites?: SiteOrderByRelationAggregateInput
     flows?: FlowOrderByRelationAggregateInput
+    billingSubscriptions?: BillingSubscriptionOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     email?: string
+    stripeCustomerId?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
@@ -26769,7 +28074,8 @@ export namespace Prisma {
     appListings?: AppListingListRelationFilter
     sites?: SiteListRelationFilter
     flows?: FlowListRelationFilter
-  }, "id" | "email">
+    billingSubscriptions?: BillingSubscriptionListRelationFilter
+  }, "id" | "email" | "stripeCustomerId">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
@@ -26778,6 +28084,7 @@ export namespace Prisma {
     emailVerified?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
     password?: SortOrderInput | SortOrder
+    stripeCustomerId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -26795,6 +28102,7 @@ export namespace Prisma {
     emailVerified?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     image?: StringNullableWithAggregatesFilter<"User"> | string | null
     password?: StringNullableWithAggregatesFilter<"User"> | string | null
+    stripeCustomerId?: StringNullableWithAggregatesFilter<"User"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
@@ -28321,6 +29629,91 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Flow"> | Date | string
   }
 
+  export type BillingSubscriptionWhereInput = {
+    AND?: BillingSubscriptionWhereInput | BillingSubscriptionWhereInput[]
+    OR?: BillingSubscriptionWhereInput[]
+    NOT?: BillingSubscriptionWhereInput | BillingSubscriptionWhereInput[]
+    id?: StringFilter<"BillingSubscription"> | string
+    userId?: StringFilter<"BillingSubscription"> | string
+    stripeSubscriptionId?: StringFilter<"BillingSubscription"> | string
+    stripePriceId?: StringFilter<"BillingSubscription"> | string
+    stripeProductId?: StringNullableFilter<"BillingSubscription"> | string | null
+    plan?: StringFilter<"BillingSubscription"> | string
+    status?: StringFilter<"BillingSubscription"> | string
+    currentPeriodEnd?: DateTimeNullableFilter<"BillingSubscription"> | Date | string | null
+    cancelAtPeriodEnd?: BoolFilter<"BillingSubscription"> | boolean
+    createdAt?: DateTimeFilter<"BillingSubscription"> | Date | string
+    updatedAt?: DateTimeFilter<"BillingSubscription"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type BillingSubscriptionOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    stripeSubscriptionId?: SortOrder
+    stripePriceId?: SortOrder
+    stripeProductId?: SortOrderInput | SortOrder
+    plan?: SortOrder
+    status?: SortOrder
+    currentPeriodEnd?: SortOrderInput | SortOrder
+    cancelAtPeriodEnd?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type BillingSubscriptionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    stripeSubscriptionId?: string
+    AND?: BillingSubscriptionWhereInput | BillingSubscriptionWhereInput[]
+    OR?: BillingSubscriptionWhereInput[]
+    NOT?: BillingSubscriptionWhereInput | BillingSubscriptionWhereInput[]
+    userId?: StringFilter<"BillingSubscription"> | string
+    stripePriceId?: StringFilter<"BillingSubscription"> | string
+    stripeProductId?: StringNullableFilter<"BillingSubscription"> | string | null
+    plan?: StringFilter<"BillingSubscription"> | string
+    status?: StringFilter<"BillingSubscription"> | string
+    currentPeriodEnd?: DateTimeNullableFilter<"BillingSubscription"> | Date | string | null
+    cancelAtPeriodEnd?: BoolFilter<"BillingSubscription"> | boolean
+    createdAt?: DateTimeFilter<"BillingSubscription"> | Date | string
+    updatedAt?: DateTimeFilter<"BillingSubscription"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "stripeSubscriptionId">
+
+  export type BillingSubscriptionOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    stripeSubscriptionId?: SortOrder
+    stripePriceId?: SortOrder
+    stripeProductId?: SortOrderInput | SortOrder
+    plan?: SortOrder
+    status?: SortOrder
+    currentPeriodEnd?: SortOrderInput | SortOrder
+    cancelAtPeriodEnd?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: BillingSubscriptionCountOrderByAggregateInput
+    _max?: BillingSubscriptionMaxOrderByAggregateInput
+    _min?: BillingSubscriptionMinOrderByAggregateInput
+  }
+
+  export type BillingSubscriptionScalarWhereWithAggregatesInput = {
+    AND?: BillingSubscriptionScalarWhereWithAggregatesInput | BillingSubscriptionScalarWhereWithAggregatesInput[]
+    OR?: BillingSubscriptionScalarWhereWithAggregatesInput[]
+    NOT?: BillingSubscriptionScalarWhereWithAggregatesInput | BillingSubscriptionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"BillingSubscription"> | string
+    userId?: StringWithAggregatesFilter<"BillingSubscription"> | string
+    stripeSubscriptionId?: StringWithAggregatesFilter<"BillingSubscription"> | string
+    stripePriceId?: StringWithAggregatesFilter<"BillingSubscription"> | string
+    stripeProductId?: StringNullableWithAggregatesFilter<"BillingSubscription"> | string | null
+    plan?: StringWithAggregatesFilter<"BillingSubscription"> | string
+    status?: StringWithAggregatesFilter<"BillingSubscription"> | string
+    currentPeriodEnd?: DateTimeNullableWithAggregatesFilter<"BillingSubscription"> | Date | string | null
+    cancelAtPeriodEnd?: BoolWithAggregatesFilter<"BillingSubscription"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"BillingSubscription"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"BillingSubscription"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     name?: string | null
@@ -28328,6 +29721,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -28347,6 +29741,7 @@ export namespace Prisma {
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -28356,6 +29751,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -28375,6 +29771,7 @@ export namespace Prisma {
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -28384,6 +29781,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -28403,6 +29801,7 @@ export namespace Prisma {
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -28412,6 +29811,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -28431,6 +29831,7 @@ export namespace Prisma {
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -28440,6 +29841,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -28451,6 +29853,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -28462,6 +29865,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -30137,6 +31541,103 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type BillingSubscriptionCreateInput = {
+    id?: string
+    stripeSubscriptionId: string
+    stripePriceId: string
+    stripeProductId?: string | null
+    plan?: string
+    status: string
+    currentPeriodEnd?: Date | string | null
+    cancelAtPeriodEnd?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutBillingSubscriptionsInput
+  }
+
+  export type BillingSubscriptionUncheckedCreateInput = {
+    id?: string
+    userId: string
+    stripeSubscriptionId: string
+    stripePriceId: string
+    stripeProductId?: string | null
+    plan?: string
+    status: string
+    currentPeriodEnd?: Date | string | null
+    cancelAtPeriodEnd?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BillingSubscriptionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    stripeSubscriptionId?: StringFieldUpdateOperationsInput | string
+    stripePriceId?: StringFieldUpdateOperationsInput | string
+    stripeProductId?: NullableStringFieldUpdateOperationsInput | string | null
+    plan?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelAtPeriodEnd?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutBillingSubscriptionsNestedInput
+  }
+
+  export type BillingSubscriptionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    stripeSubscriptionId?: StringFieldUpdateOperationsInput | string
+    stripePriceId?: StringFieldUpdateOperationsInput | string
+    stripeProductId?: NullableStringFieldUpdateOperationsInput | string | null
+    plan?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelAtPeriodEnd?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BillingSubscriptionCreateManyInput = {
+    id?: string
+    userId: string
+    stripeSubscriptionId: string
+    stripePriceId: string
+    stripeProductId?: string | null
+    plan?: string
+    status: string
+    currentPeriodEnd?: Date | string | null
+    cancelAtPeriodEnd?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BillingSubscriptionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    stripeSubscriptionId?: StringFieldUpdateOperationsInput | string
+    stripePriceId?: StringFieldUpdateOperationsInput | string
+    stripeProductId?: NullableStringFieldUpdateOperationsInput | string | null
+    plan?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelAtPeriodEnd?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BillingSubscriptionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    stripeSubscriptionId?: StringFieldUpdateOperationsInput | string
+    stripePriceId?: StringFieldUpdateOperationsInput | string
+    stripeProductId?: NullableStringFieldUpdateOperationsInput | string | null
+    plan?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelAtPeriodEnd?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -30291,6 +31792,12 @@ export namespace Prisma {
     none?: FlowWhereInput
   }
 
+  export type BillingSubscriptionListRelationFilter = {
+    every?: BillingSubscriptionWhereInput
+    some?: BillingSubscriptionWhereInput
+    none?: BillingSubscriptionWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -30364,6 +31871,10 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type BillingSubscriptionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -30371,6 +31882,7 @@ export namespace Prisma {
     emailVerified?: SortOrder
     image?: SortOrder
     password?: SortOrder
+    stripeCustomerId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -30382,6 +31894,7 @@ export namespace Prisma {
     emailVerified?: SortOrder
     image?: SortOrder
     password?: SortOrder
+    stripeCustomerId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -30393,6 +31906,7 @@ export namespace Prisma {
     emailVerified?: SortOrder
     image?: SortOrder
     password?: SortOrder
+    stripeCustomerId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -31415,6 +32929,48 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type BillingSubscriptionCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    stripeSubscriptionId?: SortOrder
+    stripePriceId?: SortOrder
+    stripeProductId?: SortOrder
+    plan?: SortOrder
+    status?: SortOrder
+    currentPeriodEnd?: SortOrder
+    cancelAtPeriodEnd?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BillingSubscriptionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    stripeSubscriptionId?: SortOrder
+    stripePriceId?: SortOrder
+    stripeProductId?: SortOrder
+    plan?: SortOrder
+    status?: SortOrder
+    currentPeriodEnd?: SortOrder
+    cancelAtPeriodEnd?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BillingSubscriptionMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    stripeSubscriptionId?: SortOrder
+    stripePriceId?: SortOrder
+    stripeProductId?: SortOrder
+    plan?: SortOrder
+    status?: SortOrder
+    currentPeriodEnd?: SortOrder
+    cancelAtPeriodEnd?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
   export type AccountCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -31534,6 +33090,13 @@ export namespace Prisma {
     connect?: FlowWhereUniqueInput | FlowWhereUniqueInput[]
   }
 
+  export type BillingSubscriptionCreateNestedManyWithoutUserInput = {
+    create?: XOR<BillingSubscriptionCreateWithoutUserInput, BillingSubscriptionUncheckedCreateWithoutUserInput> | BillingSubscriptionCreateWithoutUserInput[] | BillingSubscriptionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BillingSubscriptionCreateOrConnectWithoutUserInput | BillingSubscriptionCreateOrConnectWithoutUserInput[]
+    createMany?: BillingSubscriptionCreateManyUserInputEnvelope
+    connect?: BillingSubscriptionWhereUniqueInput | BillingSubscriptionWhereUniqueInput[]
+  }
+
   export type AccountUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -31651,6 +33214,13 @@ export namespace Prisma {
     connectOrCreate?: FlowCreateOrConnectWithoutUserInput | FlowCreateOrConnectWithoutUserInput[]
     createMany?: FlowCreateManyUserInputEnvelope
     connect?: FlowWhereUniqueInput | FlowWhereUniqueInput[]
+  }
+
+  export type BillingSubscriptionUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<BillingSubscriptionCreateWithoutUserInput, BillingSubscriptionUncheckedCreateWithoutUserInput> | BillingSubscriptionCreateWithoutUserInput[] | BillingSubscriptionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BillingSubscriptionCreateOrConnectWithoutUserInput | BillingSubscriptionCreateOrConnectWithoutUserInput[]
+    createMany?: BillingSubscriptionCreateManyUserInputEnvelope
+    connect?: BillingSubscriptionWhereUniqueInput | BillingSubscriptionWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -31907,6 +33477,20 @@ export namespace Prisma {
     deleteMany?: FlowScalarWhereInput | FlowScalarWhereInput[]
   }
 
+  export type BillingSubscriptionUpdateManyWithoutUserNestedInput = {
+    create?: XOR<BillingSubscriptionCreateWithoutUserInput, BillingSubscriptionUncheckedCreateWithoutUserInput> | BillingSubscriptionCreateWithoutUserInput[] | BillingSubscriptionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BillingSubscriptionCreateOrConnectWithoutUserInput | BillingSubscriptionCreateOrConnectWithoutUserInput[]
+    upsert?: BillingSubscriptionUpsertWithWhereUniqueWithoutUserInput | BillingSubscriptionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: BillingSubscriptionCreateManyUserInputEnvelope
+    set?: BillingSubscriptionWhereUniqueInput | BillingSubscriptionWhereUniqueInput[]
+    disconnect?: BillingSubscriptionWhereUniqueInput | BillingSubscriptionWhereUniqueInput[]
+    delete?: BillingSubscriptionWhereUniqueInput | BillingSubscriptionWhereUniqueInput[]
+    connect?: BillingSubscriptionWhereUniqueInput | BillingSubscriptionWhereUniqueInput[]
+    update?: BillingSubscriptionUpdateWithWhereUniqueWithoutUserInput | BillingSubscriptionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: BillingSubscriptionUpdateManyWithWhereWithoutUserInput | BillingSubscriptionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: BillingSubscriptionScalarWhereInput | BillingSubscriptionScalarWhereInput[]
+  }
+
   export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -32143,6 +33727,20 @@ export namespace Prisma {
     update?: FlowUpdateWithWhereUniqueWithoutUserInput | FlowUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: FlowUpdateManyWithWhereWithoutUserInput | FlowUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: FlowScalarWhereInput | FlowScalarWhereInput[]
+  }
+
+  export type BillingSubscriptionUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<BillingSubscriptionCreateWithoutUserInput, BillingSubscriptionUncheckedCreateWithoutUserInput> | BillingSubscriptionCreateWithoutUserInput[] | BillingSubscriptionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BillingSubscriptionCreateOrConnectWithoutUserInput | BillingSubscriptionCreateOrConnectWithoutUserInput[]
+    upsert?: BillingSubscriptionUpsertWithWhereUniqueWithoutUserInput | BillingSubscriptionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: BillingSubscriptionCreateManyUserInputEnvelope
+    set?: BillingSubscriptionWhereUniqueInput | BillingSubscriptionWhereUniqueInput[]
+    disconnect?: BillingSubscriptionWhereUniqueInput | BillingSubscriptionWhereUniqueInput[]
+    delete?: BillingSubscriptionWhereUniqueInput | BillingSubscriptionWhereUniqueInput[]
+    connect?: BillingSubscriptionWhereUniqueInput | BillingSubscriptionWhereUniqueInput[]
+    update?: BillingSubscriptionUpdateWithWhereUniqueWithoutUserInput | BillingSubscriptionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: BillingSubscriptionUpdateManyWithWhereWithoutUserInput | BillingSubscriptionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: BillingSubscriptionScalarWhereInput | BillingSubscriptionScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutAccountsInput = {
@@ -32687,6 +34285,20 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutFlowsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutFlowsInput, UserUpdateWithoutFlowsInput>, UserUncheckedUpdateWithoutFlowsInput>
+  }
+
+  export type UserCreateNestedOneWithoutBillingSubscriptionsInput = {
+    create?: XOR<UserCreateWithoutBillingSubscriptionsInput, UserUncheckedCreateWithoutBillingSubscriptionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBillingSubscriptionsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutBillingSubscriptionsNestedInput = {
+    create?: XOR<UserCreateWithoutBillingSubscriptionsInput, UserUncheckedCreateWithoutBillingSubscriptionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBillingSubscriptionsInput
+    upsert?: UserUpsertWithoutBillingSubscriptionsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBillingSubscriptionsInput, UserUpdateWithoutBillingSubscriptionsInput>, UserUncheckedUpdateWithoutBillingSubscriptionsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -33509,6 +35121,42 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type BillingSubscriptionCreateWithoutUserInput = {
+    id?: string
+    stripeSubscriptionId: string
+    stripePriceId: string
+    stripeProductId?: string | null
+    plan?: string
+    status: string
+    currentPeriodEnd?: Date | string | null
+    cancelAtPeriodEnd?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BillingSubscriptionUncheckedCreateWithoutUserInput = {
+    id?: string
+    stripeSubscriptionId: string
+    stripePriceId: string
+    stripeProductId?: string | null
+    plan?: string
+    status: string
+    currentPeriodEnd?: Date | string | null
+    cancelAtPeriodEnd?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BillingSubscriptionCreateOrConnectWithoutUserInput = {
+    where: BillingSubscriptionWhereUniqueInput
+    create: XOR<BillingSubscriptionCreateWithoutUserInput, BillingSubscriptionUncheckedCreateWithoutUserInput>
+  }
+
+  export type BillingSubscriptionCreateManyUserInputEnvelope = {
+    data: BillingSubscriptionCreateManyUserInput | BillingSubscriptionCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type AccountUpsertWithWhereUniqueWithoutUserInput = {
     where: AccountWhereUniqueInput
     update: XOR<AccountUpdateWithoutUserInput, AccountUncheckedUpdateWithoutUserInput>
@@ -34057,6 +35705,39 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Flow"> | Date | string
   }
 
+  export type BillingSubscriptionUpsertWithWhereUniqueWithoutUserInput = {
+    where: BillingSubscriptionWhereUniqueInput
+    update: XOR<BillingSubscriptionUpdateWithoutUserInput, BillingSubscriptionUncheckedUpdateWithoutUserInput>
+    create: XOR<BillingSubscriptionCreateWithoutUserInput, BillingSubscriptionUncheckedCreateWithoutUserInput>
+  }
+
+  export type BillingSubscriptionUpdateWithWhereUniqueWithoutUserInput = {
+    where: BillingSubscriptionWhereUniqueInput
+    data: XOR<BillingSubscriptionUpdateWithoutUserInput, BillingSubscriptionUncheckedUpdateWithoutUserInput>
+  }
+
+  export type BillingSubscriptionUpdateManyWithWhereWithoutUserInput = {
+    where: BillingSubscriptionScalarWhereInput
+    data: XOR<BillingSubscriptionUpdateManyMutationInput, BillingSubscriptionUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type BillingSubscriptionScalarWhereInput = {
+    AND?: BillingSubscriptionScalarWhereInput | BillingSubscriptionScalarWhereInput[]
+    OR?: BillingSubscriptionScalarWhereInput[]
+    NOT?: BillingSubscriptionScalarWhereInput | BillingSubscriptionScalarWhereInput[]
+    id?: StringFilter<"BillingSubscription"> | string
+    userId?: StringFilter<"BillingSubscription"> | string
+    stripeSubscriptionId?: StringFilter<"BillingSubscription"> | string
+    stripePriceId?: StringFilter<"BillingSubscription"> | string
+    stripeProductId?: StringNullableFilter<"BillingSubscription"> | string | null
+    plan?: StringFilter<"BillingSubscription"> | string
+    status?: StringFilter<"BillingSubscription"> | string
+    currentPeriodEnd?: DateTimeNullableFilter<"BillingSubscription"> | Date | string | null
+    cancelAtPeriodEnd?: BoolFilter<"BillingSubscription"> | boolean
+    createdAt?: DateTimeFilter<"BillingSubscription"> | Date | string
+    updatedAt?: DateTimeFilter<"BillingSubscription"> | Date | string
+  }
+
   export type UserCreateWithoutAccountsInput = {
     id?: string
     name?: string | null
@@ -34064,6 +35745,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -34082,6 +35764,7 @@ export namespace Prisma {
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -34091,6 +35774,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -34109,6 +35793,7 @@ export namespace Prisma {
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -34134,6 +35819,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -34152,6 +35838,7 @@ export namespace Prisma {
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -34161,6 +35848,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -34179,6 +35867,7 @@ export namespace Prisma {
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSessionsInput = {
@@ -34188,6 +35877,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -34206,6 +35896,7 @@ export namespace Prisma {
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -34215,6 +35906,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -34233,6 +35925,7 @@ export namespace Prisma {
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -34258,6 +35951,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -34276,6 +35970,7 @@ export namespace Prisma {
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -34285,6 +35980,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -34303,6 +35999,7 @@ export namespace Prisma {
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutConversationsInput = {
@@ -34312,6 +36009,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -34330,6 +36028,7 @@ export namespace Prisma {
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutConversationsInput = {
@@ -34339,6 +36038,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -34357,6 +36057,7 @@ export namespace Prisma {
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutConversationsInput = {
@@ -34444,6 +36145,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -34462,6 +36164,7 @@ export namespace Prisma {
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutConversationsInput = {
@@ -34471,6 +36174,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -34489,6 +36193,7 @@ export namespace Prisma {
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type MessageUpsertWithWhereUniqueWithoutConversationInput = {
@@ -34597,6 +36302,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -34615,6 +36321,7 @@ export namespace Prisma {
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutLegalDocumentsInput = {
@@ -34624,6 +36331,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -34642,6 +36350,7 @@ export namespace Prisma {
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutLegalDocumentsInput = {
@@ -34667,6 +36376,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -34685,6 +36395,7 @@ export namespace Prisma {
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLegalDocumentsInput = {
@@ -34694,6 +36405,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -34712,6 +36424,7 @@ export namespace Prisma {
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutIntelligenceDocumentsInput = {
@@ -34721,6 +36434,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -34739,6 +36453,7 @@ export namespace Prisma {
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutIntelligenceDocumentsInput = {
@@ -34748,6 +36463,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -34766,6 +36482,7 @@ export namespace Prisma {
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutIntelligenceDocumentsInput = {
@@ -34816,6 +36533,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -34834,6 +36552,7 @@ export namespace Prisma {
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutIntelligenceDocumentsInput = {
@@ -34843,6 +36562,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -34861,6 +36581,7 @@ export namespace Prisma {
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ConversationUpsertWithoutIntelligenceDocumentsInput = {
@@ -34901,6 +36622,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -34919,6 +36641,7 @@ export namespace Prisma {
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProjectInquiriesInput = {
@@ -34928,6 +36651,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -34946,6 +36670,7 @@ export namespace Prisma {
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProjectInquiriesInput = {
@@ -34971,6 +36696,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -34989,6 +36715,7 @@ export namespace Prisma {
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProjectInquiriesInput = {
@@ -34998,6 +36725,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -35016,6 +36744,7 @@ export namespace Prisma {
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutCalendarEventsInput = {
@@ -35025,6 +36754,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -35043,6 +36773,7 @@ export namespace Prisma {
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCalendarEventsInput = {
@@ -35052,6 +36783,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -35070,6 +36802,7 @@ export namespace Prisma {
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCalendarEventsInput = {
@@ -35095,6 +36828,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -35113,6 +36847,7 @@ export namespace Prisma {
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCalendarEventsInput = {
@@ -35122,6 +36857,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -35140,6 +36876,7 @@ export namespace Prisma {
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutBusinessContactsInput = {
@@ -35149,6 +36886,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -35167,6 +36905,7 @@ export namespace Prisma {
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBusinessContactsInput = {
@@ -35176,6 +36915,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -35194,6 +36934,7 @@ export namespace Prisma {
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBusinessContactsInput = {
@@ -35251,6 +36992,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -35269,6 +37011,7 @@ export namespace Prisma {
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBusinessContactsInput = {
@@ -35278,6 +37021,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -35296,6 +37040,7 @@ export namespace Prisma {
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type BusinessTaskUpsertWithWhereUniqueWithoutContactInput = {
@@ -35321,6 +37066,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -35339,6 +37085,7 @@ export namespace Prisma {
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBusinessTasksInput = {
@@ -35348,6 +37095,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -35366,6 +37114,7 @@ export namespace Prisma {
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBusinessTasksInput = {
@@ -35422,6 +37171,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -35440,6 +37190,7 @@ export namespace Prisma {
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBusinessTasksInput = {
@@ -35449,6 +37200,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -35467,6 +37219,7 @@ export namespace Prisma {
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type BusinessContactUpsertWithoutTasksInput = {
@@ -35513,6 +37266,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -35531,6 +37285,7 @@ export namespace Prisma {
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAutomationRulesInput = {
@@ -35540,6 +37295,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -35558,6 +37314,7 @@ export namespace Prisma {
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAutomationRulesInput = {
@@ -35609,6 +37366,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -35627,6 +37385,7 @@ export namespace Prisma {
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAutomationRulesInput = {
@@ -35636,6 +37395,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -35654,6 +37414,7 @@ export namespace Prisma {
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AutomationRunUpsertWithWhereUniqueWithoutRuleInput = {
@@ -35679,6 +37440,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -35697,6 +37459,7 @@ export namespace Prisma {
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAutomationRunsInput = {
@@ -35706,6 +37469,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -35724,6 +37488,7 @@ export namespace Prisma {
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAutomationRunsInput = {
@@ -35786,6 +37551,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -35804,6 +37570,7 @@ export namespace Prisma {
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAutomationRunsInput = {
@@ -35813,6 +37580,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -35831,6 +37599,7 @@ export namespace Prisma {
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AutomationRuleUpsertWithoutRunsInput = {
@@ -35883,6 +37652,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -35901,6 +37671,7 @@ export namespace Prisma {
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCommerceProductsInput = {
@@ -35910,6 +37681,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -35928,6 +37700,7 @@ export namespace Prisma {
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCommerceProductsInput = {
@@ -35993,6 +37766,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -36011,6 +37785,7 @@ export namespace Prisma {
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCommerceProductsInput = {
@@ -36020,6 +37795,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -36038,6 +37814,7 @@ export namespace Prisma {
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CommerceOrderUpsertWithWhereUniqueWithoutProductInput = {
@@ -36063,6 +37840,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -36081,6 +37859,7 @@ export namespace Prisma {
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCommerceOrdersInput = {
@@ -36090,6 +37869,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -36108,6 +37888,7 @@ export namespace Prisma {
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCommerceOrdersInput = {
@@ -36166,6 +37947,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -36184,6 +37966,7 @@ export namespace Prisma {
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCommerceOrdersInput = {
@@ -36193,6 +37976,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -36211,6 +37995,7 @@ export namespace Prisma {
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CommerceProductUpsertWithoutOrdersInput = {
@@ -36259,6 +38044,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -36277,6 +38063,7 @@ export namespace Prisma {
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAdsCampaignsInput = {
@@ -36286,6 +38073,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -36304,6 +38092,7 @@ export namespace Prisma {
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAdsCampaignsInput = {
@@ -36329,6 +38118,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -36347,6 +38137,7 @@ export namespace Prisma {
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAdsCampaignsInput = {
@@ -36356,6 +38147,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -36374,6 +38166,7 @@ export namespace Prisma {
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAppListingsInput = {
@@ -36383,6 +38176,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -36401,6 +38195,7 @@ export namespace Prisma {
     adsCampaigns?: AdsCampaignCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAppListingsInput = {
@@ -36410,6 +38205,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -36428,6 +38224,7 @@ export namespace Prisma {
     adsCampaigns?: AdsCampaignUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAppListingsInput = {
@@ -36453,6 +38250,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -36471,6 +38269,7 @@ export namespace Prisma {
     adsCampaigns?: AdsCampaignUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAppListingsInput = {
@@ -36480,6 +38279,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -36498,6 +38298,7 @@ export namespace Prisma {
     adsCampaigns?: AdsCampaignUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSitesInput = {
@@ -36507,6 +38308,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -36525,6 +38327,7 @@ export namespace Prisma {
     adsCampaigns?: AdsCampaignCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSitesInput = {
@@ -36534,6 +38337,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -36552,6 +38356,7 @@ export namespace Prisma {
     adsCampaigns?: AdsCampaignUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSitesInput = {
@@ -36577,6 +38382,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -36595,6 +38401,7 @@ export namespace Prisma {
     adsCampaigns?: AdsCampaignUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSitesInput = {
@@ -36604,6 +38411,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -36622,6 +38430,7 @@ export namespace Prisma {
     adsCampaigns?: AdsCampaignUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutFlowsInput = {
@@ -36631,6 +38440,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -36649,6 +38459,7 @@ export namespace Prisma {
     adsCampaigns?: AdsCampaignCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutFlowsInput = {
@@ -36658,6 +38469,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     password?: string | null
+    stripeCustomerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -36676,6 +38488,7 @@ export namespace Prisma {
     adsCampaigns?: AdsCampaignUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutFlowsInput = {
@@ -36701,6 +38514,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -36719,6 +38533,7 @@ export namespace Prisma {
     adsCampaigns?: AdsCampaignUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFlowsInput = {
@@ -36728,6 +38543,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -36746,6 +38562,139 @@ export namespace Prisma {
     adsCampaigns?: AdsCampaignUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutBillingSubscriptionsInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    password?: string | null
+    stripeCustomerId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
+    legalDocuments?: LegalDocumentCreateNestedManyWithoutUserInput
+    intelligenceDocuments?: IntelligenceDocumentCreateNestedManyWithoutUserInput
+    projectInquiries?: ProjectInquiryCreateNestedManyWithoutUserInput
+    calendarEvents?: CalendarEventCreateNestedManyWithoutUserInput
+    businessContacts?: BusinessContactCreateNestedManyWithoutUserInput
+    businessTasks?: BusinessTaskCreateNestedManyWithoutUserInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutUserInput
+    automationRuns?: AutomationRunCreateNestedManyWithoutUserInput
+    commerceProducts?: CommerceProductCreateNestedManyWithoutUserInput
+    commerceOrders?: CommerceOrderCreateNestedManyWithoutUserInput
+    adsCampaigns?: AdsCampaignCreateNestedManyWithoutUserInput
+    appListings?: AppListingCreateNestedManyWithoutUserInput
+    sites?: SiteCreateNestedManyWithoutUserInput
+    flows?: FlowCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutBillingSubscriptionsInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    password?: string | null
+    stripeCustomerId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    legalDocuments?: LegalDocumentUncheckedCreateNestedManyWithoutUserInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedCreateNestedManyWithoutUserInput
+    projectInquiries?: ProjectInquiryUncheckedCreateNestedManyWithoutUserInput
+    calendarEvents?: CalendarEventUncheckedCreateNestedManyWithoutUserInput
+    businessContacts?: BusinessContactUncheckedCreateNestedManyWithoutUserInput
+    businessTasks?: BusinessTaskUncheckedCreateNestedManyWithoutUserInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutUserInput
+    automationRuns?: AutomationRunUncheckedCreateNestedManyWithoutUserInput
+    commerceProducts?: CommerceProductUncheckedCreateNestedManyWithoutUserInput
+    commerceOrders?: CommerceOrderUncheckedCreateNestedManyWithoutUserInput
+    adsCampaigns?: AdsCampaignUncheckedCreateNestedManyWithoutUserInput
+    appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
+    sites?: SiteUncheckedCreateNestedManyWithoutUserInput
+    flows?: FlowUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutBillingSubscriptionsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutBillingSubscriptionsInput, UserUncheckedCreateWithoutBillingSubscriptionsInput>
+  }
+
+  export type UserUpsertWithoutBillingSubscriptionsInput = {
+    update: XOR<UserUpdateWithoutBillingSubscriptionsInput, UserUncheckedUpdateWithoutBillingSubscriptionsInput>
+    create: XOR<UserCreateWithoutBillingSubscriptionsInput, UserUncheckedCreateWithoutBillingSubscriptionsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutBillingSubscriptionsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutBillingSubscriptionsInput, UserUncheckedUpdateWithoutBillingSubscriptionsInput>
+  }
+
+  export type UserUpdateWithoutBillingSubscriptionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
+    legalDocuments?: LegalDocumentUpdateManyWithoutUserNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUpdateManyWithoutUserNestedInput
+    projectInquiries?: ProjectInquiryUpdateManyWithoutUserNestedInput
+    calendarEvents?: CalendarEventUpdateManyWithoutUserNestedInput
+    businessContacts?: BusinessContactUpdateManyWithoutUserNestedInput
+    businessTasks?: BusinessTaskUpdateManyWithoutUserNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutUserNestedInput
+    automationRuns?: AutomationRunUpdateManyWithoutUserNestedInput
+    commerceProducts?: CommerceProductUpdateManyWithoutUserNestedInput
+    commerceOrders?: CommerceOrderUpdateManyWithoutUserNestedInput
+    adsCampaigns?: AdsCampaignUpdateManyWithoutUserNestedInput
+    appListings?: AppListingUpdateManyWithoutUserNestedInput
+    sites?: SiteUpdateManyWithoutUserNestedInput
+    flows?: FlowUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutBillingSubscriptionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    legalDocuments?: LegalDocumentUncheckedUpdateManyWithoutUserNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedUpdateManyWithoutUserNestedInput
+    projectInquiries?: ProjectInquiryUncheckedUpdateManyWithoutUserNestedInput
+    calendarEvents?: CalendarEventUncheckedUpdateManyWithoutUserNestedInput
+    businessContacts?: BusinessContactUncheckedUpdateManyWithoutUserNestedInput
+    businessTasks?: BusinessTaskUncheckedUpdateManyWithoutUserNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutUserNestedInput
+    automationRuns?: AutomationRunUncheckedUpdateManyWithoutUserNestedInput
+    commerceProducts?: CommerceProductUncheckedUpdateManyWithoutUserNestedInput
+    commerceOrders?: CommerceOrderUncheckedUpdateManyWithoutUserNestedInput
+    adsCampaigns?: AdsCampaignUncheckedUpdateManyWithoutUserNestedInput
+    appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
+    sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
+    flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AccountCreateManyUserInput = {
@@ -36952,6 +38901,19 @@ export namespace Prisma {
     description?: string | null
     status?: string
     steps: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BillingSubscriptionCreateManyUserInput = {
+    id?: string
+    stripeSubscriptionId: string
+    stripePriceId: string
+    stripeProductId?: string | null
+    plan?: string
+    status: string
+    currentPeriodEnd?: Date | string | null
+    cancelAtPeriodEnd?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -37586,6 +39548,45 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     steps?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BillingSubscriptionUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    stripeSubscriptionId?: StringFieldUpdateOperationsInput | string
+    stripePriceId?: StringFieldUpdateOperationsInput | string
+    stripeProductId?: NullableStringFieldUpdateOperationsInput | string | null
+    plan?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelAtPeriodEnd?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BillingSubscriptionUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    stripeSubscriptionId?: StringFieldUpdateOperationsInput | string
+    stripePriceId?: StringFieldUpdateOperationsInput | string
+    stripeProductId?: NullableStringFieldUpdateOperationsInput | string | null
+    plan?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelAtPeriodEnd?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BillingSubscriptionUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    stripeSubscriptionId?: StringFieldUpdateOperationsInput | string
+    stripePriceId?: StringFieldUpdateOperationsInput | string
+    stripeProductId?: NullableStringFieldUpdateOperationsInput | string | null
+    plan?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelAtPeriodEnd?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
