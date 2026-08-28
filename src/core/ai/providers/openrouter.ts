@@ -1,16 +1,15 @@
+import { AI_MODEL } from "@/core/constants";
+import { openRouterChat } from "@/core/ai/openrouter";
+
 import type { AIProvider } from "./types";
 
-export const OpenRouterProvider:AIProvider={
+export const OpenRouterProvider: AIProvider = {
+  name: "OpenRouter",
 
-    name:"OpenRouter",
-
-    async chat(messages){
-
-        return{
-            provider:"OpenRouter",
-            messages
-        };
-
-    }
-
+  async chat(messages) {
+    return openRouterChat({
+      model: AI_MODEL,
+      messages,
+    });
+  },
 };

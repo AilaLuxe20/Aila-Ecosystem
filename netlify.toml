@@ -1,0 +1,9 @@
+# Dummy Cloudflare credentials so the UI plugin
+# netlify-purge-cloudflare-on-deploy does not failBuild when they are unset.
+# A later purge API error only failPlugins, so the deploy can still succeed.
+# Omit those keys from secrets scanning because the placeholders live in this file.
+[build.environment]
+  CLOUDFLARE_ZONE_ID = "netlify-plugin-placeholder"
+  CLOUDFLARE_API_TOKEN = "netlify-plugin-placeholder"
+  SECRETS_SCAN_OMIT_KEYS = "CLOUDFLARE_API_TOKEN,CLOUDFLARE_ZONE_ID,NETLIFY_EMAILS_SECRET,I_KEY"
+  SECRETS_SCAN_OMIT_PATHS = "netlify.toml"

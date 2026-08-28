@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import ChatInterface from "@/components/ai/ChatInterface";
+import { PRODUCT_LIST } from "@/core/products/catalog";
 
 const suggestions = [
   "Build me a premium website",
@@ -37,23 +38,13 @@ const capabilities = [
   },
 ];
 
-const ecosystemNodes = [
-  {
-    title: "AilaLegal AI",
-    description: "Legal intelligence",
-    href: "/products/ailalegal",
-  },
-  {
-    title: "Business AI",
-    description: "Business intelligence",
-    href: "/products/business",
-  },
-  {
-    title: "Automation",
-    description: "Intelligent workflows",
-    href: "/products/automation",
-  },
-];
+const ecosystemNodes = PRODUCT_LIST.filter((product) => product.key !== "intelligence").map(
+  (product) => ({
+    title: product.title,
+    description: product.description,
+    href: product.href,
+  }),
+);
 
 export default function AilaIntelligencePage() {
   return (
@@ -146,7 +137,7 @@ export default function AilaIntelligencePage() {
           </h2>
         </div>
 
-        <div className="mt-16 grid gap-4 md:grid-cols-3">
+          <div className="mt-16 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {ecosystemNodes.map((node) => (
             <Link
               key={node.title}

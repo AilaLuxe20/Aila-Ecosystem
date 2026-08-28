@@ -7,12 +7,14 @@ import {
   deleteIntelligenceDocument,
   processIntelligenceUpload,
 } from "@/core/ai/intelligence/files";
-import {
-  AilaAuthenticationError,
-  requirePrismaUser,
-} from "@/core/auth/clerk-user";
+import { AilaAuthenticationError } from "@/core/auth/clerk-user";
 import { MAX_INTELLIGENCE_ATTACHMENTS } from "@/core/constants";
-import { ERROR_CODES } from "@/lib/errors/app-error";
+import { assertModeEntitlement } from "@/lib/auth/require-product-access";
+import {
+  AuthenticationError,
+  AuthorizationError,
+  ERROR_CODES,
+} from "@/lib/errors/app-error";
 import { createLogger } from "@/lib/logger/logger";
 
 const log = createLogger("api.ai.intelligence.document");
@@ -29,9 +31,21 @@ function jsonFailure(
   return aiFailure(status, code, message, rateLimit);
 }
 
+function authFailure(error: unknown) {
+  if (error instanceof AilaAuthenticationError || error instanceof AuthenticationError) {
+    return jsonFailure(401, ERROR_CODES.UNAUTHENTICATED, "Authentication required.");
+  }
+
+  if (error instanceof AuthorizationError) {
+    return jsonFailure(403, ERROR_CODES.FORBIDDEN, error.message);
+  }
+
+  return null;
+}
+
 export async function POST(req: Request) {
   try {
-    const user = await requirePrismaUser();
+    const user = await assertModeEntitlement("intelligence");
     const rateLimit = await aiDocumentRateLimiter.check(
       `ai:document:${user.id}`
     );
@@ -118,9 +132,8 @@ export async function POST(req: Request) {
       }
     );
   } catch (error) {
-    if (error instanceof AilaAuthenticationError) {
-      return jsonFailure(401, ERROR_CODES.UNAUTHENTICATED, "Authentication required.");
-    }
+    const denied = authFailure(error);
+    if (denied) return denied;
 
     log.error("intelligence document unexpected error", error, {});
 
@@ -134,7 +147,7 @@ export async function POST(req: Request) {
 
 export async function DELETE(req: Request) {
   try {
-    const user = await requirePrismaUser();
+    const user = await assertModeEntitlement("intelligence");
     const { searchParams } = new URL(req.url);
     const documentId = searchParams.get("documentId");
 
@@ -157,9 +170,8 @@ export async function DELETE(req: Request) {
 
     return Response.json({ success: true, deleted: true });
   } catch (error) {
-    if (error instanceof AilaAuthenticationError) {
-      return jsonFailure(401, ERROR_CODES.UNAUTHENTICATED, "Authentication required.");
-    }
+    const denied = authFailure(error);
+    if (denied) return denied;
 
     log.error("intelligence document delete unexpected error", error, {});
 

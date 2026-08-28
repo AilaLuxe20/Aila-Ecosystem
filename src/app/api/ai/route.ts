@@ -16,6 +16,8 @@ import {
   AilaAuthenticationError,
   requirePrismaUser,
 } from "@/core/auth/clerk-user";
+import { assertModeEntitlement } from "@/lib/auth/require-product-access";
+import { AuthorizationError, ERROR_CODES } from "@/lib/errors/app-error";
 import type { ChatMessage } from "@/core/types";
 import {
   attachIntelligenceDocuments,
@@ -29,7 +31,6 @@ import {
   runStreamingChatSession,
   type AilaChatStreamEvent,
 } from "@/core/ai/streaming";
-import { ERROR_CODES } from "@/lib/errors/app-error";
 import { createLogger } from "@/lib/logger/logger";
 
 const log = createLogger("api.ai.chat");
@@ -83,6 +84,7 @@ export async function POST(req: Request) {
 
     const body = parsed.data;
     const mode = body.mode;
+    await assertModeEntitlement(mode);
     const conversationId = resolveConversationId(body);
     const latestUserMessage = extractLatestUserMessage(body.messages);
 
@@ -286,6 +288,10 @@ export async function POST(req: Request) {
         ERROR_CODES.UNAUTHENTICATED,
         "Authentication required."
       );
+    }
+
+    if (error instanceof AuthorizationError) {
+      return aiFailure(403, ERROR_CODES.FORBIDDEN, error.message);
     }
 
     log.error("AI chat unexpected error", error, {});

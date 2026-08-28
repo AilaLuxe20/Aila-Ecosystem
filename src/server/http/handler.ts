@@ -11,6 +11,8 @@ import {
 } from "@/lib/errors/app-error";
 import { createLogger } from "@/lib/logger/logger";
 import { canAccess } from "@/lib/auth/can-access";
+import { assertProductEntitlement } from "@/lib/auth/require-product-access";
+import { isProductKey } from "@/core/products/catalog";
 import { flattenZodError } from "@/lib/utils/validation";
 import type { UserRole } from "@/types/auth";
 
@@ -83,7 +85,9 @@ async function resolveActor(): Promise<Actor | null> {
 
   return {
     userId,
-    role: sessionClaims?.metadata?.role ?? "guest",
+    role: sessionClaims?.metadata?.role && sessionClaims.metadata.role !== "guest"
+      ? sessionClaims.metadata.role
+      : "user",
   };
 }
 
@@ -256,10 +260,14 @@ export class RouteBuilder<TContext extends RequestContext, TBody> {
           });
         }
 
-        if (config.product && actor && !canAccess(actor.role, config.product)) {
-          throw new AuthorizationError({
-            context: { product: config.product, role: actor.role },
-          });
+        if (config.product && actor) {
+          if (isProductKey(config.product)) {
+            await assertProductEntitlement(config.product);
+          } else if (!canAccess(actor.role, config.product)) {
+            throw new AuthorizationError({
+              context: { product: config.product, role: actor.role },
+            });
+          }
         }
 
         if (config.querySchema) {

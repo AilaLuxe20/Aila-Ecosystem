@@ -1,39 +1,34 @@
 ﻿import type { MetadataRoute } from "next";
 
+import { ALL_PRODUCTS, SITE_URL } from "@/core/constants";
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://ailaluxe.com";
+  const products = ALL_PRODUCTS.map((product) => ({
+    url: `${SITE_URL}${product.href}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: 0.8,
+  }));
 
   return [
     {
-      url: baseUrl,
+      url: SITE_URL,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 1,
     },
+    ...products,
     {
-      url: `${baseUrl}/products/intelligence`,
+      url: `${SITE_URL}/privacy`,
       lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
+      changeFrequency: "yearly",
+      priority: 0.3,
     },
     {
-      url: `${baseUrl}/products/ailalegal`,
+      url: `${SITE_URL}/terms`,
       lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/products/business`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/products/automation`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
+      changeFrequency: "yearly",
+      priority: 0.3,
     },
   ];
 }
-

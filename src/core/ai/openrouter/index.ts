@@ -1,26 +1,26 @@
-const OPENROUTER_URL="https://openrouter.ai/api/v1/chat/completions";
+import { getOpenRouterApiKey } from "@/core/config";
 
-export async function openRouterChat(body:unknown){
+const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
 
-    const response=await fetch(OPENROUTER_URL,{
+export async function openRouterChat(body: unknown) {
+  const apiKey = getOpenRouterApiKey();
 
-        method:"POST",
+  if (!apiKey) {
+    throw new Error("OPENROUTER_API_KEY is not configured.");
+  }
 
-        headers:{
-            Authorization:`Bearer ${process.env.OPENROUTER_API_KEY}`,
-            "Content-Type":"application/json"
-        },
+  const response = await fetch(OPENROUTER_URL, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
 
-        body:JSON.stringify(body)
+  if (!response.ok) {
+    throw new Error("OpenRouter request failed.");
+  }
 
-    });
-
-    if(!response.ok){
-
-        throw new Error(await response.text());
-
-    }
-
-    return response.json();
-
+  return response.json();
 }

@@ -69,6 +69,7 @@ export type AiChatRequest = z.infer<typeof aiChatRequestSchema>;
 export type AiErrorCode =
   | typeof ERROR_CODES.VALIDATION_FAILED
   | typeof ERROR_CODES.UNAUTHENTICATED
+  | typeof ERROR_CODES.FORBIDDEN
   | typeof ERROR_CODES.NOT_FOUND
   | typeof ERROR_CODES.CONFLICT
   | typeof ERROR_CODES.RATE_LIMITED

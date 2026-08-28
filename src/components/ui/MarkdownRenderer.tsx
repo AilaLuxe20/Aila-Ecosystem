@@ -164,6 +164,8 @@ export function MarkdownRenderer({
         }
 
         return (
+          // Remote markdown images are not limited to next/image remotePatterns.
+          // eslint-disable-next-line @next/next/no-img-element
           <img
             src={safeSrc}
             alt={alt ?? ""}

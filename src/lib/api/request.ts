@@ -158,7 +158,8 @@ export class RequestBuilder {
    * @returns A new builder.
    */
   formData(data: FormData): RequestBuilder {
-    const { "content-type": _omitted, ...rest } = this.headerMap;
+    const rest = { ...this.headerMap };
+    delete rest["content-type"];
     return this.clone({ payload: data, headerMap: rest });
   }
 
