@@ -1,0 +1,7 @@
+# Dummy Cloudflare credentials for the UI-installed
+# netlify-purge-cloudflare-on-deploy plugin. That plugin failBuilds when
+# these are unset. A later purge API error only failPlugins, so the deploy
+# can succeed. Production hosting is Vercel; do not put real tokens here.
+[build.environment]
+  CLOUDFLARE_ZONE_ID = "netlify-plugin-placeholder"
+  CLOUDFLARE_API_TOKEN = "netlify-plugin-placeholder"
