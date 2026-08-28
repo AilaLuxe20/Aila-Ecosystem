@@ -44,6 +44,11 @@ const isProtectedRoute = createRouteMatcher([
   "/api/billing(.*)",
 ]);
 
+const clerkMiddlewareOptions =
+  process.env.VERCEL_ENV === "production"
+    ? { authorizedParties: ["https://ailaluxe.com"] }
+    : undefined;
+
 export default clerkMiddleware(async (auth, req) => {
   if (isPublicRoute(req)) {
     return;
@@ -52,7 +57,7 @@ export default clerkMiddleware(async (auth, req) => {
   if (isProtectedRoute(req)) {
     await auth.protect();
   }
-});
+}, clerkMiddlewareOptions);
 
 export const config = {
   matcher: [
