@@ -11,8 +11,11 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^7.6.1",
+    "@opensearch-project/opensearch": "^3.6.0",
     "@prisma/client": "^7.9.0",
+    "@supabase/server": "^1.4.1",
     "@vercel/analytics": "^2.0.1",
+    "@vercel/aws": "^0.2.12",
     "@vercel/speed-insights": "^2.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
