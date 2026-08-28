@@ -86,7 +86,7 @@ export default function AilaLegalPage() {
               </Link>
 
               <Link
-                href="/#start-project"
+                href="#legal-chat"
                 className="rounded-full border border-white/[0.1] bg-white/[0.03] px-8 py-4 text-neutral-300 transition duration-300 hover:bg-white/[0.07]"
               >
                 Talk to AilaLegal
@@ -95,7 +95,7 @@ export default function AilaLegalPage() {
           </div>
 
           {/* LEGAL CHAT */}
-          <div className="relative">
+          <div id="legal-chat" className="relative">
             <div className="pointer-events-none absolute inset-0 rounded-full bg-blue-500/[0.08] blur-[110px]" />
 
             <ChatInterface

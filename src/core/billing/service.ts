@@ -11,7 +11,11 @@ import {
 import { createLogger } from "@/lib/logger/logger";
 import type { UserRole } from "@/types/auth";
 
-import { evaluateEntitlement, isActiveSubscriptionStatus } from "./entitlements";
+import {
+  evaluateEntitlement,
+  isActiveSubscriptionStatus,
+  isLocalProductUnlockEnabled,
+} from "./entitlements";
 import type { BillingStatus } from "./types";
 
 export type { BillingStatus } from "./types";
@@ -243,9 +247,12 @@ export async function getBillingStatus(
     currentPeriodEnd: subscription?.currentPeriodEnd?.toISOString() ?? null,
     stripeConfigured: Boolean(getStripeSecretKey()),
     priceConfigured: Boolean(getStripeProPriceId()),
-    entitledProductKeys: PRODUCT_KEYS.filter(
-      (product) => evaluateEntitlement(role, product, active).allowed,
-    ),
+    entitledProductKeys: PRODUCT_KEYS.filter((product) => {
+      if (isLocalProductUnlockEnabled() && role && role !== "guest") {
+        return true;
+      }
+      return evaluateEntitlement(role, product, active).allowed;
+    }),
   };
 }
 

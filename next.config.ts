@@ -6,6 +6,8 @@ const nextConfig: NextConfig = {
       { source: "/login", destination: "/sign-in", permanent: false },
       { source: "/signup", destination: "/sign-up", permanent: false },
       { source: "/guest", destination: "/sign-in", permanent: false },
+      { source: "/configurations", destination: "/", permanent: false },
+      { source: "/configurations/:path*", destination: "/", permanent: false },
     ];
   },
 };

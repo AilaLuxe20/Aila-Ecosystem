@@ -838,6 +838,11 @@ export default function ChatInterface({
       return;
     }
 
+    if (!isSignedIn) {
+      setSendError("Sign in to chat with Aila.");
+      return;
+    }
+
     const previousMessages = messages;
     const userMessage: ChatMessage = {
       role: "user",

@@ -7,7 +7,7 @@ export default function ShellLayout({ children }: { children: ReactNode }) {
   return (
     <>
       <Navbar />
-      <main className="pt-20">{children}</main>
+      <div className="pt-20">{children}</div>
       <EcosystemSwitcher />
       <Footer />
     </>

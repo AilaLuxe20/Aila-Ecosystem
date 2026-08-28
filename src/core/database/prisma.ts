@@ -1,35 +1,45 @@
 /**
  * Prisma database client singleton.
  *
- * Prisma client singleton for the schema in prisma/schema.prisma.
+ * Prisma ORM 7 requires either a driver adapter (direct Postgres) or an
+ * Accelerate URL. Instantiating PrismaClient with no options throws at query time.
  */
 
+import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "@/generated/prisma";
 
 declare global {
-  // Allow global `var` for Prisma client in development to prevent
-  // multiple instances during hot module replacement.
-  var __prismaClient: PrismaClient | undefined;
+  // Bump this name whenever the constructor options change so hot reload
+  // cannot keep serving a PrismaClient created without an adapter.
+  var __ailaPrismaWithAdapter: PrismaClient | undefined;
 }
 
 let prismaClient: PrismaClient | undefined;
 
-function getPrismaClient(): PrismaClient {
-  const accelerateUrl = process.env.DATABASE_URL?.startsWith("prisma")
-    ? process.env.DATABASE_URL
-    : undefined;
-  const options = accelerateUrl ? { accelerateUrl } : undefined;
+function createPrismaClient(): PrismaClient {
+  const databaseUrl = process.env.DATABASE_URL?.trim();
 
+  if (!databaseUrl) {
+    throw new Error("DATABASE_URL is not set.");
+  }
+
+  if (databaseUrl.startsWith("prisma://") || databaseUrl.startsWith("prisma+postgres://")) {
+    return new PrismaClient({ accelerateUrl: databaseUrl });
+  }
+
+  return new PrismaClient({
+    adapter: new PrismaPg(databaseUrl),
+  });
+}
+
+function getPrismaClient(): PrismaClient {
   if (process.env.NODE_ENV === "production") {
-    prismaClient ??= new PrismaClient(options);
+    prismaClient ??= createPrismaClient();
     return prismaClient;
   }
 
-  if (!global.__prismaClient) {
-    global.__prismaClient = new PrismaClient(options);
-  }
-
-  return global.__prismaClient;
+  global.__ailaPrismaWithAdapter ??= createPrismaClient();
+  return global.__ailaPrismaWithAdapter;
 }
 
 const prisma = new Proxy({} as PrismaClient, {
