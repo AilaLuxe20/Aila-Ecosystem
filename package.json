@@ -10,7 +10,7 @@
     "test": "tsx --test src/core/calendar/schema.test.ts src/core/calendar/ownership.test.ts src/core/business/schema.test.ts src/core/automation/schema.test.ts src/core/commerce/schema.test.ts src/core/ads/schema.test.ts src/core/apps/schema.test.ts src/core/sites/schema.test.ts src/core/flow/schema.test.ts src/core/billing/entitlements.test.ts src/core/products/catalog.test.ts src/core/ai/chat-api.test.ts src/core/ai/streaming/parse.test.ts src/core/ai/streaming/session.test.ts src/core/ai/streaming/persist.test.ts src/core/ai/orchestrator/tools/tools.test.ts src/core/ai/intelligence/files/files.test.ts"
   },
   "dependencies": {
-    "@clerk/nextjs": "^7.6.1",
+    "@clerk/nextjs": "^7.8.3",
     "@opensearch-project/opensearch": "^3.6.0",
     "@prisma/client": "^7.9.0",
     "@supabase/server": "^1.4.1",

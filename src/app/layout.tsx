@@ -1,5 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { ClerkProvider } from "@clerk/nextjs";
+import {
+  ClerkProvider,
+  Show,
+  SignInButton,
+  SignUpButton,
+  UserButton,
+} from "@clerk/nextjs";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -123,9 +129,9 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable}`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-screen bg-black text-white antialiased">
+      <body className="flex min-h-full flex-col bg-black pt-16 text-white antialiased">
         <ClerkProvider
           signInUrl="/sign-in"
           signUpUrl="/sign-up"
@@ -133,6 +139,28 @@ export default function RootLayout({
           signUpFallbackRedirectUrl="/dashboard"
           afterSignOutUrl="/"
         >
+          <header className="fixed inset-x-0 top-0 z-[60] flex h-16 items-center justify-end gap-4 border-b border-white/10 bg-black px-4">
+            <Show when="signed-out">
+              <SignInButton mode="modal" />
+              <SignUpButton mode="modal">
+                <button
+                  type="button"
+                  className="h-10 cursor-pointer rounded-full bg-white px-4 text-sm font-medium text-black transition hover:scale-105 sm:h-12 sm:px-5 sm:text-base"
+                >
+                  Sign Up
+                </button>
+              </SignUpButton>
+            </Show>
+            <Show when="signed-in">
+              <UserButton
+                appearance={{
+                  elements: {
+                    avatarBox: "h-9 w-9",
+                  },
+                }}
+              />
+            </Show>
+          </header>
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{
