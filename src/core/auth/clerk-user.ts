@@ -88,3 +88,15 @@ export async function requirePrismaUser() {
     return user;
   });
 }
+
+export async function getPrismaUserOrNull() {
+  try {
+    return await requirePrismaUser();
+  } catch (error) {
+    if (error instanceof AilaAuthenticationError) {
+      return null;
+    }
+
+    throw error;
+  }
+}

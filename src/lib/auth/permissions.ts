@@ -5,6 +5,15 @@ export const permissions: Record<UserRole, readonly string[]> = {
 
   user: [
     "intelligence",
+    "ailalegal",
+    "business",
+    "automation",
+    "commerce",
+    "ads",
+    "calendar",
+    "sites",
+    "apps",
+    "flow",
   ],
 
   pro: [

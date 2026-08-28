@@ -21,15 +21,20 @@ const serverEnvSchema = z.object({
   NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
   OPENROUTER_API_KEY: z.string().min(1).optional(),
   RESEND_API_KEY: z.string().min(1).optional(),
+  RESEND_FROM_EMAIL: z.string().min(1).optional(),
   PROJECT_INQUIRY_EMAIL: z.string().optional(),
   DATABASE_URL: z.string().min(1).optional(),
   CLERK_SECRET_KEY: z.string().min(1).optional(),
+  STRIPE_SECRET_KEY: z.string().min(1).optional(),
+  STRIPE_WEBHOOK_SECRET: z.string().min(1).optional(),
+  CRON_SECRET: z.string().min(1).optional(),
 });
 
 const publicEnvSchema = z.object({
   NEXT_PUBLIC_APP_URL: z.string().default("https://ailaluxe.com"),
   NEXT_PUBLIC_APP_ENV: z.enum(["development", "preview", "production", "test"]).optional(),
   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string().optional(),
+  NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string().optional(),
 });
 
 /** Validated server-only environment variables. */
@@ -79,6 +84,7 @@ export const publicEnv: PublicEnv = publicEnvSchema.parse({
   NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
   NEXT_PUBLIC_APP_ENV: process.env.NEXT_PUBLIC_APP_ENV,
   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
+  NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
 });
 
 /**

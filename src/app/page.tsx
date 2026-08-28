@@ -35,52 +35,52 @@ const platforms = [
     accent: "from-amber-300/20 via-yellow-500/5 to-transparent",
   },
   {
-    title: "Shopping Web App",
+    title: "Aila Commerce",
     description:
-      "A modern intelligent shopping experience built for the next generation of digital commerce.",
-    status: "Coming Soon",
-    type: "Web App",
-    href: "",
+      "Create products, take orders, and collect payment in your Aila catalog.",
+    status: "Live Platform",
+    type: "Commerce",
+    href: "/products/commerce",
     external: false,
     accent: "from-purple-400/20 via-fuchsia-500/5 to-transparent",
   },
   {
-    title: "Hotel Booking",
+    title: "Aila Calendar",
     description:
-      "A premium hotel discovery and reservation experience built as an interactive product demo.",
-    status: "Demo",
-    type: "Booking Platform",
-    href: "",
+      "Create, search, edit, and archive events stored on your account.",
+    status: "Live Platform",
+    type: "Workspace",
+    href: "/products/calendar",
     external: false,
     accent: "from-blue-400/20 via-cyan-500/5 to-transparent",
   },
   {
-    title: "Cleaning Booking",
+    title: "Aila Business",
     description:
-      "A service booking experience designed for cleaning businesses and modern service operations.",
-    status: "Demo",
-    type: "Service Platform",
-    href: "",
+      "Track contacts and complete tasks in a signed-in business workspace.",
+    status: "Live Platform",
+    type: "Workspace",
+    href: "/products/business",
     external: false,
     accent: "from-cyan-300/20 via-teal-500/5 to-transparent",
   },
   {
-    title: "Restaurant",
+    title: "Aila Sites",
     description:
-      "A modern restaurant experience for menus, reservations, discovery and digital ordering.",
-    status: "Demo",
-    type: "Hospitality",
-    href: "",
+      "Write markdown pages and publish them to a public Aila URL.",
+    status: "Live Platform",
+    type: "Sites",
+    href: "/products/sites",
     external: false,
     accent: "from-orange-400/20 via-red-500/5 to-transparent",
   },
   {
-    title: "Barber",
+    title: "Aila Flow",
     description:
-      "A premium barber booking experience for appointments, services and customer management.",
-    status: "Demo",
-    type: "Booking Platform",
-    href: "",
+      "Define ordered steps and complete the next one as the work moves.",
+    status: "Live Platform",
+    type: "Workflows",
+    href: "/products/flow",
     external: false,
     accent: "from-neutral-300/20 via-neutral-500/5 to-transparent",
   },
@@ -268,9 +268,8 @@ export default function Home() {
             </div>
 
             <p className="max-w-md leading-8 text-neutral-400">
-              Explore live platforms, products in development and interactive
-              demonstrations across commerce, hospitality and service
-              industries.
+              Live client work and Aila products you can sign in and use: catalog,
+              calendar, contacts, published sites, and workflows.
             </p>
           </div>
         </AnimatedSection>
@@ -317,11 +316,7 @@ export default function Home() {
 
                     <div className="mt-8 flex items-center justify-between border-t border-white/[0.07] pt-5">
                       <span className="text-sm text-neutral-400 transition group-hover:text-white">
-                        {platform.status === "Live Platform"
-                          ? "Visit Platform"
-                          : platform.status === "Coming Soon"
-                            ? "In Development"
-                            : "Explore Demo"}
+                        {platform.external ? "Visit Platform" : "Open workspace"}
                       </span>
 
                       <span className="text-xl text-neutral-600 transition duration-300 group-hover:translate-x-1 group-hover:text-cyan-300">
@@ -334,16 +329,27 @@ export default function Home() {
             );
 
             if (platform.href) {
+              const className =
+                "group relative overflow-hidden rounded-[32px] border border-white/[0.08] bg-white/[0.025] p-7 transition duration-500 hover:-translate-y-2 hover:border-white/[0.16]";
+
+              if (platform.external) {
+                return (
+                  <a
+                    key={platform.title}
+                    href={platform.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={className}
+                  >
+                    {cardContent}
+                  </a>
+                );
+              }
+
               return (
-                <a
-                  key={platform.title}
-                  href={platform.href}
-                  target={platform.external ? "_blank" : undefined}
-                  rel={platform.external ? "noopener noreferrer" : undefined}
-                  className="group relative overflow-hidden rounded-[32px] border border-white/[0.08] bg-white/[0.025] p-7 transition duration-500 hover:-translate-y-2 hover:border-white/[0.16]"
-                >
+                <Link key={platform.title} href={platform.href} className={className}>
                   {cardContent}
-                </a>
+                </Link>
               );
             }
 

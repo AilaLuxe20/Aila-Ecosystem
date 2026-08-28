@@ -10,7 +10,7 @@ export async function requireProductAccess(product: string) {
     redirect("/sign-in");
   }
 
-  const role = (sessionClaims?.metadata?.role as UserRole | undefined) ?? "guest";
+  const role = (sessionClaims?.metadata?.role as UserRole | undefined) ?? "user";
 
   if (!canAccess(role, product)) {
     redirect("/");

@@ -132,13 +132,21 @@ export default function Navbar() {
 
           <div className="hidden items-center gap-2 lg:flex">
             {isSignedIn ? (
-              <UserButton
-                appearance={{
-                  elements: {
-                    avatarBox: "h-9 w-9",
-                  },
-                }}
-              />
+              <>
+                <Link
+                  href="/dashboard"
+                  className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-neutral-300 transition hover:bg-white/10"
+                >
+                  Dashboard
+                </Link>
+                <UserButton
+                  appearance={{
+                    elements: {
+                      avatarBox: "h-9 w-9",
+                    },
+                  }}
+                />
+              </>
             ) : (
               <>
                 <SignInButton
@@ -300,7 +308,14 @@ export default function Navbar() {
 
             <div className="mt-6 flex flex-col gap-3">
               {isSignedIn ? (
-                <div className="flex justify-center">
+                <div className="flex flex-col items-center gap-3">
+                  <Link
+                    href="/dashboard"
+                    onClick={() => setMenuOpen(false)}
+                    className="w-full rounded-full border border-white/10 bg-white/5 px-6 py-4 text-center text-sm font-semibold text-neutral-300"
+                  >
+                    Dashboard
+                  </Link>
                   <UserButton
                     appearance={{
                       elements: {

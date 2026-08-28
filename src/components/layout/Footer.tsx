@@ -17,6 +17,10 @@ const companyLinks = [
     href: "/#products",
   },
   {
+    label: "Dashboard",
+    href: "/dashboard",
+  },
+  {
     label: "Build With Aila",
     href: "/build-with-aila",
   },
@@ -27,6 +31,14 @@ const companyLinks = [
   {
     label: "Start a Project",
     href: "/#start-project",
+  },
+  {
+    label: "Privacy",
+    href: "/privacy",
+  },
+  {
+    label: "Terms",
+    href: "/terms",
   },
 ];
 

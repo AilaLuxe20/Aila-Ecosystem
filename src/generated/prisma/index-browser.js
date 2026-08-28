@@ -236,9 +236,147 @@ exports.Prisma.CalendarEventScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.BusinessContactScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  email: 'email',
+  company: 'company',
+  phone: 'phone',
+  notes: 'notes',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.BusinessTaskScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  contactId: 'contactId',
+  title: 'title',
+  notes: 'notes',
+  dueAt: 'dueAt',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AutomationRuleScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  enabled: 'enabled',
+  triggerType: 'triggerType',
+  intervalHours: 'intervalHours',
+  actionType: 'actionType',
+  actionPayload: 'actionPayload',
+  lastRunAt: 'lastRunAt',
+  lastStatus: 'lastStatus',
+  lastError: 'lastError',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AutomationRunScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  ruleId: 'ruleId',
+  status: 'status',
+  message: 'message',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.CommerceProductScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  description: 'description',
+  priceCents: 'priceCents',
+  currency: 'currency',
+  sku: 'sku',
+  inventory: 'inventory',
+  active: 'active',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CommerceOrderScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  productId: 'productId',
+  quantity: 'quantity',
+  customerName: 'customerName',
+  customerEmail: 'customerEmail',
+  status: 'status',
+  totalCents: 'totalCents',
+  currency: 'currency',
+  stripeCheckoutSessionId: 'stripeCheckoutSessionId',
+  paidAt: 'paidAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AdsCampaignScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  objective: 'objective',
+  budgetCents: 'budgetCents',
+  headline: 'headline',
+  body: 'body',
+  targetingNotes: 'targetingNotes',
+  status: 'status',
+  startsAt: 'startsAt',
+  endsAt: 'endsAt',
+  launchedAt: 'launchedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AppListingScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  slug: 'slug',
+  description: 'description',
+  platform: 'platform',
+  url: 'url',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SiteScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  slug: 'slug',
+  description: 'description',
+  status: 'status',
+  pages: 'pages',
+  publishedAt: 'publishedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.FlowScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  description: 'description',
+  status: 'status',
+  steps: 'steps',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.JsonNullValueInput = {
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -249,6 +387,12 @@ exports.Prisma.QueryMode = {
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
 };
 
 
@@ -262,7 +406,17 @@ exports.Prisma.ModelName = {
   LegalDocument: 'LegalDocument',
   IntelligenceDocument: 'IntelligenceDocument',
   ProjectInquiry: 'ProjectInquiry',
-  CalendarEvent: 'CalendarEvent'
+  CalendarEvent: 'CalendarEvent',
+  BusinessContact: 'BusinessContact',
+  BusinessTask: 'BusinessTask',
+  AutomationRule: 'AutomationRule',
+  AutomationRun: 'AutomationRun',
+  CommerceProduct: 'CommerceProduct',
+  CommerceOrder: 'CommerceOrder',
+  AdsCampaign: 'AdsCampaign',
+  AppListing: 'AppListing',
+  Site: 'Site',
+  Flow: 'Flow'
 };
 
 /**

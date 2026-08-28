@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
+import { getPrismaUserOrNull } from "@/core/auth/clerk-user";
+import { getResendFromEmail } from "@/core/config";
+import { prisma } from "@/core/database/prisma";
+
 const allowedProjectTypes = [
   "Website",
   "Web App",
@@ -120,35 +124,32 @@ export async function POST(req: Request) {
       );
     }
 
-    if (
-      !process.env.RESEND_API_KEY ||
-      !process.env.PROJECT_INQUIRY_EMAIL
-    ) {
-      console.error(
-        "Missing RESEND_API_KEY or PROJECT_INQUIRY_EMAIL"
-      );
+    const signedInUser = await getPrismaUserOrNull();
 
-      return NextResponse.json(
-        {
-          error:
-            "Project inquiry email is not configured yet.",
-        },
-        {
-          status: 500,
-        }
-      );
-    }
+    const inquiry = await prisma.projectInquiry.create({
+      data: {
+        userId: signedInUser?.id,
+        name,
+        email,
+        company: company || null,
+        idea,
+        projectType,
+        description: idea,
+        status: "new",
+      },
+    });
 
+    const inquiryId = inquiry.id;
+
+    if (process.env.RESEND_API_KEY && process.env.PROJECT_INQUIRY_EMAIL) {
     const resend = new Resend(
       process.env.RESEND_API_KEY
     );
 
-    const inquiryId = crypto.randomUUID();
 
     const { data: emailData, error: emailError } =
       await resend.emails.send({
-        from:
-          "Aila Ecosystem <onboarding@resend.dev>",
+        from: getResendFromEmail(),
 
         to: [
           process.env.PROJECT_INQUIRY_EMAIL,
@@ -297,23 +298,13 @@ export async function POST(req: Request) {
         "Aila Inquiry Email Error:",
         emailError
       );
-
-      return NextResponse.json(
-        {
-          error:
-            emailError.message ||
-            "Aila could not send the notification email.",
-        },
-        {
-          status: 500,
-        }
+    } else {
+      console.log(
+        "Aila Inquiry Email Sent:",
+        emailData
       );
     }
-
-    console.log(
-      "Aila Inquiry Email Sent:",
-      emailData
-    );
+    }
 
     return NextResponse.json(
       {

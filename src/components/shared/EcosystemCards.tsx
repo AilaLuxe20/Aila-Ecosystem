@@ -30,9 +30,9 @@ const products = [
     title: "Aila Business AI",
     shortName: "AB",
     tag: "Business Intelligence",
-    status: "Building",
+    status: "Online",
     description:
-      "AI-powered business intelligence designed to uncover opportunities, improve operations and transform complex processes into smarter systems.",
+      "Contacts, tasks, and completed work stored on your account. Create a client, assign a task, and mark it done.",
     link: "/products/business",
     accent: "purple",
     capabilities: ["Insights", "Operations", "AI Strategy"],
@@ -42,9 +42,9 @@ const products = [
     title: "Aila Automation",
     shortName: "AA",
     tag: "Intelligent Systems",
-    status: "Building",
+    status: "Online",
     description:
-      "Connected automation systems that reduce repetitive work, improve efficiency and help businesses operate with greater intelligence.",
+      "Rules that send email, create calendar events, or create tasks. Run them now or on an interval.",
     link: "/products/automation",
     accent: "violet",
     capabilities: ["Workflows", "Connections", "Automation"],

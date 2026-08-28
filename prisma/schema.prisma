@@ -22,6 +22,16 @@ model User {
   intelligenceDocuments  IntelligenceDocument[]
   projectInquiries       ProjectInquiry[]
   calendarEvents         CalendarEvent[]
+  businessContacts       BusinessContact[]
+  businessTasks          BusinessTask[]
+  automationRules        AutomationRule[]
+  automationRuns         AutomationRun[]
+  commerceProducts       CommerceProduct[]
+  commerceOrders         CommerceOrder[]
+  adsCampaigns           AdsCampaign[]
+  appListings            AppListing[]
+  sites                  Site[]
+  flows                  Flow[]
   createdAt              DateTime                 @default(now())
   updatedAt              DateTime                 @updatedAt
 }
@@ -169,4 +179,199 @@ model CalendarEvent {
   @@index([userId, startsAt])
   @@index([userId, archivedAt])
   @@map("calendar_events")
+}
+
+model BusinessContact {
+  id        String         @id @default(cuid())
+  userId    String
+  name      String
+  email     String?
+  company   String?
+  phone     String?
+  notes     String?        @db.Text
+  status    String         @default("lead")
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+
+  user  User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tasks BusinessTask[]
+
+  @@index([userId, status])
+  @@map("business_contacts")
+}
+
+model BusinessTask {
+  id        String    @id @default(cuid())
+  userId    String
+  contactId String?
+  title     String
+  notes     String?   @db.Text
+  dueAt     DateTime?
+  status    String    @default("open")
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  user    User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  contact BusinessContact? @relation(fields: [contactId], references: [id], onDelete: SetNull)
+
+  @@index([userId, status])
+  @@index([contactId])
+  @@map("business_tasks")
+}
+
+model AutomationRule {
+  id             String    @id @default(cuid())
+  userId         String
+  name           String
+  enabled        Boolean   @default(true)
+  triggerType    String
+  intervalHours  Int?
+  actionType     String
+  actionPayload  Json
+  lastRunAt      DateTime?
+  lastStatus     String?
+  lastError      String?   @db.Text
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  user User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  runs AutomationRun[]
+
+  @@index([userId, enabled])
+  @@map("automation_rules")
+}
+
+model AutomationRun {
+  id        String   @id @default(cuid())
+  userId    String
+  ruleId    String
+  status    String
+  message   String   @db.Text
+  createdAt DateTime @default(now())
+
+  user User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  rule AutomationRule @relation(fields: [ruleId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@index([ruleId])
+  @@map("automation_runs")
+}
+
+model CommerceProduct {
+  id          String   @id @default(cuid())
+  userId      String
+  name        String
+  description String?  @db.Text
+  priceCents  Int
+  currency    String   @default("usd")
+  sku         String?
+  inventory   Int      @default(0)
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user   User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  orders CommerceOrder[]
+
+  @@index([userId, active])
+  @@map("commerce_products")
+}
+
+model CommerceOrder {
+  id                      String    @id @default(cuid())
+  userId                  String
+  productId               String
+  quantity                Int       @default(1)
+  customerName            String
+  customerEmail           String
+  status                  String    @default("pending")
+  totalCents              Int
+  currency                String    @default("usd")
+  stripeCheckoutSessionId String?   @unique
+  paidAt                  DateTime?
+  createdAt               DateTime  @default(now())
+  updatedAt               DateTime  @updatedAt
+
+  user    User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product CommerceProduct @relation(fields: [productId], references: [id], onDelete: Restrict)
+
+  @@index([userId, status])
+  @@index([productId])
+  @@map("commerce_orders")
+}
+
+model AdsCampaign {
+  id             String    @id @default(cuid())
+  userId         String
+  name           String
+  objective      String
+  budgetCents    Int
+  headline       String
+  body           String    @db.Text
+  targetingNotes String?   @db.Text
+  status         String    @default("draft")
+  startsAt       DateTime?
+  endsAt         DateTime?
+  launchedAt     DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, status])
+  @@map("ads_campaigns")
+}
+
+model AppListing {
+  id          String   @id @default(cuid())
+  userId      String
+  name        String
+  slug        String
+  description String   @db.Text
+  platform    String
+  url         String?
+  status      String   @default("draft")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, slug])
+  @@index([userId, status])
+  @@map("app_listings")
+}
+
+model Site {
+  id          String    @id @default(cuid())
+  userId      String
+  name        String
+  slug        String
+  description String?   @db.Text
+  status      String    @default("draft")
+  pages       Json
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, slug])
+  @@index([userId, status])
+  @@map("sites")
+}
+
+model Flow {
+  id          String   @id @default(cuid())
+  userId      String
+  name        String
+  description String?  @db.Text
+  status      String   @default("draft")
+  steps       Json
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, status])
+  @@map("flows")
 }

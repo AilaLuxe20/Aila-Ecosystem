@@ -38,3 +38,23 @@ export function getResendApiKey(): string | undefined {
 export function getProjectInquiryEmail(): string | undefined {
   return process.env.PROJECT_INQUIRY_EMAIL;
 }
+
+export function getResendFromEmail(): string {
+  return process.env.RESEND_FROM_EMAIL ?? "Aila Ecosystem <onboarding@resend.dev>";
+}
+
+export function getStripeSecretKey(): string | undefined {
+  return process.env.STRIPE_SECRET_KEY;
+}
+
+export function getStripeWebhookSecret(): string | undefined {
+  return process.env.STRIPE_WEBHOOK_SECRET;
+}
+
+export function getCronSecret(): string | undefined {
+  return process.env.CRON_SECRET;
+}
+
+export function getAppUrl(): string {
+  return process.env.NEXT_PUBLIC_APP_URL ?? "https://ailaluxe.com";
+}
