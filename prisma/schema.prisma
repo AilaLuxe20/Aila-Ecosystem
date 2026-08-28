@@ -1,38 +1,43 @@
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../src/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
+  // The 'url' property has been removed to comply with Prisma 7 configuration requirements
 }
 
 model User {
-  id            String   @id @default(cuid())
-  name          String?
-  email         String   @unique
-  emailVerified DateTime?
-  image         String?
-  password      String?
-  accounts      Account[]
-  sessions      Session[]
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id                     String                   @id @default(cuid())
+  name                   String?
+  email                  String                   @unique
+  emailVerified          DateTime?
+  image                  String?
+  password               String?
+  accounts               Account[]
+  sessions               Session[]
+  conversations          Conversation[]
+  legalDocuments         LegalDocument[]
+  intelligenceDocuments  IntelligenceDocument[]
+  projectInquiries       ProjectInquiry[]
+  createdAt              DateTime                 @default(now())
+  updatedAt              DateTime                 @updatedAt
 }
 
 model Account {
-  id                 String @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?
-  access_token       String?
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?
-  session_state      String?
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -40,8 +45,8 @@ model Account {
 }
 
 model Session {
-  id           String @id @default(cuid())
-  sessionToken String @unique
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
   userId       String
   expires      DateTime
 
@@ -50,8 +55,96 @@ model Session {
 
 model VerificationToken {
   identifier String
-  token      String @unique
+  token      String   @unique
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Conversation {
+  id        String   @id @default(cuid())
+  userId    String
+  mode      String   @default("intelligence")
+  title     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user                   User                    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages               Message[]
+  intelligenceDocuments  IntelligenceDocument[]
+
+  @@index([userId])
+  @@map("conversations")
+}
+
+model Message {
+  id             String   @id @default(cuid())
+  conversationId String
+  role           String
+  content        String   @db.Text
+  createdAt      DateTime @default(now())
+
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@index([conversationId])
+}
+
+model LegalDocument {
+  id             String   @id @default(cuid())
+  userId         String
+  fileName       String
+  fileSize       Int
+  mimeType       String
+  fileType       String
+  content        String   @db.Text
+  summary        String?  @db.Text
+  conversationId String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("legal_documents")
+}
+
+model IntelligenceDocument {
+  id                 String   @id @default(cuid())
+  userId             String
+  conversationId     String?
+  fileName           String
+  fileSize           Int
+  mimeType           String
+  kind               String
+  extractedText      String   @db.Text
+  extractedCharCount Int
+  truncated          Boolean  @default(false)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  conversation Conversation? @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([conversationId])
+  @@map("intelligence_documents")
+}
+
+model ProjectInquiry {
+  id          String   @id @default(cuid())
+  userId      String?
+  name        String
+  email       String
+  company     String?
+  idea        String
+  projectType String
+  budget      String?
+  timeline    String?
+  description String   @db.Text
+  status      String   @default("new")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@map("project_inquiries")
 }

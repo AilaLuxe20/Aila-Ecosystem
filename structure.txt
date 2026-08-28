@@ -1,0 +1,111 @@
+Folder PATH listing for volume Windows
+Volume serial number is 00000252 522C:9BF6
+C:\USERS\KARMA\AILA\SRC
++---app
+¦   ¦   favicon.ico
+¦   ¦   globals.css
+¦   ¦   layout.tsx
+¦   ¦   page.tsx
+¦   ¦   robots.ts
+¦   ¦   
+¦   +---(shell)
+¦   ¦   +---apps
+¦   ¦   +---automation
+¦   ¦   +---business
+¦   ¦   +---dashboard
+¦   ¦   +---intelligence
+¦   ¦   +---legal
+¦   ¦   +---sites
+¦   +---api
+¦   ¦   +---automation-chat
+¦   ¦   ¦       route.ts
+¦   ¦   ¦       
+¦   ¦   +---business-chat
+¦   ¦   ¦       route.ts
+¦   ¦   ¦       
+¦   ¦   +---chat
+¦   ¦   ¦       route.ts
+¦   ¦   ¦       
+¦   ¦   +---legal-chat
+¦   ¦   ¦       route.ts
+¦   ¦   ¦       
+¦   ¦   +---legal-upload
+¦   ¦   ¦       route.ts
+¦   ¦   ¦       
+¦   ¦   +---project-inquiry
+¦   ¦           route.ts
+¦   ¦           
+¦   +---components
+¦   ¦       AilaAssistant.tsx
+¦   ¦       AilaLegalAnalyzer.tsx
+¦   ¦       AilaLegalChat.tsx
+¦   ¦       AilaLegalContext.tsx
+¦   ¦       AnimatedSection.tsx
+¦   ¦       DocumentAnalyzer.tsx
+¦   ¦       EcosystemCards.tsx
+¦   ¦       EcosystemSwitcher.tsx
+¦   ¦       FeaturePanel.tsx
+¦   ¦       Footer.tsx
+¦   ¦       Navbar.tsx
+¦   ¦       ProjectInquiry.tsx
+¦   ¦       TopBar.tsx
+¦   ¦       
+¦   +---lib
+¦   ¦       ai.ts
+¦   ¦       documentContext.ts
+¦   ¦       
+¦   +---products
+¦       +---ailalegal
+¦       ¦   ¦   page.tsx
+¦       ¦   ¦   
+¦       ¦   +---analyze
+¦       ¦   ¦       route.ts
+¦       ¦   ¦       
+¦       ¦   +---chat
+¦       ¦   ¦       route.ts
+¦       ¦   ¦       
+¦       ¦   +---components
+¦       ¦   ¦       Dashboard.tsx
+¦       ¦   ¦       DocumentAnalyzer.tsx
+¦       ¦   ¦       DocumentUpload.tsx
+¦       ¦   ¦       LegalSidebar.tsx
+¦       ¦   ¦       LegalTopbar.tsx
+¦       ¦   ¦       
+¦       ¦   +---extract
+¦       ¦           route.ts
+¦       ¦           
+¦       +---automation
+¦       ¦       page.tsx
+¦       ¦       
+¦       +---business
+¦       ¦       page.tsx
+¦       ¦       
+¦       +---intelligence
+¦               page.tsx
+¦               
++---generated
+    +---prisma
+        ¦   client.d.ts
+        ¦   client.js
+        ¦   default.d.ts
+        ¦   default.js
+        ¦   edge.d.ts
+        ¦   edge.js
+        ¦   index-browser.js
+        ¦   index.d.ts
+        ¦   index.js
+        ¦   package.json
+        ¦   query_compiler_fast_bg.js
+        ¦   query_compiler_fast_bg.wasm
+        ¦   query_compiler_fast_bg.wasm-base64.js
+        ¦   schema.prisma
+        ¦   wasm-edge-light-loader.mjs
+        ¦   wasm-worker-loader.mjs
+        ¦   
+        +---runtime
+                client.d.ts
+                client.js
+                index-browser.d.ts
+                index-browser.js
+                wasm-compiler-edge.js
+                

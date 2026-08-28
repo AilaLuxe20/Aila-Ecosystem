@@ -5,13 +5,32 @@ import nextTs from "eslint-config-next/typescript";
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
-  // Override default ignores of eslint-config-next.
+
   globalIgnores([
-    // Default ignores of eslint-config-next:
+    // Next.js default ignores
     ".next/**",
     "out/**",
     "build/**",
     "next-env.d.ts",
+
+    // Dependencies
+    "node_modules/**",
+
+    // Coverage reports
+    "coverage/**",
+
+    // Generated files
+    "src/generated/**",
+    "src/generated/prisma/**",
+
+    // Optional generated folders
+    ".turbo/**",
+    ".vercel/**",
+    "dist/**",
+
+    // Separate workspace projects (have their own .next build artifacts)
+    "clerk-nextjs/**",
+    "my-app/**",
   ]),
 ]);
 

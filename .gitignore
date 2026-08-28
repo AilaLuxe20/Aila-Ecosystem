@@ -40,7 +40,13 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-.vercel
-.env*
+route-backup-*.zip
+route-usage-audit.csv
+routes-to-delete.csv
+replacements.txt
 
-/src/generated/prisma
+# stray backup/scaffold artifacts
+*.bak
+my-app/
+build_output.txt
+globals.txt

@@ -1,8 +1,8 @@
-﻿import Link from "next/link";
-import AilaAssistant from "./components/AilaAssistant";
-import EcosystemCards from "./components/EcosystemCards";
-import AnimatedSection from "./components/AnimatedSection";
-import ProjectInquiry from "./components/ProjectInquiry";
+import Link from "next/link";
+import ChatInterface from "@/components/ai/ChatInterface";
+import EcosystemCards from "@/components/shared/EcosystemCards";
+import AnimatedSection from "@/components/ui/AnimatedSection";
+import ProjectInquiry from "@/components/forms/ProjectInquiry";
 
 const services = [
   {
@@ -178,7 +178,7 @@ export default function Home() {
           </AnimatedSection>
 
           <AnimatedSection>
-            <AilaAssistant />
+            <ChatInterface mode="intelligence" />
           </AnimatedSection>
         </div>
       </section>
@@ -325,7 +325,7 @@ export default function Home() {
                       </span>
 
                       <span className="text-xl text-neutral-600 transition duration-300 group-hover:translate-x-1 group-hover:text-cyan-300">
-                        â†’
+                        →
                       </span>
                     </div>
                   </div>
@@ -381,11 +381,9 @@ export default function Home() {
       </section>
 
       {/* PROJECT INQUIRY */}
-      <section id="start-project">
-        <AnimatedSection>
-          <ProjectInquiry />
-        </AnimatedSection>
-      </section>
+      <AnimatedSection>
+        <ProjectInquiry />
+      </AnimatedSection>
 
       {/* FINAL CTA */}
       <section className="mx-auto max-w-6xl px-6 pb-40 pt-20">
@@ -419,4 +417,3 @@ export default function Home() {
     </main>
   );
 }
-
