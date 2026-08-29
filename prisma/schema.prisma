@@ -35,6 +35,8 @@ model User {
   adsLandingAnalyses     AdsLandingPageAnalysis[]
   adsRecommendations     AdsRecommendation[]
   adsAiUsage             AdsAiUsage[]
+  dailyNotes             DailyNote[]
+  dailyGoals             DailyGoal[]
   appListings            AppListing[]
   sites                  Site[]
   flows                  Flow[]
@@ -486,6 +488,36 @@ model Flow {
   @@map("flows")
 }
 
+model DailyNote {
+  id        String   @id @default(cuid())
+  userId    String
+  title     String
+  body      String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, updatedAt])
+  @@map("daily_notes")
+}
+
+model DailyGoal {
+  id        String    @id @default(cuid())
+  userId    String
+  title     String
+  status    String    @default("open")
+  dueAt     DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, status])
+  @@index([userId, dueAt])
+  @@map("daily_goals")
+}
+
 model BillingSubscription {
   id                   String    @id @default(cuid())
   userId               String
@@ -495,6 +527,7 @@ model BillingSubscription {
   plan                 String    @default("pro")
   status               String
   currentPeriodEnd     DateTime?
+  trialEndsAt          DateTime?
   cancelAtPeriodEnd    Boolean   @default(false)
   createdAt            DateTime  @default(now())
   updatedAt            DateTime  @updatedAt
