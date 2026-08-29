@@ -46,7 +46,15 @@ const isProtectedRoute = createRouteMatcher([
 
 const clerkMiddlewareOptions =
   process.env.VERCEL_ENV === "production"
-    ? { authorizedParties: ["https://ailaluxe.com"] }
+    ? {
+        authorizedParties: [
+          "https://ailaluxe.com",
+          "https://www.ailaluxe.com",
+          "https://aila.website",
+          "https://www.aila.website",
+          "https://app.aila.website",
+        ],
+      }
     : undefined;
 
 export default clerkMiddleware(async (auth, req) => {
