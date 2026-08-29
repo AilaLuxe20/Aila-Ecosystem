@@ -85,7 +85,7 @@ function BillingWorkspaceInner({
       href="/billing"
       accent="cyan"
       title="Aila Pro"
-      description="Subscribe to unlock Legal, Business, Automation, Commerce, Ads, Calendar, Sites, Apps, and Flow. Intelligence stays available on every account."
+      description="Subscribe to unlock Legal, Business, Automation, Commerce, Calendar, Sites, Apps, and Flow. Intelligence and Ads stay available on every account, with higher Ads limits on Pro."
       loading={loading}
       error={error}
       onRetry={() => void load()}
@@ -113,7 +113,9 @@ function BillingWorkspaceInner({
     >
       {requested ? (
         <p className="mb-6 rounded-2xl border border-amber-300/20 bg-amber-300/[0.06] px-4 py-3 text-sm text-amber-100">
-          {requested.title} requires an active Pro subscription.
+          {requested.paid
+            ? `${requested.title} requires an active Pro subscription.`
+            : `${requested.title} is included on Free. Pro raises campaign, creative, and daily AI limits.`}
         </p>
       ) : null}
 

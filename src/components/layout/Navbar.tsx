@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useAuth, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
-import { ALL_PRODUCTS } from "@/core/constants";
+import { groupedNavProducts } from "@/core/constants";
 
 const navigation = [
   {
@@ -16,8 +16,7 @@ const navigation = [
   },
 ];
 
-const aiProducts = ALL_PRODUCTS.slice(0, 4);
-const platformProducts = ALL_PRODUCTS.slice(4);
+const navGroups = groupedNavProducts();
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -116,19 +115,26 @@ export default function Navbar() {
               {productsOpen ? (
                 <div
                   role="menu"
-                  className="absolute left-0 top-full z-50 mt-2 w-[320px] rounded-2xl border border-white/[0.1] bg-black/95 p-2 shadow-[0_20px_80px_rgba(0,0,0,0.65)] backdrop-blur-2xl"
+                  className="absolute left-0 top-full z-50 mt-2 w-[360px] rounded-2xl border border-white/[0.1] bg-black/95 p-2 shadow-[0_20px_80px_rgba(0,0,0,0.65)] backdrop-blur-2xl"
                 >
-                  {ALL_PRODUCTS.map((item) => (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      role="menuitem"
-                      onClick={() => setProductsOpen(false)}
-                      className="flex items-center justify-between rounded-xl px-3 py-2.5 text-sm text-neutral-300 transition hover:bg-white/[0.06] hover:text-white"
-                    >
-                      <span>{item.name}</span>
-                      <span className="text-neutral-600">→</span>
-                    </Link>
+                  {navGroups.map((group) => (
+                    <div key={group.group} className="mb-1 last:mb-0">
+                      <p className="px-3 pb-1 pt-2 text-[10px] uppercase tracking-[0.22em] text-neutral-600">
+                        {group.label}
+                      </p>
+                      {group.products.map((item) => (
+                        <Link
+                          key={item.name}
+                          href={item.href}
+                          role="menuitem"
+                          onClick={() => setProductsOpen(false)}
+                          className="flex items-center justify-between rounded-xl px-3 py-2.5 text-sm text-neutral-300 transition hover:bg-white/[0.06] hover:text-white"
+                        >
+                          <span>{item.name}</span>
+                          <span className="text-neutral-600">→</span>
+                        </Link>
+                      ))}
+                    </div>
                   ))}
                 </div>
               ) : null}
@@ -254,62 +260,28 @@ export default function Navbar() {
               </Link>
             ))}
 
-            <div className="my-4 h-px w-full bg-white/[0.06]" />
-
-            <p className="py-3 text-xs uppercase tracking-[0.25em] text-neutral-600">
-              AI Products
-            </p>
-
-            {aiProducts.map((item, index) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                onClick={() => setMenuOpen(false)}
-                className="group flex items-center justify-between border-b border-white/[0.07] py-5"
-              >
-                <div className="flex items-center gap-5">
-                  <span className="text-xs text-neutral-700">
-                    0{navigation.length + index + 1}
-                  </span>
-
-                  <span className="text-xl font-medium tracking-[-0.03em] text-neutral-300 transition group-hover:text-white">
-                    {item.name}
-                  </span>
-                </div>
-
-                <span className="text-neutral-700 transition group-hover:translate-x-1 group-hover:text-cyan-300">
-                  →
-                </span>
-              </Link>
-            ))}
-
-            <div className="my-4 h-px w-full bg-white/[0.06]" />
-
-            <p className="py-3 text-xs uppercase tracking-[0.25em] text-neutral-600">
-              Platform
-            </p>
-
-            {platformProducts.map((item, index) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                onClick={() => setMenuOpen(false)}
-                className="group flex items-center justify-between border-b border-white/[0.07] py-5"
-              >
-                <div className="flex items-center gap-5">
-                  <span className="text-xs text-neutral-700">
-                    0{navigation.length + aiProducts.length + index + 1}
-                  </span>
-
-                  <span className="text-xl font-medium tracking-[-0.03em] text-neutral-300 transition group-hover:text-white">
-                    {item.name}
-                  </span>
-                </div>
-
-                <span className="text-neutral-700 transition group-hover:translate-x-1 group-hover:text-cyan-300">
-                  →
-                </span>
-              </Link>
+            {navGroups.map((group) => (
+              <div key={group.group}>
+                <div className="my-4 h-px w-full bg-white/[0.06]" />
+                <p className="py-3 text-xs uppercase tracking-[0.25em] text-neutral-600">
+                  {group.label}
+                </p>
+                {group.products.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    onClick={() => setMenuOpen(false)}
+                    className="group flex items-center justify-between border-b border-white/[0.07] py-5"
+                  >
+                    <span className="text-xl font-medium tracking-[-0.03em] text-neutral-300 transition group-hover:text-white">
+                      {item.name}
+                    </span>
+                    <span className="text-neutral-700 transition group-hover:translate-x-1 group-hover:text-cyan-300">
+                      →
+                    </span>
+                  </Link>
+                ))}
+              </div>
             ))}
           </nav>
 

@@ -25,14 +25,54 @@ const services = [
 
 const platforms = [
   {
-    title: "TLUXE Hairs",
+    title: "Aila Intelligence",
     description:
-      "A luxury hair shopping platform and real client commerce experience.",
+      "Chat, attach files, and persist conversations on your account.",
     status: "Live Platform",
-    type: "Commerce",
-    href: "https://tluxehairs.shop",
-    external: true,
-    accent: "from-amber-300/20 via-yellow-500/5 to-transparent",
+    type: "Everyday",
+    href: "/products/intelligence",
+    external: false,
+    accent: "from-cyan-400/20 via-blue-500/5 to-transparent",
+  },
+  {
+    title: "Aila Ads",
+    description:
+      "Plan campaigns, generate ad copy, and analyse stored data for creators, businesses, and agencies worldwide.",
+    status: "Live Platform",
+    type: "Professional",
+    href: "/products/ads",
+    external: false,
+    accent: "from-amber-400/20 via-orange-500/5 to-transparent",
+  },
+  {
+    title: "Aila Business",
+    description:
+      "Track contacts and complete tasks in a signed-in business workspace.",
+    status: "Live Platform",
+    type: "Professional",
+    href: "/products/business",
+    external: false,
+    accent: "from-cyan-300/20 via-teal-500/5 to-transparent",
+  },
+  {
+    title: "Aila Legal",
+    description:
+      "Upload contracts and get AI-powered analysis stored on your account.",
+    status: "Live Platform",
+    type: "Professional",
+    href: "/products/ailalegal",
+    external: false,
+    accent: "from-blue-400/20 via-indigo-500/5 to-transparent",
+  },
+  {
+    title: "Aila Automation",
+    description:
+      "Rules that send email, create calendar events, or create tasks.",
+    status: "Live Platform",
+    type: "Professional",
+    href: "/products/automation",
+    external: false,
+    accent: "from-violet-400/20 via-purple-500/5 to-transparent",
   },
   {
     title: "Aila Commerce",
@@ -45,6 +85,16 @@ const platforms = [
     accent: "from-purple-400/20 via-fuchsia-500/5 to-transparent",
   },
   {
+    title: "TLUXE Hairs",
+    description:
+      "A luxury hair shopping platform and real client commerce experience.",
+    status: "Live Platform",
+    type: "Commerce",
+    href: "https://tluxehairs.shop",
+    external: true,
+    accent: "from-amber-300/20 via-yellow-500/5 to-transparent",
+  },
+  {
     title: "Aila Calendar",
     description:
       "Create, search, edit, and archive events stored on your account.",
@@ -53,16 +103,6 @@ const platforms = [
     href: "/products/calendar",
     external: false,
     accent: "from-blue-400/20 via-cyan-500/5 to-transparent",
-  },
-  {
-    title: "Aila Business",
-    description:
-      "Track contacts and complete tasks in a signed-in business workspace.",
-    status: "Live Platform",
-    type: "Workspace",
-    href: "/products/business",
-    external: false,
-    accent: "from-cyan-300/20 via-teal-500/5 to-transparent",
   },
   {
     title: "Aila Sites",
@@ -83,45 +123,6 @@ const platforms = [
     href: "/products/flow",
     external: false,
     accent: "from-neutral-300/20 via-neutral-500/5 to-transparent",
-  },
-  {
-    title: "Aila Intelligence",
-    description:
-      "Chat, attach files, and persist conversations on your account.",
-    status: "Live Platform",
-    type: "Intelligence",
-    href: "/products/intelligence",
-    external: false,
-    accent: "from-cyan-400/20 via-blue-500/5 to-transparent",
-  },
-  {
-    title: "Aila Legal",
-    description:
-      "Upload contracts and get AI-powered analysis stored on your account.",
-    status: "Live Platform",
-    type: "Legal",
-    href: "/products/ailalegal",
-    external: false,
-    accent: "from-blue-400/20 via-indigo-500/5 to-transparent",
-  },
-  {
-    title: "Aila Automation",
-    description:
-      "Rules that send email, create calendar events, or create tasks.",
-    status: "Live Platform",
-    type: "Automation",
-    href: "/products/automation",
-    external: false,
-    accent: "from-violet-400/20 via-purple-500/5 to-transparent",
-  },
-  {
-    title: "Aila Ads",
-    description: "Plan, launch, pause, and end advertising campaigns.",
-    status: "Live Platform",
-    type: "Ads",
-    href: "/products/ads",
-    external: false,
-    accent: "from-amber-400/20 via-orange-500/5 to-transparent",
   },
   {
     title: "Aila Apps",

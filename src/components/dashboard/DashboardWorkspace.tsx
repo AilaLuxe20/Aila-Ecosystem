@@ -11,14 +11,14 @@ import { ToastProvider } from "@/components/ui";
 
 const CARDS: Array<{ key: keyof DashboardSummary | "billing"; label: string; href: string }> = [
   { key: "conversations", label: "Intelligence chats", href: "/products/intelligence" },
-  { key: "legalConversations", label: "Legal chats", href: "/products/ailalegal" },
   { key: "contacts", label: "Business contacts", href: "/products/business" },
   { key: "openTasks", label: "Open tasks", href: "/products/business" },
+  { key: "campaigns", label: "Ad campaigns", href: "/products/ads" },
+  { key: "legalConversations", label: "Legal chats", href: "/products/ailalegal" },
   { key: "automations", label: "Active automations", href: "/products/automation" },
-  { key: "calendarEvents", label: "Calendar events", href: "/products/calendar" },
   { key: "products", label: "Commerce products", href: "/products/commerce" },
   { key: "pendingOrders", label: "Pending orders", href: "/products/commerce" },
-  { key: "campaigns", label: "Ad campaigns", href: "/products/ads" },
+  { key: "calendarEvents", label: "Calendar events", href: "/products/calendar" },
   { key: "apps", label: "Apps", href: "/products/apps" },
   { key: "sites", label: "Sites", href: "/products/sites" },
   { key: "flows", label: "Flows", href: "/products/flow" },

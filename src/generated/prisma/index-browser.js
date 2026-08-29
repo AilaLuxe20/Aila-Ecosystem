@@ -323,13 +323,82 @@ exports.Prisma.AdsCampaignScalarFieldEnum = {
   name: 'name',
   objective: 'objective',
   budgetCents: 'budgetCents',
+  plannedSpendCents: 'plannedSpendCents',
   headline: 'headline',
   body: 'body',
   targetingNotes: 'targetingNotes',
+  audience: 'audience',
+  location: 'location',
+  landingPageUrl: 'landingPageUrl',
+  conversionGoal: 'conversionGoal',
+  callToAction: 'callToAction',
+  currency: 'currency',
+  timezone: 'timezone',
+  intendedPlatform: 'intendedPlatform',
   status: 'status',
   startsAt: 'startsAt',
   endsAt: 'endsAt',
   launchedAt: 'launchedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AdsCreativeScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  campaignId: 'campaignId',
+  source: 'source',
+  variantLabel: 'variantLabel',
+  headline: 'headline',
+  body: 'body',
+  callToAction: 'callToAction',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AdsPlatformConnectionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  platform: 'platform',
+  status: 'status',
+  note: 'note',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AdsLandingPageAnalysisScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  campaignId: 'campaignId',
+  url: 'url',
+  fetchStatus: 'fetchStatus',
+  httpStatus: 'httpStatus',
+  title: 'title',
+  excerpt: 'excerpt',
+  analysis: 'analysis',
+  errorMessage: 'errorMessage',
+  fetchedAt: 'fetchedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AdsRecommendationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  campaignId: 'campaignId',
+  kind: 'kind',
+  content: 'content',
+  source: 'source',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AdsAiUsageScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  day: 'day',
+  kind: 'kind',
+  count: 'count',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -429,6 +498,11 @@ exports.Prisma.ModelName = {
   CommerceProduct: 'CommerceProduct',
   CommerceOrder: 'CommerceOrder',
   AdsCampaign: 'AdsCampaign',
+  AdsCreative: 'AdsCreative',
+  AdsPlatformConnection: 'AdsPlatformConnection',
+  AdsLandingPageAnalysis: 'AdsLandingPageAnalysis',
+  AdsRecommendation: 'AdsRecommendation',
+  AdsAiUsage: 'AdsAiUsage',
   AppListing: 'AppListing',
   Site: 'Site',
   Flow: 'Flow',

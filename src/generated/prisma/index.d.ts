@@ -99,6 +99,31 @@ export type CommerceOrder = $Result.DefaultSelection<Prisma.$CommerceOrderPayloa
  */
 export type AdsCampaign = $Result.DefaultSelection<Prisma.$AdsCampaignPayload>
 /**
+ * Model AdsCreative
+ * 
+ */
+export type AdsCreative = $Result.DefaultSelection<Prisma.$AdsCreativePayload>
+/**
+ * Model AdsPlatformConnection
+ * 
+ */
+export type AdsPlatformConnection = $Result.DefaultSelection<Prisma.$AdsPlatformConnectionPayload>
+/**
+ * Model AdsLandingPageAnalysis
+ * 
+ */
+export type AdsLandingPageAnalysis = $Result.DefaultSelection<Prisma.$AdsLandingPageAnalysisPayload>
+/**
+ * Model AdsRecommendation
+ * 
+ */
+export type AdsRecommendation = $Result.DefaultSelection<Prisma.$AdsRecommendationPayload>
+/**
+ * Model AdsAiUsage
+ * 
+ */
+export type AdsAiUsage = $Result.DefaultSelection<Prisma.$AdsAiUsagePayload>
+/**
  * Model AppListing
  * 
  */
@@ -409,6 +434,56 @@ export class PrismaClient<
     * ```
     */
   get adsCampaign(): Prisma.AdsCampaignDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.adsCreative`: Exposes CRUD operations for the **AdsCreative** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AdsCreatives
+    * const adsCreatives = await prisma.adsCreative.findMany()
+    * ```
+    */
+  get adsCreative(): Prisma.AdsCreativeDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.adsPlatformConnection`: Exposes CRUD operations for the **AdsPlatformConnection** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AdsPlatformConnections
+    * const adsPlatformConnections = await prisma.adsPlatformConnection.findMany()
+    * ```
+    */
+  get adsPlatformConnection(): Prisma.AdsPlatformConnectionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.adsLandingPageAnalysis`: Exposes CRUD operations for the **AdsLandingPageAnalysis** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AdsLandingPageAnalyses
+    * const adsLandingPageAnalyses = await prisma.adsLandingPageAnalysis.findMany()
+    * ```
+    */
+  get adsLandingPageAnalysis(): Prisma.AdsLandingPageAnalysisDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.adsRecommendation`: Exposes CRUD operations for the **AdsRecommendation** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AdsRecommendations
+    * const adsRecommendations = await prisma.adsRecommendation.findMany()
+    * ```
+    */
+  get adsRecommendation(): Prisma.AdsRecommendationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.adsAiUsage`: Exposes CRUD operations for the **AdsAiUsage** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AdsAiUsages
+    * const adsAiUsages = await prisma.adsAiUsage.findMany()
+    * ```
+    */
+  get adsAiUsage(): Prisma.AdsAiUsageDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.appListing`: Exposes CRUD operations for the **AppListing** model.
@@ -913,6 +988,11 @@ export namespace Prisma {
     CommerceProduct: 'CommerceProduct',
     CommerceOrder: 'CommerceOrder',
     AdsCampaign: 'AdsCampaign',
+    AdsCreative: 'AdsCreative',
+    AdsPlatformConnection: 'AdsPlatformConnection',
+    AdsLandingPageAnalysis: 'AdsLandingPageAnalysis',
+    AdsRecommendation: 'AdsRecommendation',
+    AdsAiUsage: 'AdsAiUsage',
     AppListing: 'AppListing',
     Site: 'Site',
     Flow: 'Flow',
@@ -932,7 +1012,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "account" | "session" | "verificationToken" | "conversation" | "message" | "legalDocument" | "intelligenceDocument" | "projectInquiry" | "calendarEvent" | "businessContact" | "businessTask" | "automationRule" | "automationRun" | "commerceProduct" | "commerceOrder" | "adsCampaign" | "appListing" | "site" | "flow" | "billingSubscription"
+      modelProps: "user" | "account" | "session" | "verificationToken" | "conversation" | "message" | "legalDocument" | "intelligenceDocument" | "projectInquiry" | "calendarEvent" | "businessContact" | "businessTask" | "automationRule" | "automationRun" | "commerceProduct" | "commerceOrder" | "adsCampaign" | "adsCreative" | "adsPlatformConnection" | "adsLandingPageAnalysis" | "adsRecommendation" | "adsAiUsage" | "appListing" | "site" | "flow" | "billingSubscription"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2194,6 +2274,376 @@ export namespace Prisma {
           }
         }
       }
+      AdsCreative: {
+        payload: Prisma.$AdsCreativePayload<ExtArgs>
+        fields: Prisma.AdsCreativeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AdsCreativeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsCreativePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AdsCreativeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsCreativePayload>
+          }
+          findFirst: {
+            args: Prisma.AdsCreativeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsCreativePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AdsCreativeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsCreativePayload>
+          }
+          findMany: {
+            args: Prisma.AdsCreativeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsCreativePayload>[]
+          }
+          create: {
+            args: Prisma.AdsCreativeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsCreativePayload>
+          }
+          createMany: {
+            args: Prisma.AdsCreativeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AdsCreativeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsCreativePayload>[]
+          }
+          delete: {
+            args: Prisma.AdsCreativeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsCreativePayload>
+          }
+          update: {
+            args: Prisma.AdsCreativeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsCreativePayload>
+          }
+          deleteMany: {
+            args: Prisma.AdsCreativeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AdsCreativeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AdsCreativeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsCreativePayload>[]
+          }
+          upsert: {
+            args: Prisma.AdsCreativeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsCreativePayload>
+          }
+          aggregate: {
+            args: Prisma.AdsCreativeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAdsCreative>
+          }
+          groupBy: {
+            args: Prisma.AdsCreativeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AdsCreativeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AdsCreativeCountArgs<ExtArgs>
+            result: $Utils.Optional<AdsCreativeCountAggregateOutputType> | number
+          }
+        }
+      }
+      AdsPlatformConnection: {
+        payload: Prisma.$AdsPlatformConnectionPayload<ExtArgs>
+        fields: Prisma.AdsPlatformConnectionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AdsPlatformConnectionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsPlatformConnectionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AdsPlatformConnectionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsPlatformConnectionPayload>
+          }
+          findFirst: {
+            args: Prisma.AdsPlatformConnectionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsPlatformConnectionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AdsPlatformConnectionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsPlatformConnectionPayload>
+          }
+          findMany: {
+            args: Prisma.AdsPlatformConnectionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsPlatformConnectionPayload>[]
+          }
+          create: {
+            args: Prisma.AdsPlatformConnectionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsPlatformConnectionPayload>
+          }
+          createMany: {
+            args: Prisma.AdsPlatformConnectionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AdsPlatformConnectionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsPlatformConnectionPayload>[]
+          }
+          delete: {
+            args: Prisma.AdsPlatformConnectionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsPlatformConnectionPayload>
+          }
+          update: {
+            args: Prisma.AdsPlatformConnectionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsPlatformConnectionPayload>
+          }
+          deleteMany: {
+            args: Prisma.AdsPlatformConnectionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AdsPlatformConnectionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AdsPlatformConnectionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsPlatformConnectionPayload>[]
+          }
+          upsert: {
+            args: Prisma.AdsPlatformConnectionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsPlatformConnectionPayload>
+          }
+          aggregate: {
+            args: Prisma.AdsPlatformConnectionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAdsPlatformConnection>
+          }
+          groupBy: {
+            args: Prisma.AdsPlatformConnectionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AdsPlatformConnectionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AdsPlatformConnectionCountArgs<ExtArgs>
+            result: $Utils.Optional<AdsPlatformConnectionCountAggregateOutputType> | number
+          }
+        }
+      }
+      AdsLandingPageAnalysis: {
+        payload: Prisma.$AdsLandingPageAnalysisPayload<ExtArgs>
+        fields: Prisma.AdsLandingPageAnalysisFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AdsLandingPageAnalysisFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsLandingPageAnalysisPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AdsLandingPageAnalysisFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsLandingPageAnalysisPayload>
+          }
+          findFirst: {
+            args: Prisma.AdsLandingPageAnalysisFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsLandingPageAnalysisPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AdsLandingPageAnalysisFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsLandingPageAnalysisPayload>
+          }
+          findMany: {
+            args: Prisma.AdsLandingPageAnalysisFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsLandingPageAnalysisPayload>[]
+          }
+          create: {
+            args: Prisma.AdsLandingPageAnalysisCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsLandingPageAnalysisPayload>
+          }
+          createMany: {
+            args: Prisma.AdsLandingPageAnalysisCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AdsLandingPageAnalysisCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsLandingPageAnalysisPayload>[]
+          }
+          delete: {
+            args: Prisma.AdsLandingPageAnalysisDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsLandingPageAnalysisPayload>
+          }
+          update: {
+            args: Prisma.AdsLandingPageAnalysisUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsLandingPageAnalysisPayload>
+          }
+          deleteMany: {
+            args: Prisma.AdsLandingPageAnalysisDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AdsLandingPageAnalysisUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AdsLandingPageAnalysisUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsLandingPageAnalysisPayload>[]
+          }
+          upsert: {
+            args: Prisma.AdsLandingPageAnalysisUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsLandingPageAnalysisPayload>
+          }
+          aggregate: {
+            args: Prisma.AdsLandingPageAnalysisAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAdsLandingPageAnalysis>
+          }
+          groupBy: {
+            args: Prisma.AdsLandingPageAnalysisGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AdsLandingPageAnalysisGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AdsLandingPageAnalysisCountArgs<ExtArgs>
+            result: $Utils.Optional<AdsLandingPageAnalysisCountAggregateOutputType> | number
+          }
+        }
+      }
+      AdsRecommendation: {
+        payload: Prisma.$AdsRecommendationPayload<ExtArgs>
+        fields: Prisma.AdsRecommendationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AdsRecommendationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsRecommendationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AdsRecommendationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsRecommendationPayload>
+          }
+          findFirst: {
+            args: Prisma.AdsRecommendationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsRecommendationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AdsRecommendationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsRecommendationPayload>
+          }
+          findMany: {
+            args: Prisma.AdsRecommendationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsRecommendationPayload>[]
+          }
+          create: {
+            args: Prisma.AdsRecommendationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsRecommendationPayload>
+          }
+          createMany: {
+            args: Prisma.AdsRecommendationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AdsRecommendationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsRecommendationPayload>[]
+          }
+          delete: {
+            args: Prisma.AdsRecommendationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsRecommendationPayload>
+          }
+          update: {
+            args: Prisma.AdsRecommendationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsRecommendationPayload>
+          }
+          deleteMany: {
+            args: Prisma.AdsRecommendationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AdsRecommendationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AdsRecommendationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsRecommendationPayload>[]
+          }
+          upsert: {
+            args: Prisma.AdsRecommendationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsRecommendationPayload>
+          }
+          aggregate: {
+            args: Prisma.AdsRecommendationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAdsRecommendation>
+          }
+          groupBy: {
+            args: Prisma.AdsRecommendationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AdsRecommendationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AdsRecommendationCountArgs<ExtArgs>
+            result: $Utils.Optional<AdsRecommendationCountAggregateOutputType> | number
+          }
+        }
+      }
+      AdsAiUsage: {
+        payload: Prisma.$AdsAiUsagePayload<ExtArgs>
+        fields: Prisma.AdsAiUsageFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AdsAiUsageFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsAiUsagePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AdsAiUsageFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsAiUsagePayload>
+          }
+          findFirst: {
+            args: Prisma.AdsAiUsageFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsAiUsagePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AdsAiUsageFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsAiUsagePayload>
+          }
+          findMany: {
+            args: Prisma.AdsAiUsageFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsAiUsagePayload>[]
+          }
+          create: {
+            args: Prisma.AdsAiUsageCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsAiUsagePayload>
+          }
+          createMany: {
+            args: Prisma.AdsAiUsageCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AdsAiUsageCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsAiUsagePayload>[]
+          }
+          delete: {
+            args: Prisma.AdsAiUsageDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsAiUsagePayload>
+          }
+          update: {
+            args: Prisma.AdsAiUsageUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsAiUsagePayload>
+          }
+          deleteMany: {
+            args: Prisma.AdsAiUsageDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AdsAiUsageUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AdsAiUsageUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsAiUsagePayload>[]
+          }
+          upsert: {
+            args: Prisma.AdsAiUsageUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdsAiUsagePayload>
+          }
+          aggregate: {
+            args: Prisma.AdsAiUsageAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAdsAiUsage>
+          }
+          groupBy: {
+            args: Prisma.AdsAiUsageGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AdsAiUsageGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AdsAiUsageCountArgs<ExtArgs>
+            result: $Utils.Optional<AdsAiUsageCountAggregateOutputType> | number
+          }
+        }
+      }
       AppListing: {
         payload: Prisma.$AppListingPayload<ExtArgs>
         fields: Prisma.AppListingFieldRefs
@@ -2630,6 +3080,11 @@ export namespace Prisma {
     commerceProduct?: CommerceProductOmit
     commerceOrder?: CommerceOrderOmit
     adsCampaign?: AdsCampaignOmit
+    adsCreative?: AdsCreativeOmit
+    adsPlatformConnection?: AdsPlatformConnectionOmit
+    adsLandingPageAnalysis?: AdsLandingPageAnalysisOmit
+    adsRecommendation?: AdsRecommendationOmit
+    adsAiUsage?: AdsAiUsageOmit
     appListing?: AppListingOmit
     site?: SiteOmit
     flow?: FlowOmit
@@ -2728,6 +3183,11 @@ export namespace Prisma {
     commerceProducts: number
     commerceOrders: number
     adsCampaigns: number
+    adsCreatives: number
+    adsPlatformConnections: number
+    adsLandingAnalyses: number
+    adsRecommendations: number
+    adsAiUsage: number
     appListings: number
     sites: number
     flows: number
@@ -2749,6 +3209,11 @@ export namespace Prisma {
     commerceProducts?: boolean | UserCountOutputTypeCountCommerceProductsArgs
     commerceOrders?: boolean | UserCountOutputTypeCountCommerceOrdersArgs
     adsCampaigns?: boolean | UserCountOutputTypeCountAdsCampaignsArgs
+    adsCreatives?: boolean | UserCountOutputTypeCountAdsCreativesArgs
+    adsPlatformConnections?: boolean | UserCountOutputTypeCountAdsPlatformConnectionsArgs
+    adsLandingAnalyses?: boolean | UserCountOutputTypeCountAdsLandingAnalysesArgs
+    adsRecommendations?: boolean | UserCountOutputTypeCountAdsRecommendationsArgs
+    adsAiUsage?: boolean | UserCountOutputTypeCountAdsAiUsageArgs
     appListings?: boolean | UserCountOutputTypeCountAppListingsArgs
     sites?: boolean | UserCountOutputTypeCountSitesArgs
     flows?: boolean | UserCountOutputTypeCountFlowsArgs
@@ -2862,6 +3327,41 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountAdsCampaignsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AdsCampaignWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountAdsCreativesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AdsCreativeWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountAdsPlatformConnectionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AdsPlatformConnectionWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountAdsLandingAnalysesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AdsLandingPageAnalysisWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountAdsRecommendationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AdsRecommendationWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountAdsAiUsageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AdsAiUsageWhereInput
   }
 
   /**
@@ -3023,6 +3523,55 @@ export namespace Prisma {
    */
   export type CommerceProductCountOutputTypeCountOrdersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CommerceOrderWhereInput
+  }
+
+
+  /**
+   * Count Type AdsCampaignCountOutputType
+   */
+
+  export type AdsCampaignCountOutputType = {
+    creatives: number
+    landingAnalyses: number
+    recommendations: number
+  }
+
+  export type AdsCampaignCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    creatives?: boolean | AdsCampaignCountOutputTypeCountCreativesArgs
+    landingAnalyses?: boolean | AdsCampaignCountOutputTypeCountLandingAnalysesArgs
+    recommendations?: boolean | AdsCampaignCountOutputTypeCountRecommendationsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * AdsCampaignCountOutputType without action
+   */
+  export type AdsCampaignCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsCampaignCountOutputType
+     */
+    select?: AdsCampaignCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * AdsCampaignCountOutputType without action
+   */
+  export type AdsCampaignCountOutputTypeCountCreativesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AdsCreativeWhereInput
+  }
+
+  /**
+   * AdsCampaignCountOutputType without action
+   */
+  export type AdsCampaignCountOutputTypeCountLandingAnalysesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AdsLandingPageAnalysisWhereInput
+  }
+
+  /**
+   * AdsCampaignCountOutputType without action
+   */
+  export type AdsCampaignCountOutputTypeCountRecommendationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AdsRecommendationWhereInput
   }
 
 
@@ -3240,6 +3789,11 @@ export namespace Prisma {
     commerceProducts?: boolean | User$commerceProductsArgs<ExtArgs>
     commerceOrders?: boolean | User$commerceOrdersArgs<ExtArgs>
     adsCampaigns?: boolean | User$adsCampaignsArgs<ExtArgs>
+    adsCreatives?: boolean | User$adsCreativesArgs<ExtArgs>
+    adsPlatformConnections?: boolean | User$adsPlatformConnectionsArgs<ExtArgs>
+    adsLandingAnalyses?: boolean | User$adsLandingAnalysesArgs<ExtArgs>
+    adsRecommendations?: boolean | User$adsRecommendationsArgs<ExtArgs>
+    adsAiUsage?: boolean | User$adsAiUsageArgs<ExtArgs>
     appListings?: boolean | User$appListingsArgs<ExtArgs>
     sites?: boolean | User$sitesArgs<ExtArgs>
     flows?: boolean | User$flowsArgs<ExtArgs>
@@ -3299,6 +3853,11 @@ export namespace Prisma {
     commerceProducts?: boolean | User$commerceProductsArgs<ExtArgs>
     commerceOrders?: boolean | User$commerceOrdersArgs<ExtArgs>
     adsCampaigns?: boolean | User$adsCampaignsArgs<ExtArgs>
+    adsCreatives?: boolean | User$adsCreativesArgs<ExtArgs>
+    adsPlatformConnections?: boolean | User$adsPlatformConnectionsArgs<ExtArgs>
+    adsLandingAnalyses?: boolean | User$adsLandingAnalysesArgs<ExtArgs>
+    adsRecommendations?: boolean | User$adsRecommendationsArgs<ExtArgs>
+    adsAiUsage?: boolean | User$adsAiUsageArgs<ExtArgs>
     appListings?: boolean | User$appListingsArgs<ExtArgs>
     sites?: boolean | User$sitesArgs<ExtArgs>
     flows?: boolean | User$flowsArgs<ExtArgs>
@@ -3325,6 +3884,11 @@ export namespace Prisma {
       commerceProducts: Prisma.$CommerceProductPayload<ExtArgs>[]
       commerceOrders: Prisma.$CommerceOrderPayload<ExtArgs>[]
       adsCampaigns: Prisma.$AdsCampaignPayload<ExtArgs>[]
+      adsCreatives: Prisma.$AdsCreativePayload<ExtArgs>[]
+      adsPlatformConnections: Prisma.$AdsPlatformConnectionPayload<ExtArgs>[]
+      adsLandingAnalyses: Prisma.$AdsLandingPageAnalysisPayload<ExtArgs>[]
+      adsRecommendations: Prisma.$AdsRecommendationPayload<ExtArgs>[]
+      adsAiUsage: Prisma.$AdsAiUsagePayload<ExtArgs>[]
       appListings: Prisma.$AppListingPayload<ExtArgs>[]
       sites: Prisma.$SitePayload<ExtArgs>[]
       flows: Prisma.$FlowPayload<ExtArgs>[]
@@ -3748,6 +4312,11 @@ export namespace Prisma {
     commerceProducts<T extends User$commerceProductsArgs<ExtArgs> = {}>(args?: Subset<T, User$commerceProductsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommerceProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     commerceOrders<T extends User$commerceOrdersArgs<ExtArgs> = {}>(args?: Subset<T, User$commerceOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommerceOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     adsCampaigns<T extends User$adsCampaignsArgs<ExtArgs> = {}>(args?: Subset<T, User$adsCampaignsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdsCampaignPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    adsCreatives<T extends User$adsCreativesArgs<ExtArgs> = {}>(args?: Subset<T, User$adsCreativesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdsCreativePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    adsPlatformConnections<T extends User$adsPlatformConnectionsArgs<ExtArgs> = {}>(args?: Subset<T, User$adsPlatformConnectionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdsPlatformConnectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    adsLandingAnalyses<T extends User$adsLandingAnalysesArgs<ExtArgs> = {}>(args?: Subset<T, User$adsLandingAnalysesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdsLandingPageAnalysisPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    adsRecommendations<T extends User$adsRecommendationsArgs<ExtArgs> = {}>(args?: Subset<T, User$adsRecommendationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdsRecommendationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    adsAiUsage<T extends User$adsAiUsageArgs<ExtArgs> = {}>(args?: Subset<T, User$adsAiUsageArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdsAiUsagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     appListings<T extends User$appListingsArgs<ExtArgs> = {}>(args?: Subset<T, User$appListingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AppListingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sites<T extends User$sitesArgs<ExtArgs> = {}>(args?: Subset<T, User$sitesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SitePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     flows<T extends User$flowsArgs<ExtArgs> = {}>(args?: Subset<T, User$flowsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlowPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -4516,6 +5085,126 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: AdsCampaignScalarFieldEnum | AdsCampaignScalarFieldEnum[]
+  }
+
+  /**
+   * User.adsCreatives
+   */
+  export type User$adsCreativesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsCreative
+     */
+    select?: AdsCreativeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsCreative
+     */
+    omit?: AdsCreativeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsCreativeInclude<ExtArgs> | null
+    where?: AdsCreativeWhereInput
+    orderBy?: AdsCreativeOrderByWithRelationInput | AdsCreativeOrderByWithRelationInput[]
+    cursor?: AdsCreativeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AdsCreativeScalarFieldEnum | AdsCreativeScalarFieldEnum[]
+  }
+
+  /**
+   * User.adsPlatformConnections
+   */
+  export type User$adsPlatformConnectionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsPlatformConnection
+     */
+    select?: AdsPlatformConnectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsPlatformConnection
+     */
+    omit?: AdsPlatformConnectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsPlatformConnectionInclude<ExtArgs> | null
+    where?: AdsPlatformConnectionWhereInput
+    orderBy?: AdsPlatformConnectionOrderByWithRelationInput | AdsPlatformConnectionOrderByWithRelationInput[]
+    cursor?: AdsPlatformConnectionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AdsPlatformConnectionScalarFieldEnum | AdsPlatformConnectionScalarFieldEnum[]
+  }
+
+  /**
+   * User.adsLandingAnalyses
+   */
+  export type User$adsLandingAnalysesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsLandingPageAnalysis
+     */
+    select?: AdsLandingPageAnalysisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsLandingPageAnalysis
+     */
+    omit?: AdsLandingPageAnalysisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsLandingPageAnalysisInclude<ExtArgs> | null
+    where?: AdsLandingPageAnalysisWhereInput
+    orderBy?: AdsLandingPageAnalysisOrderByWithRelationInput | AdsLandingPageAnalysisOrderByWithRelationInput[]
+    cursor?: AdsLandingPageAnalysisWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AdsLandingPageAnalysisScalarFieldEnum | AdsLandingPageAnalysisScalarFieldEnum[]
+  }
+
+  /**
+   * User.adsRecommendations
+   */
+  export type User$adsRecommendationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsRecommendation
+     */
+    select?: AdsRecommendationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsRecommendation
+     */
+    omit?: AdsRecommendationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsRecommendationInclude<ExtArgs> | null
+    where?: AdsRecommendationWhereInput
+    orderBy?: AdsRecommendationOrderByWithRelationInput | AdsRecommendationOrderByWithRelationInput[]
+    cursor?: AdsRecommendationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AdsRecommendationScalarFieldEnum | AdsRecommendationScalarFieldEnum[]
+  }
+
+  /**
+   * User.adsAiUsage
+   */
+  export type User$adsAiUsageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsAiUsage
+     */
+    select?: AdsAiUsageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsAiUsage
+     */
+    omit?: AdsAiUsageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsAiUsageInclude<ExtArgs> | null
+    where?: AdsAiUsageWhereInput
+    orderBy?: AdsAiUsageOrderByWithRelationInput | AdsAiUsageOrderByWithRelationInput[]
+    cursor?: AdsAiUsageWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AdsAiUsageScalarFieldEnum | AdsAiUsageScalarFieldEnum[]
   }
 
   /**
@@ -21823,10 +22512,12 @@ export namespace Prisma {
 
   export type AdsCampaignAvgAggregateOutputType = {
     budgetCents: number | null
+    plannedSpendCents: number | null
   }
 
   export type AdsCampaignSumAggregateOutputType = {
     budgetCents: number | null
+    plannedSpendCents: number | null
   }
 
   export type AdsCampaignMinAggregateOutputType = {
@@ -21835,9 +22526,18 @@ export namespace Prisma {
     name: string | null
     objective: string | null
     budgetCents: number | null
+    plannedSpendCents: number | null
     headline: string | null
     body: string | null
     targetingNotes: string | null
+    audience: string | null
+    location: string | null
+    landingPageUrl: string | null
+    conversionGoal: string | null
+    callToAction: string | null
+    currency: string | null
+    timezone: string | null
+    intendedPlatform: string | null
     status: string | null
     startsAt: Date | null
     endsAt: Date | null
@@ -21852,9 +22552,18 @@ export namespace Prisma {
     name: string | null
     objective: string | null
     budgetCents: number | null
+    plannedSpendCents: number | null
     headline: string | null
     body: string | null
     targetingNotes: string | null
+    audience: string | null
+    location: string | null
+    landingPageUrl: string | null
+    conversionGoal: string | null
+    callToAction: string | null
+    currency: string | null
+    timezone: string | null
+    intendedPlatform: string | null
     status: string | null
     startsAt: Date | null
     endsAt: Date | null
@@ -21869,9 +22578,18 @@ export namespace Prisma {
     name: number
     objective: number
     budgetCents: number
+    plannedSpendCents: number
     headline: number
     body: number
     targetingNotes: number
+    audience: number
+    location: number
+    landingPageUrl: number
+    conversionGoal: number
+    callToAction: number
+    currency: number
+    timezone: number
+    intendedPlatform: number
     status: number
     startsAt: number
     endsAt: number
@@ -21884,10 +22602,12 @@ export namespace Prisma {
 
   export type AdsCampaignAvgAggregateInputType = {
     budgetCents?: true
+    plannedSpendCents?: true
   }
 
   export type AdsCampaignSumAggregateInputType = {
     budgetCents?: true
+    plannedSpendCents?: true
   }
 
   export type AdsCampaignMinAggregateInputType = {
@@ -21896,9 +22616,18 @@ export namespace Prisma {
     name?: true
     objective?: true
     budgetCents?: true
+    plannedSpendCents?: true
     headline?: true
     body?: true
     targetingNotes?: true
+    audience?: true
+    location?: true
+    landingPageUrl?: true
+    conversionGoal?: true
+    callToAction?: true
+    currency?: true
+    timezone?: true
+    intendedPlatform?: true
     status?: true
     startsAt?: true
     endsAt?: true
@@ -21913,9 +22642,18 @@ export namespace Prisma {
     name?: true
     objective?: true
     budgetCents?: true
+    plannedSpendCents?: true
     headline?: true
     body?: true
     targetingNotes?: true
+    audience?: true
+    location?: true
+    landingPageUrl?: true
+    conversionGoal?: true
+    callToAction?: true
+    currency?: true
+    timezone?: true
+    intendedPlatform?: true
     status?: true
     startsAt?: true
     endsAt?: true
@@ -21930,9 +22668,18 @@ export namespace Prisma {
     name?: true
     objective?: true
     budgetCents?: true
+    plannedSpendCents?: true
     headline?: true
     body?: true
     targetingNotes?: true
+    audience?: true
+    location?: true
+    landingPageUrl?: true
+    conversionGoal?: true
+    callToAction?: true
+    currency?: true
+    timezone?: true
+    intendedPlatform?: true
     status?: true
     startsAt?: true
     endsAt?: true
@@ -22034,9 +22781,18 @@ export namespace Prisma {
     name: string
     objective: string
     budgetCents: number
+    plannedSpendCents: number | null
     headline: string
     body: string
     targetingNotes: string | null
+    audience: string | null
+    location: string | null
+    landingPageUrl: string | null
+    conversionGoal: string | null
+    callToAction: string | null
+    currency: string
+    timezone: string
+    intendedPlatform: string | null
     status: string
     startsAt: Date | null
     endsAt: Date | null
@@ -22070,9 +22826,18 @@ export namespace Prisma {
     name?: boolean
     objective?: boolean
     budgetCents?: boolean
+    plannedSpendCents?: boolean
     headline?: boolean
     body?: boolean
     targetingNotes?: boolean
+    audience?: boolean
+    location?: boolean
+    landingPageUrl?: boolean
+    conversionGoal?: boolean
+    callToAction?: boolean
+    currency?: boolean
+    timezone?: boolean
+    intendedPlatform?: boolean
     status?: boolean
     startsAt?: boolean
     endsAt?: boolean
@@ -22080,6 +22845,10 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    creatives?: boolean | AdsCampaign$creativesArgs<ExtArgs>
+    landingAnalyses?: boolean | AdsCampaign$landingAnalysesArgs<ExtArgs>
+    recommendations?: boolean | AdsCampaign$recommendationsArgs<ExtArgs>
+    _count?: boolean | AdsCampaignCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["adsCampaign"]>
 
   export type AdsCampaignSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -22088,9 +22857,18 @@ export namespace Prisma {
     name?: boolean
     objective?: boolean
     budgetCents?: boolean
+    plannedSpendCents?: boolean
     headline?: boolean
     body?: boolean
     targetingNotes?: boolean
+    audience?: boolean
+    location?: boolean
+    landingPageUrl?: boolean
+    conversionGoal?: boolean
+    callToAction?: boolean
+    currency?: boolean
+    timezone?: boolean
+    intendedPlatform?: boolean
     status?: boolean
     startsAt?: boolean
     endsAt?: boolean
@@ -22106,9 +22884,18 @@ export namespace Prisma {
     name?: boolean
     objective?: boolean
     budgetCents?: boolean
+    plannedSpendCents?: boolean
     headline?: boolean
     body?: boolean
     targetingNotes?: boolean
+    audience?: boolean
+    location?: boolean
+    landingPageUrl?: boolean
+    conversionGoal?: boolean
+    callToAction?: boolean
+    currency?: boolean
+    timezone?: boolean
+    intendedPlatform?: boolean
     status?: boolean
     startsAt?: boolean
     endsAt?: boolean
@@ -22124,9 +22911,18 @@ export namespace Prisma {
     name?: boolean
     objective?: boolean
     budgetCents?: boolean
+    plannedSpendCents?: boolean
     headline?: boolean
     body?: boolean
     targetingNotes?: boolean
+    audience?: boolean
+    location?: boolean
+    landingPageUrl?: boolean
+    conversionGoal?: boolean
+    callToAction?: boolean
+    currency?: boolean
+    timezone?: boolean
+    intendedPlatform?: boolean
     status?: boolean
     startsAt?: boolean
     endsAt?: boolean
@@ -22135,9 +22931,13 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type AdsCampaignOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "name" | "objective" | "budgetCents" | "headline" | "body" | "targetingNotes" | "status" | "startsAt" | "endsAt" | "launchedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["adsCampaign"]>
+  export type AdsCampaignOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "name" | "objective" | "budgetCents" | "plannedSpendCents" | "headline" | "body" | "targetingNotes" | "audience" | "location" | "landingPageUrl" | "conversionGoal" | "callToAction" | "currency" | "timezone" | "intendedPlatform" | "status" | "startsAt" | "endsAt" | "launchedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["adsCampaign"]>
   export type AdsCampaignInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    creatives?: boolean | AdsCampaign$creativesArgs<ExtArgs>
+    landingAnalyses?: boolean | AdsCampaign$landingAnalysesArgs<ExtArgs>
+    recommendations?: boolean | AdsCampaign$recommendationsArgs<ExtArgs>
+    _count?: boolean | AdsCampaignCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AdsCampaignIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -22150,6 +22950,9 @@ export namespace Prisma {
     name: "AdsCampaign"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
+      creatives: Prisma.$AdsCreativePayload<ExtArgs>[]
+      landingAnalyses: Prisma.$AdsLandingPageAnalysisPayload<ExtArgs>[]
+      recommendations: Prisma.$AdsRecommendationPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -22157,9 +22960,18 @@ export namespace Prisma {
       name: string
       objective: string
       budgetCents: number
+      plannedSpendCents: number | null
       headline: string
       body: string
       targetingNotes: string | null
+      audience: string | null
+      location: string | null
+      landingPageUrl: string | null
+      conversionGoal: string | null
+      callToAction: string | null
+      currency: string
+      timezone: string
+      intendedPlatform: string | null
       status: string
       startsAt: Date | null
       endsAt: Date | null
@@ -22561,6 +23373,9 @@ export namespace Prisma {
   export interface Prisma__AdsCampaignClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    creatives<T extends AdsCampaign$creativesArgs<ExtArgs> = {}>(args?: Subset<T, AdsCampaign$creativesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdsCreativePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    landingAnalyses<T extends AdsCampaign$landingAnalysesArgs<ExtArgs> = {}>(args?: Subset<T, AdsCampaign$landingAnalysesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdsLandingPageAnalysisPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    recommendations<T extends AdsCampaign$recommendationsArgs<ExtArgs> = {}>(args?: Subset<T, AdsCampaign$recommendationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdsRecommendationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -22595,9 +23410,18 @@ export namespace Prisma {
     readonly name: FieldRef<"AdsCampaign", 'String'>
     readonly objective: FieldRef<"AdsCampaign", 'String'>
     readonly budgetCents: FieldRef<"AdsCampaign", 'Int'>
+    readonly plannedSpendCents: FieldRef<"AdsCampaign", 'Int'>
     readonly headline: FieldRef<"AdsCampaign", 'String'>
     readonly body: FieldRef<"AdsCampaign", 'String'>
     readonly targetingNotes: FieldRef<"AdsCampaign", 'String'>
+    readonly audience: FieldRef<"AdsCampaign", 'String'>
+    readonly location: FieldRef<"AdsCampaign", 'String'>
+    readonly landingPageUrl: FieldRef<"AdsCampaign", 'String'>
+    readonly conversionGoal: FieldRef<"AdsCampaign", 'String'>
+    readonly callToAction: FieldRef<"AdsCampaign", 'String'>
+    readonly currency: FieldRef<"AdsCampaign", 'String'>
+    readonly timezone: FieldRef<"AdsCampaign", 'String'>
+    readonly intendedPlatform: FieldRef<"AdsCampaign", 'String'>
     readonly status: FieldRef<"AdsCampaign", 'String'>
     readonly startsAt: FieldRef<"AdsCampaign", 'DateTime'>
     readonly endsAt: FieldRef<"AdsCampaign", 'DateTime'>
@@ -23005,6 +23829,78 @@ export namespace Prisma {
   }
 
   /**
+   * AdsCampaign.creatives
+   */
+  export type AdsCampaign$creativesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsCreative
+     */
+    select?: AdsCreativeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsCreative
+     */
+    omit?: AdsCreativeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsCreativeInclude<ExtArgs> | null
+    where?: AdsCreativeWhereInput
+    orderBy?: AdsCreativeOrderByWithRelationInput | AdsCreativeOrderByWithRelationInput[]
+    cursor?: AdsCreativeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AdsCreativeScalarFieldEnum | AdsCreativeScalarFieldEnum[]
+  }
+
+  /**
+   * AdsCampaign.landingAnalyses
+   */
+  export type AdsCampaign$landingAnalysesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsLandingPageAnalysis
+     */
+    select?: AdsLandingPageAnalysisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsLandingPageAnalysis
+     */
+    omit?: AdsLandingPageAnalysisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsLandingPageAnalysisInclude<ExtArgs> | null
+    where?: AdsLandingPageAnalysisWhereInput
+    orderBy?: AdsLandingPageAnalysisOrderByWithRelationInput | AdsLandingPageAnalysisOrderByWithRelationInput[]
+    cursor?: AdsLandingPageAnalysisWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AdsLandingPageAnalysisScalarFieldEnum | AdsLandingPageAnalysisScalarFieldEnum[]
+  }
+
+  /**
+   * AdsCampaign.recommendations
+   */
+  export type AdsCampaign$recommendationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsRecommendation
+     */
+    select?: AdsRecommendationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsRecommendation
+     */
+    omit?: AdsRecommendationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsRecommendationInclude<ExtArgs> | null
+    where?: AdsRecommendationWhereInput
+    orderBy?: AdsRecommendationOrderByWithRelationInput | AdsRecommendationOrderByWithRelationInput[]
+    cursor?: AdsRecommendationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AdsRecommendationScalarFieldEnum | AdsRecommendationScalarFieldEnum[]
+  }
+
+  /**
    * AdsCampaign without action
    */
   export type AdsCampaignDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -23020,6 +23916,5692 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: AdsCampaignInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model AdsCreative
+   */
+
+  export type AggregateAdsCreative = {
+    _count: AdsCreativeCountAggregateOutputType | null
+    _min: AdsCreativeMinAggregateOutputType | null
+    _max: AdsCreativeMaxAggregateOutputType | null
+  }
+
+  export type AdsCreativeMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    campaignId: string | null
+    source: string | null
+    variantLabel: string | null
+    headline: string | null
+    body: string | null
+    callToAction: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AdsCreativeMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    campaignId: string | null
+    source: string | null
+    variantLabel: string | null
+    headline: string | null
+    body: string | null
+    callToAction: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AdsCreativeCountAggregateOutputType = {
+    id: number
+    userId: number
+    campaignId: number
+    source: number
+    variantLabel: number
+    headline: number
+    body: number
+    callToAction: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type AdsCreativeMinAggregateInputType = {
+    id?: true
+    userId?: true
+    campaignId?: true
+    source?: true
+    variantLabel?: true
+    headline?: true
+    body?: true
+    callToAction?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AdsCreativeMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    campaignId?: true
+    source?: true
+    variantLabel?: true
+    headline?: true
+    body?: true
+    callToAction?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AdsCreativeCountAggregateInputType = {
+    id?: true
+    userId?: true
+    campaignId?: true
+    source?: true
+    variantLabel?: true
+    headline?: true
+    body?: true
+    callToAction?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type AdsCreativeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AdsCreative to aggregate.
+     */
+    where?: AdsCreativeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdsCreatives to fetch.
+     */
+    orderBy?: AdsCreativeOrderByWithRelationInput | AdsCreativeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AdsCreativeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdsCreatives from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdsCreatives.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AdsCreatives
+    **/
+    _count?: true | AdsCreativeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AdsCreativeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AdsCreativeMaxAggregateInputType
+  }
+
+  export type GetAdsCreativeAggregateType<T extends AdsCreativeAggregateArgs> = {
+        [P in keyof T & keyof AggregateAdsCreative]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAdsCreative[P]>
+      : GetScalarType<T[P], AggregateAdsCreative[P]>
+  }
+
+
+
+
+  export type AdsCreativeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AdsCreativeWhereInput
+    orderBy?: AdsCreativeOrderByWithAggregationInput | AdsCreativeOrderByWithAggregationInput[]
+    by: AdsCreativeScalarFieldEnum[] | AdsCreativeScalarFieldEnum
+    having?: AdsCreativeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AdsCreativeCountAggregateInputType | true
+    _min?: AdsCreativeMinAggregateInputType
+    _max?: AdsCreativeMaxAggregateInputType
+  }
+
+  export type AdsCreativeGroupByOutputType = {
+    id: string
+    userId: string
+    campaignId: string
+    source: string
+    variantLabel: string | null
+    headline: string
+    body: string
+    callToAction: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: AdsCreativeCountAggregateOutputType | null
+    _min: AdsCreativeMinAggregateOutputType | null
+    _max: AdsCreativeMaxAggregateOutputType | null
+  }
+
+  type GetAdsCreativeGroupByPayload<T extends AdsCreativeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AdsCreativeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AdsCreativeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AdsCreativeGroupByOutputType[P]>
+            : GetScalarType<T[P], AdsCreativeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AdsCreativeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    campaignId?: boolean
+    source?: boolean
+    variantLabel?: boolean
+    headline?: boolean
+    body?: boolean
+    callToAction?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    campaign?: boolean | AdsCampaignDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["adsCreative"]>
+
+  export type AdsCreativeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    campaignId?: boolean
+    source?: boolean
+    variantLabel?: boolean
+    headline?: boolean
+    body?: boolean
+    callToAction?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    campaign?: boolean | AdsCampaignDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["adsCreative"]>
+
+  export type AdsCreativeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    campaignId?: boolean
+    source?: boolean
+    variantLabel?: boolean
+    headline?: boolean
+    body?: boolean
+    callToAction?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    campaign?: boolean | AdsCampaignDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["adsCreative"]>
+
+  export type AdsCreativeSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    campaignId?: boolean
+    source?: boolean
+    variantLabel?: boolean
+    headline?: boolean
+    body?: boolean
+    callToAction?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type AdsCreativeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "campaignId" | "source" | "variantLabel" | "headline" | "body" | "callToAction" | "createdAt" | "updatedAt", ExtArgs["result"]["adsCreative"]>
+  export type AdsCreativeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    campaign?: boolean | AdsCampaignDefaultArgs<ExtArgs>
+  }
+  export type AdsCreativeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    campaign?: boolean | AdsCampaignDefaultArgs<ExtArgs>
+  }
+  export type AdsCreativeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    campaign?: boolean | AdsCampaignDefaultArgs<ExtArgs>
+  }
+
+  export type $AdsCreativePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AdsCreative"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      campaign: Prisma.$AdsCampaignPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      campaignId: string
+      source: string
+      variantLabel: string | null
+      headline: string
+      body: string
+      callToAction: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["adsCreative"]>
+    composites: {}
+  }
+
+  type AdsCreativeGetPayload<S extends boolean | null | undefined | AdsCreativeDefaultArgs> = $Result.GetResult<Prisma.$AdsCreativePayload, S>
+
+  type AdsCreativeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AdsCreativeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AdsCreativeCountAggregateInputType | true
+    }
+
+  export interface AdsCreativeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AdsCreative'], meta: { name: 'AdsCreative' } }
+    /**
+     * Find zero or one AdsCreative that matches the filter.
+     * @param {AdsCreativeFindUniqueArgs} args - Arguments to find a AdsCreative
+     * @example
+     * // Get one AdsCreative
+     * const adsCreative = await prisma.adsCreative.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AdsCreativeFindUniqueArgs>(args: SelectSubset<T, AdsCreativeFindUniqueArgs<ExtArgs>>): Prisma__AdsCreativeClient<$Result.GetResult<Prisma.$AdsCreativePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AdsCreative that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AdsCreativeFindUniqueOrThrowArgs} args - Arguments to find a AdsCreative
+     * @example
+     * // Get one AdsCreative
+     * const adsCreative = await prisma.adsCreative.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AdsCreativeFindUniqueOrThrowArgs>(args: SelectSubset<T, AdsCreativeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AdsCreativeClient<$Result.GetResult<Prisma.$AdsCreativePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AdsCreative that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdsCreativeFindFirstArgs} args - Arguments to find a AdsCreative
+     * @example
+     * // Get one AdsCreative
+     * const adsCreative = await prisma.adsCreative.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AdsCreativeFindFirstArgs>(args?: SelectSubset<T, AdsCreativeFindFirstArgs<ExtArgs>>): Prisma__AdsCreativeClient<$Result.GetResult<Prisma.$AdsCreativePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AdsCreative that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdsCreativeFindFirstOrThrowArgs} args - Arguments to find a AdsCreative
+     * @example
+     * // Get one AdsCreative
+     * const adsCreative = await prisma.adsCreative.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AdsCreativeFindFirstOrThrowArgs>(args?: SelectSubset<T, AdsCreativeFindFirstOrThrowArgs<ExtArgs>>): Prisma__AdsCreativeClient<$Result.GetResult<Prisma.$AdsCreativePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AdsCreatives that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdsCreativeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AdsCreatives
+     * const adsCreatives = await prisma.adsCreative.findMany()
+     * 
+     * // Get first 10 AdsCreatives
+     * const adsCreatives = await prisma.adsCreative.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const adsCreativeWithIdOnly = await prisma.adsCreative.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AdsCreativeFindManyArgs>(args?: SelectSubset<T, AdsCreativeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdsCreativePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AdsCreative.
+     * @param {AdsCreativeCreateArgs} args - Arguments to create a AdsCreative.
+     * @example
+     * // Create one AdsCreative
+     * const AdsCreative = await prisma.adsCreative.create({
+     *   data: {
+     *     // ... data to create a AdsCreative
+     *   }
+     * })
+     * 
+     */
+    create<T extends AdsCreativeCreateArgs>(args: SelectSubset<T, AdsCreativeCreateArgs<ExtArgs>>): Prisma__AdsCreativeClient<$Result.GetResult<Prisma.$AdsCreativePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AdsCreatives.
+     * @param {AdsCreativeCreateManyArgs} args - Arguments to create many AdsCreatives.
+     * @example
+     * // Create many AdsCreatives
+     * const adsCreative = await prisma.adsCreative.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AdsCreativeCreateManyArgs>(args?: SelectSubset<T, AdsCreativeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AdsCreatives and returns the data saved in the database.
+     * @param {AdsCreativeCreateManyAndReturnArgs} args - Arguments to create many AdsCreatives.
+     * @example
+     * // Create many AdsCreatives
+     * const adsCreative = await prisma.adsCreative.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AdsCreatives and only return the `id`
+     * const adsCreativeWithIdOnly = await prisma.adsCreative.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AdsCreativeCreateManyAndReturnArgs>(args?: SelectSubset<T, AdsCreativeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdsCreativePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a AdsCreative.
+     * @param {AdsCreativeDeleteArgs} args - Arguments to delete one AdsCreative.
+     * @example
+     * // Delete one AdsCreative
+     * const AdsCreative = await prisma.adsCreative.delete({
+     *   where: {
+     *     // ... filter to delete one AdsCreative
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AdsCreativeDeleteArgs>(args: SelectSubset<T, AdsCreativeDeleteArgs<ExtArgs>>): Prisma__AdsCreativeClient<$Result.GetResult<Prisma.$AdsCreativePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AdsCreative.
+     * @param {AdsCreativeUpdateArgs} args - Arguments to update one AdsCreative.
+     * @example
+     * // Update one AdsCreative
+     * const adsCreative = await prisma.adsCreative.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AdsCreativeUpdateArgs>(args: SelectSubset<T, AdsCreativeUpdateArgs<ExtArgs>>): Prisma__AdsCreativeClient<$Result.GetResult<Prisma.$AdsCreativePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AdsCreatives.
+     * @param {AdsCreativeDeleteManyArgs} args - Arguments to filter AdsCreatives to delete.
+     * @example
+     * // Delete a few AdsCreatives
+     * const { count } = await prisma.adsCreative.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AdsCreativeDeleteManyArgs>(args?: SelectSubset<T, AdsCreativeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AdsCreatives.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdsCreativeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AdsCreatives
+     * const adsCreative = await prisma.adsCreative.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AdsCreativeUpdateManyArgs>(args: SelectSubset<T, AdsCreativeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AdsCreatives and returns the data updated in the database.
+     * @param {AdsCreativeUpdateManyAndReturnArgs} args - Arguments to update many AdsCreatives.
+     * @example
+     * // Update many AdsCreatives
+     * const adsCreative = await prisma.adsCreative.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AdsCreatives and only return the `id`
+     * const adsCreativeWithIdOnly = await prisma.adsCreative.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AdsCreativeUpdateManyAndReturnArgs>(args: SelectSubset<T, AdsCreativeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdsCreativePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one AdsCreative.
+     * @param {AdsCreativeUpsertArgs} args - Arguments to update or create a AdsCreative.
+     * @example
+     * // Update or create a AdsCreative
+     * const adsCreative = await prisma.adsCreative.upsert({
+     *   create: {
+     *     // ... data to create a AdsCreative
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AdsCreative we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AdsCreativeUpsertArgs>(args: SelectSubset<T, AdsCreativeUpsertArgs<ExtArgs>>): Prisma__AdsCreativeClient<$Result.GetResult<Prisma.$AdsCreativePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AdsCreatives.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdsCreativeCountArgs} args - Arguments to filter AdsCreatives to count.
+     * @example
+     * // Count the number of AdsCreatives
+     * const count = await prisma.adsCreative.count({
+     *   where: {
+     *     // ... the filter for the AdsCreatives we want to count
+     *   }
+     * })
+    **/
+    count<T extends AdsCreativeCountArgs>(
+      args?: Subset<T, AdsCreativeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AdsCreativeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AdsCreative.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdsCreativeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AdsCreativeAggregateArgs>(args: Subset<T, AdsCreativeAggregateArgs>): Prisma.PrismaPromise<GetAdsCreativeAggregateType<T>>
+
+    /**
+     * Group by AdsCreative.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdsCreativeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AdsCreativeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AdsCreativeGroupByArgs['orderBy'] }
+        : { orderBy?: AdsCreativeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AdsCreativeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAdsCreativeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AdsCreative model
+   */
+  readonly fields: AdsCreativeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AdsCreative.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AdsCreativeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    campaign<T extends AdsCampaignDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AdsCampaignDefaultArgs<ExtArgs>>): Prisma__AdsCampaignClient<$Result.GetResult<Prisma.$AdsCampaignPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AdsCreative model
+   */
+  interface AdsCreativeFieldRefs {
+    readonly id: FieldRef<"AdsCreative", 'String'>
+    readonly userId: FieldRef<"AdsCreative", 'String'>
+    readonly campaignId: FieldRef<"AdsCreative", 'String'>
+    readonly source: FieldRef<"AdsCreative", 'String'>
+    readonly variantLabel: FieldRef<"AdsCreative", 'String'>
+    readonly headline: FieldRef<"AdsCreative", 'String'>
+    readonly body: FieldRef<"AdsCreative", 'String'>
+    readonly callToAction: FieldRef<"AdsCreative", 'String'>
+    readonly createdAt: FieldRef<"AdsCreative", 'DateTime'>
+    readonly updatedAt: FieldRef<"AdsCreative", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AdsCreative findUnique
+   */
+  export type AdsCreativeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsCreative
+     */
+    select?: AdsCreativeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsCreative
+     */
+    omit?: AdsCreativeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsCreativeInclude<ExtArgs> | null
+    /**
+     * Filter, which AdsCreative to fetch.
+     */
+    where: AdsCreativeWhereUniqueInput
+  }
+
+  /**
+   * AdsCreative findUniqueOrThrow
+   */
+  export type AdsCreativeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsCreative
+     */
+    select?: AdsCreativeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsCreative
+     */
+    omit?: AdsCreativeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsCreativeInclude<ExtArgs> | null
+    /**
+     * Filter, which AdsCreative to fetch.
+     */
+    where: AdsCreativeWhereUniqueInput
+  }
+
+  /**
+   * AdsCreative findFirst
+   */
+  export type AdsCreativeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsCreative
+     */
+    select?: AdsCreativeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsCreative
+     */
+    omit?: AdsCreativeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsCreativeInclude<ExtArgs> | null
+    /**
+     * Filter, which AdsCreative to fetch.
+     */
+    where?: AdsCreativeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdsCreatives to fetch.
+     */
+    orderBy?: AdsCreativeOrderByWithRelationInput | AdsCreativeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AdsCreatives.
+     */
+    cursor?: AdsCreativeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdsCreatives from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdsCreatives.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AdsCreatives.
+     */
+    distinct?: AdsCreativeScalarFieldEnum | AdsCreativeScalarFieldEnum[]
+  }
+
+  /**
+   * AdsCreative findFirstOrThrow
+   */
+  export type AdsCreativeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsCreative
+     */
+    select?: AdsCreativeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsCreative
+     */
+    omit?: AdsCreativeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsCreativeInclude<ExtArgs> | null
+    /**
+     * Filter, which AdsCreative to fetch.
+     */
+    where?: AdsCreativeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdsCreatives to fetch.
+     */
+    orderBy?: AdsCreativeOrderByWithRelationInput | AdsCreativeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AdsCreatives.
+     */
+    cursor?: AdsCreativeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdsCreatives from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdsCreatives.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AdsCreatives.
+     */
+    distinct?: AdsCreativeScalarFieldEnum | AdsCreativeScalarFieldEnum[]
+  }
+
+  /**
+   * AdsCreative findMany
+   */
+  export type AdsCreativeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsCreative
+     */
+    select?: AdsCreativeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsCreative
+     */
+    omit?: AdsCreativeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsCreativeInclude<ExtArgs> | null
+    /**
+     * Filter, which AdsCreatives to fetch.
+     */
+    where?: AdsCreativeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdsCreatives to fetch.
+     */
+    orderBy?: AdsCreativeOrderByWithRelationInput | AdsCreativeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AdsCreatives.
+     */
+    cursor?: AdsCreativeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdsCreatives from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdsCreatives.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AdsCreatives.
+     */
+    distinct?: AdsCreativeScalarFieldEnum | AdsCreativeScalarFieldEnum[]
+  }
+
+  /**
+   * AdsCreative create
+   */
+  export type AdsCreativeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsCreative
+     */
+    select?: AdsCreativeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsCreative
+     */
+    omit?: AdsCreativeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsCreativeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a AdsCreative.
+     */
+    data: XOR<AdsCreativeCreateInput, AdsCreativeUncheckedCreateInput>
+  }
+
+  /**
+   * AdsCreative createMany
+   */
+  export type AdsCreativeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AdsCreatives.
+     */
+    data: AdsCreativeCreateManyInput | AdsCreativeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AdsCreative createManyAndReturn
+   */
+  export type AdsCreativeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsCreative
+     */
+    select?: AdsCreativeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsCreative
+     */
+    omit?: AdsCreativeOmit<ExtArgs> | null
+    /**
+     * The data used to create many AdsCreatives.
+     */
+    data: AdsCreativeCreateManyInput | AdsCreativeCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsCreativeIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AdsCreative update
+   */
+  export type AdsCreativeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsCreative
+     */
+    select?: AdsCreativeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsCreative
+     */
+    omit?: AdsCreativeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsCreativeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a AdsCreative.
+     */
+    data: XOR<AdsCreativeUpdateInput, AdsCreativeUncheckedUpdateInput>
+    /**
+     * Choose, which AdsCreative to update.
+     */
+    where: AdsCreativeWhereUniqueInput
+  }
+
+  /**
+   * AdsCreative updateMany
+   */
+  export type AdsCreativeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AdsCreatives.
+     */
+    data: XOR<AdsCreativeUpdateManyMutationInput, AdsCreativeUncheckedUpdateManyInput>
+    /**
+     * Filter which AdsCreatives to update
+     */
+    where?: AdsCreativeWhereInput
+    /**
+     * Limit how many AdsCreatives to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AdsCreative updateManyAndReturn
+   */
+  export type AdsCreativeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsCreative
+     */
+    select?: AdsCreativeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsCreative
+     */
+    omit?: AdsCreativeOmit<ExtArgs> | null
+    /**
+     * The data used to update AdsCreatives.
+     */
+    data: XOR<AdsCreativeUpdateManyMutationInput, AdsCreativeUncheckedUpdateManyInput>
+    /**
+     * Filter which AdsCreatives to update
+     */
+    where?: AdsCreativeWhereInput
+    /**
+     * Limit how many AdsCreatives to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsCreativeIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AdsCreative upsert
+   */
+  export type AdsCreativeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsCreative
+     */
+    select?: AdsCreativeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsCreative
+     */
+    omit?: AdsCreativeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsCreativeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the AdsCreative to update in case it exists.
+     */
+    where: AdsCreativeWhereUniqueInput
+    /**
+     * In case the AdsCreative found by the `where` argument doesn't exist, create a new AdsCreative with this data.
+     */
+    create: XOR<AdsCreativeCreateInput, AdsCreativeUncheckedCreateInput>
+    /**
+     * In case the AdsCreative was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AdsCreativeUpdateInput, AdsCreativeUncheckedUpdateInput>
+  }
+
+  /**
+   * AdsCreative delete
+   */
+  export type AdsCreativeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsCreative
+     */
+    select?: AdsCreativeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsCreative
+     */
+    omit?: AdsCreativeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsCreativeInclude<ExtArgs> | null
+    /**
+     * Filter which AdsCreative to delete.
+     */
+    where: AdsCreativeWhereUniqueInput
+  }
+
+  /**
+   * AdsCreative deleteMany
+   */
+  export type AdsCreativeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AdsCreatives to delete
+     */
+    where?: AdsCreativeWhereInput
+    /**
+     * Limit how many AdsCreatives to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AdsCreative without action
+   */
+  export type AdsCreativeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsCreative
+     */
+    select?: AdsCreativeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsCreative
+     */
+    omit?: AdsCreativeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsCreativeInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model AdsPlatformConnection
+   */
+
+  export type AggregateAdsPlatformConnection = {
+    _count: AdsPlatformConnectionCountAggregateOutputType | null
+    _min: AdsPlatformConnectionMinAggregateOutputType | null
+    _max: AdsPlatformConnectionMaxAggregateOutputType | null
+  }
+
+  export type AdsPlatformConnectionMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    platform: string | null
+    status: string | null
+    note: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AdsPlatformConnectionMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    platform: string | null
+    status: string | null
+    note: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AdsPlatformConnectionCountAggregateOutputType = {
+    id: number
+    userId: number
+    platform: number
+    status: number
+    note: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type AdsPlatformConnectionMinAggregateInputType = {
+    id?: true
+    userId?: true
+    platform?: true
+    status?: true
+    note?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AdsPlatformConnectionMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    platform?: true
+    status?: true
+    note?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AdsPlatformConnectionCountAggregateInputType = {
+    id?: true
+    userId?: true
+    platform?: true
+    status?: true
+    note?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type AdsPlatformConnectionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AdsPlatformConnection to aggregate.
+     */
+    where?: AdsPlatformConnectionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdsPlatformConnections to fetch.
+     */
+    orderBy?: AdsPlatformConnectionOrderByWithRelationInput | AdsPlatformConnectionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AdsPlatformConnectionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdsPlatformConnections from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdsPlatformConnections.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AdsPlatformConnections
+    **/
+    _count?: true | AdsPlatformConnectionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AdsPlatformConnectionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AdsPlatformConnectionMaxAggregateInputType
+  }
+
+  export type GetAdsPlatformConnectionAggregateType<T extends AdsPlatformConnectionAggregateArgs> = {
+        [P in keyof T & keyof AggregateAdsPlatformConnection]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAdsPlatformConnection[P]>
+      : GetScalarType<T[P], AggregateAdsPlatformConnection[P]>
+  }
+
+
+
+
+  export type AdsPlatformConnectionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AdsPlatformConnectionWhereInput
+    orderBy?: AdsPlatformConnectionOrderByWithAggregationInput | AdsPlatformConnectionOrderByWithAggregationInput[]
+    by: AdsPlatformConnectionScalarFieldEnum[] | AdsPlatformConnectionScalarFieldEnum
+    having?: AdsPlatformConnectionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AdsPlatformConnectionCountAggregateInputType | true
+    _min?: AdsPlatformConnectionMinAggregateInputType
+    _max?: AdsPlatformConnectionMaxAggregateInputType
+  }
+
+  export type AdsPlatformConnectionGroupByOutputType = {
+    id: string
+    userId: string
+    platform: string
+    status: string
+    note: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: AdsPlatformConnectionCountAggregateOutputType | null
+    _min: AdsPlatformConnectionMinAggregateOutputType | null
+    _max: AdsPlatformConnectionMaxAggregateOutputType | null
+  }
+
+  type GetAdsPlatformConnectionGroupByPayload<T extends AdsPlatformConnectionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AdsPlatformConnectionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AdsPlatformConnectionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AdsPlatformConnectionGroupByOutputType[P]>
+            : GetScalarType<T[P], AdsPlatformConnectionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AdsPlatformConnectionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    platform?: boolean
+    status?: boolean
+    note?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["adsPlatformConnection"]>
+
+  export type AdsPlatformConnectionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    platform?: boolean
+    status?: boolean
+    note?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["adsPlatformConnection"]>
+
+  export type AdsPlatformConnectionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    platform?: boolean
+    status?: boolean
+    note?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["adsPlatformConnection"]>
+
+  export type AdsPlatformConnectionSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    platform?: boolean
+    status?: boolean
+    note?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type AdsPlatformConnectionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "platform" | "status" | "note" | "createdAt" | "updatedAt", ExtArgs["result"]["adsPlatformConnection"]>
+  export type AdsPlatformConnectionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type AdsPlatformConnectionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type AdsPlatformConnectionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $AdsPlatformConnectionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AdsPlatformConnection"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      platform: string
+      status: string
+      note: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["adsPlatformConnection"]>
+    composites: {}
+  }
+
+  type AdsPlatformConnectionGetPayload<S extends boolean | null | undefined | AdsPlatformConnectionDefaultArgs> = $Result.GetResult<Prisma.$AdsPlatformConnectionPayload, S>
+
+  type AdsPlatformConnectionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AdsPlatformConnectionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AdsPlatformConnectionCountAggregateInputType | true
+    }
+
+  export interface AdsPlatformConnectionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AdsPlatformConnection'], meta: { name: 'AdsPlatformConnection' } }
+    /**
+     * Find zero or one AdsPlatformConnection that matches the filter.
+     * @param {AdsPlatformConnectionFindUniqueArgs} args - Arguments to find a AdsPlatformConnection
+     * @example
+     * // Get one AdsPlatformConnection
+     * const adsPlatformConnection = await prisma.adsPlatformConnection.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AdsPlatformConnectionFindUniqueArgs>(args: SelectSubset<T, AdsPlatformConnectionFindUniqueArgs<ExtArgs>>): Prisma__AdsPlatformConnectionClient<$Result.GetResult<Prisma.$AdsPlatformConnectionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AdsPlatformConnection that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AdsPlatformConnectionFindUniqueOrThrowArgs} args - Arguments to find a AdsPlatformConnection
+     * @example
+     * // Get one AdsPlatformConnection
+     * const adsPlatformConnection = await prisma.adsPlatformConnection.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AdsPlatformConnectionFindUniqueOrThrowArgs>(args: SelectSubset<T, AdsPlatformConnectionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AdsPlatformConnectionClient<$Result.GetResult<Prisma.$AdsPlatformConnectionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AdsPlatformConnection that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdsPlatformConnectionFindFirstArgs} args - Arguments to find a AdsPlatformConnection
+     * @example
+     * // Get one AdsPlatformConnection
+     * const adsPlatformConnection = await prisma.adsPlatformConnection.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AdsPlatformConnectionFindFirstArgs>(args?: SelectSubset<T, AdsPlatformConnectionFindFirstArgs<ExtArgs>>): Prisma__AdsPlatformConnectionClient<$Result.GetResult<Prisma.$AdsPlatformConnectionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AdsPlatformConnection that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdsPlatformConnectionFindFirstOrThrowArgs} args - Arguments to find a AdsPlatformConnection
+     * @example
+     * // Get one AdsPlatformConnection
+     * const adsPlatformConnection = await prisma.adsPlatformConnection.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AdsPlatformConnectionFindFirstOrThrowArgs>(args?: SelectSubset<T, AdsPlatformConnectionFindFirstOrThrowArgs<ExtArgs>>): Prisma__AdsPlatformConnectionClient<$Result.GetResult<Prisma.$AdsPlatformConnectionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AdsPlatformConnections that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdsPlatformConnectionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AdsPlatformConnections
+     * const adsPlatformConnections = await prisma.adsPlatformConnection.findMany()
+     * 
+     * // Get first 10 AdsPlatformConnections
+     * const adsPlatformConnections = await prisma.adsPlatformConnection.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const adsPlatformConnectionWithIdOnly = await prisma.adsPlatformConnection.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AdsPlatformConnectionFindManyArgs>(args?: SelectSubset<T, AdsPlatformConnectionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdsPlatformConnectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AdsPlatformConnection.
+     * @param {AdsPlatformConnectionCreateArgs} args - Arguments to create a AdsPlatformConnection.
+     * @example
+     * // Create one AdsPlatformConnection
+     * const AdsPlatformConnection = await prisma.adsPlatformConnection.create({
+     *   data: {
+     *     // ... data to create a AdsPlatformConnection
+     *   }
+     * })
+     * 
+     */
+    create<T extends AdsPlatformConnectionCreateArgs>(args: SelectSubset<T, AdsPlatformConnectionCreateArgs<ExtArgs>>): Prisma__AdsPlatformConnectionClient<$Result.GetResult<Prisma.$AdsPlatformConnectionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AdsPlatformConnections.
+     * @param {AdsPlatformConnectionCreateManyArgs} args - Arguments to create many AdsPlatformConnections.
+     * @example
+     * // Create many AdsPlatformConnections
+     * const adsPlatformConnection = await prisma.adsPlatformConnection.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AdsPlatformConnectionCreateManyArgs>(args?: SelectSubset<T, AdsPlatformConnectionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AdsPlatformConnections and returns the data saved in the database.
+     * @param {AdsPlatformConnectionCreateManyAndReturnArgs} args - Arguments to create many AdsPlatformConnections.
+     * @example
+     * // Create many AdsPlatformConnections
+     * const adsPlatformConnection = await prisma.adsPlatformConnection.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AdsPlatformConnections and only return the `id`
+     * const adsPlatformConnectionWithIdOnly = await prisma.adsPlatformConnection.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AdsPlatformConnectionCreateManyAndReturnArgs>(args?: SelectSubset<T, AdsPlatformConnectionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdsPlatformConnectionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a AdsPlatformConnection.
+     * @param {AdsPlatformConnectionDeleteArgs} args - Arguments to delete one AdsPlatformConnection.
+     * @example
+     * // Delete one AdsPlatformConnection
+     * const AdsPlatformConnection = await prisma.adsPlatformConnection.delete({
+     *   where: {
+     *     // ... filter to delete one AdsPlatformConnection
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AdsPlatformConnectionDeleteArgs>(args: SelectSubset<T, AdsPlatformConnectionDeleteArgs<ExtArgs>>): Prisma__AdsPlatformConnectionClient<$Result.GetResult<Prisma.$AdsPlatformConnectionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AdsPlatformConnection.
+     * @param {AdsPlatformConnectionUpdateArgs} args - Arguments to update one AdsPlatformConnection.
+     * @example
+     * // Update one AdsPlatformConnection
+     * const adsPlatformConnection = await prisma.adsPlatformConnection.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AdsPlatformConnectionUpdateArgs>(args: SelectSubset<T, AdsPlatformConnectionUpdateArgs<ExtArgs>>): Prisma__AdsPlatformConnectionClient<$Result.GetResult<Prisma.$AdsPlatformConnectionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AdsPlatformConnections.
+     * @param {AdsPlatformConnectionDeleteManyArgs} args - Arguments to filter AdsPlatformConnections to delete.
+     * @example
+     * // Delete a few AdsPlatformConnections
+     * const { count } = await prisma.adsPlatformConnection.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AdsPlatformConnectionDeleteManyArgs>(args?: SelectSubset<T, AdsPlatformConnectionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AdsPlatformConnections.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdsPlatformConnectionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AdsPlatformConnections
+     * const adsPlatformConnection = await prisma.adsPlatformConnection.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AdsPlatformConnectionUpdateManyArgs>(args: SelectSubset<T, AdsPlatformConnectionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AdsPlatformConnections and returns the data updated in the database.
+     * @param {AdsPlatformConnectionUpdateManyAndReturnArgs} args - Arguments to update many AdsPlatformConnections.
+     * @example
+     * // Update many AdsPlatformConnections
+     * const adsPlatformConnection = await prisma.adsPlatformConnection.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AdsPlatformConnections and only return the `id`
+     * const adsPlatformConnectionWithIdOnly = await prisma.adsPlatformConnection.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AdsPlatformConnectionUpdateManyAndReturnArgs>(args: SelectSubset<T, AdsPlatformConnectionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdsPlatformConnectionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one AdsPlatformConnection.
+     * @param {AdsPlatformConnectionUpsertArgs} args - Arguments to update or create a AdsPlatformConnection.
+     * @example
+     * // Update or create a AdsPlatformConnection
+     * const adsPlatformConnection = await prisma.adsPlatformConnection.upsert({
+     *   create: {
+     *     // ... data to create a AdsPlatformConnection
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AdsPlatformConnection we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AdsPlatformConnectionUpsertArgs>(args: SelectSubset<T, AdsPlatformConnectionUpsertArgs<ExtArgs>>): Prisma__AdsPlatformConnectionClient<$Result.GetResult<Prisma.$AdsPlatformConnectionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AdsPlatformConnections.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdsPlatformConnectionCountArgs} args - Arguments to filter AdsPlatformConnections to count.
+     * @example
+     * // Count the number of AdsPlatformConnections
+     * const count = await prisma.adsPlatformConnection.count({
+     *   where: {
+     *     // ... the filter for the AdsPlatformConnections we want to count
+     *   }
+     * })
+    **/
+    count<T extends AdsPlatformConnectionCountArgs>(
+      args?: Subset<T, AdsPlatformConnectionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AdsPlatformConnectionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AdsPlatformConnection.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdsPlatformConnectionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AdsPlatformConnectionAggregateArgs>(args: Subset<T, AdsPlatformConnectionAggregateArgs>): Prisma.PrismaPromise<GetAdsPlatformConnectionAggregateType<T>>
+
+    /**
+     * Group by AdsPlatformConnection.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdsPlatformConnectionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AdsPlatformConnectionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AdsPlatformConnectionGroupByArgs['orderBy'] }
+        : { orderBy?: AdsPlatformConnectionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AdsPlatformConnectionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAdsPlatformConnectionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AdsPlatformConnection model
+   */
+  readonly fields: AdsPlatformConnectionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AdsPlatformConnection.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AdsPlatformConnectionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AdsPlatformConnection model
+   */
+  interface AdsPlatformConnectionFieldRefs {
+    readonly id: FieldRef<"AdsPlatformConnection", 'String'>
+    readonly userId: FieldRef<"AdsPlatformConnection", 'String'>
+    readonly platform: FieldRef<"AdsPlatformConnection", 'String'>
+    readonly status: FieldRef<"AdsPlatformConnection", 'String'>
+    readonly note: FieldRef<"AdsPlatformConnection", 'String'>
+    readonly createdAt: FieldRef<"AdsPlatformConnection", 'DateTime'>
+    readonly updatedAt: FieldRef<"AdsPlatformConnection", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AdsPlatformConnection findUnique
+   */
+  export type AdsPlatformConnectionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsPlatformConnection
+     */
+    select?: AdsPlatformConnectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsPlatformConnection
+     */
+    omit?: AdsPlatformConnectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsPlatformConnectionInclude<ExtArgs> | null
+    /**
+     * Filter, which AdsPlatformConnection to fetch.
+     */
+    where: AdsPlatformConnectionWhereUniqueInput
+  }
+
+  /**
+   * AdsPlatformConnection findUniqueOrThrow
+   */
+  export type AdsPlatformConnectionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsPlatformConnection
+     */
+    select?: AdsPlatformConnectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsPlatformConnection
+     */
+    omit?: AdsPlatformConnectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsPlatformConnectionInclude<ExtArgs> | null
+    /**
+     * Filter, which AdsPlatformConnection to fetch.
+     */
+    where: AdsPlatformConnectionWhereUniqueInput
+  }
+
+  /**
+   * AdsPlatformConnection findFirst
+   */
+  export type AdsPlatformConnectionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsPlatformConnection
+     */
+    select?: AdsPlatformConnectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsPlatformConnection
+     */
+    omit?: AdsPlatformConnectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsPlatformConnectionInclude<ExtArgs> | null
+    /**
+     * Filter, which AdsPlatformConnection to fetch.
+     */
+    where?: AdsPlatformConnectionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdsPlatformConnections to fetch.
+     */
+    orderBy?: AdsPlatformConnectionOrderByWithRelationInput | AdsPlatformConnectionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AdsPlatformConnections.
+     */
+    cursor?: AdsPlatformConnectionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdsPlatformConnections from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdsPlatformConnections.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AdsPlatformConnections.
+     */
+    distinct?: AdsPlatformConnectionScalarFieldEnum | AdsPlatformConnectionScalarFieldEnum[]
+  }
+
+  /**
+   * AdsPlatformConnection findFirstOrThrow
+   */
+  export type AdsPlatformConnectionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsPlatformConnection
+     */
+    select?: AdsPlatformConnectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsPlatformConnection
+     */
+    omit?: AdsPlatformConnectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsPlatformConnectionInclude<ExtArgs> | null
+    /**
+     * Filter, which AdsPlatformConnection to fetch.
+     */
+    where?: AdsPlatformConnectionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdsPlatformConnections to fetch.
+     */
+    orderBy?: AdsPlatformConnectionOrderByWithRelationInput | AdsPlatformConnectionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AdsPlatformConnections.
+     */
+    cursor?: AdsPlatformConnectionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdsPlatformConnections from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdsPlatformConnections.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AdsPlatformConnections.
+     */
+    distinct?: AdsPlatformConnectionScalarFieldEnum | AdsPlatformConnectionScalarFieldEnum[]
+  }
+
+  /**
+   * AdsPlatformConnection findMany
+   */
+  export type AdsPlatformConnectionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsPlatformConnection
+     */
+    select?: AdsPlatformConnectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsPlatformConnection
+     */
+    omit?: AdsPlatformConnectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsPlatformConnectionInclude<ExtArgs> | null
+    /**
+     * Filter, which AdsPlatformConnections to fetch.
+     */
+    where?: AdsPlatformConnectionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdsPlatformConnections to fetch.
+     */
+    orderBy?: AdsPlatformConnectionOrderByWithRelationInput | AdsPlatformConnectionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AdsPlatformConnections.
+     */
+    cursor?: AdsPlatformConnectionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdsPlatformConnections from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdsPlatformConnections.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AdsPlatformConnections.
+     */
+    distinct?: AdsPlatformConnectionScalarFieldEnum | AdsPlatformConnectionScalarFieldEnum[]
+  }
+
+  /**
+   * AdsPlatformConnection create
+   */
+  export type AdsPlatformConnectionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsPlatformConnection
+     */
+    select?: AdsPlatformConnectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsPlatformConnection
+     */
+    omit?: AdsPlatformConnectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsPlatformConnectionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a AdsPlatformConnection.
+     */
+    data: XOR<AdsPlatformConnectionCreateInput, AdsPlatformConnectionUncheckedCreateInput>
+  }
+
+  /**
+   * AdsPlatformConnection createMany
+   */
+  export type AdsPlatformConnectionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AdsPlatformConnections.
+     */
+    data: AdsPlatformConnectionCreateManyInput | AdsPlatformConnectionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AdsPlatformConnection createManyAndReturn
+   */
+  export type AdsPlatformConnectionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsPlatformConnection
+     */
+    select?: AdsPlatformConnectionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsPlatformConnection
+     */
+    omit?: AdsPlatformConnectionOmit<ExtArgs> | null
+    /**
+     * The data used to create many AdsPlatformConnections.
+     */
+    data: AdsPlatformConnectionCreateManyInput | AdsPlatformConnectionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsPlatformConnectionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AdsPlatformConnection update
+   */
+  export type AdsPlatformConnectionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsPlatformConnection
+     */
+    select?: AdsPlatformConnectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsPlatformConnection
+     */
+    omit?: AdsPlatformConnectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsPlatformConnectionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a AdsPlatformConnection.
+     */
+    data: XOR<AdsPlatformConnectionUpdateInput, AdsPlatformConnectionUncheckedUpdateInput>
+    /**
+     * Choose, which AdsPlatformConnection to update.
+     */
+    where: AdsPlatformConnectionWhereUniqueInput
+  }
+
+  /**
+   * AdsPlatformConnection updateMany
+   */
+  export type AdsPlatformConnectionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AdsPlatformConnections.
+     */
+    data: XOR<AdsPlatformConnectionUpdateManyMutationInput, AdsPlatformConnectionUncheckedUpdateManyInput>
+    /**
+     * Filter which AdsPlatformConnections to update
+     */
+    where?: AdsPlatformConnectionWhereInput
+    /**
+     * Limit how many AdsPlatformConnections to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AdsPlatformConnection updateManyAndReturn
+   */
+  export type AdsPlatformConnectionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsPlatformConnection
+     */
+    select?: AdsPlatformConnectionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsPlatformConnection
+     */
+    omit?: AdsPlatformConnectionOmit<ExtArgs> | null
+    /**
+     * The data used to update AdsPlatformConnections.
+     */
+    data: XOR<AdsPlatformConnectionUpdateManyMutationInput, AdsPlatformConnectionUncheckedUpdateManyInput>
+    /**
+     * Filter which AdsPlatformConnections to update
+     */
+    where?: AdsPlatformConnectionWhereInput
+    /**
+     * Limit how many AdsPlatformConnections to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsPlatformConnectionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AdsPlatformConnection upsert
+   */
+  export type AdsPlatformConnectionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsPlatformConnection
+     */
+    select?: AdsPlatformConnectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsPlatformConnection
+     */
+    omit?: AdsPlatformConnectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsPlatformConnectionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the AdsPlatformConnection to update in case it exists.
+     */
+    where: AdsPlatformConnectionWhereUniqueInput
+    /**
+     * In case the AdsPlatformConnection found by the `where` argument doesn't exist, create a new AdsPlatformConnection with this data.
+     */
+    create: XOR<AdsPlatformConnectionCreateInput, AdsPlatformConnectionUncheckedCreateInput>
+    /**
+     * In case the AdsPlatformConnection was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AdsPlatformConnectionUpdateInput, AdsPlatformConnectionUncheckedUpdateInput>
+  }
+
+  /**
+   * AdsPlatformConnection delete
+   */
+  export type AdsPlatformConnectionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsPlatformConnection
+     */
+    select?: AdsPlatformConnectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsPlatformConnection
+     */
+    omit?: AdsPlatformConnectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsPlatformConnectionInclude<ExtArgs> | null
+    /**
+     * Filter which AdsPlatformConnection to delete.
+     */
+    where: AdsPlatformConnectionWhereUniqueInput
+  }
+
+  /**
+   * AdsPlatformConnection deleteMany
+   */
+  export type AdsPlatformConnectionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AdsPlatformConnections to delete
+     */
+    where?: AdsPlatformConnectionWhereInput
+    /**
+     * Limit how many AdsPlatformConnections to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AdsPlatformConnection without action
+   */
+  export type AdsPlatformConnectionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsPlatformConnection
+     */
+    select?: AdsPlatformConnectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsPlatformConnection
+     */
+    omit?: AdsPlatformConnectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsPlatformConnectionInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model AdsLandingPageAnalysis
+   */
+
+  export type AggregateAdsLandingPageAnalysis = {
+    _count: AdsLandingPageAnalysisCountAggregateOutputType | null
+    _avg: AdsLandingPageAnalysisAvgAggregateOutputType | null
+    _sum: AdsLandingPageAnalysisSumAggregateOutputType | null
+    _min: AdsLandingPageAnalysisMinAggregateOutputType | null
+    _max: AdsLandingPageAnalysisMaxAggregateOutputType | null
+  }
+
+  export type AdsLandingPageAnalysisAvgAggregateOutputType = {
+    httpStatus: number | null
+  }
+
+  export type AdsLandingPageAnalysisSumAggregateOutputType = {
+    httpStatus: number | null
+  }
+
+  export type AdsLandingPageAnalysisMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    campaignId: string | null
+    url: string | null
+    fetchStatus: string | null
+    httpStatus: number | null
+    title: string | null
+    excerpt: string | null
+    analysis: string | null
+    errorMessage: string | null
+    fetchedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AdsLandingPageAnalysisMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    campaignId: string | null
+    url: string | null
+    fetchStatus: string | null
+    httpStatus: number | null
+    title: string | null
+    excerpt: string | null
+    analysis: string | null
+    errorMessage: string | null
+    fetchedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AdsLandingPageAnalysisCountAggregateOutputType = {
+    id: number
+    userId: number
+    campaignId: number
+    url: number
+    fetchStatus: number
+    httpStatus: number
+    title: number
+    excerpt: number
+    analysis: number
+    errorMessage: number
+    fetchedAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type AdsLandingPageAnalysisAvgAggregateInputType = {
+    httpStatus?: true
+  }
+
+  export type AdsLandingPageAnalysisSumAggregateInputType = {
+    httpStatus?: true
+  }
+
+  export type AdsLandingPageAnalysisMinAggregateInputType = {
+    id?: true
+    userId?: true
+    campaignId?: true
+    url?: true
+    fetchStatus?: true
+    httpStatus?: true
+    title?: true
+    excerpt?: true
+    analysis?: true
+    errorMessage?: true
+    fetchedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AdsLandingPageAnalysisMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    campaignId?: true
+    url?: true
+    fetchStatus?: true
+    httpStatus?: true
+    title?: true
+    excerpt?: true
+    analysis?: true
+    errorMessage?: true
+    fetchedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AdsLandingPageAnalysisCountAggregateInputType = {
+    id?: true
+    userId?: true
+    campaignId?: true
+    url?: true
+    fetchStatus?: true
+    httpStatus?: true
+    title?: true
+    excerpt?: true
+    analysis?: true
+    errorMessage?: true
+    fetchedAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type AdsLandingPageAnalysisAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AdsLandingPageAnalysis to aggregate.
+     */
+    where?: AdsLandingPageAnalysisWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdsLandingPageAnalyses to fetch.
+     */
+    orderBy?: AdsLandingPageAnalysisOrderByWithRelationInput | AdsLandingPageAnalysisOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AdsLandingPageAnalysisWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdsLandingPageAnalyses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdsLandingPageAnalyses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AdsLandingPageAnalyses
+    **/
+    _count?: true | AdsLandingPageAnalysisCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: AdsLandingPageAnalysisAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AdsLandingPageAnalysisSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AdsLandingPageAnalysisMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AdsLandingPageAnalysisMaxAggregateInputType
+  }
+
+  export type GetAdsLandingPageAnalysisAggregateType<T extends AdsLandingPageAnalysisAggregateArgs> = {
+        [P in keyof T & keyof AggregateAdsLandingPageAnalysis]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAdsLandingPageAnalysis[P]>
+      : GetScalarType<T[P], AggregateAdsLandingPageAnalysis[P]>
+  }
+
+
+
+
+  export type AdsLandingPageAnalysisGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AdsLandingPageAnalysisWhereInput
+    orderBy?: AdsLandingPageAnalysisOrderByWithAggregationInput | AdsLandingPageAnalysisOrderByWithAggregationInput[]
+    by: AdsLandingPageAnalysisScalarFieldEnum[] | AdsLandingPageAnalysisScalarFieldEnum
+    having?: AdsLandingPageAnalysisScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AdsLandingPageAnalysisCountAggregateInputType | true
+    _avg?: AdsLandingPageAnalysisAvgAggregateInputType
+    _sum?: AdsLandingPageAnalysisSumAggregateInputType
+    _min?: AdsLandingPageAnalysisMinAggregateInputType
+    _max?: AdsLandingPageAnalysisMaxAggregateInputType
+  }
+
+  export type AdsLandingPageAnalysisGroupByOutputType = {
+    id: string
+    userId: string
+    campaignId: string | null
+    url: string
+    fetchStatus: string
+    httpStatus: number | null
+    title: string | null
+    excerpt: string | null
+    analysis: string | null
+    errorMessage: string | null
+    fetchedAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: AdsLandingPageAnalysisCountAggregateOutputType | null
+    _avg: AdsLandingPageAnalysisAvgAggregateOutputType | null
+    _sum: AdsLandingPageAnalysisSumAggregateOutputType | null
+    _min: AdsLandingPageAnalysisMinAggregateOutputType | null
+    _max: AdsLandingPageAnalysisMaxAggregateOutputType | null
+  }
+
+  type GetAdsLandingPageAnalysisGroupByPayload<T extends AdsLandingPageAnalysisGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AdsLandingPageAnalysisGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AdsLandingPageAnalysisGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AdsLandingPageAnalysisGroupByOutputType[P]>
+            : GetScalarType<T[P], AdsLandingPageAnalysisGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AdsLandingPageAnalysisSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    campaignId?: boolean
+    url?: boolean
+    fetchStatus?: boolean
+    httpStatus?: boolean
+    title?: boolean
+    excerpt?: boolean
+    analysis?: boolean
+    errorMessage?: boolean
+    fetchedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    campaign?: boolean | AdsLandingPageAnalysis$campaignArgs<ExtArgs>
+  }, ExtArgs["result"]["adsLandingPageAnalysis"]>
+
+  export type AdsLandingPageAnalysisSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    campaignId?: boolean
+    url?: boolean
+    fetchStatus?: boolean
+    httpStatus?: boolean
+    title?: boolean
+    excerpt?: boolean
+    analysis?: boolean
+    errorMessage?: boolean
+    fetchedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    campaign?: boolean | AdsLandingPageAnalysis$campaignArgs<ExtArgs>
+  }, ExtArgs["result"]["adsLandingPageAnalysis"]>
+
+  export type AdsLandingPageAnalysisSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    campaignId?: boolean
+    url?: boolean
+    fetchStatus?: boolean
+    httpStatus?: boolean
+    title?: boolean
+    excerpt?: boolean
+    analysis?: boolean
+    errorMessage?: boolean
+    fetchedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    campaign?: boolean | AdsLandingPageAnalysis$campaignArgs<ExtArgs>
+  }, ExtArgs["result"]["adsLandingPageAnalysis"]>
+
+  export type AdsLandingPageAnalysisSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    campaignId?: boolean
+    url?: boolean
+    fetchStatus?: boolean
+    httpStatus?: boolean
+    title?: boolean
+    excerpt?: boolean
+    analysis?: boolean
+    errorMessage?: boolean
+    fetchedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type AdsLandingPageAnalysisOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "campaignId" | "url" | "fetchStatus" | "httpStatus" | "title" | "excerpt" | "analysis" | "errorMessage" | "fetchedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["adsLandingPageAnalysis"]>
+  export type AdsLandingPageAnalysisInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    campaign?: boolean | AdsLandingPageAnalysis$campaignArgs<ExtArgs>
+  }
+  export type AdsLandingPageAnalysisIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    campaign?: boolean | AdsLandingPageAnalysis$campaignArgs<ExtArgs>
+  }
+  export type AdsLandingPageAnalysisIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    campaign?: boolean | AdsLandingPageAnalysis$campaignArgs<ExtArgs>
+  }
+
+  export type $AdsLandingPageAnalysisPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AdsLandingPageAnalysis"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      campaign: Prisma.$AdsCampaignPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      campaignId: string | null
+      url: string
+      fetchStatus: string
+      httpStatus: number | null
+      title: string | null
+      excerpt: string | null
+      analysis: string | null
+      errorMessage: string | null
+      fetchedAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["adsLandingPageAnalysis"]>
+    composites: {}
+  }
+
+  type AdsLandingPageAnalysisGetPayload<S extends boolean | null | undefined | AdsLandingPageAnalysisDefaultArgs> = $Result.GetResult<Prisma.$AdsLandingPageAnalysisPayload, S>
+
+  type AdsLandingPageAnalysisCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AdsLandingPageAnalysisFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AdsLandingPageAnalysisCountAggregateInputType | true
+    }
+
+  export interface AdsLandingPageAnalysisDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AdsLandingPageAnalysis'], meta: { name: 'AdsLandingPageAnalysis' } }
+    /**
+     * Find zero or one AdsLandingPageAnalysis that matches the filter.
+     * @param {AdsLandingPageAnalysisFindUniqueArgs} args - Arguments to find a AdsLandingPageAnalysis
+     * @example
+     * // Get one AdsLandingPageAnalysis
+     * const adsLandingPageAnalysis = await prisma.adsLandingPageAnalysis.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AdsLandingPageAnalysisFindUniqueArgs>(args: SelectSubset<T, AdsLandingPageAnalysisFindUniqueArgs<ExtArgs>>): Prisma__AdsLandingPageAnalysisClient<$Result.GetResult<Prisma.$AdsLandingPageAnalysisPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AdsLandingPageAnalysis that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AdsLandingPageAnalysisFindUniqueOrThrowArgs} args - Arguments to find a AdsLandingPageAnalysis
+     * @example
+     * // Get one AdsLandingPageAnalysis
+     * const adsLandingPageAnalysis = await prisma.adsLandingPageAnalysis.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AdsLandingPageAnalysisFindUniqueOrThrowArgs>(args: SelectSubset<T, AdsLandingPageAnalysisFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AdsLandingPageAnalysisClient<$Result.GetResult<Prisma.$AdsLandingPageAnalysisPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AdsLandingPageAnalysis that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdsLandingPageAnalysisFindFirstArgs} args - Arguments to find a AdsLandingPageAnalysis
+     * @example
+     * // Get one AdsLandingPageAnalysis
+     * const adsLandingPageAnalysis = await prisma.adsLandingPageAnalysis.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AdsLandingPageAnalysisFindFirstArgs>(args?: SelectSubset<T, AdsLandingPageAnalysisFindFirstArgs<ExtArgs>>): Prisma__AdsLandingPageAnalysisClient<$Result.GetResult<Prisma.$AdsLandingPageAnalysisPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AdsLandingPageAnalysis that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdsLandingPageAnalysisFindFirstOrThrowArgs} args - Arguments to find a AdsLandingPageAnalysis
+     * @example
+     * // Get one AdsLandingPageAnalysis
+     * const adsLandingPageAnalysis = await prisma.adsLandingPageAnalysis.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AdsLandingPageAnalysisFindFirstOrThrowArgs>(args?: SelectSubset<T, AdsLandingPageAnalysisFindFirstOrThrowArgs<ExtArgs>>): Prisma__AdsLandingPageAnalysisClient<$Result.GetResult<Prisma.$AdsLandingPageAnalysisPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AdsLandingPageAnalyses that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdsLandingPageAnalysisFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AdsLandingPageAnalyses
+     * const adsLandingPageAnalyses = await prisma.adsLandingPageAnalysis.findMany()
+     * 
+     * // Get first 10 AdsLandingPageAnalyses
+     * const adsLandingPageAnalyses = await prisma.adsLandingPageAnalysis.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const adsLandingPageAnalysisWithIdOnly = await prisma.adsLandingPageAnalysis.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AdsLandingPageAnalysisFindManyArgs>(args?: SelectSubset<T, AdsLandingPageAnalysisFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdsLandingPageAnalysisPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AdsLandingPageAnalysis.
+     * @param {AdsLandingPageAnalysisCreateArgs} args - Arguments to create a AdsLandingPageAnalysis.
+     * @example
+     * // Create one AdsLandingPageAnalysis
+     * const AdsLandingPageAnalysis = await prisma.adsLandingPageAnalysis.create({
+     *   data: {
+     *     // ... data to create a AdsLandingPageAnalysis
+     *   }
+     * })
+     * 
+     */
+    create<T extends AdsLandingPageAnalysisCreateArgs>(args: SelectSubset<T, AdsLandingPageAnalysisCreateArgs<ExtArgs>>): Prisma__AdsLandingPageAnalysisClient<$Result.GetResult<Prisma.$AdsLandingPageAnalysisPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AdsLandingPageAnalyses.
+     * @param {AdsLandingPageAnalysisCreateManyArgs} args - Arguments to create many AdsLandingPageAnalyses.
+     * @example
+     * // Create many AdsLandingPageAnalyses
+     * const adsLandingPageAnalysis = await prisma.adsLandingPageAnalysis.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AdsLandingPageAnalysisCreateManyArgs>(args?: SelectSubset<T, AdsLandingPageAnalysisCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AdsLandingPageAnalyses and returns the data saved in the database.
+     * @param {AdsLandingPageAnalysisCreateManyAndReturnArgs} args - Arguments to create many AdsLandingPageAnalyses.
+     * @example
+     * // Create many AdsLandingPageAnalyses
+     * const adsLandingPageAnalysis = await prisma.adsLandingPageAnalysis.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AdsLandingPageAnalyses and only return the `id`
+     * const adsLandingPageAnalysisWithIdOnly = await prisma.adsLandingPageAnalysis.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AdsLandingPageAnalysisCreateManyAndReturnArgs>(args?: SelectSubset<T, AdsLandingPageAnalysisCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdsLandingPageAnalysisPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a AdsLandingPageAnalysis.
+     * @param {AdsLandingPageAnalysisDeleteArgs} args - Arguments to delete one AdsLandingPageAnalysis.
+     * @example
+     * // Delete one AdsLandingPageAnalysis
+     * const AdsLandingPageAnalysis = await prisma.adsLandingPageAnalysis.delete({
+     *   where: {
+     *     // ... filter to delete one AdsLandingPageAnalysis
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AdsLandingPageAnalysisDeleteArgs>(args: SelectSubset<T, AdsLandingPageAnalysisDeleteArgs<ExtArgs>>): Prisma__AdsLandingPageAnalysisClient<$Result.GetResult<Prisma.$AdsLandingPageAnalysisPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AdsLandingPageAnalysis.
+     * @param {AdsLandingPageAnalysisUpdateArgs} args - Arguments to update one AdsLandingPageAnalysis.
+     * @example
+     * // Update one AdsLandingPageAnalysis
+     * const adsLandingPageAnalysis = await prisma.adsLandingPageAnalysis.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AdsLandingPageAnalysisUpdateArgs>(args: SelectSubset<T, AdsLandingPageAnalysisUpdateArgs<ExtArgs>>): Prisma__AdsLandingPageAnalysisClient<$Result.GetResult<Prisma.$AdsLandingPageAnalysisPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AdsLandingPageAnalyses.
+     * @param {AdsLandingPageAnalysisDeleteManyArgs} args - Arguments to filter AdsLandingPageAnalyses to delete.
+     * @example
+     * // Delete a few AdsLandingPageAnalyses
+     * const { count } = await prisma.adsLandingPageAnalysis.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AdsLandingPageAnalysisDeleteManyArgs>(args?: SelectSubset<T, AdsLandingPageAnalysisDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AdsLandingPageAnalyses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdsLandingPageAnalysisUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AdsLandingPageAnalyses
+     * const adsLandingPageAnalysis = await prisma.adsLandingPageAnalysis.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AdsLandingPageAnalysisUpdateManyArgs>(args: SelectSubset<T, AdsLandingPageAnalysisUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AdsLandingPageAnalyses and returns the data updated in the database.
+     * @param {AdsLandingPageAnalysisUpdateManyAndReturnArgs} args - Arguments to update many AdsLandingPageAnalyses.
+     * @example
+     * // Update many AdsLandingPageAnalyses
+     * const adsLandingPageAnalysis = await prisma.adsLandingPageAnalysis.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AdsLandingPageAnalyses and only return the `id`
+     * const adsLandingPageAnalysisWithIdOnly = await prisma.adsLandingPageAnalysis.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AdsLandingPageAnalysisUpdateManyAndReturnArgs>(args: SelectSubset<T, AdsLandingPageAnalysisUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdsLandingPageAnalysisPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one AdsLandingPageAnalysis.
+     * @param {AdsLandingPageAnalysisUpsertArgs} args - Arguments to update or create a AdsLandingPageAnalysis.
+     * @example
+     * // Update or create a AdsLandingPageAnalysis
+     * const adsLandingPageAnalysis = await prisma.adsLandingPageAnalysis.upsert({
+     *   create: {
+     *     // ... data to create a AdsLandingPageAnalysis
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AdsLandingPageAnalysis we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AdsLandingPageAnalysisUpsertArgs>(args: SelectSubset<T, AdsLandingPageAnalysisUpsertArgs<ExtArgs>>): Prisma__AdsLandingPageAnalysisClient<$Result.GetResult<Prisma.$AdsLandingPageAnalysisPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AdsLandingPageAnalyses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdsLandingPageAnalysisCountArgs} args - Arguments to filter AdsLandingPageAnalyses to count.
+     * @example
+     * // Count the number of AdsLandingPageAnalyses
+     * const count = await prisma.adsLandingPageAnalysis.count({
+     *   where: {
+     *     // ... the filter for the AdsLandingPageAnalyses we want to count
+     *   }
+     * })
+    **/
+    count<T extends AdsLandingPageAnalysisCountArgs>(
+      args?: Subset<T, AdsLandingPageAnalysisCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AdsLandingPageAnalysisCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AdsLandingPageAnalysis.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdsLandingPageAnalysisAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AdsLandingPageAnalysisAggregateArgs>(args: Subset<T, AdsLandingPageAnalysisAggregateArgs>): Prisma.PrismaPromise<GetAdsLandingPageAnalysisAggregateType<T>>
+
+    /**
+     * Group by AdsLandingPageAnalysis.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdsLandingPageAnalysisGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AdsLandingPageAnalysisGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AdsLandingPageAnalysisGroupByArgs['orderBy'] }
+        : { orderBy?: AdsLandingPageAnalysisGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AdsLandingPageAnalysisGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAdsLandingPageAnalysisGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AdsLandingPageAnalysis model
+   */
+  readonly fields: AdsLandingPageAnalysisFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AdsLandingPageAnalysis.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AdsLandingPageAnalysisClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    campaign<T extends AdsLandingPageAnalysis$campaignArgs<ExtArgs> = {}>(args?: Subset<T, AdsLandingPageAnalysis$campaignArgs<ExtArgs>>): Prisma__AdsCampaignClient<$Result.GetResult<Prisma.$AdsCampaignPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AdsLandingPageAnalysis model
+   */
+  interface AdsLandingPageAnalysisFieldRefs {
+    readonly id: FieldRef<"AdsLandingPageAnalysis", 'String'>
+    readonly userId: FieldRef<"AdsLandingPageAnalysis", 'String'>
+    readonly campaignId: FieldRef<"AdsLandingPageAnalysis", 'String'>
+    readonly url: FieldRef<"AdsLandingPageAnalysis", 'String'>
+    readonly fetchStatus: FieldRef<"AdsLandingPageAnalysis", 'String'>
+    readonly httpStatus: FieldRef<"AdsLandingPageAnalysis", 'Int'>
+    readonly title: FieldRef<"AdsLandingPageAnalysis", 'String'>
+    readonly excerpt: FieldRef<"AdsLandingPageAnalysis", 'String'>
+    readonly analysis: FieldRef<"AdsLandingPageAnalysis", 'String'>
+    readonly errorMessage: FieldRef<"AdsLandingPageAnalysis", 'String'>
+    readonly fetchedAt: FieldRef<"AdsLandingPageAnalysis", 'DateTime'>
+    readonly createdAt: FieldRef<"AdsLandingPageAnalysis", 'DateTime'>
+    readonly updatedAt: FieldRef<"AdsLandingPageAnalysis", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AdsLandingPageAnalysis findUnique
+   */
+  export type AdsLandingPageAnalysisFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsLandingPageAnalysis
+     */
+    select?: AdsLandingPageAnalysisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsLandingPageAnalysis
+     */
+    omit?: AdsLandingPageAnalysisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsLandingPageAnalysisInclude<ExtArgs> | null
+    /**
+     * Filter, which AdsLandingPageAnalysis to fetch.
+     */
+    where: AdsLandingPageAnalysisWhereUniqueInput
+  }
+
+  /**
+   * AdsLandingPageAnalysis findUniqueOrThrow
+   */
+  export type AdsLandingPageAnalysisFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsLandingPageAnalysis
+     */
+    select?: AdsLandingPageAnalysisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsLandingPageAnalysis
+     */
+    omit?: AdsLandingPageAnalysisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsLandingPageAnalysisInclude<ExtArgs> | null
+    /**
+     * Filter, which AdsLandingPageAnalysis to fetch.
+     */
+    where: AdsLandingPageAnalysisWhereUniqueInput
+  }
+
+  /**
+   * AdsLandingPageAnalysis findFirst
+   */
+  export type AdsLandingPageAnalysisFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsLandingPageAnalysis
+     */
+    select?: AdsLandingPageAnalysisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsLandingPageAnalysis
+     */
+    omit?: AdsLandingPageAnalysisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsLandingPageAnalysisInclude<ExtArgs> | null
+    /**
+     * Filter, which AdsLandingPageAnalysis to fetch.
+     */
+    where?: AdsLandingPageAnalysisWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdsLandingPageAnalyses to fetch.
+     */
+    orderBy?: AdsLandingPageAnalysisOrderByWithRelationInput | AdsLandingPageAnalysisOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AdsLandingPageAnalyses.
+     */
+    cursor?: AdsLandingPageAnalysisWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdsLandingPageAnalyses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdsLandingPageAnalyses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AdsLandingPageAnalyses.
+     */
+    distinct?: AdsLandingPageAnalysisScalarFieldEnum | AdsLandingPageAnalysisScalarFieldEnum[]
+  }
+
+  /**
+   * AdsLandingPageAnalysis findFirstOrThrow
+   */
+  export type AdsLandingPageAnalysisFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsLandingPageAnalysis
+     */
+    select?: AdsLandingPageAnalysisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsLandingPageAnalysis
+     */
+    omit?: AdsLandingPageAnalysisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsLandingPageAnalysisInclude<ExtArgs> | null
+    /**
+     * Filter, which AdsLandingPageAnalysis to fetch.
+     */
+    where?: AdsLandingPageAnalysisWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdsLandingPageAnalyses to fetch.
+     */
+    orderBy?: AdsLandingPageAnalysisOrderByWithRelationInput | AdsLandingPageAnalysisOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AdsLandingPageAnalyses.
+     */
+    cursor?: AdsLandingPageAnalysisWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdsLandingPageAnalyses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdsLandingPageAnalyses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AdsLandingPageAnalyses.
+     */
+    distinct?: AdsLandingPageAnalysisScalarFieldEnum | AdsLandingPageAnalysisScalarFieldEnum[]
+  }
+
+  /**
+   * AdsLandingPageAnalysis findMany
+   */
+  export type AdsLandingPageAnalysisFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsLandingPageAnalysis
+     */
+    select?: AdsLandingPageAnalysisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsLandingPageAnalysis
+     */
+    omit?: AdsLandingPageAnalysisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsLandingPageAnalysisInclude<ExtArgs> | null
+    /**
+     * Filter, which AdsLandingPageAnalyses to fetch.
+     */
+    where?: AdsLandingPageAnalysisWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdsLandingPageAnalyses to fetch.
+     */
+    orderBy?: AdsLandingPageAnalysisOrderByWithRelationInput | AdsLandingPageAnalysisOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AdsLandingPageAnalyses.
+     */
+    cursor?: AdsLandingPageAnalysisWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdsLandingPageAnalyses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdsLandingPageAnalyses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AdsLandingPageAnalyses.
+     */
+    distinct?: AdsLandingPageAnalysisScalarFieldEnum | AdsLandingPageAnalysisScalarFieldEnum[]
+  }
+
+  /**
+   * AdsLandingPageAnalysis create
+   */
+  export type AdsLandingPageAnalysisCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsLandingPageAnalysis
+     */
+    select?: AdsLandingPageAnalysisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsLandingPageAnalysis
+     */
+    omit?: AdsLandingPageAnalysisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsLandingPageAnalysisInclude<ExtArgs> | null
+    /**
+     * The data needed to create a AdsLandingPageAnalysis.
+     */
+    data: XOR<AdsLandingPageAnalysisCreateInput, AdsLandingPageAnalysisUncheckedCreateInput>
+  }
+
+  /**
+   * AdsLandingPageAnalysis createMany
+   */
+  export type AdsLandingPageAnalysisCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AdsLandingPageAnalyses.
+     */
+    data: AdsLandingPageAnalysisCreateManyInput | AdsLandingPageAnalysisCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AdsLandingPageAnalysis createManyAndReturn
+   */
+  export type AdsLandingPageAnalysisCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsLandingPageAnalysis
+     */
+    select?: AdsLandingPageAnalysisSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsLandingPageAnalysis
+     */
+    omit?: AdsLandingPageAnalysisOmit<ExtArgs> | null
+    /**
+     * The data used to create many AdsLandingPageAnalyses.
+     */
+    data: AdsLandingPageAnalysisCreateManyInput | AdsLandingPageAnalysisCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsLandingPageAnalysisIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AdsLandingPageAnalysis update
+   */
+  export type AdsLandingPageAnalysisUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsLandingPageAnalysis
+     */
+    select?: AdsLandingPageAnalysisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsLandingPageAnalysis
+     */
+    omit?: AdsLandingPageAnalysisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsLandingPageAnalysisInclude<ExtArgs> | null
+    /**
+     * The data needed to update a AdsLandingPageAnalysis.
+     */
+    data: XOR<AdsLandingPageAnalysisUpdateInput, AdsLandingPageAnalysisUncheckedUpdateInput>
+    /**
+     * Choose, which AdsLandingPageAnalysis to update.
+     */
+    where: AdsLandingPageAnalysisWhereUniqueInput
+  }
+
+  /**
+   * AdsLandingPageAnalysis updateMany
+   */
+  export type AdsLandingPageAnalysisUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AdsLandingPageAnalyses.
+     */
+    data: XOR<AdsLandingPageAnalysisUpdateManyMutationInput, AdsLandingPageAnalysisUncheckedUpdateManyInput>
+    /**
+     * Filter which AdsLandingPageAnalyses to update
+     */
+    where?: AdsLandingPageAnalysisWhereInput
+    /**
+     * Limit how many AdsLandingPageAnalyses to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AdsLandingPageAnalysis updateManyAndReturn
+   */
+  export type AdsLandingPageAnalysisUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsLandingPageAnalysis
+     */
+    select?: AdsLandingPageAnalysisSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsLandingPageAnalysis
+     */
+    omit?: AdsLandingPageAnalysisOmit<ExtArgs> | null
+    /**
+     * The data used to update AdsLandingPageAnalyses.
+     */
+    data: XOR<AdsLandingPageAnalysisUpdateManyMutationInput, AdsLandingPageAnalysisUncheckedUpdateManyInput>
+    /**
+     * Filter which AdsLandingPageAnalyses to update
+     */
+    where?: AdsLandingPageAnalysisWhereInput
+    /**
+     * Limit how many AdsLandingPageAnalyses to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsLandingPageAnalysisIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AdsLandingPageAnalysis upsert
+   */
+  export type AdsLandingPageAnalysisUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsLandingPageAnalysis
+     */
+    select?: AdsLandingPageAnalysisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsLandingPageAnalysis
+     */
+    omit?: AdsLandingPageAnalysisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsLandingPageAnalysisInclude<ExtArgs> | null
+    /**
+     * The filter to search for the AdsLandingPageAnalysis to update in case it exists.
+     */
+    where: AdsLandingPageAnalysisWhereUniqueInput
+    /**
+     * In case the AdsLandingPageAnalysis found by the `where` argument doesn't exist, create a new AdsLandingPageAnalysis with this data.
+     */
+    create: XOR<AdsLandingPageAnalysisCreateInput, AdsLandingPageAnalysisUncheckedCreateInput>
+    /**
+     * In case the AdsLandingPageAnalysis was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AdsLandingPageAnalysisUpdateInput, AdsLandingPageAnalysisUncheckedUpdateInput>
+  }
+
+  /**
+   * AdsLandingPageAnalysis delete
+   */
+  export type AdsLandingPageAnalysisDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsLandingPageAnalysis
+     */
+    select?: AdsLandingPageAnalysisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsLandingPageAnalysis
+     */
+    omit?: AdsLandingPageAnalysisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsLandingPageAnalysisInclude<ExtArgs> | null
+    /**
+     * Filter which AdsLandingPageAnalysis to delete.
+     */
+    where: AdsLandingPageAnalysisWhereUniqueInput
+  }
+
+  /**
+   * AdsLandingPageAnalysis deleteMany
+   */
+  export type AdsLandingPageAnalysisDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AdsLandingPageAnalyses to delete
+     */
+    where?: AdsLandingPageAnalysisWhereInput
+    /**
+     * Limit how many AdsLandingPageAnalyses to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AdsLandingPageAnalysis.campaign
+   */
+  export type AdsLandingPageAnalysis$campaignArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsCampaign
+     */
+    select?: AdsCampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsCampaign
+     */
+    omit?: AdsCampaignOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsCampaignInclude<ExtArgs> | null
+    where?: AdsCampaignWhereInput
+  }
+
+  /**
+   * AdsLandingPageAnalysis without action
+   */
+  export type AdsLandingPageAnalysisDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsLandingPageAnalysis
+     */
+    select?: AdsLandingPageAnalysisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsLandingPageAnalysis
+     */
+    omit?: AdsLandingPageAnalysisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsLandingPageAnalysisInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model AdsRecommendation
+   */
+
+  export type AggregateAdsRecommendation = {
+    _count: AdsRecommendationCountAggregateOutputType | null
+    _min: AdsRecommendationMinAggregateOutputType | null
+    _max: AdsRecommendationMaxAggregateOutputType | null
+  }
+
+  export type AdsRecommendationMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    campaignId: string | null
+    kind: string | null
+    content: string | null
+    source: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AdsRecommendationMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    campaignId: string | null
+    kind: string | null
+    content: string | null
+    source: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AdsRecommendationCountAggregateOutputType = {
+    id: number
+    userId: number
+    campaignId: number
+    kind: number
+    content: number
+    source: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type AdsRecommendationMinAggregateInputType = {
+    id?: true
+    userId?: true
+    campaignId?: true
+    kind?: true
+    content?: true
+    source?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AdsRecommendationMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    campaignId?: true
+    kind?: true
+    content?: true
+    source?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AdsRecommendationCountAggregateInputType = {
+    id?: true
+    userId?: true
+    campaignId?: true
+    kind?: true
+    content?: true
+    source?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type AdsRecommendationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AdsRecommendation to aggregate.
+     */
+    where?: AdsRecommendationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdsRecommendations to fetch.
+     */
+    orderBy?: AdsRecommendationOrderByWithRelationInput | AdsRecommendationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AdsRecommendationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdsRecommendations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdsRecommendations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AdsRecommendations
+    **/
+    _count?: true | AdsRecommendationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AdsRecommendationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AdsRecommendationMaxAggregateInputType
+  }
+
+  export type GetAdsRecommendationAggregateType<T extends AdsRecommendationAggregateArgs> = {
+        [P in keyof T & keyof AggregateAdsRecommendation]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAdsRecommendation[P]>
+      : GetScalarType<T[P], AggregateAdsRecommendation[P]>
+  }
+
+
+
+
+  export type AdsRecommendationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AdsRecommendationWhereInput
+    orderBy?: AdsRecommendationOrderByWithAggregationInput | AdsRecommendationOrderByWithAggregationInput[]
+    by: AdsRecommendationScalarFieldEnum[] | AdsRecommendationScalarFieldEnum
+    having?: AdsRecommendationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AdsRecommendationCountAggregateInputType | true
+    _min?: AdsRecommendationMinAggregateInputType
+    _max?: AdsRecommendationMaxAggregateInputType
+  }
+
+  export type AdsRecommendationGroupByOutputType = {
+    id: string
+    userId: string
+    campaignId: string
+    kind: string
+    content: string
+    source: string
+    createdAt: Date
+    updatedAt: Date
+    _count: AdsRecommendationCountAggregateOutputType | null
+    _min: AdsRecommendationMinAggregateOutputType | null
+    _max: AdsRecommendationMaxAggregateOutputType | null
+  }
+
+  type GetAdsRecommendationGroupByPayload<T extends AdsRecommendationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AdsRecommendationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AdsRecommendationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AdsRecommendationGroupByOutputType[P]>
+            : GetScalarType<T[P], AdsRecommendationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AdsRecommendationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    campaignId?: boolean
+    kind?: boolean
+    content?: boolean
+    source?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    campaign?: boolean | AdsCampaignDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["adsRecommendation"]>
+
+  export type AdsRecommendationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    campaignId?: boolean
+    kind?: boolean
+    content?: boolean
+    source?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    campaign?: boolean | AdsCampaignDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["adsRecommendation"]>
+
+  export type AdsRecommendationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    campaignId?: boolean
+    kind?: boolean
+    content?: boolean
+    source?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    campaign?: boolean | AdsCampaignDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["adsRecommendation"]>
+
+  export type AdsRecommendationSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    campaignId?: boolean
+    kind?: boolean
+    content?: boolean
+    source?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type AdsRecommendationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "campaignId" | "kind" | "content" | "source" | "createdAt" | "updatedAt", ExtArgs["result"]["adsRecommendation"]>
+  export type AdsRecommendationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    campaign?: boolean | AdsCampaignDefaultArgs<ExtArgs>
+  }
+  export type AdsRecommendationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    campaign?: boolean | AdsCampaignDefaultArgs<ExtArgs>
+  }
+  export type AdsRecommendationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    campaign?: boolean | AdsCampaignDefaultArgs<ExtArgs>
+  }
+
+  export type $AdsRecommendationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AdsRecommendation"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      campaign: Prisma.$AdsCampaignPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      campaignId: string
+      kind: string
+      content: string
+      source: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["adsRecommendation"]>
+    composites: {}
+  }
+
+  type AdsRecommendationGetPayload<S extends boolean | null | undefined | AdsRecommendationDefaultArgs> = $Result.GetResult<Prisma.$AdsRecommendationPayload, S>
+
+  type AdsRecommendationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AdsRecommendationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AdsRecommendationCountAggregateInputType | true
+    }
+
+  export interface AdsRecommendationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AdsRecommendation'], meta: { name: 'AdsRecommendation' } }
+    /**
+     * Find zero or one AdsRecommendation that matches the filter.
+     * @param {AdsRecommendationFindUniqueArgs} args - Arguments to find a AdsRecommendation
+     * @example
+     * // Get one AdsRecommendation
+     * const adsRecommendation = await prisma.adsRecommendation.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AdsRecommendationFindUniqueArgs>(args: SelectSubset<T, AdsRecommendationFindUniqueArgs<ExtArgs>>): Prisma__AdsRecommendationClient<$Result.GetResult<Prisma.$AdsRecommendationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AdsRecommendation that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AdsRecommendationFindUniqueOrThrowArgs} args - Arguments to find a AdsRecommendation
+     * @example
+     * // Get one AdsRecommendation
+     * const adsRecommendation = await prisma.adsRecommendation.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AdsRecommendationFindUniqueOrThrowArgs>(args: SelectSubset<T, AdsRecommendationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AdsRecommendationClient<$Result.GetResult<Prisma.$AdsRecommendationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AdsRecommendation that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdsRecommendationFindFirstArgs} args - Arguments to find a AdsRecommendation
+     * @example
+     * // Get one AdsRecommendation
+     * const adsRecommendation = await prisma.adsRecommendation.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AdsRecommendationFindFirstArgs>(args?: SelectSubset<T, AdsRecommendationFindFirstArgs<ExtArgs>>): Prisma__AdsRecommendationClient<$Result.GetResult<Prisma.$AdsRecommendationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AdsRecommendation that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdsRecommendationFindFirstOrThrowArgs} args - Arguments to find a AdsRecommendation
+     * @example
+     * // Get one AdsRecommendation
+     * const adsRecommendation = await prisma.adsRecommendation.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AdsRecommendationFindFirstOrThrowArgs>(args?: SelectSubset<T, AdsRecommendationFindFirstOrThrowArgs<ExtArgs>>): Prisma__AdsRecommendationClient<$Result.GetResult<Prisma.$AdsRecommendationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AdsRecommendations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdsRecommendationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AdsRecommendations
+     * const adsRecommendations = await prisma.adsRecommendation.findMany()
+     * 
+     * // Get first 10 AdsRecommendations
+     * const adsRecommendations = await prisma.adsRecommendation.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const adsRecommendationWithIdOnly = await prisma.adsRecommendation.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AdsRecommendationFindManyArgs>(args?: SelectSubset<T, AdsRecommendationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdsRecommendationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AdsRecommendation.
+     * @param {AdsRecommendationCreateArgs} args - Arguments to create a AdsRecommendation.
+     * @example
+     * // Create one AdsRecommendation
+     * const AdsRecommendation = await prisma.adsRecommendation.create({
+     *   data: {
+     *     // ... data to create a AdsRecommendation
+     *   }
+     * })
+     * 
+     */
+    create<T extends AdsRecommendationCreateArgs>(args: SelectSubset<T, AdsRecommendationCreateArgs<ExtArgs>>): Prisma__AdsRecommendationClient<$Result.GetResult<Prisma.$AdsRecommendationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AdsRecommendations.
+     * @param {AdsRecommendationCreateManyArgs} args - Arguments to create many AdsRecommendations.
+     * @example
+     * // Create many AdsRecommendations
+     * const adsRecommendation = await prisma.adsRecommendation.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AdsRecommendationCreateManyArgs>(args?: SelectSubset<T, AdsRecommendationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AdsRecommendations and returns the data saved in the database.
+     * @param {AdsRecommendationCreateManyAndReturnArgs} args - Arguments to create many AdsRecommendations.
+     * @example
+     * // Create many AdsRecommendations
+     * const adsRecommendation = await prisma.adsRecommendation.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AdsRecommendations and only return the `id`
+     * const adsRecommendationWithIdOnly = await prisma.adsRecommendation.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AdsRecommendationCreateManyAndReturnArgs>(args?: SelectSubset<T, AdsRecommendationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdsRecommendationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a AdsRecommendation.
+     * @param {AdsRecommendationDeleteArgs} args - Arguments to delete one AdsRecommendation.
+     * @example
+     * // Delete one AdsRecommendation
+     * const AdsRecommendation = await prisma.adsRecommendation.delete({
+     *   where: {
+     *     // ... filter to delete one AdsRecommendation
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AdsRecommendationDeleteArgs>(args: SelectSubset<T, AdsRecommendationDeleteArgs<ExtArgs>>): Prisma__AdsRecommendationClient<$Result.GetResult<Prisma.$AdsRecommendationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AdsRecommendation.
+     * @param {AdsRecommendationUpdateArgs} args - Arguments to update one AdsRecommendation.
+     * @example
+     * // Update one AdsRecommendation
+     * const adsRecommendation = await prisma.adsRecommendation.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AdsRecommendationUpdateArgs>(args: SelectSubset<T, AdsRecommendationUpdateArgs<ExtArgs>>): Prisma__AdsRecommendationClient<$Result.GetResult<Prisma.$AdsRecommendationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AdsRecommendations.
+     * @param {AdsRecommendationDeleteManyArgs} args - Arguments to filter AdsRecommendations to delete.
+     * @example
+     * // Delete a few AdsRecommendations
+     * const { count } = await prisma.adsRecommendation.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AdsRecommendationDeleteManyArgs>(args?: SelectSubset<T, AdsRecommendationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AdsRecommendations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdsRecommendationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AdsRecommendations
+     * const adsRecommendation = await prisma.adsRecommendation.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AdsRecommendationUpdateManyArgs>(args: SelectSubset<T, AdsRecommendationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AdsRecommendations and returns the data updated in the database.
+     * @param {AdsRecommendationUpdateManyAndReturnArgs} args - Arguments to update many AdsRecommendations.
+     * @example
+     * // Update many AdsRecommendations
+     * const adsRecommendation = await prisma.adsRecommendation.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AdsRecommendations and only return the `id`
+     * const adsRecommendationWithIdOnly = await prisma.adsRecommendation.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AdsRecommendationUpdateManyAndReturnArgs>(args: SelectSubset<T, AdsRecommendationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdsRecommendationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one AdsRecommendation.
+     * @param {AdsRecommendationUpsertArgs} args - Arguments to update or create a AdsRecommendation.
+     * @example
+     * // Update or create a AdsRecommendation
+     * const adsRecommendation = await prisma.adsRecommendation.upsert({
+     *   create: {
+     *     // ... data to create a AdsRecommendation
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AdsRecommendation we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AdsRecommendationUpsertArgs>(args: SelectSubset<T, AdsRecommendationUpsertArgs<ExtArgs>>): Prisma__AdsRecommendationClient<$Result.GetResult<Prisma.$AdsRecommendationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AdsRecommendations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdsRecommendationCountArgs} args - Arguments to filter AdsRecommendations to count.
+     * @example
+     * // Count the number of AdsRecommendations
+     * const count = await prisma.adsRecommendation.count({
+     *   where: {
+     *     // ... the filter for the AdsRecommendations we want to count
+     *   }
+     * })
+    **/
+    count<T extends AdsRecommendationCountArgs>(
+      args?: Subset<T, AdsRecommendationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AdsRecommendationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AdsRecommendation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdsRecommendationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AdsRecommendationAggregateArgs>(args: Subset<T, AdsRecommendationAggregateArgs>): Prisma.PrismaPromise<GetAdsRecommendationAggregateType<T>>
+
+    /**
+     * Group by AdsRecommendation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdsRecommendationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AdsRecommendationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AdsRecommendationGroupByArgs['orderBy'] }
+        : { orderBy?: AdsRecommendationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AdsRecommendationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAdsRecommendationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AdsRecommendation model
+   */
+  readonly fields: AdsRecommendationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AdsRecommendation.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AdsRecommendationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    campaign<T extends AdsCampaignDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AdsCampaignDefaultArgs<ExtArgs>>): Prisma__AdsCampaignClient<$Result.GetResult<Prisma.$AdsCampaignPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AdsRecommendation model
+   */
+  interface AdsRecommendationFieldRefs {
+    readonly id: FieldRef<"AdsRecommendation", 'String'>
+    readonly userId: FieldRef<"AdsRecommendation", 'String'>
+    readonly campaignId: FieldRef<"AdsRecommendation", 'String'>
+    readonly kind: FieldRef<"AdsRecommendation", 'String'>
+    readonly content: FieldRef<"AdsRecommendation", 'String'>
+    readonly source: FieldRef<"AdsRecommendation", 'String'>
+    readonly createdAt: FieldRef<"AdsRecommendation", 'DateTime'>
+    readonly updatedAt: FieldRef<"AdsRecommendation", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AdsRecommendation findUnique
+   */
+  export type AdsRecommendationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsRecommendation
+     */
+    select?: AdsRecommendationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsRecommendation
+     */
+    omit?: AdsRecommendationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsRecommendationInclude<ExtArgs> | null
+    /**
+     * Filter, which AdsRecommendation to fetch.
+     */
+    where: AdsRecommendationWhereUniqueInput
+  }
+
+  /**
+   * AdsRecommendation findUniqueOrThrow
+   */
+  export type AdsRecommendationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsRecommendation
+     */
+    select?: AdsRecommendationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsRecommendation
+     */
+    omit?: AdsRecommendationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsRecommendationInclude<ExtArgs> | null
+    /**
+     * Filter, which AdsRecommendation to fetch.
+     */
+    where: AdsRecommendationWhereUniqueInput
+  }
+
+  /**
+   * AdsRecommendation findFirst
+   */
+  export type AdsRecommendationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsRecommendation
+     */
+    select?: AdsRecommendationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsRecommendation
+     */
+    omit?: AdsRecommendationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsRecommendationInclude<ExtArgs> | null
+    /**
+     * Filter, which AdsRecommendation to fetch.
+     */
+    where?: AdsRecommendationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdsRecommendations to fetch.
+     */
+    orderBy?: AdsRecommendationOrderByWithRelationInput | AdsRecommendationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AdsRecommendations.
+     */
+    cursor?: AdsRecommendationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdsRecommendations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdsRecommendations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AdsRecommendations.
+     */
+    distinct?: AdsRecommendationScalarFieldEnum | AdsRecommendationScalarFieldEnum[]
+  }
+
+  /**
+   * AdsRecommendation findFirstOrThrow
+   */
+  export type AdsRecommendationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsRecommendation
+     */
+    select?: AdsRecommendationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsRecommendation
+     */
+    omit?: AdsRecommendationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsRecommendationInclude<ExtArgs> | null
+    /**
+     * Filter, which AdsRecommendation to fetch.
+     */
+    where?: AdsRecommendationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdsRecommendations to fetch.
+     */
+    orderBy?: AdsRecommendationOrderByWithRelationInput | AdsRecommendationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AdsRecommendations.
+     */
+    cursor?: AdsRecommendationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdsRecommendations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdsRecommendations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AdsRecommendations.
+     */
+    distinct?: AdsRecommendationScalarFieldEnum | AdsRecommendationScalarFieldEnum[]
+  }
+
+  /**
+   * AdsRecommendation findMany
+   */
+  export type AdsRecommendationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsRecommendation
+     */
+    select?: AdsRecommendationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsRecommendation
+     */
+    omit?: AdsRecommendationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsRecommendationInclude<ExtArgs> | null
+    /**
+     * Filter, which AdsRecommendations to fetch.
+     */
+    where?: AdsRecommendationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdsRecommendations to fetch.
+     */
+    orderBy?: AdsRecommendationOrderByWithRelationInput | AdsRecommendationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AdsRecommendations.
+     */
+    cursor?: AdsRecommendationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdsRecommendations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdsRecommendations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AdsRecommendations.
+     */
+    distinct?: AdsRecommendationScalarFieldEnum | AdsRecommendationScalarFieldEnum[]
+  }
+
+  /**
+   * AdsRecommendation create
+   */
+  export type AdsRecommendationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsRecommendation
+     */
+    select?: AdsRecommendationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsRecommendation
+     */
+    omit?: AdsRecommendationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsRecommendationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a AdsRecommendation.
+     */
+    data: XOR<AdsRecommendationCreateInput, AdsRecommendationUncheckedCreateInput>
+  }
+
+  /**
+   * AdsRecommendation createMany
+   */
+  export type AdsRecommendationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AdsRecommendations.
+     */
+    data: AdsRecommendationCreateManyInput | AdsRecommendationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AdsRecommendation createManyAndReturn
+   */
+  export type AdsRecommendationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsRecommendation
+     */
+    select?: AdsRecommendationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsRecommendation
+     */
+    omit?: AdsRecommendationOmit<ExtArgs> | null
+    /**
+     * The data used to create many AdsRecommendations.
+     */
+    data: AdsRecommendationCreateManyInput | AdsRecommendationCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsRecommendationIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AdsRecommendation update
+   */
+  export type AdsRecommendationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsRecommendation
+     */
+    select?: AdsRecommendationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsRecommendation
+     */
+    omit?: AdsRecommendationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsRecommendationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a AdsRecommendation.
+     */
+    data: XOR<AdsRecommendationUpdateInput, AdsRecommendationUncheckedUpdateInput>
+    /**
+     * Choose, which AdsRecommendation to update.
+     */
+    where: AdsRecommendationWhereUniqueInput
+  }
+
+  /**
+   * AdsRecommendation updateMany
+   */
+  export type AdsRecommendationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AdsRecommendations.
+     */
+    data: XOR<AdsRecommendationUpdateManyMutationInput, AdsRecommendationUncheckedUpdateManyInput>
+    /**
+     * Filter which AdsRecommendations to update
+     */
+    where?: AdsRecommendationWhereInput
+    /**
+     * Limit how many AdsRecommendations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AdsRecommendation updateManyAndReturn
+   */
+  export type AdsRecommendationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsRecommendation
+     */
+    select?: AdsRecommendationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsRecommendation
+     */
+    omit?: AdsRecommendationOmit<ExtArgs> | null
+    /**
+     * The data used to update AdsRecommendations.
+     */
+    data: XOR<AdsRecommendationUpdateManyMutationInput, AdsRecommendationUncheckedUpdateManyInput>
+    /**
+     * Filter which AdsRecommendations to update
+     */
+    where?: AdsRecommendationWhereInput
+    /**
+     * Limit how many AdsRecommendations to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsRecommendationIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AdsRecommendation upsert
+   */
+  export type AdsRecommendationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsRecommendation
+     */
+    select?: AdsRecommendationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsRecommendation
+     */
+    omit?: AdsRecommendationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsRecommendationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the AdsRecommendation to update in case it exists.
+     */
+    where: AdsRecommendationWhereUniqueInput
+    /**
+     * In case the AdsRecommendation found by the `where` argument doesn't exist, create a new AdsRecommendation with this data.
+     */
+    create: XOR<AdsRecommendationCreateInput, AdsRecommendationUncheckedCreateInput>
+    /**
+     * In case the AdsRecommendation was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AdsRecommendationUpdateInput, AdsRecommendationUncheckedUpdateInput>
+  }
+
+  /**
+   * AdsRecommendation delete
+   */
+  export type AdsRecommendationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsRecommendation
+     */
+    select?: AdsRecommendationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsRecommendation
+     */
+    omit?: AdsRecommendationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsRecommendationInclude<ExtArgs> | null
+    /**
+     * Filter which AdsRecommendation to delete.
+     */
+    where: AdsRecommendationWhereUniqueInput
+  }
+
+  /**
+   * AdsRecommendation deleteMany
+   */
+  export type AdsRecommendationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AdsRecommendations to delete
+     */
+    where?: AdsRecommendationWhereInput
+    /**
+     * Limit how many AdsRecommendations to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AdsRecommendation without action
+   */
+  export type AdsRecommendationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsRecommendation
+     */
+    select?: AdsRecommendationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsRecommendation
+     */
+    omit?: AdsRecommendationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsRecommendationInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model AdsAiUsage
+   */
+
+  export type AggregateAdsAiUsage = {
+    _count: AdsAiUsageCountAggregateOutputType | null
+    _avg: AdsAiUsageAvgAggregateOutputType | null
+    _sum: AdsAiUsageSumAggregateOutputType | null
+    _min: AdsAiUsageMinAggregateOutputType | null
+    _max: AdsAiUsageMaxAggregateOutputType | null
+  }
+
+  export type AdsAiUsageAvgAggregateOutputType = {
+    count: number | null
+  }
+
+  export type AdsAiUsageSumAggregateOutputType = {
+    count: number | null
+  }
+
+  export type AdsAiUsageMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    day: Date | null
+    kind: string | null
+    count: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AdsAiUsageMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    day: Date | null
+    kind: string | null
+    count: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AdsAiUsageCountAggregateOutputType = {
+    id: number
+    userId: number
+    day: number
+    kind: number
+    count: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type AdsAiUsageAvgAggregateInputType = {
+    count?: true
+  }
+
+  export type AdsAiUsageSumAggregateInputType = {
+    count?: true
+  }
+
+  export type AdsAiUsageMinAggregateInputType = {
+    id?: true
+    userId?: true
+    day?: true
+    kind?: true
+    count?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AdsAiUsageMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    day?: true
+    kind?: true
+    count?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AdsAiUsageCountAggregateInputType = {
+    id?: true
+    userId?: true
+    day?: true
+    kind?: true
+    count?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type AdsAiUsageAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AdsAiUsage to aggregate.
+     */
+    where?: AdsAiUsageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdsAiUsages to fetch.
+     */
+    orderBy?: AdsAiUsageOrderByWithRelationInput | AdsAiUsageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AdsAiUsageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdsAiUsages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdsAiUsages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AdsAiUsages
+    **/
+    _count?: true | AdsAiUsageCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: AdsAiUsageAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AdsAiUsageSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AdsAiUsageMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AdsAiUsageMaxAggregateInputType
+  }
+
+  export type GetAdsAiUsageAggregateType<T extends AdsAiUsageAggregateArgs> = {
+        [P in keyof T & keyof AggregateAdsAiUsage]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAdsAiUsage[P]>
+      : GetScalarType<T[P], AggregateAdsAiUsage[P]>
+  }
+
+
+
+
+  export type AdsAiUsageGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AdsAiUsageWhereInput
+    orderBy?: AdsAiUsageOrderByWithAggregationInput | AdsAiUsageOrderByWithAggregationInput[]
+    by: AdsAiUsageScalarFieldEnum[] | AdsAiUsageScalarFieldEnum
+    having?: AdsAiUsageScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AdsAiUsageCountAggregateInputType | true
+    _avg?: AdsAiUsageAvgAggregateInputType
+    _sum?: AdsAiUsageSumAggregateInputType
+    _min?: AdsAiUsageMinAggregateInputType
+    _max?: AdsAiUsageMaxAggregateInputType
+  }
+
+  export type AdsAiUsageGroupByOutputType = {
+    id: string
+    userId: string
+    day: Date
+    kind: string
+    count: number
+    createdAt: Date
+    updatedAt: Date
+    _count: AdsAiUsageCountAggregateOutputType | null
+    _avg: AdsAiUsageAvgAggregateOutputType | null
+    _sum: AdsAiUsageSumAggregateOutputType | null
+    _min: AdsAiUsageMinAggregateOutputType | null
+    _max: AdsAiUsageMaxAggregateOutputType | null
+  }
+
+  type GetAdsAiUsageGroupByPayload<T extends AdsAiUsageGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AdsAiUsageGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AdsAiUsageGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AdsAiUsageGroupByOutputType[P]>
+            : GetScalarType<T[P], AdsAiUsageGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AdsAiUsageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    day?: boolean
+    kind?: boolean
+    count?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["adsAiUsage"]>
+
+  export type AdsAiUsageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    day?: boolean
+    kind?: boolean
+    count?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["adsAiUsage"]>
+
+  export type AdsAiUsageSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    day?: boolean
+    kind?: boolean
+    count?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["adsAiUsage"]>
+
+  export type AdsAiUsageSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    day?: boolean
+    kind?: boolean
+    count?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type AdsAiUsageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "day" | "kind" | "count" | "createdAt" | "updatedAt", ExtArgs["result"]["adsAiUsage"]>
+  export type AdsAiUsageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type AdsAiUsageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type AdsAiUsageIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $AdsAiUsagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AdsAiUsage"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      day: Date
+      kind: string
+      count: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["adsAiUsage"]>
+    composites: {}
+  }
+
+  type AdsAiUsageGetPayload<S extends boolean | null | undefined | AdsAiUsageDefaultArgs> = $Result.GetResult<Prisma.$AdsAiUsagePayload, S>
+
+  type AdsAiUsageCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AdsAiUsageFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AdsAiUsageCountAggregateInputType | true
+    }
+
+  export interface AdsAiUsageDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AdsAiUsage'], meta: { name: 'AdsAiUsage' } }
+    /**
+     * Find zero or one AdsAiUsage that matches the filter.
+     * @param {AdsAiUsageFindUniqueArgs} args - Arguments to find a AdsAiUsage
+     * @example
+     * // Get one AdsAiUsage
+     * const adsAiUsage = await prisma.adsAiUsage.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AdsAiUsageFindUniqueArgs>(args: SelectSubset<T, AdsAiUsageFindUniqueArgs<ExtArgs>>): Prisma__AdsAiUsageClient<$Result.GetResult<Prisma.$AdsAiUsagePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AdsAiUsage that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AdsAiUsageFindUniqueOrThrowArgs} args - Arguments to find a AdsAiUsage
+     * @example
+     * // Get one AdsAiUsage
+     * const adsAiUsage = await prisma.adsAiUsage.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AdsAiUsageFindUniqueOrThrowArgs>(args: SelectSubset<T, AdsAiUsageFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AdsAiUsageClient<$Result.GetResult<Prisma.$AdsAiUsagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AdsAiUsage that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdsAiUsageFindFirstArgs} args - Arguments to find a AdsAiUsage
+     * @example
+     * // Get one AdsAiUsage
+     * const adsAiUsage = await prisma.adsAiUsage.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AdsAiUsageFindFirstArgs>(args?: SelectSubset<T, AdsAiUsageFindFirstArgs<ExtArgs>>): Prisma__AdsAiUsageClient<$Result.GetResult<Prisma.$AdsAiUsagePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AdsAiUsage that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdsAiUsageFindFirstOrThrowArgs} args - Arguments to find a AdsAiUsage
+     * @example
+     * // Get one AdsAiUsage
+     * const adsAiUsage = await prisma.adsAiUsage.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AdsAiUsageFindFirstOrThrowArgs>(args?: SelectSubset<T, AdsAiUsageFindFirstOrThrowArgs<ExtArgs>>): Prisma__AdsAiUsageClient<$Result.GetResult<Prisma.$AdsAiUsagePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AdsAiUsages that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdsAiUsageFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AdsAiUsages
+     * const adsAiUsages = await prisma.adsAiUsage.findMany()
+     * 
+     * // Get first 10 AdsAiUsages
+     * const adsAiUsages = await prisma.adsAiUsage.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const adsAiUsageWithIdOnly = await prisma.adsAiUsage.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AdsAiUsageFindManyArgs>(args?: SelectSubset<T, AdsAiUsageFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdsAiUsagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AdsAiUsage.
+     * @param {AdsAiUsageCreateArgs} args - Arguments to create a AdsAiUsage.
+     * @example
+     * // Create one AdsAiUsage
+     * const AdsAiUsage = await prisma.adsAiUsage.create({
+     *   data: {
+     *     // ... data to create a AdsAiUsage
+     *   }
+     * })
+     * 
+     */
+    create<T extends AdsAiUsageCreateArgs>(args: SelectSubset<T, AdsAiUsageCreateArgs<ExtArgs>>): Prisma__AdsAiUsageClient<$Result.GetResult<Prisma.$AdsAiUsagePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AdsAiUsages.
+     * @param {AdsAiUsageCreateManyArgs} args - Arguments to create many AdsAiUsages.
+     * @example
+     * // Create many AdsAiUsages
+     * const adsAiUsage = await prisma.adsAiUsage.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AdsAiUsageCreateManyArgs>(args?: SelectSubset<T, AdsAiUsageCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AdsAiUsages and returns the data saved in the database.
+     * @param {AdsAiUsageCreateManyAndReturnArgs} args - Arguments to create many AdsAiUsages.
+     * @example
+     * // Create many AdsAiUsages
+     * const adsAiUsage = await prisma.adsAiUsage.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AdsAiUsages and only return the `id`
+     * const adsAiUsageWithIdOnly = await prisma.adsAiUsage.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AdsAiUsageCreateManyAndReturnArgs>(args?: SelectSubset<T, AdsAiUsageCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdsAiUsagePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a AdsAiUsage.
+     * @param {AdsAiUsageDeleteArgs} args - Arguments to delete one AdsAiUsage.
+     * @example
+     * // Delete one AdsAiUsage
+     * const AdsAiUsage = await prisma.adsAiUsage.delete({
+     *   where: {
+     *     // ... filter to delete one AdsAiUsage
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AdsAiUsageDeleteArgs>(args: SelectSubset<T, AdsAiUsageDeleteArgs<ExtArgs>>): Prisma__AdsAiUsageClient<$Result.GetResult<Prisma.$AdsAiUsagePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AdsAiUsage.
+     * @param {AdsAiUsageUpdateArgs} args - Arguments to update one AdsAiUsage.
+     * @example
+     * // Update one AdsAiUsage
+     * const adsAiUsage = await prisma.adsAiUsage.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AdsAiUsageUpdateArgs>(args: SelectSubset<T, AdsAiUsageUpdateArgs<ExtArgs>>): Prisma__AdsAiUsageClient<$Result.GetResult<Prisma.$AdsAiUsagePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AdsAiUsages.
+     * @param {AdsAiUsageDeleteManyArgs} args - Arguments to filter AdsAiUsages to delete.
+     * @example
+     * // Delete a few AdsAiUsages
+     * const { count } = await prisma.adsAiUsage.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AdsAiUsageDeleteManyArgs>(args?: SelectSubset<T, AdsAiUsageDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AdsAiUsages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdsAiUsageUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AdsAiUsages
+     * const adsAiUsage = await prisma.adsAiUsage.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AdsAiUsageUpdateManyArgs>(args: SelectSubset<T, AdsAiUsageUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AdsAiUsages and returns the data updated in the database.
+     * @param {AdsAiUsageUpdateManyAndReturnArgs} args - Arguments to update many AdsAiUsages.
+     * @example
+     * // Update many AdsAiUsages
+     * const adsAiUsage = await prisma.adsAiUsage.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AdsAiUsages and only return the `id`
+     * const adsAiUsageWithIdOnly = await prisma.adsAiUsage.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AdsAiUsageUpdateManyAndReturnArgs>(args: SelectSubset<T, AdsAiUsageUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdsAiUsagePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one AdsAiUsage.
+     * @param {AdsAiUsageUpsertArgs} args - Arguments to update or create a AdsAiUsage.
+     * @example
+     * // Update or create a AdsAiUsage
+     * const adsAiUsage = await prisma.adsAiUsage.upsert({
+     *   create: {
+     *     // ... data to create a AdsAiUsage
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AdsAiUsage we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AdsAiUsageUpsertArgs>(args: SelectSubset<T, AdsAiUsageUpsertArgs<ExtArgs>>): Prisma__AdsAiUsageClient<$Result.GetResult<Prisma.$AdsAiUsagePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AdsAiUsages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdsAiUsageCountArgs} args - Arguments to filter AdsAiUsages to count.
+     * @example
+     * // Count the number of AdsAiUsages
+     * const count = await prisma.adsAiUsage.count({
+     *   where: {
+     *     // ... the filter for the AdsAiUsages we want to count
+     *   }
+     * })
+    **/
+    count<T extends AdsAiUsageCountArgs>(
+      args?: Subset<T, AdsAiUsageCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AdsAiUsageCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AdsAiUsage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdsAiUsageAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AdsAiUsageAggregateArgs>(args: Subset<T, AdsAiUsageAggregateArgs>): Prisma.PrismaPromise<GetAdsAiUsageAggregateType<T>>
+
+    /**
+     * Group by AdsAiUsage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdsAiUsageGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AdsAiUsageGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AdsAiUsageGroupByArgs['orderBy'] }
+        : { orderBy?: AdsAiUsageGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AdsAiUsageGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAdsAiUsageGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AdsAiUsage model
+   */
+  readonly fields: AdsAiUsageFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AdsAiUsage.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AdsAiUsageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AdsAiUsage model
+   */
+  interface AdsAiUsageFieldRefs {
+    readonly id: FieldRef<"AdsAiUsage", 'String'>
+    readonly userId: FieldRef<"AdsAiUsage", 'String'>
+    readonly day: FieldRef<"AdsAiUsage", 'DateTime'>
+    readonly kind: FieldRef<"AdsAiUsage", 'String'>
+    readonly count: FieldRef<"AdsAiUsage", 'Int'>
+    readonly createdAt: FieldRef<"AdsAiUsage", 'DateTime'>
+    readonly updatedAt: FieldRef<"AdsAiUsage", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AdsAiUsage findUnique
+   */
+  export type AdsAiUsageFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsAiUsage
+     */
+    select?: AdsAiUsageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsAiUsage
+     */
+    omit?: AdsAiUsageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsAiUsageInclude<ExtArgs> | null
+    /**
+     * Filter, which AdsAiUsage to fetch.
+     */
+    where: AdsAiUsageWhereUniqueInput
+  }
+
+  /**
+   * AdsAiUsage findUniqueOrThrow
+   */
+  export type AdsAiUsageFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsAiUsage
+     */
+    select?: AdsAiUsageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsAiUsage
+     */
+    omit?: AdsAiUsageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsAiUsageInclude<ExtArgs> | null
+    /**
+     * Filter, which AdsAiUsage to fetch.
+     */
+    where: AdsAiUsageWhereUniqueInput
+  }
+
+  /**
+   * AdsAiUsage findFirst
+   */
+  export type AdsAiUsageFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsAiUsage
+     */
+    select?: AdsAiUsageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsAiUsage
+     */
+    omit?: AdsAiUsageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsAiUsageInclude<ExtArgs> | null
+    /**
+     * Filter, which AdsAiUsage to fetch.
+     */
+    where?: AdsAiUsageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdsAiUsages to fetch.
+     */
+    orderBy?: AdsAiUsageOrderByWithRelationInput | AdsAiUsageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AdsAiUsages.
+     */
+    cursor?: AdsAiUsageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdsAiUsages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdsAiUsages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AdsAiUsages.
+     */
+    distinct?: AdsAiUsageScalarFieldEnum | AdsAiUsageScalarFieldEnum[]
+  }
+
+  /**
+   * AdsAiUsage findFirstOrThrow
+   */
+  export type AdsAiUsageFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsAiUsage
+     */
+    select?: AdsAiUsageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsAiUsage
+     */
+    omit?: AdsAiUsageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsAiUsageInclude<ExtArgs> | null
+    /**
+     * Filter, which AdsAiUsage to fetch.
+     */
+    where?: AdsAiUsageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdsAiUsages to fetch.
+     */
+    orderBy?: AdsAiUsageOrderByWithRelationInput | AdsAiUsageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AdsAiUsages.
+     */
+    cursor?: AdsAiUsageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdsAiUsages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdsAiUsages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AdsAiUsages.
+     */
+    distinct?: AdsAiUsageScalarFieldEnum | AdsAiUsageScalarFieldEnum[]
+  }
+
+  /**
+   * AdsAiUsage findMany
+   */
+  export type AdsAiUsageFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsAiUsage
+     */
+    select?: AdsAiUsageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsAiUsage
+     */
+    omit?: AdsAiUsageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsAiUsageInclude<ExtArgs> | null
+    /**
+     * Filter, which AdsAiUsages to fetch.
+     */
+    where?: AdsAiUsageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdsAiUsages to fetch.
+     */
+    orderBy?: AdsAiUsageOrderByWithRelationInput | AdsAiUsageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AdsAiUsages.
+     */
+    cursor?: AdsAiUsageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdsAiUsages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdsAiUsages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AdsAiUsages.
+     */
+    distinct?: AdsAiUsageScalarFieldEnum | AdsAiUsageScalarFieldEnum[]
+  }
+
+  /**
+   * AdsAiUsage create
+   */
+  export type AdsAiUsageCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsAiUsage
+     */
+    select?: AdsAiUsageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsAiUsage
+     */
+    omit?: AdsAiUsageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsAiUsageInclude<ExtArgs> | null
+    /**
+     * The data needed to create a AdsAiUsage.
+     */
+    data: XOR<AdsAiUsageCreateInput, AdsAiUsageUncheckedCreateInput>
+  }
+
+  /**
+   * AdsAiUsage createMany
+   */
+  export type AdsAiUsageCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AdsAiUsages.
+     */
+    data: AdsAiUsageCreateManyInput | AdsAiUsageCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AdsAiUsage createManyAndReturn
+   */
+  export type AdsAiUsageCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsAiUsage
+     */
+    select?: AdsAiUsageSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsAiUsage
+     */
+    omit?: AdsAiUsageOmit<ExtArgs> | null
+    /**
+     * The data used to create many AdsAiUsages.
+     */
+    data: AdsAiUsageCreateManyInput | AdsAiUsageCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsAiUsageIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AdsAiUsage update
+   */
+  export type AdsAiUsageUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsAiUsage
+     */
+    select?: AdsAiUsageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsAiUsage
+     */
+    omit?: AdsAiUsageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsAiUsageInclude<ExtArgs> | null
+    /**
+     * The data needed to update a AdsAiUsage.
+     */
+    data: XOR<AdsAiUsageUpdateInput, AdsAiUsageUncheckedUpdateInput>
+    /**
+     * Choose, which AdsAiUsage to update.
+     */
+    where: AdsAiUsageWhereUniqueInput
+  }
+
+  /**
+   * AdsAiUsage updateMany
+   */
+  export type AdsAiUsageUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AdsAiUsages.
+     */
+    data: XOR<AdsAiUsageUpdateManyMutationInput, AdsAiUsageUncheckedUpdateManyInput>
+    /**
+     * Filter which AdsAiUsages to update
+     */
+    where?: AdsAiUsageWhereInput
+    /**
+     * Limit how many AdsAiUsages to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AdsAiUsage updateManyAndReturn
+   */
+  export type AdsAiUsageUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsAiUsage
+     */
+    select?: AdsAiUsageSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsAiUsage
+     */
+    omit?: AdsAiUsageOmit<ExtArgs> | null
+    /**
+     * The data used to update AdsAiUsages.
+     */
+    data: XOR<AdsAiUsageUpdateManyMutationInput, AdsAiUsageUncheckedUpdateManyInput>
+    /**
+     * Filter which AdsAiUsages to update
+     */
+    where?: AdsAiUsageWhereInput
+    /**
+     * Limit how many AdsAiUsages to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsAiUsageIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AdsAiUsage upsert
+   */
+  export type AdsAiUsageUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsAiUsage
+     */
+    select?: AdsAiUsageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsAiUsage
+     */
+    omit?: AdsAiUsageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsAiUsageInclude<ExtArgs> | null
+    /**
+     * The filter to search for the AdsAiUsage to update in case it exists.
+     */
+    where: AdsAiUsageWhereUniqueInput
+    /**
+     * In case the AdsAiUsage found by the `where` argument doesn't exist, create a new AdsAiUsage with this data.
+     */
+    create: XOR<AdsAiUsageCreateInput, AdsAiUsageUncheckedCreateInput>
+    /**
+     * In case the AdsAiUsage was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AdsAiUsageUpdateInput, AdsAiUsageUncheckedUpdateInput>
+  }
+
+  /**
+   * AdsAiUsage delete
+   */
+  export type AdsAiUsageDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsAiUsage
+     */
+    select?: AdsAiUsageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsAiUsage
+     */
+    omit?: AdsAiUsageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsAiUsageInclude<ExtArgs> | null
+    /**
+     * Filter which AdsAiUsage to delete.
+     */
+    where: AdsAiUsageWhereUniqueInput
+  }
+
+  /**
+   * AdsAiUsage deleteMany
+   */
+  export type AdsAiUsageDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AdsAiUsages to delete
+     */
+    where?: AdsAiUsageWhereInput
+    /**
+     * Limit how many AdsAiUsages to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AdsAiUsage without action
+   */
+  export type AdsAiUsageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdsAiUsage
+     */
+    select?: AdsAiUsageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdsAiUsage
+     */
+    omit?: AdsAiUsageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdsAiUsageInclude<ExtArgs> | null
   }
 
 
@@ -27779,9 +34361,18 @@ export namespace Prisma {
     name: 'name',
     objective: 'objective',
     budgetCents: 'budgetCents',
+    plannedSpendCents: 'plannedSpendCents',
     headline: 'headline',
     body: 'body',
     targetingNotes: 'targetingNotes',
+    audience: 'audience',
+    location: 'location',
+    landingPageUrl: 'landingPageUrl',
+    conversionGoal: 'conversionGoal',
+    callToAction: 'callToAction',
+    currency: 'currency',
+    timezone: 'timezone',
+    intendedPlatform: 'intendedPlatform',
     status: 'status',
     startsAt: 'startsAt',
     endsAt: 'endsAt',
@@ -27791,6 +34382,81 @@ export namespace Prisma {
   };
 
   export type AdsCampaignScalarFieldEnum = (typeof AdsCampaignScalarFieldEnum)[keyof typeof AdsCampaignScalarFieldEnum]
+
+
+  export const AdsCreativeScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    campaignId: 'campaignId',
+    source: 'source',
+    variantLabel: 'variantLabel',
+    headline: 'headline',
+    body: 'body',
+    callToAction: 'callToAction',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type AdsCreativeScalarFieldEnum = (typeof AdsCreativeScalarFieldEnum)[keyof typeof AdsCreativeScalarFieldEnum]
+
+
+  export const AdsPlatformConnectionScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    platform: 'platform',
+    status: 'status',
+    note: 'note',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type AdsPlatformConnectionScalarFieldEnum = (typeof AdsPlatformConnectionScalarFieldEnum)[keyof typeof AdsPlatformConnectionScalarFieldEnum]
+
+
+  export const AdsLandingPageAnalysisScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    campaignId: 'campaignId',
+    url: 'url',
+    fetchStatus: 'fetchStatus',
+    httpStatus: 'httpStatus',
+    title: 'title',
+    excerpt: 'excerpt',
+    analysis: 'analysis',
+    errorMessage: 'errorMessage',
+    fetchedAt: 'fetchedAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type AdsLandingPageAnalysisScalarFieldEnum = (typeof AdsLandingPageAnalysisScalarFieldEnum)[keyof typeof AdsLandingPageAnalysisScalarFieldEnum]
+
+
+  export const AdsRecommendationScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    campaignId: 'campaignId',
+    kind: 'kind',
+    content: 'content',
+    source: 'source',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type AdsRecommendationScalarFieldEnum = (typeof AdsRecommendationScalarFieldEnum)[keyof typeof AdsRecommendationScalarFieldEnum]
+
+
+  export const AdsAiUsageScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    day: 'day',
+    kind: 'kind',
+    count: 'count',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type AdsAiUsageScalarFieldEnum = (typeof AdsAiUsageScalarFieldEnum)[keyof typeof AdsAiUsageScalarFieldEnum]
 
 
   export const AppListingScalarFieldEnum: {
@@ -28008,6 +34674,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductListRelationFilter
     commerceOrders?: CommerceOrderListRelationFilter
     adsCampaigns?: AdsCampaignListRelationFilter
+    adsCreatives?: AdsCreativeListRelationFilter
+    adsPlatformConnections?: AdsPlatformConnectionListRelationFilter
+    adsLandingAnalyses?: AdsLandingPageAnalysisListRelationFilter
+    adsRecommendations?: AdsRecommendationListRelationFilter
+    adsAiUsage?: AdsAiUsageListRelationFilter
     appListings?: AppListingListRelationFilter
     sites?: SiteListRelationFilter
     flows?: FlowListRelationFilter
@@ -28038,6 +34709,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductOrderByRelationAggregateInput
     commerceOrders?: CommerceOrderOrderByRelationAggregateInput
     adsCampaigns?: AdsCampaignOrderByRelationAggregateInput
+    adsCreatives?: AdsCreativeOrderByRelationAggregateInput
+    adsPlatformConnections?: AdsPlatformConnectionOrderByRelationAggregateInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisOrderByRelationAggregateInput
+    adsRecommendations?: AdsRecommendationOrderByRelationAggregateInput
+    adsAiUsage?: AdsAiUsageOrderByRelationAggregateInput
     appListings?: AppListingOrderByRelationAggregateInput
     sites?: SiteOrderByRelationAggregateInput
     flows?: FlowOrderByRelationAggregateInput
@@ -28071,6 +34747,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductListRelationFilter
     commerceOrders?: CommerceOrderListRelationFilter
     adsCampaigns?: AdsCampaignListRelationFilter
+    adsCreatives?: AdsCreativeListRelationFilter
+    adsPlatformConnections?: AdsPlatformConnectionListRelationFilter
+    adsLandingAnalyses?: AdsLandingPageAnalysisListRelationFilter
+    adsRecommendations?: AdsRecommendationListRelationFilter
+    adsAiUsage?: AdsAiUsageListRelationFilter
     appListings?: AppListingListRelationFilter
     sites?: SiteListRelationFilter
     flows?: FlowListRelationFilter
@@ -29304,9 +35985,18 @@ export namespace Prisma {
     name?: StringFilter<"AdsCampaign"> | string
     objective?: StringFilter<"AdsCampaign"> | string
     budgetCents?: IntFilter<"AdsCampaign"> | number
+    plannedSpendCents?: IntNullableFilter<"AdsCampaign"> | number | null
     headline?: StringFilter<"AdsCampaign"> | string
     body?: StringFilter<"AdsCampaign"> | string
     targetingNotes?: StringNullableFilter<"AdsCampaign"> | string | null
+    audience?: StringNullableFilter<"AdsCampaign"> | string | null
+    location?: StringNullableFilter<"AdsCampaign"> | string | null
+    landingPageUrl?: StringNullableFilter<"AdsCampaign"> | string | null
+    conversionGoal?: StringNullableFilter<"AdsCampaign"> | string | null
+    callToAction?: StringNullableFilter<"AdsCampaign"> | string | null
+    currency?: StringFilter<"AdsCampaign"> | string
+    timezone?: StringFilter<"AdsCampaign"> | string
+    intendedPlatform?: StringNullableFilter<"AdsCampaign"> | string | null
     status?: StringFilter<"AdsCampaign"> | string
     startsAt?: DateTimeNullableFilter<"AdsCampaign"> | Date | string | null
     endsAt?: DateTimeNullableFilter<"AdsCampaign"> | Date | string | null
@@ -29314,6 +36004,9 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"AdsCampaign"> | Date | string
     updatedAt?: DateTimeFilter<"AdsCampaign"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    creatives?: AdsCreativeListRelationFilter
+    landingAnalyses?: AdsLandingPageAnalysisListRelationFilter
+    recommendations?: AdsRecommendationListRelationFilter
   }
 
   export type AdsCampaignOrderByWithRelationInput = {
@@ -29322,9 +36015,18 @@ export namespace Prisma {
     name?: SortOrder
     objective?: SortOrder
     budgetCents?: SortOrder
+    plannedSpendCents?: SortOrderInput | SortOrder
     headline?: SortOrder
     body?: SortOrder
     targetingNotes?: SortOrderInput | SortOrder
+    audience?: SortOrderInput | SortOrder
+    location?: SortOrderInput | SortOrder
+    landingPageUrl?: SortOrderInput | SortOrder
+    conversionGoal?: SortOrderInput | SortOrder
+    callToAction?: SortOrderInput | SortOrder
+    currency?: SortOrder
+    timezone?: SortOrder
+    intendedPlatform?: SortOrderInput | SortOrder
     status?: SortOrder
     startsAt?: SortOrderInput | SortOrder
     endsAt?: SortOrderInput | SortOrder
@@ -29332,6 +36034,9 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
+    creatives?: AdsCreativeOrderByRelationAggregateInput
+    landingAnalyses?: AdsLandingPageAnalysisOrderByRelationAggregateInput
+    recommendations?: AdsRecommendationOrderByRelationAggregateInput
   }
 
   export type AdsCampaignWhereUniqueInput = Prisma.AtLeast<{
@@ -29343,9 +36048,18 @@ export namespace Prisma {
     name?: StringFilter<"AdsCampaign"> | string
     objective?: StringFilter<"AdsCampaign"> | string
     budgetCents?: IntFilter<"AdsCampaign"> | number
+    plannedSpendCents?: IntNullableFilter<"AdsCampaign"> | number | null
     headline?: StringFilter<"AdsCampaign"> | string
     body?: StringFilter<"AdsCampaign"> | string
     targetingNotes?: StringNullableFilter<"AdsCampaign"> | string | null
+    audience?: StringNullableFilter<"AdsCampaign"> | string | null
+    location?: StringNullableFilter<"AdsCampaign"> | string | null
+    landingPageUrl?: StringNullableFilter<"AdsCampaign"> | string | null
+    conversionGoal?: StringNullableFilter<"AdsCampaign"> | string | null
+    callToAction?: StringNullableFilter<"AdsCampaign"> | string | null
+    currency?: StringFilter<"AdsCampaign"> | string
+    timezone?: StringFilter<"AdsCampaign"> | string
+    intendedPlatform?: StringNullableFilter<"AdsCampaign"> | string | null
     status?: StringFilter<"AdsCampaign"> | string
     startsAt?: DateTimeNullableFilter<"AdsCampaign"> | Date | string | null
     endsAt?: DateTimeNullableFilter<"AdsCampaign"> | Date | string | null
@@ -29353,6 +36067,9 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"AdsCampaign"> | Date | string
     updatedAt?: DateTimeFilter<"AdsCampaign"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    creatives?: AdsCreativeListRelationFilter
+    landingAnalyses?: AdsLandingPageAnalysisListRelationFilter
+    recommendations?: AdsRecommendationListRelationFilter
   }, "id">
 
   export type AdsCampaignOrderByWithAggregationInput = {
@@ -29361,9 +36078,18 @@ export namespace Prisma {
     name?: SortOrder
     objective?: SortOrder
     budgetCents?: SortOrder
+    plannedSpendCents?: SortOrderInput | SortOrder
     headline?: SortOrder
     body?: SortOrder
     targetingNotes?: SortOrderInput | SortOrder
+    audience?: SortOrderInput | SortOrder
+    location?: SortOrderInput | SortOrder
+    landingPageUrl?: SortOrderInput | SortOrder
+    conversionGoal?: SortOrderInput | SortOrder
+    callToAction?: SortOrderInput | SortOrder
+    currency?: SortOrder
+    timezone?: SortOrder
+    intendedPlatform?: SortOrderInput | SortOrder
     status?: SortOrder
     startsAt?: SortOrderInput | SortOrder
     endsAt?: SortOrderInput | SortOrder
@@ -29386,15 +36112,414 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"AdsCampaign"> | string
     objective?: StringWithAggregatesFilter<"AdsCampaign"> | string
     budgetCents?: IntWithAggregatesFilter<"AdsCampaign"> | number
+    plannedSpendCents?: IntNullableWithAggregatesFilter<"AdsCampaign"> | number | null
     headline?: StringWithAggregatesFilter<"AdsCampaign"> | string
     body?: StringWithAggregatesFilter<"AdsCampaign"> | string
     targetingNotes?: StringNullableWithAggregatesFilter<"AdsCampaign"> | string | null
+    audience?: StringNullableWithAggregatesFilter<"AdsCampaign"> | string | null
+    location?: StringNullableWithAggregatesFilter<"AdsCampaign"> | string | null
+    landingPageUrl?: StringNullableWithAggregatesFilter<"AdsCampaign"> | string | null
+    conversionGoal?: StringNullableWithAggregatesFilter<"AdsCampaign"> | string | null
+    callToAction?: StringNullableWithAggregatesFilter<"AdsCampaign"> | string | null
+    currency?: StringWithAggregatesFilter<"AdsCampaign"> | string
+    timezone?: StringWithAggregatesFilter<"AdsCampaign"> | string
+    intendedPlatform?: StringNullableWithAggregatesFilter<"AdsCampaign"> | string | null
     status?: StringWithAggregatesFilter<"AdsCampaign"> | string
     startsAt?: DateTimeNullableWithAggregatesFilter<"AdsCampaign"> | Date | string | null
     endsAt?: DateTimeNullableWithAggregatesFilter<"AdsCampaign"> | Date | string | null
     launchedAt?: DateTimeNullableWithAggregatesFilter<"AdsCampaign"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"AdsCampaign"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"AdsCampaign"> | Date | string
+  }
+
+  export type AdsCreativeWhereInput = {
+    AND?: AdsCreativeWhereInput | AdsCreativeWhereInput[]
+    OR?: AdsCreativeWhereInput[]
+    NOT?: AdsCreativeWhereInput | AdsCreativeWhereInput[]
+    id?: StringFilter<"AdsCreative"> | string
+    userId?: StringFilter<"AdsCreative"> | string
+    campaignId?: StringFilter<"AdsCreative"> | string
+    source?: StringFilter<"AdsCreative"> | string
+    variantLabel?: StringNullableFilter<"AdsCreative"> | string | null
+    headline?: StringFilter<"AdsCreative"> | string
+    body?: StringFilter<"AdsCreative"> | string
+    callToAction?: StringNullableFilter<"AdsCreative"> | string | null
+    createdAt?: DateTimeFilter<"AdsCreative"> | Date | string
+    updatedAt?: DateTimeFilter<"AdsCreative"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    campaign?: XOR<AdsCampaignScalarRelationFilter, AdsCampaignWhereInput>
+  }
+
+  export type AdsCreativeOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    campaignId?: SortOrder
+    source?: SortOrder
+    variantLabel?: SortOrderInput | SortOrder
+    headline?: SortOrder
+    body?: SortOrder
+    callToAction?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    campaign?: AdsCampaignOrderByWithRelationInput
+  }
+
+  export type AdsCreativeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: AdsCreativeWhereInput | AdsCreativeWhereInput[]
+    OR?: AdsCreativeWhereInput[]
+    NOT?: AdsCreativeWhereInput | AdsCreativeWhereInput[]
+    userId?: StringFilter<"AdsCreative"> | string
+    campaignId?: StringFilter<"AdsCreative"> | string
+    source?: StringFilter<"AdsCreative"> | string
+    variantLabel?: StringNullableFilter<"AdsCreative"> | string | null
+    headline?: StringFilter<"AdsCreative"> | string
+    body?: StringFilter<"AdsCreative"> | string
+    callToAction?: StringNullableFilter<"AdsCreative"> | string | null
+    createdAt?: DateTimeFilter<"AdsCreative"> | Date | string
+    updatedAt?: DateTimeFilter<"AdsCreative"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    campaign?: XOR<AdsCampaignScalarRelationFilter, AdsCampaignWhereInput>
+  }, "id">
+
+  export type AdsCreativeOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    campaignId?: SortOrder
+    source?: SortOrder
+    variantLabel?: SortOrderInput | SortOrder
+    headline?: SortOrder
+    body?: SortOrder
+    callToAction?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: AdsCreativeCountOrderByAggregateInput
+    _max?: AdsCreativeMaxOrderByAggregateInput
+    _min?: AdsCreativeMinOrderByAggregateInput
+  }
+
+  export type AdsCreativeScalarWhereWithAggregatesInput = {
+    AND?: AdsCreativeScalarWhereWithAggregatesInput | AdsCreativeScalarWhereWithAggregatesInput[]
+    OR?: AdsCreativeScalarWhereWithAggregatesInput[]
+    NOT?: AdsCreativeScalarWhereWithAggregatesInput | AdsCreativeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"AdsCreative"> | string
+    userId?: StringWithAggregatesFilter<"AdsCreative"> | string
+    campaignId?: StringWithAggregatesFilter<"AdsCreative"> | string
+    source?: StringWithAggregatesFilter<"AdsCreative"> | string
+    variantLabel?: StringNullableWithAggregatesFilter<"AdsCreative"> | string | null
+    headline?: StringWithAggregatesFilter<"AdsCreative"> | string
+    body?: StringWithAggregatesFilter<"AdsCreative"> | string
+    callToAction?: StringNullableWithAggregatesFilter<"AdsCreative"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"AdsCreative"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"AdsCreative"> | Date | string
+  }
+
+  export type AdsPlatformConnectionWhereInput = {
+    AND?: AdsPlatformConnectionWhereInput | AdsPlatformConnectionWhereInput[]
+    OR?: AdsPlatformConnectionWhereInput[]
+    NOT?: AdsPlatformConnectionWhereInput | AdsPlatformConnectionWhereInput[]
+    id?: StringFilter<"AdsPlatformConnection"> | string
+    userId?: StringFilter<"AdsPlatformConnection"> | string
+    platform?: StringFilter<"AdsPlatformConnection"> | string
+    status?: StringFilter<"AdsPlatformConnection"> | string
+    note?: StringNullableFilter<"AdsPlatformConnection"> | string | null
+    createdAt?: DateTimeFilter<"AdsPlatformConnection"> | Date | string
+    updatedAt?: DateTimeFilter<"AdsPlatformConnection"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type AdsPlatformConnectionOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    platform?: SortOrder
+    status?: SortOrder
+    note?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type AdsPlatformConnectionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId_platform?: AdsPlatformConnectionUserIdPlatformCompoundUniqueInput
+    AND?: AdsPlatformConnectionWhereInput | AdsPlatformConnectionWhereInput[]
+    OR?: AdsPlatformConnectionWhereInput[]
+    NOT?: AdsPlatformConnectionWhereInput | AdsPlatformConnectionWhereInput[]
+    userId?: StringFilter<"AdsPlatformConnection"> | string
+    platform?: StringFilter<"AdsPlatformConnection"> | string
+    status?: StringFilter<"AdsPlatformConnection"> | string
+    note?: StringNullableFilter<"AdsPlatformConnection"> | string | null
+    createdAt?: DateTimeFilter<"AdsPlatformConnection"> | Date | string
+    updatedAt?: DateTimeFilter<"AdsPlatformConnection"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "userId_platform">
+
+  export type AdsPlatformConnectionOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    platform?: SortOrder
+    status?: SortOrder
+    note?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: AdsPlatformConnectionCountOrderByAggregateInput
+    _max?: AdsPlatformConnectionMaxOrderByAggregateInput
+    _min?: AdsPlatformConnectionMinOrderByAggregateInput
+  }
+
+  export type AdsPlatformConnectionScalarWhereWithAggregatesInput = {
+    AND?: AdsPlatformConnectionScalarWhereWithAggregatesInput | AdsPlatformConnectionScalarWhereWithAggregatesInput[]
+    OR?: AdsPlatformConnectionScalarWhereWithAggregatesInput[]
+    NOT?: AdsPlatformConnectionScalarWhereWithAggregatesInput | AdsPlatformConnectionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"AdsPlatformConnection"> | string
+    userId?: StringWithAggregatesFilter<"AdsPlatformConnection"> | string
+    platform?: StringWithAggregatesFilter<"AdsPlatformConnection"> | string
+    status?: StringWithAggregatesFilter<"AdsPlatformConnection"> | string
+    note?: StringNullableWithAggregatesFilter<"AdsPlatformConnection"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"AdsPlatformConnection"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"AdsPlatformConnection"> | Date | string
+  }
+
+  export type AdsLandingPageAnalysisWhereInput = {
+    AND?: AdsLandingPageAnalysisWhereInput | AdsLandingPageAnalysisWhereInput[]
+    OR?: AdsLandingPageAnalysisWhereInput[]
+    NOT?: AdsLandingPageAnalysisWhereInput | AdsLandingPageAnalysisWhereInput[]
+    id?: StringFilter<"AdsLandingPageAnalysis"> | string
+    userId?: StringFilter<"AdsLandingPageAnalysis"> | string
+    campaignId?: StringNullableFilter<"AdsLandingPageAnalysis"> | string | null
+    url?: StringFilter<"AdsLandingPageAnalysis"> | string
+    fetchStatus?: StringFilter<"AdsLandingPageAnalysis"> | string
+    httpStatus?: IntNullableFilter<"AdsLandingPageAnalysis"> | number | null
+    title?: StringNullableFilter<"AdsLandingPageAnalysis"> | string | null
+    excerpt?: StringNullableFilter<"AdsLandingPageAnalysis"> | string | null
+    analysis?: StringNullableFilter<"AdsLandingPageAnalysis"> | string | null
+    errorMessage?: StringNullableFilter<"AdsLandingPageAnalysis"> | string | null
+    fetchedAt?: DateTimeNullableFilter<"AdsLandingPageAnalysis"> | Date | string | null
+    createdAt?: DateTimeFilter<"AdsLandingPageAnalysis"> | Date | string
+    updatedAt?: DateTimeFilter<"AdsLandingPageAnalysis"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    campaign?: XOR<AdsCampaignNullableScalarRelationFilter, AdsCampaignWhereInput> | null
+  }
+
+  export type AdsLandingPageAnalysisOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    campaignId?: SortOrderInput | SortOrder
+    url?: SortOrder
+    fetchStatus?: SortOrder
+    httpStatus?: SortOrderInput | SortOrder
+    title?: SortOrderInput | SortOrder
+    excerpt?: SortOrderInput | SortOrder
+    analysis?: SortOrderInput | SortOrder
+    errorMessage?: SortOrderInput | SortOrder
+    fetchedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    campaign?: AdsCampaignOrderByWithRelationInput
+  }
+
+  export type AdsLandingPageAnalysisWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: AdsLandingPageAnalysisWhereInput | AdsLandingPageAnalysisWhereInput[]
+    OR?: AdsLandingPageAnalysisWhereInput[]
+    NOT?: AdsLandingPageAnalysisWhereInput | AdsLandingPageAnalysisWhereInput[]
+    userId?: StringFilter<"AdsLandingPageAnalysis"> | string
+    campaignId?: StringNullableFilter<"AdsLandingPageAnalysis"> | string | null
+    url?: StringFilter<"AdsLandingPageAnalysis"> | string
+    fetchStatus?: StringFilter<"AdsLandingPageAnalysis"> | string
+    httpStatus?: IntNullableFilter<"AdsLandingPageAnalysis"> | number | null
+    title?: StringNullableFilter<"AdsLandingPageAnalysis"> | string | null
+    excerpt?: StringNullableFilter<"AdsLandingPageAnalysis"> | string | null
+    analysis?: StringNullableFilter<"AdsLandingPageAnalysis"> | string | null
+    errorMessage?: StringNullableFilter<"AdsLandingPageAnalysis"> | string | null
+    fetchedAt?: DateTimeNullableFilter<"AdsLandingPageAnalysis"> | Date | string | null
+    createdAt?: DateTimeFilter<"AdsLandingPageAnalysis"> | Date | string
+    updatedAt?: DateTimeFilter<"AdsLandingPageAnalysis"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    campaign?: XOR<AdsCampaignNullableScalarRelationFilter, AdsCampaignWhereInput> | null
+  }, "id">
+
+  export type AdsLandingPageAnalysisOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    campaignId?: SortOrderInput | SortOrder
+    url?: SortOrder
+    fetchStatus?: SortOrder
+    httpStatus?: SortOrderInput | SortOrder
+    title?: SortOrderInput | SortOrder
+    excerpt?: SortOrderInput | SortOrder
+    analysis?: SortOrderInput | SortOrder
+    errorMessage?: SortOrderInput | SortOrder
+    fetchedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: AdsLandingPageAnalysisCountOrderByAggregateInput
+    _avg?: AdsLandingPageAnalysisAvgOrderByAggregateInput
+    _max?: AdsLandingPageAnalysisMaxOrderByAggregateInput
+    _min?: AdsLandingPageAnalysisMinOrderByAggregateInput
+    _sum?: AdsLandingPageAnalysisSumOrderByAggregateInput
+  }
+
+  export type AdsLandingPageAnalysisScalarWhereWithAggregatesInput = {
+    AND?: AdsLandingPageAnalysisScalarWhereWithAggregatesInput | AdsLandingPageAnalysisScalarWhereWithAggregatesInput[]
+    OR?: AdsLandingPageAnalysisScalarWhereWithAggregatesInput[]
+    NOT?: AdsLandingPageAnalysisScalarWhereWithAggregatesInput | AdsLandingPageAnalysisScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"AdsLandingPageAnalysis"> | string
+    userId?: StringWithAggregatesFilter<"AdsLandingPageAnalysis"> | string
+    campaignId?: StringNullableWithAggregatesFilter<"AdsLandingPageAnalysis"> | string | null
+    url?: StringWithAggregatesFilter<"AdsLandingPageAnalysis"> | string
+    fetchStatus?: StringWithAggregatesFilter<"AdsLandingPageAnalysis"> | string
+    httpStatus?: IntNullableWithAggregatesFilter<"AdsLandingPageAnalysis"> | number | null
+    title?: StringNullableWithAggregatesFilter<"AdsLandingPageAnalysis"> | string | null
+    excerpt?: StringNullableWithAggregatesFilter<"AdsLandingPageAnalysis"> | string | null
+    analysis?: StringNullableWithAggregatesFilter<"AdsLandingPageAnalysis"> | string | null
+    errorMessage?: StringNullableWithAggregatesFilter<"AdsLandingPageAnalysis"> | string | null
+    fetchedAt?: DateTimeNullableWithAggregatesFilter<"AdsLandingPageAnalysis"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"AdsLandingPageAnalysis"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"AdsLandingPageAnalysis"> | Date | string
+  }
+
+  export type AdsRecommendationWhereInput = {
+    AND?: AdsRecommendationWhereInput | AdsRecommendationWhereInput[]
+    OR?: AdsRecommendationWhereInput[]
+    NOT?: AdsRecommendationWhereInput | AdsRecommendationWhereInput[]
+    id?: StringFilter<"AdsRecommendation"> | string
+    userId?: StringFilter<"AdsRecommendation"> | string
+    campaignId?: StringFilter<"AdsRecommendation"> | string
+    kind?: StringFilter<"AdsRecommendation"> | string
+    content?: StringFilter<"AdsRecommendation"> | string
+    source?: StringFilter<"AdsRecommendation"> | string
+    createdAt?: DateTimeFilter<"AdsRecommendation"> | Date | string
+    updatedAt?: DateTimeFilter<"AdsRecommendation"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    campaign?: XOR<AdsCampaignScalarRelationFilter, AdsCampaignWhereInput>
+  }
+
+  export type AdsRecommendationOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    campaignId?: SortOrder
+    kind?: SortOrder
+    content?: SortOrder
+    source?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    campaign?: AdsCampaignOrderByWithRelationInput
+  }
+
+  export type AdsRecommendationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: AdsRecommendationWhereInput | AdsRecommendationWhereInput[]
+    OR?: AdsRecommendationWhereInput[]
+    NOT?: AdsRecommendationWhereInput | AdsRecommendationWhereInput[]
+    userId?: StringFilter<"AdsRecommendation"> | string
+    campaignId?: StringFilter<"AdsRecommendation"> | string
+    kind?: StringFilter<"AdsRecommendation"> | string
+    content?: StringFilter<"AdsRecommendation"> | string
+    source?: StringFilter<"AdsRecommendation"> | string
+    createdAt?: DateTimeFilter<"AdsRecommendation"> | Date | string
+    updatedAt?: DateTimeFilter<"AdsRecommendation"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    campaign?: XOR<AdsCampaignScalarRelationFilter, AdsCampaignWhereInput>
+  }, "id">
+
+  export type AdsRecommendationOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    campaignId?: SortOrder
+    kind?: SortOrder
+    content?: SortOrder
+    source?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: AdsRecommendationCountOrderByAggregateInput
+    _max?: AdsRecommendationMaxOrderByAggregateInput
+    _min?: AdsRecommendationMinOrderByAggregateInput
+  }
+
+  export type AdsRecommendationScalarWhereWithAggregatesInput = {
+    AND?: AdsRecommendationScalarWhereWithAggregatesInput | AdsRecommendationScalarWhereWithAggregatesInput[]
+    OR?: AdsRecommendationScalarWhereWithAggregatesInput[]
+    NOT?: AdsRecommendationScalarWhereWithAggregatesInput | AdsRecommendationScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"AdsRecommendation"> | string
+    userId?: StringWithAggregatesFilter<"AdsRecommendation"> | string
+    campaignId?: StringWithAggregatesFilter<"AdsRecommendation"> | string
+    kind?: StringWithAggregatesFilter<"AdsRecommendation"> | string
+    content?: StringWithAggregatesFilter<"AdsRecommendation"> | string
+    source?: StringWithAggregatesFilter<"AdsRecommendation"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"AdsRecommendation"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"AdsRecommendation"> | Date | string
+  }
+
+  export type AdsAiUsageWhereInput = {
+    AND?: AdsAiUsageWhereInput | AdsAiUsageWhereInput[]
+    OR?: AdsAiUsageWhereInput[]
+    NOT?: AdsAiUsageWhereInput | AdsAiUsageWhereInput[]
+    id?: StringFilter<"AdsAiUsage"> | string
+    userId?: StringFilter<"AdsAiUsage"> | string
+    day?: DateTimeFilter<"AdsAiUsage"> | Date | string
+    kind?: StringFilter<"AdsAiUsage"> | string
+    count?: IntFilter<"AdsAiUsage"> | number
+    createdAt?: DateTimeFilter<"AdsAiUsage"> | Date | string
+    updatedAt?: DateTimeFilter<"AdsAiUsage"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type AdsAiUsageOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    day?: SortOrder
+    kind?: SortOrder
+    count?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type AdsAiUsageWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId_day_kind?: AdsAiUsageUserIdDayKindCompoundUniqueInput
+    AND?: AdsAiUsageWhereInput | AdsAiUsageWhereInput[]
+    OR?: AdsAiUsageWhereInput[]
+    NOT?: AdsAiUsageWhereInput | AdsAiUsageWhereInput[]
+    userId?: StringFilter<"AdsAiUsage"> | string
+    day?: DateTimeFilter<"AdsAiUsage"> | Date | string
+    kind?: StringFilter<"AdsAiUsage"> | string
+    count?: IntFilter<"AdsAiUsage"> | number
+    createdAt?: DateTimeFilter<"AdsAiUsage"> | Date | string
+    updatedAt?: DateTimeFilter<"AdsAiUsage"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "userId_day_kind">
+
+  export type AdsAiUsageOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    day?: SortOrder
+    kind?: SortOrder
+    count?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: AdsAiUsageCountOrderByAggregateInput
+    _avg?: AdsAiUsageAvgOrderByAggregateInput
+    _max?: AdsAiUsageMaxOrderByAggregateInput
+    _min?: AdsAiUsageMinOrderByAggregateInput
+    _sum?: AdsAiUsageSumOrderByAggregateInput
+  }
+
+  export type AdsAiUsageScalarWhereWithAggregatesInput = {
+    AND?: AdsAiUsageScalarWhereWithAggregatesInput | AdsAiUsageScalarWhereWithAggregatesInput[]
+    OR?: AdsAiUsageScalarWhereWithAggregatesInput[]
+    NOT?: AdsAiUsageScalarWhereWithAggregatesInput | AdsAiUsageScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"AdsAiUsage"> | string
+    userId?: StringWithAggregatesFilter<"AdsAiUsage"> | string
+    day?: DateTimeWithAggregatesFilter<"AdsAiUsage"> | Date | string
+    kind?: StringWithAggregatesFilter<"AdsAiUsage"> | string
+    count?: IntWithAggregatesFilter<"AdsAiUsage"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"AdsAiUsage"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"AdsAiUsage"> | Date | string
   }
 
   export type AppListingWhereInput = {
@@ -29738,6 +36863,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductCreateNestedManyWithoutUserInput
     commerceOrders?: CommerceOrderCreateNestedManyWithoutUserInput
     adsCampaigns?: AdsCampaignCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -29768,6 +36898,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUncheckedCreateNestedManyWithoutUserInput
     commerceOrders?: CommerceOrderUncheckedCreateNestedManyWithoutUserInput
     adsCampaigns?: AdsCampaignUncheckedCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeUncheckedCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -29798,6 +36933,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUpdateManyWithoutUserNestedInput
     commerceOrders?: CommerceOrderUpdateManyWithoutUserNestedInput
     adsCampaigns?: AdsCampaignUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -29828,6 +36968,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUncheckedUpdateManyWithoutUserNestedInput
     commerceOrders?: CommerceOrderUncheckedUpdateManyWithoutUserNestedInput
     adsCampaigns?: AdsCampaignUncheckedUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUncheckedUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -31172,9 +38317,18 @@ export namespace Prisma {
     name: string
     objective: string
     budgetCents: number
+    plannedSpendCents?: number | null
     headline: string
     body: string
     targetingNotes?: string | null
+    audience?: string | null
+    location?: string | null
+    landingPageUrl?: string | null
+    conversionGoal?: string | null
+    callToAction?: string | null
+    currency?: string
+    timezone?: string
+    intendedPlatform?: string | null
     status?: string
     startsAt?: Date | string | null
     endsAt?: Date | string | null
@@ -31182,6 +38336,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutAdsCampaignsInput
+    creatives?: AdsCreativeCreateNestedManyWithoutCampaignInput
+    landingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutCampaignInput
+    recommendations?: AdsRecommendationCreateNestedManyWithoutCampaignInput
   }
 
   export type AdsCampaignUncheckedCreateInput = {
@@ -31190,15 +38347,27 @@ export namespace Prisma {
     name: string
     objective: string
     budgetCents: number
+    plannedSpendCents?: number | null
     headline: string
     body: string
     targetingNotes?: string | null
+    audience?: string | null
+    location?: string | null
+    landingPageUrl?: string | null
+    conversionGoal?: string | null
+    callToAction?: string | null
+    currency?: string
+    timezone?: string
+    intendedPlatform?: string | null
     status?: string
     startsAt?: Date | string | null
     endsAt?: Date | string | null
     launchedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    creatives?: AdsCreativeUncheckedCreateNestedManyWithoutCampaignInput
+    landingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutCampaignInput
+    recommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutCampaignInput
   }
 
   export type AdsCampaignUpdateInput = {
@@ -31206,9 +38375,18 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     objective?: StringFieldUpdateOperationsInput | string
     budgetCents?: IntFieldUpdateOperationsInput | number
+    plannedSpendCents?: NullableIntFieldUpdateOperationsInput | number | null
     headline?: StringFieldUpdateOperationsInput | string
     body?: StringFieldUpdateOperationsInput | string
     targetingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    landingPageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    conversionGoal?: NullableStringFieldUpdateOperationsInput | string | null
+    callToAction?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: StringFieldUpdateOperationsInput | string
+    timezone?: StringFieldUpdateOperationsInput | string
+    intendedPlatform?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     startsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -31216,6 +38394,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutAdsCampaignsNestedInput
+    creatives?: AdsCreativeUpdateManyWithoutCampaignNestedInput
+    landingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutCampaignNestedInput
+    recommendations?: AdsRecommendationUpdateManyWithoutCampaignNestedInput
   }
 
   export type AdsCampaignUncheckedUpdateInput = {
@@ -31224,15 +38405,27 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     objective?: StringFieldUpdateOperationsInput | string
     budgetCents?: IntFieldUpdateOperationsInput | number
+    plannedSpendCents?: NullableIntFieldUpdateOperationsInput | number | null
     headline?: StringFieldUpdateOperationsInput | string
     body?: StringFieldUpdateOperationsInput | string
     targetingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    landingPageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    conversionGoal?: NullableStringFieldUpdateOperationsInput | string | null
+    callToAction?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: StringFieldUpdateOperationsInput | string
+    timezone?: StringFieldUpdateOperationsInput | string
+    intendedPlatform?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     startsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     launchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    creatives?: AdsCreativeUncheckedUpdateManyWithoutCampaignNestedInput
+    landingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutCampaignNestedInput
+    recommendations?: AdsRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
   }
 
   export type AdsCampaignCreateManyInput = {
@@ -31241,9 +38434,18 @@ export namespace Prisma {
     name: string
     objective: string
     budgetCents: number
+    plannedSpendCents?: number | null
     headline: string
     body: string
     targetingNotes?: string | null
+    audience?: string | null
+    location?: string | null
+    landingPageUrl?: string | null
+    conversionGoal?: string | null
+    callToAction?: string | null
+    currency?: string
+    timezone?: string
+    intendedPlatform?: string | null
     status?: string
     startsAt?: Date | string | null
     endsAt?: Date | string | null
@@ -31257,9 +38459,18 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     objective?: StringFieldUpdateOperationsInput | string
     budgetCents?: IntFieldUpdateOperationsInput | number
+    plannedSpendCents?: NullableIntFieldUpdateOperationsInput | number | null
     headline?: StringFieldUpdateOperationsInput | string
     body?: StringFieldUpdateOperationsInput | string
     targetingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    landingPageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    conversionGoal?: NullableStringFieldUpdateOperationsInput | string | null
+    callToAction?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: StringFieldUpdateOperationsInput | string
+    timezone?: StringFieldUpdateOperationsInput | string
+    intendedPlatform?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     startsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -31274,13 +38485,434 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     objective?: StringFieldUpdateOperationsInput | string
     budgetCents?: IntFieldUpdateOperationsInput | number
+    plannedSpendCents?: NullableIntFieldUpdateOperationsInput | number | null
     headline?: StringFieldUpdateOperationsInput | string
     body?: StringFieldUpdateOperationsInput | string
     targetingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    landingPageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    conversionGoal?: NullableStringFieldUpdateOperationsInput | string | null
+    callToAction?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: StringFieldUpdateOperationsInput | string
+    timezone?: StringFieldUpdateOperationsInput | string
+    intendedPlatform?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     startsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     launchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdsCreativeCreateInput = {
+    id?: string
+    source: string
+    variantLabel?: string | null
+    headline: string
+    body: string
+    callToAction?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutAdsCreativesInput
+    campaign: AdsCampaignCreateNestedOneWithoutCreativesInput
+  }
+
+  export type AdsCreativeUncheckedCreateInput = {
+    id?: string
+    userId: string
+    campaignId: string
+    source: string
+    variantLabel?: string | null
+    headline: string
+    body: string
+    callToAction?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdsCreativeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    variantLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    headline?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    callToAction?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAdsCreativesNestedInput
+    campaign?: AdsCampaignUpdateOneRequiredWithoutCreativesNestedInput
+  }
+
+  export type AdsCreativeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    campaignId?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    variantLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    headline?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    callToAction?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdsCreativeCreateManyInput = {
+    id?: string
+    userId: string
+    campaignId: string
+    source: string
+    variantLabel?: string | null
+    headline: string
+    body: string
+    callToAction?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdsCreativeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    variantLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    headline?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    callToAction?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdsCreativeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    campaignId?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    variantLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    headline?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    callToAction?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdsPlatformConnectionCreateInput = {
+    id?: string
+    platform: string
+    status?: string
+    note?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutAdsPlatformConnectionsInput
+  }
+
+  export type AdsPlatformConnectionUncheckedCreateInput = {
+    id?: string
+    userId: string
+    platform: string
+    status?: string
+    note?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdsPlatformConnectionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    platform?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAdsPlatformConnectionsNestedInput
+  }
+
+  export type AdsPlatformConnectionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    platform?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdsPlatformConnectionCreateManyInput = {
+    id?: string
+    userId: string
+    platform: string
+    status?: string
+    note?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdsPlatformConnectionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    platform?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdsPlatformConnectionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    platform?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdsLandingPageAnalysisCreateInput = {
+    id?: string
+    url: string
+    fetchStatus: string
+    httpStatus?: number | null
+    title?: string | null
+    excerpt?: string | null
+    analysis?: string | null
+    errorMessage?: string | null
+    fetchedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutAdsLandingAnalysesInput
+    campaign?: AdsCampaignCreateNestedOneWithoutLandingAnalysesInput
+  }
+
+  export type AdsLandingPageAnalysisUncheckedCreateInput = {
+    id?: string
+    userId: string
+    campaignId?: string | null
+    url: string
+    fetchStatus: string
+    httpStatus?: number | null
+    title?: string | null
+    excerpt?: string | null
+    analysis?: string | null
+    errorMessage?: string | null
+    fetchedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdsLandingPageAnalysisUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    fetchStatus?: StringFieldUpdateOperationsInput | string
+    httpStatus?: NullableIntFieldUpdateOperationsInput | number | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    excerpt?: NullableStringFieldUpdateOperationsInput | string | null
+    analysis?: NullableStringFieldUpdateOperationsInput | string | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    fetchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAdsLandingAnalysesNestedInput
+    campaign?: AdsCampaignUpdateOneWithoutLandingAnalysesNestedInput
+  }
+
+  export type AdsLandingPageAnalysisUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    campaignId?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    fetchStatus?: StringFieldUpdateOperationsInput | string
+    httpStatus?: NullableIntFieldUpdateOperationsInput | number | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    excerpt?: NullableStringFieldUpdateOperationsInput | string | null
+    analysis?: NullableStringFieldUpdateOperationsInput | string | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    fetchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdsLandingPageAnalysisCreateManyInput = {
+    id?: string
+    userId: string
+    campaignId?: string | null
+    url: string
+    fetchStatus: string
+    httpStatus?: number | null
+    title?: string | null
+    excerpt?: string | null
+    analysis?: string | null
+    errorMessage?: string | null
+    fetchedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdsLandingPageAnalysisUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    fetchStatus?: StringFieldUpdateOperationsInput | string
+    httpStatus?: NullableIntFieldUpdateOperationsInput | number | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    excerpt?: NullableStringFieldUpdateOperationsInput | string | null
+    analysis?: NullableStringFieldUpdateOperationsInput | string | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    fetchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdsLandingPageAnalysisUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    campaignId?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    fetchStatus?: StringFieldUpdateOperationsInput | string
+    httpStatus?: NullableIntFieldUpdateOperationsInput | number | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    excerpt?: NullableStringFieldUpdateOperationsInput | string | null
+    analysis?: NullableStringFieldUpdateOperationsInput | string | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    fetchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdsRecommendationCreateInput = {
+    id?: string
+    kind: string
+    content: string
+    source: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutAdsRecommendationsInput
+    campaign: AdsCampaignCreateNestedOneWithoutRecommendationsInput
+  }
+
+  export type AdsRecommendationUncheckedCreateInput = {
+    id?: string
+    userId: string
+    campaignId: string
+    kind: string
+    content: string
+    source: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdsRecommendationUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    kind?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAdsRecommendationsNestedInput
+    campaign?: AdsCampaignUpdateOneRequiredWithoutRecommendationsNestedInput
+  }
+
+  export type AdsRecommendationUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    campaignId?: StringFieldUpdateOperationsInput | string
+    kind?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdsRecommendationCreateManyInput = {
+    id?: string
+    userId: string
+    campaignId: string
+    kind: string
+    content: string
+    source: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdsRecommendationUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    kind?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdsRecommendationUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    campaignId?: StringFieldUpdateOperationsInput | string
+    kind?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdsAiUsageCreateInput = {
+    id?: string
+    day: Date | string
+    kind: string
+    count?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutAdsAiUsageInput
+  }
+
+  export type AdsAiUsageUncheckedCreateInput = {
+    id?: string
+    userId: string
+    day: Date | string
+    kind: string
+    count?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdsAiUsageUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    day?: DateTimeFieldUpdateOperationsInput | Date | string
+    kind?: StringFieldUpdateOperationsInput | string
+    count?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAdsAiUsageNestedInput
+  }
+
+  export type AdsAiUsageUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    day?: DateTimeFieldUpdateOperationsInput | Date | string
+    kind?: StringFieldUpdateOperationsInput | string
+    count?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdsAiUsageCreateManyInput = {
+    id?: string
+    userId: string
+    day: Date | string
+    kind: string
+    count?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdsAiUsageUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    day?: DateTimeFieldUpdateOperationsInput | Date | string
+    kind?: StringFieldUpdateOperationsInput | string
+    count?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdsAiUsageUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    day?: DateTimeFieldUpdateOperationsInput | Date | string
+    kind?: StringFieldUpdateOperationsInput | string
+    count?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -31774,6 +39406,36 @@ export namespace Prisma {
     none?: AdsCampaignWhereInput
   }
 
+  export type AdsCreativeListRelationFilter = {
+    every?: AdsCreativeWhereInput
+    some?: AdsCreativeWhereInput
+    none?: AdsCreativeWhereInput
+  }
+
+  export type AdsPlatformConnectionListRelationFilter = {
+    every?: AdsPlatformConnectionWhereInput
+    some?: AdsPlatformConnectionWhereInput
+    none?: AdsPlatformConnectionWhereInput
+  }
+
+  export type AdsLandingPageAnalysisListRelationFilter = {
+    every?: AdsLandingPageAnalysisWhereInput
+    some?: AdsLandingPageAnalysisWhereInput
+    none?: AdsLandingPageAnalysisWhereInput
+  }
+
+  export type AdsRecommendationListRelationFilter = {
+    every?: AdsRecommendationWhereInput
+    some?: AdsRecommendationWhereInput
+    none?: AdsRecommendationWhereInput
+  }
+
+  export type AdsAiUsageListRelationFilter = {
+    every?: AdsAiUsageWhereInput
+    some?: AdsAiUsageWhereInput
+    none?: AdsAiUsageWhereInput
+  }
+
   export type AppListingListRelationFilter = {
     every?: AppListingWhereInput
     some?: AppListingWhereInput
@@ -31856,6 +39518,26 @@ export namespace Prisma {
   }
 
   export type AdsCampaignOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AdsCreativeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AdsPlatformConnectionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AdsLandingPageAnalysisOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AdsRecommendationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AdsAiUsageOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -32759,9 +40441,18 @@ export namespace Prisma {
     name?: SortOrder
     objective?: SortOrder
     budgetCents?: SortOrder
+    plannedSpendCents?: SortOrder
     headline?: SortOrder
     body?: SortOrder
     targetingNotes?: SortOrder
+    audience?: SortOrder
+    location?: SortOrder
+    landingPageUrl?: SortOrder
+    conversionGoal?: SortOrder
+    callToAction?: SortOrder
+    currency?: SortOrder
+    timezone?: SortOrder
+    intendedPlatform?: SortOrder
     status?: SortOrder
     startsAt?: SortOrder
     endsAt?: SortOrder
@@ -32772,6 +40463,7 @@ export namespace Prisma {
 
   export type AdsCampaignAvgOrderByAggregateInput = {
     budgetCents?: SortOrder
+    plannedSpendCents?: SortOrder
   }
 
   export type AdsCampaignMaxOrderByAggregateInput = {
@@ -32780,9 +40472,18 @@ export namespace Prisma {
     name?: SortOrder
     objective?: SortOrder
     budgetCents?: SortOrder
+    plannedSpendCents?: SortOrder
     headline?: SortOrder
     body?: SortOrder
     targetingNotes?: SortOrder
+    audience?: SortOrder
+    location?: SortOrder
+    landingPageUrl?: SortOrder
+    conversionGoal?: SortOrder
+    callToAction?: SortOrder
+    currency?: SortOrder
+    timezone?: SortOrder
+    intendedPlatform?: SortOrder
     status?: SortOrder
     startsAt?: SortOrder
     endsAt?: SortOrder
@@ -32797,9 +40498,18 @@ export namespace Prisma {
     name?: SortOrder
     objective?: SortOrder
     budgetCents?: SortOrder
+    plannedSpendCents?: SortOrder
     headline?: SortOrder
     body?: SortOrder
     targetingNotes?: SortOrder
+    audience?: SortOrder
+    location?: SortOrder
+    landingPageUrl?: SortOrder
+    conversionGoal?: SortOrder
+    callToAction?: SortOrder
+    currency?: SortOrder
+    timezone?: SortOrder
+    intendedPlatform?: SortOrder
     status?: SortOrder
     startsAt?: SortOrder
     endsAt?: SortOrder
@@ -32810,6 +40520,224 @@ export namespace Prisma {
 
   export type AdsCampaignSumOrderByAggregateInput = {
     budgetCents?: SortOrder
+    plannedSpendCents?: SortOrder
+  }
+
+  export type AdsCampaignScalarRelationFilter = {
+    is?: AdsCampaignWhereInput
+    isNot?: AdsCampaignWhereInput
+  }
+
+  export type AdsCreativeCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    campaignId?: SortOrder
+    source?: SortOrder
+    variantLabel?: SortOrder
+    headline?: SortOrder
+    body?: SortOrder
+    callToAction?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AdsCreativeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    campaignId?: SortOrder
+    source?: SortOrder
+    variantLabel?: SortOrder
+    headline?: SortOrder
+    body?: SortOrder
+    callToAction?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AdsCreativeMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    campaignId?: SortOrder
+    source?: SortOrder
+    variantLabel?: SortOrder
+    headline?: SortOrder
+    body?: SortOrder
+    callToAction?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AdsPlatformConnectionUserIdPlatformCompoundUniqueInput = {
+    userId: string
+    platform: string
+  }
+
+  export type AdsPlatformConnectionCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    platform?: SortOrder
+    status?: SortOrder
+    note?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AdsPlatformConnectionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    platform?: SortOrder
+    status?: SortOrder
+    note?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AdsPlatformConnectionMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    platform?: SortOrder
+    status?: SortOrder
+    note?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AdsCampaignNullableScalarRelationFilter = {
+    is?: AdsCampaignWhereInput | null
+    isNot?: AdsCampaignWhereInput | null
+  }
+
+  export type AdsLandingPageAnalysisCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    campaignId?: SortOrder
+    url?: SortOrder
+    fetchStatus?: SortOrder
+    httpStatus?: SortOrder
+    title?: SortOrder
+    excerpt?: SortOrder
+    analysis?: SortOrder
+    errorMessage?: SortOrder
+    fetchedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AdsLandingPageAnalysisAvgOrderByAggregateInput = {
+    httpStatus?: SortOrder
+  }
+
+  export type AdsLandingPageAnalysisMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    campaignId?: SortOrder
+    url?: SortOrder
+    fetchStatus?: SortOrder
+    httpStatus?: SortOrder
+    title?: SortOrder
+    excerpt?: SortOrder
+    analysis?: SortOrder
+    errorMessage?: SortOrder
+    fetchedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AdsLandingPageAnalysisMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    campaignId?: SortOrder
+    url?: SortOrder
+    fetchStatus?: SortOrder
+    httpStatus?: SortOrder
+    title?: SortOrder
+    excerpt?: SortOrder
+    analysis?: SortOrder
+    errorMessage?: SortOrder
+    fetchedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AdsLandingPageAnalysisSumOrderByAggregateInput = {
+    httpStatus?: SortOrder
+  }
+
+  export type AdsRecommendationCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    campaignId?: SortOrder
+    kind?: SortOrder
+    content?: SortOrder
+    source?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AdsRecommendationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    campaignId?: SortOrder
+    kind?: SortOrder
+    content?: SortOrder
+    source?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AdsRecommendationMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    campaignId?: SortOrder
+    kind?: SortOrder
+    content?: SortOrder
+    source?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AdsAiUsageUserIdDayKindCompoundUniqueInput = {
+    userId: string
+    day: Date | string
+    kind: string
+  }
+
+  export type AdsAiUsageCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    day?: SortOrder
+    kind?: SortOrder
+    count?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AdsAiUsageAvgOrderByAggregateInput = {
+    count?: SortOrder
+  }
+
+  export type AdsAiUsageMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    day?: SortOrder
+    kind?: SortOrder
+    count?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AdsAiUsageMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    day?: SortOrder
+    kind?: SortOrder
+    count?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AdsAiUsageSumOrderByAggregateInput = {
+    count?: SortOrder
   }
 
   export type AppListingUserIdSlugCompoundUniqueInput = {
@@ -33069,6 +40997,41 @@ export namespace Prisma {
     connect?: AdsCampaignWhereUniqueInput | AdsCampaignWhereUniqueInput[]
   }
 
+  export type AdsCreativeCreateNestedManyWithoutUserInput = {
+    create?: XOR<AdsCreativeCreateWithoutUserInput, AdsCreativeUncheckedCreateWithoutUserInput> | AdsCreativeCreateWithoutUserInput[] | AdsCreativeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AdsCreativeCreateOrConnectWithoutUserInput | AdsCreativeCreateOrConnectWithoutUserInput[]
+    createMany?: AdsCreativeCreateManyUserInputEnvelope
+    connect?: AdsCreativeWhereUniqueInput | AdsCreativeWhereUniqueInput[]
+  }
+
+  export type AdsPlatformConnectionCreateNestedManyWithoutUserInput = {
+    create?: XOR<AdsPlatformConnectionCreateWithoutUserInput, AdsPlatformConnectionUncheckedCreateWithoutUserInput> | AdsPlatformConnectionCreateWithoutUserInput[] | AdsPlatformConnectionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AdsPlatformConnectionCreateOrConnectWithoutUserInput | AdsPlatformConnectionCreateOrConnectWithoutUserInput[]
+    createMany?: AdsPlatformConnectionCreateManyUserInputEnvelope
+    connect?: AdsPlatformConnectionWhereUniqueInput | AdsPlatformConnectionWhereUniqueInput[]
+  }
+
+  export type AdsLandingPageAnalysisCreateNestedManyWithoutUserInput = {
+    create?: XOR<AdsLandingPageAnalysisCreateWithoutUserInput, AdsLandingPageAnalysisUncheckedCreateWithoutUserInput> | AdsLandingPageAnalysisCreateWithoutUserInput[] | AdsLandingPageAnalysisUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AdsLandingPageAnalysisCreateOrConnectWithoutUserInput | AdsLandingPageAnalysisCreateOrConnectWithoutUserInput[]
+    createMany?: AdsLandingPageAnalysisCreateManyUserInputEnvelope
+    connect?: AdsLandingPageAnalysisWhereUniqueInput | AdsLandingPageAnalysisWhereUniqueInput[]
+  }
+
+  export type AdsRecommendationCreateNestedManyWithoutUserInput = {
+    create?: XOR<AdsRecommendationCreateWithoutUserInput, AdsRecommendationUncheckedCreateWithoutUserInput> | AdsRecommendationCreateWithoutUserInput[] | AdsRecommendationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AdsRecommendationCreateOrConnectWithoutUserInput | AdsRecommendationCreateOrConnectWithoutUserInput[]
+    createMany?: AdsRecommendationCreateManyUserInputEnvelope
+    connect?: AdsRecommendationWhereUniqueInput | AdsRecommendationWhereUniqueInput[]
+  }
+
+  export type AdsAiUsageCreateNestedManyWithoutUserInput = {
+    create?: XOR<AdsAiUsageCreateWithoutUserInput, AdsAiUsageUncheckedCreateWithoutUserInput> | AdsAiUsageCreateWithoutUserInput[] | AdsAiUsageUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AdsAiUsageCreateOrConnectWithoutUserInput | AdsAiUsageCreateOrConnectWithoutUserInput[]
+    createMany?: AdsAiUsageCreateManyUserInputEnvelope
+    connect?: AdsAiUsageWhereUniqueInput | AdsAiUsageWhereUniqueInput[]
+  }
+
   export type AppListingCreateNestedManyWithoutUserInput = {
     create?: XOR<AppListingCreateWithoutUserInput, AppListingUncheckedCreateWithoutUserInput> | AppListingCreateWithoutUserInput[] | AppListingUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AppListingCreateOrConnectWithoutUserInput | AppListingCreateOrConnectWithoutUserInput[]
@@ -33193,6 +41156,41 @@ export namespace Prisma {
     connectOrCreate?: AdsCampaignCreateOrConnectWithoutUserInput | AdsCampaignCreateOrConnectWithoutUserInput[]
     createMany?: AdsCampaignCreateManyUserInputEnvelope
     connect?: AdsCampaignWhereUniqueInput | AdsCampaignWhereUniqueInput[]
+  }
+
+  export type AdsCreativeUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<AdsCreativeCreateWithoutUserInput, AdsCreativeUncheckedCreateWithoutUserInput> | AdsCreativeCreateWithoutUserInput[] | AdsCreativeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AdsCreativeCreateOrConnectWithoutUserInput | AdsCreativeCreateOrConnectWithoutUserInput[]
+    createMany?: AdsCreativeCreateManyUserInputEnvelope
+    connect?: AdsCreativeWhereUniqueInput | AdsCreativeWhereUniqueInput[]
+  }
+
+  export type AdsPlatformConnectionUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<AdsPlatformConnectionCreateWithoutUserInput, AdsPlatformConnectionUncheckedCreateWithoutUserInput> | AdsPlatformConnectionCreateWithoutUserInput[] | AdsPlatformConnectionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AdsPlatformConnectionCreateOrConnectWithoutUserInput | AdsPlatformConnectionCreateOrConnectWithoutUserInput[]
+    createMany?: AdsPlatformConnectionCreateManyUserInputEnvelope
+    connect?: AdsPlatformConnectionWhereUniqueInput | AdsPlatformConnectionWhereUniqueInput[]
+  }
+
+  export type AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<AdsLandingPageAnalysisCreateWithoutUserInput, AdsLandingPageAnalysisUncheckedCreateWithoutUserInput> | AdsLandingPageAnalysisCreateWithoutUserInput[] | AdsLandingPageAnalysisUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AdsLandingPageAnalysisCreateOrConnectWithoutUserInput | AdsLandingPageAnalysisCreateOrConnectWithoutUserInput[]
+    createMany?: AdsLandingPageAnalysisCreateManyUserInputEnvelope
+    connect?: AdsLandingPageAnalysisWhereUniqueInput | AdsLandingPageAnalysisWhereUniqueInput[]
+  }
+
+  export type AdsRecommendationUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<AdsRecommendationCreateWithoutUserInput, AdsRecommendationUncheckedCreateWithoutUserInput> | AdsRecommendationCreateWithoutUserInput[] | AdsRecommendationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AdsRecommendationCreateOrConnectWithoutUserInput | AdsRecommendationCreateOrConnectWithoutUserInput[]
+    createMany?: AdsRecommendationCreateManyUserInputEnvelope
+    connect?: AdsRecommendationWhereUniqueInput | AdsRecommendationWhereUniqueInput[]
+  }
+
+  export type AdsAiUsageUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<AdsAiUsageCreateWithoutUserInput, AdsAiUsageUncheckedCreateWithoutUserInput> | AdsAiUsageCreateWithoutUserInput[] | AdsAiUsageUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AdsAiUsageCreateOrConnectWithoutUserInput | AdsAiUsageCreateOrConnectWithoutUserInput[]
+    createMany?: AdsAiUsageCreateManyUserInputEnvelope
+    connect?: AdsAiUsageWhereUniqueInput | AdsAiUsageWhereUniqueInput[]
   }
 
   export type AppListingUncheckedCreateNestedManyWithoutUserInput = {
@@ -33433,6 +41431,76 @@ export namespace Prisma {
     update?: AdsCampaignUpdateWithWhereUniqueWithoutUserInput | AdsCampaignUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: AdsCampaignUpdateManyWithWhereWithoutUserInput | AdsCampaignUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: AdsCampaignScalarWhereInput | AdsCampaignScalarWhereInput[]
+  }
+
+  export type AdsCreativeUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AdsCreativeCreateWithoutUserInput, AdsCreativeUncheckedCreateWithoutUserInput> | AdsCreativeCreateWithoutUserInput[] | AdsCreativeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AdsCreativeCreateOrConnectWithoutUserInput | AdsCreativeCreateOrConnectWithoutUserInput[]
+    upsert?: AdsCreativeUpsertWithWhereUniqueWithoutUserInput | AdsCreativeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AdsCreativeCreateManyUserInputEnvelope
+    set?: AdsCreativeWhereUniqueInput | AdsCreativeWhereUniqueInput[]
+    disconnect?: AdsCreativeWhereUniqueInput | AdsCreativeWhereUniqueInput[]
+    delete?: AdsCreativeWhereUniqueInput | AdsCreativeWhereUniqueInput[]
+    connect?: AdsCreativeWhereUniqueInput | AdsCreativeWhereUniqueInput[]
+    update?: AdsCreativeUpdateWithWhereUniqueWithoutUserInput | AdsCreativeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AdsCreativeUpdateManyWithWhereWithoutUserInput | AdsCreativeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AdsCreativeScalarWhereInput | AdsCreativeScalarWhereInput[]
+  }
+
+  export type AdsPlatformConnectionUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AdsPlatformConnectionCreateWithoutUserInput, AdsPlatformConnectionUncheckedCreateWithoutUserInput> | AdsPlatformConnectionCreateWithoutUserInput[] | AdsPlatformConnectionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AdsPlatformConnectionCreateOrConnectWithoutUserInput | AdsPlatformConnectionCreateOrConnectWithoutUserInput[]
+    upsert?: AdsPlatformConnectionUpsertWithWhereUniqueWithoutUserInput | AdsPlatformConnectionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AdsPlatformConnectionCreateManyUserInputEnvelope
+    set?: AdsPlatformConnectionWhereUniqueInput | AdsPlatformConnectionWhereUniqueInput[]
+    disconnect?: AdsPlatformConnectionWhereUniqueInput | AdsPlatformConnectionWhereUniqueInput[]
+    delete?: AdsPlatformConnectionWhereUniqueInput | AdsPlatformConnectionWhereUniqueInput[]
+    connect?: AdsPlatformConnectionWhereUniqueInput | AdsPlatformConnectionWhereUniqueInput[]
+    update?: AdsPlatformConnectionUpdateWithWhereUniqueWithoutUserInput | AdsPlatformConnectionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AdsPlatformConnectionUpdateManyWithWhereWithoutUserInput | AdsPlatformConnectionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AdsPlatformConnectionScalarWhereInput | AdsPlatformConnectionScalarWhereInput[]
+  }
+
+  export type AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AdsLandingPageAnalysisCreateWithoutUserInput, AdsLandingPageAnalysisUncheckedCreateWithoutUserInput> | AdsLandingPageAnalysisCreateWithoutUserInput[] | AdsLandingPageAnalysisUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AdsLandingPageAnalysisCreateOrConnectWithoutUserInput | AdsLandingPageAnalysisCreateOrConnectWithoutUserInput[]
+    upsert?: AdsLandingPageAnalysisUpsertWithWhereUniqueWithoutUserInput | AdsLandingPageAnalysisUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AdsLandingPageAnalysisCreateManyUserInputEnvelope
+    set?: AdsLandingPageAnalysisWhereUniqueInput | AdsLandingPageAnalysisWhereUniqueInput[]
+    disconnect?: AdsLandingPageAnalysisWhereUniqueInput | AdsLandingPageAnalysisWhereUniqueInput[]
+    delete?: AdsLandingPageAnalysisWhereUniqueInput | AdsLandingPageAnalysisWhereUniqueInput[]
+    connect?: AdsLandingPageAnalysisWhereUniqueInput | AdsLandingPageAnalysisWhereUniqueInput[]
+    update?: AdsLandingPageAnalysisUpdateWithWhereUniqueWithoutUserInput | AdsLandingPageAnalysisUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AdsLandingPageAnalysisUpdateManyWithWhereWithoutUserInput | AdsLandingPageAnalysisUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AdsLandingPageAnalysisScalarWhereInput | AdsLandingPageAnalysisScalarWhereInput[]
+  }
+
+  export type AdsRecommendationUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AdsRecommendationCreateWithoutUserInput, AdsRecommendationUncheckedCreateWithoutUserInput> | AdsRecommendationCreateWithoutUserInput[] | AdsRecommendationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AdsRecommendationCreateOrConnectWithoutUserInput | AdsRecommendationCreateOrConnectWithoutUserInput[]
+    upsert?: AdsRecommendationUpsertWithWhereUniqueWithoutUserInput | AdsRecommendationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AdsRecommendationCreateManyUserInputEnvelope
+    set?: AdsRecommendationWhereUniqueInput | AdsRecommendationWhereUniqueInput[]
+    disconnect?: AdsRecommendationWhereUniqueInput | AdsRecommendationWhereUniqueInput[]
+    delete?: AdsRecommendationWhereUniqueInput | AdsRecommendationWhereUniqueInput[]
+    connect?: AdsRecommendationWhereUniqueInput | AdsRecommendationWhereUniqueInput[]
+    update?: AdsRecommendationUpdateWithWhereUniqueWithoutUserInput | AdsRecommendationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AdsRecommendationUpdateManyWithWhereWithoutUserInput | AdsRecommendationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AdsRecommendationScalarWhereInput | AdsRecommendationScalarWhereInput[]
+  }
+
+  export type AdsAiUsageUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AdsAiUsageCreateWithoutUserInput, AdsAiUsageUncheckedCreateWithoutUserInput> | AdsAiUsageCreateWithoutUserInput[] | AdsAiUsageUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AdsAiUsageCreateOrConnectWithoutUserInput | AdsAiUsageCreateOrConnectWithoutUserInput[]
+    upsert?: AdsAiUsageUpsertWithWhereUniqueWithoutUserInput | AdsAiUsageUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AdsAiUsageCreateManyUserInputEnvelope
+    set?: AdsAiUsageWhereUniqueInput | AdsAiUsageWhereUniqueInput[]
+    disconnect?: AdsAiUsageWhereUniqueInput | AdsAiUsageWhereUniqueInput[]
+    delete?: AdsAiUsageWhereUniqueInput | AdsAiUsageWhereUniqueInput[]
+    connect?: AdsAiUsageWhereUniqueInput | AdsAiUsageWhereUniqueInput[]
+    update?: AdsAiUsageUpdateWithWhereUniqueWithoutUserInput | AdsAiUsageUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AdsAiUsageUpdateManyWithWhereWithoutUserInput | AdsAiUsageUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AdsAiUsageScalarWhereInput | AdsAiUsageScalarWhereInput[]
   }
 
   export type AppListingUpdateManyWithoutUserNestedInput = {
@@ -33685,6 +41753,76 @@ export namespace Prisma {
     update?: AdsCampaignUpdateWithWhereUniqueWithoutUserInput | AdsCampaignUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: AdsCampaignUpdateManyWithWhereWithoutUserInput | AdsCampaignUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: AdsCampaignScalarWhereInput | AdsCampaignScalarWhereInput[]
+  }
+
+  export type AdsCreativeUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AdsCreativeCreateWithoutUserInput, AdsCreativeUncheckedCreateWithoutUserInput> | AdsCreativeCreateWithoutUserInput[] | AdsCreativeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AdsCreativeCreateOrConnectWithoutUserInput | AdsCreativeCreateOrConnectWithoutUserInput[]
+    upsert?: AdsCreativeUpsertWithWhereUniqueWithoutUserInput | AdsCreativeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AdsCreativeCreateManyUserInputEnvelope
+    set?: AdsCreativeWhereUniqueInput | AdsCreativeWhereUniqueInput[]
+    disconnect?: AdsCreativeWhereUniqueInput | AdsCreativeWhereUniqueInput[]
+    delete?: AdsCreativeWhereUniqueInput | AdsCreativeWhereUniqueInput[]
+    connect?: AdsCreativeWhereUniqueInput | AdsCreativeWhereUniqueInput[]
+    update?: AdsCreativeUpdateWithWhereUniqueWithoutUserInput | AdsCreativeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AdsCreativeUpdateManyWithWhereWithoutUserInput | AdsCreativeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AdsCreativeScalarWhereInput | AdsCreativeScalarWhereInput[]
+  }
+
+  export type AdsPlatformConnectionUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AdsPlatformConnectionCreateWithoutUserInput, AdsPlatformConnectionUncheckedCreateWithoutUserInput> | AdsPlatformConnectionCreateWithoutUserInput[] | AdsPlatformConnectionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AdsPlatformConnectionCreateOrConnectWithoutUserInput | AdsPlatformConnectionCreateOrConnectWithoutUserInput[]
+    upsert?: AdsPlatformConnectionUpsertWithWhereUniqueWithoutUserInput | AdsPlatformConnectionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AdsPlatformConnectionCreateManyUserInputEnvelope
+    set?: AdsPlatformConnectionWhereUniqueInput | AdsPlatformConnectionWhereUniqueInput[]
+    disconnect?: AdsPlatformConnectionWhereUniqueInput | AdsPlatformConnectionWhereUniqueInput[]
+    delete?: AdsPlatformConnectionWhereUniqueInput | AdsPlatformConnectionWhereUniqueInput[]
+    connect?: AdsPlatformConnectionWhereUniqueInput | AdsPlatformConnectionWhereUniqueInput[]
+    update?: AdsPlatformConnectionUpdateWithWhereUniqueWithoutUserInput | AdsPlatformConnectionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AdsPlatformConnectionUpdateManyWithWhereWithoutUserInput | AdsPlatformConnectionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AdsPlatformConnectionScalarWhereInput | AdsPlatformConnectionScalarWhereInput[]
+  }
+
+  export type AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AdsLandingPageAnalysisCreateWithoutUserInput, AdsLandingPageAnalysisUncheckedCreateWithoutUserInput> | AdsLandingPageAnalysisCreateWithoutUserInput[] | AdsLandingPageAnalysisUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AdsLandingPageAnalysisCreateOrConnectWithoutUserInput | AdsLandingPageAnalysisCreateOrConnectWithoutUserInput[]
+    upsert?: AdsLandingPageAnalysisUpsertWithWhereUniqueWithoutUserInput | AdsLandingPageAnalysisUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AdsLandingPageAnalysisCreateManyUserInputEnvelope
+    set?: AdsLandingPageAnalysisWhereUniqueInput | AdsLandingPageAnalysisWhereUniqueInput[]
+    disconnect?: AdsLandingPageAnalysisWhereUniqueInput | AdsLandingPageAnalysisWhereUniqueInput[]
+    delete?: AdsLandingPageAnalysisWhereUniqueInput | AdsLandingPageAnalysisWhereUniqueInput[]
+    connect?: AdsLandingPageAnalysisWhereUniqueInput | AdsLandingPageAnalysisWhereUniqueInput[]
+    update?: AdsLandingPageAnalysisUpdateWithWhereUniqueWithoutUserInput | AdsLandingPageAnalysisUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AdsLandingPageAnalysisUpdateManyWithWhereWithoutUserInput | AdsLandingPageAnalysisUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AdsLandingPageAnalysisScalarWhereInput | AdsLandingPageAnalysisScalarWhereInput[]
+  }
+
+  export type AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AdsRecommendationCreateWithoutUserInput, AdsRecommendationUncheckedCreateWithoutUserInput> | AdsRecommendationCreateWithoutUserInput[] | AdsRecommendationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AdsRecommendationCreateOrConnectWithoutUserInput | AdsRecommendationCreateOrConnectWithoutUserInput[]
+    upsert?: AdsRecommendationUpsertWithWhereUniqueWithoutUserInput | AdsRecommendationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AdsRecommendationCreateManyUserInputEnvelope
+    set?: AdsRecommendationWhereUniqueInput | AdsRecommendationWhereUniqueInput[]
+    disconnect?: AdsRecommendationWhereUniqueInput | AdsRecommendationWhereUniqueInput[]
+    delete?: AdsRecommendationWhereUniqueInput | AdsRecommendationWhereUniqueInput[]
+    connect?: AdsRecommendationWhereUniqueInput | AdsRecommendationWhereUniqueInput[]
+    update?: AdsRecommendationUpdateWithWhereUniqueWithoutUserInput | AdsRecommendationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AdsRecommendationUpdateManyWithWhereWithoutUserInput | AdsRecommendationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AdsRecommendationScalarWhereInput | AdsRecommendationScalarWhereInput[]
+  }
+
+  export type AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AdsAiUsageCreateWithoutUserInput, AdsAiUsageUncheckedCreateWithoutUserInput> | AdsAiUsageCreateWithoutUserInput[] | AdsAiUsageUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AdsAiUsageCreateOrConnectWithoutUserInput | AdsAiUsageCreateOrConnectWithoutUserInput[]
+    upsert?: AdsAiUsageUpsertWithWhereUniqueWithoutUserInput | AdsAiUsageUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AdsAiUsageCreateManyUserInputEnvelope
+    set?: AdsAiUsageWhereUniqueInput | AdsAiUsageWhereUniqueInput[]
+    disconnect?: AdsAiUsageWhereUniqueInput | AdsAiUsageWhereUniqueInput[]
+    delete?: AdsAiUsageWhereUniqueInput | AdsAiUsageWhereUniqueInput[]
+    connect?: AdsAiUsageWhereUniqueInput | AdsAiUsageWhereUniqueInput[]
+    update?: AdsAiUsageUpdateWithWhereUniqueWithoutUserInput | AdsAiUsageUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AdsAiUsageUpdateManyWithWhereWithoutUserInput | AdsAiUsageUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AdsAiUsageScalarWhereInput | AdsAiUsageScalarWhereInput[]
   }
 
   export type AppListingUncheckedUpdateManyWithoutUserNestedInput = {
@@ -34237,12 +42375,252 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type AdsCreativeCreateNestedManyWithoutCampaignInput = {
+    create?: XOR<AdsCreativeCreateWithoutCampaignInput, AdsCreativeUncheckedCreateWithoutCampaignInput> | AdsCreativeCreateWithoutCampaignInput[] | AdsCreativeUncheckedCreateWithoutCampaignInput[]
+    connectOrCreate?: AdsCreativeCreateOrConnectWithoutCampaignInput | AdsCreativeCreateOrConnectWithoutCampaignInput[]
+    createMany?: AdsCreativeCreateManyCampaignInputEnvelope
+    connect?: AdsCreativeWhereUniqueInput | AdsCreativeWhereUniqueInput[]
+  }
+
+  export type AdsLandingPageAnalysisCreateNestedManyWithoutCampaignInput = {
+    create?: XOR<AdsLandingPageAnalysisCreateWithoutCampaignInput, AdsLandingPageAnalysisUncheckedCreateWithoutCampaignInput> | AdsLandingPageAnalysisCreateWithoutCampaignInput[] | AdsLandingPageAnalysisUncheckedCreateWithoutCampaignInput[]
+    connectOrCreate?: AdsLandingPageAnalysisCreateOrConnectWithoutCampaignInput | AdsLandingPageAnalysisCreateOrConnectWithoutCampaignInput[]
+    createMany?: AdsLandingPageAnalysisCreateManyCampaignInputEnvelope
+    connect?: AdsLandingPageAnalysisWhereUniqueInput | AdsLandingPageAnalysisWhereUniqueInput[]
+  }
+
+  export type AdsRecommendationCreateNestedManyWithoutCampaignInput = {
+    create?: XOR<AdsRecommendationCreateWithoutCampaignInput, AdsRecommendationUncheckedCreateWithoutCampaignInput> | AdsRecommendationCreateWithoutCampaignInput[] | AdsRecommendationUncheckedCreateWithoutCampaignInput[]
+    connectOrCreate?: AdsRecommendationCreateOrConnectWithoutCampaignInput | AdsRecommendationCreateOrConnectWithoutCampaignInput[]
+    createMany?: AdsRecommendationCreateManyCampaignInputEnvelope
+    connect?: AdsRecommendationWhereUniqueInput | AdsRecommendationWhereUniqueInput[]
+  }
+
+  export type AdsCreativeUncheckedCreateNestedManyWithoutCampaignInput = {
+    create?: XOR<AdsCreativeCreateWithoutCampaignInput, AdsCreativeUncheckedCreateWithoutCampaignInput> | AdsCreativeCreateWithoutCampaignInput[] | AdsCreativeUncheckedCreateWithoutCampaignInput[]
+    connectOrCreate?: AdsCreativeCreateOrConnectWithoutCampaignInput | AdsCreativeCreateOrConnectWithoutCampaignInput[]
+    createMany?: AdsCreativeCreateManyCampaignInputEnvelope
+    connect?: AdsCreativeWhereUniqueInput | AdsCreativeWhereUniqueInput[]
+  }
+
+  export type AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutCampaignInput = {
+    create?: XOR<AdsLandingPageAnalysisCreateWithoutCampaignInput, AdsLandingPageAnalysisUncheckedCreateWithoutCampaignInput> | AdsLandingPageAnalysisCreateWithoutCampaignInput[] | AdsLandingPageAnalysisUncheckedCreateWithoutCampaignInput[]
+    connectOrCreate?: AdsLandingPageAnalysisCreateOrConnectWithoutCampaignInput | AdsLandingPageAnalysisCreateOrConnectWithoutCampaignInput[]
+    createMany?: AdsLandingPageAnalysisCreateManyCampaignInputEnvelope
+    connect?: AdsLandingPageAnalysisWhereUniqueInput | AdsLandingPageAnalysisWhereUniqueInput[]
+  }
+
+  export type AdsRecommendationUncheckedCreateNestedManyWithoutCampaignInput = {
+    create?: XOR<AdsRecommendationCreateWithoutCampaignInput, AdsRecommendationUncheckedCreateWithoutCampaignInput> | AdsRecommendationCreateWithoutCampaignInput[] | AdsRecommendationUncheckedCreateWithoutCampaignInput[]
+    connectOrCreate?: AdsRecommendationCreateOrConnectWithoutCampaignInput | AdsRecommendationCreateOrConnectWithoutCampaignInput[]
+    createMany?: AdsRecommendationCreateManyCampaignInputEnvelope
+    connect?: AdsRecommendationWhereUniqueInput | AdsRecommendationWhereUniqueInput[]
+  }
+
   export type UserUpdateOneRequiredWithoutAdsCampaignsNestedInput = {
     create?: XOR<UserCreateWithoutAdsCampaignsInput, UserUncheckedCreateWithoutAdsCampaignsInput>
     connectOrCreate?: UserCreateOrConnectWithoutAdsCampaignsInput
     upsert?: UserUpsertWithoutAdsCampaignsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAdsCampaignsInput, UserUpdateWithoutAdsCampaignsInput>, UserUncheckedUpdateWithoutAdsCampaignsInput>
+  }
+
+  export type AdsCreativeUpdateManyWithoutCampaignNestedInput = {
+    create?: XOR<AdsCreativeCreateWithoutCampaignInput, AdsCreativeUncheckedCreateWithoutCampaignInput> | AdsCreativeCreateWithoutCampaignInput[] | AdsCreativeUncheckedCreateWithoutCampaignInput[]
+    connectOrCreate?: AdsCreativeCreateOrConnectWithoutCampaignInput | AdsCreativeCreateOrConnectWithoutCampaignInput[]
+    upsert?: AdsCreativeUpsertWithWhereUniqueWithoutCampaignInput | AdsCreativeUpsertWithWhereUniqueWithoutCampaignInput[]
+    createMany?: AdsCreativeCreateManyCampaignInputEnvelope
+    set?: AdsCreativeWhereUniqueInput | AdsCreativeWhereUniqueInput[]
+    disconnect?: AdsCreativeWhereUniqueInput | AdsCreativeWhereUniqueInput[]
+    delete?: AdsCreativeWhereUniqueInput | AdsCreativeWhereUniqueInput[]
+    connect?: AdsCreativeWhereUniqueInput | AdsCreativeWhereUniqueInput[]
+    update?: AdsCreativeUpdateWithWhereUniqueWithoutCampaignInput | AdsCreativeUpdateWithWhereUniqueWithoutCampaignInput[]
+    updateMany?: AdsCreativeUpdateManyWithWhereWithoutCampaignInput | AdsCreativeUpdateManyWithWhereWithoutCampaignInput[]
+    deleteMany?: AdsCreativeScalarWhereInput | AdsCreativeScalarWhereInput[]
+  }
+
+  export type AdsLandingPageAnalysisUpdateManyWithoutCampaignNestedInput = {
+    create?: XOR<AdsLandingPageAnalysisCreateWithoutCampaignInput, AdsLandingPageAnalysisUncheckedCreateWithoutCampaignInput> | AdsLandingPageAnalysisCreateWithoutCampaignInput[] | AdsLandingPageAnalysisUncheckedCreateWithoutCampaignInput[]
+    connectOrCreate?: AdsLandingPageAnalysisCreateOrConnectWithoutCampaignInput | AdsLandingPageAnalysisCreateOrConnectWithoutCampaignInput[]
+    upsert?: AdsLandingPageAnalysisUpsertWithWhereUniqueWithoutCampaignInput | AdsLandingPageAnalysisUpsertWithWhereUniqueWithoutCampaignInput[]
+    createMany?: AdsLandingPageAnalysisCreateManyCampaignInputEnvelope
+    set?: AdsLandingPageAnalysisWhereUniqueInput | AdsLandingPageAnalysisWhereUniqueInput[]
+    disconnect?: AdsLandingPageAnalysisWhereUniqueInput | AdsLandingPageAnalysisWhereUniqueInput[]
+    delete?: AdsLandingPageAnalysisWhereUniqueInput | AdsLandingPageAnalysisWhereUniqueInput[]
+    connect?: AdsLandingPageAnalysisWhereUniqueInput | AdsLandingPageAnalysisWhereUniqueInput[]
+    update?: AdsLandingPageAnalysisUpdateWithWhereUniqueWithoutCampaignInput | AdsLandingPageAnalysisUpdateWithWhereUniqueWithoutCampaignInput[]
+    updateMany?: AdsLandingPageAnalysisUpdateManyWithWhereWithoutCampaignInput | AdsLandingPageAnalysisUpdateManyWithWhereWithoutCampaignInput[]
+    deleteMany?: AdsLandingPageAnalysisScalarWhereInput | AdsLandingPageAnalysisScalarWhereInput[]
+  }
+
+  export type AdsRecommendationUpdateManyWithoutCampaignNestedInput = {
+    create?: XOR<AdsRecommendationCreateWithoutCampaignInput, AdsRecommendationUncheckedCreateWithoutCampaignInput> | AdsRecommendationCreateWithoutCampaignInput[] | AdsRecommendationUncheckedCreateWithoutCampaignInput[]
+    connectOrCreate?: AdsRecommendationCreateOrConnectWithoutCampaignInput | AdsRecommendationCreateOrConnectWithoutCampaignInput[]
+    upsert?: AdsRecommendationUpsertWithWhereUniqueWithoutCampaignInput | AdsRecommendationUpsertWithWhereUniqueWithoutCampaignInput[]
+    createMany?: AdsRecommendationCreateManyCampaignInputEnvelope
+    set?: AdsRecommendationWhereUniqueInput | AdsRecommendationWhereUniqueInput[]
+    disconnect?: AdsRecommendationWhereUniqueInput | AdsRecommendationWhereUniqueInput[]
+    delete?: AdsRecommendationWhereUniqueInput | AdsRecommendationWhereUniqueInput[]
+    connect?: AdsRecommendationWhereUniqueInput | AdsRecommendationWhereUniqueInput[]
+    update?: AdsRecommendationUpdateWithWhereUniqueWithoutCampaignInput | AdsRecommendationUpdateWithWhereUniqueWithoutCampaignInput[]
+    updateMany?: AdsRecommendationUpdateManyWithWhereWithoutCampaignInput | AdsRecommendationUpdateManyWithWhereWithoutCampaignInput[]
+    deleteMany?: AdsRecommendationScalarWhereInput | AdsRecommendationScalarWhereInput[]
+  }
+
+  export type AdsCreativeUncheckedUpdateManyWithoutCampaignNestedInput = {
+    create?: XOR<AdsCreativeCreateWithoutCampaignInput, AdsCreativeUncheckedCreateWithoutCampaignInput> | AdsCreativeCreateWithoutCampaignInput[] | AdsCreativeUncheckedCreateWithoutCampaignInput[]
+    connectOrCreate?: AdsCreativeCreateOrConnectWithoutCampaignInput | AdsCreativeCreateOrConnectWithoutCampaignInput[]
+    upsert?: AdsCreativeUpsertWithWhereUniqueWithoutCampaignInput | AdsCreativeUpsertWithWhereUniqueWithoutCampaignInput[]
+    createMany?: AdsCreativeCreateManyCampaignInputEnvelope
+    set?: AdsCreativeWhereUniqueInput | AdsCreativeWhereUniqueInput[]
+    disconnect?: AdsCreativeWhereUniqueInput | AdsCreativeWhereUniqueInput[]
+    delete?: AdsCreativeWhereUniqueInput | AdsCreativeWhereUniqueInput[]
+    connect?: AdsCreativeWhereUniqueInput | AdsCreativeWhereUniqueInput[]
+    update?: AdsCreativeUpdateWithWhereUniqueWithoutCampaignInput | AdsCreativeUpdateWithWhereUniqueWithoutCampaignInput[]
+    updateMany?: AdsCreativeUpdateManyWithWhereWithoutCampaignInput | AdsCreativeUpdateManyWithWhereWithoutCampaignInput[]
+    deleteMany?: AdsCreativeScalarWhereInput | AdsCreativeScalarWhereInput[]
+  }
+
+  export type AdsLandingPageAnalysisUncheckedUpdateManyWithoutCampaignNestedInput = {
+    create?: XOR<AdsLandingPageAnalysisCreateWithoutCampaignInput, AdsLandingPageAnalysisUncheckedCreateWithoutCampaignInput> | AdsLandingPageAnalysisCreateWithoutCampaignInput[] | AdsLandingPageAnalysisUncheckedCreateWithoutCampaignInput[]
+    connectOrCreate?: AdsLandingPageAnalysisCreateOrConnectWithoutCampaignInput | AdsLandingPageAnalysisCreateOrConnectWithoutCampaignInput[]
+    upsert?: AdsLandingPageAnalysisUpsertWithWhereUniqueWithoutCampaignInput | AdsLandingPageAnalysisUpsertWithWhereUniqueWithoutCampaignInput[]
+    createMany?: AdsLandingPageAnalysisCreateManyCampaignInputEnvelope
+    set?: AdsLandingPageAnalysisWhereUniqueInput | AdsLandingPageAnalysisWhereUniqueInput[]
+    disconnect?: AdsLandingPageAnalysisWhereUniqueInput | AdsLandingPageAnalysisWhereUniqueInput[]
+    delete?: AdsLandingPageAnalysisWhereUniqueInput | AdsLandingPageAnalysisWhereUniqueInput[]
+    connect?: AdsLandingPageAnalysisWhereUniqueInput | AdsLandingPageAnalysisWhereUniqueInput[]
+    update?: AdsLandingPageAnalysisUpdateWithWhereUniqueWithoutCampaignInput | AdsLandingPageAnalysisUpdateWithWhereUniqueWithoutCampaignInput[]
+    updateMany?: AdsLandingPageAnalysisUpdateManyWithWhereWithoutCampaignInput | AdsLandingPageAnalysisUpdateManyWithWhereWithoutCampaignInput[]
+    deleteMany?: AdsLandingPageAnalysisScalarWhereInput | AdsLandingPageAnalysisScalarWhereInput[]
+  }
+
+  export type AdsRecommendationUncheckedUpdateManyWithoutCampaignNestedInput = {
+    create?: XOR<AdsRecommendationCreateWithoutCampaignInput, AdsRecommendationUncheckedCreateWithoutCampaignInput> | AdsRecommendationCreateWithoutCampaignInput[] | AdsRecommendationUncheckedCreateWithoutCampaignInput[]
+    connectOrCreate?: AdsRecommendationCreateOrConnectWithoutCampaignInput | AdsRecommendationCreateOrConnectWithoutCampaignInput[]
+    upsert?: AdsRecommendationUpsertWithWhereUniqueWithoutCampaignInput | AdsRecommendationUpsertWithWhereUniqueWithoutCampaignInput[]
+    createMany?: AdsRecommendationCreateManyCampaignInputEnvelope
+    set?: AdsRecommendationWhereUniqueInput | AdsRecommendationWhereUniqueInput[]
+    disconnect?: AdsRecommendationWhereUniqueInput | AdsRecommendationWhereUniqueInput[]
+    delete?: AdsRecommendationWhereUniqueInput | AdsRecommendationWhereUniqueInput[]
+    connect?: AdsRecommendationWhereUniqueInput | AdsRecommendationWhereUniqueInput[]
+    update?: AdsRecommendationUpdateWithWhereUniqueWithoutCampaignInput | AdsRecommendationUpdateWithWhereUniqueWithoutCampaignInput[]
+    updateMany?: AdsRecommendationUpdateManyWithWhereWithoutCampaignInput | AdsRecommendationUpdateManyWithWhereWithoutCampaignInput[]
+    deleteMany?: AdsRecommendationScalarWhereInput | AdsRecommendationScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutAdsCreativesInput = {
+    create?: XOR<UserCreateWithoutAdsCreativesInput, UserUncheckedCreateWithoutAdsCreativesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAdsCreativesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type AdsCampaignCreateNestedOneWithoutCreativesInput = {
+    create?: XOR<AdsCampaignCreateWithoutCreativesInput, AdsCampaignUncheckedCreateWithoutCreativesInput>
+    connectOrCreate?: AdsCampaignCreateOrConnectWithoutCreativesInput
+    connect?: AdsCampaignWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutAdsCreativesNestedInput = {
+    create?: XOR<UserCreateWithoutAdsCreativesInput, UserUncheckedCreateWithoutAdsCreativesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAdsCreativesInput
+    upsert?: UserUpsertWithoutAdsCreativesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAdsCreativesInput, UserUpdateWithoutAdsCreativesInput>, UserUncheckedUpdateWithoutAdsCreativesInput>
+  }
+
+  export type AdsCampaignUpdateOneRequiredWithoutCreativesNestedInput = {
+    create?: XOR<AdsCampaignCreateWithoutCreativesInput, AdsCampaignUncheckedCreateWithoutCreativesInput>
+    connectOrCreate?: AdsCampaignCreateOrConnectWithoutCreativesInput
+    upsert?: AdsCampaignUpsertWithoutCreativesInput
+    connect?: AdsCampaignWhereUniqueInput
+    update?: XOR<XOR<AdsCampaignUpdateToOneWithWhereWithoutCreativesInput, AdsCampaignUpdateWithoutCreativesInput>, AdsCampaignUncheckedUpdateWithoutCreativesInput>
+  }
+
+  export type UserCreateNestedOneWithoutAdsPlatformConnectionsInput = {
+    create?: XOR<UserCreateWithoutAdsPlatformConnectionsInput, UserUncheckedCreateWithoutAdsPlatformConnectionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAdsPlatformConnectionsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutAdsPlatformConnectionsNestedInput = {
+    create?: XOR<UserCreateWithoutAdsPlatformConnectionsInput, UserUncheckedCreateWithoutAdsPlatformConnectionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAdsPlatformConnectionsInput
+    upsert?: UserUpsertWithoutAdsPlatformConnectionsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAdsPlatformConnectionsInput, UserUpdateWithoutAdsPlatformConnectionsInput>, UserUncheckedUpdateWithoutAdsPlatformConnectionsInput>
+  }
+
+  export type UserCreateNestedOneWithoutAdsLandingAnalysesInput = {
+    create?: XOR<UserCreateWithoutAdsLandingAnalysesInput, UserUncheckedCreateWithoutAdsLandingAnalysesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAdsLandingAnalysesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type AdsCampaignCreateNestedOneWithoutLandingAnalysesInput = {
+    create?: XOR<AdsCampaignCreateWithoutLandingAnalysesInput, AdsCampaignUncheckedCreateWithoutLandingAnalysesInput>
+    connectOrCreate?: AdsCampaignCreateOrConnectWithoutLandingAnalysesInput
+    connect?: AdsCampaignWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutAdsLandingAnalysesNestedInput = {
+    create?: XOR<UserCreateWithoutAdsLandingAnalysesInput, UserUncheckedCreateWithoutAdsLandingAnalysesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAdsLandingAnalysesInput
+    upsert?: UserUpsertWithoutAdsLandingAnalysesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAdsLandingAnalysesInput, UserUpdateWithoutAdsLandingAnalysesInput>, UserUncheckedUpdateWithoutAdsLandingAnalysesInput>
+  }
+
+  export type AdsCampaignUpdateOneWithoutLandingAnalysesNestedInput = {
+    create?: XOR<AdsCampaignCreateWithoutLandingAnalysesInput, AdsCampaignUncheckedCreateWithoutLandingAnalysesInput>
+    connectOrCreate?: AdsCampaignCreateOrConnectWithoutLandingAnalysesInput
+    upsert?: AdsCampaignUpsertWithoutLandingAnalysesInput
+    disconnect?: AdsCampaignWhereInput | boolean
+    delete?: AdsCampaignWhereInput | boolean
+    connect?: AdsCampaignWhereUniqueInput
+    update?: XOR<XOR<AdsCampaignUpdateToOneWithWhereWithoutLandingAnalysesInput, AdsCampaignUpdateWithoutLandingAnalysesInput>, AdsCampaignUncheckedUpdateWithoutLandingAnalysesInput>
+  }
+
+  export type UserCreateNestedOneWithoutAdsRecommendationsInput = {
+    create?: XOR<UserCreateWithoutAdsRecommendationsInput, UserUncheckedCreateWithoutAdsRecommendationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAdsRecommendationsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type AdsCampaignCreateNestedOneWithoutRecommendationsInput = {
+    create?: XOR<AdsCampaignCreateWithoutRecommendationsInput, AdsCampaignUncheckedCreateWithoutRecommendationsInput>
+    connectOrCreate?: AdsCampaignCreateOrConnectWithoutRecommendationsInput
+    connect?: AdsCampaignWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutAdsRecommendationsNestedInput = {
+    create?: XOR<UserCreateWithoutAdsRecommendationsInput, UserUncheckedCreateWithoutAdsRecommendationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAdsRecommendationsInput
+    upsert?: UserUpsertWithoutAdsRecommendationsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAdsRecommendationsInput, UserUpdateWithoutAdsRecommendationsInput>, UserUncheckedUpdateWithoutAdsRecommendationsInput>
+  }
+
+  export type AdsCampaignUpdateOneRequiredWithoutRecommendationsNestedInput = {
+    create?: XOR<AdsCampaignCreateWithoutRecommendationsInput, AdsCampaignUncheckedCreateWithoutRecommendationsInput>
+    connectOrCreate?: AdsCampaignCreateOrConnectWithoutRecommendationsInput
+    upsert?: AdsCampaignUpsertWithoutRecommendationsInput
+    connect?: AdsCampaignWhereUniqueInput
+    update?: XOR<XOR<AdsCampaignUpdateToOneWithWhereWithoutRecommendationsInput, AdsCampaignUpdateWithoutRecommendationsInput>, AdsCampaignUncheckedUpdateWithoutRecommendationsInput>
+  }
+
+  export type UserCreateNestedOneWithoutAdsAiUsageInput = {
+    create?: XOR<UserCreateWithoutAdsAiUsageInput, UserUncheckedCreateWithoutAdsAiUsageInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAdsAiUsageInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutAdsAiUsageNestedInput = {
+    create?: XOR<UserCreateWithoutAdsAiUsageInput, UserUncheckedCreateWithoutAdsAiUsageInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAdsAiUsageInput
+    upsert?: UserUpsertWithoutAdsAiUsageInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAdsAiUsageInput, UserUpdateWithoutAdsAiUsageInput>, UserUncheckedUpdateWithoutAdsAiUsageInput>
   }
 
   export type UserCreateNestedOneWithoutAppListingsInput = {
@@ -34986,15 +43364,27 @@ export namespace Prisma {
     name: string
     objective: string
     budgetCents: number
+    plannedSpendCents?: number | null
     headline: string
     body: string
     targetingNotes?: string | null
+    audience?: string | null
+    location?: string | null
+    landingPageUrl?: string | null
+    conversionGoal?: string | null
+    callToAction?: string | null
+    currency?: string
+    timezone?: string
+    intendedPlatform?: string | null
     status?: string
     startsAt?: Date | string | null
     endsAt?: Date | string | null
     launchedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    creatives?: AdsCreativeCreateNestedManyWithoutCampaignInput
+    landingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutCampaignInput
+    recommendations?: AdsRecommendationCreateNestedManyWithoutCampaignInput
   }
 
   export type AdsCampaignUncheckedCreateWithoutUserInput = {
@@ -35002,15 +43392,27 @@ export namespace Prisma {
     name: string
     objective: string
     budgetCents: number
+    plannedSpendCents?: number | null
     headline: string
     body: string
     targetingNotes?: string | null
+    audience?: string | null
+    location?: string | null
+    landingPageUrl?: string | null
+    conversionGoal?: string | null
+    callToAction?: string | null
+    currency?: string
+    timezone?: string
+    intendedPlatform?: string | null
     status?: string
     startsAt?: Date | string | null
     endsAt?: Date | string | null
     launchedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    creatives?: AdsCreativeUncheckedCreateNestedManyWithoutCampaignInput
+    landingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutCampaignInput
+    recommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutCampaignInput
   }
 
   export type AdsCampaignCreateOrConnectWithoutUserInput = {
@@ -35020,6 +43422,166 @@ export namespace Prisma {
 
   export type AdsCampaignCreateManyUserInputEnvelope = {
     data: AdsCampaignCreateManyUserInput | AdsCampaignCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AdsCreativeCreateWithoutUserInput = {
+    id?: string
+    source: string
+    variantLabel?: string | null
+    headline: string
+    body: string
+    callToAction?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    campaign: AdsCampaignCreateNestedOneWithoutCreativesInput
+  }
+
+  export type AdsCreativeUncheckedCreateWithoutUserInput = {
+    id?: string
+    campaignId: string
+    source: string
+    variantLabel?: string | null
+    headline: string
+    body: string
+    callToAction?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdsCreativeCreateOrConnectWithoutUserInput = {
+    where: AdsCreativeWhereUniqueInput
+    create: XOR<AdsCreativeCreateWithoutUserInput, AdsCreativeUncheckedCreateWithoutUserInput>
+  }
+
+  export type AdsCreativeCreateManyUserInputEnvelope = {
+    data: AdsCreativeCreateManyUserInput | AdsCreativeCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AdsPlatformConnectionCreateWithoutUserInput = {
+    id?: string
+    platform: string
+    status?: string
+    note?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdsPlatformConnectionUncheckedCreateWithoutUserInput = {
+    id?: string
+    platform: string
+    status?: string
+    note?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdsPlatformConnectionCreateOrConnectWithoutUserInput = {
+    where: AdsPlatformConnectionWhereUniqueInput
+    create: XOR<AdsPlatformConnectionCreateWithoutUserInput, AdsPlatformConnectionUncheckedCreateWithoutUserInput>
+  }
+
+  export type AdsPlatformConnectionCreateManyUserInputEnvelope = {
+    data: AdsPlatformConnectionCreateManyUserInput | AdsPlatformConnectionCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AdsLandingPageAnalysisCreateWithoutUserInput = {
+    id?: string
+    url: string
+    fetchStatus: string
+    httpStatus?: number | null
+    title?: string | null
+    excerpt?: string | null
+    analysis?: string | null
+    errorMessage?: string | null
+    fetchedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    campaign?: AdsCampaignCreateNestedOneWithoutLandingAnalysesInput
+  }
+
+  export type AdsLandingPageAnalysisUncheckedCreateWithoutUserInput = {
+    id?: string
+    campaignId?: string | null
+    url: string
+    fetchStatus: string
+    httpStatus?: number | null
+    title?: string | null
+    excerpt?: string | null
+    analysis?: string | null
+    errorMessage?: string | null
+    fetchedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdsLandingPageAnalysisCreateOrConnectWithoutUserInput = {
+    where: AdsLandingPageAnalysisWhereUniqueInput
+    create: XOR<AdsLandingPageAnalysisCreateWithoutUserInput, AdsLandingPageAnalysisUncheckedCreateWithoutUserInput>
+  }
+
+  export type AdsLandingPageAnalysisCreateManyUserInputEnvelope = {
+    data: AdsLandingPageAnalysisCreateManyUserInput | AdsLandingPageAnalysisCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AdsRecommendationCreateWithoutUserInput = {
+    id?: string
+    kind: string
+    content: string
+    source: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    campaign: AdsCampaignCreateNestedOneWithoutRecommendationsInput
+  }
+
+  export type AdsRecommendationUncheckedCreateWithoutUserInput = {
+    id?: string
+    campaignId: string
+    kind: string
+    content: string
+    source: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdsRecommendationCreateOrConnectWithoutUserInput = {
+    where: AdsRecommendationWhereUniqueInput
+    create: XOR<AdsRecommendationCreateWithoutUserInput, AdsRecommendationUncheckedCreateWithoutUserInput>
+  }
+
+  export type AdsRecommendationCreateManyUserInputEnvelope = {
+    data: AdsRecommendationCreateManyUserInput | AdsRecommendationCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AdsAiUsageCreateWithoutUserInput = {
+    id?: string
+    day: Date | string
+    kind: string
+    count?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdsAiUsageUncheckedCreateWithoutUserInput = {
+    id?: string
+    day: Date | string
+    kind: string
+    count?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdsAiUsageCreateOrConnectWithoutUserInput = {
+    where: AdsAiUsageWhereUniqueInput
+    create: XOR<AdsAiUsageCreateWithoutUserInput, AdsAiUsageUncheckedCreateWithoutUserInput>
+  }
+
+  export type AdsAiUsageCreateManyUserInputEnvelope = {
+    data: AdsAiUsageCreateManyUserInput | AdsAiUsageCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -35600,15 +44162,179 @@ export namespace Prisma {
     name?: StringFilter<"AdsCampaign"> | string
     objective?: StringFilter<"AdsCampaign"> | string
     budgetCents?: IntFilter<"AdsCampaign"> | number
+    plannedSpendCents?: IntNullableFilter<"AdsCampaign"> | number | null
     headline?: StringFilter<"AdsCampaign"> | string
     body?: StringFilter<"AdsCampaign"> | string
     targetingNotes?: StringNullableFilter<"AdsCampaign"> | string | null
+    audience?: StringNullableFilter<"AdsCampaign"> | string | null
+    location?: StringNullableFilter<"AdsCampaign"> | string | null
+    landingPageUrl?: StringNullableFilter<"AdsCampaign"> | string | null
+    conversionGoal?: StringNullableFilter<"AdsCampaign"> | string | null
+    callToAction?: StringNullableFilter<"AdsCampaign"> | string | null
+    currency?: StringFilter<"AdsCampaign"> | string
+    timezone?: StringFilter<"AdsCampaign"> | string
+    intendedPlatform?: StringNullableFilter<"AdsCampaign"> | string | null
     status?: StringFilter<"AdsCampaign"> | string
     startsAt?: DateTimeNullableFilter<"AdsCampaign"> | Date | string | null
     endsAt?: DateTimeNullableFilter<"AdsCampaign"> | Date | string | null
     launchedAt?: DateTimeNullableFilter<"AdsCampaign"> | Date | string | null
     createdAt?: DateTimeFilter<"AdsCampaign"> | Date | string
     updatedAt?: DateTimeFilter<"AdsCampaign"> | Date | string
+  }
+
+  export type AdsCreativeUpsertWithWhereUniqueWithoutUserInput = {
+    where: AdsCreativeWhereUniqueInput
+    update: XOR<AdsCreativeUpdateWithoutUserInput, AdsCreativeUncheckedUpdateWithoutUserInput>
+    create: XOR<AdsCreativeCreateWithoutUserInput, AdsCreativeUncheckedCreateWithoutUserInput>
+  }
+
+  export type AdsCreativeUpdateWithWhereUniqueWithoutUserInput = {
+    where: AdsCreativeWhereUniqueInput
+    data: XOR<AdsCreativeUpdateWithoutUserInput, AdsCreativeUncheckedUpdateWithoutUserInput>
+  }
+
+  export type AdsCreativeUpdateManyWithWhereWithoutUserInput = {
+    where: AdsCreativeScalarWhereInput
+    data: XOR<AdsCreativeUpdateManyMutationInput, AdsCreativeUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type AdsCreativeScalarWhereInput = {
+    AND?: AdsCreativeScalarWhereInput | AdsCreativeScalarWhereInput[]
+    OR?: AdsCreativeScalarWhereInput[]
+    NOT?: AdsCreativeScalarWhereInput | AdsCreativeScalarWhereInput[]
+    id?: StringFilter<"AdsCreative"> | string
+    userId?: StringFilter<"AdsCreative"> | string
+    campaignId?: StringFilter<"AdsCreative"> | string
+    source?: StringFilter<"AdsCreative"> | string
+    variantLabel?: StringNullableFilter<"AdsCreative"> | string | null
+    headline?: StringFilter<"AdsCreative"> | string
+    body?: StringFilter<"AdsCreative"> | string
+    callToAction?: StringNullableFilter<"AdsCreative"> | string | null
+    createdAt?: DateTimeFilter<"AdsCreative"> | Date | string
+    updatedAt?: DateTimeFilter<"AdsCreative"> | Date | string
+  }
+
+  export type AdsPlatformConnectionUpsertWithWhereUniqueWithoutUserInput = {
+    where: AdsPlatformConnectionWhereUniqueInput
+    update: XOR<AdsPlatformConnectionUpdateWithoutUserInput, AdsPlatformConnectionUncheckedUpdateWithoutUserInput>
+    create: XOR<AdsPlatformConnectionCreateWithoutUserInput, AdsPlatformConnectionUncheckedCreateWithoutUserInput>
+  }
+
+  export type AdsPlatformConnectionUpdateWithWhereUniqueWithoutUserInput = {
+    where: AdsPlatformConnectionWhereUniqueInput
+    data: XOR<AdsPlatformConnectionUpdateWithoutUserInput, AdsPlatformConnectionUncheckedUpdateWithoutUserInput>
+  }
+
+  export type AdsPlatformConnectionUpdateManyWithWhereWithoutUserInput = {
+    where: AdsPlatformConnectionScalarWhereInput
+    data: XOR<AdsPlatformConnectionUpdateManyMutationInput, AdsPlatformConnectionUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type AdsPlatformConnectionScalarWhereInput = {
+    AND?: AdsPlatformConnectionScalarWhereInput | AdsPlatformConnectionScalarWhereInput[]
+    OR?: AdsPlatformConnectionScalarWhereInput[]
+    NOT?: AdsPlatformConnectionScalarWhereInput | AdsPlatformConnectionScalarWhereInput[]
+    id?: StringFilter<"AdsPlatformConnection"> | string
+    userId?: StringFilter<"AdsPlatformConnection"> | string
+    platform?: StringFilter<"AdsPlatformConnection"> | string
+    status?: StringFilter<"AdsPlatformConnection"> | string
+    note?: StringNullableFilter<"AdsPlatformConnection"> | string | null
+    createdAt?: DateTimeFilter<"AdsPlatformConnection"> | Date | string
+    updatedAt?: DateTimeFilter<"AdsPlatformConnection"> | Date | string
+  }
+
+  export type AdsLandingPageAnalysisUpsertWithWhereUniqueWithoutUserInput = {
+    where: AdsLandingPageAnalysisWhereUniqueInput
+    update: XOR<AdsLandingPageAnalysisUpdateWithoutUserInput, AdsLandingPageAnalysisUncheckedUpdateWithoutUserInput>
+    create: XOR<AdsLandingPageAnalysisCreateWithoutUserInput, AdsLandingPageAnalysisUncheckedCreateWithoutUserInput>
+  }
+
+  export type AdsLandingPageAnalysisUpdateWithWhereUniqueWithoutUserInput = {
+    where: AdsLandingPageAnalysisWhereUniqueInput
+    data: XOR<AdsLandingPageAnalysisUpdateWithoutUserInput, AdsLandingPageAnalysisUncheckedUpdateWithoutUserInput>
+  }
+
+  export type AdsLandingPageAnalysisUpdateManyWithWhereWithoutUserInput = {
+    where: AdsLandingPageAnalysisScalarWhereInput
+    data: XOR<AdsLandingPageAnalysisUpdateManyMutationInput, AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type AdsLandingPageAnalysisScalarWhereInput = {
+    AND?: AdsLandingPageAnalysisScalarWhereInput | AdsLandingPageAnalysisScalarWhereInput[]
+    OR?: AdsLandingPageAnalysisScalarWhereInput[]
+    NOT?: AdsLandingPageAnalysisScalarWhereInput | AdsLandingPageAnalysisScalarWhereInput[]
+    id?: StringFilter<"AdsLandingPageAnalysis"> | string
+    userId?: StringFilter<"AdsLandingPageAnalysis"> | string
+    campaignId?: StringNullableFilter<"AdsLandingPageAnalysis"> | string | null
+    url?: StringFilter<"AdsLandingPageAnalysis"> | string
+    fetchStatus?: StringFilter<"AdsLandingPageAnalysis"> | string
+    httpStatus?: IntNullableFilter<"AdsLandingPageAnalysis"> | number | null
+    title?: StringNullableFilter<"AdsLandingPageAnalysis"> | string | null
+    excerpt?: StringNullableFilter<"AdsLandingPageAnalysis"> | string | null
+    analysis?: StringNullableFilter<"AdsLandingPageAnalysis"> | string | null
+    errorMessage?: StringNullableFilter<"AdsLandingPageAnalysis"> | string | null
+    fetchedAt?: DateTimeNullableFilter<"AdsLandingPageAnalysis"> | Date | string | null
+    createdAt?: DateTimeFilter<"AdsLandingPageAnalysis"> | Date | string
+    updatedAt?: DateTimeFilter<"AdsLandingPageAnalysis"> | Date | string
+  }
+
+  export type AdsRecommendationUpsertWithWhereUniqueWithoutUserInput = {
+    where: AdsRecommendationWhereUniqueInput
+    update: XOR<AdsRecommendationUpdateWithoutUserInput, AdsRecommendationUncheckedUpdateWithoutUserInput>
+    create: XOR<AdsRecommendationCreateWithoutUserInput, AdsRecommendationUncheckedCreateWithoutUserInput>
+  }
+
+  export type AdsRecommendationUpdateWithWhereUniqueWithoutUserInput = {
+    where: AdsRecommendationWhereUniqueInput
+    data: XOR<AdsRecommendationUpdateWithoutUserInput, AdsRecommendationUncheckedUpdateWithoutUserInput>
+  }
+
+  export type AdsRecommendationUpdateManyWithWhereWithoutUserInput = {
+    where: AdsRecommendationScalarWhereInput
+    data: XOR<AdsRecommendationUpdateManyMutationInput, AdsRecommendationUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type AdsRecommendationScalarWhereInput = {
+    AND?: AdsRecommendationScalarWhereInput | AdsRecommendationScalarWhereInput[]
+    OR?: AdsRecommendationScalarWhereInput[]
+    NOT?: AdsRecommendationScalarWhereInput | AdsRecommendationScalarWhereInput[]
+    id?: StringFilter<"AdsRecommendation"> | string
+    userId?: StringFilter<"AdsRecommendation"> | string
+    campaignId?: StringFilter<"AdsRecommendation"> | string
+    kind?: StringFilter<"AdsRecommendation"> | string
+    content?: StringFilter<"AdsRecommendation"> | string
+    source?: StringFilter<"AdsRecommendation"> | string
+    createdAt?: DateTimeFilter<"AdsRecommendation"> | Date | string
+    updatedAt?: DateTimeFilter<"AdsRecommendation"> | Date | string
+  }
+
+  export type AdsAiUsageUpsertWithWhereUniqueWithoutUserInput = {
+    where: AdsAiUsageWhereUniqueInput
+    update: XOR<AdsAiUsageUpdateWithoutUserInput, AdsAiUsageUncheckedUpdateWithoutUserInput>
+    create: XOR<AdsAiUsageCreateWithoutUserInput, AdsAiUsageUncheckedCreateWithoutUserInput>
+  }
+
+  export type AdsAiUsageUpdateWithWhereUniqueWithoutUserInput = {
+    where: AdsAiUsageWhereUniqueInput
+    data: XOR<AdsAiUsageUpdateWithoutUserInput, AdsAiUsageUncheckedUpdateWithoutUserInput>
+  }
+
+  export type AdsAiUsageUpdateManyWithWhereWithoutUserInput = {
+    where: AdsAiUsageScalarWhereInput
+    data: XOR<AdsAiUsageUpdateManyMutationInput, AdsAiUsageUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type AdsAiUsageScalarWhereInput = {
+    AND?: AdsAiUsageScalarWhereInput | AdsAiUsageScalarWhereInput[]
+    OR?: AdsAiUsageScalarWhereInput[]
+    NOT?: AdsAiUsageScalarWhereInput | AdsAiUsageScalarWhereInput[]
+    id?: StringFilter<"AdsAiUsage"> | string
+    userId?: StringFilter<"AdsAiUsage"> | string
+    day?: DateTimeFilter<"AdsAiUsage"> | Date | string
+    kind?: StringFilter<"AdsAiUsage"> | string
+    count?: IntFilter<"AdsAiUsage"> | number
+    createdAt?: DateTimeFilter<"AdsAiUsage"> | Date | string
+    updatedAt?: DateTimeFilter<"AdsAiUsage"> | Date | string
   }
 
   export type AppListingUpsertWithWhereUniqueWithoutUserInput = {
@@ -35761,6 +44487,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductCreateNestedManyWithoutUserInput
     commerceOrders?: CommerceOrderCreateNestedManyWithoutUserInput
     adsCampaigns?: AdsCampaignCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -35790,6 +44521,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUncheckedCreateNestedManyWithoutUserInput
     commerceOrders?: CommerceOrderUncheckedCreateNestedManyWithoutUserInput
     adsCampaigns?: AdsCampaignUncheckedCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeUncheckedCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -35835,6 +44571,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUpdateManyWithoutUserNestedInput
     commerceOrders?: CommerceOrderUpdateManyWithoutUserNestedInput
     adsCampaigns?: AdsCampaignUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -35864,6 +44605,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUncheckedUpdateManyWithoutUserNestedInput
     commerceOrders?: CommerceOrderUncheckedUpdateManyWithoutUserNestedInput
     adsCampaigns?: AdsCampaignUncheckedUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUncheckedUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -35893,6 +44639,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductCreateNestedManyWithoutUserInput
     commerceOrders?: CommerceOrderCreateNestedManyWithoutUserInput
     adsCampaigns?: AdsCampaignCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -35922,6 +44673,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUncheckedCreateNestedManyWithoutUserInput
     commerceOrders?: CommerceOrderUncheckedCreateNestedManyWithoutUserInput
     adsCampaigns?: AdsCampaignUncheckedCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeUncheckedCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -35967,6 +44723,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUpdateManyWithoutUserNestedInput
     commerceOrders?: CommerceOrderUpdateManyWithoutUserNestedInput
     adsCampaigns?: AdsCampaignUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -35996,6 +44757,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUncheckedUpdateManyWithoutUserNestedInput
     commerceOrders?: CommerceOrderUncheckedUpdateManyWithoutUserNestedInput
     adsCampaigns?: AdsCampaignUncheckedUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUncheckedUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -36025,6 +44791,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductCreateNestedManyWithoutUserInput
     commerceOrders?: CommerceOrderCreateNestedManyWithoutUserInput
     adsCampaigns?: AdsCampaignCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -36054,6 +44825,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUncheckedCreateNestedManyWithoutUserInput
     commerceOrders?: CommerceOrderUncheckedCreateNestedManyWithoutUserInput
     adsCampaigns?: AdsCampaignUncheckedCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeUncheckedCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -36161,6 +44937,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUpdateManyWithoutUserNestedInput
     commerceOrders?: CommerceOrderUpdateManyWithoutUserNestedInput
     adsCampaigns?: AdsCampaignUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -36190,6 +44971,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUncheckedUpdateManyWithoutUserNestedInput
     commerceOrders?: CommerceOrderUncheckedUpdateManyWithoutUserNestedInput
     adsCampaigns?: AdsCampaignUncheckedUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUncheckedUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -36318,6 +45104,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductCreateNestedManyWithoutUserInput
     commerceOrders?: CommerceOrderCreateNestedManyWithoutUserInput
     adsCampaigns?: AdsCampaignCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -36347,6 +45138,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUncheckedCreateNestedManyWithoutUserInput
     commerceOrders?: CommerceOrderUncheckedCreateNestedManyWithoutUserInput
     adsCampaigns?: AdsCampaignUncheckedCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeUncheckedCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -36392,6 +45188,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUpdateManyWithoutUserNestedInput
     commerceOrders?: CommerceOrderUpdateManyWithoutUserNestedInput
     adsCampaigns?: AdsCampaignUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -36421,6 +45222,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUncheckedUpdateManyWithoutUserNestedInput
     commerceOrders?: CommerceOrderUncheckedUpdateManyWithoutUserNestedInput
     adsCampaigns?: AdsCampaignUncheckedUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUncheckedUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -36450,6 +45256,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductCreateNestedManyWithoutUserInput
     commerceOrders?: CommerceOrderCreateNestedManyWithoutUserInput
     adsCampaigns?: AdsCampaignCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -36479,6 +45290,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUncheckedCreateNestedManyWithoutUserInput
     commerceOrders?: CommerceOrderUncheckedCreateNestedManyWithoutUserInput
     adsCampaigns?: AdsCampaignUncheckedCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeUncheckedCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -36549,6 +45365,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUpdateManyWithoutUserNestedInput
     commerceOrders?: CommerceOrderUpdateManyWithoutUserNestedInput
     adsCampaigns?: AdsCampaignUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -36578,6 +45399,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUncheckedUpdateManyWithoutUserNestedInput
     commerceOrders?: CommerceOrderUncheckedUpdateManyWithoutUserNestedInput
     adsCampaigns?: AdsCampaignUncheckedUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUncheckedUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -36638,6 +45464,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductCreateNestedManyWithoutUserInput
     commerceOrders?: CommerceOrderCreateNestedManyWithoutUserInput
     adsCampaigns?: AdsCampaignCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -36667,6 +45498,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUncheckedCreateNestedManyWithoutUserInput
     commerceOrders?: CommerceOrderUncheckedCreateNestedManyWithoutUserInput
     adsCampaigns?: AdsCampaignUncheckedCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeUncheckedCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -36712,6 +45548,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUpdateManyWithoutUserNestedInput
     commerceOrders?: CommerceOrderUpdateManyWithoutUserNestedInput
     adsCampaigns?: AdsCampaignUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -36741,6 +45582,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUncheckedUpdateManyWithoutUserNestedInput
     commerceOrders?: CommerceOrderUncheckedUpdateManyWithoutUserNestedInput
     adsCampaigns?: AdsCampaignUncheckedUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUncheckedUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -36770,6 +45616,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductCreateNestedManyWithoutUserInput
     commerceOrders?: CommerceOrderCreateNestedManyWithoutUserInput
     adsCampaigns?: AdsCampaignCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -36799,6 +45650,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUncheckedCreateNestedManyWithoutUserInput
     commerceOrders?: CommerceOrderUncheckedCreateNestedManyWithoutUserInput
     adsCampaigns?: AdsCampaignUncheckedCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeUncheckedCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -36844,6 +45700,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUpdateManyWithoutUserNestedInput
     commerceOrders?: CommerceOrderUpdateManyWithoutUserNestedInput
     adsCampaigns?: AdsCampaignUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -36873,6 +45734,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUncheckedUpdateManyWithoutUserNestedInput
     commerceOrders?: CommerceOrderUncheckedUpdateManyWithoutUserNestedInput
     adsCampaigns?: AdsCampaignUncheckedUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUncheckedUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -36902,6 +45768,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductCreateNestedManyWithoutUserInput
     commerceOrders?: CommerceOrderCreateNestedManyWithoutUserInput
     adsCampaigns?: AdsCampaignCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -36931,6 +45802,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUncheckedCreateNestedManyWithoutUserInput
     commerceOrders?: CommerceOrderUncheckedCreateNestedManyWithoutUserInput
     adsCampaigns?: AdsCampaignUncheckedCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeUncheckedCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -37008,6 +45884,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUpdateManyWithoutUserNestedInput
     commerceOrders?: CommerceOrderUpdateManyWithoutUserNestedInput
     adsCampaigns?: AdsCampaignUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -37037,6 +45918,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUncheckedUpdateManyWithoutUserNestedInput
     commerceOrders?: CommerceOrderUncheckedUpdateManyWithoutUserNestedInput
     adsCampaigns?: AdsCampaignUncheckedUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUncheckedUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -37082,6 +45968,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductCreateNestedManyWithoutUserInput
     commerceOrders?: CommerceOrderCreateNestedManyWithoutUserInput
     adsCampaigns?: AdsCampaignCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -37111,6 +46002,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUncheckedCreateNestedManyWithoutUserInput
     commerceOrders?: CommerceOrderUncheckedCreateNestedManyWithoutUserInput
     adsCampaigns?: AdsCampaignUncheckedCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeUncheckedCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -37187,6 +46083,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUpdateManyWithoutUserNestedInput
     commerceOrders?: CommerceOrderUpdateManyWithoutUserNestedInput
     adsCampaigns?: AdsCampaignUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -37216,6 +46117,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUncheckedUpdateManyWithoutUserNestedInput
     commerceOrders?: CommerceOrderUncheckedUpdateManyWithoutUserNestedInput
     adsCampaigns?: AdsCampaignUncheckedUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUncheckedUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -37282,6 +46188,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductCreateNestedManyWithoutUserInput
     commerceOrders?: CommerceOrderCreateNestedManyWithoutUserInput
     adsCampaigns?: AdsCampaignCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -37311,6 +46222,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUncheckedCreateNestedManyWithoutUserInput
     commerceOrders?: CommerceOrderUncheckedCreateNestedManyWithoutUserInput
     adsCampaigns?: AdsCampaignUncheckedCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeUncheckedCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -37382,6 +46298,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUpdateManyWithoutUserNestedInput
     commerceOrders?: CommerceOrderUpdateManyWithoutUserNestedInput
     adsCampaigns?: AdsCampaignUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -37411,6 +46332,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUncheckedUpdateManyWithoutUserNestedInput
     commerceOrders?: CommerceOrderUncheckedUpdateManyWithoutUserNestedInput
     adsCampaigns?: AdsCampaignUncheckedUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUncheckedUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -37456,6 +46382,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductCreateNestedManyWithoutUserInput
     commerceOrders?: CommerceOrderCreateNestedManyWithoutUserInput
     adsCampaigns?: AdsCampaignCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -37485,6 +46416,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUncheckedCreateNestedManyWithoutUserInput
     commerceOrders?: CommerceOrderUncheckedCreateNestedManyWithoutUserInput
     adsCampaigns?: AdsCampaignUncheckedCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeUncheckedCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -37567,6 +46503,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUpdateManyWithoutUserNestedInput
     commerceOrders?: CommerceOrderUpdateManyWithoutUserNestedInput
     adsCampaigns?: AdsCampaignUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -37596,6 +46537,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUncheckedUpdateManyWithoutUserNestedInput
     commerceOrders?: CommerceOrderUncheckedUpdateManyWithoutUserNestedInput
     adsCampaigns?: AdsCampaignUncheckedUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUncheckedUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -37668,6 +46614,11 @@ export namespace Prisma {
     automationRuns?: AutomationRunCreateNestedManyWithoutUserInput
     commerceOrders?: CommerceOrderCreateNestedManyWithoutUserInput
     adsCampaigns?: AdsCampaignCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -37697,6 +46648,11 @@ export namespace Prisma {
     automationRuns?: AutomationRunUncheckedCreateNestedManyWithoutUserInput
     commerceOrders?: CommerceOrderUncheckedCreateNestedManyWithoutUserInput
     adsCampaigns?: AdsCampaignUncheckedCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeUncheckedCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -37782,6 +46738,11 @@ export namespace Prisma {
     automationRuns?: AutomationRunUpdateManyWithoutUserNestedInput
     commerceOrders?: CommerceOrderUpdateManyWithoutUserNestedInput
     adsCampaigns?: AdsCampaignUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -37811,6 +46772,11 @@ export namespace Prisma {
     automationRuns?: AutomationRunUncheckedUpdateManyWithoutUserNestedInput
     commerceOrders?: CommerceOrderUncheckedUpdateManyWithoutUserNestedInput
     adsCampaigns?: AdsCampaignUncheckedUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUncheckedUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -37856,6 +46822,11 @@ export namespace Prisma {
     automationRuns?: AutomationRunCreateNestedManyWithoutUserInput
     commerceProducts?: CommerceProductCreateNestedManyWithoutUserInput
     adsCampaigns?: AdsCampaignCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -37885,6 +46856,11 @@ export namespace Prisma {
     automationRuns?: AutomationRunUncheckedCreateNestedManyWithoutUserInput
     commerceProducts?: CommerceProductUncheckedCreateNestedManyWithoutUserInput
     adsCampaigns?: AdsCampaignUncheckedCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeUncheckedCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -37963,6 +46939,11 @@ export namespace Prisma {
     automationRuns?: AutomationRunUpdateManyWithoutUserNestedInput
     commerceProducts?: CommerceProductUpdateManyWithoutUserNestedInput
     adsCampaigns?: AdsCampaignUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -37992,6 +46973,11 @@ export namespace Prisma {
     automationRuns?: AutomationRunUncheckedUpdateManyWithoutUserNestedInput
     commerceProducts?: CommerceProductUncheckedUpdateManyWithoutUserNestedInput
     adsCampaigns?: AdsCampaignUncheckedUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUncheckedUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -38060,6 +47046,11 @@ export namespace Prisma {
     automationRuns?: AutomationRunCreateNestedManyWithoutUserInput
     commerceProducts?: CommerceProductCreateNestedManyWithoutUserInput
     commerceOrders?: CommerceOrderCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -38089,6 +47080,11 @@ export namespace Prisma {
     automationRuns?: AutomationRunUncheckedCreateNestedManyWithoutUserInput
     commerceProducts?: CommerceProductUncheckedCreateNestedManyWithoutUserInput
     commerceOrders?: CommerceOrderUncheckedCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeUncheckedCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -38098,6 +47094,110 @@ export namespace Prisma {
   export type UserCreateOrConnectWithoutAdsCampaignsInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutAdsCampaignsInput, UserUncheckedCreateWithoutAdsCampaignsInput>
+  }
+
+  export type AdsCreativeCreateWithoutCampaignInput = {
+    id?: string
+    source: string
+    variantLabel?: string | null
+    headline: string
+    body: string
+    callToAction?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutAdsCreativesInput
+  }
+
+  export type AdsCreativeUncheckedCreateWithoutCampaignInput = {
+    id?: string
+    userId: string
+    source: string
+    variantLabel?: string | null
+    headline: string
+    body: string
+    callToAction?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdsCreativeCreateOrConnectWithoutCampaignInput = {
+    where: AdsCreativeWhereUniqueInput
+    create: XOR<AdsCreativeCreateWithoutCampaignInput, AdsCreativeUncheckedCreateWithoutCampaignInput>
+  }
+
+  export type AdsCreativeCreateManyCampaignInputEnvelope = {
+    data: AdsCreativeCreateManyCampaignInput | AdsCreativeCreateManyCampaignInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AdsLandingPageAnalysisCreateWithoutCampaignInput = {
+    id?: string
+    url: string
+    fetchStatus: string
+    httpStatus?: number | null
+    title?: string | null
+    excerpt?: string | null
+    analysis?: string | null
+    errorMessage?: string | null
+    fetchedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutAdsLandingAnalysesInput
+  }
+
+  export type AdsLandingPageAnalysisUncheckedCreateWithoutCampaignInput = {
+    id?: string
+    userId: string
+    url: string
+    fetchStatus: string
+    httpStatus?: number | null
+    title?: string | null
+    excerpt?: string | null
+    analysis?: string | null
+    errorMessage?: string | null
+    fetchedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdsLandingPageAnalysisCreateOrConnectWithoutCampaignInput = {
+    where: AdsLandingPageAnalysisWhereUniqueInput
+    create: XOR<AdsLandingPageAnalysisCreateWithoutCampaignInput, AdsLandingPageAnalysisUncheckedCreateWithoutCampaignInput>
+  }
+
+  export type AdsLandingPageAnalysisCreateManyCampaignInputEnvelope = {
+    data: AdsLandingPageAnalysisCreateManyCampaignInput | AdsLandingPageAnalysisCreateManyCampaignInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AdsRecommendationCreateWithoutCampaignInput = {
+    id?: string
+    kind: string
+    content: string
+    source: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutAdsRecommendationsInput
+  }
+
+  export type AdsRecommendationUncheckedCreateWithoutCampaignInput = {
+    id?: string
+    userId: string
+    kind: string
+    content: string
+    source: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdsRecommendationCreateOrConnectWithoutCampaignInput = {
+    where: AdsRecommendationWhereUniqueInput
+    create: XOR<AdsRecommendationCreateWithoutCampaignInput, AdsRecommendationUncheckedCreateWithoutCampaignInput>
+  }
+
+  export type AdsRecommendationCreateManyCampaignInputEnvelope = {
+    data: AdsRecommendationCreateManyCampaignInput | AdsRecommendationCreateManyCampaignInput[]
+    skipDuplicates?: boolean
   }
 
   export type UserUpsertWithoutAdsCampaignsInput = {
@@ -38134,6 +47234,11 @@ export namespace Prisma {
     automationRuns?: AutomationRunUpdateManyWithoutUserNestedInput
     commerceProducts?: CommerceProductUpdateManyWithoutUserNestedInput
     commerceOrders?: CommerceOrderUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -38163,6 +47268,1203 @@ export namespace Prisma {
     automationRuns?: AutomationRunUncheckedUpdateManyWithoutUserNestedInput
     commerceProducts?: CommerceProductUncheckedUpdateManyWithoutUserNestedInput
     commerceOrders?: CommerceOrderUncheckedUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUncheckedUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
+    appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
+    sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
+    flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type AdsCreativeUpsertWithWhereUniqueWithoutCampaignInput = {
+    where: AdsCreativeWhereUniqueInput
+    update: XOR<AdsCreativeUpdateWithoutCampaignInput, AdsCreativeUncheckedUpdateWithoutCampaignInput>
+    create: XOR<AdsCreativeCreateWithoutCampaignInput, AdsCreativeUncheckedCreateWithoutCampaignInput>
+  }
+
+  export type AdsCreativeUpdateWithWhereUniqueWithoutCampaignInput = {
+    where: AdsCreativeWhereUniqueInput
+    data: XOR<AdsCreativeUpdateWithoutCampaignInput, AdsCreativeUncheckedUpdateWithoutCampaignInput>
+  }
+
+  export type AdsCreativeUpdateManyWithWhereWithoutCampaignInput = {
+    where: AdsCreativeScalarWhereInput
+    data: XOR<AdsCreativeUpdateManyMutationInput, AdsCreativeUncheckedUpdateManyWithoutCampaignInput>
+  }
+
+  export type AdsLandingPageAnalysisUpsertWithWhereUniqueWithoutCampaignInput = {
+    where: AdsLandingPageAnalysisWhereUniqueInput
+    update: XOR<AdsLandingPageAnalysisUpdateWithoutCampaignInput, AdsLandingPageAnalysisUncheckedUpdateWithoutCampaignInput>
+    create: XOR<AdsLandingPageAnalysisCreateWithoutCampaignInput, AdsLandingPageAnalysisUncheckedCreateWithoutCampaignInput>
+  }
+
+  export type AdsLandingPageAnalysisUpdateWithWhereUniqueWithoutCampaignInput = {
+    where: AdsLandingPageAnalysisWhereUniqueInput
+    data: XOR<AdsLandingPageAnalysisUpdateWithoutCampaignInput, AdsLandingPageAnalysisUncheckedUpdateWithoutCampaignInput>
+  }
+
+  export type AdsLandingPageAnalysisUpdateManyWithWhereWithoutCampaignInput = {
+    where: AdsLandingPageAnalysisScalarWhereInput
+    data: XOR<AdsLandingPageAnalysisUpdateManyMutationInput, AdsLandingPageAnalysisUncheckedUpdateManyWithoutCampaignInput>
+  }
+
+  export type AdsRecommendationUpsertWithWhereUniqueWithoutCampaignInput = {
+    where: AdsRecommendationWhereUniqueInput
+    update: XOR<AdsRecommendationUpdateWithoutCampaignInput, AdsRecommendationUncheckedUpdateWithoutCampaignInput>
+    create: XOR<AdsRecommendationCreateWithoutCampaignInput, AdsRecommendationUncheckedCreateWithoutCampaignInput>
+  }
+
+  export type AdsRecommendationUpdateWithWhereUniqueWithoutCampaignInput = {
+    where: AdsRecommendationWhereUniqueInput
+    data: XOR<AdsRecommendationUpdateWithoutCampaignInput, AdsRecommendationUncheckedUpdateWithoutCampaignInput>
+  }
+
+  export type AdsRecommendationUpdateManyWithWhereWithoutCampaignInput = {
+    where: AdsRecommendationScalarWhereInput
+    data: XOR<AdsRecommendationUpdateManyMutationInput, AdsRecommendationUncheckedUpdateManyWithoutCampaignInput>
+  }
+
+  export type UserCreateWithoutAdsCreativesInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    password?: string | null
+    stripeCustomerId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
+    legalDocuments?: LegalDocumentCreateNestedManyWithoutUserInput
+    intelligenceDocuments?: IntelligenceDocumentCreateNestedManyWithoutUserInput
+    projectInquiries?: ProjectInquiryCreateNestedManyWithoutUserInput
+    calendarEvents?: CalendarEventCreateNestedManyWithoutUserInput
+    businessContacts?: BusinessContactCreateNestedManyWithoutUserInput
+    businessTasks?: BusinessTaskCreateNestedManyWithoutUserInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutUserInput
+    automationRuns?: AutomationRunCreateNestedManyWithoutUserInput
+    commerceProducts?: CommerceProductCreateNestedManyWithoutUserInput
+    commerceOrders?: CommerceOrderCreateNestedManyWithoutUserInput
+    adsCampaigns?: AdsCampaignCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
+    appListings?: AppListingCreateNestedManyWithoutUserInput
+    sites?: SiteCreateNestedManyWithoutUserInput
+    flows?: FlowCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutAdsCreativesInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    password?: string | null
+    stripeCustomerId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    legalDocuments?: LegalDocumentUncheckedCreateNestedManyWithoutUserInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedCreateNestedManyWithoutUserInput
+    projectInquiries?: ProjectInquiryUncheckedCreateNestedManyWithoutUserInput
+    calendarEvents?: CalendarEventUncheckedCreateNestedManyWithoutUserInput
+    businessContacts?: BusinessContactUncheckedCreateNestedManyWithoutUserInput
+    businessTasks?: BusinessTaskUncheckedCreateNestedManyWithoutUserInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutUserInput
+    automationRuns?: AutomationRunUncheckedCreateNestedManyWithoutUserInput
+    commerceProducts?: CommerceProductUncheckedCreateNestedManyWithoutUserInput
+    commerceOrders?: CommerceOrderUncheckedCreateNestedManyWithoutUserInput
+    adsCampaigns?: AdsCampaignUncheckedCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
+    appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
+    sites?: SiteUncheckedCreateNestedManyWithoutUserInput
+    flows?: FlowUncheckedCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutAdsCreativesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutAdsCreativesInput, UserUncheckedCreateWithoutAdsCreativesInput>
+  }
+
+  export type AdsCampaignCreateWithoutCreativesInput = {
+    id?: string
+    name: string
+    objective: string
+    budgetCents: number
+    plannedSpendCents?: number | null
+    headline: string
+    body: string
+    targetingNotes?: string | null
+    audience?: string | null
+    location?: string | null
+    landingPageUrl?: string | null
+    conversionGoal?: string | null
+    callToAction?: string | null
+    currency?: string
+    timezone?: string
+    intendedPlatform?: string | null
+    status?: string
+    startsAt?: Date | string | null
+    endsAt?: Date | string | null
+    launchedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutAdsCampaignsInput
+    landingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutCampaignInput
+    recommendations?: AdsRecommendationCreateNestedManyWithoutCampaignInput
+  }
+
+  export type AdsCampaignUncheckedCreateWithoutCreativesInput = {
+    id?: string
+    userId: string
+    name: string
+    objective: string
+    budgetCents: number
+    plannedSpendCents?: number | null
+    headline: string
+    body: string
+    targetingNotes?: string | null
+    audience?: string | null
+    location?: string | null
+    landingPageUrl?: string | null
+    conversionGoal?: string | null
+    callToAction?: string | null
+    currency?: string
+    timezone?: string
+    intendedPlatform?: string | null
+    status?: string
+    startsAt?: Date | string | null
+    endsAt?: Date | string | null
+    launchedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    landingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutCampaignInput
+    recommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  }
+
+  export type AdsCampaignCreateOrConnectWithoutCreativesInput = {
+    where: AdsCampaignWhereUniqueInput
+    create: XOR<AdsCampaignCreateWithoutCreativesInput, AdsCampaignUncheckedCreateWithoutCreativesInput>
+  }
+
+  export type UserUpsertWithoutAdsCreativesInput = {
+    update: XOR<UserUpdateWithoutAdsCreativesInput, UserUncheckedUpdateWithoutAdsCreativesInput>
+    create: XOR<UserCreateWithoutAdsCreativesInput, UserUncheckedCreateWithoutAdsCreativesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutAdsCreativesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutAdsCreativesInput, UserUncheckedUpdateWithoutAdsCreativesInput>
+  }
+
+  export type UserUpdateWithoutAdsCreativesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
+    legalDocuments?: LegalDocumentUpdateManyWithoutUserNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUpdateManyWithoutUserNestedInput
+    projectInquiries?: ProjectInquiryUpdateManyWithoutUserNestedInput
+    calendarEvents?: CalendarEventUpdateManyWithoutUserNestedInput
+    businessContacts?: BusinessContactUpdateManyWithoutUserNestedInput
+    businessTasks?: BusinessTaskUpdateManyWithoutUserNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutUserNestedInput
+    automationRuns?: AutomationRunUpdateManyWithoutUserNestedInput
+    commerceProducts?: CommerceProductUpdateManyWithoutUserNestedInput
+    commerceOrders?: CommerceOrderUpdateManyWithoutUserNestedInput
+    adsCampaigns?: AdsCampaignUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
+    appListings?: AppListingUpdateManyWithoutUserNestedInput
+    sites?: SiteUpdateManyWithoutUserNestedInput
+    flows?: FlowUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutAdsCreativesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    legalDocuments?: LegalDocumentUncheckedUpdateManyWithoutUserNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedUpdateManyWithoutUserNestedInput
+    projectInquiries?: ProjectInquiryUncheckedUpdateManyWithoutUserNestedInput
+    calendarEvents?: CalendarEventUncheckedUpdateManyWithoutUserNestedInput
+    businessContacts?: BusinessContactUncheckedUpdateManyWithoutUserNestedInput
+    businessTasks?: BusinessTaskUncheckedUpdateManyWithoutUserNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutUserNestedInput
+    automationRuns?: AutomationRunUncheckedUpdateManyWithoutUserNestedInput
+    commerceProducts?: CommerceProductUncheckedUpdateManyWithoutUserNestedInput
+    commerceOrders?: CommerceOrderUncheckedUpdateManyWithoutUserNestedInput
+    adsCampaigns?: AdsCampaignUncheckedUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
+    appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
+    sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
+    flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type AdsCampaignUpsertWithoutCreativesInput = {
+    update: XOR<AdsCampaignUpdateWithoutCreativesInput, AdsCampaignUncheckedUpdateWithoutCreativesInput>
+    create: XOR<AdsCampaignCreateWithoutCreativesInput, AdsCampaignUncheckedCreateWithoutCreativesInput>
+    where?: AdsCampaignWhereInput
+  }
+
+  export type AdsCampaignUpdateToOneWithWhereWithoutCreativesInput = {
+    where?: AdsCampaignWhereInput
+    data: XOR<AdsCampaignUpdateWithoutCreativesInput, AdsCampaignUncheckedUpdateWithoutCreativesInput>
+  }
+
+  export type AdsCampaignUpdateWithoutCreativesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    objective?: StringFieldUpdateOperationsInput | string
+    budgetCents?: IntFieldUpdateOperationsInput | number
+    plannedSpendCents?: NullableIntFieldUpdateOperationsInput | number | null
+    headline?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    targetingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    landingPageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    conversionGoal?: NullableStringFieldUpdateOperationsInput | string | null
+    callToAction?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: StringFieldUpdateOperationsInput | string
+    timezone?: StringFieldUpdateOperationsInput | string
+    intendedPlatform?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    startsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    launchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAdsCampaignsNestedInput
+    landingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutCampaignNestedInput
+    recommendations?: AdsRecommendationUpdateManyWithoutCampaignNestedInput
+  }
+
+  export type AdsCampaignUncheckedUpdateWithoutCreativesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    objective?: StringFieldUpdateOperationsInput | string
+    budgetCents?: IntFieldUpdateOperationsInput | number
+    plannedSpendCents?: NullableIntFieldUpdateOperationsInput | number | null
+    headline?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    targetingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    landingPageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    conversionGoal?: NullableStringFieldUpdateOperationsInput | string | null
+    callToAction?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: StringFieldUpdateOperationsInput | string
+    timezone?: StringFieldUpdateOperationsInput | string
+    intendedPlatform?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    startsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    launchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    landingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutCampaignNestedInput
+    recommendations?: AdsRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  }
+
+  export type UserCreateWithoutAdsPlatformConnectionsInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    password?: string | null
+    stripeCustomerId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
+    legalDocuments?: LegalDocumentCreateNestedManyWithoutUserInput
+    intelligenceDocuments?: IntelligenceDocumentCreateNestedManyWithoutUserInput
+    projectInquiries?: ProjectInquiryCreateNestedManyWithoutUserInput
+    calendarEvents?: CalendarEventCreateNestedManyWithoutUserInput
+    businessContacts?: BusinessContactCreateNestedManyWithoutUserInput
+    businessTasks?: BusinessTaskCreateNestedManyWithoutUserInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutUserInput
+    automationRuns?: AutomationRunCreateNestedManyWithoutUserInput
+    commerceProducts?: CommerceProductCreateNestedManyWithoutUserInput
+    commerceOrders?: CommerceOrderCreateNestedManyWithoutUserInput
+    adsCampaigns?: AdsCampaignCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
+    appListings?: AppListingCreateNestedManyWithoutUserInput
+    sites?: SiteCreateNestedManyWithoutUserInput
+    flows?: FlowCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutAdsPlatformConnectionsInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    password?: string | null
+    stripeCustomerId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    legalDocuments?: LegalDocumentUncheckedCreateNestedManyWithoutUserInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedCreateNestedManyWithoutUserInput
+    projectInquiries?: ProjectInquiryUncheckedCreateNestedManyWithoutUserInput
+    calendarEvents?: CalendarEventUncheckedCreateNestedManyWithoutUserInput
+    businessContacts?: BusinessContactUncheckedCreateNestedManyWithoutUserInput
+    businessTasks?: BusinessTaskUncheckedCreateNestedManyWithoutUserInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutUserInput
+    automationRuns?: AutomationRunUncheckedCreateNestedManyWithoutUserInput
+    commerceProducts?: CommerceProductUncheckedCreateNestedManyWithoutUserInput
+    commerceOrders?: CommerceOrderUncheckedCreateNestedManyWithoutUserInput
+    adsCampaigns?: AdsCampaignUncheckedCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeUncheckedCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
+    appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
+    sites?: SiteUncheckedCreateNestedManyWithoutUserInput
+    flows?: FlowUncheckedCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutAdsPlatformConnectionsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutAdsPlatformConnectionsInput, UserUncheckedCreateWithoutAdsPlatformConnectionsInput>
+  }
+
+  export type UserUpsertWithoutAdsPlatformConnectionsInput = {
+    update: XOR<UserUpdateWithoutAdsPlatformConnectionsInput, UserUncheckedUpdateWithoutAdsPlatformConnectionsInput>
+    create: XOR<UserCreateWithoutAdsPlatformConnectionsInput, UserUncheckedCreateWithoutAdsPlatformConnectionsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutAdsPlatformConnectionsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutAdsPlatformConnectionsInput, UserUncheckedUpdateWithoutAdsPlatformConnectionsInput>
+  }
+
+  export type UserUpdateWithoutAdsPlatformConnectionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
+    legalDocuments?: LegalDocumentUpdateManyWithoutUserNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUpdateManyWithoutUserNestedInput
+    projectInquiries?: ProjectInquiryUpdateManyWithoutUserNestedInput
+    calendarEvents?: CalendarEventUpdateManyWithoutUserNestedInput
+    businessContacts?: BusinessContactUpdateManyWithoutUserNestedInput
+    businessTasks?: BusinessTaskUpdateManyWithoutUserNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutUserNestedInput
+    automationRuns?: AutomationRunUpdateManyWithoutUserNestedInput
+    commerceProducts?: CommerceProductUpdateManyWithoutUserNestedInput
+    commerceOrders?: CommerceOrderUpdateManyWithoutUserNestedInput
+    adsCampaigns?: AdsCampaignUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
+    appListings?: AppListingUpdateManyWithoutUserNestedInput
+    sites?: SiteUpdateManyWithoutUserNestedInput
+    flows?: FlowUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutAdsPlatformConnectionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    legalDocuments?: LegalDocumentUncheckedUpdateManyWithoutUserNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedUpdateManyWithoutUserNestedInput
+    projectInquiries?: ProjectInquiryUncheckedUpdateManyWithoutUserNestedInput
+    calendarEvents?: CalendarEventUncheckedUpdateManyWithoutUserNestedInput
+    businessContacts?: BusinessContactUncheckedUpdateManyWithoutUserNestedInput
+    businessTasks?: BusinessTaskUncheckedUpdateManyWithoutUserNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutUserNestedInput
+    automationRuns?: AutomationRunUncheckedUpdateManyWithoutUserNestedInput
+    commerceProducts?: CommerceProductUncheckedUpdateManyWithoutUserNestedInput
+    commerceOrders?: CommerceOrderUncheckedUpdateManyWithoutUserNestedInput
+    adsCampaigns?: AdsCampaignUncheckedUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUncheckedUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
+    appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
+    sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
+    flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutAdsLandingAnalysesInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    password?: string | null
+    stripeCustomerId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
+    legalDocuments?: LegalDocumentCreateNestedManyWithoutUserInput
+    intelligenceDocuments?: IntelligenceDocumentCreateNestedManyWithoutUserInput
+    projectInquiries?: ProjectInquiryCreateNestedManyWithoutUserInput
+    calendarEvents?: CalendarEventCreateNestedManyWithoutUserInput
+    businessContacts?: BusinessContactCreateNestedManyWithoutUserInput
+    businessTasks?: BusinessTaskCreateNestedManyWithoutUserInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutUserInput
+    automationRuns?: AutomationRunCreateNestedManyWithoutUserInput
+    commerceProducts?: CommerceProductCreateNestedManyWithoutUserInput
+    commerceOrders?: CommerceOrderCreateNestedManyWithoutUserInput
+    adsCampaigns?: AdsCampaignCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
+    appListings?: AppListingCreateNestedManyWithoutUserInput
+    sites?: SiteCreateNestedManyWithoutUserInput
+    flows?: FlowCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutAdsLandingAnalysesInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    password?: string | null
+    stripeCustomerId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    legalDocuments?: LegalDocumentUncheckedCreateNestedManyWithoutUserInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedCreateNestedManyWithoutUserInput
+    projectInquiries?: ProjectInquiryUncheckedCreateNestedManyWithoutUserInput
+    calendarEvents?: CalendarEventUncheckedCreateNestedManyWithoutUserInput
+    businessContacts?: BusinessContactUncheckedCreateNestedManyWithoutUserInput
+    businessTasks?: BusinessTaskUncheckedCreateNestedManyWithoutUserInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutUserInput
+    automationRuns?: AutomationRunUncheckedCreateNestedManyWithoutUserInput
+    commerceProducts?: CommerceProductUncheckedCreateNestedManyWithoutUserInput
+    commerceOrders?: CommerceOrderUncheckedCreateNestedManyWithoutUserInput
+    adsCampaigns?: AdsCampaignUncheckedCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeUncheckedCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
+    appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
+    sites?: SiteUncheckedCreateNestedManyWithoutUserInput
+    flows?: FlowUncheckedCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutAdsLandingAnalysesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutAdsLandingAnalysesInput, UserUncheckedCreateWithoutAdsLandingAnalysesInput>
+  }
+
+  export type AdsCampaignCreateWithoutLandingAnalysesInput = {
+    id?: string
+    name: string
+    objective: string
+    budgetCents: number
+    plannedSpendCents?: number | null
+    headline: string
+    body: string
+    targetingNotes?: string | null
+    audience?: string | null
+    location?: string | null
+    landingPageUrl?: string | null
+    conversionGoal?: string | null
+    callToAction?: string | null
+    currency?: string
+    timezone?: string
+    intendedPlatform?: string | null
+    status?: string
+    startsAt?: Date | string | null
+    endsAt?: Date | string | null
+    launchedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutAdsCampaignsInput
+    creatives?: AdsCreativeCreateNestedManyWithoutCampaignInput
+    recommendations?: AdsRecommendationCreateNestedManyWithoutCampaignInput
+  }
+
+  export type AdsCampaignUncheckedCreateWithoutLandingAnalysesInput = {
+    id?: string
+    userId: string
+    name: string
+    objective: string
+    budgetCents: number
+    plannedSpendCents?: number | null
+    headline: string
+    body: string
+    targetingNotes?: string | null
+    audience?: string | null
+    location?: string | null
+    landingPageUrl?: string | null
+    conversionGoal?: string | null
+    callToAction?: string | null
+    currency?: string
+    timezone?: string
+    intendedPlatform?: string | null
+    status?: string
+    startsAt?: Date | string | null
+    endsAt?: Date | string | null
+    launchedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    creatives?: AdsCreativeUncheckedCreateNestedManyWithoutCampaignInput
+    recommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  }
+
+  export type AdsCampaignCreateOrConnectWithoutLandingAnalysesInput = {
+    where: AdsCampaignWhereUniqueInput
+    create: XOR<AdsCampaignCreateWithoutLandingAnalysesInput, AdsCampaignUncheckedCreateWithoutLandingAnalysesInput>
+  }
+
+  export type UserUpsertWithoutAdsLandingAnalysesInput = {
+    update: XOR<UserUpdateWithoutAdsLandingAnalysesInput, UserUncheckedUpdateWithoutAdsLandingAnalysesInput>
+    create: XOR<UserCreateWithoutAdsLandingAnalysesInput, UserUncheckedCreateWithoutAdsLandingAnalysesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutAdsLandingAnalysesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutAdsLandingAnalysesInput, UserUncheckedUpdateWithoutAdsLandingAnalysesInput>
+  }
+
+  export type UserUpdateWithoutAdsLandingAnalysesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
+    legalDocuments?: LegalDocumentUpdateManyWithoutUserNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUpdateManyWithoutUserNestedInput
+    projectInquiries?: ProjectInquiryUpdateManyWithoutUserNestedInput
+    calendarEvents?: CalendarEventUpdateManyWithoutUserNestedInput
+    businessContacts?: BusinessContactUpdateManyWithoutUserNestedInput
+    businessTasks?: BusinessTaskUpdateManyWithoutUserNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutUserNestedInput
+    automationRuns?: AutomationRunUpdateManyWithoutUserNestedInput
+    commerceProducts?: CommerceProductUpdateManyWithoutUserNestedInput
+    commerceOrders?: CommerceOrderUpdateManyWithoutUserNestedInput
+    adsCampaigns?: AdsCampaignUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
+    appListings?: AppListingUpdateManyWithoutUserNestedInput
+    sites?: SiteUpdateManyWithoutUserNestedInput
+    flows?: FlowUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutAdsLandingAnalysesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    legalDocuments?: LegalDocumentUncheckedUpdateManyWithoutUserNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedUpdateManyWithoutUserNestedInput
+    projectInquiries?: ProjectInquiryUncheckedUpdateManyWithoutUserNestedInput
+    calendarEvents?: CalendarEventUncheckedUpdateManyWithoutUserNestedInput
+    businessContacts?: BusinessContactUncheckedUpdateManyWithoutUserNestedInput
+    businessTasks?: BusinessTaskUncheckedUpdateManyWithoutUserNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutUserNestedInput
+    automationRuns?: AutomationRunUncheckedUpdateManyWithoutUserNestedInput
+    commerceProducts?: CommerceProductUncheckedUpdateManyWithoutUserNestedInput
+    commerceOrders?: CommerceOrderUncheckedUpdateManyWithoutUserNestedInput
+    adsCampaigns?: AdsCampaignUncheckedUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUncheckedUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
+    appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
+    sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
+    flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type AdsCampaignUpsertWithoutLandingAnalysesInput = {
+    update: XOR<AdsCampaignUpdateWithoutLandingAnalysesInput, AdsCampaignUncheckedUpdateWithoutLandingAnalysesInput>
+    create: XOR<AdsCampaignCreateWithoutLandingAnalysesInput, AdsCampaignUncheckedCreateWithoutLandingAnalysesInput>
+    where?: AdsCampaignWhereInput
+  }
+
+  export type AdsCampaignUpdateToOneWithWhereWithoutLandingAnalysesInput = {
+    where?: AdsCampaignWhereInput
+    data: XOR<AdsCampaignUpdateWithoutLandingAnalysesInput, AdsCampaignUncheckedUpdateWithoutLandingAnalysesInput>
+  }
+
+  export type AdsCampaignUpdateWithoutLandingAnalysesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    objective?: StringFieldUpdateOperationsInput | string
+    budgetCents?: IntFieldUpdateOperationsInput | number
+    plannedSpendCents?: NullableIntFieldUpdateOperationsInput | number | null
+    headline?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    targetingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    landingPageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    conversionGoal?: NullableStringFieldUpdateOperationsInput | string | null
+    callToAction?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: StringFieldUpdateOperationsInput | string
+    timezone?: StringFieldUpdateOperationsInput | string
+    intendedPlatform?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    startsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    launchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAdsCampaignsNestedInput
+    creatives?: AdsCreativeUpdateManyWithoutCampaignNestedInput
+    recommendations?: AdsRecommendationUpdateManyWithoutCampaignNestedInput
+  }
+
+  export type AdsCampaignUncheckedUpdateWithoutLandingAnalysesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    objective?: StringFieldUpdateOperationsInput | string
+    budgetCents?: IntFieldUpdateOperationsInput | number
+    plannedSpendCents?: NullableIntFieldUpdateOperationsInput | number | null
+    headline?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    targetingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    landingPageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    conversionGoal?: NullableStringFieldUpdateOperationsInput | string | null
+    callToAction?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: StringFieldUpdateOperationsInput | string
+    timezone?: StringFieldUpdateOperationsInput | string
+    intendedPlatform?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    startsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    launchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    creatives?: AdsCreativeUncheckedUpdateManyWithoutCampaignNestedInput
+    recommendations?: AdsRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  }
+
+  export type UserCreateWithoutAdsRecommendationsInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    password?: string | null
+    stripeCustomerId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
+    legalDocuments?: LegalDocumentCreateNestedManyWithoutUserInput
+    intelligenceDocuments?: IntelligenceDocumentCreateNestedManyWithoutUserInput
+    projectInquiries?: ProjectInquiryCreateNestedManyWithoutUserInput
+    calendarEvents?: CalendarEventCreateNestedManyWithoutUserInput
+    businessContacts?: BusinessContactCreateNestedManyWithoutUserInput
+    businessTasks?: BusinessTaskCreateNestedManyWithoutUserInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutUserInput
+    automationRuns?: AutomationRunCreateNestedManyWithoutUserInput
+    commerceProducts?: CommerceProductCreateNestedManyWithoutUserInput
+    commerceOrders?: CommerceOrderCreateNestedManyWithoutUserInput
+    adsCampaigns?: AdsCampaignCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
+    appListings?: AppListingCreateNestedManyWithoutUserInput
+    sites?: SiteCreateNestedManyWithoutUserInput
+    flows?: FlowCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutAdsRecommendationsInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    password?: string | null
+    stripeCustomerId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    legalDocuments?: LegalDocumentUncheckedCreateNestedManyWithoutUserInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedCreateNestedManyWithoutUserInput
+    projectInquiries?: ProjectInquiryUncheckedCreateNestedManyWithoutUserInput
+    calendarEvents?: CalendarEventUncheckedCreateNestedManyWithoutUserInput
+    businessContacts?: BusinessContactUncheckedCreateNestedManyWithoutUserInput
+    businessTasks?: BusinessTaskUncheckedCreateNestedManyWithoutUserInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutUserInput
+    automationRuns?: AutomationRunUncheckedCreateNestedManyWithoutUserInput
+    commerceProducts?: CommerceProductUncheckedCreateNestedManyWithoutUserInput
+    commerceOrders?: CommerceOrderUncheckedCreateNestedManyWithoutUserInput
+    adsCampaigns?: AdsCampaignUncheckedCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeUncheckedCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
+    appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
+    sites?: SiteUncheckedCreateNestedManyWithoutUserInput
+    flows?: FlowUncheckedCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutAdsRecommendationsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutAdsRecommendationsInput, UserUncheckedCreateWithoutAdsRecommendationsInput>
+  }
+
+  export type AdsCampaignCreateWithoutRecommendationsInput = {
+    id?: string
+    name: string
+    objective: string
+    budgetCents: number
+    plannedSpendCents?: number | null
+    headline: string
+    body: string
+    targetingNotes?: string | null
+    audience?: string | null
+    location?: string | null
+    landingPageUrl?: string | null
+    conversionGoal?: string | null
+    callToAction?: string | null
+    currency?: string
+    timezone?: string
+    intendedPlatform?: string | null
+    status?: string
+    startsAt?: Date | string | null
+    endsAt?: Date | string | null
+    launchedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutAdsCampaignsInput
+    creatives?: AdsCreativeCreateNestedManyWithoutCampaignInput
+    landingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutCampaignInput
+  }
+
+  export type AdsCampaignUncheckedCreateWithoutRecommendationsInput = {
+    id?: string
+    userId: string
+    name: string
+    objective: string
+    budgetCents: number
+    plannedSpendCents?: number | null
+    headline: string
+    body: string
+    targetingNotes?: string | null
+    audience?: string | null
+    location?: string | null
+    landingPageUrl?: string | null
+    conversionGoal?: string | null
+    callToAction?: string | null
+    currency?: string
+    timezone?: string
+    intendedPlatform?: string | null
+    status?: string
+    startsAt?: Date | string | null
+    endsAt?: Date | string | null
+    launchedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    creatives?: AdsCreativeUncheckedCreateNestedManyWithoutCampaignInput
+    landingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutCampaignInput
+  }
+
+  export type AdsCampaignCreateOrConnectWithoutRecommendationsInput = {
+    where: AdsCampaignWhereUniqueInput
+    create: XOR<AdsCampaignCreateWithoutRecommendationsInput, AdsCampaignUncheckedCreateWithoutRecommendationsInput>
+  }
+
+  export type UserUpsertWithoutAdsRecommendationsInput = {
+    update: XOR<UserUpdateWithoutAdsRecommendationsInput, UserUncheckedUpdateWithoutAdsRecommendationsInput>
+    create: XOR<UserCreateWithoutAdsRecommendationsInput, UserUncheckedCreateWithoutAdsRecommendationsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutAdsRecommendationsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutAdsRecommendationsInput, UserUncheckedUpdateWithoutAdsRecommendationsInput>
+  }
+
+  export type UserUpdateWithoutAdsRecommendationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
+    legalDocuments?: LegalDocumentUpdateManyWithoutUserNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUpdateManyWithoutUserNestedInput
+    projectInquiries?: ProjectInquiryUpdateManyWithoutUserNestedInput
+    calendarEvents?: CalendarEventUpdateManyWithoutUserNestedInput
+    businessContacts?: BusinessContactUpdateManyWithoutUserNestedInput
+    businessTasks?: BusinessTaskUpdateManyWithoutUserNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutUserNestedInput
+    automationRuns?: AutomationRunUpdateManyWithoutUserNestedInput
+    commerceProducts?: CommerceProductUpdateManyWithoutUserNestedInput
+    commerceOrders?: CommerceOrderUpdateManyWithoutUserNestedInput
+    adsCampaigns?: AdsCampaignUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
+    appListings?: AppListingUpdateManyWithoutUserNestedInput
+    sites?: SiteUpdateManyWithoutUserNestedInput
+    flows?: FlowUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutAdsRecommendationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    legalDocuments?: LegalDocumentUncheckedUpdateManyWithoutUserNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedUpdateManyWithoutUserNestedInput
+    projectInquiries?: ProjectInquiryUncheckedUpdateManyWithoutUserNestedInput
+    calendarEvents?: CalendarEventUncheckedUpdateManyWithoutUserNestedInput
+    businessContacts?: BusinessContactUncheckedUpdateManyWithoutUserNestedInput
+    businessTasks?: BusinessTaskUncheckedUpdateManyWithoutUserNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutUserNestedInput
+    automationRuns?: AutomationRunUncheckedUpdateManyWithoutUserNestedInput
+    commerceProducts?: CommerceProductUncheckedUpdateManyWithoutUserNestedInput
+    commerceOrders?: CommerceOrderUncheckedUpdateManyWithoutUserNestedInput
+    adsCampaigns?: AdsCampaignUncheckedUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUncheckedUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
+    appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
+    sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
+    flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type AdsCampaignUpsertWithoutRecommendationsInput = {
+    update: XOR<AdsCampaignUpdateWithoutRecommendationsInput, AdsCampaignUncheckedUpdateWithoutRecommendationsInput>
+    create: XOR<AdsCampaignCreateWithoutRecommendationsInput, AdsCampaignUncheckedCreateWithoutRecommendationsInput>
+    where?: AdsCampaignWhereInput
+  }
+
+  export type AdsCampaignUpdateToOneWithWhereWithoutRecommendationsInput = {
+    where?: AdsCampaignWhereInput
+    data: XOR<AdsCampaignUpdateWithoutRecommendationsInput, AdsCampaignUncheckedUpdateWithoutRecommendationsInput>
+  }
+
+  export type AdsCampaignUpdateWithoutRecommendationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    objective?: StringFieldUpdateOperationsInput | string
+    budgetCents?: IntFieldUpdateOperationsInput | number
+    plannedSpendCents?: NullableIntFieldUpdateOperationsInput | number | null
+    headline?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    targetingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    landingPageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    conversionGoal?: NullableStringFieldUpdateOperationsInput | string | null
+    callToAction?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: StringFieldUpdateOperationsInput | string
+    timezone?: StringFieldUpdateOperationsInput | string
+    intendedPlatform?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    startsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    launchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAdsCampaignsNestedInput
+    creatives?: AdsCreativeUpdateManyWithoutCampaignNestedInput
+    landingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutCampaignNestedInput
+  }
+
+  export type AdsCampaignUncheckedUpdateWithoutRecommendationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    objective?: StringFieldUpdateOperationsInput | string
+    budgetCents?: IntFieldUpdateOperationsInput | number
+    plannedSpendCents?: NullableIntFieldUpdateOperationsInput | number | null
+    headline?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    targetingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    landingPageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    conversionGoal?: NullableStringFieldUpdateOperationsInput | string | null
+    callToAction?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: StringFieldUpdateOperationsInput | string
+    timezone?: StringFieldUpdateOperationsInput | string
+    intendedPlatform?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    startsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    launchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    creatives?: AdsCreativeUncheckedUpdateManyWithoutCampaignNestedInput
+    landingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutCampaignNestedInput
+  }
+
+  export type UserCreateWithoutAdsAiUsageInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    password?: string | null
+    stripeCustomerId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
+    legalDocuments?: LegalDocumentCreateNestedManyWithoutUserInput
+    intelligenceDocuments?: IntelligenceDocumentCreateNestedManyWithoutUserInput
+    projectInquiries?: ProjectInquiryCreateNestedManyWithoutUserInput
+    calendarEvents?: CalendarEventCreateNestedManyWithoutUserInput
+    businessContacts?: BusinessContactCreateNestedManyWithoutUserInput
+    businessTasks?: BusinessTaskCreateNestedManyWithoutUserInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutUserInput
+    automationRuns?: AutomationRunCreateNestedManyWithoutUserInput
+    commerceProducts?: CommerceProductCreateNestedManyWithoutUserInput
+    commerceOrders?: CommerceOrderCreateNestedManyWithoutUserInput
+    adsCampaigns?: AdsCampaignCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
+    appListings?: AppListingCreateNestedManyWithoutUserInput
+    sites?: SiteCreateNestedManyWithoutUserInput
+    flows?: FlowCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutAdsAiUsageInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    password?: string | null
+    stripeCustomerId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    legalDocuments?: LegalDocumentUncheckedCreateNestedManyWithoutUserInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedCreateNestedManyWithoutUserInput
+    projectInquiries?: ProjectInquiryUncheckedCreateNestedManyWithoutUserInput
+    calendarEvents?: CalendarEventUncheckedCreateNestedManyWithoutUserInput
+    businessContacts?: BusinessContactUncheckedCreateNestedManyWithoutUserInput
+    businessTasks?: BusinessTaskUncheckedCreateNestedManyWithoutUserInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutUserInput
+    automationRuns?: AutomationRunUncheckedCreateNestedManyWithoutUserInput
+    commerceProducts?: CommerceProductUncheckedCreateNestedManyWithoutUserInput
+    commerceOrders?: CommerceOrderUncheckedCreateNestedManyWithoutUserInput
+    adsCampaigns?: AdsCampaignUncheckedCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeUncheckedCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
+    appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
+    sites?: SiteUncheckedCreateNestedManyWithoutUserInput
+    flows?: FlowUncheckedCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutAdsAiUsageInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutAdsAiUsageInput, UserUncheckedCreateWithoutAdsAiUsageInput>
+  }
+
+  export type UserUpsertWithoutAdsAiUsageInput = {
+    update: XOR<UserUpdateWithoutAdsAiUsageInput, UserUncheckedUpdateWithoutAdsAiUsageInput>
+    create: XOR<UserCreateWithoutAdsAiUsageInput, UserUncheckedCreateWithoutAdsAiUsageInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutAdsAiUsageInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutAdsAiUsageInput, UserUncheckedUpdateWithoutAdsAiUsageInput>
+  }
+
+  export type UserUpdateWithoutAdsAiUsageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
+    legalDocuments?: LegalDocumentUpdateManyWithoutUserNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUpdateManyWithoutUserNestedInput
+    projectInquiries?: ProjectInquiryUpdateManyWithoutUserNestedInput
+    calendarEvents?: CalendarEventUpdateManyWithoutUserNestedInput
+    businessContacts?: BusinessContactUpdateManyWithoutUserNestedInput
+    businessTasks?: BusinessTaskUpdateManyWithoutUserNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutUserNestedInput
+    automationRuns?: AutomationRunUpdateManyWithoutUserNestedInput
+    commerceProducts?: CommerceProductUpdateManyWithoutUserNestedInput
+    commerceOrders?: CommerceOrderUpdateManyWithoutUserNestedInput
+    adsCampaigns?: AdsCampaignUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
+    appListings?: AppListingUpdateManyWithoutUserNestedInput
+    sites?: SiteUpdateManyWithoutUserNestedInput
+    flows?: FlowUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutAdsAiUsageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    legalDocuments?: LegalDocumentUncheckedUpdateManyWithoutUserNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedUpdateManyWithoutUserNestedInput
+    projectInquiries?: ProjectInquiryUncheckedUpdateManyWithoutUserNestedInput
+    calendarEvents?: CalendarEventUncheckedUpdateManyWithoutUserNestedInput
+    businessContacts?: BusinessContactUncheckedUpdateManyWithoutUserNestedInput
+    businessTasks?: BusinessTaskUncheckedUpdateManyWithoutUserNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutUserNestedInput
+    automationRuns?: AutomationRunUncheckedUpdateManyWithoutUserNestedInput
+    commerceProducts?: CommerceProductUncheckedUpdateManyWithoutUserNestedInput
+    commerceOrders?: CommerceOrderUncheckedUpdateManyWithoutUserNestedInput
+    adsCampaigns?: AdsCampaignUncheckedUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUncheckedUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -38193,6 +48495,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductCreateNestedManyWithoutUserInput
     commerceOrders?: CommerceOrderCreateNestedManyWithoutUserInput
     adsCampaigns?: AdsCampaignCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     billingSubscriptions?: BillingSubscriptionCreateNestedManyWithoutUserInput
@@ -38222,6 +48529,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUncheckedCreateNestedManyWithoutUserInput
     commerceOrders?: CommerceOrderUncheckedCreateNestedManyWithoutUserInput
     adsCampaigns?: AdsCampaignUncheckedCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeUncheckedCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     billingSubscriptions?: BillingSubscriptionUncheckedCreateNestedManyWithoutUserInput
@@ -38267,6 +48579,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUpdateManyWithoutUserNestedInput
     commerceOrders?: CommerceOrderUpdateManyWithoutUserNestedInput
     adsCampaigns?: AdsCampaignUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     billingSubscriptions?: BillingSubscriptionUpdateManyWithoutUserNestedInput
@@ -38296,6 +48613,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUncheckedUpdateManyWithoutUserNestedInput
     commerceOrders?: CommerceOrderUncheckedUpdateManyWithoutUserNestedInput
     adsCampaigns?: AdsCampaignUncheckedUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUncheckedUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     billingSubscriptions?: BillingSubscriptionUncheckedUpdateManyWithoutUserNestedInput
@@ -38325,6 +48647,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductCreateNestedManyWithoutUserInput
     commerceOrders?: CommerceOrderCreateNestedManyWithoutUserInput
     adsCampaigns?: AdsCampaignCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     billingSubscriptions?: BillingSubscriptionCreateNestedManyWithoutUserInput
@@ -38354,6 +48681,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUncheckedCreateNestedManyWithoutUserInput
     commerceOrders?: CommerceOrderUncheckedCreateNestedManyWithoutUserInput
     adsCampaigns?: AdsCampaignUncheckedCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeUncheckedCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     billingSubscriptions?: BillingSubscriptionUncheckedCreateNestedManyWithoutUserInput
@@ -38399,6 +48731,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUpdateManyWithoutUserNestedInput
     commerceOrders?: CommerceOrderUpdateManyWithoutUserNestedInput
     adsCampaigns?: AdsCampaignUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     billingSubscriptions?: BillingSubscriptionUpdateManyWithoutUserNestedInput
@@ -38428,6 +48765,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUncheckedUpdateManyWithoutUserNestedInput
     commerceOrders?: CommerceOrderUncheckedUpdateManyWithoutUserNestedInput
     adsCampaigns?: AdsCampaignUncheckedUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUncheckedUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     billingSubscriptions?: BillingSubscriptionUncheckedUpdateManyWithoutUserNestedInput
@@ -38457,6 +48799,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductCreateNestedManyWithoutUserInput
     commerceOrders?: CommerceOrderCreateNestedManyWithoutUserInput
     adsCampaigns?: AdsCampaignCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     billingSubscriptions?: BillingSubscriptionCreateNestedManyWithoutUserInput
@@ -38486,6 +48833,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUncheckedCreateNestedManyWithoutUserInput
     commerceOrders?: CommerceOrderUncheckedCreateNestedManyWithoutUserInput
     adsCampaigns?: AdsCampaignUncheckedCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeUncheckedCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     billingSubscriptions?: BillingSubscriptionUncheckedCreateNestedManyWithoutUserInput
@@ -38531,6 +48883,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUpdateManyWithoutUserNestedInput
     commerceOrders?: CommerceOrderUpdateManyWithoutUserNestedInput
     adsCampaigns?: AdsCampaignUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     billingSubscriptions?: BillingSubscriptionUpdateManyWithoutUserNestedInput
@@ -38560,6 +48917,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUncheckedUpdateManyWithoutUserNestedInput
     commerceOrders?: CommerceOrderUncheckedUpdateManyWithoutUserNestedInput
     adsCampaigns?: AdsCampaignUncheckedUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUncheckedUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     billingSubscriptions?: BillingSubscriptionUncheckedUpdateManyWithoutUserNestedInput
@@ -38589,6 +48951,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductCreateNestedManyWithoutUserInput
     commerceOrders?: CommerceOrderCreateNestedManyWithoutUserInput
     adsCampaigns?: AdsCampaignCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -38618,6 +48985,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUncheckedCreateNestedManyWithoutUserInput
     commerceOrders?: CommerceOrderUncheckedCreateNestedManyWithoutUserInput
     adsCampaigns?: AdsCampaignUncheckedCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeUncheckedCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -38663,6 +49035,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUpdateManyWithoutUserNestedInput
     commerceOrders?: CommerceOrderUpdateManyWithoutUserNestedInput
     adsCampaigns?: AdsCampaignUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -38692,6 +49069,11 @@ export namespace Prisma {
     commerceProducts?: CommerceProductUncheckedUpdateManyWithoutUserNestedInput
     commerceOrders?: CommerceOrderUncheckedUpdateManyWithoutUserNestedInput
     adsCampaigns?: AdsCampaignUncheckedUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUncheckedUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -38860,13 +49242,77 @@ export namespace Prisma {
     name: string
     objective: string
     budgetCents: number
+    plannedSpendCents?: number | null
     headline: string
     body: string
     targetingNotes?: string | null
+    audience?: string | null
+    location?: string | null
+    landingPageUrl?: string | null
+    conversionGoal?: string | null
+    callToAction?: string | null
+    currency?: string
+    timezone?: string
+    intendedPlatform?: string | null
     status?: string
     startsAt?: Date | string | null
     endsAt?: Date | string | null
     launchedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdsCreativeCreateManyUserInput = {
+    id?: string
+    campaignId: string
+    source: string
+    variantLabel?: string | null
+    headline: string
+    body: string
+    callToAction?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdsPlatformConnectionCreateManyUserInput = {
+    id?: string
+    platform: string
+    status?: string
+    note?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdsLandingPageAnalysisCreateManyUserInput = {
+    id?: string
+    campaignId?: string | null
+    url: string
+    fetchStatus: string
+    httpStatus?: number | null
+    title?: string | null
+    excerpt?: string | null
+    analysis?: string | null
+    errorMessage?: string | null
+    fetchedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdsRecommendationCreateManyUserInput = {
+    id?: string
+    campaignId: string
+    kind: string
+    content: string
+    source: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdsAiUsageCreateManyUserInput = {
+    id?: string
+    day: Date | string
+    kind: string
+    count?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -39407,15 +49853,27 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     objective?: StringFieldUpdateOperationsInput | string
     budgetCents?: IntFieldUpdateOperationsInput | number
+    plannedSpendCents?: NullableIntFieldUpdateOperationsInput | number | null
     headline?: StringFieldUpdateOperationsInput | string
     body?: StringFieldUpdateOperationsInput | string
     targetingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    landingPageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    conversionGoal?: NullableStringFieldUpdateOperationsInput | string | null
+    callToAction?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: StringFieldUpdateOperationsInput | string
+    timezone?: StringFieldUpdateOperationsInput | string
+    intendedPlatform?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     startsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     launchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    creatives?: AdsCreativeUpdateManyWithoutCampaignNestedInput
+    landingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutCampaignNestedInput
+    recommendations?: AdsRecommendationUpdateManyWithoutCampaignNestedInput
   }
 
   export type AdsCampaignUncheckedUpdateWithoutUserInput = {
@@ -39423,9 +49881,46 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     objective?: StringFieldUpdateOperationsInput | string
     budgetCents?: IntFieldUpdateOperationsInput | number
+    plannedSpendCents?: NullableIntFieldUpdateOperationsInput | number | null
     headline?: StringFieldUpdateOperationsInput | string
     body?: StringFieldUpdateOperationsInput | string
     targetingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    landingPageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    conversionGoal?: NullableStringFieldUpdateOperationsInput | string | null
+    callToAction?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: StringFieldUpdateOperationsInput | string
+    timezone?: StringFieldUpdateOperationsInput | string
+    intendedPlatform?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    startsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    launchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    creatives?: AdsCreativeUncheckedUpdateManyWithoutCampaignNestedInput
+    landingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutCampaignNestedInput
+    recommendations?: AdsRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  }
+
+  export type AdsCampaignUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    objective?: StringFieldUpdateOperationsInput | string
+    budgetCents?: IntFieldUpdateOperationsInput | number
+    plannedSpendCents?: NullableIntFieldUpdateOperationsInput | number | null
+    headline?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    targetingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    landingPageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    conversionGoal?: NullableStringFieldUpdateOperationsInput | string | null
+    callToAction?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: StringFieldUpdateOperationsInput | string
+    timezone?: StringFieldUpdateOperationsInput | string
+    intendedPlatform?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     startsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -39434,18 +49929,167 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type AdsCampaignUncheckedUpdateManyWithoutUserInput = {
+  export type AdsCreativeUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    objective?: StringFieldUpdateOperationsInput | string
-    budgetCents?: IntFieldUpdateOperationsInput | number
+    source?: StringFieldUpdateOperationsInput | string
+    variantLabel?: NullableStringFieldUpdateOperationsInput | string | null
     headline?: StringFieldUpdateOperationsInput | string
     body?: StringFieldUpdateOperationsInput | string
-    targetingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    callToAction?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    campaign?: AdsCampaignUpdateOneRequiredWithoutCreativesNestedInput
+  }
+
+  export type AdsCreativeUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    campaignId?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    variantLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    headline?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    callToAction?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdsCreativeUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    campaignId?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    variantLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    headline?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    callToAction?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdsPlatformConnectionUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    platform?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
-    startsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    launchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdsPlatformConnectionUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    platform?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdsPlatformConnectionUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    platform?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdsLandingPageAnalysisUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    fetchStatus?: StringFieldUpdateOperationsInput | string
+    httpStatus?: NullableIntFieldUpdateOperationsInput | number | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    excerpt?: NullableStringFieldUpdateOperationsInput | string | null
+    analysis?: NullableStringFieldUpdateOperationsInput | string | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    fetchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    campaign?: AdsCampaignUpdateOneWithoutLandingAnalysesNestedInput
+  }
+
+  export type AdsLandingPageAnalysisUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    campaignId?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    fetchStatus?: StringFieldUpdateOperationsInput | string
+    httpStatus?: NullableIntFieldUpdateOperationsInput | number | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    excerpt?: NullableStringFieldUpdateOperationsInput | string | null
+    analysis?: NullableStringFieldUpdateOperationsInput | string | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    fetchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    campaignId?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    fetchStatus?: StringFieldUpdateOperationsInput | string
+    httpStatus?: NullableIntFieldUpdateOperationsInput | number | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    excerpt?: NullableStringFieldUpdateOperationsInput | string | null
+    analysis?: NullableStringFieldUpdateOperationsInput | string | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    fetchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdsRecommendationUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    kind?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    campaign?: AdsCampaignUpdateOneRequiredWithoutRecommendationsNestedInput
+  }
+
+  export type AdsRecommendationUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    campaignId?: StringFieldUpdateOperationsInput | string
+    kind?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdsRecommendationUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    campaignId?: StringFieldUpdateOperationsInput | string
+    kind?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdsAiUsageUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    day?: DateTimeFieldUpdateOperationsInput | Date | string
+    kind?: StringFieldUpdateOperationsInput | string
+    count?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdsAiUsageUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    day?: DateTimeFieldUpdateOperationsInput | Date | string
+    kind?: StringFieldUpdateOperationsInput | string
+    count?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdsAiUsageUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    day?: DateTimeFieldUpdateOperationsInput | Date | string
+    kind?: StringFieldUpdateOperationsInput | string
+    count?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -39807,6 +50451,154 @@ export namespace Prisma {
     currency?: StringFieldUpdateOperationsInput | string
     stripeCheckoutSessionId?: NullableStringFieldUpdateOperationsInput | string | null
     paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdsCreativeCreateManyCampaignInput = {
+    id?: string
+    userId: string
+    source: string
+    variantLabel?: string | null
+    headline: string
+    body: string
+    callToAction?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdsLandingPageAnalysisCreateManyCampaignInput = {
+    id?: string
+    userId: string
+    url: string
+    fetchStatus: string
+    httpStatus?: number | null
+    title?: string | null
+    excerpt?: string | null
+    analysis?: string | null
+    errorMessage?: string | null
+    fetchedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdsRecommendationCreateManyCampaignInput = {
+    id?: string
+    userId: string
+    kind: string
+    content: string
+    source: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdsCreativeUpdateWithoutCampaignInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    variantLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    headline?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    callToAction?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAdsCreativesNestedInput
+  }
+
+  export type AdsCreativeUncheckedUpdateWithoutCampaignInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    variantLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    headline?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    callToAction?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdsCreativeUncheckedUpdateManyWithoutCampaignInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    variantLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    headline?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    callToAction?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdsLandingPageAnalysisUpdateWithoutCampaignInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    fetchStatus?: StringFieldUpdateOperationsInput | string
+    httpStatus?: NullableIntFieldUpdateOperationsInput | number | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    excerpt?: NullableStringFieldUpdateOperationsInput | string | null
+    analysis?: NullableStringFieldUpdateOperationsInput | string | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    fetchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAdsLandingAnalysesNestedInput
+  }
+
+  export type AdsLandingPageAnalysisUncheckedUpdateWithoutCampaignInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    fetchStatus?: StringFieldUpdateOperationsInput | string
+    httpStatus?: NullableIntFieldUpdateOperationsInput | number | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    excerpt?: NullableStringFieldUpdateOperationsInput | string | null
+    analysis?: NullableStringFieldUpdateOperationsInput | string | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    fetchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdsLandingPageAnalysisUncheckedUpdateManyWithoutCampaignInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    fetchStatus?: StringFieldUpdateOperationsInput | string
+    httpStatus?: NullableIntFieldUpdateOperationsInput | number | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    excerpt?: NullableStringFieldUpdateOperationsInput | string | null
+    analysis?: NullableStringFieldUpdateOperationsInput | string | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    fetchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdsRecommendationUpdateWithoutCampaignInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    kind?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAdsRecommendationsNestedInput
+  }
+
+  export type AdsRecommendationUncheckedUpdateWithoutCampaignInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    kind?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdsRecommendationUncheckedUpdateManyWithoutCampaignInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    kind?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
