@@ -25,6 +25,16 @@ const services = [
 
 const platforms = [
   {
+    title: "Aila Daily",
+    description:
+      "Plan the day from your stored tasks, notes, goals, calendar, conversations, and campaigns.",
+    status: "Live Platform",
+    type: "Everyday",
+    href: "/products/daily",
+    external: false,
+    accent: "from-sky-400/20 via-cyan-500/5 to-transparent",
+  },
+  {
     title: "Aila Intelligence",
     description:
       "Chat, attach files, and persist conversations on your account.",

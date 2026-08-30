@@ -14,8 +14,11 @@ test("every catalog product has a matching navigation href", () => {
 test("AI modes map back to catalog products", () => {
   assert.equal(productKeyFromMode("legal"), "ailalegal");
   assert.equal(productKeyFromMode("intelligence"), "intelligence");
+  assert.equal(productKeyFromMode("daily"), "daily");
   assert.equal(PRODUCTS.commerce.paid, true);
   assert.equal(PRODUCTS.intelligence.paid, false);
+  assert.equal(PRODUCTS.daily.paid, false);
+  assert.equal(PRODUCTS.daily.group, "everyday");
   assert.equal(PRODUCTS.ads.paid, false);
   assert.equal(PRODUCTS.ads.group, "professional");
   assert.equal(PRODUCTS.intelligence.group, "everyday");

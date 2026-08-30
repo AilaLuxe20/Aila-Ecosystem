@@ -16,6 +16,10 @@ const companyLinks = [
     href: "/#products",
   },
   {
+    label: "Daily",
+    href: "/products/daily",
+  },
+  {
     label: "Dashboard",
     href: "/dashboard",
   },

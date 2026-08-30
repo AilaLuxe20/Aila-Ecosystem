@@ -10,6 +10,8 @@ import { WorkspaceShell } from "@/components/workspace/WorkspaceShell";
 import { ToastProvider } from "@/components/ui";
 
 const CARDS: Array<{ key: keyof DashboardSummary | "billing"; label: string; href: string }> = [
+  { key: "dailyNotes", label: "Daily notes", href: "/products/daily" },
+  { key: "openGoals", label: "Open Daily goals", href: "/products/daily" },
   { key: "conversations", label: "Intelligence chats", href: "/products/intelligence" },
   { key: "contacts", label: "Business contacts", href: "/products/business" },
   { key: "openTasks", label: "Open tasks", href: "/products/business" },

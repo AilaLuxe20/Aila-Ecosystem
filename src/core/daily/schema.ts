@@ -70,7 +70,41 @@ export const updateDailyGoalSchema = z
     { message: "Provide a title, status, or due date to update." },
   );
 
+export const createDailyTaskSchema = z
+  .object({
+    title: z.string().trim().min(1, "Title is required.").max(DAILY_GOAL_TITLE_MAX),
+    notes: z.string().trim().max(DAILY_NOTE_BODY_MAX).optional().nullable().transform((value) => (value ? value : null)),
+    dueAt: optionalIsoDate,
+    status: z.enum(DAILY_GOAL_STATUSES).optional().default("open"),
+  })
+  .strict();
+
+export const updateDailyTaskSchema = z
+  .object({
+    title: z.string().trim().min(1).max(DAILY_GOAL_TITLE_MAX).optional(),
+    notes: z
+      .string()
+      .trim()
+      .max(DAILY_NOTE_BODY_MAX)
+      .optional()
+      .nullable()
+      .transform((value) => (value === undefined ? undefined : value ? value : null)),
+    dueAt: optionalIsoDate,
+    status: z.enum(DAILY_GOAL_STATUSES).optional(),
+  })
+  .strict()
+  .refine(
+    (value) =>
+      value.title !== undefined ||
+      value.notes !== undefined ||
+      value.dueAt !== undefined ||
+      value.status !== undefined,
+    { message: "Provide a title, notes, due date, or status to update." },
+  );
+
 export type CreateDailyNoteBody = z.infer<typeof createDailyNoteSchema>;
 export type UpdateDailyNoteBody = z.infer<typeof updateDailyNoteSchema>;
 export type CreateDailyGoalBody = z.infer<typeof createDailyGoalSchema>;
 export type UpdateDailyGoalBody = z.infer<typeof updateDailyGoalSchema>;
+export type CreateDailyTaskBody = z.infer<typeof createDailyTaskSchema>;
+export type UpdateDailyTaskBody = z.infer<typeof updateDailyTaskSchema>;

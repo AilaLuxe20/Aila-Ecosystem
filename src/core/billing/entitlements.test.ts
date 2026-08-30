@@ -13,6 +13,12 @@ test("intelligence is available to signed-in users without a subscription", () =
   assert.equal(decision.reason, "free_product");
 });
 
+test("daily is available to signed-in users without a subscription", () => {
+  const decision = evaluateEntitlement("user", "daily", false);
+  assert.equal(decision.allowed, true);
+  assert.equal(decision.reason, "free_product");
+});
+
 test("ads is available to signed-in users without a subscription", () => {
   const decision = evaluateEntitlement("user", "ads", false);
   assert.equal(decision.allowed, true);

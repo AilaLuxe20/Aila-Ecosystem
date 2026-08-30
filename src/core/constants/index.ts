@@ -49,6 +49,10 @@ export const MODE_CONFIG = {
     maxTokens: 700,
     temperature: 0.5,
   },
+  daily: {
+    maxTokens: 900,
+    temperature: 0.4,
+  },
   legal: {
     maxTokens: 1400,
     temperature: 0.25,
@@ -88,6 +92,16 @@ export const MODE_CONFIG = {
 } as const;
 
 export const PRODUCT_NAVIGATION = [
+  {
+    name: "Daily",
+    mobileName: "Daily",
+    href: "/products/daily",
+    group: "everyday",
+    dot: "bg-sky-300 shadow-[0_0_14px_rgba(125,211,252,0.9)]",
+    activeBorder: "border-sky-300/20",
+    activeBackground: "bg-sky-300/[0.08]",
+    activeText: "text-sky-100",
+  },
   {
     name: "Intelligence",
     mobileName: "AI",

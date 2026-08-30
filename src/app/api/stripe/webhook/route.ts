@@ -7,6 +7,7 @@ import {
   CHECKOUT_KIND_COMMERCE,
   CHECKOUT_KIND_SUBSCRIPTION,
 } from "@/core/billing/service";
+import { hasProcessedStripeEvent, recordStripeEvent } from "@/core/billing/webhooks";
 import {
   markCommerceOrderPaidFromStripe,
   requireStripeWebhookSecret,
@@ -37,6 +38,10 @@ export async function POST(req: Request) {
       signature,
       requireStripeWebhookSecret(),
     );
+
+    if (await hasProcessedStripeEvent(event.id)) {
+      return ok({ received: true, duplicate: true });
+    }
 
     switch (event.type) {
       case "checkout.session.completed": {
@@ -81,6 +86,7 @@ export async function POST(req: Request) {
         log.info("Ignored Stripe event.", { type: event.type });
     }
 
+    await recordStripeEvent(event.id, event.type);
     return ok({ received: true });
   } catch (error) {
     return failure(error);

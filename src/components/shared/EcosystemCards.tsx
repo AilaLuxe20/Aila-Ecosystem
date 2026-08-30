@@ -19,6 +19,13 @@ const accentByProduct: Record<
     text: "group-hover:text-cyan-200",
     line: "from-cyan-300/70",
   },
+  daily: {
+    glow: "group-hover:bg-sky-400/10",
+    orb: "from-sky-300/30 to-sky-500/5",
+    dot: "bg-sky-300 shadow-[0_0_16px_rgba(125,211,252,0.9)]",
+    text: "group-hover:text-sky-200",
+    line: "from-sky-300/70",
+  },
   ailalegal: {
     glow: "group-hover:bg-blue-500/10",
     orb: "from-blue-300/30 to-blue-600/5",

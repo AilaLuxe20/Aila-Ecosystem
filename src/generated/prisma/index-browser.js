@@ -440,6 +440,25 @@ exports.Prisma.FlowScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.DailyNoteScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  title: 'title',
+  body: 'body',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.DailyGoalScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  title: 'title',
+  status: 'status',
+  dueAt: 'dueAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.BillingSubscriptionScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -449,9 +468,16 @@ exports.Prisma.BillingSubscriptionScalarFieldEnum = {
   plan: 'plan',
   status: 'status',
   currentPeriodEnd: 'currentPeriodEnd',
+  trialEndsAt: 'trialEndsAt',
   cancelAtPeriodEnd: 'cancelAtPeriodEnd',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.StripeWebhookEventScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -506,7 +532,10 @@ exports.Prisma.ModelName = {
   AppListing: 'AppListing',
   Site: 'Site',
   Flow: 'Flow',
-  BillingSubscription: 'BillingSubscription'
+  DailyNote: 'DailyNote',
+  DailyGoal: 'DailyGoal',
+  BillingSubscription: 'BillingSubscription',
+  StripeWebhookEvent: 'StripeWebhookEvent'
 };
 
 /**

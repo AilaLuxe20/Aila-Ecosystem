@@ -537,3 +537,12 @@ model BillingSubscription {
   @@index([userId, status])
   @@map("billing_subscriptions")
 }
+
+model StripeWebhookEvent {
+  id        String   @id
+  type      String
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@map("stripe_webhook_events")
+}

@@ -139,10 +139,25 @@ export type Site = $Result.DefaultSelection<Prisma.$SitePayload>
  */
 export type Flow = $Result.DefaultSelection<Prisma.$FlowPayload>
 /**
+ * Model DailyNote
+ * 
+ */
+export type DailyNote = $Result.DefaultSelection<Prisma.$DailyNotePayload>
+/**
+ * Model DailyGoal
+ * 
+ */
+export type DailyGoal = $Result.DefaultSelection<Prisma.$DailyGoalPayload>
+/**
  * Model BillingSubscription
  * 
  */
 export type BillingSubscription = $Result.DefaultSelection<Prisma.$BillingSubscriptionPayload>
+/**
+ * Model StripeWebhookEvent
+ * 
+ */
+export type StripeWebhookEvent = $Result.DefaultSelection<Prisma.$StripeWebhookEventPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -516,6 +531,26 @@ export class PrismaClient<
   get flow(): Prisma.FlowDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.dailyNote`: Exposes CRUD operations for the **DailyNote** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more DailyNotes
+    * const dailyNotes = await prisma.dailyNote.findMany()
+    * ```
+    */
+  get dailyNote(): Prisma.DailyNoteDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.dailyGoal`: Exposes CRUD operations for the **DailyGoal** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more DailyGoals
+    * const dailyGoals = await prisma.dailyGoal.findMany()
+    * ```
+    */
+  get dailyGoal(): Prisma.DailyGoalDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.billingSubscription`: Exposes CRUD operations for the **BillingSubscription** model.
     * Example usage:
     * ```ts
@@ -524,6 +559,16 @@ export class PrismaClient<
     * ```
     */
   get billingSubscription(): Prisma.BillingSubscriptionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.stripeWebhookEvent`: Exposes CRUD operations for the **StripeWebhookEvent** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more StripeWebhookEvents
+    * const stripeWebhookEvents = await prisma.stripeWebhookEvent.findMany()
+    * ```
+    */
+  get stripeWebhookEvent(): Prisma.StripeWebhookEventDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -996,7 +1041,10 @@ export namespace Prisma {
     AppListing: 'AppListing',
     Site: 'Site',
     Flow: 'Flow',
-    BillingSubscription: 'BillingSubscription'
+    DailyNote: 'DailyNote',
+    DailyGoal: 'DailyGoal',
+    BillingSubscription: 'BillingSubscription',
+    StripeWebhookEvent: 'StripeWebhookEvent'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1012,7 +1060,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "account" | "session" | "verificationToken" | "conversation" | "message" | "legalDocument" | "intelligenceDocument" | "projectInquiry" | "calendarEvent" | "businessContact" | "businessTask" | "automationRule" | "automationRun" | "commerceProduct" | "commerceOrder" | "adsCampaign" | "adsCreative" | "adsPlatformConnection" | "adsLandingPageAnalysis" | "adsRecommendation" | "adsAiUsage" | "appListing" | "site" | "flow" | "billingSubscription"
+      modelProps: "user" | "account" | "session" | "verificationToken" | "conversation" | "message" | "legalDocument" | "intelligenceDocument" | "projectInquiry" | "calendarEvent" | "businessContact" | "businessTask" | "automationRule" | "automationRun" | "commerceProduct" | "commerceOrder" | "adsCampaign" | "adsCreative" | "adsPlatformConnection" | "adsLandingPageAnalysis" | "adsRecommendation" | "adsAiUsage" | "appListing" | "site" | "flow" | "dailyNote" | "dailyGoal" | "billingSubscription" | "stripeWebhookEvent"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2866,6 +2914,154 @@ export namespace Prisma {
           }
         }
       }
+      DailyNote: {
+        payload: Prisma.$DailyNotePayload<ExtArgs>
+        fields: Prisma.DailyNoteFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DailyNoteFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyNotePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DailyNoteFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyNotePayload>
+          }
+          findFirst: {
+            args: Prisma.DailyNoteFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyNotePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DailyNoteFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyNotePayload>
+          }
+          findMany: {
+            args: Prisma.DailyNoteFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyNotePayload>[]
+          }
+          create: {
+            args: Prisma.DailyNoteCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyNotePayload>
+          }
+          createMany: {
+            args: Prisma.DailyNoteCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DailyNoteCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyNotePayload>[]
+          }
+          delete: {
+            args: Prisma.DailyNoteDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyNotePayload>
+          }
+          update: {
+            args: Prisma.DailyNoteUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyNotePayload>
+          }
+          deleteMany: {
+            args: Prisma.DailyNoteDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DailyNoteUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DailyNoteUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyNotePayload>[]
+          }
+          upsert: {
+            args: Prisma.DailyNoteUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyNotePayload>
+          }
+          aggregate: {
+            args: Prisma.DailyNoteAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDailyNote>
+          }
+          groupBy: {
+            args: Prisma.DailyNoteGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DailyNoteGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DailyNoteCountArgs<ExtArgs>
+            result: $Utils.Optional<DailyNoteCountAggregateOutputType> | number
+          }
+        }
+      }
+      DailyGoal: {
+        payload: Prisma.$DailyGoalPayload<ExtArgs>
+        fields: Prisma.DailyGoalFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DailyGoalFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyGoalPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DailyGoalFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyGoalPayload>
+          }
+          findFirst: {
+            args: Prisma.DailyGoalFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyGoalPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DailyGoalFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyGoalPayload>
+          }
+          findMany: {
+            args: Prisma.DailyGoalFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyGoalPayload>[]
+          }
+          create: {
+            args: Prisma.DailyGoalCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyGoalPayload>
+          }
+          createMany: {
+            args: Prisma.DailyGoalCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DailyGoalCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyGoalPayload>[]
+          }
+          delete: {
+            args: Prisma.DailyGoalDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyGoalPayload>
+          }
+          update: {
+            args: Prisma.DailyGoalUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyGoalPayload>
+          }
+          deleteMany: {
+            args: Prisma.DailyGoalDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DailyGoalUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DailyGoalUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyGoalPayload>[]
+          }
+          upsert: {
+            args: Prisma.DailyGoalUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyGoalPayload>
+          }
+          aggregate: {
+            args: Prisma.DailyGoalAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDailyGoal>
+          }
+          groupBy: {
+            args: Prisma.DailyGoalGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DailyGoalGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DailyGoalCountArgs<ExtArgs>
+            result: $Utils.Optional<DailyGoalCountAggregateOutputType> | number
+          }
+        }
+      }
       BillingSubscription: {
         payload: Prisma.$BillingSubscriptionPayload<ExtArgs>
         fields: Prisma.BillingSubscriptionFieldRefs
@@ -2937,6 +3133,80 @@ export namespace Prisma {
           count: {
             args: Prisma.BillingSubscriptionCountArgs<ExtArgs>
             result: $Utils.Optional<BillingSubscriptionCountAggregateOutputType> | number
+          }
+        }
+      }
+      StripeWebhookEvent: {
+        payload: Prisma.$StripeWebhookEventPayload<ExtArgs>
+        fields: Prisma.StripeWebhookEventFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.StripeWebhookEventFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StripeWebhookEventPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.StripeWebhookEventFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StripeWebhookEventPayload>
+          }
+          findFirst: {
+            args: Prisma.StripeWebhookEventFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StripeWebhookEventPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.StripeWebhookEventFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StripeWebhookEventPayload>
+          }
+          findMany: {
+            args: Prisma.StripeWebhookEventFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StripeWebhookEventPayload>[]
+          }
+          create: {
+            args: Prisma.StripeWebhookEventCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StripeWebhookEventPayload>
+          }
+          createMany: {
+            args: Prisma.StripeWebhookEventCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.StripeWebhookEventCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StripeWebhookEventPayload>[]
+          }
+          delete: {
+            args: Prisma.StripeWebhookEventDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StripeWebhookEventPayload>
+          }
+          update: {
+            args: Prisma.StripeWebhookEventUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StripeWebhookEventPayload>
+          }
+          deleteMany: {
+            args: Prisma.StripeWebhookEventDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.StripeWebhookEventUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.StripeWebhookEventUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StripeWebhookEventPayload>[]
+          }
+          upsert: {
+            args: Prisma.StripeWebhookEventUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StripeWebhookEventPayload>
+          }
+          aggregate: {
+            args: Prisma.StripeWebhookEventAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateStripeWebhookEvent>
+          }
+          groupBy: {
+            args: Prisma.StripeWebhookEventGroupByArgs<ExtArgs>
+            result: $Utils.Optional<StripeWebhookEventGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.StripeWebhookEventCountArgs<ExtArgs>
+            result: $Utils.Optional<StripeWebhookEventCountAggregateOutputType> | number
           }
         }
       }
@@ -3088,7 +3358,10 @@ export namespace Prisma {
     appListing?: AppListingOmit
     site?: SiteOmit
     flow?: FlowOmit
+    dailyNote?: DailyNoteOmit
+    dailyGoal?: DailyGoalOmit
     billingSubscription?: BillingSubscriptionOmit
+    stripeWebhookEvent?: StripeWebhookEventOmit
   }
 
   /* Types for Logging */
@@ -3188,6 +3461,8 @@ export namespace Prisma {
     adsLandingAnalyses: number
     adsRecommendations: number
     adsAiUsage: number
+    dailyNotes: number
+    dailyGoals: number
     appListings: number
     sites: number
     flows: number
@@ -3214,6 +3489,8 @@ export namespace Prisma {
     adsLandingAnalyses?: boolean | UserCountOutputTypeCountAdsLandingAnalysesArgs
     adsRecommendations?: boolean | UserCountOutputTypeCountAdsRecommendationsArgs
     adsAiUsage?: boolean | UserCountOutputTypeCountAdsAiUsageArgs
+    dailyNotes?: boolean | UserCountOutputTypeCountDailyNotesArgs
+    dailyGoals?: boolean | UserCountOutputTypeCountDailyGoalsArgs
     appListings?: boolean | UserCountOutputTypeCountAppListingsArgs
     sites?: boolean | UserCountOutputTypeCountSitesArgs
     flows?: boolean | UserCountOutputTypeCountFlowsArgs
@@ -3362,6 +3639,20 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountAdsAiUsageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AdsAiUsageWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountDailyNotesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DailyNoteWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountDailyGoalsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DailyGoalWhereInput
   }
 
   /**
@@ -3794,6 +4085,8 @@ export namespace Prisma {
     adsLandingAnalyses?: boolean | User$adsLandingAnalysesArgs<ExtArgs>
     adsRecommendations?: boolean | User$adsRecommendationsArgs<ExtArgs>
     adsAiUsage?: boolean | User$adsAiUsageArgs<ExtArgs>
+    dailyNotes?: boolean | User$dailyNotesArgs<ExtArgs>
+    dailyGoals?: boolean | User$dailyGoalsArgs<ExtArgs>
     appListings?: boolean | User$appListingsArgs<ExtArgs>
     sites?: boolean | User$sitesArgs<ExtArgs>
     flows?: boolean | User$flowsArgs<ExtArgs>
@@ -3858,6 +4151,8 @@ export namespace Prisma {
     adsLandingAnalyses?: boolean | User$adsLandingAnalysesArgs<ExtArgs>
     adsRecommendations?: boolean | User$adsRecommendationsArgs<ExtArgs>
     adsAiUsage?: boolean | User$adsAiUsageArgs<ExtArgs>
+    dailyNotes?: boolean | User$dailyNotesArgs<ExtArgs>
+    dailyGoals?: boolean | User$dailyGoalsArgs<ExtArgs>
     appListings?: boolean | User$appListingsArgs<ExtArgs>
     sites?: boolean | User$sitesArgs<ExtArgs>
     flows?: boolean | User$flowsArgs<ExtArgs>
@@ -3889,6 +4184,8 @@ export namespace Prisma {
       adsLandingAnalyses: Prisma.$AdsLandingPageAnalysisPayload<ExtArgs>[]
       adsRecommendations: Prisma.$AdsRecommendationPayload<ExtArgs>[]
       adsAiUsage: Prisma.$AdsAiUsagePayload<ExtArgs>[]
+      dailyNotes: Prisma.$DailyNotePayload<ExtArgs>[]
+      dailyGoals: Prisma.$DailyGoalPayload<ExtArgs>[]
       appListings: Prisma.$AppListingPayload<ExtArgs>[]
       sites: Prisma.$SitePayload<ExtArgs>[]
       flows: Prisma.$FlowPayload<ExtArgs>[]
@@ -4317,6 +4614,8 @@ export namespace Prisma {
     adsLandingAnalyses<T extends User$adsLandingAnalysesArgs<ExtArgs> = {}>(args?: Subset<T, User$adsLandingAnalysesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdsLandingPageAnalysisPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     adsRecommendations<T extends User$adsRecommendationsArgs<ExtArgs> = {}>(args?: Subset<T, User$adsRecommendationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdsRecommendationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     adsAiUsage<T extends User$adsAiUsageArgs<ExtArgs> = {}>(args?: Subset<T, User$adsAiUsageArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdsAiUsagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    dailyNotes<T extends User$dailyNotesArgs<ExtArgs> = {}>(args?: Subset<T, User$dailyNotesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DailyNotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    dailyGoals<T extends User$dailyGoalsArgs<ExtArgs> = {}>(args?: Subset<T, User$dailyGoalsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DailyGoalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     appListings<T extends User$appListingsArgs<ExtArgs> = {}>(args?: Subset<T, User$appListingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AppListingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sites<T extends User$sitesArgs<ExtArgs> = {}>(args?: Subset<T, User$sitesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SitePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     flows<T extends User$flowsArgs<ExtArgs> = {}>(args?: Subset<T, User$flowsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlowPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -5205,6 +5504,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: AdsAiUsageScalarFieldEnum | AdsAiUsageScalarFieldEnum[]
+  }
+
+  /**
+   * User.dailyNotes
+   */
+  export type User$dailyNotesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyNote
+     */
+    select?: DailyNoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyNote
+     */
+    omit?: DailyNoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyNoteInclude<ExtArgs> | null
+    where?: DailyNoteWhereInput
+    orderBy?: DailyNoteOrderByWithRelationInput | DailyNoteOrderByWithRelationInput[]
+    cursor?: DailyNoteWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DailyNoteScalarFieldEnum | DailyNoteScalarFieldEnum[]
+  }
+
+  /**
+   * User.dailyGoals
+   */
+  export type User$dailyGoalsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyGoal
+     */
+    select?: DailyGoalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyGoal
+     */
+    omit?: DailyGoalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyGoalInclude<ExtArgs> | null
+    where?: DailyGoalWhereInput
+    orderBy?: DailyGoalOrderByWithRelationInput | DailyGoalOrderByWithRelationInput[]
+    cursor?: DailyGoalWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DailyGoalScalarFieldEnum | DailyGoalScalarFieldEnum[]
   }
 
   /**
@@ -32956,6 +33303,2171 @@ export namespace Prisma {
 
 
   /**
+   * Model DailyNote
+   */
+
+  export type AggregateDailyNote = {
+    _count: DailyNoteCountAggregateOutputType | null
+    _min: DailyNoteMinAggregateOutputType | null
+    _max: DailyNoteMaxAggregateOutputType | null
+  }
+
+  export type DailyNoteMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    title: string | null
+    body: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DailyNoteMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    title: string | null
+    body: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DailyNoteCountAggregateOutputType = {
+    id: number
+    userId: number
+    title: number
+    body: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type DailyNoteMinAggregateInputType = {
+    id?: true
+    userId?: true
+    title?: true
+    body?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type DailyNoteMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    title?: true
+    body?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type DailyNoteCountAggregateInputType = {
+    id?: true
+    userId?: true
+    title?: true
+    body?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type DailyNoteAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DailyNote to aggregate.
+     */
+    where?: DailyNoteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DailyNotes to fetch.
+     */
+    orderBy?: DailyNoteOrderByWithRelationInput | DailyNoteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DailyNoteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DailyNotes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DailyNotes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned DailyNotes
+    **/
+    _count?: true | DailyNoteCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DailyNoteMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DailyNoteMaxAggregateInputType
+  }
+
+  export type GetDailyNoteAggregateType<T extends DailyNoteAggregateArgs> = {
+        [P in keyof T & keyof AggregateDailyNote]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDailyNote[P]>
+      : GetScalarType<T[P], AggregateDailyNote[P]>
+  }
+
+
+
+
+  export type DailyNoteGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DailyNoteWhereInput
+    orderBy?: DailyNoteOrderByWithAggregationInput | DailyNoteOrderByWithAggregationInput[]
+    by: DailyNoteScalarFieldEnum[] | DailyNoteScalarFieldEnum
+    having?: DailyNoteScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DailyNoteCountAggregateInputType | true
+    _min?: DailyNoteMinAggregateInputType
+    _max?: DailyNoteMaxAggregateInputType
+  }
+
+  export type DailyNoteGroupByOutputType = {
+    id: string
+    userId: string
+    title: string
+    body: string
+    createdAt: Date
+    updatedAt: Date
+    _count: DailyNoteCountAggregateOutputType | null
+    _min: DailyNoteMinAggregateOutputType | null
+    _max: DailyNoteMaxAggregateOutputType | null
+  }
+
+  type GetDailyNoteGroupByPayload<T extends DailyNoteGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DailyNoteGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DailyNoteGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DailyNoteGroupByOutputType[P]>
+            : GetScalarType<T[P], DailyNoteGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DailyNoteSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    title?: boolean
+    body?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["dailyNote"]>
+
+  export type DailyNoteSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    title?: boolean
+    body?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["dailyNote"]>
+
+  export type DailyNoteSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    title?: boolean
+    body?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["dailyNote"]>
+
+  export type DailyNoteSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    title?: boolean
+    body?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type DailyNoteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "title" | "body" | "createdAt" | "updatedAt", ExtArgs["result"]["dailyNote"]>
+  export type DailyNoteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type DailyNoteIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type DailyNoteIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $DailyNotePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "DailyNote"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      title: string
+      body: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["dailyNote"]>
+    composites: {}
+  }
+
+  type DailyNoteGetPayload<S extends boolean | null | undefined | DailyNoteDefaultArgs> = $Result.GetResult<Prisma.$DailyNotePayload, S>
+
+  type DailyNoteCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DailyNoteFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DailyNoteCountAggregateInputType | true
+    }
+
+  export interface DailyNoteDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DailyNote'], meta: { name: 'DailyNote' } }
+    /**
+     * Find zero or one DailyNote that matches the filter.
+     * @param {DailyNoteFindUniqueArgs} args - Arguments to find a DailyNote
+     * @example
+     * // Get one DailyNote
+     * const dailyNote = await prisma.dailyNote.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DailyNoteFindUniqueArgs>(args: SelectSubset<T, DailyNoteFindUniqueArgs<ExtArgs>>): Prisma__DailyNoteClient<$Result.GetResult<Prisma.$DailyNotePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one DailyNote that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DailyNoteFindUniqueOrThrowArgs} args - Arguments to find a DailyNote
+     * @example
+     * // Get one DailyNote
+     * const dailyNote = await prisma.dailyNote.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DailyNoteFindUniqueOrThrowArgs>(args: SelectSubset<T, DailyNoteFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DailyNoteClient<$Result.GetResult<Prisma.$DailyNotePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DailyNote that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DailyNoteFindFirstArgs} args - Arguments to find a DailyNote
+     * @example
+     * // Get one DailyNote
+     * const dailyNote = await prisma.dailyNote.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DailyNoteFindFirstArgs>(args?: SelectSubset<T, DailyNoteFindFirstArgs<ExtArgs>>): Prisma__DailyNoteClient<$Result.GetResult<Prisma.$DailyNotePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DailyNote that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DailyNoteFindFirstOrThrowArgs} args - Arguments to find a DailyNote
+     * @example
+     * // Get one DailyNote
+     * const dailyNote = await prisma.dailyNote.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DailyNoteFindFirstOrThrowArgs>(args?: SelectSubset<T, DailyNoteFindFirstOrThrowArgs<ExtArgs>>): Prisma__DailyNoteClient<$Result.GetResult<Prisma.$DailyNotePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more DailyNotes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DailyNoteFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all DailyNotes
+     * const dailyNotes = await prisma.dailyNote.findMany()
+     * 
+     * // Get first 10 DailyNotes
+     * const dailyNotes = await prisma.dailyNote.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const dailyNoteWithIdOnly = await prisma.dailyNote.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DailyNoteFindManyArgs>(args?: SelectSubset<T, DailyNoteFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DailyNotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a DailyNote.
+     * @param {DailyNoteCreateArgs} args - Arguments to create a DailyNote.
+     * @example
+     * // Create one DailyNote
+     * const DailyNote = await prisma.dailyNote.create({
+     *   data: {
+     *     // ... data to create a DailyNote
+     *   }
+     * })
+     * 
+     */
+    create<T extends DailyNoteCreateArgs>(args: SelectSubset<T, DailyNoteCreateArgs<ExtArgs>>): Prisma__DailyNoteClient<$Result.GetResult<Prisma.$DailyNotePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many DailyNotes.
+     * @param {DailyNoteCreateManyArgs} args - Arguments to create many DailyNotes.
+     * @example
+     * // Create many DailyNotes
+     * const dailyNote = await prisma.dailyNote.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DailyNoteCreateManyArgs>(args?: SelectSubset<T, DailyNoteCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many DailyNotes and returns the data saved in the database.
+     * @param {DailyNoteCreateManyAndReturnArgs} args - Arguments to create many DailyNotes.
+     * @example
+     * // Create many DailyNotes
+     * const dailyNote = await prisma.dailyNote.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many DailyNotes and only return the `id`
+     * const dailyNoteWithIdOnly = await prisma.dailyNote.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DailyNoteCreateManyAndReturnArgs>(args?: SelectSubset<T, DailyNoteCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DailyNotePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a DailyNote.
+     * @param {DailyNoteDeleteArgs} args - Arguments to delete one DailyNote.
+     * @example
+     * // Delete one DailyNote
+     * const DailyNote = await prisma.dailyNote.delete({
+     *   where: {
+     *     // ... filter to delete one DailyNote
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DailyNoteDeleteArgs>(args: SelectSubset<T, DailyNoteDeleteArgs<ExtArgs>>): Prisma__DailyNoteClient<$Result.GetResult<Prisma.$DailyNotePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one DailyNote.
+     * @param {DailyNoteUpdateArgs} args - Arguments to update one DailyNote.
+     * @example
+     * // Update one DailyNote
+     * const dailyNote = await prisma.dailyNote.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DailyNoteUpdateArgs>(args: SelectSubset<T, DailyNoteUpdateArgs<ExtArgs>>): Prisma__DailyNoteClient<$Result.GetResult<Prisma.$DailyNotePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more DailyNotes.
+     * @param {DailyNoteDeleteManyArgs} args - Arguments to filter DailyNotes to delete.
+     * @example
+     * // Delete a few DailyNotes
+     * const { count } = await prisma.dailyNote.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DailyNoteDeleteManyArgs>(args?: SelectSubset<T, DailyNoteDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DailyNotes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DailyNoteUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many DailyNotes
+     * const dailyNote = await prisma.dailyNote.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DailyNoteUpdateManyArgs>(args: SelectSubset<T, DailyNoteUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DailyNotes and returns the data updated in the database.
+     * @param {DailyNoteUpdateManyAndReturnArgs} args - Arguments to update many DailyNotes.
+     * @example
+     * // Update many DailyNotes
+     * const dailyNote = await prisma.dailyNote.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more DailyNotes and only return the `id`
+     * const dailyNoteWithIdOnly = await prisma.dailyNote.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DailyNoteUpdateManyAndReturnArgs>(args: SelectSubset<T, DailyNoteUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DailyNotePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one DailyNote.
+     * @param {DailyNoteUpsertArgs} args - Arguments to update or create a DailyNote.
+     * @example
+     * // Update or create a DailyNote
+     * const dailyNote = await prisma.dailyNote.upsert({
+     *   create: {
+     *     // ... data to create a DailyNote
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the DailyNote we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DailyNoteUpsertArgs>(args: SelectSubset<T, DailyNoteUpsertArgs<ExtArgs>>): Prisma__DailyNoteClient<$Result.GetResult<Prisma.$DailyNotePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of DailyNotes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DailyNoteCountArgs} args - Arguments to filter DailyNotes to count.
+     * @example
+     * // Count the number of DailyNotes
+     * const count = await prisma.dailyNote.count({
+     *   where: {
+     *     // ... the filter for the DailyNotes we want to count
+     *   }
+     * })
+    **/
+    count<T extends DailyNoteCountArgs>(
+      args?: Subset<T, DailyNoteCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DailyNoteCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a DailyNote.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DailyNoteAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DailyNoteAggregateArgs>(args: Subset<T, DailyNoteAggregateArgs>): Prisma.PrismaPromise<GetDailyNoteAggregateType<T>>
+
+    /**
+     * Group by DailyNote.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DailyNoteGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DailyNoteGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DailyNoteGroupByArgs['orderBy'] }
+        : { orderBy?: DailyNoteGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DailyNoteGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDailyNoteGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the DailyNote model
+   */
+  readonly fields: DailyNoteFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for DailyNote.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DailyNoteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the DailyNote model
+   */
+  interface DailyNoteFieldRefs {
+    readonly id: FieldRef<"DailyNote", 'String'>
+    readonly userId: FieldRef<"DailyNote", 'String'>
+    readonly title: FieldRef<"DailyNote", 'String'>
+    readonly body: FieldRef<"DailyNote", 'String'>
+    readonly createdAt: FieldRef<"DailyNote", 'DateTime'>
+    readonly updatedAt: FieldRef<"DailyNote", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * DailyNote findUnique
+   */
+  export type DailyNoteFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyNote
+     */
+    select?: DailyNoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyNote
+     */
+    omit?: DailyNoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyNoteInclude<ExtArgs> | null
+    /**
+     * Filter, which DailyNote to fetch.
+     */
+    where: DailyNoteWhereUniqueInput
+  }
+
+  /**
+   * DailyNote findUniqueOrThrow
+   */
+  export type DailyNoteFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyNote
+     */
+    select?: DailyNoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyNote
+     */
+    omit?: DailyNoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyNoteInclude<ExtArgs> | null
+    /**
+     * Filter, which DailyNote to fetch.
+     */
+    where: DailyNoteWhereUniqueInput
+  }
+
+  /**
+   * DailyNote findFirst
+   */
+  export type DailyNoteFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyNote
+     */
+    select?: DailyNoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyNote
+     */
+    omit?: DailyNoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyNoteInclude<ExtArgs> | null
+    /**
+     * Filter, which DailyNote to fetch.
+     */
+    where?: DailyNoteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DailyNotes to fetch.
+     */
+    orderBy?: DailyNoteOrderByWithRelationInput | DailyNoteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DailyNotes.
+     */
+    cursor?: DailyNoteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DailyNotes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DailyNotes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DailyNotes.
+     */
+    distinct?: DailyNoteScalarFieldEnum | DailyNoteScalarFieldEnum[]
+  }
+
+  /**
+   * DailyNote findFirstOrThrow
+   */
+  export type DailyNoteFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyNote
+     */
+    select?: DailyNoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyNote
+     */
+    omit?: DailyNoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyNoteInclude<ExtArgs> | null
+    /**
+     * Filter, which DailyNote to fetch.
+     */
+    where?: DailyNoteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DailyNotes to fetch.
+     */
+    orderBy?: DailyNoteOrderByWithRelationInput | DailyNoteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DailyNotes.
+     */
+    cursor?: DailyNoteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DailyNotes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DailyNotes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DailyNotes.
+     */
+    distinct?: DailyNoteScalarFieldEnum | DailyNoteScalarFieldEnum[]
+  }
+
+  /**
+   * DailyNote findMany
+   */
+  export type DailyNoteFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyNote
+     */
+    select?: DailyNoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyNote
+     */
+    omit?: DailyNoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyNoteInclude<ExtArgs> | null
+    /**
+     * Filter, which DailyNotes to fetch.
+     */
+    where?: DailyNoteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DailyNotes to fetch.
+     */
+    orderBy?: DailyNoteOrderByWithRelationInput | DailyNoteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing DailyNotes.
+     */
+    cursor?: DailyNoteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DailyNotes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DailyNotes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DailyNotes.
+     */
+    distinct?: DailyNoteScalarFieldEnum | DailyNoteScalarFieldEnum[]
+  }
+
+  /**
+   * DailyNote create
+   */
+  export type DailyNoteCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyNote
+     */
+    select?: DailyNoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyNote
+     */
+    omit?: DailyNoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyNoteInclude<ExtArgs> | null
+    /**
+     * The data needed to create a DailyNote.
+     */
+    data: XOR<DailyNoteCreateInput, DailyNoteUncheckedCreateInput>
+  }
+
+  /**
+   * DailyNote createMany
+   */
+  export type DailyNoteCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many DailyNotes.
+     */
+    data: DailyNoteCreateManyInput | DailyNoteCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DailyNote createManyAndReturn
+   */
+  export type DailyNoteCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyNote
+     */
+    select?: DailyNoteSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyNote
+     */
+    omit?: DailyNoteOmit<ExtArgs> | null
+    /**
+     * The data used to create many DailyNotes.
+     */
+    data: DailyNoteCreateManyInput | DailyNoteCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyNoteIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * DailyNote update
+   */
+  export type DailyNoteUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyNote
+     */
+    select?: DailyNoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyNote
+     */
+    omit?: DailyNoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyNoteInclude<ExtArgs> | null
+    /**
+     * The data needed to update a DailyNote.
+     */
+    data: XOR<DailyNoteUpdateInput, DailyNoteUncheckedUpdateInput>
+    /**
+     * Choose, which DailyNote to update.
+     */
+    where: DailyNoteWhereUniqueInput
+  }
+
+  /**
+   * DailyNote updateMany
+   */
+  export type DailyNoteUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update DailyNotes.
+     */
+    data: XOR<DailyNoteUpdateManyMutationInput, DailyNoteUncheckedUpdateManyInput>
+    /**
+     * Filter which DailyNotes to update
+     */
+    where?: DailyNoteWhereInput
+    /**
+     * Limit how many DailyNotes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * DailyNote updateManyAndReturn
+   */
+  export type DailyNoteUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyNote
+     */
+    select?: DailyNoteSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyNote
+     */
+    omit?: DailyNoteOmit<ExtArgs> | null
+    /**
+     * The data used to update DailyNotes.
+     */
+    data: XOR<DailyNoteUpdateManyMutationInput, DailyNoteUncheckedUpdateManyInput>
+    /**
+     * Filter which DailyNotes to update
+     */
+    where?: DailyNoteWhereInput
+    /**
+     * Limit how many DailyNotes to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyNoteIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * DailyNote upsert
+   */
+  export type DailyNoteUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyNote
+     */
+    select?: DailyNoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyNote
+     */
+    omit?: DailyNoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyNoteInclude<ExtArgs> | null
+    /**
+     * The filter to search for the DailyNote to update in case it exists.
+     */
+    where: DailyNoteWhereUniqueInput
+    /**
+     * In case the DailyNote found by the `where` argument doesn't exist, create a new DailyNote with this data.
+     */
+    create: XOR<DailyNoteCreateInput, DailyNoteUncheckedCreateInput>
+    /**
+     * In case the DailyNote was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DailyNoteUpdateInput, DailyNoteUncheckedUpdateInput>
+  }
+
+  /**
+   * DailyNote delete
+   */
+  export type DailyNoteDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyNote
+     */
+    select?: DailyNoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyNote
+     */
+    omit?: DailyNoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyNoteInclude<ExtArgs> | null
+    /**
+     * Filter which DailyNote to delete.
+     */
+    where: DailyNoteWhereUniqueInput
+  }
+
+  /**
+   * DailyNote deleteMany
+   */
+  export type DailyNoteDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DailyNotes to delete
+     */
+    where?: DailyNoteWhereInput
+    /**
+     * Limit how many DailyNotes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * DailyNote without action
+   */
+  export type DailyNoteDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyNote
+     */
+    select?: DailyNoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyNote
+     */
+    omit?: DailyNoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyNoteInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model DailyGoal
+   */
+
+  export type AggregateDailyGoal = {
+    _count: DailyGoalCountAggregateOutputType | null
+    _min: DailyGoalMinAggregateOutputType | null
+    _max: DailyGoalMaxAggregateOutputType | null
+  }
+
+  export type DailyGoalMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    title: string | null
+    status: string | null
+    dueAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DailyGoalMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    title: string | null
+    status: string | null
+    dueAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DailyGoalCountAggregateOutputType = {
+    id: number
+    userId: number
+    title: number
+    status: number
+    dueAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type DailyGoalMinAggregateInputType = {
+    id?: true
+    userId?: true
+    title?: true
+    status?: true
+    dueAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type DailyGoalMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    title?: true
+    status?: true
+    dueAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type DailyGoalCountAggregateInputType = {
+    id?: true
+    userId?: true
+    title?: true
+    status?: true
+    dueAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type DailyGoalAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DailyGoal to aggregate.
+     */
+    where?: DailyGoalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DailyGoals to fetch.
+     */
+    orderBy?: DailyGoalOrderByWithRelationInput | DailyGoalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DailyGoalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DailyGoals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DailyGoals.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned DailyGoals
+    **/
+    _count?: true | DailyGoalCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DailyGoalMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DailyGoalMaxAggregateInputType
+  }
+
+  export type GetDailyGoalAggregateType<T extends DailyGoalAggregateArgs> = {
+        [P in keyof T & keyof AggregateDailyGoal]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDailyGoal[P]>
+      : GetScalarType<T[P], AggregateDailyGoal[P]>
+  }
+
+
+
+
+  export type DailyGoalGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DailyGoalWhereInput
+    orderBy?: DailyGoalOrderByWithAggregationInput | DailyGoalOrderByWithAggregationInput[]
+    by: DailyGoalScalarFieldEnum[] | DailyGoalScalarFieldEnum
+    having?: DailyGoalScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DailyGoalCountAggregateInputType | true
+    _min?: DailyGoalMinAggregateInputType
+    _max?: DailyGoalMaxAggregateInputType
+  }
+
+  export type DailyGoalGroupByOutputType = {
+    id: string
+    userId: string
+    title: string
+    status: string
+    dueAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: DailyGoalCountAggregateOutputType | null
+    _min: DailyGoalMinAggregateOutputType | null
+    _max: DailyGoalMaxAggregateOutputType | null
+  }
+
+  type GetDailyGoalGroupByPayload<T extends DailyGoalGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DailyGoalGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DailyGoalGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DailyGoalGroupByOutputType[P]>
+            : GetScalarType<T[P], DailyGoalGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DailyGoalSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    title?: boolean
+    status?: boolean
+    dueAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["dailyGoal"]>
+
+  export type DailyGoalSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    title?: boolean
+    status?: boolean
+    dueAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["dailyGoal"]>
+
+  export type DailyGoalSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    title?: boolean
+    status?: boolean
+    dueAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["dailyGoal"]>
+
+  export type DailyGoalSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    title?: boolean
+    status?: boolean
+    dueAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type DailyGoalOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "title" | "status" | "dueAt" | "createdAt" | "updatedAt", ExtArgs["result"]["dailyGoal"]>
+  export type DailyGoalInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type DailyGoalIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type DailyGoalIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $DailyGoalPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "DailyGoal"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      title: string
+      status: string
+      dueAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["dailyGoal"]>
+    composites: {}
+  }
+
+  type DailyGoalGetPayload<S extends boolean | null | undefined | DailyGoalDefaultArgs> = $Result.GetResult<Prisma.$DailyGoalPayload, S>
+
+  type DailyGoalCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DailyGoalFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DailyGoalCountAggregateInputType | true
+    }
+
+  export interface DailyGoalDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DailyGoal'], meta: { name: 'DailyGoal' } }
+    /**
+     * Find zero or one DailyGoal that matches the filter.
+     * @param {DailyGoalFindUniqueArgs} args - Arguments to find a DailyGoal
+     * @example
+     * // Get one DailyGoal
+     * const dailyGoal = await prisma.dailyGoal.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DailyGoalFindUniqueArgs>(args: SelectSubset<T, DailyGoalFindUniqueArgs<ExtArgs>>): Prisma__DailyGoalClient<$Result.GetResult<Prisma.$DailyGoalPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one DailyGoal that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DailyGoalFindUniqueOrThrowArgs} args - Arguments to find a DailyGoal
+     * @example
+     * // Get one DailyGoal
+     * const dailyGoal = await prisma.dailyGoal.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DailyGoalFindUniqueOrThrowArgs>(args: SelectSubset<T, DailyGoalFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DailyGoalClient<$Result.GetResult<Prisma.$DailyGoalPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DailyGoal that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DailyGoalFindFirstArgs} args - Arguments to find a DailyGoal
+     * @example
+     * // Get one DailyGoal
+     * const dailyGoal = await prisma.dailyGoal.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DailyGoalFindFirstArgs>(args?: SelectSubset<T, DailyGoalFindFirstArgs<ExtArgs>>): Prisma__DailyGoalClient<$Result.GetResult<Prisma.$DailyGoalPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DailyGoal that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DailyGoalFindFirstOrThrowArgs} args - Arguments to find a DailyGoal
+     * @example
+     * // Get one DailyGoal
+     * const dailyGoal = await prisma.dailyGoal.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DailyGoalFindFirstOrThrowArgs>(args?: SelectSubset<T, DailyGoalFindFirstOrThrowArgs<ExtArgs>>): Prisma__DailyGoalClient<$Result.GetResult<Prisma.$DailyGoalPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more DailyGoals that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DailyGoalFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all DailyGoals
+     * const dailyGoals = await prisma.dailyGoal.findMany()
+     * 
+     * // Get first 10 DailyGoals
+     * const dailyGoals = await prisma.dailyGoal.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const dailyGoalWithIdOnly = await prisma.dailyGoal.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DailyGoalFindManyArgs>(args?: SelectSubset<T, DailyGoalFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DailyGoalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a DailyGoal.
+     * @param {DailyGoalCreateArgs} args - Arguments to create a DailyGoal.
+     * @example
+     * // Create one DailyGoal
+     * const DailyGoal = await prisma.dailyGoal.create({
+     *   data: {
+     *     // ... data to create a DailyGoal
+     *   }
+     * })
+     * 
+     */
+    create<T extends DailyGoalCreateArgs>(args: SelectSubset<T, DailyGoalCreateArgs<ExtArgs>>): Prisma__DailyGoalClient<$Result.GetResult<Prisma.$DailyGoalPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many DailyGoals.
+     * @param {DailyGoalCreateManyArgs} args - Arguments to create many DailyGoals.
+     * @example
+     * // Create many DailyGoals
+     * const dailyGoal = await prisma.dailyGoal.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DailyGoalCreateManyArgs>(args?: SelectSubset<T, DailyGoalCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many DailyGoals and returns the data saved in the database.
+     * @param {DailyGoalCreateManyAndReturnArgs} args - Arguments to create many DailyGoals.
+     * @example
+     * // Create many DailyGoals
+     * const dailyGoal = await prisma.dailyGoal.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many DailyGoals and only return the `id`
+     * const dailyGoalWithIdOnly = await prisma.dailyGoal.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DailyGoalCreateManyAndReturnArgs>(args?: SelectSubset<T, DailyGoalCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DailyGoalPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a DailyGoal.
+     * @param {DailyGoalDeleteArgs} args - Arguments to delete one DailyGoal.
+     * @example
+     * // Delete one DailyGoal
+     * const DailyGoal = await prisma.dailyGoal.delete({
+     *   where: {
+     *     // ... filter to delete one DailyGoal
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DailyGoalDeleteArgs>(args: SelectSubset<T, DailyGoalDeleteArgs<ExtArgs>>): Prisma__DailyGoalClient<$Result.GetResult<Prisma.$DailyGoalPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one DailyGoal.
+     * @param {DailyGoalUpdateArgs} args - Arguments to update one DailyGoal.
+     * @example
+     * // Update one DailyGoal
+     * const dailyGoal = await prisma.dailyGoal.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DailyGoalUpdateArgs>(args: SelectSubset<T, DailyGoalUpdateArgs<ExtArgs>>): Prisma__DailyGoalClient<$Result.GetResult<Prisma.$DailyGoalPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more DailyGoals.
+     * @param {DailyGoalDeleteManyArgs} args - Arguments to filter DailyGoals to delete.
+     * @example
+     * // Delete a few DailyGoals
+     * const { count } = await prisma.dailyGoal.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DailyGoalDeleteManyArgs>(args?: SelectSubset<T, DailyGoalDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DailyGoals.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DailyGoalUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many DailyGoals
+     * const dailyGoal = await prisma.dailyGoal.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DailyGoalUpdateManyArgs>(args: SelectSubset<T, DailyGoalUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DailyGoals and returns the data updated in the database.
+     * @param {DailyGoalUpdateManyAndReturnArgs} args - Arguments to update many DailyGoals.
+     * @example
+     * // Update many DailyGoals
+     * const dailyGoal = await prisma.dailyGoal.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more DailyGoals and only return the `id`
+     * const dailyGoalWithIdOnly = await prisma.dailyGoal.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DailyGoalUpdateManyAndReturnArgs>(args: SelectSubset<T, DailyGoalUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DailyGoalPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one DailyGoal.
+     * @param {DailyGoalUpsertArgs} args - Arguments to update or create a DailyGoal.
+     * @example
+     * // Update or create a DailyGoal
+     * const dailyGoal = await prisma.dailyGoal.upsert({
+     *   create: {
+     *     // ... data to create a DailyGoal
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the DailyGoal we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DailyGoalUpsertArgs>(args: SelectSubset<T, DailyGoalUpsertArgs<ExtArgs>>): Prisma__DailyGoalClient<$Result.GetResult<Prisma.$DailyGoalPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of DailyGoals.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DailyGoalCountArgs} args - Arguments to filter DailyGoals to count.
+     * @example
+     * // Count the number of DailyGoals
+     * const count = await prisma.dailyGoal.count({
+     *   where: {
+     *     // ... the filter for the DailyGoals we want to count
+     *   }
+     * })
+    **/
+    count<T extends DailyGoalCountArgs>(
+      args?: Subset<T, DailyGoalCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DailyGoalCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a DailyGoal.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DailyGoalAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DailyGoalAggregateArgs>(args: Subset<T, DailyGoalAggregateArgs>): Prisma.PrismaPromise<GetDailyGoalAggregateType<T>>
+
+    /**
+     * Group by DailyGoal.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DailyGoalGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DailyGoalGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DailyGoalGroupByArgs['orderBy'] }
+        : { orderBy?: DailyGoalGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DailyGoalGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDailyGoalGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the DailyGoal model
+   */
+  readonly fields: DailyGoalFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for DailyGoal.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DailyGoalClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the DailyGoal model
+   */
+  interface DailyGoalFieldRefs {
+    readonly id: FieldRef<"DailyGoal", 'String'>
+    readonly userId: FieldRef<"DailyGoal", 'String'>
+    readonly title: FieldRef<"DailyGoal", 'String'>
+    readonly status: FieldRef<"DailyGoal", 'String'>
+    readonly dueAt: FieldRef<"DailyGoal", 'DateTime'>
+    readonly createdAt: FieldRef<"DailyGoal", 'DateTime'>
+    readonly updatedAt: FieldRef<"DailyGoal", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * DailyGoal findUnique
+   */
+  export type DailyGoalFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyGoal
+     */
+    select?: DailyGoalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyGoal
+     */
+    omit?: DailyGoalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyGoalInclude<ExtArgs> | null
+    /**
+     * Filter, which DailyGoal to fetch.
+     */
+    where: DailyGoalWhereUniqueInput
+  }
+
+  /**
+   * DailyGoal findUniqueOrThrow
+   */
+  export type DailyGoalFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyGoal
+     */
+    select?: DailyGoalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyGoal
+     */
+    omit?: DailyGoalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyGoalInclude<ExtArgs> | null
+    /**
+     * Filter, which DailyGoal to fetch.
+     */
+    where: DailyGoalWhereUniqueInput
+  }
+
+  /**
+   * DailyGoal findFirst
+   */
+  export type DailyGoalFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyGoal
+     */
+    select?: DailyGoalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyGoal
+     */
+    omit?: DailyGoalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyGoalInclude<ExtArgs> | null
+    /**
+     * Filter, which DailyGoal to fetch.
+     */
+    where?: DailyGoalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DailyGoals to fetch.
+     */
+    orderBy?: DailyGoalOrderByWithRelationInput | DailyGoalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DailyGoals.
+     */
+    cursor?: DailyGoalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DailyGoals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DailyGoals.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DailyGoals.
+     */
+    distinct?: DailyGoalScalarFieldEnum | DailyGoalScalarFieldEnum[]
+  }
+
+  /**
+   * DailyGoal findFirstOrThrow
+   */
+  export type DailyGoalFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyGoal
+     */
+    select?: DailyGoalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyGoal
+     */
+    omit?: DailyGoalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyGoalInclude<ExtArgs> | null
+    /**
+     * Filter, which DailyGoal to fetch.
+     */
+    where?: DailyGoalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DailyGoals to fetch.
+     */
+    orderBy?: DailyGoalOrderByWithRelationInput | DailyGoalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DailyGoals.
+     */
+    cursor?: DailyGoalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DailyGoals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DailyGoals.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DailyGoals.
+     */
+    distinct?: DailyGoalScalarFieldEnum | DailyGoalScalarFieldEnum[]
+  }
+
+  /**
+   * DailyGoal findMany
+   */
+  export type DailyGoalFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyGoal
+     */
+    select?: DailyGoalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyGoal
+     */
+    omit?: DailyGoalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyGoalInclude<ExtArgs> | null
+    /**
+     * Filter, which DailyGoals to fetch.
+     */
+    where?: DailyGoalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DailyGoals to fetch.
+     */
+    orderBy?: DailyGoalOrderByWithRelationInput | DailyGoalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing DailyGoals.
+     */
+    cursor?: DailyGoalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DailyGoals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DailyGoals.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DailyGoals.
+     */
+    distinct?: DailyGoalScalarFieldEnum | DailyGoalScalarFieldEnum[]
+  }
+
+  /**
+   * DailyGoal create
+   */
+  export type DailyGoalCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyGoal
+     */
+    select?: DailyGoalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyGoal
+     */
+    omit?: DailyGoalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyGoalInclude<ExtArgs> | null
+    /**
+     * The data needed to create a DailyGoal.
+     */
+    data: XOR<DailyGoalCreateInput, DailyGoalUncheckedCreateInput>
+  }
+
+  /**
+   * DailyGoal createMany
+   */
+  export type DailyGoalCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many DailyGoals.
+     */
+    data: DailyGoalCreateManyInput | DailyGoalCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DailyGoal createManyAndReturn
+   */
+  export type DailyGoalCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyGoal
+     */
+    select?: DailyGoalSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyGoal
+     */
+    omit?: DailyGoalOmit<ExtArgs> | null
+    /**
+     * The data used to create many DailyGoals.
+     */
+    data: DailyGoalCreateManyInput | DailyGoalCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyGoalIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * DailyGoal update
+   */
+  export type DailyGoalUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyGoal
+     */
+    select?: DailyGoalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyGoal
+     */
+    omit?: DailyGoalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyGoalInclude<ExtArgs> | null
+    /**
+     * The data needed to update a DailyGoal.
+     */
+    data: XOR<DailyGoalUpdateInput, DailyGoalUncheckedUpdateInput>
+    /**
+     * Choose, which DailyGoal to update.
+     */
+    where: DailyGoalWhereUniqueInput
+  }
+
+  /**
+   * DailyGoal updateMany
+   */
+  export type DailyGoalUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update DailyGoals.
+     */
+    data: XOR<DailyGoalUpdateManyMutationInput, DailyGoalUncheckedUpdateManyInput>
+    /**
+     * Filter which DailyGoals to update
+     */
+    where?: DailyGoalWhereInput
+    /**
+     * Limit how many DailyGoals to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * DailyGoal updateManyAndReturn
+   */
+  export type DailyGoalUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyGoal
+     */
+    select?: DailyGoalSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyGoal
+     */
+    omit?: DailyGoalOmit<ExtArgs> | null
+    /**
+     * The data used to update DailyGoals.
+     */
+    data: XOR<DailyGoalUpdateManyMutationInput, DailyGoalUncheckedUpdateManyInput>
+    /**
+     * Filter which DailyGoals to update
+     */
+    where?: DailyGoalWhereInput
+    /**
+     * Limit how many DailyGoals to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyGoalIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * DailyGoal upsert
+   */
+  export type DailyGoalUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyGoal
+     */
+    select?: DailyGoalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyGoal
+     */
+    omit?: DailyGoalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyGoalInclude<ExtArgs> | null
+    /**
+     * The filter to search for the DailyGoal to update in case it exists.
+     */
+    where: DailyGoalWhereUniqueInput
+    /**
+     * In case the DailyGoal found by the `where` argument doesn't exist, create a new DailyGoal with this data.
+     */
+    create: XOR<DailyGoalCreateInput, DailyGoalUncheckedCreateInput>
+    /**
+     * In case the DailyGoal was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DailyGoalUpdateInput, DailyGoalUncheckedUpdateInput>
+  }
+
+  /**
+   * DailyGoal delete
+   */
+  export type DailyGoalDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyGoal
+     */
+    select?: DailyGoalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyGoal
+     */
+    omit?: DailyGoalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyGoalInclude<ExtArgs> | null
+    /**
+     * Filter which DailyGoal to delete.
+     */
+    where: DailyGoalWhereUniqueInput
+  }
+
+  /**
+   * DailyGoal deleteMany
+   */
+  export type DailyGoalDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DailyGoals to delete
+     */
+    where?: DailyGoalWhereInput
+    /**
+     * Limit how many DailyGoals to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * DailyGoal without action
+   */
+  export type DailyGoalDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyGoal
+     */
+    select?: DailyGoalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyGoal
+     */
+    omit?: DailyGoalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyGoalInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model BillingSubscription
    */
 
@@ -32974,6 +35486,7 @@ export namespace Prisma {
     plan: string | null
     status: string | null
     currentPeriodEnd: Date | null
+    trialEndsAt: Date | null
     cancelAtPeriodEnd: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -32988,6 +35501,7 @@ export namespace Prisma {
     plan: string | null
     status: string | null
     currentPeriodEnd: Date | null
+    trialEndsAt: Date | null
     cancelAtPeriodEnd: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -33002,6 +35516,7 @@ export namespace Prisma {
     plan: number
     status: number
     currentPeriodEnd: number
+    trialEndsAt: number
     cancelAtPeriodEnd: number
     createdAt: number
     updatedAt: number
@@ -33018,6 +35533,7 @@ export namespace Prisma {
     plan?: true
     status?: true
     currentPeriodEnd?: true
+    trialEndsAt?: true
     cancelAtPeriodEnd?: true
     createdAt?: true
     updatedAt?: true
@@ -33032,6 +35548,7 @@ export namespace Prisma {
     plan?: true
     status?: true
     currentPeriodEnd?: true
+    trialEndsAt?: true
     cancelAtPeriodEnd?: true
     createdAt?: true
     updatedAt?: true
@@ -33046,6 +35563,7 @@ export namespace Prisma {
     plan?: true
     status?: true
     currentPeriodEnd?: true
+    trialEndsAt?: true
     cancelAtPeriodEnd?: true
     createdAt?: true
     updatedAt?: true
@@ -33133,6 +35651,7 @@ export namespace Prisma {
     plan: string
     status: string
     currentPeriodEnd: Date | null
+    trialEndsAt: Date | null
     cancelAtPeriodEnd: boolean
     createdAt: Date
     updatedAt: Date
@@ -33164,6 +35683,7 @@ export namespace Prisma {
     plan?: boolean
     status?: boolean
     currentPeriodEnd?: boolean
+    trialEndsAt?: boolean
     cancelAtPeriodEnd?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -33179,6 +35699,7 @@ export namespace Prisma {
     plan?: boolean
     status?: boolean
     currentPeriodEnd?: boolean
+    trialEndsAt?: boolean
     cancelAtPeriodEnd?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -33194,6 +35715,7 @@ export namespace Prisma {
     plan?: boolean
     status?: boolean
     currentPeriodEnd?: boolean
+    trialEndsAt?: boolean
     cancelAtPeriodEnd?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -33209,12 +35731,13 @@ export namespace Prisma {
     plan?: boolean
     status?: boolean
     currentPeriodEnd?: boolean
+    trialEndsAt?: boolean
     cancelAtPeriodEnd?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type BillingSubscriptionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "stripeSubscriptionId" | "stripePriceId" | "stripeProductId" | "plan" | "status" | "currentPeriodEnd" | "cancelAtPeriodEnd" | "createdAt" | "updatedAt", ExtArgs["result"]["billingSubscription"]>
+  export type BillingSubscriptionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "stripeSubscriptionId" | "stripePriceId" | "stripeProductId" | "plan" | "status" | "currentPeriodEnd" | "trialEndsAt" | "cancelAtPeriodEnd" | "createdAt" | "updatedAt", ExtArgs["result"]["billingSubscription"]>
   export type BillingSubscriptionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -33239,6 +35762,7 @@ export namespace Prisma {
       plan: string
       status: string
       currentPeriodEnd: Date | null
+      trialEndsAt: Date | null
       cancelAtPeriodEnd: boolean
       createdAt: Date
       updatedAt: Date
@@ -33674,6 +36198,7 @@ export namespace Prisma {
     readonly plan: FieldRef<"BillingSubscription", 'String'>
     readonly status: FieldRef<"BillingSubscription", 'String'>
     readonly currentPeriodEnd: FieldRef<"BillingSubscription", 'DateTime'>
+    readonly trialEndsAt: FieldRef<"BillingSubscription", 'DateTime'>
     readonly cancelAtPeriodEnd: FieldRef<"BillingSubscription", 'Boolean'>
     readonly createdAt: FieldRef<"BillingSubscription", 'DateTime'>
     readonly updatedAt: FieldRef<"BillingSubscription", 'DateTime'>
@@ -34097,6 +36622,980 @@ export namespace Prisma {
 
 
   /**
+   * Model StripeWebhookEvent
+   */
+
+  export type AggregateStripeWebhookEvent = {
+    _count: StripeWebhookEventCountAggregateOutputType | null
+    _min: StripeWebhookEventMinAggregateOutputType | null
+    _max: StripeWebhookEventMaxAggregateOutputType | null
+  }
+
+  export type StripeWebhookEventMinAggregateOutputType = {
+    id: string | null
+    type: string | null
+    createdAt: Date | null
+  }
+
+  export type StripeWebhookEventMaxAggregateOutputType = {
+    id: string | null
+    type: string | null
+    createdAt: Date | null
+  }
+
+  export type StripeWebhookEventCountAggregateOutputType = {
+    id: number
+    type: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type StripeWebhookEventMinAggregateInputType = {
+    id?: true
+    type?: true
+    createdAt?: true
+  }
+
+  export type StripeWebhookEventMaxAggregateInputType = {
+    id?: true
+    type?: true
+    createdAt?: true
+  }
+
+  export type StripeWebhookEventCountAggregateInputType = {
+    id?: true
+    type?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type StripeWebhookEventAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StripeWebhookEvent to aggregate.
+     */
+    where?: StripeWebhookEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StripeWebhookEvents to fetch.
+     */
+    orderBy?: StripeWebhookEventOrderByWithRelationInput | StripeWebhookEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: StripeWebhookEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StripeWebhookEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StripeWebhookEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned StripeWebhookEvents
+    **/
+    _count?: true | StripeWebhookEventCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: StripeWebhookEventMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: StripeWebhookEventMaxAggregateInputType
+  }
+
+  export type GetStripeWebhookEventAggregateType<T extends StripeWebhookEventAggregateArgs> = {
+        [P in keyof T & keyof AggregateStripeWebhookEvent]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateStripeWebhookEvent[P]>
+      : GetScalarType<T[P], AggregateStripeWebhookEvent[P]>
+  }
+
+
+
+
+  export type StripeWebhookEventGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StripeWebhookEventWhereInput
+    orderBy?: StripeWebhookEventOrderByWithAggregationInput | StripeWebhookEventOrderByWithAggregationInput[]
+    by: StripeWebhookEventScalarFieldEnum[] | StripeWebhookEventScalarFieldEnum
+    having?: StripeWebhookEventScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: StripeWebhookEventCountAggregateInputType | true
+    _min?: StripeWebhookEventMinAggregateInputType
+    _max?: StripeWebhookEventMaxAggregateInputType
+  }
+
+  export type StripeWebhookEventGroupByOutputType = {
+    id: string
+    type: string
+    createdAt: Date
+    _count: StripeWebhookEventCountAggregateOutputType | null
+    _min: StripeWebhookEventMinAggregateOutputType | null
+    _max: StripeWebhookEventMaxAggregateOutputType | null
+  }
+
+  type GetStripeWebhookEventGroupByPayload<T extends StripeWebhookEventGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<StripeWebhookEventGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof StripeWebhookEventGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], StripeWebhookEventGroupByOutputType[P]>
+            : GetScalarType<T[P], StripeWebhookEventGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type StripeWebhookEventSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["stripeWebhookEvent"]>
+
+  export type StripeWebhookEventSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["stripeWebhookEvent"]>
+
+  export type StripeWebhookEventSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["stripeWebhookEvent"]>
+
+  export type StripeWebhookEventSelectScalar = {
+    id?: boolean
+    type?: boolean
+    createdAt?: boolean
+  }
+
+  export type StripeWebhookEventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "type" | "createdAt", ExtArgs["result"]["stripeWebhookEvent"]>
+
+  export type $StripeWebhookEventPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "StripeWebhookEvent"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      type: string
+      createdAt: Date
+    }, ExtArgs["result"]["stripeWebhookEvent"]>
+    composites: {}
+  }
+
+  type StripeWebhookEventGetPayload<S extends boolean | null | undefined | StripeWebhookEventDefaultArgs> = $Result.GetResult<Prisma.$StripeWebhookEventPayload, S>
+
+  type StripeWebhookEventCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<StripeWebhookEventFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: StripeWebhookEventCountAggregateInputType | true
+    }
+
+  export interface StripeWebhookEventDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['StripeWebhookEvent'], meta: { name: 'StripeWebhookEvent' } }
+    /**
+     * Find zero or one StripeWebhookEvent that matches the filter.
+     * @param {StripeWebhookEventFindUniqueArgs} args - Arguments to find a StripeWebhookEvent
+     * @example
+     * // Get one StripeWebhookEvent
+     * const stripeWebhookEvent = await prisma.stripeWebhookEvent.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends StripeWebhookEventFindUniqueArgs>(args: SelectSubset<T, StripeWebhookEventFindUniqueArgs<ExtArgs>>): Prisma__StripeWebhookEventClient<$Result.GetResult<Prisma.$StripeWebhookEventPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one StripeWebhookEvent that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {StripeWebhookEventFindUniqueOrThrowArgs} args - Arguments to find a StripeWebhookEvent
+     * @example
+     * // Get one StripeWebhookEvent
+     * const stripeWebhookEvent = await prisma.stripeWebhookEvent.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends StripeWebhookEventFindUniqueOrThrowArgs>(args: SelectSubset<T, StripeWebhookEventFindUniqueOrThrowArgs<ExtArgs>>): Prisma__StripeWebhookEventClient<$Result.GetResult<Prisma.$StripeWebhookEventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first StripeWebhookEvent that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StripeWebhookEventFindFirstArgs} args - Arguments to find a StripeWebhookEvent
+     * @example
+     * // Get one StripeWebhookEvent
+     * const stripeWebhookEvent = await prisma.stripeWebhookEvent.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends StripeWebhookEventFindFirstArgs>(args?: SelectSubset<T, StripeWebhookEventFindFirstArgs<ExtArgs>>): Prisma__StripeWebhookEventClient<$Result.GetResult<Prisma.$StripeWebhookEventPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first StripeWebhookEvent that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StripeWebhookEventFindFirstOrThrowArgs} args - Arguments to find a StripeWebhookEvent
+     * @example
+     * // Get one StripeWebhookEvent
+     * const stripeWebhookEvent = await prisma.stripeWebhookEvent.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends StripeWebhookEventFindFirstOrThrowArgs>(args?: SelectSubset<T, StripeWebhookEventFindFirstOrThrowArgs<ExtArgs>>): Prisma__StripeWebhookEventClient<$Result.GetResult<Prisma.$StripeWebhookEventPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more StripeWebhookEvents that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StripeWebhookEventFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all StripeWebhookEvents
+     * const stripeWebhookEvents = await prisma.stripeWebhookEvent.findMany()
+     * 
+     * // Get first 10 StripeWebhookEvents
+     * const stripeWebhookEvents = await prisma.stripeWebhookEvent.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const stripeWebhookEventWithIdOnly = await prisma.stripeWebhookEvent.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends StripeWebhookEventFindManyArgs>(args?: SelectSubset<T, StripeWebhookEventFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StripeWebhookEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a StripeWebhookEvent.
+     * @param {StripeWebhookEventCreateArgs} args - Arguments to create a StripeWebhookEvent.
+     * @example
+     * // Create one StripeWebhookEvent
+     * const StripeWebhookEvent = await prisma.stripeWebhookEvent.create({
+     *   data: {
+     *     // ... data to create a StripeWebhookEvent
+     *   }
+     * })
+     * 
+     */
+    create<T extends StripeWebhookEventCreateArgs>(args: SelectSubset<T, StripeWebhookEventCreateArgs<ExtArgs>>): Prisma__StripeWebhookEventClient<$Result.GetResult<Prisma.$StripeWebhookEventPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many StripeWebhookEvents.
+     * @param {StripeWebhookEventCreateManyArgs} args - Arguments to create many StripeWebhookEvents.
+     * @example
+     * // Create many StripeWebhookEvents
+     * const stripeWebhookEvent = await prisma.stripeWebhookEvent.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends StripeWebhookEventCreateManyArgs>(args?: SelectSubset<T, StripeWebhookEventCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many StripeWebhookEvents and returns the data saved in the database.
+     * @param {StripeWebhookEventCreateManyAndReturnArgs} args - Arguments to create many StripeWebhookEvents.
+     * @example
+     * // Create many StripeWebhookEvents
+     * const stripeWebhookEvent = await prisma.stripeWebhookEvent.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many StripeWebhookEvents and only return the `id`
+     * const stripeWebhookEventWithIdOnly = await prisma.stripeWebhookEvent.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends StripeWebhookEventCreateManyAndReturnArgs>(args?: SelectSubset<T, StripeWebhookEventCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StripeWebhookEventPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a StripeWebhookEvent.
+     * @param {StripeWebhookEventDeleteArgs} args - Arguments to delete one StripeWebhookEvent.
+     * @example
+     * // Delete one StripeWebhookEvent
+     * const StripeWebhookEvent = await prisma.stripeWebhookEvent.delete({
+     *   where: {
+     *     // ... filter to delete one StripeWebhookEvent
+     *   }
+     * })
+     * 
+     */
+    delete<T extends StripeWebhookEventDeleteArgs>(args: SelectSubset<T, StripeWebhookEventDeleteArgs<ExtArgs>>): Prisma__StripeWebhookEventClient<$Result.GetResult<Prisma.$StripeWebhookEventPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one StripeWebhookEvent.
+     * @param {StripeWebhookEventUpdateArgs} args - Arguments to update one StripeWebhookEvent.
+     * @example
+     * // Update one StripeWebhookEvent
+     * const stripeWebhookEvent = await prisma.stripeWebhookEvent.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends StripeWebhookEventUpdateArgs>(args: SelectSubset<T, StripeWebhookEventUpdateArgs<ExtArgs>>): Prisma__StripeWebhookEventClient<$Result.GetResult<Prisma.$StripeWebhookEventPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more StripeWebhookEvents.
+     * @param {StripeWebhookEventDeleteManyArgs} args - Arguments to filter StripeWebhookEvents to delete.
+     * @example
+     * // Delete a few StripeWebhookEvents
+     * const { count } = await prisma.stripeWebhookEvent.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends StripeWebhookEventDeleteManyArgs>(args?: SelectSubset<T, StripeWebhookEventDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StripeWebhookEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StripeWebhookEventUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many StripeWebhookEvents
+     * const stripeWebhookEvent = await prisma.stripeWebhookEvent.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends StripeWebhookEventUpdateManyArgs>(args: SelectSubset<T, StripeWebhookEventUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StripeWebhookEvents and returns the data updated in the database.
+     * @param {StripeWebhookEventUpdateManyAndReturnArgs} args - Arguments to update many StripeWebhookEvents.
+     * @example
+     * // Update many StripeWebhookEvents
+     * const stripeWebhookEvent = await prisma.stripeWebhookEvent.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more StripeWebhookEvents and only return the `id`
+     * const stripeWebhookEventWithIdOnly = await prisma.stripeWebhookEvent.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends StripeWebhookEventUpdateManyAndReturnArgs>(args: SelectSubset<T, StripeWebhookEventUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StripeWebhookEventPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one StripeWebhookEvent.
+     * @param {StripeWebhookEventUpsertArgs} args - Arguments to update or create a StripeWebhookEvent.
+     * @example
+     * // Update or create a StripeWebhookEvent
+     * const stripeWebhookEvent = await prisma.stripeWebhookEvent.upsert({
+     *   create: {
+     *     // ... data to create a StripeWebhookEvent
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the StripeWebhookEvent we want to update
+     *   }
+     * })
+     */
+    upsert<T extends StripeWebhookEventUpsertArgs>(args: SelectSubset<T, StripeWebhookEventUpsertArgs<ExtArgs>>): Prisma__StripeWebhookEventClient<$Result.GetResult<Prisma.$StripeWebhookEventPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of StripeWebhookEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StripeWebhookEventCountArgs} args - Arguments to filter StripeWebhookEvents to count.
+     * @example
+     * // Count the number of StripeWebhookEvents
+     * const count = await prisma.stripeWebhookEvent.count({
+     *   where: {
+     *     // ... the filter for the StripeWebhookEvents we want to count
+     *   }
+     * })
+    **/
+    count<T extends StripeWebhookEventCountArgs>(
+      args?: Subset<T, StripeWebhookEventCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], StripeWebhookEventCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a StripeWebhookEvent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StripeWebhookEventAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends StripeWebhookEventAggregateArgs>(args: Subset<T, StripeWebhookEventAggregateArgs>): Prisma.PrismaPromise<GetStripeWebhookEventAggregateType<T>>
+
+    /**
+     * Group by StripeWebhookEvent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StripeWebhookEventGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends StripeWebhookEventGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: StripeWebhookEventGroupByArgs['orderBy'] }
+        : { orderBy?: StripeWebhookEventGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, StripeWebhookEventGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStripeWebhookEventGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the StripeWebhookEvent model
+   */
+  readonly fields: StripeWebhookEventFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for StripeWebhookEvent.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__StripeWebhookEventClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the StripeWebhookEvent model
+   */
+  interface StripeWebhookEventFieldRefs {
+    readonly id: FieldRef<"StripeWebhookEvent", 'String'>
+    readonly type: FieldRef<"StripeWebhookEvent", 'String'>
+    readonly createdAt: FieldRef<"StripeWebhookEvent", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * StripeWebhookEvent findUnique
+   */
+  export type StripeWebhookEventFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StripeWebhookEvent
+     */
+    select?: StripeWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StripeWebhookEvent
+     */
+    omit?: StripeWebhookEventOmit<ExtArgs> | null
+    /**
+     * Filter, which StripeWebhookEvent to fetch.
+     */
+    where: StripeWebhookEventWhereUniqueInput
+  }
+
+  /**
+   * StripeWebhookEvent findUniqueOrThrow
+   */
+  export type StripeWebhookEventFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StripeWebhookEvent
+     */
+    select?: StripeWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StripeWebhookEvent
+     */
+    omit?: StripeWebhookEventOmit<ExtArgs> | null
+    /**
+     * Filter, which StripeWebhookEvent to fetch.
+     */
+    where: StripeWebhookEventWhereUniqueInput
+  }
+
+  /**
+   * StripeWebhookEvent findFirst
+   */
+  export type StripeWebhookEventFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StripeWebhookEvent
+     */
+    select?: StripeWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StripeWebhookEvent
+     */
+    omit?: StripeWebhookEventOmit<ExtArgs> | null
+    /**
+     * Filter, which StripeWebhookEvent to fetch.
+     */
+    where?: StripeWebhookEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StripeWebhookEvents to fetch.
+     */
+    orderBy?: StripeWebhookEventOrderByWithRelationInput | StripeWebhookEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StripeWebhookEvents.
+     */
+    cursor?: StripeWebhookEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StripeWebhookEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StripeWebhookEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StripeWebhookEvents.
+     */
+    distinct?: StripeWebhookEventScalarFieldEnum | StripeWebhookEventScalarFieldEnum[]
+  }
+
+  /**
+   * StripeWebhookEvent findFirstOrThrow
+   */
+  export type StripeWebhookEventFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StripeWebhookEvent
+     */
+    select?: StripeWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StripeWebhookEvent
+     */
+    omit?: StripeWebhookEventOmit<ExtArgs> | null
+    /**
+     * Filter, which StripeWebhookEvent to fetch.
+     */
+    where?: StripeWebhookEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StripeWebhookEvents to fetch.
+     */
+    orderBy?: StripeWebhookEventOrderByWithRelationInput | StripeWebhookEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StripeWebhookEvents.
+     */
+    cursor?: StripeWebhookEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StripeWebhookEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StripeWebhookEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StripeWebhookEvents.
+     */
+    distinct?: StripeWebhookEventScalarFieldEnum | StripeWebhookEventScalarFieldEnum[]
+  }
+
+  /**
+   * StripeWebhookEvent findMany
+   */
+  export type StripeWebhookEventFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StripeWebhookEvent
+     */
+    select?: StripeWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StripeWebhookEvent
+     */
+    omit?: StripeWebhookEventOmit<ExtArgs> | null
+    /**
+     * Filter, which StripeWebhookEvents to fetch.
+     */
+    where?: StripeWebhookEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StripeWebhookEvents to fetch.
+     */
+    orderBy?: StripeWebhookEventOrderByWithRelationInput | StripeWebhookEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing StripeWebhookEvents.
+     */
+    cursor?: StripeWebhookEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StripeWebhookEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StripeWebhookEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StripeWebhookEvents.
+     */
+    distinct?: StripeWebhookEventScalarFieldEnum | StripeWebhookEventScalarFieldEnum[]
+  }
+
+  /**
+   * StripeWebhookEvent create
+   */
+  export type StripeWebhookEventCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StripeWebhookEvent
+     */
+    select?: StripeWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StripeWebhookEvent
+     */
+    omit?: StripeWebhookEventOmit<ExtArgs> | null
+    /**
+     * The data needed to create a StripeWebhookEvent.
+     */
+    data: XOR<StripeWebhookEventCreateInput, StripeWebhookEventUncheckedCreateInput>
+  }
+
+  /**
+   * StripeWebhookEvent createMany
+   */
+  export type StripeWebhookEventCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many StripeWebhookEvents.
+     */
+    data: StripeWebhookEventCreateManyInput | StripeWebhookEventCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * StripeWebhookEvent createManyAndReturn
+   */
+  export type StripeWebhookEventCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StripeWebhookEvent
+     */
+    select?: StripeWebhookEventSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the StripeWebhookEvent
+     */
+    omit?: StripeWebhookEventOmit<ExtArgs> | null
+    /**
+     * The data used to create many StripeWebhookEvents.
+     */
+    data: StripeWebhookEventCreateManyInput | StripeWebhookEventCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * StripeWebhookEvent update
+   */
+  export type StripeWebhookEventUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StripeWebhookEvent
+     */
+    select?: StripeWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StripeWebhookEvent
+     */
+    omit?: StripeWebhookEventOmit<ExtArgs> | null
+    /**
+     * The data needed to update a StripeWebhookEvent.
+     */
+    data: XOR<StripeWebhookEventUpdateInput, StripeWebhookEventUncheckedUpdateInput>
+    /**
+     * Choose, which StripeWebhookEvent to update.
+     */
+    where: StripeWebhookEventWhereUniqueInput
+  }
+
+  /**
+   * StripeWebhookEvent updateMany
+   */
+  export type StripeWebhookEventUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update StripeWebhookEvents.
+     */
+    data: XOR<StripeWebhookEventUpdateManyMutationInput, StripeWebhookEventUncheckedUpdateManyInput>
+    /**
+     * Filter which StripeWebhookEvents to update
+     */
+    where?: StripeWebhookEventWhereInput
+    /**
+     * Limit how many StripeWebhookEvents to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * StripeWebhookEvent updateManyAndReturn
+   */
+  export type StripeWebhookEventUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StripeWebhookEvent
+     */
+    select?: StripeWebhookEventSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the StripeWebhookEvent
+     */
+    omit?: StripeWebhookEventOmit<ExtArgs> | null
+    /**
+     * The data used to update StripeWebhookEvents.
+     */
+    data: XOR<StripeWebhookEventUpdateManyMutationInput, StripeWebhookEventUncheckedUpdateManyInput>
+    /**
+     * Filter which StripeWebhookEvents to update
+     */
+    where?: StripeWebhookEventWhereInput
+    /**
+     * Limit how many StripeWebhookEvents to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * StripeWebhookEvent upsert
+   */
+  export type StripeWebhookEventUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StripeWebhookEvent
+     */
+    select?: StripeWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StripeWebhookEvent
+     */
+    omit?: StripeWebhookEventOmit<ExtArgs> | null
+    /**
+     * The filter to search for the StripeWebhookEvent to update in case it exists.
+     */
+    where: StripeWebhookEventWhereUniqueInput
+    /**
+     * In case the StripeWebhookEvent found by the `where` argument doesn't exist, create a new StripeWebhookEvent with this data.
+     */
+    create: XOR<StripeWebhookEventCreateInput, StripeWebhookEventUncheckedCreateInput>
+    /**
+     * In case the StripeWebhookEvent was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<StripeWebhookEventUpdateInput, StripeWebhookEventUncheckedUpdateInput>
+  }
+
+  /**
+   * StripeWebhookEvent delete
+   */
+  export type StripeWebhookEventDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StripeWebhookEvent
+     */
+    select?: StripeWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StripeWebhookEvent
+     */
+    omit?: StripeWebhookEventOmit<ExtArgs> | null
+    /**
+     * Filter which StripeWebhookEvent to delete.
+     */
+    where: StripeWebhookEventWhereUniqueInput
+  }
+
+  /**
+   * StripeWebhookEvent deleteMany
+   */
+  export type StripeWebhookEventDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StripeWebhookEvents to delete
+     */
+    where?: StripeWebhookEventWhereInput
+    /**
+     * Limit how many StripeWebhookEvents to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * StripeWebhookEvent without action
+   */
+  export type StripeWebhookEventDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StripeWebhookEvent
+     */
+    select?: StripeWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StripeWebhookEvent
+     */
+    omit?: StripeWebhookEventOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -34505,6 +38004,31 @@ export namespace Prisma {
   export type FlowScalarFieldEnum = (typeof FlowScalarFieldEnum)[keyof typeof FlowScalarFieldEnum]
 
 
+  export const DailyNoteScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    title: 'title',
+    body: 'body',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type DailyNoteScalarFieldEnum = (typeof DailyNoteScalarFieldEnum)[keyof typeof DailyNoteScalarFieldEnum]
+
+
+  export const DailyGoalScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    title: 'title',
+    status: 'status',
+    dueAt: 'dueAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type DailyGoalScalarFieldEnum = (typeof DailyGoalScalarFieldEnum)[keyof typeof DailyGoalScalarFieldEnum]
+
+
   export const BillingSubscriptionScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
@@ -34514,12 +38038,22 @@ export namespace Prisma {
     plan: 'plan',
     status: 'status',
     currentPeriodEnd: 'currentPeriodEnd',
+    trialEndsAt: 'trialEndsAt',
     cancelAtPeriodEnd: 'cancelAtPeriodEnd',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
 
   export type BillingSubscriptionScalarFieldEnum = (typeof BillingSubscriptionScalarFieldEnum)[keyof typeof BillingSubscriptionScalarFieldEnum]
+
+
+  export const StripeWebhookEventScalarFieldEnum: {
+    id: 'id',
+    type: 'type',
+    createdAt: 'createdAt'
+  };
+
+  export type StripeWebhookEventScalarFieldEnum = (typeof StripeWebhookEventScalarFieldEnum)[keyof typeof StripeWebhookEventScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -34679,6 +38213,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisListRelationFilter
     adsRecommendations?: AdsRecommendationListRelationFilter
     adsAiUsage?: AdsAiUsageListRelationFilter
+    dailyNotes?: DailyNoteListRelationFilter
+    dailyGoals?: DailyGoalListRelationFilter
     appListings?: AppListingListRelationFilter
     sites?: SiteListRelationFilter
     flows?: FlowListRelationFilter
@@ -34714,6 +38250,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisOrderByRelationAggregateInput
     adsRecommendations?: AdsRecommendationOrderByRelationAggregateInput
     adsAiUsage?: AdsAiUsageOrderByRelationAggregateInput
+    dailyNotes?: DailyNoteOrderByRelationAggregateInput
+    dailyGoals?: DailyGoalOrderByRelationAggregateInput
     appListings?: AppListingOrderByRelationAggregateInput
     sites?: SiteOrderByRelationAggregateInput
     flows?: FlowOrderByRelationAggregateInput
@@ -34752,6 +38290,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisListRelationFilter
     adsRecommendations?: AdsRecommendationListRelationFilter
     adsAiUsage?: AdsAiUsageListRelationFilter
+    dailyNotes?: DailyNoteListRelationFilter
+    dailyGoals?: DailyGoalListRelationFilter
     appListings?: AppListingListRelationFilter
     sites?: SiteListRelationFilter
     flows?: FlowListRelationFilter
@@ -36754,6 +40294,131 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Flow"> | Date | string
   }
 
+  export type DailyNoteWhereInput = {
+    AND?: DailyNoteWhereInput | DailyNoteWhereInput[]
+    OR?: DailyNoteWhereInput[]
+    NOT?: DailyNoteWhereInput | DailyNoteWhereInput[]
+    id?: StringFilter<"DailyNote"> | string
+    userId?: StringFilter<"DailyNote"> | string
+    title?: StringFilter<"DailyNote"> | string
+    body?: StringFilter<"DailyNote"> | string
+    createdAt?: DateTimeFilter<"DailyNote"> | Date | string
+    updatedAt?: DateTimeFilter<"DailyNote"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type DailyNoteOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    body?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type DailyNoteWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: DailyNoteWhereInput | DailyNoteWhereInput[]
+    OR?: DailyNoteWhereInput[]
+    NOT?: DailyNoteWhereInput | DailyNoteWhereInput[]
+    userId?: StringFilter<"DailyNote"> | string
+    title?: StringFilter<"DailyNote"> | string
+    body?: StringFilter<"DailyNote"> | string
+    createdAt?: DateTimeFilter<"DailyNote"> | Date | string
+    updatedAt?: DateTimeFilter<"DailyNote"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type DailyNoteOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    body?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: DailyNoteCountOrderByAggregateInput
+    _max?: DailyNoteMaxOrderByAggregateInput
+    _min?: DailyNoteMinOrderByAggregateInput
+  }
+
+  export type DailyNoteScalarWhereWithAggregatesInput = {
+    AND?: DailyNoteScalarWhereWithAggregatesInput | DailyNoteScalarWhereWithAggregatesInput[]
+    OR?: DailyNoteScalarWhereWithAggregatesInput[]
+    NOT?: DailyNoteScalarWhereWithAggregatesInput | DailyNoteScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"DailyNote"> | string
+    userId?: StringWithAggregatesFilter<"DailyNote"> | string
+    title?: StringWithAggregatesFilter<"DailyNote"> | string
+    body?: StringWithAggregatesFilter<"DailyNote"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"DailyNote"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"DailyNote"> | Date | string
+  }
+
+  export type DailyGoalWhereInput = {
+    AND?: DailyGoalWhereInput | DailyGoalWhereInput[]
+    OR?: DailyGoalWhereInput[]
+    NOT?: DailyGoalWhereInput | DailyGoalWhereInput[]
+    id?: StringFilter<"DailyGoal"> | string
+    userId?: StringFilter<"DailyGoal"> | string
+    title?: StringFilter<"DailyGoal"> | string
+    status?: StringFilter<"DailyGoal"> | string
+    dueAt?: DateTimeNullableFilter<"DailyGoal"> | Date | string | null
+    createdAt?: DateTimeFilter<"DailyGoal"> | Date | string
+    updatedAt?: DateTimeFilter<"DailyGoal"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type DailyGoalOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    status?: SortOrder
+    dueAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type DailyGoalWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: DailyGoalWhereInput | DailyGoalWhereInput[]
+    OR?: DailyGoalWhereInput[]
+    NOT?: DailyGoalWhereInput | DailyGoalWhereInput[]
+    userId?: StringFilter<"DailyGoal"> | string
+    title?: StringFilter<"DailyGoal"> | string
+    status?: StringFilter<"DailyGoal"> | string
+    dueAt?: DateTimeNullableFilter<"DailyGoal"> | Date | string | null
+    createdAt?: DateTimeFilter<"DailyGoal"> | Date | string
+    updatedAt?: DateTimeFilter<"DailyGoal"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type DailyGoalOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    status?: SortOrder
+    dueAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: DailyGoalCountOrderByAggregateInput
+    _max?: DailyGoalMaxOrderByAggregateInput
+    _min?: DailyGoalMinOrderByAggregateInput
+  }
+
+  export type DailyGoalScalarWhereWithAggregatesInput = {
+    AND?: DailyGoalScalarWhereWithAggregatesInput | DailyGoalScalarWhereWithAggregatesInput[]
+    OR?: DailyGoalScalarWhereWithAggregatesInput[]
+    NOT?: DailyGoalScalarWhereWithAggregatesInput | DailyGoalScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"DailyGoal"> | string
+    userId?: StringWithAggregatesFilter<"DailyGoal"> | string
+    title?: StringWithAggregatesFilter<"DailyGoal"> | string
+    status?: StringWithAggregatesFilter<"DailyGoal"> | string
+    dueAt?: DateTimeNullableWithAggregatesFilter<"DailyGoal"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"DailyGoal"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"DailyGoal"> | Date | string
+  }
+
   export type BillingSubscriptionWhereInput = {
     AND?: BillingSubscriptionWhereInput | BillingSubscriptionWhereInput[]
     OR?: BillingSubscriptionWhereInput[]
@@ -36766,6 +40431,7 @@ export namespace Prisma {
     plan?: StringFilter<"BillingSubscription"> | string
     status?: StringFilter<"BillingSubscription"> | string
     currentPeriodEnd?: DateTimeNullableFilter<"BillingSubscription"> | Date | string | null
+    trialEndsAt?: DateTimeNullableFilter<"BillingSubscription"> | Date | string | null
     cancelAtPeriodEnd?: BoolFilter<"BillingSubscription"> | boolean
     createdAt?: DateTimeFilter<"BillingSubscription"> | Date | string
     updatedAt?: DateTimeFilter<"BillingSubscription"> | Date | string
@@ -36781,6 +40447,7 @@ export namespace Prisma {
     plan?: SortOrder
     status?: SortOrder
     currentPeriodEnd?: SortOrderInput | SortOrder
+    trialEndsAt?: SortOrderInput | SortOrder
     cancelAtPeriodEnd?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -36799,6 +40466,7 @@ export namespace Prisma {
     plan?: StringFilter<"BillingSubscription"> | string
     status?: StringFilter<"BillingSubscription"> | string
     currentPeriodEnd?: DateTimeNullableFilter<"BillingSubscription"> | Date | string | null
+    trialEndsAt?: DateTimeNullableFilter<"BillingSubscription"> | Date | string | null
     cancelAtPeriodEnd?: BoolFilter<"BillingSubscription"> | boolean
     createdAt?: DateTimeFilter<"BillingSubscription"> | Date | string
     updatedAt?: DateTimeFilter<"BillingSubscription"> | Date | string
@@ -36814,6 +40482,7 @@ export namespace Prisma {
     plan?: SortOrder
     status?: SortOrder
     currentPeriodEnd?: SortOrderInput | SortOrder
+    trialEndsAt?: SortOrderInput | SortOrder
     cancelAtPeriodEnd?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -36834,9 +40503,52 @@ export namespace Prisma {
     plan?: StringWithAggregatesFilter<"BillingSubscription"> | string
     status?: StringWithAggregatesFilter<"BillingSubscription"> | string
     currentPeriodEnd?: DateTimeNullableWithAggregatesFilter<"BillingSubscription"> | Date | string | null
+    trialEndsAt?: DateTimeNullableWithAggregatesFilter<"BillingSubscription"> | Date | string | null
     cancelAtPeriodEnd?: BoolWithAggregatesFilter<"BillingSubscription"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"BillingSubscription"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"BillingSubscription"> | Date | string
+  }
+
+  export type StripeWebhookEventWhereInput = {
+    AND?: StripeWebhookEventWhereInput | StripeWebhookEventWhereInput[]
+    OR?: StripeWebhookEventWhereInput[]
+    NOT?: StripeWebhookEventWhereInput | StripeWebhookEventWhereInput[]
+    id?: StringFilter<"StripeWebhookEvent"> | string
+    type?: StringFilter<"StripeWebhookEvent"> | string
+    createdAt?: DateTimeFilter<"StripeWebhookEvent"> | Date | string
+  }
+
+  export type StripeWebhookEventOrderByWithRelationInput = {
+    id?: SortOrder
+    type?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type StripeWebhookEventWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: StripeWebhookEventWhereInput | StripeWebhookEventWhereInput[]
+    OR?: StripeWebhookEventWhereInput[]
+    NOT?: StripeWebhookEventWhereInput | StripeWebhookEventWhereInput[]
+    type?: StringFilter<"StripeWebhookEvent"> | string
+    createdAt?: DateTimeFilter<"StripeWebhookEvent"> | Date | string
+  }, "id">
+
+  export type StripeWebhookEventOrderByWithAggregationInput = {
+    id?: SortOrder
+    type?: SortOrder
+    createdAt?: SortOrder
+    _count?: StripeWebhookEventCountOrderByAggregateInput
+    _max?: StripeWebhookEventMaxOrderByAggregateInput
+    _min?: StripeWebhookEventMinOrderByAggregateInput
+  }
+
+  export type StripeWebhookEventScalarWhereWithAggregatesInput = {
+    AND?: StripeWebhookEventScalarWhereWithAggregatesInput | StripeWebhookEventScalarWhereWithAggregatesInput[]
+    OR?: StripeWebhookEventScalarWhereWithAggregatesInput[]
+    NOT?: StripeWebhookEventScalarWhereWithAggregatesInput | StripeWebhookEventScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"StripeWebhookEvent"> | string
+    type?: StringWithAggregatesFilter<"StripeWebhookEvent"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"StripeWebhookEvent"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -36868,6 +40580,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -36903,6 +40617,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteUncheckedCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -36938,6 +40654,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -36973,6 +40691,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUncheckedUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -39173,6 +42893,137 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type DailyNoteCreateInput = {
+    id?: string
+    title: string
+    body: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutDailyNotesInput
+  }
+
+  export type DailyNoteUncheckedCreateInput = {
+    id?: string
+    userId: string
+    title: string
+    body: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DailyNoteUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutDailyNotesNestedInput
+  }
+
+  export type DailyNoteUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DailyNoteCreateManyInput = {
+    id?: string
+    userId: string
+    title: string
+    body: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DailyNoteUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DailyNoteUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DailyGoalCreateInput = {
+    id?: string
+    title: string
+    status?: string
+    dueAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutDailyGoalsInput
+  }
+
+  export type DailyGoalUncheckedCreateInput = {
+    id?: string
+    userId: string
+    title: string
+    status?: string
+    dueAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DailyGoalUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    dueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutDailyGoalsNestedInput
+  }
+
+  export type DailyGoalUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    dueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DailyGoalCreateManyInput = {
+    id?: string
+    userId: string
+    title: string
+    status?: string
+    dueAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DailyGoalUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    dueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DailyGoalUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    dueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type BillingSubscriptionCreateInput = {
     id?: string
     stripeSubscriptionId: string
@@ -39181,6 +43032,7 @@ export namespace Prisma {
     plan?: string
     status: string
     currentPeriodEnd?: Date | string | null
+    trialEndsAt?: Date | string | null
     cancelAtPeriodEnd?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -39196,6 +43048,7 @@ export namespace Prisma {
     plan?: string
     status: string
     currentPeriodEnd?: Date | string | null
+    trialEndsAt?: Date | string | null
     cancelAtPeriodEnd?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -39209,6 +43062,7 @@ export namespace Prisma {
     plan?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelAtPeriodEnd?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39224,6 +43078,7 @@ export namespace Prisma {
     plan?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelAtPeriodEnd?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39238,6 +43093,7 @@ export namespace Prisma {
     plan?: string
     status: string
     currentPeriodEnd?: Date | string | null
+    trialEndsAt?: Date | string | null
     cancelAtPeriodEnd?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -39251,6 +43107,7 @@ export namespace Prisma {
     plan?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelAtPeriodEnd?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39265,9 +43122,52 @@ export namespace Prisma {
     plan?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelAtPeriodEnd?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StripeWebhookEventCreateInput = {
+    id: string
+    type: string
+    createdAt?: Date | string
+  }
+
+  export type StripeWebhookEventUncheckedCreateInput = {
+    id: string
+    type: string
+    createdAt?: Date | string
+  }
+
+  export type StripeWebhookEventUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StripeWebhookEventUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StripeWebhookEventCreateManyInput = {
+    id: string
+    type: string
+    createdAt?: Date | string
+  }
+
+  export type StripeWebhookEventUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StripeWebhookEventUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -39436,6 +43336,18 @@ export namespace Prisma {
     none?: AdsAiUsageWhereInput
   }
 
+  export type DailyNoteListRelationFilter = {
+    every?: DailyNoteWhereInput
+    some?: DailyNoteWhereInput
+    none?: DailyNoteWhereInput
+  }
+
+  export type DailyGoalListRelationFilter = {
+    every?: DailyGoalWhereInput
+    some?: DailyGoalWhereInput
+    none?: DailyGoalWhereInput
+  }
+
   export type AppListingListRelationFilter = {
     every?: AppListingWhereInput
     some?: AppListingWhereInput
@@ -39538,6 +43450,14 @@ export namespace Prisma {
   }
 
   export type AdsAiUsageOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type DailyNoteOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type DailyGoalOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -40857,6 +44777,63 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type DailyNoteCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    body?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DailyNoteMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    body?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DailyNoteMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    body?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DailyGoalCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    status?: SortOrder
+    dueAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DailyGoalMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    status?: SortOrder
+    dueAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DailyGoalMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    status?: SortOrder
+    dueAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
   export type BillingSubscriptionCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
@@ -40866,6 +44843,7 @@ export namespace Prisma {
     plan?: SortOrder
     status?: SortOrder
     currentPeriodEnd?: SortOrder
+    trialEndsAt?: SortOrder
     cancelAtPeriodEnd?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -40880,6 +44858,7 @@ export namespace Prisma {
     plan?: SortOrder
     status?: SortOrder
     currentPeriodEnd?: SortOrder
+    trialEndsAt?: SortOrder
     cancelAtPeriodEnd?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -40894,9 +44873,28 @@ export namespace Prisma {
     plan?: SortOrder
     status?: SortOrder
     currentPeriodEnd?: SortOrder
+    trialEndsAt?: SortOrder
     cancelAtPeriodEnd?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type StripeWebhookEventCountOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type StripeWebhookEventMaxOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type StripeWebhookEventMinOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type AccountCreateNestedManyWithoutUserInput = {
@@ -41030,6 +45028,20 @@ export namespace Prisma {
     connectOrCreate?: AdsAiUsageCreateOrConnectWithoutUserInput | AdsAiUsageCreateOrConnectWithoutUserInput[]
     createMany?: AdsAiUsageCreateManyUserInputEnvelope
     connect?: AdsAiUsageWhereUniqueInput | AdsAiUsageWhereUniqueInput[]
+  }
+
+  export type DailyNoteCreateNestedManyWithoutUserInput = {
+    create?: XOR<DailyNoteCreateWithoutUserInput, DailyNoteUncheckedCreateWithoutUserInput> | DailyNoteCreateWithoutUserInput[] | DailyNoteUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: DailyNoteCreateOrConnectWithoutUserInput | DailyNoteCreateOrConnectWithoutUserInput[]
+    createMany?: DailyNoteCreateManyUserInputEnvelope
+    connect?: DailyNoteWhereUniqueInput | DailyNoteWhereUniqueInput[]
+  }
+
+  export type DailyGoalCreateNestedManyWithoutUserInput = {
+    create?: XOR<DailyGoalCreateWithoutUserInput, DailyGoalUncheckedCreateWithoutUserInput> | DailyGoalCreateWithoutUserInput[] | DailyGoalUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: DailyGoalCreateOrConnectWithoutUserInput | DailyGoalCreateOrConnectWithoutUserInput[]
+    createMany?: DailyGoalCreateManyUserInputEnvelope
+    connect?: DailyGoalWhereUniqueInput | DailyGoalWhereUniqueInput[]
   }
 
   export type AppListingCreateNestedManyWithoutUserInput = {
@@ -41191,6 +45203,20 @@ export namespace Prisma {
     connectOrCreate?: AdsAiUsageCreateOrConnectWithoutUserInput | AdsAiUsageCreateOrConnectWithoutUserInput[]
     createMany?: AdsAiUsageCreateManyUserInputEnvelope
     connect?: AdsAiUsageWhereUniqueInput | AdsAiUsageWhereUniqueInput[]
+  }
+
+  export type DailyNoteUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<DailyNoteCreateWithoutUserInput, DailyNoteUncheckedCreateWithoutUserInput> | DailyNoteCreateWithoutUserInput[] | DailyNoteUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: DailyNoteCreateOrConnectWithoutUserInput | DailyNoteCreateOrConnectWithoutUserInput[]
+    createMany?: DailyNoteCreateManyUserInputEnvelope
+    connect?: DailyNoteWhereUniqueInput | DailyNoteWhereUniqueInput[]
+  }
+
+  export type DailyGoalUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<DailyGoalCreateWithoutUserInput, DailyGoalUncheckedCreateWithoutUserInput> | DailyGoalCreateWithoutUserInput[] | DailyGoalUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: DailyGoalCreateOrConnectWithoutUserInput | DailyGoalCreateOrConnectWithoutUserInput[]
+    createMany?: DailyGoalCreateManyUserInputEnvelope
+    connect?: DailyGoalWhereUniqueInput | DailyGoalWhereUniqueInput[]
   }
 
   export type AppListingUncheckedCreateNestedManyWithoutUserInput = {
@@ -41501,6 +45527,34 @@ export namespace Prisma {
     update?: AdsAiUsageUpdateWithWhereUniqueWithoutUserInput | AdsAiUsageUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: AdsAiUsageUpdateManyWithWhereWithoutUserInput | AdsAiUsageUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: AdsAiUsageScalarWhereInput | AdsAiUsageScalarWhereInput[]
+  }
+
+  export type DailyNoteUpdateManyWithoutUserNestedInput = {
+    create?: XOR<DailyNoteCreateWithoutUserInput, DailyNoteUncheckedCreateWithoutUserInput> | DailyNoteCreateWithoutUserInput[] | DailyNoteUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: DailyNoteCreateOrConnectWithoutUserInput | DailyNoteCreateOrConnectWithoutUserInput[]
+    upsert?: DailyNoteUpsertWithWhereUniqueWithoutUserInput | DailyNoteUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: DailyNoteCreateManyUserInputEnvelope
+    set?: DailyNoteWhereUniqueInput | DailyNoteWhereUniqueInput[]
+    disconnect?: DailyNoteWhereUniqueInput | DailyNoteWhereUniqueInput[]
+    delete?: DailyNoteWhereUniqueInput | DailyNoteWhereUniqueInput[]
+    connect?: DailyNoteWhereUniqueInput | DailyNoteWhereUniqueInput[]
+    update?: DailyNoteUpdateWithWhereUniqueWithoutUserInput | DailyNoteUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: DailyNoteUpdateManyWithWhereWithoutUserInput | DailyNoteUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: DailyNoteScalarWhereInput | DailyNoteScalarWhereInput[]
+  }
+
+  export type DailyGoalUpdateManyWithoutUserNestedInput = {
+    create?: XOR<DailyGoalCreateWithoutUserInput, DailyGoalUncheckedCreateWithoutUserInput> | DailyGoalCreateWithoutUserInput[] | DailyGoalUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: DailyGoalCreateOrConnectWithoutUserInput | DailyGoalCreateOrConnectWithoutUserInput[]
+    upsert?: DailyGoalUpsertWithWhereUniqueWithoutUserInput | DailyGoalUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: DailyGoalCreateManyUserInputEnvelope
+    set?: DailyGoalWhereUniqueInput | DailyGoalWhereUniqueInput[]
+    disconnect?: DailyGoalWhereUniqueInput | DailyGoalWhereUniqueInput[]
+    delete?: DailyGoalWhereUniqueInput | DailyGoalWhereUniqueInput[]
+    connect?: DailyGoalWhereUniqueInput | DailyGoalWhereUniqueInput[]
+    update?: DailyGoalUpdateWithWhereUniqueWithoutUserInput | DailyGoalUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: DailyGoalUpdateManyWithWhereWithoutUserInput | DailyGoalUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: DailyGoalScalarWhereInput | DailyGoalScalarWhereInput[]
   }
 
   export type AppListingUpdateManyWithoutUserNestedInput = {
@@ -41823,6 +45877,34 @@ export namespace Prisma {
     update?: AdsAiUsageUpdateWithWhereUniqueWithoutUserInput | AdsAiUsageUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: AdsAiUsageUpdateManyWithWhereWithoutUserInput | AdsAiUsageUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: AdsAiUsageScalarWhereInput | AdsAiUsageScalarWhereInput[]
+  }
+
+  export type DailyNoteUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<DailyNoteCreateWithoutUserInput, DailyNoteUncheckedCreateWithoutUserInput> | DailyNoteCreateWithoutUserInput[] | DailyNoteUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: DailyNoteCreateOrConnectWithoutUserInput | DailyNoteCreateOrConnectWithoutUserInput[]
+    upsert?: DailyNoteUpsertWithWhereUniqueWithoutUserInput | DailyNoteUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: DailyNoteCreateManyUserInputEnvelope
+    set?: DailyNoteWhereUniqueInput | DailyNoteWhereUniqueInput[]
+    disconnect?: DailyNoteWhereUniqueInput | DailyNoteWhereUniqueInput[]
+    delete?: DailyNoteWhereUniqueInput | DailyNoteWhereUniqueInput[]
+    connect?: DailyNoteWhereUniqueInput | DailyNoteWhereUniqueInput[]
+    update?: DailyNoteUpdateWithWhereUniqueWithoutUserInput | DailyNoteUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: DailyNoteUpdateManyWithWhereWithoutUserInput | DailyNoteUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: DailyNoteScalarWhereInput | DailyNoteScalarWhereInput[]
+  }
+
+  export type DailyGoalUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<DailyGoalCreateWithoutUserInput, DailyGoalUncheckedCreateWithoutUserInput> | DailyGoalCreateWithoutUserInput[] | DailyGoalUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: DailyGoalCreateOrConnectWithoutUserInput | DailyGoalCreateOrConnectWithoutUserInput[]
+    upsert?: DailyGoalUpsertWithWhereUniqueWithoutUserInput | DailyGoalUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: DailyGoalCreateManyUserInputEnvelope
+    set?: DailyGoalWhereUniqueInput | DailyGoalWhereUniqueInput[]
+    disconnect?: DailyGoalWhereUniqueInput | DailyGoalWhereUniqueInput[]
+    delete?: DailyGoalWhereUniqueInput | DailyGoalWhereUniqueInput[]
+    connect?: DailyGoalWhereUniqueInput | DailyGoalWhereUniqueInput[]
+    update?: DailyGoalUpdateWithWhereUniqueWithoutUserInput | DailyGoalUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: DailyGoalUpdateManyWithWhereWithoutUserInput | DailyGoalUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: DailyGoalScalarWhereInput | DailyGoalScalarWhereInput[]
   }
 
   export type AppListingUncheckedUpdateManyWithoutUserNestedInput = {
@@ -42663,6 +46745,34 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutFlowsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutFlowsInput, UserUpdateWithoutFlowsInput>, UserUncheckedUpdateWithoutFlowsInput>
+  }
+
+  export type UserCreateNestedOneWithoutDailyNotesInput = {
+    create?: XOR<UserCreateWithoutDailyNotesInput, UserUncheckedCreateWithoutDailyNotesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDailyNotesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutDailyNotesNestedInput = {
+    create?: XOR<UserCreateWithoutDailyNotesInput, UserUncheckedCreateWithoutDailyNotesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDailyNotesInput
+    upsert?: UserUpsertWithoutDailyNotesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutDailyNotesInput, UserUpdateWithoutDailyNotesInput>, UserUncheckedUpdateWithoutDailyNotesInput>
+  }
+
+  export type UserCreateNestedOneWithoutDailyGoalsInput = {
+    create?: XOR<UserCreateWithoutDailyGoalsInput, UserUncheckedCreateWithoutDailyGoalsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDailyGoalsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutDailyGoalsNestedInput = {
+    create?: XOR<UserCreateWithoutDailyGoalsInput, UserUncheckedCreateWithoutDailyGoalsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDailyGoalsInput
+    upsert?: UserUpsertWithoutDailyGoalsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutDailyGoalsInput, UserUpdateWithoutDailyGoalsInput>, UserUncheckedUpdateWithoutDailyGoalsInput>
   }
 
   export type UserCreateNestedOneWithoutBillingSubscriptionsInput = {
@@ -43585,6 +47695,60 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type DailyNoteCreateWithoutUserInput = {
+    id?: string
+    title: string
+    body: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DailyNoteUncheckedCreateWithoutUserInput = {
+    id?: string
+    title: string
+    body: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DailyNoteCreateOrConnectWithoutUserInput = {
+    where: DailyNoteWhereUniqueInput
+    create: XOR<DailyNoteCreateWithoutUserInput, DailyNoteUncheckedCreateWithoutUserInput>
+  }
+
+  export type DailyNoteCreateManyUserInputEnvelope = {
+    data: DailyNoteCreateManyUserInput | DailyNoteCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type DailyGoalCreateWithoutUserInput = {
+    id?: string
+    title: string
+    status?: string
+    dueAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DailyGoalUncheckedCreateWithoutUserInput = {
+    id?: string
+    title: string
+    status?: string
+    dueAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DailyGoalCreateOrConnectWithoutUserInput = {
+    where: DailyGoalWhereUniqueInput
+    create: XOR<DailyGoalCreateWithoutUserInput, DailyGoalUncheckedCreateWithoutUserInput>
+  }
+
+  export type DailyGoalCreateManyUserInputEnvelope = {
+    data: DailyGoalCreateManyUserInput | DailyGoalCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type AppListingCreateWithoutUserInput = {
     id?: string
     name: string
@@ -43691,6 +47855,7 @@ export namespace Prisma {
     plan?: string
     status: string
     currentPeriodEnd?: Date | string | null
+    trialEndsAt?: Date | string | null
     cancelAtPeriodEnd?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -43704,6 +47869,7 @@ export namespace Prisma {
     plan?: string
     status: string
     currentPeriodEnd?: Date | string | null
+    trialEndsAt?: Date | string | null
     cancelAtPeriodEnd?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -44337,6 +48503,63 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"AdsAiUsage"> | Date | string
   }
 
+  export type DailyNoteUpsertWithWhereUniqueWithoutUserInput = {
+    where: DailyNoteWhereUniqueInput
+    update: XOR<DailyNoteUpdateWithoutUserInput, DailyNoteUncheckedUpdateWithoutUserInput>
+    create: XOR<DailyNoteCreateWithoutUserInput, DailyNoteUncheckedCreateWithoutUserInput>
+  }
+
+  export type DailyNoteUpdateWithWhereUniqueWithoutUserInput = {
+    where: DailyNoteWhereUniqueInput
+    data: XOR<DailyNoteUpdateWithoutUserInput, DailyNoteUncheckedUpdateWithoutUserInput>
+  }
+
+  export type DailyNoteUpdateManyWithWhereWithoutUserInput = {
+    where: DailyNoteScalarWhereInput
+    data: XOR<DailyNoteUpdateManyMutationInput, DailyNoteUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type DailyNoteScalarWhereInput = {
+    AND?: DailyNoteScalarWhereInput | DailyNoteScalarWhereInput[]
+    OR?: DailyNoteScalarWhereInput[]
+    NOT?: DailyNoteScalarWhereInput | DailyNoteScalarWhereInput[]
+    id?: StringFilter<"DailyNote"> | string
+    userId?: StringFilter<"DailyNote"> | string
+    title?: StringFilter<"DailyNote"> | string
+    body?: StringFilter<"DailyNote"> | string
+    createdAt?: DateTimeFilter<"DailyNote"> | Date | string
+    updatedAt?: DateTimeFilter<"DailyNote"> | Date | string
+  }
+
+  export type DailyGoalUpsertWithWhereUniqueWithoutUserInput = {
+    where: DailyGoalWhereUniqueInput
+    update: XOR<DailyGoalUpdateWithoutUserInput, DailyGoalUncheckedUpdateWithoutUserInput>
+    create: XOR<DailyGoalCreateWithoutUserInput, DailyGoalUncheckedCreateWithoutUserInput>
+  }
+
+  export type DailyGoalUpdateWithWhereUniqueWithoutUserInput = {
+    where: DailyGoalWhereUniqueInput
+    data: XOR<DailyGoalUpdateWithoutUserInput, DailyGoalUncheckedUpdateWithoutUserInput>
+  }
+
+  export type DailyGoalUpdateManyWithWhereWithoutUserInput = {
+    where: DailyGoalScalarWhereInput
+    data: XOR<DailyGoalUpdateManyMutationInput, DailyGoalUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type DailyGoalScalarWhereInput = {
+    AND?: DailyGoalScalarWhereInput | DailyGoalScalarWhereInput[]
+    OR?: DailyGoalScalarWhereInput[]
+    NOT?: DailyGoalScalarWhereInput | DailyGoalScalarWhereInput[]
+    id?: StringFilter<"DailyGoal"> | string
+    userId?: StringFilter<"DailyGoal"> | string
+    title?: StringFilter<"DailyGoal"> | string
+    status?: StringFilter<"DailyGoal"> | string
+    dueAt?: DateTimeNullableFilter<"DailyGoal"> | Date | string | null
+    createdAt?: DateTimeFilter<"DailyGoal"> | Date | string
+    updatedAt?: DateTimeFilter<"DailyGoal"> | Date | string
+  }
+
   export type AppListingUpsertWithWhereUniqueWithoutUserInput = {
     where: AppListingWhereUniqueInput
     update: XOR<AppListingUpdateWithoutUserInput, AppListingUncheckedUpdateWithoutUserInput>
@@ -44459,6 +48682,7 @@ export namespace Prisma {
     plan?: StringFilter<"BillingSubscription"> | string
     status?: StringFilter<"BillingSubscription"> | string
     currentPeriodEnd?: DateTimeNullableFilter<"BillingSubscription"> | Date | string | null
+    trialEndsAt?: DateTimeNullableFilter<"BillingSubscription"> | Date | string | null
     cancelAtPeriodEnd?: BoolFilter<"BillingSubscription"> | boolean
     createdAt?: DateTimeFilter<"BillingSubscription"> | Date | string
     updatedAt?: DateTimeFilter<"BillingSubscription"> | Date | string
@@ -44492,6 +48716,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -44526,6 +48752,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteUncheckedCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -44576,6 +48804,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -44610,6 +48840,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUncheckedUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -44644,6 +48876,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -44678,6 +48912,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteUncheckedCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -44728,6 +48964,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -44762,6 +49000,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUncheckedUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -44796,6 +49036,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -44830,6 +49072,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteUncheckedCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -44942,6 +49186,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -44976,6 +49222,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUncheckedUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -45109,6 +49357,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -45143,6 +49393,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteUncheckedCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -45193,6 +49445,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -45227,6 +49481,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUncheckedUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -45261,6 +49517,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -45295,6 +49553,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteUncheckedCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -45370,6 +49630,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -45404,6 +49666,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUncheckedUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -45469,6 +49733,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -45503,6 +49769,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteUncheckedCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -45553,6 +49821,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -45587,6 +49857,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUncheckedUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -45621,6 +49893,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -45655,6 +49929,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteUncheckedCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -45705,6 +49981,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -45739,6 +50017,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUncheckedUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -45773,6 +50053,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -45807,6 +50089,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteUncheckedCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -45889,6 +50173,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -45923,6 +50209,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUncheckedUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -45973,6 +50261,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -46007,6 +50297,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteUncheckedCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -46088,6 +50380,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -46122,6 +50416,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUncheckedUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -46193,6 +50489,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -46227,6 +50525,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteUncheckedCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -46303,6 +50603,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -46337,6 +50639,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUncheckedUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -46387,6 +50691,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -46421,6 +50727,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteUncheckedCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -46508,6 +50816,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -46542,6 +50852,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUncheckedUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -46619,6 +50931,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -46653,6 +50967,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteUncheckedCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -46743,6 +51059,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -46777,6 +51095,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUncheckedUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -46827,6 +51147,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -46861,6 +51183,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteUncheckedCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -46944,6 +51268,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -46978,6 +51304,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUncheckedUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -47051,6 +51379,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -47085,6 +51415,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteUncheckedCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -47239,6 +51571,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -47273,6 +51607,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUncheckedUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -47355,6 +51691,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -47389,6 +51727,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteUncheckedCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -47500,6 +51840,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -47534,6 +51876,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUncheckedUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -47635,6 +51979,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -47669,6 +52015,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteUncheckedCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -47719,6 +52067,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -47753,6 +52103,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUncheckedUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -47787,6 +52139,8 @@ export namespace Prisma {
     adsPlatformConnections?: AdsPlatformConnectionCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -47821,6 +52175,8 @@ export namespace Prisma {
     adsPlatformConnections?: AdsPlatformConnectionUncheckedCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteUncheckedCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -47932,6 +52288,8 @@ export namespace Prisma {
     adsPlatformConnections?: AdsPlatformConnectionUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -47966,6 +52324,8 @@ export namespace Prisma {
     adsPlatformConnections?: AdsPlatformConnectionUncheckedUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUncheckedUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -48067,6 +52427,8 @@ export namespace Prisma {
     adsPlatformConnections?: AdsPlatformConnectionCreateNestedManyWithoutUserInput
     adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -48101,6 +52463,8 @@ export namespace Prisma {
     adsPlatformConnections?: AdsPlatformConnectionUncheckedCreateNestedManyWithoutUserInput
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteUncheckedCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -48212,6 +52576,8 @@ export namespace Prisma {
     adsPlatformConnections?: AdsPlatformConnectionUpdateManyWithoutUserNestedInput
     adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -48246,6 +52612,8 @@ export namespace Prisma {
     adsPlatformConnections?: AdsPlatformConnectionUncheckedUpdateManyWithoutUserNestedInput
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUncheckedUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -48347,6 +52715,8 @@ export namespace Prisma {
     adsPlatformConnections?: AdsPlatformConnectionCreateNestedManyWithoutUserInput
     adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -48381,6 +52751,8 @@ export namespace Prisma {
     adsPlatformConnections?: AdsPlatformConnectionUncheckedCreateNestedManyWithoutUserInput
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteUncheckedCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -48431,6 +52803,8 @@ export namespace Prisma {
     adsPlatformConnections?: AdsPlatformConnectionUpdateManyWithoutUserNestedInput
     adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -48465,6 +52839,8 @@ export namespace Prisma {
     adsPlatformConnections?: AdsPlatformConnectionUncheckedUpdateManyWithoutUserNestedInput
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUncheckedUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -48500,6 +52876,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     billingSubscriptions?: BillingSubscriptionCreateNestedManyWithoutUserInput
@@ -48534,6 +52912,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteUncheckedCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     billingSubscriptions?: BillingSubscriptionUncheckedCreateNestedManyWithoutUserInput
@@ -48584,6 +52964,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     billingSubscriptions?: BillingSubscriptionUpdateManyWithoutUserNestedInput
@@ -48618,6 +53000,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUncheckedUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     billingSubscriptions?: BillingSubscriptionUncheckedUpdateManyWithoutUserNestedInput
@@ -48652,6 +53036,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     billingSubscriptions?: BillingSubscriptionCreateNestedManyWithoutUserInput
@@ -48686,6 +53072,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteUncheckedCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     billingSubscriptions?: BillingSubscriptionUncheckedCreateNestedManyWithoutUserInput
@@ -48736,6 +53124,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     billingSubscriptions?: BillingSubscriptionUpdateManyWithoutUserNestedInput
@@ -48770,6 +53160,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUncheckedUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     billingSubscriptions?: BillingSubscriptionUncheckedUpdateManyWithoutUserNestedInput
@@ -48804,6 +53196,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     billingSubscriptions?: BillingSubscriptionCreateNestedManyWithoutUserInput
@@ -48838,6 +53232,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteUncheckedCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     billingSubscriptions?: BillingSubscriptionUncheckedCreateNestedManyWithoutUserInput
@@ -48888,6 +53284,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     billingSubscriptions?: BillingSubscriptionUpdateManyWithoutUserNestedInput
@@ -48922,8 +53320,330 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUncheckedUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutDailyNotesInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    password?: string | null
+    stripeCustomerId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
+    legalDocuments?: LegalDocumentCreateNestedManyWithoutUserInput
+    intelligenceDocuments?: IntelligenceDocumentCreateNestedManyWithoutUserInput
+    projectInquiries?: ProjectInquiryCreateNestedManyWithoutUserInput
+    calendarEvents?: CalendarEventCreateNestedManyWithoutUserInput
+    businessContacts?: BusinessContactCreateNestedManyWithoutUserInput
+    businessTasks?: BusinessTaskCreateNestedManyWithoutUserInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutUserInput
+    automationRuns?: AutomationRunCreateNestedManyWithoutUserInput
+    commerceProducts?: CommerceProductCreateNestedManyWithoutUserInput
+    commerceOrders?: CommerceOrderCreateNestedManyWithoutUserInput
+    adsCampaigns?: AdsCampaignCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalCreateNestedManyWithoutUserInput
+    appListings?: AppListingCreateNestedManyWithoutUserInput
+    sites?: SiteCreateNestedManyWithoutUserInput
+    flows?: FlowCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutDailyNotesInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    password?: string | null
+    stripeCustomerId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    legalDocuments?: LegalDocumentUncheckedCreateNestedManyWithoutUserInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedCreateNestedManyWithoutUserInput
+    projectInquiries?: ProjectInquiryUncheckedCreateNestedManyWithoutUserInput
+    calendarEvents?: CalendarEventUncheckedCreateNestedManyWithoutUserInput
+    businessContacts?: BusinessContactUncheckedCreateNestedManyWithoutUserInput
+    businessTasks?: BusinessTaskUncheckedCreateNestedManyWithoutUserInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutUserInput
+    automationRuns?: AutomationRunUncheckedCreateNestedManyWithoutUserInput
+    commerceProducts?: CommerceProductUncheckedCreateNestedManyWithoutUserInput
+    commerceOrders?: CommerceOrderUncheckedCreateNestedManyWithoutUserInput
+    adsCampaigns?: AdsCampaignUncheckedCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeUncheckedCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalUncheckedCreateNestedManyWithoutUserInput
+    appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
+    sites?: SiteUncheckedCreateNestedManyWithoutUserInput
+    flows?: FlowUncheckedCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutDailyNotesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutDailyNotesInput, UserUncheckedCreateWithoutDailyNotesInput>
+  }
+
+  export type UserUpsertWithoutDailyNotesInput = {
+    update: XOR<UserUpdateWithoutDailyNotesInput, UserUncheckedUpdateWithoutDailyNotesInput>
+    create: XOR<UserCreateWithoutDailyNotesInput, UserUncheckedCreateWithoutDailyNotesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutDailyNotesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutDailyNotesInput, UserUncheckedUpdateWithoutDailyNotesInput>
+  }
+
+  export type UserUpdateWithoutDailyNotesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
+    legalDocuments?: LegalDocumentUpdateManyWithoutUserNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUpdateManyWithoutUserNestedInput
+    projectInquiries?: ProjectInquiryUpdateManyWithoutUserNestedInput
+    calendarEvents?: CalendarEventUpdateManyWithoutUserNestedInput
+    businessContacts?: BusinessContactUpdateManyWithoutUserNestedInput
+    businessTasks?: BusinessTaskUpdateManyWithoutUserNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutUserNestedInput
+    automationRuns?: AutomationRunUpdateManyWithoutUserNestedInput
+    commerceProducts?: CommerceProductUpdateManyWithoutUserNestedInput
+    commerceOrders?: CommerceOrderUpdateManyWithoutUserNestedInput
+    adsCampaigns?: AdsCampaignUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUpdateManyWithoutUserNestedInput
+    appListings?: AppListingUpdateManyWithoutUserNestedInput
+    sites?: SiteUpdateManyWithoutUserNestedInput
+    flows?: FlowUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutDailyNotesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    legalDocuments?: LegalDocumentUncheckedUpdateManyWithoutUserNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedUpdateManyWithoutUserNestedInput
+    projectInquiries?: ProjectInquiryUncheckedUpdateManyWithoutUserNestedInput
+    calendarEvents?: CalendarEventUncheckedUpdateManyWithoutUserNestedInput
+    businessContacts?: BusinessContactUncheckedUpdateManyWithoutUserNestedInput
+    businessTasks?: BusinessTaskUncheckedUpdateManyWithoutUserNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutUserNestedInput
+    automationRuns?: AutomationRunUncheckedUpdateManyWithoutUserNestedInput
+    commerceProducts?: CommerceProductUncheckedUpdateManyWithoutUserNestedInput
+    commerceOrders?: CommerceOrderUncheckedUpdateManyWithoutUserNestedInput
+    adsCampaigns?: AdsCampaignUncheckedUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUncheckedUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUncheckedUpdateManyWithoutUserNestedInput
+    appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
+    sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
+    flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutDailyGoalsInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    password?: string | null
+    stripeCustomerId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
+    legalDocuments?: LegalDocumentCreateNestedManyWithoutUserInput
+    intelligenceDocuments?: IntelligenceDocumentCreateNestedManyWithoutUserInput
+    projectInquiries?: ProjectInquiryCreateNestedManyWithoutUserInput
+    calendarEvents?: CalendarEventCreateNestedManyWithoutUserInput
+    businessContacts?: BusinessContactCreateNestedManyWithoutUserInput
+    businessTasks?: BusinessTaskCreateNestedManyWithoutUserInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutUserInput
+    automationRuns?: AutomationRunCreateNestedManyWithoutUserInput
+    commerceProducts?: CommerceProductCreateNestedManyWithoutUserInput
+    commerceOrders?: CommerceOrderCreateNestedManyWithoutUserInput
+    adsCampaigns?: AdsCampaignCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteCreateNestedManyWithoutUserInput
+    appListings?: AppListingCreateNestedManyWithoutUserInput
+    sites?: SiteCreateNestedManyWithoutUserInput
+    flows?: FlowCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutDailyGoalsInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    password?: string | null
+    stripeCustomerId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    legalDocuments?: LegalDocumentUncheckedCreateNestedManyWithoutUserInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedCreateNestedManyWithoutUserInput
+    projectInquiries?: ProjectInquiryUncheckedCreateNestedManyWithoutUserInput
+    calendarEvents?: CalendarEventUncheckedCreateNestedManyWithoutUserInput
+    businessContacts?: BusinessContactUncheckedCreateNestedManyWithoutUserInput
+    businessTasks?: BusinessTaskUncheckedCreateNestedManyWithoutUserInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutUserInput
+    automationRuns?: AutomationRunUncheckedCreateNestedManyWithoutUserInput
+    commerceProducts?: CommerceProductUncheckedCreateNestedManyWithoutUserInput
+    commerceOrders?: CommerceOrderUncheckedCreateNestedManyWithoutUserInput
+    adsCampaigns?: AdsCampaignUncheckedCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeUncheckedCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteUncheckedCreateNestedManyWithoutUserInput
+    appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
+    sites?: SiteUncheckedCreateNestedManyWithoutUserInput
+    flows?: FlowUncheckedCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutDailyGoalsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutDailyGoalsInput, UserUncheckedCreateWithoutDailyGoalsInput>
+  }
+
+  export type UserUpsertWithoutDailyGoalsInput = {
+    update: XOR<UserUpdateWithoutDailyGoalsInput, UserUncheckedUpdateWithoutDailyGoalsInput>
+    create: XOR<UserCreateWithoutDailyGoalsInput, UserUncheckedCreateWithoutDailyGoalsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutDailyGoalsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutDailyGoalsInput, UserUncheckedUpdateWithoutDailyGoalsInput>
+  }
+
+  export type UserUpdateWithoutDailyGoalsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
+    legalDocuments?: LegalDocumentUpdateManyWithoutUserNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUpdateManyWithoutUserNestedInput
+    projectInquiries?: ProjectInquiryUpdateManyWithoutUserNestedInput
+    calendarEvents?: CalendarEventUpdateManyWithoutUserNestedInput
+    businessContacts?: BusinessContactUpdateManyWithoutUserNestedInput
+    businessTasks?: BusinessTaskUpdateManyWithoutUserNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutUserNestedInput
+    automationRuns?: AutomationRunUpdateManyWithoutUserNestedInput
+    commerceProducts?: CommerceProductUpdateManyWithoutUserNestedInput
+    commerceOrders?: CommerceOrderUpdateManyWithoutUserNestedInput
+    adsCampaigns?: AdsCampaignUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUpdateManyWithoutUserNestedInput
+    appListings?: AppListingUpdateManyWithoutUserNestedInput
+    sites?: SiteUpdateManyWithoutUserNestedInput
+    flows?: FlowUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutDailyGoalsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    legalDocuments?: LegalDocumentUncheckedUpdateManyWithoutUserNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedUpdateManyWithoutUserNestedInput
+    projectInquiries?: ProjectInquiryUncheckedUpdateManyWithoutUserNestedInput
+    calendarEvents?: CalendarEventUncheckedUpdateManyWithoutUserNestedInput
+    businessContacts?: BusinessContactUncheckedUpdateManyWithoutUserNestedInput
+    businessTasks?: BusinessTaskUncheckedUpdateManyWithoutUserNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutUserNestedInput
+    automationRuns?: AutomationRunUncheckedUpdateManyWithoutUserNestedInput
+    commerceProducts?: CommerceProductUncheckedUpdateManyWithoutUserNestedInput
+    commerceOrders?: CommerceOrderUncheckedUpdateManyWithoutUserNestedInput
+    adsCampaigns?: AdsCampaignUncheckedUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUncheckedUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUncheckedUpdateManyWithoutUserNestedInput
+    appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
+    sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
+    flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     billingSubscriptions?: BillingSubscriptionUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -48956,6 +53676,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalCreateNestedManyWithoutUserInput
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
@@ -48990,6 +53712,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
     adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
     adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteUncheckedCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalUncheckedCreateNestedManyWithoutUserInput
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
@@ -49040,6 +53764,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUpdateManyWithoutUserNestedInput
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
@@ -49074,6 +53800,8 @@ export namespace Prisma {
     adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
     adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
     adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUncheckedUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUncheckedUpdateManyWithoutUserNestedInput
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
@@ -49317,6 +54045,23 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type DailyNoteCreateManyUserInput = {
+    id?: string
+    title: string
+    body: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DailyGoalCreateManyUserInput = {
+    id?: string
+    title: string
+    status?: string
+    dueAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type AppListingCreateManyUserInput = {
     id?: string
     name: string
@@ -49359,6 +54104,7 @@ export namespace Prisma {
     plan?: string
     status: string
     currentPeriodEnd?: Date | string | null
+    trialEndsAt?: Date | string | null
     cancelAtPeriodEnd?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -50094,6 +54840,57 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type DailyNoteUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DailyNoteUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DailyNoteUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DailyGoalUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    dueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DailyGoalUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    dueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DailyGoalUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    dueAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type AppListingUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
@@ -50204,6 +55001,7 @@ export namespace Prisma {
     plan?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelAtPeriodEnd?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -50217,6 +55015,7 @@ export namespace Prisma {
     plan?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelAtPeriodEnd?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -50230,6 +55029,7 @@ export namespace Prisma {
     plan?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    trialEndsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelAtPeriodEnd?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

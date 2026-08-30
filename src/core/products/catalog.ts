@@ -3,13 +3,14 @@ import type { AilaMode } from "@/core/types";
 /**
  * Canonical registry of products that actually exist in this repository.
  *
- * Daily, Documents, Writer, Translate, Coding, Career, Education, Health,
+ * Documents, Writer, Translate, Coding, Career, Education, Health,
  * Finance, Travel, Ship, and Salon are not implemented here — they are not
  * registered, linked, or stubbed.
  */
 
 export const PRODUCT_KEYS = [
   "intelligence",
+  "daily",
   "business",
   "ads",
   "ailalegal",
@@ -61,6 +62,16 @@ export const PRODUCTS: Record<ProductKey, ProductDefinition> = {
     group: "everyday",
     description:
       "The intelligence layer of the ecosystem. Chat, attach files, and persist conversations on your account.",
+  },
+  daily: {
+    key: "daily",
+    title: "Aila Daily",
+    href: "/products/daily",
+    aiMode: "daily",
+    paid: false,
+    group: "everyday",
+    description:
+      "Plan the day from your stored tasks, notes, goals, calendar, conversations, and campaigns.",
   },
   business: {
     key: "business",
@@ -173,6 +184,7 @@ export function groupedCatalogProducts(): readonly GroupedCatalog[] {
 
 const MODE_TO_PRODUCT: Record<AilaMode, ProductKey> = {
   intelligence: "intelligence",
+  daily: "daily",
   legal: "ailalegal",
   business: "business",
   automation: "automation",

@@ -4,6 +4,7 @@
 
 export type AilaMode =
   | "intelligence"
+  | "daily"
   | "legal"
   | "business"
   | "automation"
