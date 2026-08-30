@@ -2,10 +2,9 @@
 
 import Link from "next/link";
 import { track } from "@vercel/analytics";
-import { ALL_PRODUCTS } from "@/core/constants";
+import { groupedNavProducts } from "@/core/constants";
 
-const aiProducts = ALL_PRODUCTS.slice(0, 4);
-const platformProducts = ALL_PRODUCTS.slice(4);
+const navGroups = groupedNavProducts();
 
 const companyLinks = [
   {
@@ -15,6 +14,10 @@ const companyLinks = [
   {
     label: "Products",
     href: "/#products",
+  },
+  {
+    label: "Daily",
+    href: "/products/daily",
   },
   {
     label: "Dashboard",
@@ -166,48 +169,52 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* AI PRODUCTS */}
-          <div>
-            <p className="text-xs uppercase tracking-[0.25em] text-neutral-700">
-              AI Products
-            </p>
-
-            <div className="mt-6 flex flex-col gap-4">
-              {aiProducts.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  onClick={() =>
-                    trackClick("product_clicked", item.name)
-                  }
-                  className="w-fit text-sm text-neutral-500 transition hover:translate-x-1 hover:text-white"
-                >
-                  {item.name}
-                </Link>
+          <div className="flex flex-col gap-10">
+            {navGroups
+              .filter((group) => group.group === "everyday" || group.group === "professional")
+              .map((group) => (
+                <div key={group.group}>
+                  <p className="text-xs uppercase tracking-[0.25em] text-neutral-700">
+                    {group.label}
+                  </p>
+                  <div className="mt-6 flex flex-col gap-4">
+                    {group.products.map((item) => (
+                      <Link
+                        key={item.name}
+                        href={item.href}
+                        onClick={() => trackClick("product_clicked", item.name)}
+                        className="w-fit text-sm text-neutral-500 transition hover:translate-x-1 hover:text-white"
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
               ))}
-            </div>
           </div>
 
-          {/* PLATFORM */}
-          <div>
-            <p className="text-xs uppercase tracking-[0.25em] text-neutral-700">
-              Platform
-            </p>
-
-            <div className="mt-6 flex flex-col gap-4">
-              {platformProducts.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  onClick={() =>
-                    trackClick("product_clicked", item.name)
-                  }
-                  className="w-fit text-sm text-neutral-500 transition hover:translate-x-1 hover:text-white"
-                >
-                  {item.name}
-                </Link>
+          <div className="flex flex-col gap-10">
+            {navGroups
+              .filter((group) => group.group === "commerce" || group.group === "supporting")
+              .map((group) => (
+                <div key={group.group}>
+                  <p className="text-xs uppercase tracking-[0.25em] text-neutral-700">
+                    {group.label}
+                  </p>
+                  <div className="mt-6 flex flex-col gap-4">
+                    {group.products.map((item) => (
+                      <Link
+                        key={item.name}
+                        href={item.href}
+                        onClick={() => trackClick("product_clicked", item.name)}
+                        className="w-fit text-sm text-neutral-500 transition hover:translate-x-1 hover:text-white"
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
               ))}
-            </div>
           </div>
 
           {/* EXPLORE */}

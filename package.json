@@ -7,11 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "tsx --test src/core/calendar/schema.test.ts src/core/calendar/ownership.test.ts src/core/business/schema.test.ts src/core/automation/schema.test.ts src/core/commerce/schema.test.ts src/core/ads/schema.test.ts src/core/apps/schema.test.ts src/core/sites/schema.test.ts src/core/flow/schema.test.ts src/core/billing/entitlements.test.ts src/core/products/catalog.test.ts src/core/ai/chat-api.test.ts src/core/ai/streaming/parse.test.ts src/core/ai/streaming/session.test.ts src/core/ai/streaming/persist.test.ts src/core/ai/orchestrator/tools/tools.test.ts src/core/ai/intelligence/files/files.test.ts"
+    "test": "tsx --test src/core/calendar/schema.test.ts src/core/calendar/ownership.test.ts src/core/business/schema.test.ts src/core/automation/schema.test.ts src/core/commerce/schema.test.ts src/core/ads/schema.test.ts src/core/ads/plan.test.ts src/core/ads/json.test.ts src/core/ads/landing-page.test.ts src/core/ads/analysis.test.ts src/core/apps/schema.test.ts src/core/sites/schema.test.ts src/core/flow/schema.test.ts src/core/daily/schema.test.ts src/core/daily/timezone.test.ts src/core/daily/briefing.test.ts src/core/billing/entitlements.test.ts src/core/billing/plans.test.ts src/core/billing/trial.test.ts src/core/products/catalog.test.ts src/core/ai/chat-api.test.ts src/core/ai/streaming/parse.test.ts src/core/ai/streaming/session.test.ts src/core/ai/streaming/persist.test.ts src/core/ai/orchestrator/tools/tools.test.ts src/core/ai/intelligence/files/files.test.ts src/lib/config/env.test.ts src/core/database/prisma.test.ts"
   },
   "dependencies": {
     "@clerk/nextjs": "^7.8.3",
     "@opensearch-project/opensearch": "^3.6.0",
+    "@prisma/adapter-pg": "^7.10.0",
     "@prisma/client": "^7.9.0",
     "@supabase/server": "^1.4.1",
     "@vercel/analytics": "^2.0.1",
@@ -25,6 +26,7 @@
     "highlight.js": "^11.11.1",
     "lucide-react": "^1.23.0",
     "next": "^16.3.0",
+    "pg": "^8.23.0",
     "radix-ui": "^1.6.7",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",

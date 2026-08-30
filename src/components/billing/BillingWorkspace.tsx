@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useCallback, useState } from "react";
 
+import { BILLING_PLANS } from "@/core/billing/plans";
 import type { BillingStatus } from "@/core/billing/types";
 import { PRODUCTS, PRODUCT_LIST, type ProductKey } from "@/core/products/catalog";
 import { workspaceFetch } from "@/components/workspace/api";
@@ -42,7 +43,11 @@ function BillingWorkspaceInner({
   }, []);
 
   const requested = requestedProduct ? PRODUCTS[requestedProduct] : null;
-  const subscribed = billing.plan === "pro";
+  const hasStripeSubscription = Boolean(
+    billing.status && billing.status !== "canceled" && billing.status !== "incomplete_expired",
+  );
+  const showPortal = hasStripeSubscription && billing.stripeConfigured;
+  const showCheckout = billing.plan === "free";
 
   async function startCheckout() {
     setBusy("checkout");
@@ -84,47 +89,73 @@ function BillingWorkspaceInner({
       product="Billing"
       href="/billing"
       accent="cyan"
-      title="Aila Pro"
-      description="Subscribe to unlock Legal, Business, Automation, Commerce, Ads, Calendar, Sites, Apps, and Flow. Intelligence stays available on every account."
+      title="Aila billing"
+      description="Free includes Intelligence, Daily, and Ads. Pro checkout uses Stripe, including a 7-day trial when this account has not used one. Business and Enterprise are Clerk staff grants, not self-serve Stripe prices."
       loading={loading}
       error={error}
       onRetry={() => void load()}
       actions={
-        subscribed ? (
-          <button
-            type="button"
-            onClick={() => void openPortal()}
-            disabled={busy !== null || !billing.stripeConfigured}
-            className="rounded-full bg-white px-5 py-2 text-sm font-semibold text-black disabled:opacity-50"
-          >
-            {busy === "portal" ? "Opening portal…" : "Manage subscription"}
-          </button>
-        ) : (
-          <button
-            type="button"
-            onClick={() => void startCheckout()}
-            disabled={busy !== null || !billing.stripeConfigured || !billing.priceConfigured}
-            className="rounded-full bg-white px-5 py-2 text-sm font-semibold text-black disabled:opacity-50"
-          >
-            {busy === "checkout" ? "Redirecting…" : "Subscribe with Stripe"}
-          </button>
-        )
+        <>
+          {showPortal ? (
+            <button
+              type="button"
+              onClick={() => void openPortal()}
+              disabled={busy !== null || !billing.stripeConfigured}
+              className="rounded-full bg-white px-5 py-2 text-sm font-semibold text-black disabled:opacity-50"
+            >
+              {busy === "portal" ? "Opening portal…" : "Manage subscription"}
+            </button>
+          ) : null}
+          {showCheckout ? (
+            <button
+              type="button"
+              onClick={() => void startCheckout()}
+              disabled={busy !== null || !billing.stripeConfigured || !billing.priceConfigured}
+              className="rounded-full bg-white px-5 py-2 text-sm font-semibold text-black disabled:opacity-50"
+            >
+              {busy === "checkout"
+                ? "Redirecting…"
+                : billing.trialEligible
+                  ? "Start 7-day Pro trial"
+                  : "Subscribe with Stripe"}
+            </button>
+          ) : null}
+        </>
       }
     >
       {requested ? (
         <p className="mb-6 rounded-2xl border border-amber-300/20 bg-amber-300/[0.06] px-4 py-3 text-sm text-amber-100">
-          {requested.title} requires an active Pro subscription.
+          {requested.paid
+            ? `${requested.title} requires an active Pro subscription or trial.`
+            : `${requested.title} is included on Free. Pro raises Ads limits and unlocks paid workspaces.`}
         </p>
       ) : null}
 
       <div className="grid gap-4 lg:grid-cols-3">
         <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-5">
           <p className="text-xs uppercase tracking-[0.18em] text-white/40">Plan</p>
-          <p className="mt-3 text-3xl font-semibold tracking-tight">
-            {billing.plan === "pro" ? "Pro" : "Free"}
-          </p>
+          <p className="mt-3 text-3xl font-semibold tracking-tight">{billing.planLabel}</p>
           <p className="mt-2 text-sm text-white/50">
             {billing.status ? `Stripe status: ${billing.status}` : "No Stripe subscription on this account."}
+          </p>
+        </div>
+        <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-5">
+          <p className="text-xs uppercase tracking-[0.18em] text-white/40">Trial</p>
+          <p className="mt-3 text-lg font-medium">
+            {billing.trialing
+              ? billing.trialDaysRemaining === null
+                ? "Trialing"
+                : `${billing.trialDaysRemaining} day${billing.trialDaysRemaining === 1 ? "" : "s"} remaining`
+              : billing.trialEndsAt
+                ? "Trial already used on this account"
+                : billing.trialEligible
+                  ? "Eligible for a 7-day Stripe trial"
+                  : "No trial on this account"}
+          </p>
+          <p className="mt-2 text-sm text-white/50">
+            {billing.trialEndsAt
+              ? `Trial end: ${new Date(billing.trialEndsAt).toLocaleString()}`
+              : "Trial dates are stored on the subscription, not in the browser."}
           </p>
         </div>
         <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-5">
@@ -137,17 +168,41 @@ function BillingWorkspaceInner({
           <p className="mt-2 text-sm text-white/50">
             {billing.cancelAtPeriodEnd
               ? "Cancels at the end of the current period."
-              : "Cancels only if you cancel in the Stripe portal."}
+              : "Payment methods and invoices are managed in the Stripe portal."}
           </p>
         </div>
-        <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-5">
-          <p className="text-xs uppercase tracking-[0.18em] text-white/40">Configuration</p>
-          <p className="mt-3 text-sm text-white/70">
-            {billing.stripeConfigured && billing.priceConfigured
-              ? "Stripe checkout and the customer portal are connected."
-              : "Add STRIPE_SECRET_KEY and STRIPE_PRICE_PRO to enable paid access. Unpaid users cannot use paid products."}
-          </p>
-        </div>
+      </div>
+
+      <div className="mt-8 grid gap-3 lg:grid-cols-2">
+        {BILLING_PLANS.map((plan) => {
+          const current = billing.plan === plan.id;
+          return (
+            <div key={plan.id} className="rounded-2xl border border-white/8 bg-white/[0.03] p-5">
+              <div className="flex items-center justify-between gap-3">
+                <p className="text-xl font-medium">{plan.name}</p>
+                <span className="text-[10px] uppercase tracking-[0.18em] text-white/40">
+                  {current ? "Current" : plan.purchasable ? "Stripe" : plan.grant === "clerk_role" ? "Staff grant" : "Included"}
+                </span>
+              </div>
+              <p className="mt-3 text-sm text-white/55">{plan.summary}</p>
+              <ul className="mt-4 space-y-2 text-sm text-white/70">
+                {plan.includes.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              {plan.purchasable && showCheckout ? (
+                <button
+                  type="button"
+                  onClick={() => void startCheckout()}
+                  disabled={busy !== null || !billing.stripeConfigured || !billing.priceConfigured}
+                  className="mt-5 rounded-full bg-white px-4 py-2 text-sm font-semibold text-black disabled:opacity-50"
+                >
+                  {billing.trialEligible ? "Start 7-day trial" : "Upgrade with Stripe"}
+                </button>
+              ) : null}
+            </div>
+          );
+        })}
       </div>
 
       <div className="mt-8 grid gap-3 sm:grid-cols-2">

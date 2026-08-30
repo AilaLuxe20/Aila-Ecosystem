@@ -9,7 +9,7 @@ import { getActorRole, parseProductQuery } from "@/lib/auth/require-product-acce
 
 export const metadata: Metadata = {
   title: "Billing",
-  description: "Aila Pro subscription, checkout, and billing portal.",
+  description: "Aila plans, Stripe checkout, 7-day trial status, and billing portal.",
 };
 
 type PageProps = {

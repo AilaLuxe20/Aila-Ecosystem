@@ -34,7 +34,7 @@ const capabilities = [
     number: "04",
     title: "Ecosystem Navigation",
     description:
-      "Connect users with AilaLegal AI, Business AI, Automation and custom software services.",
+      "Connect users with Aila Ads, AilaLegal AI, Business AI, Automation and custom software services.",
   },
 ];
 

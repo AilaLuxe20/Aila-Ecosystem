@@ -26,9 +26,15 @@ export type EntitlementDecision = {
     | "free_product"
     | "active_subscription"
     | "clerk_pro"
+    | "development"
     | "unauthenticated"
     | "subscription_required";
 };
+
+/** Local `next dev` only — production and preview stay subscription-gated. */
+export function isLocalProductUnlockEnabled(): boolean {
+  return process.env.NODE_ENV === "development";
+}
 
 export function isActiveSubscriptionStatus(status: string): boolean {
   return (ACTIVE_SUBSCRIPTION_STATUSES as readonly string[]).includes(status);
@@ -86,6 +92,10 @@ export async function resolveProductEntitlement(
   role: UserRole,
   product: ProductKey,
 ): Promise<EntitlementDecision> {
+  if (isLocalProductUnlockEnabled() && role && role !== "guest") {
+    return { allowed: true, reason: "development" };
+  }
+
   if (!isPaidProduct(product) || STAFF_ROLES.has(role) || role === "pro") {
     return evaluateEntitlement(role, product, false);
   }

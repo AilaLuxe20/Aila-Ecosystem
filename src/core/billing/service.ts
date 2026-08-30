@@ -5,20 +5,33 @@ import { getAppUrl, getStripeProPriceId, getStripeSecretKey } from "@/core/confi
 import { prisma } from "@/core/database/prisma";
 import { PRODUCT_KEYS, PRODUCTS, isProductKey } from "@/core/products/catalog";
 import {
+  ConflictError,
   ConfigurationError,
   NotFoundError,
 } from "@/lib/errors/app-error";
 import { createLogger } from "@/lib/logger/logger";
 import type { UserRole } from "@/types/auth";
 
-import { evaluateEntitlement, isActiveSubscriptionStatus } from "./entitlements";
+import {
+  ACTIVE_SUBSCRIPTION_STATUSES,
+  evaluateEntitlement,
+  isActiveSubscriptionStatus,
+  isLocalProductUnlockEnabled,
+} from "./entitlements";
+import {
+  billingPlanById,
+  resolveBillingPlanId,
+  STRIPE_BILLING_PLAN,
+  STRIPE_TRIAL_DAYS,
+} from "./plans";
+import { trialDaysRemaining, trialEndFromUnix } from "./trial";
 import type { BillingStatus } from "./types";
 
 export type { BillingStatus } from "./types";
 
 const log = createLogger("billing");
 
-export const BILLING_PLAN = "pro";
+export const BILLING_PLAN = STRIPE_BILLING_PLAN;
 export const CHECKOUT_KIND_SUBSCRIPTION = "subscription";
 export const CHECKOUT_KIND_COMMERCE = "commerce_order";
 
@@ -93,6 +106,7 @@ export async function upsertSubscriptionFromStripe(
       plan: BILLING_PLAN,
       status: subscription.status,
       currentPeriodEnd: periodEndFromSubscription(subscription),
+      trialEndsAt: trialEndFromUnix(subscription.trial_end),
       cancelAtPeriodEnd: subscription.cancel_at_period_end,
     },
     update: {
@@ -101,6 +115,9 @@ export async function upsertSubscriptionFromStripe(
       stripeProductId: typeof price?.product === "string" ? price.product : undefined,
       status: subscription.status,
       currentPeriodEnd: periodEndFromSubscription(subscription),
+      ...(trialEndFromUnix(subscription.trial_end)
+        ? { trialEndsAt: trialEndFromUnix(subscription.trial_end) }
+        : {}),
       cancelAtPeriodEnd: subscription.cancel_at_period_end,
     },
   });
@@ -155,6 +172,14 @@ async function ensureStripeCustomer(user: {
   return customer.id;
 }
 
+async function userHasUsedTrial(userId: string): Promise<boolean> {
+  const existing = await prisma.billingSubscription.findFirst({
+    where: { userId, trialEndsAt: { not: null } },
+    select: { id: true },
+  });
+  return Boolean(existing);
+}
+
 export async function createProCheckoutSession(user: {
   id: string;
   email: string;
@@ -168,6 +193,20 @@ export async function createProCheckoutSession(user: {
     });
   }
 
+  const active = await prisma.billingSubscription.findFirst({
+    where: {
+      userId: user.id,
+      status: { in: [...ACTIVE_SUBSCRIPTION_STATUSES] },
+    },
+    select: { id: true },
+  });
+
+  if (active) {
+    throw new ConflictError({
+      message: "This account already has an active subscription. Use the billing portal to manage it.",
+    });
+  }
+
   const requestedProduct =
     product && isProductKey(product) ? PRODUCTS[product] : null;
   const customerId = await ensureStripeCustomer(user);
@@ -175,6 +214,7 @@ export async function createProCheckoutSession(user: {
   const successPath = requestedProduct
     ? `${requestedProduct.href}?billing=success`
     : "/billing?checkout=success";
+  const offerTrial = !(await userHasUsedTrial(user.id));
 
   const session = await stripe.checkout.sessions.create({
     mode: "subscription",
@@ -190,6 +230,7 @@ export async function createProCheckoutSession(user: {
       product: requestedProduct?.key ?? "",
     },
     subscription_data: {
+      ...(offerTrial ? { trial_period_days: STRIPE_TRIAL_DAYS } : {}),
       metadata: {
         kind: CHECKOUT_KIND_SUBSCRIPTION,
         userId: user.id,
@@ -235,17 +276,33 @@ export async function getBillingStatus(
   const active = subscription
     ? isActiveSubscriptionStatus(subscription.status)
     : false;
+  const plan = resolveBillingPlanId(role, active);
+  const trialEndsAt = subscription?.trialEndsAt ?? null;
+  const trialing = subscription?.status === "trialing";
+  const displayTrialEnd =
+    trialEndsAt ?? (trialing ? subscription?.currentPeriodEnd ?? null : null);
+  const trialEligible = !trialEndsAt && !active && plan === "free";
 
   return {
-    plan: active ? "pro" : "free",
+    plan,
+    planLabel: billingPlanById(plan).name,
     status: subscription?.status ?? null,
+    trialing,
+    trialEndsAt: displayTrialEnd?.toISOString() ?? null,
+    trialDaysRemaining: trialing || (displayTrialEnd && displayTrialEnd.getTime() > Date.now())
+      ? trialDaysRemaining(displayTrialEnd)
+      : null,
+    trialEligible,
     cancelAtPeriodEnd: subscription?.cancelAtPeriodEnd ?? false,
     currentPeriodEnd: subscription?.currentPeriodEnd?.toISOString() ?? null,
     stripeConfigured: Boolean(getStripeSecretKey()),
     priceConfigured: Boolean(getStripeProPriceId()),
-    entitledProductKeys: PRODUCT_KEYS.filter(
-      (product) => evaluateEntitlement(role, product, active).allowed,
-    ),
+    entitledProductKeys: PRODUCT_KEYS.filter((product) => {
+      if (isLocalProductUnlockEnabled() && role && role !== "guest") {
+        return true;
+      }
+      return evaluateEntitlement(role, product, active).allowed;
+    }),
   };
 }
 

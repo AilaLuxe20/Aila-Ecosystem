@@ -16,6 +16,8 @@ export interface AIRequest {
   documentToolText?: string;
   /** Authenticated Prisma user id. Required before Intelligence tools run. */
   userId?: string;
+  /** Server-loaded Daily snapshot. Never taken from the client. */
+  workspaceContext?: string;
 }
 
 export interface AIResponse {

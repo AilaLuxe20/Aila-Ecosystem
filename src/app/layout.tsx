@@ -129,6 +129,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
+      data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-black pt-16 text-white antialiased">
@@ -141,7 +142,14 @@ export default function RootLayout({
         >
           <header className="fixed inset-x-0 top-0 z-[60] flex h-16 items-center justify-end gap-4 border-b border-white/10 bg-black px-4">
             <Show when="signed-out">
-              <SignInButton mode="modal" />
+              <SignInButton mode="modal">
+                <button
+                  type="button"
+                  className="h-10 cursor-pointer rounded-full border border-white/10 bg-white/5 px-4 text-sm font-medium text-neutral-200 transition hover:bg-white/10 sm:h-12 sm:px-5 sm:text-base"
+                >
+                  Sign In
+                </button>
+              </SignInButton>
               <SignUpButton mode="modal">
                 <button
                   type="button"

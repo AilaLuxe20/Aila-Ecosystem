@@ -24,6 +24,7 @@ import {
 
 export const AILA_MODE_VALUES = [
   "intelligence",
+  "daily",
   "legal",
   "business",
   "automation",
@@ -61,6 +62,7 @@ export const aiChatRequestSchema = z
       .array(z.string().trim().min(1).max(128))
       .max(MAX_INTELLIGENCE_ATTACHMENTS)
       .optional(),
+    timezone: z.string().trim().min(1).max(64).optional(),
   })
   .strict();
 

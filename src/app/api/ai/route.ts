@@ -25,6 +25,8 @@ import {
   formatDocumentPromptBlock,
   resolveIntelligenceDocuments,
 } from "@/core/ai/intelligence/files";
+import { formatDailyAiContext, getDailyWorkspace } from "@/core/daily/service";
+import { isValidTimeZone } from "@/core/daily/timezone";
 import {
   encodeSseData,
   isAbortError,
@@ -137,6 +139,7 @@ export async function POST(req: Request) {
     let documentKind: string | undefined;
     let documentToolText: string | undefined;
     let intelligenceDocumentIds: string[] = [];
+    let workspaceContext: string | undefined;
 
     if (mode === "intelligence") {
       // Intelligence never trusts client-supplied document bodies.
@@ -174,6 +177,13 @@ export async function POST(req: Request) {
       }
     }
 
+    if (mode === "daily") {
+      const timezone =
+        body.timezone && isValidTimeZone(body.timezone) ? body.timezone : "UTC";
+      const workspace = await getDailyWorkspace(user.id, timezone);
+      workspaceContext = formatDailyAiContext(workspace);
+    }
+
     const encoder = new TextEncoder();
     const stream = new ReadableStream<Uint8Array>({
       async start(controller) {
@@ -206,6 +216,7 @@ export async function POST(req: Request) {
                 documentKind,
                 documentToolText,
                 userId: user.id,
+                workspaceContext,
               },
               { signal: req.signal }
             ),

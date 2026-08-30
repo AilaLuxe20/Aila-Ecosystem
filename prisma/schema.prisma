@@ -30,6 +30,13 @@ model User {
   commerceProducts       CommerceProduct[]
   commerceOrders         CommerceOrder[]
   adsCampaigns           AdsCampaign[]
+  adsCreatives           AdsCreative[]
+  adsPlatformConnections AdsPlatformConnection[]
+  adsLandingAnalyses     AdsLandingPageAnalysis[]
+  adsRecommendations     AdsRecommendation[]
+  adsAiUsage             AdsAiUsage[]
+  dailyNotes             DailyNote[]
+  dailyGoals             DailyGoal[]
   appListings            AppListing[]
   sites                  Site[]
   flows                  Flow[]
@@ -304,25 +311,127 @@ model CommerceOrder {
 }
 
 model AdsCampaign {
-  id             String    @id @default(cuid())
-  userId         String
-  name           String
-  objective      String
-  budgetCents    Int
-  headline       String
-  body           String    @db.Text
-  targetingNotes String?   @db.Text
-  status         String    @default("draft")
-  startsAt       DateTime?
-  endsAt         DateTime?
-  launchedAt     DateTime?
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
+  id               String    @id @default(cuid())
+  userId           String
+  name             String
+  objective        String
+  budgetCents      Int
+  plannedSpendCents Int?
+  headline         String
+  body             String    @db.Text
+  targetingNotes   String?   @db.Text
+  audience         String?   @db.Text
+  location         String?   @db.Text
+  landingPageUrl   String?
+  conversionGoal   String?
+  callToAction     String?
+  currency         String    @default("usd")
+  timezone         String    @default("UTC")
+  intendedPlatform String?
+  status           String    @default("draft")
+  startsAt         DateTime?
+  endsAt           DateTime?
+  launchedAt       DateTime?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user             User                     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  creatives        AdsCreative[]
+  landingAnalyses  AdsLandingPageAnalysis[]
+  recommendations  AdsRecommendation[]
 
   @@index([userId, status])
   @@map("ads_campaigns")
+}
+
+model AdsCreative {
+  id           String   @id @default(cuid())
+  userId       String
+  campaignId   String
+  source       String
+  variantLabel String?
+  headline     String
+  body         String   @db.Text
+  callToAction String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user     User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  campaign AdsCampaign  @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@index([userId, campaignId])
+  @@map("ads_creatives")
+}
+
+model AdsPlatformConnection {
+  id        String   @id @default(cuid())
+  userId    String
+  platform  String
+  status    String   @default("not_connected")
+  note      String?  @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, platform])
+  @@index([userId])
+  @@map("ads_platform_connections")
+}
+
+model AdsLandingPageAnalysis {
+  id           String    @id @default(cuid())
+  userId       String
+  campaignId   String?
+  url          String
+  fetchStatus  String
+  httpStatus   Int?
+  title        String?
+  excerpt      String?   @db.Text
+  analysis     String?   @db.Text
+  errorMessage String?
+  fetchedAt    DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  user     User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  campaign AdsCampaign?  @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@index([userId, campaignId])
+  @@map("ads_landing_page_analyses")
+}
+
+model AdsRecommendation {
+  id         String   @id @default(cuid())
+  userId     String
+  campaignId String
+  kind       String
+  content    String   @db.Text
+  source     String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  user     User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  campaign AdsCampaign  @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@index([userId, campaignId])
+  @@map("ads_recommendations")
+}
+
+model AdsAiUsage {
+  id        String   @id @default(cuid())
+  userId    String
+  day       DateTime @db.Date
+  kind      String
+  count     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, day, kind])
+  @@index([userId, day])
+  @@map("ads_ai_usage")
 }
 
 model AppListing {
@@ -379,6 +488,36 @@ model Flow {
   @@map("flows")
 }
 
+model DailyNote {
+  id        String   @id @default(cuid())
+  userId    String
+  title     String
+  body      String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, updatedAt])
+  @@map("daily_notes")
+}
+
+model DailyGoal {
+  id        String    @id @default(cuid())
+  userId    String
+  title     String
+  status    String    @default("open")
+  dueAt     DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, status])
+  @@index([userId, dueAt])
+  @@map("daily_goals")
+}
+
 model BillingSubscription {
   id                   String    @id @default(cuid())
   userId               String
@@ -388,6 +527,7 @@ model BillingSubscription {
   plan                 String    @default("pro")
   status               String
   currentPeriodEnd     DateTime?
+  trialEndsAt          DateTime?
   cancelAtPeriodEnd    Boolean   @default(false)
   createdAt            DateTime  @default(now())
   updatedAt            DateTime  @updatedAt
@@ -396,4 +536,13 @@ model BillingSubscription {
 
   @@index([userId, status])
   @@map("billing_subscriptions")
+}
+
+model StripeWebhookEvent {
+  id        String   @id
+  type      String
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@map("stripe_webhook_events")
 }

@@ -148,7 +148,7 @@ export function MarkdownRenderer({
 
         return <CodeBlock code={text} language={language} className="my-4" />;
       },
-      pre: ({ children }) => <>{children}</>,
+      pre: ({ children }) => <div className="contents">{children}</div>,
       table: ({ children }) => <Table className="my-4">{children}</Table>,
       thead: ({ children }) => <TableHeader>{children}</TableHeader>,
       tbody: ({ children }) => <TableBody>{children}</TableBody>,

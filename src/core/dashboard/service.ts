@@ -2,6 +2,8 @@ import { prisma } from "@/core/database/prisma";
 
 export type DashboardSummary = {
   conversations: number;
+  dailyNotes: number;
+  openGoals: number;
   legalConversations: number;
   calendarEvents: number;
   contacts: number;
@@ -18,6 +20,8 @@ export type DashboardSummary = {
 export async function getDashboardSummary(userId: string): Promise<DashboardSummary> {
   const [
     conversations,
+    dailyNotes,
+    openGoals,
     legalConversations,
     calendarEvents,
     contacts,
@@ -31,6 +35,8 @@ export async function getDashboardSummary(userId: string): Promise<DashboardSumm
     flows,
   ] = await Promise.all([
     prisma.conversation.count({ where: { userId, mode: "intelligence" } }),
+    prisma.dailyNote.count({ where: { userId } }),
+    prisma.dailyGoal.count({ where: { userId, status: "open" } }),
     prisma.conversation.count({ where: { userId, mode: "legal" } }),
     prisma.calendarEvent.count({ where: { userId, archivedAt: null } }),
     prisma.businessContact.count({ where: { userId } }),
@@ -46,6 +52,8 @@ export async function getDashboardSummary(userId: string): Promise<DashboardSumm
 
   return {
     conversations,
+    dailyNotes,
+    openGoals,
     legalConversations,
     calendarEvents,
     contacts,

@@ -29,7 +29,11 @@ export const config = {
 } as const;
 
 export function getOpenRouterApiKey(): string | undefined {
-  return getOptionalSecret("OPENROUTER_API_KEY");
+  const value = getOptionalSecret("OPENROUTER_API_KEY");
+  if (!value) return undefined;
+
+  const key = value.replace(/^Bearer\s+/i, "").trim();
+  return key || undefined;
 }
 
 export function getResendApiKey(): string | undefined {
@@ -65,5 +69,17 @@ export function getClerkWebhookSecret(): string | undefined {
 }
 
 export function getAppUrl(): string {
+  if (process.env.NODE_ENV === "development") {
+    const configured = publicEnv.NEXT_PUBLIC_APP_URL;
+    if (configured.startsWith("http://localhost") || configured.startsWith("http://127.0.0.1")) {
+      return configured;
+    }
+    return "http://localhost:3000";
+  }
+
+  if (process.env.VERCEL_URL && process.env.VERCEL_ENV !== "production") {
+    return `https://${process.env.VERCEL_URL}`;
+  }
+
   return publicEnv.NEXT_PUBLIC_APP_URL;
 }

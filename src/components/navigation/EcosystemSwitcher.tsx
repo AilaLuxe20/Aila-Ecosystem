@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { PRODUCT_NAVIGATION } from "@/core/constants";
+import { ALL_PRODUCTS } from "@/core/constants";
 
 export default function EcosystemSwitcher() {
   const pathname = usePathname();
@@ -13,11 +13,11 @@ export default function EcosystemSwitcher() {
     <>
       {/* DESKTOP SWITCHER */}
       <div className="pointer-events-none fixed bottom-5 left-0 right-0 z-[100] hidden justify-center px-5 lg:flex">
-        <nav className="pointer-events-auto flex items-center gap-1 rounded-full border border-white/[0.1] bg-black/75 p-1.5 shadow-[0_20px_80px_rgba(0,0,0,0.65)] backdrop-blur-2xl">
+        <nav className="pointer-events-auto flex max-w-[calc(100vw-2.5rem)] items-center gap-1 overflow-x-auto rounded-full border border-white/[0.1] bg-black/75 p-1.5 shadow-[0_20px_80px_rgba(0,0,0,0.65)] backdrop-blur-2xl">
           <Link
             href="/"
             aria-label="Aila Ecosystem home"
-            className={`group relative flex h-11 items-center gap-3 overflow-hidden rounded-full border px-4 transition duration-500 ${
+            className={`group relative flex h-11 shrink-0 items-center gap-3 overflow-hidden rounded-full border px-4 transition duration-500 ${
               homeActive
                 ? "border-white/[0.14] bg-white/[0.08]"
                 : "border-transparent hover:border-white/[0.1] hover:bg-white/[0.05]"
@@ -54,16 +54,16 @@ export default function EcosystemSwitcher() {
             )}
           </Link>
 
-          <div className="mx-1 h-7 w-px bg-white/[0.08]" />
+          <div className="mx-1 h-7 w-px shrink-0 bg-white/[0.08]" />
 
-          {PRODUCT_NAVIGATION.map((product) => {
+          {ALL_PRODUCTS.map((product) => {
             const active = pathname.startsWith(product.href);
 
             return (
               <Link
                 key={product.name}
                 href={product.href}
-                className={`group relative flex h-11 items-center gap-2.5 overflow-hidden rounded-full border px-4 transition duration-500 ${
+                className={`group relative flex h-11 shrink-0 items-center gap-2.5 overflow-hidden rounded-full border px-4 transition duration-500 ${
                   active
                     ? `${product.activeBorder} ${product.activeBackground}`
                     : "border-transparent hover:border-white/[0.08] hover:bg-white/[0.04]"
@@ -109,11 +109,11 @@ export default function EcosystemSwitcher() {
       </div>
 
       {/* MOBILE SWITCHER */}
-      <nav className="fixed bottom-3 left-3 right-3 z-[100] grid grid-cols-5 rounded-[22px] border border-white/[0.1] bg-black/85 p-1.5 shadow-[0_20px_80px_rgba(0,0,0,0.75)] backdrop-blur-2xl lg:hidden">
+      <nav className="fixed bottom-3 left-3 right-3 z-[100] flex gap-1 overflow-x-auto rounded-[22px] border border-white/[0.1] bg-black/85 p-1.5 shadow-[0_20px_80px_rgba(0,0,0,0.75)] backdrop-blur-2xl lg:hidden">
         <Link
           href="/"
           aria-label="Aila Ecosystem"
-          className={`relative flex min-h-12 flex-col items-center justify-center gap-1 overflow-hidden rounded-2xl border transition duration-300 ${
+          className={`relative flex min-h-12 min-w-[4.5rem] shrink-0 flex-col items-center justify-center gap-1 overflow-hidden rounded-2xl border transition duration-300 ${
             homeActive
               ? "border-white/[0.1] bg-white/[0.08]"
               : "border-transparent"
@@ -134,14 +134,14 @@ export default function EcosystemSwitcher() {
           </span>
         </Link>
 
-        {PRODUCT_NAVIGATION.map((product) => {
+        {ALL_PRODUCTS.map((product) => {
           const active = pathname.startsWith(product.href);
 
           return (
             <Link
               key={product.name}
               href={product.href}
-              className={`relative flex min-h-12 flex-col items-center justify-center gap-1 overflow-hidden rounded-2xl border transition duration-300 ${
+              className={`relative flex min-h-12 min-w-[4.5rem] shrink-0 flex-col items-center justify-center gap-1 overflow-hidden rounded-2xl border transition duration-300 ${
                 active
                   ? `${product.activeBorder} ${product.activeBackground}`
                   : "border-transparent"

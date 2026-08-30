@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAuth, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
-import { ALL_PRODUCTS } from "@/core/constants";
+import { groupedNavProducts } from "@/core/constants";
 
 const navigation = [
   {
@@ -14,18 +14,15 @@ const navigation = [
     label: "Services",
     href: "/#services",
   },
-  {
-    label: "Products",
-    href: "/#products",
-  },
 ];
 
-const aiProducts = ALL_PRODUCTS.slice(0, 4);
-const platformProducts = ALL_PRODUCTS.slice(4);
+const navGroups = groupedNavProducts();
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [productsOpen, setProductsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const productsRef = useRef<HTMLDivElement>(null);
   const { isSignedIn } = useAuth();
 
   useEffect(() => {
@@ -38,22 +35,28 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener(
-        "scroll",
-        handleScroll
-      );
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = menuOpen
-      ? "hidden"
-      : "";
+    document.body.style.overflow = menuOpen ? "hidden" : "";
 
     return () => {
       document.body.style.overflow = "";
     };
   }, [menuOpen]);
+
+  useEffect(() => {
+    function onPointerDown(event: MouseEvent) {
+      if (!productsRef.current?.contains(event.target as Node)) {
+        setProductsOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", onPointerDown);
+    return () => document.removeEventListener("mousedown", onPointerDown);
+  }, []);
 
   return (
     <>
@@ -64,7 +67,7 @@ export default function Navbar() {
             : "bg-transparent"
         }`}
       >
-        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
+        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-4 px-6">
           <Link
             href="/"
             onClick={() => setMenuOpen(false)}
@@ -98,39 +101,54 @@ export default function Navbar() {
               </Link>
             ))}
 
-            <div className="mx-2 h-4 w-px bg-white/[0.08]" />
-
-            {aiProducts.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
+            <div className="relative" ref={productsRef}>
+              <button
+                type="button"
+                aria-expanded={productsOpen}
+                aria-haspopup="menu"
+                onClick={() => setProductsOpen((open) => !open)}
                 className="rounded-full px-4 py-2 text-sm text-neutral-500 transition duration-300 hover:bg-white/[0.04] hover:text-white"
               >
-                {item.name}
-              </Link>
-            ))}
+                Products
+              </button>
 
-            <div className="mx-2 h-4 w-px bg-white/[0.08]" />
-
-            {platformProducts.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="rounded-full px-4 py-2 text-sm text-neutral-500 transition duration-300 hover:bg-white/[0.04] hover:text-white"
-              >
-                {item.name}
-              </Link>
-            ))}
+              {productsOpen ? (
+                <div
+                  role="menu"
+                  className="absolute left-0 top-full z-50 mt-2 w-[360px] rounded-2xl border border-white/[0.1] bg-black/95 p-2 shadow-[0_20px_80px_rgba(0,0,0,0.65)] backdrop-blur-2xl"
+                >
+                  {navGroups.map((group) => (
+                    <div key={group.group} className="mb-1 last:mb-0">
+                      <p className="px-3 pb-1 pt-2 text-[10px] uppercase tracking-[0.22em] text-neutral-600">
+                        {group.label}
+                      </p>
+                      {group.products.map((item) => (
+                        <Link
+                          key={item.name}
+                          href={item.href}
+                          role="menuitem"
+                          onClick={() => setProductsOpen(false)}
+                          className="flex items-center justify-between rounded-xl px-3 py-2.5 text-sm text-neutral-300 transition hover:bg-white/[0.06] hover:text-white"
+                        >
+                          <span>{item.name}</span>
+                          <span className="text-neutral-600">→</span>
+                        </Link>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              ) : null}
+            </div>
           </nav>
 
-          <Link
-            href="/#start-project"
-            className="hidden rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition duration-300 hover:scale-105 lg:inline-flex"
-          >
-            Start a Project
-          </Link>
-
           <div className="hidden items-center gap-2 lg:flex">
+            <Link
+              href="/#start-project"
+              className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition duration-300 hover:scale-105"
+            >
+              Start a Project
+            </Link>
+
             {isSignedIn ? (
               <>
                 <Link
@@ -155,24 +173,22 @@ export default function Navbar() {
               </>
             ) : (
               <>
-                <SignInButton
-                  mode="modal"
-                  appearance={{
-                    elements: {
-                      button:
-                        "rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-neutral-300 transition hover:bg-white/10",
-                    },
-                  }}
-                />
-                <SignUpButton
-                  mode="modal"
-                  appearance={{
-                    elements: {
-                      button:
-                        "rounded-full bg-white px-4 py-2 text-sm font-semibold text-black transition hover:scale-105",
-                    },
-                  }}
-                />
+                <SignInButton mode="modal">
+                  <button
+                    type="button"
+                    className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-neutral-300 transition hover:bg-white/10"
+                  >
+                    Sign In
+                  </button>
+                </SignInButton>
+                <SignUpButton mode="modal">
+                  <button
+                    type="button"
+                    className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-black transition hover:scale-105"
+                  >
+                    Sign Up
+                  </button>
+                </SignUpButton>
               </>
             )}
           </div>
@@ -219,7 +235,7 @@ export default function Navbar() {
       >
         <div className="pointer-events-none absolute left-1/2 top-[-200px] h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-cyan-500/[0.08] blur-[140px]" />
 
-        <div className="relative flex min-h-screen flex-col px-6 pb-10 pt-32">
+        <div className="relative flex min-h-screen flex-col overflow-y-auto px-6 pb-10 pt-32">
           <nav className="flex flex-col">
             {navigation.map((item, index) => (
               <Link
@@ -244,62 +260,28 @@ export default function Navbar() {
               </Link>
             ))}
 
-            <div className="my-4 h-px w-full bg-white/[0.06]" />
-
-            <p className="py-3 text-xs uppercase tracking-[0.25em] text-neutral-600">
-              AI Products
-            </p>
-
-            {aiProducts.map((item, index) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                onClick={() => setMenuOpen(false)}
-                className="group flex items-center justify-between border-b border-white/[0.07] py-5"
-              >
-                <div className="flex items-center gap-5">
-                  <span className="text-xs text-neutral-700">
-                    0{navigation.length + index + 1}
-                  </span>
-
-                  <span className="text-xl font-medium tracking-[-0.03em] text-neutral-300 transition group-hover:text-white">
-                    {item.name}
-                  </span>
-                </div>
-
-                <span className="text-neutral-700 transition group-hover:translate-x-1 group-hover:text-cyan-300">
-                  →
-                </span>
-              </Link>
-            ))}
-
-            <div className="my-4 h-px w-full bg-white/[0.06]" />
-
-            <p className="py-3 text-xs uppercase tracking-[0.25em] text-neutral-600">
-              Platform
-            </p>
-
-            {platformProducts.map((item, index) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                onClick={() => setMenuOpen(false)}
-                className="group flex items-center justify-between border-b border-white/[0.07] py-5"
-              >
-                <div className="flex items-center gap-5">
-                  <span className="text-xs text-neutral-700">
-                    0{navigation.length + aiProducts.length + index + 1}
-                  </span>
-
-                  <span className="text-xl font-medium tracking-[-0.03em] text-neutral-300 transition group-hover:text-white">
-                    {item.name}
-                  </span>
-                </div>
-
-                <span className="text-neutral-700 transition group-hover:translate-x-1 group-hover:text-cyan-300">
-                  →
-                </span>
-              </Link>
+            {navGroups.map((group) => (
+              <div key={group.group}>
+                <div className="my-4 h-px w-full bg-white/[0.06]" />
+                <p className="py-3 text-xs uppercase tracking-[0.25em] text-neutral-600">
+                  {group.label}
+                </p>
+                {group.products.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    onClick={() => setMenuOpen(false)}
+                    className="group flex items-center justify-between border-b border-white/[0.07] py-5"
+                  >
+                    <span className="text-xl font-medium tracking-[-0.03em] text-neutral-300 transition group-hover:text-white">
+                      {item.name}
+                    </span>
+                    <span className="text-neutral-700 transition group-hover:translate-x-1 group-hover:text-cyan-300">
+                      →
+                    </span>
+                  </Link>
+                ))}
+              </div>
             ))}
           </nav>
 
@@ -339,24 +321,22 @@ export default function Navbar() {
                 </div>
               ) : (
                 <>
-                  <SignInButton
-                    mode="modal"
-                    appearance={{
-                      elements: {
-                        button:
-                          "w-full rounded-full border border-white/10 bg-white/5 px-6 py-4 text-center text-sm font-semibold text-neutral-300 transition hover:bg-white/10",
-                      },
-                    }}
-                  />
-                  <SignUpButton
-                    mode="modal"
-                    appearance={{
-                      elements: {
-                        button:
-                          "w-full rounded-full bg-white px-6 py-4 text-center text-sm font-semibold text-black transition hover:scale-105",
-                      },
-                    }}
-                  />
+                  <SignInButton mode="modal">
+                    <button
+                      type="button"
+                      className="w-full rounded-full border border-white/10 bg-white/5 px-6 py-4 text-center text-sm font-semibold text-neutral-300 transition hover:bg-white/10"
+                    >
+                      Sign In
+                    </button>
+                  </SignInButton>
+                  <SignUpButton mode="modal">
+                    <button
+                      type="button"
+                      className="w-full rounded-full bg-white px-6 py-4 text-center text-sm font-semibold text-black transition hover:scale-105"
+                    >
+                      Sign Up
+                    </button>
+                  </SignUpButton>
                 </>
               )}
             </div>

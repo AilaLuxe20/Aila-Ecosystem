@@ -44,6 +44,12 @@ const defaultSuggestions: Record<AilaMode, string[]> = {
     "Add AI to my business",
     "Automate repetitive work",
   ],
+  daily: [
+    "Help me plan today from my stored work",
+    "Break my open goals into tasks",
+    "Prioritize what I should do first",
+    "Summarise my notes into an action plan",
+  ],
   legal: [
     "What should I check before signing a contract?",
     "Explain a termination clause",
@@ -93,6 +99,7 @@ const defaultSuggestions: Record<AilaMode, string[]> = {
 
 const defaultPlaceholders: Record<AilaMode, string> = {
   intelligence: "Tell Aila what you want to build...",
+  daily: "Ask Aila Daily to plan from your stored work...",
   legal: "Ask AilaLegal about a contract, clause or legal document...",
   business: "Ask Aila Business AI...",
   automation: "Describe a process to automate...",
@@ -108,6 +115,10 @@ const defaultHeaders: Record<AilaMode, { title: string; subtitle: string }> = {
   intelligence: {
     title: "Aila Intelligence",
     subtitle: "Core ecosystem intelligence",
+  },
+  daily: {
+    title: "Aila Daily",
+    subtitle: "Everyday planning assistant",
   },
   legal: {
     title: "AilaLegal Intelligence",
@@ -150,6 +161,8 @@ const defaultHeaders: Record<AilaMode, { title: string; subtitle: string }> = {
 const defaultWelcomeMessages: Record<AilaMode, string> = {
   intelligence:
     "Welcome. I am Aila Intelligence, the intelligence layer of the Aila Ecosystem. Tell me what you want to build, improve or automate.",
+  daily:
+    "Welcome to Aila Daily. I can help plan the day from the notes, goals, tasks, and calendar already stored on your account.",
   legal:
     "Welcome to AilaLegal AI. I can help you understand contracts, documents, clauses and potential review points. How can I assist you?",
   business:
@@ -838,6 +851,11 @@ export default function ChatInterface({
       return;
     }
 
+    if (!isSignedIn) {
+      setSendError("Sign in to chat with Aila.");
+      return;
+    }
+
     const previousMessages = messages;
     const userMessage: ChatMessage = {
       role: "user",
@@ -901,6 +919,9 @@ export default function ChatInterface({
           attachment?.status === "ready" &&
           attachment.documentId
             ? { documentIds: [attachment.documentId] }
+            : {}),
+          ...(mode === "daily"
+            ? { timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC" }
             : {}),
         }),
       });
