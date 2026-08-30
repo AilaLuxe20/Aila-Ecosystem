@@ -17,13 +17,41 @@ import { ConfigurationError } from "@/lib/errors/app-error";
 /** Deployment environment the app is running in. */
 export type RuntimeEnvironment = "development" | "preview" | "production" | "test";
 
+/**
+ * Trims whitespace and quotes from env values.
+ * A missing closing quote in `.env.local` would otherwise be sent as part of
+ * the credential and rejected as 401.
+ */
+export function normalizeOptionalEnvValue(value: unknown): unknown {
+  if (typeof value !== "string") return value;
+
+  let next = value.trim();
+
+  if (next.length >= 2) {
+    const quote = next[0];
+    if ((quote === '"' || quote === "'") && next.endsWith(quote)) {
+      next = next.slice(1, -1).trim();
+    }
+  }
+
+  if (next.startsWith('"') || next.startsWith("'")) {
+    next = next.slice(1).trim();
+  }
+
+  if (next.endsWith('"') || next.endsWith("'")) {
+    next = next.slice(0, -1).trim();
+  }
+
+  return next === "" ? undefined : next;
+}
+
 const optionalUrl = z.preprocess(
-  (value) => (typeof value === "string" && value.trim() === "" ? undefined : value),
+  normalizeOptionalEnvValue,
   z.string().url().optional(),
 );
 
 const optionalSecret = z.preprocess(
-  (value) => (typeof value === "string" && value.trim() === "" ? undefined : value),
+  normalizeOptionalEnvValue,
   z.string().min(1).optional(),
 );
 
@@ -55,8 +83,8 @@ const publicEnvSchema = z.object({
   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: optionalSecret,
   NEXT_PUBLIC_CLERK_SIGN_IN_URL: z.string().default("/sign-in"),
   NEXT_PUBLIC_CLERK_SIGN_UP_URL: z.string().default("/sign-up"),
-  NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL: z.string().default("/dashboard"),
-  NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL: z.string().default("/dashboard"),
+  NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL: z.string().default("/products/daily"),
+  NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL: z.string().default("/products/daily"),
   NEXT_PUBLIC_SUPABASE_URL: optionalUrl,
   NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: optionalSecret,
   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: optionalSecret,

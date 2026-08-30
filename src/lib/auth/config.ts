@@ -1,6 +1,8 @@
 /**
- * Route lists kept in sync with `src/proxy.ts`.
- * Clerk enforcement lives in proxy.ts, not this file.
+ * Intended public vs signed-in surfaces. Enforcement is resource-based:
+ * pages call `requireProductAccess` / `auth()`, APIs call
+ * `requireWorkspaceUser` / `requirePrismaUser`. `proxy.ts` only runs Clerk
+ * session plumbing.
  */
 export const authConfig = {
   publicRoutes: [
@@ -13,6 +15,7 @@ export const authConfig = {
     "/privacy",
     "/terms",
     "/s",
+    "/s/:path*",
     "/build-with-aila",
     "/project-discovery",
     "/products/intelligence",
@@ -30,6 +33,7 @@ export const authConfig = {
     "/products/automation",
     "/products/commerce",
     "/products/ads",
+    "/products/daily",
     "/products/calendar",
     "/products/sites",
     "/products/apps",
@@ -40,6 +44,7 @@ export const authConfig = {
     "/api/automation",
     "/api/commerce",
     "/api/ads",
+    "/api/daily",
     "/api/apps",
     "/api/sites",
     "/api/flow",

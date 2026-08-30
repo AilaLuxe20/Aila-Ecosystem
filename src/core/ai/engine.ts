@@ -30,8 +30,12 @@ import {
   type OpenRouterStreamEvent,
 } from "@/core/ai/streaming";
 import type { OpenRouterToolSpec, ProviderChatMessage } from "@/core/ai/orchestrator/tools/contract";
-
-const OPENROUTER_ENDPOINT = "https://openrouter.ai/api/v1/chat/completions";
+import {
+  OPENROUTER_CHAT_URL,
+  buildOpenRouterHeaders,
+  openRouterUserMessage,
+  readOpenRouterFailure,
+} from "@/core/ai/openrouter";
 
 /**
  * Validate and sanitise chat messages.
@@ -88,7 +92,7 @@ type PreparedChat =
   | { ok: false; response: AIResponse };
 
 function prepareChatRequest(request: AIRequest): PreparedChat {
-  const { mode, messages, documentText, documentName } = request;
+  const { mode, messages, documentText, documentName, workspaceContext } = request;
 
   const apiKey = getOpenRouterApiKey();
   if (!apiKey) {
@@ -142,6 +146,14 @@ Content:
 ${documentText.trim().slice(0, 14000)}`;
   }
 
+  if (workspaceContext && workspaceContext.trim().length > 0) {
+    systemPrompt = `${systemPrompt}
+
+CURRENT USER WORKSPACE (trusted server-loaded account data — use this, do not invent replacements):
+
+${workspaceContext.trim().slice(0, 8000)}`;
+  }
+
   return {
     ok: true,
     apiKey,
@@ -180,13 +192,9 @@ function createOpenRouterRequest(
     ...prepared.validMessages,
   ];
 
-  return fetch(OPENROUTER_ENDPOINT, {
+  return fetch(OPENROUTER_CHAT_URL, {
     method: "POST",
-    headers: {
-      Authorization: `Bearer ${prepared.apiKey}`,
-      "Content-Type": "application/json",
-      ...(stream ? { Accept: "text/event-stream" } : {}),
-    },
+    headers: buildOpenRouterHeaders(prepared.apiKey, stream),
     signal: options.signal,
     body: JSON.stringify({
       model: AI_MODEL,
@@ -295,14 +303,16 @@ export async function chatTurn(
   }
 
   if (!aiResponse.ok) {
+    const failure = await readOpenRouterFailure(aiResponse);
     console.error("Aila AI Engine Turn API Error:", {
-      status: aiResponse.status,
+      status: failure.status,
+      code: failure.code,
     });
     return {
       success: false,
       reply: "",
       toolCalls: [],
-      error: "Aila Intelligence could not respond right now.",
+      error: openRouterUserMessage(failure, "chat"),
     };
   }
 
@@ -363,19 +373,21 @@ export async function chat(request: AIRequest): Promise<AIResponse> {
 
   const aiResponse = await createOpenRouterRequest(prepared, false);
 
-  const data = await aiResponse.json();
-
   if (!aiResponse.ok) {
+    const failure = await readOpenRouterFailure(aiResponse);
     console.error("Aila AI Engine API Error:", {
-      status: aiResponse.status,
+      status: failure.status,
+      code: failure.code,
     });
 
     return {
       success: false,
       reply: "",
-      error: "Aila Intelligence could not respond right now.",
+      error: openRouterUserMessage(failure, "chat"),
     };
   }
+
+  const data = await aiResponse.json();
 
   const reply = data?.choices?.[0]?.message?.content;
 
@@ -446,12 +458,14 @@ export async function* chatStream(
   }
 
   if (!aiResponse.ok || !aiResponse.body) {
+    const failure = await readOpenRouterFailure(aiResponse);
     console.error("Aila AI Engine Stream API Error:", {
-      status: aiResponse.status,
+      status: failure.status,
+      code: failure.code,
     });
     yield {
       type: "error",
-      error: "Aila Intelligence could not respond right now.",
+      error: openRouterUserMessage(failure, "chat"),
     };
     return;
   }
@@ -509,12 +523,9 @@ export async function analyzeDocument(
 
   const modeConfig = MODE_CONFIG[mode];
 
-  const aiResponse = await fetch(OPENROUTER_ENDPOINT, {
+  const aiResponse = await fetch(OPENROUTER_CHAT_URL, {
     method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
+    headers: buildOpenRouterHeaders(apiKey),
     body: JSON.stringify({
       model: AI_MODEL,
       messages: [
@@ -538,19 +549,21 @@ ${documentText}
     }),
   });
 
-  const data = await aiResponse.json();
-
   if (!aiResponse.ok) {
+    const failure = await readOpenRouterFailure(aiResponse);
     console.error("Aila Document Analysis API Error:", {
-      status: aiResponse.status,
+      status: failure.status,
+      code: failure.code,
     });
 
     return {
       success: false,
       reply: "",
-      error: "Aila could not analyze the document right now.",
+      error: openRouterUserMessage(failure, "document"),
     };
   }
+
+  const data = await aiResponse.json();
 
   const analysis = data?.choices?.[0]?.message?.content;
 

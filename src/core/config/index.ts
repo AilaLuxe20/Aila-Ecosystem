@@ -29,7 +29,11 @@ export const config = {
 } as const;
 
 export function getOpenRouterApiKey(): string | undefined {
-  return getOptionalSecret("OPENROUTER_API_KEY");
+  const value = getOptionalSecret("OPENROUTER_API_KEY");
+  if (!value) return undefined;
+
+  const key = value.replace(/^Bearer\s+/i, "").trim();
+  return key || undefined;
 }
 
 export function getResendApiKey(): string | undefined {

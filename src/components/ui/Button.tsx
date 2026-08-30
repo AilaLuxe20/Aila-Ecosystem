@@ -106,20 +106,34 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
   },
   ref,
 ) {
-  const Component = asChild ? Slot.Root : "button";
   const resolvedSize: ControlSize = size ?? "md";
+  const classNames = cn(
+    buttonVariants({ variant, size, fullWidth }),
+    glyphSizeStyles[resolvedSize],
+    className,
+  );
+
+  if (asChild) {
+    return (
+      <Slot.Root
+        ref={ref}
+        aria-busy={loading || undefined}
+        aria-disabled={disabled || loading || undefined}
+        className={classNames}
+        {...props}
+      >
+        {children}
+      </Slot.Root>
+    );
+  }
 
   return (
-    <Component
+    <button
       ref={ref}
-      type={asChild ? undefined : type}
+      type={type}
       disabled={disabled || loading}
       aria-busy={loading || undefined}
-      className={cn(
-        buttonVariants({ variant, size, fullWidth }),
-        glyphSizeStyles[resolvedSize],
-        className,
-      )}
+      className={classNames}
       {...props}
     >
       {loading ? (
@@ -134,7 +148,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
           {trailingIcon}
         </>
       )}
-    </Component>
+    </button>
   );
 });
 

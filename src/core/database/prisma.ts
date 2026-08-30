@@ -16,6 +16,30 @@ declare global {
 
 let prismaClient: PrismaClient | undefined;
 
+function isLocalDatabaseHost(databaseUrl: string): boolean {
+  return /@:?(localhost|127\.0\.0\.1|\[::1\])[:/]/.test(databaseUrl);
+}
+
+/**
+ * pg v8 treats sslmode=require/prefer/verify-ca as verify-full. The next major
+ * release will follow libpq (weaker). Pin the current secure behavior for
+ * remote hosts without changing local unencrypted development URLs.
+ */
+export function resolvePostgresConnectionString(databaseUrl: string): string {
+  if (
+    databaseUrl.startsWith("prisma://") ||
+    databaseUrl.startsWith("prisma+postgres://") ||
+    isLocalDatabaseHost(databaseUrl)
+  ) {
+    return databaseUrl;
+  }
+
+  return databaseUrl.replace(
+    /([?&]sslmode=)(require|prefer|verify-ca)(?=&|$)/i,
+    "$1verify-full",
+  );
+}
+
 function createPrismaClient(): PrismaClient {
   const databaseUrl = process.env.DATABASE_URL?.trim();
 
@@ -23,12 +47,14 @@ function createPrismaClient(): PrismaClient {
     throw new Error("DATABASE_URL is not set.");
   }
 
-  if (databaseUrl.startsWith("prisma://") || databaseUrl.startsWith("prisma+postgres://")) {
-    return new PrismaClient({ accelerateUrl: databaseUrl });
+  const resolvedUrl = resolvePostgresConnectionString(databaseUrl);
+
+  if (resolvedUrl.startsWith("prisma://") || resolvedUrl.startsWith("prisma+postgres://")) {
+    return new PrismaClient({ accelerateUrl: resolvedUrl });
   }
 
   return new PrismaClient({
-    adapter: new PrismaPg(databaseUrl),
+    adapter: new PrismaPg(resolvedUrl),
   });
 }
 
