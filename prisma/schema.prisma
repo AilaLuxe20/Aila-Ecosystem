@@ -40,6 +40,22 @@ model User {
   appListings            AppListing[]
   sites                  Site[]
   flows                  Flow[]
+  writerDocuments        WriterDocument[]
+  translateEntries       TranslateEntry[]
+  libraryDocuments       LibraryDocument[]
+  codingProjects         CodingProject[]
+  educationCourses       EducationCourse[]
+  educationNotes         EducationNote[]
+  educationQuizzes       EducationQuiz[]
+  careerResumes          CareerResume[]
+  careerApplications     CareerApplication[]
+  healthHabits           HealthHabit[]
+  healthLogs             HealthLog[]
+  financeTransactions    FinanceTransaction[]
+  financeBudgets         FinanceBudget[]
+  financeGoals           FinanceGoal[]
+  travelTrips            TravelTrip[]
+  shippingShipments      ShippingShipment[]
   billingSubscriptions   BillingSubscription[]
   createdAt              DateTime                 @default(now())
   updatedAt              DateTime                 @updatedAt
@@ -545,4 +561,284 @@ model StripeWebhookEvent {
 
   @@index([createdAt])
   @@map("stripe_webhook_events")
+}
+
+model WriterDocument {
+  id        String   @id @default(cuid())
+  userId    String
+  title     String
+  body      String   @db.Text
+  folder    String?
+  status    String   @default("draft")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, updatedAt])
+  @@map("writer_documents")
+}
+
+model TranslateEntry {
+  id              String   @id @default(cuid())
+  userId          String
+  sourceLang      String
+  targetLang      String
+  sourceText      String   @db.Text
+  translatedText  String   @db.Text
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@map("translate_entries")
+}
+
+model LibraryDocument {
+  id                 String   @id @default(cuid())
+  userId             String
+  title              String
+  fileName           String
+  fileSize           Int
+  mimeType           String
+  extractedText      String   @db.Text
+  extractedCharCount Int
+  truncated          Boolean  @default(false)
+  notes              String?  @db.Text
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, updatedAt])
+  @@map("library_documents")
+}
+
+model CodingProject {
+  id          String   @id @default(cuid())
+  userId      String
+  name        String
+  description String?  @db.Text
+  language    String
+  files       Json
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, updatedAt])
+  @@map("coding_projects")
+}
+
+model EducationCourse {
+  id          String   @id @default(cuid())
+  userId      String
+  title       String
+  topic       String
+  description String?  @db.Text
+  status      String   @default("active")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user    User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  notes   EducationNote[]
+  quizzes EducationQuiz[]
+
+  @@index([userId, status])
+  @@map("education_courses")
+}
+
+model EducationNote {
+  id        String   @id @default(cuid())
+  userId    String
+  courseId  String?
+  title     String
+  body      String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user   User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course EducationCourse? @relation(fields: [courseId], references: [id], onDelete: SetNull)
+
+  @@index([userId, updatedAt])
+  @@index([courseId])
+  @@map("education_notes")
+}
+
+model EducationQuiz {
+  id         String    @id @default(cuid())
+  userId     String
+  courseId   String
+  question   String    @db.Text
+  answer     String    @db.Text
+  userAnswer String?   @db.Text
+  correct    Boolean?
+  answeredAt DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  user   User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course EducationCourse @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@index([userId, courseId])
+  @@map("education_quizzes")
+}
+
+model CareerResume {
+  id          String   @id @default(cuid())
+  userId      String
+  title       String
+  summary     String   @db.Text
+  experience  String   @db.Text
+  skills      String   @db.Text
+  status      String   @default("draft")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, updatedAt])
+  @@map("career_resumes")
+}
+
+model CareerApplication {
+  id         String    @id @default(cuid())
+  userId     String
+  company    String
+  role       String
+  status     String    @default("draft")
+  notes      String?   @db.Text
+  appliedAt  DateTime?
+  interviewAt DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, status])
+  @@map("career_applications")
+}
+
+model HealthHabit {
+  id        String   @id @default(cuid())
+  userId    String
+  name      String
+  cadence   String
+  notes     String?  @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, updatedAt])
+  @@map("health_habits")
+}
+
+model HealthLog {
+  id        String   @id @default(cuid())
+  userId    String
+  kind      String
+  title     String
+  body      String   @db.Text
+  remindAt  DateTime?
+  done      Boolean  @default(false)
+  loggedAt  DateTime @default(now())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, loggedAt])
+  @@map("health_logs")
+}
+
+model FinanceTransaction {
+  id          String   @id @default(cuid())
+  userId      String
+  kind        String
+  amountCents Int
+  currency    String   @default("usd")
+  category    String
+  note        String?
+  occurredAt  DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, occurredAt])
+  @@index([userId, kind])
+  @@map("finance_transactions")
+}
+
+model FinanceBudget {
+  id         String   @id @default(cuid())
+  userId     String
+  category   String
+  limitCents Int
+  period     String   @default("month")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, category])
+  @@map("finance_budgets")
+}
+
+model FinanceGoal {
+  id          String   @id @default(cuid())
+  userId      String
+  title       String
+  targetCents Int
+  savedCents  Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, updatedAt])
+  @@map("finance_goals")
+}
+
+model TravelTrip {
+  id          String   @id @default(cuid())
+  userId      String
+  title       String
+  destination String
+  startsOn    DateTime?
+  endsOn      DateTime?
+  notes       String?  @db.Text
+  status      String   @default("planning")
+  items       Json
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, status])
+  @@map("travel_trips")
+}
+
+model ShippingShipment {
+  id                String   @id @default(cuid())
+  userId            String
+  senderName        String
+  senderAddress     String   @db.Text
+  recipientName     String
+  recipientAddress  String   @db.Text
+  packageDesc       String
+  weightKg          Decimal? @db.Decimal(8, 2)
+  carrier           String?
+  trackingNumber    String?
+  status            String   @default("draft")
+  notes             String?  @db.Text
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, status])
+  @@map("shipping_shipments")
 }

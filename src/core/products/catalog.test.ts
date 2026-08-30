@@ -23,4 +23,12 @@ test("AI modes map back to catalog products", () => {
   assert.equal(PRODUCTS.ads.group, "professional");
   assert.equal(PRODUCTS.intelligence.group, "everyday");
   assert.equal(PRODUCTS.commerce.group, "commerce");
+  assert.equal(PRODUCTS.writer.paid, false);
+  assert.equal(PRODUCTS.translate.paid, false);
+  assert.equal(PRODUCTS.documents.paid, false);
+  assert.equal(PRODUCTS.coding.paid, true);
+  assert.equal(PRODUCTS.shipping.group, "commerce");
+  assert.equal(PRODUCTS.health.group, "life");
+  assert.equal(productKeyFromMode("writer"), "writer");
+  assert.equal(productKeyFromMode("shipping"), "shipping");
 });

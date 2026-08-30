@@ -34,6 +34,16 @@ export const AILA_MODE_VALUES = [
   "commerce",
   "flow",
   "sites",
+  "writer",
+  "translate",
+  "documents",
+  "coding",
+  "education",
+  "career",
+  "health",
+  "finance",
+  "travel",
+  "shipping",
 ] as const satisfies readonly AilaMode[];
 
 export const ailaModeQuerySchema = z.enum(AILA_MODE_VALUES);

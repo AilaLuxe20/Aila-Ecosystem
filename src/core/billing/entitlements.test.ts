@@ -25,6 +25,18 @@ test("ads is available to signed-in users without a subscription", () => {
   assert.equal(decision.reason, "free_product");
 });
 
+test("writer, translate, and documents are free everyday products", () => {
+  assert.equal(evaluateEntitlement("user", "writer", false).allowed, true);
+  assert.equal(evaluateEntitlement("user", "translate", false).allowed, true);
+  assert.equal(evaluateEntitlement("user", "documents", false).allowed, true);
+});
+
+test("new life and professional products stay paid", () => {
+  assert.equal(evaluateEntitlement("user", "coding", false).allowed, false);
+  assert.equal(evaluateEntitlement("user", "health", false).allowed, false);
+  assert.equal(evaluateEntitlement("user", "shipping", false).allowed, false);
+});
+
 test("paid products require a subscription for the default user role", () => {
   const decision = evaluateEntitlement("user", "business", false);
   assert.equal(decision.allowed, false);

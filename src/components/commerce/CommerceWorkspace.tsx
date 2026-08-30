@@ -4,8 +4,9 @@ import { Plus } from "lucide-react";
 import { useAuth } from "@clerk/nextjs";
 import { useCallback, useEffect, useState } from "react";
 
+import ChatInterface from "@/components/ai/ChatInterface";
 import type { CommerceOrderDto, CommerceProductDto } from "@/core/commerce/service";
-import { workspaceFetch } from "@/components/workspace/api";
+import { useWorkspaceApi } from "@/components/workspace/api";
 import { WorkspaceShell } from "@/components/workspace/WorkspaceShell";
 import {
   Button,
@@ -33,6 +34,7 @@ function money(cents: number, currency: string) {
 
 function CommerceWorkspaceInner(): React.JSX.Element {
   const { isSignedIn } = useAuth();
+  const api = useWorkspaceApi();
   const toast = useToast();
   const [products, setProducts] = useState<CommerceProductDto[]>([]);
   const [orders, setOrders] = useState<CommerceOrderDto[]>([]);
@@ -57,8 +59,8 @@ function CommerceWorkspaceInner(): React.JSX.Element {
   const load = useCallback(async (signal?: AbortSignal) => {
     if (!isSignedIn) return;
     const [productBody, orderBody] = (await Promise.all([
-      workspaceFetch("/api/commerce/products", { method: "GET" }, signal),
-      workspaceFetch("/api/commerce/orders", { method: "GET" }, signal),
+      api("/api/commerce/products", { method: "GET" }, signal),
+      api("/api/commerce/orders", { method: "GET" }, signal),
     ])) as [
       { data?: { products?: CommerceProductDto[]; stripeConfigured?: boolean } },
       { data?: { orders?: CommerceOrderDto[] } },
@@ -68,7 +70,7 @@ function CommerceWorkspaceInner(): React.JSX.Element {
     setOrders(orderBody.data?.orders ?? []);
     setError(null);
     setLoading(false);
-  }, [isSignedIn]);
+  }, [api, isSignedIn]);
 
   useEffect(() => {
     if (!isSignedIn) return;
@@ -110,13 +112,13 @@ function CommerceWorkspaceInner(): React.JSX.Element {
         active: true,
       };
       if (editing) {
-        await workspaceFetch(`/api/commerce/products/${editing.id}`, {
+        await api(`/api/commerce/products/${editing.id}`, {
           method: "PATCH",
           body: JSON.stringify(payload),
         });
         toast.success("Product updated");
       } else {
-        await workspaceFetch("/api/commerce/products", {
+        await api("/api/commerce/products", {
           method: "POST",
           body: JSON.stringify(payload),
         });
@@ -135,7 +137,7 @@ function CommerceWorkspaceInner(): React.JSX.Element {
     setSubmitting(true);
     setFormError(null);
     try {
-      const body = (await workspaceFetch("/api/commerce/orders", {
+      const body = (await api("/api/commerce/orders", {
         method: "POST",
         body: JSON.stringify({
           productId,
@@ -159,7 +161,7 @@ function CommerceWorkspaceInner(): React.JSX.Element {
   }
 
   async function markPaid(order: CommerceOrderDto) {
-    await workspaceFetch(`/api/commerce/orders/${order.id}`, {
+    await api(`/api/commerce/orders/${order.id}`, {
       method: "PATCH",
       body: JSON.stringify({ status: "paid" }),
     });
@@ -285,6 +287,13 @@ function CommerceWorkspaceInner(): React.JSX.Element {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+      <div className="mt-10">
+        <ChatInterface
+          mode="commerce"
+          showConversationHistory
+          placeholder="Ask Aila Commerce about this catalog or checkout..."
+        />
+      </div>
     </WorkspaceShell>
   );
 }

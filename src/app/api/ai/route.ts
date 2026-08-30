@@ -27,6 +27,21 @@ import {
 } from "@/core/ai/intelligence/files";
 import { formatDailyAiContext, getDailyWorkspace } from "@/core/daily/service";
 import { isValidTimeZone } from "@/core/daily/timezone";
+import { formatCareerAiContext, listCareerApplications, listCareerResumes } from "@/core/career/service";
+import { formatCodingAiContext, listCodingProjects } from "@/core/coding/service";
+import { formatDocumentsAiContext, listLibraryDocuments } from "@/core/documents/service";
+import {
+  formatEducationAiContext,
+  listEducationCourses,
+  listEducationNotes,
+  listEducationQuizzes,
+} from "@/core/education/service";
+import { formatFinanceAiContext, getFinanceWorkspace } from "@/core/finance/service";
+import { formatHealthAiContext, listHealthHabits, listHealthLogs } from "@/core/health/service";
+import { formatShippingAiContext, listShippingShipments } from "@/core/shipping/service";
+import { formatTranslateAiContext, listTranslateEntries } from "@/core/translate/service";
+import { formatTravelAiContext, listTravelTrips } from "@/core/travel/service";
+import { formatWriterAiContext, listWriterDocuments } from "@/core/writer/service";
 import {
   encodeSseData,
   isAbortError,
@@ -182,6 +197,59 @@ export async function POST(req: Request) {
         body.timezone && isValidTimeZone(body.timezone) ? body.timezone : "UTC";
       const workspace = await getDailyWorkspace(user.id, timezone);
       workspaceContext = formatDailyAiContext(workspace);
+    }
+
+    if (mode === "health") {
+      const [habits, logs] = await Promise.all([
+        listHealthHabits(user.id),
+        listHealthLogs(user.id),
+      ]);
+      workspaceContext = formatHealthAiContext(habits, logs);
+    }
+
+    if (mode === "finance") {
+      workspaceContext = formatFinanceAiContext(await getFinanceWorkspace(user.id));
+    }
+
+    if (mode === "travel") {
+      workspaceContext = formatTravelAiContext(await listTravelTrips(user.id));
+    }
+
+    if (mode === "shipping") {
+      workspaceContext = formatShippingAiContext(await listShippingShipments(user.id));
+    }
+
+    if (mode === "writer") {
+      workspaceContext = formatWriterAiContext(await listWriterDocuments(user.id, {}));
+    }
+
+    if (mode === "translate") {
+      workspaceContext = formatTranslateAiContext(await listTranslateEntries(user.id, {}));
+    }
+
+    if (mode === "documents") {
+      workspaceContext = formatDocumentsAiContext(await listLibraryDocuments(user.id, {}));
+    }
+
+    if (mode === "coding") {
+      workspaceContext = formatCodingAiContext(await listCodingProjects(user.id, {}));
+    }
+
+    if (mode === "career") {
+      const [resumes, applications] = await Promise.all([
+        listCareerResumes(user.id, {}),
+        listCareerApplications(user.id, {}),
+      ]);
+      workspaceContext = formatCareerAiContext(resumes, applications);
+    }
+
+    if (mode === "education") {
+      const [courses, notes, quizzes] = await Promise.all([
+        listEducationCourses(user.id, {}),
+        listEducationNotes(user.id, {}),
+        listEducationQuizzes(user.id, {}),
+      ]);
+      workspaceContext = formatEducationAiContext(courses, notes, quizzes);
     }
 
     const encoder = new TextEncoder();

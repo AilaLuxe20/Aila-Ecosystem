@@ -4,8 +4,9 @@ import { Plus } from "lucide-react";
 import { useAuth } from "@clerk/nextjs";
 import { useCallback, useEffect, useState } from "react";
 
+import ChatInterface from "@/components/ai/ChatInterface";
 import type { AppListingDto } from "@/core/apps/service";
-import { workspaceFetch } from "@/components/workspace/api";
+import { useWorkspaceApi } from "@/components/workspace/api";
 import { WorkspaceShell } from "@/components/workspace/WorkspaceShell";
 import {
   Button,
@@ -26,6 +27,7 @@ import {
 
 function AppsWorkspaceInner(): React.JSX.Element {
   const { isSignedIn } = useAuth();
+  const api = useWorkspaceApi();
   const toast = useToast();
   const [apps, setApps] = useState<AppListingDto[]>([]);
   const [loading, setLoading] = useState(true);
@@ -42,13 +44,13 @@ function AppsWorkspaceInner(): React.JSX.Element {
 
   const load = useCallback(async (signal?: AbortSignal) => {
     if (!isSignedIn) return;
-    const response = (await workspaceFetch("/api/apps", { method: "GET" }, signal)) as {
+    const response = (await api("/api/apps", { method: "GET" }, signal)) as {
       data?: { apps?: AppListingDto[] };
     };
     setApps(response.data?.apps ?? []);
     setError(null);
     setLoading(false);
-  }, [isSignedIn]);
+  }, [api, isSignedIn]);
 
   useEffect(() => {
     if (!isSignedIn) return;
@@ -90,13 +92,13 @@ function AppsWorkspaceInner(): React.JSX.Element {
         ...(status ? { status } : {}),
       };
       if (editing) {
-        await workspaceFetch(`/api/apps/${editing.id}`, {
+        await api(`/api/apps/${editing.id}`, {
           method: "PATCH",
           body: JSON.stringify(payload),
         });
         toast.success("App updated");
       } else {
-        await workspaceFetch("/api/apps", {
+        await api("/api/apps", {
           method: "POST",
           body: JSON.stringify(payload),
         });
@@ -112,7 +114,7 @@ function AppsWorkspaceInner(): React.JSX.Element {
   }
 
   async function setLive(app: AppListingDto) {
-    await workspaceFetch(`/api/apps/${app.id}`, {
+    await api(`/api/apps/${app.id}`, {
       method: "PATCH",
       body: JSON.stringify({ status: "live" }),
     });
@@ -186,6 +188,13 @@ function AppsWorkspaceInner(): React.JSX.Element {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+      <div className="mt-10">
+        <ChatInterface
+          mode="apps"
+          showConversationHistory
+          placeholder="Ask Aila Apps about this listing or an app idea..."
+        />
+      </div>
     </WorkspaceShell>
   );
 }

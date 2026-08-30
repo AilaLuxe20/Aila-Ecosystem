@@ -4,8 +4,9 @@ import { Plus } from "lucide-react";
 import { useAuth } from "@clerk/nextjs";
 import { useCallback, useEffect, useState } from "react";
 
+import ChatInterface from "@/components/ai/ChatInterface";
 import type { AutomationRuleDto, AutomationRunDto } from "@/core/automation/service";
-import { workspaceFetch } from "@/components/workspace/api";
+import { useWorkspaceApi } from "@/components/workspace/api";
 import { WorkspaceShell } from "@/components/workspace/WorkspaceShell";
 import {
   Button,
@@ -71,6 +72,7 @@ function payloadFromForm(form: FormState): Record<string, unknown> {
 
 function AutomationWorkspaceInner(): React.JSX.Element {
   const { isSignedIn } = useAuth();
+  const api = useWorkspaceApi();
   const toast = useToast();
   const [rules, setRules] = useState<AutomationRuleDto[]>([]);
   const [runs, setRuns] = useState<AutomationRunDto[]>([]);
@@ -85,14 +87,14 @@ function AutomationWorkspaceInner(): React.JSX.Element {
   const load = useCallback(async (signal?: AbortSignal) => {
     if (!isSignedIn) return;
     const [rulesBody, runsBody] = (await Promise.all([
-      workspaceFetch("/api/automation/rules", { method: "GET" }, signal),
-      workspaceFetch("/api/automation/runs", { method: "GET" }, signal),
+      api("/api/automation/rules", { method: "GET" }, signal),
+      api("/api/automation/runs", { method: "GET" }, signal),
     ])) as [{ data?: { rules?: AutomationRuleDto[] } }, { data?: { runs?: AutomationRunDto[] } }];
     setRules(rulesBody.data?.rules ?? []);
     setRuns(runsBody.data?.runs ?? []);
     setError(null);
     setLoading(false);
-  }, [isSignedIn]);
+  }, [api, isSignedIn]);
 
   useEffect(() => {
     if (!isSignedIn) return;
@@ -147,13 +149,13 @@ function AutomationWorkspaceInner(): React.JSX.Element {
         actionPayload: payloadFromForm(form),
       };
       if (editing) {
-        await workspaceFetch(`/api/automation/rules/${editing.id}`, {
+        await api(`/api/automation/rules/${editing.id}`, {
           method: "PATCH",
           body: JSON.stringify(payload),
         });
         toast.success("Automation updated");
       } else {
-        await workspaceFetch("/api/automation/rules", {
+        await api("/api/automation/rules", {
           method: "POST",
           body: JSON.stringify(payload),
         });
@@ -170,7 +172,7 @@ function AutomationWorkspaceInner(): React.JSX.Element {
 
   async function run(rule: AutomationRuleDto) {
     try {
-      await workspaceFetch(`/api/automation/rules/${rule.id}/run`, { method: "POST" });
+      await api(`/api/automation/rules/${rule.id}/run`, { method: "POST" });
       toast.success("Automation ran");
       await load();
     } catch (caught) {
@@ -183,7 +185,7 @@ function AutomationWorkspaceInner(): React.JSX.Element {
     if (!editing) return;
     setSubmitting(true);
     try {
-      await workspaceFetch(`/api/automation/rules/${editing.id}`, { method: "DELETE" });
+      await api(`/api/automation/rules/${editing.id}`, { method: "DELETE" });
       toast.success("Automation deleted");
       setOpen(false);
       await load();
@@ -349,6 +351,13 @@ function AutomationWorkspaceInner(): React.JSX.Element {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+      <div className="mt-10">
+        <ChatInterface
+          mode="automation"
+          showConversationHistory
+          placeholder="Ask Aila Automation how to structure a rule..."
+        />
+      </div>
     </WorkspaceShell>
   );
 }

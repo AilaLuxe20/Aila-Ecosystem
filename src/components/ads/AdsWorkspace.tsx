@@ -14,7 +14,7 @@ import type {
   AdsWorkspaceDto,
 } from "@/core/ads/service";
 import { ADS_CURRENCIES, ADS_INTENDED_PLATFORMS } from "@/core/ads/schema";
-import { workspaceFetch } from "@/components/workspace/api";
+import { useWorkspaceApi } from "@/components/workspace/api";
 import { WorkspaceShell } from "@/components/workspace/WorkspaceShell";
 import {
   Button,
@@ -167,6 +167,7 @@ function payloadFromForm(form: CampaignForm) {
 
 function AdsWorkspaceInner(): React.JSX.Element {
   const { isSignedIn } = useAuth();
+  const api = useWorkspaceApi();
   const toast = useToast();
   const [workspace, setWorkspace] = useState<AdsWorkspaceDto | null>(null);
   const [detail, setDetail] = useState<CampaignDetail | null>(null);
@@ -188,22 +189,22 @@ function AdsWorkspaceInner(): React.JSX.Element {
 
   const loadWorkspace = useCallback(async (signal?: AbortSignal) => {
     if (!isSignedIn) return;
-    const response = (await workspaceFetch("/api/ads/workspace", { method: "GET" }, signal)) as {
+    const response = (await api("/api/ads/workspace", { method: "GET" }, signal)) as {
       data?: { workspace?: AdsWorkspaceDto };
     };
     setWorkspace(response.data?.workspace ?? null);
     setError(null);
     setLoading(false);
-  }, [isSignedIn]);
+  }, [api, isSignedIn]);
 
   const loadDetail = useCallback(async (id: string) => {
-    const response = (await workspaceFetch(`/api/ads/campaigns/${id}`, { method: "GET" })) as {
+    const response = (await api(`/api/ads/campaigns/${id}`, { method: "GET" })) as {
       data?: CampaignDetail;
     };
     if (!response.data?.campaign) return;
     setDetail(response.data);
     setForm(formFromCampaign(response.data.campaign));
-  }, []);
+  }, [api]);
 
   useEffect(() => {
     if (!isSignedIn) return;
@@ -234,7 +235,7 @@ function AdsWorkspaceInner(): React.JSX.Element {
     setFormError(null);
     try {
       const payload = payloadFromForm(createForm);
-      const response = (await workspaceFetch("/api/ads/campaigns", {
+      const response = (await api("/api/ads/campaigns", {
         method: "POST",
         body: JSON.stringify(payload),
       })) as { data?: { campaign?: AdsCampaignDto } };
@@ -257,7 +258,7 @@ function AdsWorkspaceInner(): React.JSX.Element {
     setSubmitting(true);
     setFormError(null);
     try {
-      await workspaceFetch(`/api/ads/campaigns/${selectedId}`, {
+      await api(`/api/ads/campaigns/${selectedId}`, {
         method: "PATCH",
         body: JSON.stringify(payloadFromForm(form)),
       });
@@ -271,7 +272,7 @@ function AdsWorkspaceInner(): React.JSX.Element {
   }
 
   async function setStatus(campaign: AdsCampaignDto, status: "active" | "paused" | "ended") {
-    await workspaceFetch(`/api/ads/campaigns/${campaign.id}`, {
+    await api(`/api/ads/campaigns/${campaign.id}`, {
       method: "PATCH",
       body: JSON.stringify({ status }),
     });
@@ -286,7 +287,7 @@ function AdsWorkspaceInner(): React.JSX.Element {
     if (!selectedId) return;
     setWorking("generate");
     try {
-      await workspaceFetch("/api/ads/generate", {
+      await api("/api/ads/generate", {
         method: "POST",
         body: JSON.stringify({ campaignId: selectedId, count: 3 }),
       });
@@ -304,7 +305,7 @@ function AdsWorkspaceInner(): React.JSX.Element {
     if (!selectedId) return;
     setWorking("creative");
     try {
-      await workspaceFetch(`/api/ads/campaigns/${selectedId}/creatives`, {
+      await api(`/api/ads/campaigns/${selectedId}/creatives`, {
         method: "POST",
         body: JSON.stringify({ headline: creativeHeadline, body: creativeBody }),
       });
@@ -321,7 +322,7 @@ function AdsWorkspaceInner(): React.JSX.Element {
 
   async function applyCreative(creative: AdsCreativeDto) {
     if (!selectedId) return;
-    await workspaceFetch(`/api/ads/campaigns/${selectedId}/creatives/${creative.id}/apply`, {
+    await api(`/api/ads/campaigns/${selectedId}/creatives/${creative.id}/apply`, {
       method: "POST",
     });
     toast.success("Campaign copy updated");
@@ -332,7 +333,7 @@ function AdsWorkspaceInner(): React.JSX.Element {
     if (!selectedId) return;
     setWorking("audience");
     try {
-      const response = (await workspaceFetch("/api/ads/audience", {
+      const response = (await api("/api/ads/audience", {
         method: "POST",
         body: JSON.stringify({ campaignId: selectedId, brief: audienceBrief || undefined, apply }),
       })) as {
@@ -361,7 +362,7 @@ function AdsWorkspaceInner(): React.JSX.Element {
     if (!selectedId) return;
     setWorking("analyze");
     try {
-      const response = (await workspaceFetch("/api/ads/analyze", {
+      const response = (await api("/api/ads/analyze", {
         method: "POST",
         body: JSON.stringify({ campaignId: selectedId }),
       })) as {
@@ -382,7 +383,7 @@ function AdsWorkspaceInner(): React.JSX.Element {
     if (!selectedId) return;
     setWorking("landing");
     try {
-      await workspaceFetch("/api/ads/landing-page", {
+      await api("/api/ads/landing-page", {
         method: "POST",
         body: JSON.stringify({
           campaignId: selectedId,

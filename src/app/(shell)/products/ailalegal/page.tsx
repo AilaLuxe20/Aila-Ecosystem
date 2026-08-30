@@ -4,6 +4,7 @@ import Link from "next/link";
 import ChatInterface from "@/components/ai/ChatInterface";
 import DocumentUpload from "@/components/ai/DocumentUpload";
 import { AilaLegalProvider } from "@/components/ai/AilaLegalContext";
+import { LegalLibrary } from "@/components/legal/LegalLibrary";
 
 const legalCapabilities = [
   {
@@ -127,6 +128,17 @@ export default function AilaLegalPage() {
 
           <div className="mt-16">
             <DocumentUpload />
+          </div>
+        </section>
+
+        <section id="legal-library" className="relative mx-auto max-w-7xl px-6 pb-24">
+          <p className="text-sm uppercase tracking-[0.3em] text-blue-300/60">Your library</p>
+          <h2 className="mt-4 text-3xl font-semibold tracking-[-0.04em]">Stored analyses</h2>
+          <p className="mt-3 max-w-2xl text-neutral-400">
+            Documents you upload stay on your account. Open one to reread the analysis without uploading again.
+          </p>
+          <div className="mt-10">
+            <LegalLibrary />
           </div>
         </section>
 

@@ -1,3 +1,8 @@
+"use client";
+
+import { useAuth } from "@clerk/nextjs";
+import { useCallback } from "react";
+
 export type WorkspaceApiError = {
   message: string;
   fieldErrors: Record<string, string>;
@@ -26,12 +31,15 @@ export async function workspaceFetch(
   path: string,
   init: RequestInit | undefined,
   signal?: AbortSignal,
+  getToken?: () => Promise<string | null>,
 ): Promise<unknown> {
+  const token = getToken ? await getToken() : null;
   const response = await fetch(path, {
     ...init,
     signal,
     headers: {
-      ...(init?.body ? { "content-type": "application/json" } : {}),
+      ...(init?.body && !(init.body instanceof FormData) ? { "content-type": "application/json" } : {}),
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
       ...init?.headers,
     },
   });
@@ -58,4 +66,14 @@ export function fieldErrorsFromUnknown(error: unknown): Record<string, string> {
   }
 
   return {};
+}
+
+export function useWorkspaceApi() {
+  const { getToken } = useAuth();
+
+  return useCallback(
+    (path: string, init?: RequestInit, signal?: AbortSignal) =>
+      workspaceFetch(path, init, signal, getToken),
+    [getToken],
+  );
 }

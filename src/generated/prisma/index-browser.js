@@ -480,6 +480,200 @@ exports.Prisma.StripeWebhookEventScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.WriterDocumentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  title: 'title',
+  body: 'body',
+  folder: 'folder',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TranslateEntryScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  sourceLang: 'sourceLang',
+  targetLang: 'targetLang',
+  sourceText: 'sourceText',
+  translatedText: 'translatedText',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.LibraryDocumentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  title: 'title',
+  fileName: 'fileName',
+  fileSize: 'fileSize',
+  mimeType: 'mimeType',
+  extractedText: 'extractedText',
+  extractedCharCount: 'extractedCharCount',
+  truncated: 'truncated',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CodingProjectScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  description: 'description',
+  language: 'language',
+  files: 'files',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.EducationCourseScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  title: 'title',
+  topic: 'topic',
+  description: 'description',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.EducationNoteScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  courseId: 'courseId',
+  title: 'title',
+  body: 'body',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.EducationQuizScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  courseId: 'courseId',
+  question: 'question',
+  answer: 'answer',
+  userAnswer: 'userAnswer',
+  correct: 'correct',
+  answeredAt: 'answeredAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CareerResumeScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  title: 'title',
+  summary: 'summary',
+  experience: 'experience',
+  skills: 'skills',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CareerApplicationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  company: 'company',
+  role: 'role',
+  status: 'status',
+  notes: 'notes',
+  appliedAt: 'appliedAt',
+  interviewAt: 'interviewAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.HealthHabitScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  cadence: 'cadence',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.HealthLogScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  kind: 'kind',
+  title: 'title',
+  body: 'body',
+  remindAt: 'remindAt',
+  done: 'done',
+  loggedAt: 'loggedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.FinanceTransactionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  kind: 'kind',
+  amountCents: 'amountCents',
+  currency: 'currency',
+  category: 'category',
+  note: 'note',
+  occurredAt: 'occurredAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.FinanceBudgetScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  category: 'category',
+  limitCents: 'limitCents',
+  period: 'period',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.FinanceGoalScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  title: 'title',
+  targetCents: 'targetCents',
+  savedCents: 'savedCents',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TravelTripScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  title: 'title',
+  destination: 'destination',
+  startsOn: 'startsOn',
+  endsOn: 'endsOn',
+  notes: 'notes',
+  status: 'status',
+  items: 'items',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ShippingShipmentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  senderName: 'senderName',
+  senderAddress: 'senderAddress',
+  recipientName: 'recipientName',
+  recipientAddress: 'recipientAddress',
+  packageDesc: 'packageDesc',
+  weightKg: 'weightKg',
+  carrier: 'carrier',
+  trackingNumber: 'trackingNumber',
+  status: 'status',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -535,7 +729,23 @@ exports.Prisma.ModelName = {
   DailyNote: 'DailyNote',
   DailyGoal: 'DailyGoal',
   BillingSubscription: 'BillingSubscription',
-  StripeWebhookEvent: 'StripeWebhookEvent'
+  StripeWebhookEvent: 'StripeWebhookEvent',
+  WriterDocument: 'WriterDocument',
+  TranslateEntry: 'TranslateEntry',
+  LibraryDocument: 'LibraryDocument',
+  CodingProject: 'CodingProject',
+  EducationCourse: 'EducationCourse',
+  EducationNote: 'EducationNote',
+  EducationQuiz: 'EducationQuiz',
+  CareerResume: 'CareerResume',
+  CareerApplication: 'CareerApplication',
+  HealthHabit: 'HealthHabit',
+  HealthLog: 'HealthLog',
+  FinanceTransaction: 'FinanceTransaction',
+  FinanceBudget: 'FinanceBudget',
+  FinanceGoal: 'FinanceGoal',
+  TravelTrip: 'TravelTrip',
+  ShippingShipment: 'ShippingShipment'
 };
 
 /**

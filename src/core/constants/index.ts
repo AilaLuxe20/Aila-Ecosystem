@@ -89,6 +89,46 @@ export const MODE_CONFIG = {
     maxTokens: 900,
     temperature: 0.5,
   },
+  writer: {
+    maxTokens: 1400,
+    temperature: 0.55,
+  },
+  translate: {
+    maxTokens: 1200,
+    temperature: 0.2,
+  },
+  documents: {
+    maxTokens: 1000,
+    temperature: 0.3,
+  },
+  coding: {
+    maxTokens: 1600,
+    temperature: 0.2,
+  },
+  education: {
+    maxTokens: 1100,
+    temperature: 0.45,
+  },
+  career: {
+    maxTokens: 1200,
+    temperature: 0.45,
+  },
+  health: {
+    maxTokens: 900,
+    temperature: 0.35,
+  },
+  finance: {
+    maxTokens: 900,
+    temperature: 0.3,
+  },
+  travel: {
+    maxTokens: 1000,
+    temperature: 0.45,
+  },
+  shipping: {
+    maxTokens: 800,
+    temperature: 0.3,
+  },
 } as const;
 
 export const PRODUCT_NAVIGATION = [
@@ -111,6 +151,36 @@ export const PRODUCT_NAVIGATION = [
     activeBorder: "border-cyan-300/20",
     activeBackground: "bg-cyan-300/[0.08]",
     activeText: "text-cyan-100",
+  },
+  {
+    name: "Writer",
+    mobileName: "Write",
+    href: "/products/writer",
+    group: "everyday",
+    dot: "bg-lime-300 shadow-[0_0_14px_rgba(190,242,100,0.9)]",
+    activeBorder: "border-lime-300/20",
+    activeBackground: "bg-lime-300/[0.08]",
+    activeText: "text-lime-100",
+  },
+  {
+    name: "Translate",
+    mobileName: "Lang",
+    href: "/products/translate",
+    group: "everyday",
+    dot: "bg-sky-300 shadow-[0_0_14px_rgba(125,211,252,0.9)]",
+    activeBorder: "border-sky-300/20",
+    activeBackground: "bg-sky-300/[0.08]",
+    activeText: "text-sky-100",
+  },
+  {
+    name: "Documents",
+    mobileName: "Docs",
+    href: "/products/documents",
+    group: "everyday",
+    dot: "bg-orange-300 shadow-[0_0_14px_rgba(253,186,116,0.9)]",
+    activeBorder: "border-orange-300/20",
+    activeBackground: "bg-orange-300/[0.08]",
+    activeText: "text-orange-100",
   },
   {
     name: "Business",
@@ -152,6 +222,69 @@ export const PRODUCT_NAVIGATION = [
     activeBackground: "bg-violet-300/[0.08]",
     activeText: "text-violet-100",
   },
+  {
+    name: "Coding",
+    mobileName: "Code",
+    href: "/products/coding",
+    group: "professional",
+    dot: "bg-lime-300 shadow-[0_0_14px_rgba(163,230,53,0.9)]",
+    activeBorder: "border-lime-300/20",
+    activeBackground: "bg-lime-300/[0.08]",
+    activeText: "text-lime-100",
+  },
+  {
+    name: "Career",
+    mobileName: "Career",
+    href: "/products/career",
+    group: "professional",
+    dot: "bg-blue-300 shadow-[0_0_14px_rgba(147,197,253,0.9)]",
+    activeBorder: "border-blue-300/20",
+    activeBackground: "bg-blue-300/[0.08]",
+    activeText: "text-blue-100",
+  },
+] as const;
+
+export const LIFE_NAVIGATION = [
+  {
+    name: "Education",
+    mobileName: "Learn",
+    href: "/products/education",
+    group: "life",
+    dot: "bg-sky-300 shadow-[0_0_14px_rgba(56,189,248,0.9)]",
+    activeBorder: "border-sky-300/20",
+    activeBackground: "bg-sky-300/[0.08]",
+    activeText: "text-sky-100",
+  },
+  {
+    name: "Health",
+    mobileName: "Health",
+    href: "/products/health",
+    group: "life",
+    dot: "bg-rose-300 shadow-[0_0_14px_rgba(251,113,133,0.9)]",
+    activeBorder: "border-rose-300/20",
+    activeBackground: "bg-rose-300/[0.08]",
+    activeText: "text-rose-100",
+  },
+  {
+    name: "Finance",
+    mobileName: "Money",
+    href: "/products/finance",
+    group: "life",
+    dot: "bg-emerald-300 shadow-[0_0_14px_rgba(52,211,153,0.9)]",
+    activeBorder: "border-emerald-300/20",
+    activeBackground: "bg-emerald-300/[0.08]",
+    activeText: "text-emerald-100",
+  },
+  {
+    name: "Travel",
+    mobileName: "Travel",
+    href: "/products/travel",
+    group: "life",
+    dot: "bg-orange-300 shadow-[0_0_14px_rgba(251,146,60,0.9)]",
+    activeBorder: "border-orange-300/20",
+    activeBackground: "bg-orange-300/[0.08]",
+    activeText: "text-orange-100",
+  },
 ] as const;
 
 export const PLATFORM_NAVIGATION = [
@@ -164,6 +297,16 @@ export const PLATFORM_NAVIGATION = [
     activeBorder: "border-emerald-300/20",
     activeBackground: "bg-emerald-300/[0.08]",
     activeText: "text-emerald-100",
+  },
+  {
+    name: "Shipping",
+    mobileName: "Ship",
+    href: "/products/shipping",
+    group: "commerce",
+    dot: "bg-amber-300 shadow-[0_0_14px_rgba(251,191,36,0.9)]",
+    activeBorder: "border-amber-300/20",
+    activeBackground: "bg-amber-300/[0.08]",
+    activeText: "text-amber-100",
   },
   {
     name: "Calendar",
@@ -207,13 +350,24 @@ export const PLATFORM_NAVIGATION = [
   },
 ] as const;
 
-export const ALL_PRODUCTS = [...PRODUCT_NAVIGATION, ...PLATFORM_NAVIGATION];
+export const ALL_PRODUCTS = [
+  ...PRODUCT_NAVIGATION,
+  ...LIFE_NAVIGATION,
+  ...PLATFORM_NAVIGATION,
+];
 
-export const NAV_GROUP_ORDER = ["everyday", "professional", "commerce", "supporting"] as const;
+export const NAV_GROUP_ORDER = [
+  "everyday",
+  "professional",
+  "life",
+  "commerce",
+  "supporting",
+] as const;
 
 export const NAV_GROUP_LABELS = {
   everyday: "Everyday core",
   professional: "Professional",
+  life: "Life",
   commerce: "Commerce & operations",
   supporting: "More",
 } as const;

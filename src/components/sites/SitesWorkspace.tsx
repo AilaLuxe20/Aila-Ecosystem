@@ -4,8 +4,9 @@ import { Plus } from "lucide-react";
 import { useAuth } from "@clerk/nextjs";
 import { useCallback, useEffect, useState } from "react";
 
-import type { SiteDto } from "@/core/sites/service";
-import { workspaceFetch } from "@/components/workspace/api";
+import ChatInterface from "@/components/ai/ChatInterface";
+import type { SiteDto, SitePageDto } from "@/core/sites/service";
+import { useWorkspaceApi } from "@/components/workspace/api";
 import { WorkspaceShell } from "@/components/workspace/WorkspaceShell";
 import {
   Button,
@@ -26,6 +27,7 @@ import {
 
 function SitesWorkspaceInner(): React.JSX.Element {
   const { isSignedIn } = useAuth();
+  const api = useWorkspaceApi();
   const toast = useToast();
   const [sites, setSites] = useState<SiteDto[]>([]);
   const [loading, setLoading] = useState(true);
@@ -35,21 +37,22 @@ function SitesWorkspaceInner(): React.JSX.Element {
   const [name, setName] = useState("");
   const [slug, setSlug] = useState("");
   const [description, setDescription] = useState("");
-  const [pageTitle, setPageTitle] = useState("Home");
-  const [pagePath, setPagePath] = useState("/");
-  const [pageContent, setPageContent] = useState("# Welcome\n\nWrite your page here.");
+  const [pages, setPages] = useState<SitePageDto[]>([
+    { id: "", title: "Home", path: "/", content: "# Welcome\n\nWrite your page here." },
+  ]);
+  const [activePageIndex, setActivePageIndex] = useState(0);
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
 
   const load = useCallback(async (signal?: AbortSignal) => {
     if (!isSignedIn) return;
-    const response = (await workspaceFetch("/api/sites", { method: "GET" }, signal)) as {
+    const response = (await api("/api/sites", { method: "GET" }, signal)) as {
       data?: { sites?: SiteDto[] };
     };
     setSites(response.data?.sites ?? []);
     setError(null);
     setLoading(false);
-  }, [isSignedIn]);
+  }, [api, isSignedIn]);
 
   useEffect(() => {
     if (!isSignedIn) return;
@@ -68,16 +71,22 @@ function SitesWorkspaceInner(): React.JSX.Element {
   }, [isSignedIn, load]);
 
   function openSite(site?: SiteDto) {
-    const home = site?.pages[0];
     setEditing(site ?? null);
     setName(site?.name ?? "");
     setSlug(site?.slug ?? "");
     setDescription(site?.description ?? "");
-    setPageTitle(home?.title ?? "Home");
-    setPagePath(home?.path ?? "/");
-    setPageContent(home?.content ?? "# Welcome\n\nWrite your page here.");
+    setPages(
+      site?.pages.length
+        ? site.pages
+        : [{ id: "", title: "Home", path: "/", content: "# Welcome\n\nWrite your page here." }],
+    );
+    setActivePageIndex(0);
     setFormError(null);
     setOpen(true);
+  }
+
+  function updatePage(index: number, patch: Partial<SitePageDto>) {
+    setPages((current) => current.map((page, i) => (i === index ? { ...page, ...patch } : page)));
   }
 
   async function save(status?: "draft" | "published") {
@@ -88,24 +97,22 @@ function SitesWorkspaceInner(): React.JSX.Element {
         name,
         slug,
         description: description || null,
-        pages: [
-          {
-            id: editing?.pages[0]?.id,
-            title: pageTitle,
-            path: pagePath,
-            content: pageContent,
-          },
-        ],
+        pages: pages.map((page) => ({
+          ...(page.id ? { id: page.id } : {}),
+          title: page.title,
+          path: page.path,
+          content: page.content,
+        })),
         ...(status ? { status } : {}),
       };
       if (editing) {
-        await workspaceFetch(`/api/sites/${editing.id}`, {
+        await api(`/api/sites/${editing.id}`, {
           method: "PATCH",
           body: JSON.stringify(payload),
         });
         toast.success(status === "published" ? "Site published" : "Site updated");
       } else {
-        await workspaceFetch("/api/sites", {
+        await api("/api/sites", {
           method: "POST",
           body: JSON.stringify(payload),
         });
@@ -121,7 +128,7 @@ function SitesWorkspaceInner(): React.JSX.Element {
   }
 
   async function publish(site: SiteDto) {
-    await workspaceFetch(`/api/sites/${site.id}`, {
+    await api(`/api/sites/${site.id}`, {
       method: "PATCH",
       body: JSON.stringify({ status: "published" }),
     });
@@ -176,11 +183,70 @@ function SitesWorkspaceInner(): React.JSX.Element {
             <Field label="Name"><Input value={name} onChange={(event) => setName(event.target.value)} /></Field>
             <Field label="Slug"><Input value={slug} onChange={(event) => setSlug(event.target.value)} /></Field>
             <Field label="Description"><Input value={description} onChange={(event) => setDescription(event.target.value)} /></Field>
-            <Field label="Page title"><Input value={pageTitle} onChange={(event) => setPageTitle(event.target.value)} /></Field>
-            <Field label="Page path"><Input value={pagePath} onChange={(event) => setPagePath(event.target.value)} /></Field>
-            <Field label="Content">
-              <Textarea rows={10} value={pageContent} onChange={(event) => setPageContent(event.target.value)} />
-            </Field>
+            <div className="flex flex-wrap items-center gap-2">
+              {pages.map((page, index) => (
+                <button
+                  key={`${page.id || "new"}-${index}`}
+                  type="button"
+                  onClick={() => setActivePageIndex(index)}
+                  className={`rounded-full border px-3 py-1 text-xs ${
+                    index === activePageIndex
+                      ? "border-teal-300/30 bg-teal-300/[0.1] text-white"
+                      : "border-white/10 text-white/60"
+                  }`}
+                >
+                  {page.title || page.path || `Page ${index + 1}`}
+                </button>
+              ))}
+              <Button
+                size="sm"
+                variant="secondary"
+                onClick={() => {
+                  setPages((current) => [
+                    ...current,
+                    { id: "", title: "New page", path: `/page-${current.length + 1}`, content: "# New page\n" },
+                  ]);
+                  setActivePageIndex(pages.length);
+                }}
+              >
+                Add page
+              </Button>
+            </div>
+            {pages[activePageIndex] ? (
+              <>
+                <Field label="Page title">
+                  <Input
+                    value={pages[activePageIndex].title}
+                    onChange={(event) => updatePage(activePageIndex, { title: event.target.value })}
+                  />
+                </Field>
+                <Field label="Page path">
+                  <Input
+                    value={pages[activePageIndex].path}
+                    onChange={(event) => updatePage(activePageIndex, { path: event.target.value })}
+                  />
+                </Field>
+                <Field label="Content">
+                  <Textarea
+                    rows={10}
+                    value={pages[activePageIndex].content}
+                    onChange={(event) => updatePage(activePageIndex, { content: event.target.value })}
+                  />
+                </Field>
+                {pages.length > 1 ? (
+                  <Button
+                    size="sm"
+                    variant="secondary"
+                    onClick={() => {
+                      setPages((current) => current.filter((_, index) => index !== activePageIndex));
+                      setActivePageIndex((current) => Math.max(0, current - 1));
+                    }}
+                  >
+                    Remove this page
+                  </Button>
+                ) : null}
+              </>
+            ) : null}
             {formError ? <p className="text-sm text-red-300">{formError}</p> : null}
           </DialogBody>
           <DialogFooter>
@@ -189,6 +255,13 @@ function SitesWorkspaceInner(): React.JSX.Element {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+      <div className="mt-10">
+        <ChatInterface
+          mode="sites"
+          showConversationHistory
+          placeholder="Ask Aila Sites about structure, copy, or this draft..."
+        />
+      </div>
     </WorkspaceShell>
   );
 }
