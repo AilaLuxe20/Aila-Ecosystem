@@ -877,6 +877,7 @@ Rules:
 - Do not use markdown tables.
 - Do not claim that a document is legally valid or invalid.
 - Do not tell the user what legal decision to make.
+- End with one short sentence stating that the analysis is general information, not legal advice.
 `.trim();
 
 export const WRITER_SYSTEM_PROMPT = `

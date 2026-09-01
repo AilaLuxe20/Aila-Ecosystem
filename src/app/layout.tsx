@@ -1,11 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import {
-  ClerkProvider,
-  Show,
-  SignInButton,
-  SignUpButton,
-  UserButton,
-} from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -60,10 +54,6 @@ export const metadata: Metadata = {
 
   creator: "Aila Ecosystem",
   publisher: "Aila Ecosystem",
-
-  alternates: {
-    canonical: "/",
-  },
 
   openGraph: {
     type: "website",
@@ -132,7 +122,7 @@ export default function RootLayout({
       data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-black pt-16 text-white antialiased">
+      <body className="flex min-h-full flex-col bg-black text-white antialiased">
         <ClerkProvider
           signInUrl="/sign-in"
           signUpUrl="/sign-up"
@@ -140,35 +130,12 @@ export default function RootLayout({
           signUpFallbackRedirectUrl="/dashboard"
           afterSignOutUrl="/"
         >
-          <header className="fixed inset-x-0 top-0 z-[60] flex h-16 items-center justify-end gap-4 border-b border-white/10 bg-black px-4">
-            <Show when="signed-out">
-              <SignInButton mode="modal">
-                <button
-                  type="button"
-                  className="h-10 cursor-pointer rounded-full border border-white/10 bg-white/5 px-4 text-sm font-medium text-neutral-200 transition hover:bg-white/10 sm:h-12 sm:px-5 sm:text-base"
-                >
-                  Sign In
-                </button>
-              </SignInButton>
-              <SignUpButton mode="modal">
-                <button
-                  type="button"
-                  className="h-10 cursor-pointer rounded-full bg-white px-4 text-sm font-medium text-black transition hover:scale-105 sm:h-12 sm:px-5 sm:text-base"
-                >
-                  Sign Up
-                </button>
-              </SignUpButton>
-            </Show>
-            <Show when="signed-in">
-              <UserButton
-                appearance={{
-                  elements: {
-                    avatarBox: "h-9 w-9",
-                  },
-                }}
-              />
-            </Show>
-          </header>
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[80] focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-black"
+          >
+            Skip to main content
+          </a>
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{
@@ -183,7 +150,7 @@ export default function RootLayout({
             }}
           />
 
-          {children}
+          <div id="main-content">{children}</div>
 
           <Analytics />
           <SpeedInsights />

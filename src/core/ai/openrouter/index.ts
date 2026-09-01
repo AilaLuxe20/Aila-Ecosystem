@@ -1,4 +1,4 @@
-import { SITE_NAME, SITE_URL } from "@/core/constants";
+import { AI_REQUEST_TIMEOUT_MS, SITE_NAME, SITE_URL } from "@/core/constants";
 import { getOpenRouterApiKey } from "@/core/config";
 
 export const OPENROUTER_CHAT_URL = "https://openrouter.ai/api/v1/chat/completions";
@@ -55,8 +55,8 @@ export function openRouterUserMessage(
 ): string {
   if (failure.status === 401 || failure.status === 403) {
     return kind === "document"
-      ? "Document analysis was rejected by OpenRouter. Check OPENROUTER_API_KEY."
-      : "The AI provider rejected OPENROUTER_API_KEY. Chat cannot run until that key is valid.";
+      ? "Document analysis is not available right now. The AI provider rejected the request."
+      : "The AI provider rejected this request. Chat cannot run until the service is configured.";
   }
 
   if (failure.status === 402) {
@@ -72,16 +72,22 @@ export function openRouterUserMessage(
     : "Aila Intelligence could not respond right now.";
 }
 
-export async function openRouterChat(body: unknown) {
+export function resolveOpenRouterSignal(signal?: AbortSignal): AbortSignal {
+  const timeout = AbortSignal.timeout(AI_REQUEST_TIMEOUT_MS);
+  return signal ? AbortSignal.any([signal, timeout]) : timeout;
+}
+
+export async function openRouterChat(body: unknown, signal?: AbortSignal) {
   const apiKey = getOpenRouterApiKey();
 
   if (!apiKey) {
-    throw new Error("OPENROUTER_API_KEY is not configured.");
+    throw new Error("The AI provider is not configured.");
   }
 
   const response = await fetch(OPENROUTER_CHAT_URL, {
     method: "POST",
     headers: buildOpenRouterHeaders(apiKey),
+    signal: resolveOpenRouterSignal(signal),
     body: JSON.stringify(body),
   });
 

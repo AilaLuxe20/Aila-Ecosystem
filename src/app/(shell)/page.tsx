@@ -1,8 +1,20 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import ChatInterface from "@/components/ai/ChatInterface";
 import EcosystemCards from "@/components/shared/EcosystemCards";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import ProjectInquiry from "@/components/forms/ProjectInquiry";
+
+export const metadata: Metadata = {
+  title: {
+    absolute: "Aila Ecosystem | AI Software Company",
+  },
+  description:
+    "Aila is an AI software company. Sign in to use Intelligence, Legal, Daily, Ads, and the rest of the product workspaces — or start a custom project.",
+  alternates: {
+    canonical: "/",
+  },
+};
 
 const services = [
   {
@@ -74,7 +86,7 @@ const platforms = [
   {
     title: "Aila Ads",
     description:
-      "Plan campaigns, generate ad copy, and analyse stored data for creators, businesses, and agencies worldwide.",
+      "Plan campaigns, generate ad copy, and analyse stored campaign data. Aila Ads does not buy ad inventory.",
     status: "Live Platform",
     type: "Professional",
     href: "/products/ads",
@@ -315,11 +327,11 @@ export default function Home() {
 
                 <div>
                   <h2 className="text-4xl font-bold">
-                    Apps
+                    21
                   </h2>
 
                   <p className="mt-2 text-neutral-400">
-                    iOS • Android
+                    Products
                   </p>
                 </div>
               </div>
@@ -433,15 +445,7 @@ export default function Home() {
 
                 <div className="relative flex min-h-[340px] flex-col">
                   <div className="flex items-start justify-between gap-4">
-                    <span
-                      className={`rounded-full border px-3 py-1.5 text-[10px] uppercase tracking-[0.2em] ${
-                        platform.status === "Live Platform"
-                          ? "border-green-400/20 bg-green-400/[0.07] text-green-300"
-                          : platform.status === "Coming Soon"
-                            ? "border-purple-400/20 bg-purple-400/[0.07] text-purple-300"
-                            : "border-white/10 bg-white/5 text-neutral-400"
-                      }`}
-                    >
+                    <span className="rounded-full border border-green-400/20 bg-green-400/[0.07] px-3 py-1.5 text-[10px] uppercase tracking-[0.2em] text-green-300">
                       {platform.status}
                     </span>
 

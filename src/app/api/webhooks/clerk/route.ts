@@ -33,18 +33,41 @@ export async function POST(req: NextRequest) {
         null;
 
       await prisma.$transaction(async (tx) => {
-        const user = await tx.user.upsert({
+        const existing = await tx.user.findUnique({
           where: { email },
-          update: {
-            name,
-            image: event.data.image_url,
-          },
-          create: {
-            email,
-            name,
-            image: event.data.image_url,
+          include: {
+            accounts: {
+              where: { provider: "clerk" },
+            },
           },
         });
+
+        if (existing) {
+          const foreign = existing.accounts.find(
+            (account) => account.providerAccountId !== event.data.id,
+          );
+
+          if (foreign) {
+            log.warn("Clerk webhook skipped email merge.", { type: event.type });
+            return;
+          }
+        }
+
+        const user = existing
+          ? await tx.user.update({
+              where: { id: existing.id },
+              data: {
+                name,
+                image: event.data.image_url,
+              },
+            })
+          : await tx.user.create({
+              data: {
+                email,
+                name,
+                image: event.data.image_url,
+              },
+            });
 
         await tx.account.upsert({
           where: {
@@ -65,12 +88,19 @@ export async function POST(req: NextRequest) {
     }
 
     if (event.type === "user.deleted" && event.data.id) {
-      await prisma.account.deleteMany({
+      const accounts = await prisma.account.findMany({
         where: {
           provider: "clerk",
           providerAccountId: event.data.id,
         },
+        select: { userId: true },
       });
+
+      for (const account of accounts) {
+        await prisma.user.delete({
+          where: { id: account.userId },
+        });
+      }
     }
 
     return ok({ received: true });

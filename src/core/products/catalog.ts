@@ -154,7 +154,7 @@ export const PRODUCTS: Record<ProductKey, ProductDefinition> = {
     aiMode: "coding",
     paid: true,
     group: "professional",
-    description: "A coding workspace with project files, editing, and AI help for explain and debug.",
+    description: "A coding workspace with project files, editing, and AI help to explain code.",
   },
   career: {
     key: "career",

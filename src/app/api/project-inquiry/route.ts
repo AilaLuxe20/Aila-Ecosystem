@@ -4,6 +4,25 @@ import { Resend } from "resend";
 import { getPrismaUserOrNull } from "@/core/auth/clerk-user";
 import { getProjectInquiryEmail, getResendApiKey, getResendFromEmail } from "@/core/config";
 import { prisma } from "@/core/database/prisma";
+import { MemoryRateLimiter } from "@/lib/api/rate-limit";
+import { createLogger } from "@/lib/logger/logger";
+
+const log = createLogger("api.project-inquiry");
+
+const projectInquiryRateLimiter = new MemoryRateLimiter({
+  limit: 8,
+  windowMs: 60_000,
+});
+
+function clientIp(req: Request): string {
+  const forwarded = req.headers.get("x-forwarded-for");
+  if (forwarded) {
+    const first = forwarded.split(",")[0]?.trim();
+    if (first) return first;
+  }
+
+  return req.headers.get("x-real-ip") ?? "unknown";
+}
 
 const allowedProjectTypes = [
   "Website",
@@ -15,6 +34,17 @@ const allowedProjectTypes = [
 
 export async function POST(req: Request) {
   try {
+    const rateLimit = await projectInquiryRateLimiter.check(
+      `project-inquiry:${clientIp(req)}`,
+    );
+
+    if (!rateLimit.allowed) {
+      return NextResponse.json(
+        { error: "Too many inquiries. Please try again shortly." },
+        { status: 429 },
+      );
+    }
+
     const body = await req.json();
 
     const name =
@@ -297,15 +327,12 @@ export async function POST(req: Request) {
       });
 
     if (emailError) {
-      console.error(
-        "Aila Inquiry Email Error:",
-        emailError
-      );
+      log.error("Project inquiry email failed.", emailError);
     } else {
-      console.log(
-        "Aila Inquiry Email Sent:",
-        emailData
-      );
+      log.info("Project inquiry email sent.", {
+        inquiryId,
+        emailId: emailData?.id,
+      });
     }
     }
 
@@ -323,17 +350,11 @@ export async function POST(req: Request) {
       }
     );
   } catch (error) {
-    console.error(
-      "Project Inquiry API Error:",
-      error
-    );
+    log.error("Project inquiry failed.", error);
 
     return NextResponse.json(
       {
-        error:
-          error instanceof Error
-            ? error.message
-            : "Aila could not receive your project right now.",
+        error: "Aila could not receive your project right now.",
       },
       {
         status: 500,

@@ -42,6 +42,7 @@ import { formatShippingAiContext, listShippingShipments } from "@/core/shipping/
 import { formatTranslateAiContext, listTranslateEntries } from "@/core/translate/service";
 import { formatTravelAiContext, listTravelTrips } from "@/core/travel/service";
 import { formatWriterAiContext, listWriterDocuments } from "@/core/writer/service";
+import { getLatestLegalDocumentContext } from "@/core/legal/service";
 import {
   encodeSseData,
   isAbortError,
@@ -149,8 +150,9 @@ export async function POST(req: Request) {
     // Server history only — never trust client-provided prior turns.
     const conversationMessages = [...history, latestUserMessage];
 
-    let documentText = body.documentText ?? undefined;
-    let documentName = body.documentName ?? undefined;
+    // Client document bodies are never trusted. Only server-loaded extracts.
+    let documentText: string | undefined;
+    let documentName: string | undefined;
     let documentKind: string | undefined;
     let documentToolText: string | undefined;
     let intelligenceDocumentIds: string[] = [];
@@ -189,6 +191,14 @@ export async function POST(req: Request) {
         intelligenceDocumentIds = resolvedDocuments.records.map(
           (record) => record.id
         );
+      }
+    }
+
+    if (mode === "legal") {
+      const latestLegal = await getLatestLegalDocumentContext(user.id);
+      if (latestLegal) {
+        documentText = latestLegal.text;
+        documentName = latestLegal.fileName;
       }
     }
 

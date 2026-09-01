@@ -54,14 +54,25 @@ export default function Navbar() {
       }
     }
 
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setProductsOpen(false);
+        setMenuOpen(false);
+      }
+    }
+
     document.addEventListener("mousedown", onPointerDown);
-    return () => document.removeEventListener("mousedown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
   }, []);
 
   return (
     <>
       <header
-        className={`fixed left-0 right-0 top-16 z-50 transition-all duration-500 ${
+        className={`fixed left-0 right-0 top-0 z-50 transition-all duration-500 ${
           scrolled
             ? "border-b border-white/[0.07] bg-black/70 backdrop-blur-2xl"
             : "bg-transparent"
@@ -106,6 +117,7 @@ export default function Navbar() {
                 type="button"
                 aria-expanded={productsOpen}
                 aria-haspopup="menu"
+                aria-controls="navbar-products-menu"
                 onClick={() => setProductsOpen((open) => !open)}
                 className="rounded-full px-4 py-2 text-sm text-neutral-500 transition duration-300 hover:bg-white/[0.04] hover:text-white"
               >
@@ -114,8 +126,9 @@ export default function Navbar() {
 
               {productsOpen ? (
                 <div
+                  id="navbar-products-menu"
                   role="menu"
-                  className="absolute left-0 top-full z-50 mt-2 w-[360px] rounded-2xl border border-white/[0.1] bg-black/95 p-2 shadow-[0_20px_80px_rgba(0,0,0,0.65)] backdrop-blur-2xl"
+                  className="absolute left-0 top-full z-50 mt-2 max-h-[70vh] w-[360px] overflow-y-auto rounded-2xl border border-white/[0.1] bg-black/95 p-2 shadow-[0_20px_80px_rgba(0,0,0,0.65)] backdrop-blur-2xl"
                 >
                   {navGroups.map((group) => (
                     <div key={group.group} className="mb-1 last:mb-0">
@@ -198,6 +211,8 @@ export default function Navbar() {
             onClick={() =>
               setMenuOpen((previous) => !previous)
             }
+            aria-expanded={menuOpen}
+            aria-controls="mobile-navigation"
             aria-label={
               menuOpen
                 ? "Close navigation menu"
@@ -227,6 +242,11 @@ export default function Navbar() {
       </header>
 
       <div
+        id="mobile-navigation"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Site navigation"
+        aria-hidden={!menuOpen}
         className={`fixed inset-0 z-40 bg-[#030303] transition duration-500 lg:hidden ${
           menuOpen
             ? "visible opacity-100"

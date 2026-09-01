@@ -171,7 +171,12 @@ export default function Footer() {
 
           <div className="flex flex-col gap-10">
             {navGroups
-              .filter((group) => group.group === "everyday" || group.group === "professional")
+              .filter(
+                (group) =>
+                  group.group === "everyday" ||
+                  group.group === "professional" ||
+                  group.group === "life",
+              )
               .map((group) => (
                 <div key={group.group}>
                   <p className="text-xs uppercase tracking-[0.25em] text-neutral-700">

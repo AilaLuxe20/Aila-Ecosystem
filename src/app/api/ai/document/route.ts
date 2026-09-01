@@ -9,6 +9,7 @@ import {
   AuthenticationError,
   AuthorizationError,
   ERROR_CODES,
+  ValidationError,
 } from "@/lib/errors/app-error";
 import { createLogger } from "@/lib/logger/logger";
 
@@ -84,15 +85,19 @@ export async function POST(req: Request) {
       );
     }
 
+    if (error instanceof ValidationError) {
+      return NextResponse.json(
+        { message: error.message },
+        { status: 400 },
+      );
+    }
+
     log.error("Legal document analysis failed.", error, {
       code: ERROR_CODES.INTERNAL_ERROR,
     });
 
     return NextResponse.json(
-      {
-        message:
-          error instanceof Error ? error.message : "Document analysis failed.",
-      },
+      { message: "Document analysis failed." },
       { status: 500 },
     );
   }

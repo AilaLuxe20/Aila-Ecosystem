@@ -70,6 +70,33 @@ export async function deleteLegalDocument(userId: string, id: string) {
   await prisma.legalDocument.delete({ where: { id } });
 }
 
+export async function getLatestLegalDocumentContext(
+  userId: string,
+): Promise<{ fileName: string; text: string } | null> {
+  const record = await prisma.legalDocument.findFirst({
+    where: { userId },
+    orderBy: { createdAt: "desc" },
+    select: {
+      fileName: true,
+      content: true,
+    },
+  });
+
+  if (!record) {
+    return null;
+  }
+
+  const text = record.content.trim().slice(0, 14000);
+  if (!text) {
+    return null;
+  }
+
+  return {
+    fileName: record.fileName,
+    text,
+  };
+}
+
 export async function saveLegalDocument(input: {
   userId: string;
   fileName: string;

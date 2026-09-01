@@ -35,6 +35,7 @@ import {
   buildOpenRouterHeaders,
   openRouterUserMessage,
   readOpenRouterFailure,
+  resolveOpenRouterSignal,
 } from "@/core/ai/openrouter";
 
 /**
@@ -195,7 +196,7 @@ function createOpenRouterRequest(
   return fetch(OPENROUTER_CHAT_URL, {
     method: "POST",
     headers: buildOpenRouterHeaders(prepared.apiKey, stream),
-    signal: options.signal,
+    signal: resolveOpenRouterSignal(options.signal),
     body: JSON.stringify({
       model: AI_MODEL,
       stream,
@@ -371,7 +372,25 @@ export async function chat(request: AIRequest): Promise<AIResponse> {
     return prepared.response;
   }
 
-  const aiResponse = await createOpenRouterRequest(prepared, false);
+  let aiResponse: Response;
+
+  try {
+    aiResponse = await createOpenRouterRequest(prepared, false);
+  } catch (error) {
+    if (isAbortError(error)) {
+      return {
+        success: false,
+        reply: "",
+        error: "Aila Intelligence could not respond right now.",
+      };
+    }
+
+    return {
+      success: false,
+      reply: "",
+      error: "Aila Intelligence could not respond right now.",
+    };
+  }
 
   if (!aiResponse.ok) {
     const failure = await readOpenRouterFailure(aiResponse);
@@ -523,31 +542,42 @@ export async function analyzeDocument(
 
   const modeConfig = MODE_CONFIG[mode];
 
-  const aiResponse = await fetch(OPENROUTER_CHAT_URL, {
-    method: "POST",
-    headers: buildOpenRouterHeaders(apiKey),
-    body: JSON.stringify({
-      model: AI_MODEL,
-      messages: [
-        {
-          role: "system",
-          content: DOCUMENT_ANALYSIS_PROMPT,
-        },
-        {
-          role: "user",
-          content: `
+  let aiResponse: Response;
+
+  try {
+    aiResponse = await fetch(OPENROUTER_CHAT_URL, {
+      method: "POST",
+      headers: buildOpenRouterHeaders(apiKey),
+      signal: resolveOpenRouterSignal(),
+      body: JSON.stringify({
+        model: AI_MODEL,
+        messages: [
+          {
+            role: "system",
+            content: DOCUMENT_ANALYSIS_PROMPT,
+          },
+          {
+            role: "user",
+            content: `
 DOCUMENT NAME:
 ${fileName}
 
 DOCUMENT CONTENT:
 ${documentText}
           `.trim(),
-        },
-      ],
-      max_tokens: modeConfig.maxTokens,
-      temperature: modeConfig.temperature,
-    }),
-  });
+          },
+        ],
+        max_tokens: modeConfig.maxTokens,
+        temperature: modeConfig.temperature,
+      }),
+    });
+  } catch {
+    return {
+      success: false,
+      reply: "",
+      error: "Aila could not analyze the document right now.",
+    };
+  }
 
   if (!aiResponse.ok) {
     const failure = await readOpenRouterFailure(aiResponse);

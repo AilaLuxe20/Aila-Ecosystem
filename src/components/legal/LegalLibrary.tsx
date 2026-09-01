@@ -13,6 +13,7 @@ function LegalLibraryInner(): React.JSX.Element {
   const [documents, setDocuments] = useState<LegalDocumentListItem[]>([]);
   const [selected, setSelected] = useState<LegalDocumentDto | null>(null);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     if (!isSignedIn) return;
@@ -20,6 +21,7 @@ function LegalLibraryInner(): React.JSX.Element {
       data?: { documents?: LegalDocumentListItem[] };
     };
     setDocuments(response.data?.documents ?? []);
+    setLoadError(null);
     setLoading(false);
   }, [getToken, isSignedIn]);
 
@@ -29,6 +31,7 @@ function LegalLibraryInner(): React.JSX.Element {
     const timeout = window.setTimeout(() => {
       void load().catch(() => {
         if (controller.signal.aborted) return;
+        setLoadError("Your document library could not be loaded.");
         setLoading(false);
       });
     }, 0);
@@ -63,6 +66,20 @@ function LegalLibraryInner(): React.JSX.Element {
 
   if (loading) {
     return <p className="text-sm text-white/50">Loading your legal documents…</p>;
+  }
+
+  if (loadError) {
+    return (
+      <EmptyState
+        title="Library unavailable"
+        description={loadError}
+        action={
+          <Button type="button" onClick={() => void load()}>
+            Try again
+          </Button>
+        }
+      />
+    );
   }
 
   if (documents.length === 0) {

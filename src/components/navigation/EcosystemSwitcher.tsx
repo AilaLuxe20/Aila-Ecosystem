@@ -63,6 +63,7 @@ export default function EcosystemSwitcher() {
               <Link
                 key={product.name}
                 href={product.href}
+                aria-label={product.name}
                 className={`group relative flex h-11 shrink-0 items-center gap-2.5 overflow-hidden rounded-full border px-4 transition duration-500 ${
                   active
                     ? `${product.activeBorder} ${product.activeBackground}`
@@ -141,6 +142,7 @@ export default function EcosystemSwitcher() {
             <Link
               key={product.name}
               href={product.href}
+              aria-label={product.name}
               className={`relative flex min-h-12 min-w-[4.5rem] shrink-0 flex-col items-center justify-center gap-1 overflow-hidden rounded-2xl border transition duration-300 ${
                 active
                   ? `${product.activeBorder} ${product.activeBackground}`

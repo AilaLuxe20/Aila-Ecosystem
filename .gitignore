@@ -56,3 +56,7 @@ replacements.txt
 my-app/
 build_output.txt
 globals.txt
+
+# Local diagnostic scripts and their output. Never commit secrets.
+scripts/_*.out.json
+scripts/_inspect-*.json

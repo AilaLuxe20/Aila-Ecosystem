@@ -39,6 +39,9 @@ export const MAX_FILENAME_LENGTH = 255;
 
 export const INTELLIGENCE_EXTRACT_TIMEOUT_MS = 20_000;
 
+/** OpenRouter request budget when the caller does not pass an abort signal. */
+export const AI_REQUEST_TIMEOUT_MS = 30_000;
+
 export const AI_MODEL = "openai/gpt-4.1-mini";
 
 /** Maximum tool rounds per Intelligence request. Prevents unbounded loops. */
