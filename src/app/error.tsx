@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 export default function Error({
   reset,
 }: {
@@ -23,12 +25,12 @@ export default function Error({
         >
           Try again
         </button>
-        <a
+        <Link
           href="/"
           className="rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm text-neutral-300"
         >
           Back to Aila
-        </a>
+        </Link>
       </div>
     </main>
   );

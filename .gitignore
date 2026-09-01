@@ -58,5 +58,6 @@ build_output.txt
 globals.txt
 
 # Local diagnostic scripts and their output. Never commit secrets.
+scripts/_*.mjs
 scripts/_*.out.json
 scripts/_inspect-*.json
