@@ -6,7 +6,7 @@ import { useCallback, useState } from "react";
 import { BILLING_PLANS } from "@/core/billing/plans";
 import type { BillingStatus } from "@/core/billing/types";
 import { PRODUCTS, PRODUCT_LIST, type ProductKey } from "@/core/products/catalog";
-import { workspaceFetch } from "@/components/workspace/api";
+import { useWorkspaceApi } from "@/components/workspace/api";
 import { WorkspaceShell } from "@/components/workspace/WorkspaceShell";
 import { ToastProvider, useToast } from "@/components/ui";
 
@@ -20,6 +20,7 @@ function BillingWorkspaceInner({
   initialBilling,
 }: BillingWorkspaceProps) {
   const { error: showError } = useToast();
+  const api = useWorkspaceApi();
   const [billing, setBilling] = useState<BillingStatus>(initialBilling);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<unknown>(null);
@@ -28,7 +29,7 @@ function BillingWorkspaceInner({
   const load = useCallback(async () => {
     setLoading(true);
     try {
-      const response = (await workspaceFetch("/api/billing/status", { method: "GET" })) as {
+      const response = (await api("/api/billing/status", { method: "GET" })) as {
         data?: { billing?: BillingStatus };
       };
       if (response.data?.billing) {
@@ -40,7 +41,7 @@ function BillingWorkspaceInner({
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [api]);
 
   const requested = requestedProduct ? PRODUCTS[requestedProduct] : null;
   const hasStripeSubscription = Boolean(
@@ -52,7 +53,7 @@ function BillingWorkspaceInner({
   async function startCheckout() {
     setBusy("checkout");
     try {
-      const response = (await workspaceFetch("/api/billing/checkout", {
+      const response = (await api("/api/billing/checkout", {
         method: "POST",
         body: JSON.stringify({ product: requestedProduct }),
       })) as { data?: { checkoutUrl?: string } };
@@ -70,7 +71,7 @@ function BillingWorkspaceInner({
   async function openPortal() {
     setBusy("portal");
     try {
-      const response = (await workspaceFetch("/api/billing/portal", { method: "POST" })) as {
+      const response = (await api("/api/billing/portal", { method: "POST" })) as {
         data?: { portalUrl?: string };
       };
       const url = response.data?.portalUrl;
@@ -90,7 +91,7 @@ function BillingWorkspaceInner({
       href="/billing"
       accent="cyan"
       title="Aila billing"
-      description="Free includes Intelligence, Daily, and Ads. Pro checkout uses Stripe, including a 7-day trial when this account has not used one. Business and Enterprise are Clerk staff grants, not self-serve Stripe prices."
+      description="Free includes Intelligence, Daily, Writer, Translate, Documents, and Ads. Pro checkout uses Stripe, including a 7-day trial when this account has not used one. Business and Enterprise are Clerk staff grants, not self-serve Stripe prices."
       loading={loading}
       error={error}
       onRetry={() => void load()}

@@ -95,6 +95,56 @@ const defaultSuggestions: Record<AilaMode, string[]> = {
     "What pages should my site have?",
     "Help me plan my site structure",
   ],
+  writer: [
+    "Rewrite this more clearly",
+    "Shorten this paragraph",
+    "Make this more professional",
+  ],
+  translate: [
+    "Translate this to Spanish",
+    "Translate this to French",
+    "What language is this?",
+  ],
+  documents: [
+    "Summarise the document I uploaded",
+    "What dates appear in this file?",
+    "Help me organise these notes",
+  ],
+  coding: [
+    "Explain this function",
+    "Find the bug in this code",
+    "Write a unit test for this",
+  ],
+  education: [
+    "Quiz me on this topic",
+    "Turn my notes into a study plan",
+    "Explain this in simpler words",
+  ],
+  career: [
+    "Improve this resume bullet",
+    "Prepare me for a product interview",
+    "Draft a short cover note",
+  ],
+  health: [
+    "Help me set a sleep reminder",
+    "Turn this into a weekly habit",
+    "This is not medical advice — help me organise notes",
+  ],
+  finance: [
+    "Summarise this month's expenses",
+    "Help me set a grocery budget",
+    "How close am I to this savings goal?",
+  ],
+  travel: [
+    "Build a 3-day itinerary",
+    "What should I pack for this trip?",
+    "Organise these reservation notes",
+  ],
+  shipping: [
+    "Help me complete this shipment form",
+    "What status should this parcel have?",
+    "Where can I look up this tracking number?",
+  ],
 };
 
 const defaultPlaceholders: Record<AilaMode, string> = {
@@ -109,6 +159,16 @@ const defaultPlaceholders: Record<AilaMode, string> = {
   commerce: "Ask Aila Commerce about your store...",
   flow: "Describe a workflow to connect...",
   sites: "Tell Aila Sites about your website...",
+  writer: "Paste text to draft or rewrite...",
+  translate: "Paste text to translate...",
+  documents: "Ask about a file you uploaded...",
+  coding: "Paste code or ask for a change...",
+  education: "Ask to study, quiz, or plan...",
+  career: "Ask about a resume or interview...",
+  health: "Log a habit or reminder — not medical advice...",
+  finance: "Ask about a budget or expense...",
+  travel: "Plan a trip from your notes...",
+  shipping: "Ask about a shipment record...",
 };
 
 const defaultHeaders: Record<AilaMode, { title: string; subtitle: string }> = {
@@ -156,6 +216,46 @@ const defaultHeaders: Record<AilaMode, { title: string; subtitle: string }> = {
     title: "Aila Sites",
     subtitle: "Website planning assistant",
   },
+  writer: {
+    title: "Aila Writer",
+    subtitle: "Writing assistant",
+  },
+  translate: {
+    title: "Aila Translate",
+    subtitle: "Translation assistant",
+  },
+  documents: {
+    title: "Aila Documents",
+    subtitle: "Document assistant",
+  },
+  coding: {
+    title: "Aila Coding",
+    subtitle: "Code assistant",
+  },
+  education: {
+    title: "Aila Education",
+    subtitle: "Study assistant",
+  },
+  career: {
+    title: "Aila Career",
+    subtitle: "Career assistant",
+  },
+  health: {
+    title: "Aila Health",
+    subtitle: "Wellness organiser — not medical care",
+  },
+  finance: {
+    title: "Aila Finance",
+    subtitle: "Budget assistant",
+  },
+  travel: {
+    title: "Aila Travel",
+    subtitle: "Trip planner — bookings are yours",
+  },
+  shipping: {
+    title: "Aila Shipping",
+    subtitle: "Shipment records",
+  },
 };
 
 const defaultWelcomeMessages: Record<AilaMode, string> = {
@@ -177,6 +277,18 @@ const defaultWelcomeMessages: Record<AilaMode, string> = {
     "Hello, I am Aila Commerce. Tell me about the store you want to build or improve.",
   flow: "Hello, I am Aila Flow. Tell me about the process you want to connect.",
   sites: "Hello, I am Aila Sites. Tell me about the website you want to build.",
+  writer: "Hello, I am Aila Writer. Paste a draft and I will help you rewrite it.",
+  translate: "Hello, I am Aila Translate. Paste text and choose a language.",
+  documents: "Hello, I am Aila Documents. Upload a file, then ask about the extracted text.",
+  coding: "Hello, I am Aila Coding. Open a file or paste code and I will help you change it.",
+  education: "Hello, I am Aila Education. I can explain a topic, quiz you, or build a study plan.",
+  career: "Hello, I am Aila Career. I can help with resumes, applications, and interview practice.",
+  health:
+    "Hello, I am Aila Health. I can help organise habits and notes. I do not diagnose or replace a clinician.",
+  finance: "Hello, I am Aila Finance. Track money you enter here — no bank is connected.",
+  travel: "Hello, I am Aila Travel. I can help plan a trip. I cannot book or confirm reservations.",
+  shipping:
+    "Hello, I am Aila Shipping. I keep shipment records you enter. I cannot query carrier networks.",
 };
 
 function sessionStorageKey(mode: AilaMode) {
@@ -354,7 +466,12 @@ export default function ChatInterface({
   showHeader = true,
   showConversationHistory = false,
 }: ChatInterfaceProps) {
-  const { isLoaded: isAuthLoaded, isSignedIn } = useAuth();
+  const { isLoaded: isAuthLoaded, isSignedIn, getToken } = useAuth();
+
+  const authHeaders = useCallback(async (): Promise<HeadersInit> => {
+    const token = await getToken();
+    return token ? { Authorization: `Bearer ${token}` } : {};
+  }, [getToken]);
 
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>(
@@ -441,7 +558,7 @@ export default function ChatInterface({
     try {
       const response = await fetch(
         `/api/ai/conversation/list?mode=${encodeURIComponent(mode)}`,
-        { signal: controller.signal }
+        { signal: controller.signal, headers: await authHeaders() }
       );
 
       if (controller.signal.aborted) {
@@ -485,7 +602,7 @@ export default function ChatInterface({
 
       setConversationListStatus("error");
     }
-  }, [mode, showConversationHistory]);
+  }, [authHeaders, mode, showConversationHistory]);
 
   const loadConversation = useCallback(
     async (id: string) => {
@@ -510,7 +627,7 @@ export default function ChatInterface({
       try {
         const response = await fetch(
           `/api/ai/conversation?conversationId=${encodeURIComponent(id)}&mode=${encodeURIComponent(mode)}`,
-          { signal: controller.signal }
+          { signal: controller.signal, headers: await authHeaders() }
         );
 
         if (isStale()) {
@@ -605,7 +722,7 @@ export default function ChatInterface({
         );
       }
     },
-    [beginFreshConversation, mode, refreshConversations]
+    [authHeaders, beginFreshConversation, mode, refreshConversations]
   );
 
   const loadConversationRef = useRef(loadConversation);
@@ -741,6 +858,7 @@ export default function ChatInterface({
         `/api/ai/conversation?conversationId=${encodeURIComponent(id)}`,
         {
           method: "DELETE",
+          headers: await authHeaders(),
         }
       );
 
@@ -783,7 +901,8 @@ export default function ChatInterface({
 
     try {
       const response = await fetch(
-        `/api/ai/conversation?conversationId=${encodeURIComponent(id)}&mode=${encodeURIComponent(mode)}`
+        `/api/ai/conversation?conversationId=${encodeURIComponent(id)}&mode=${encodeURIComponent(mode)}`,
+        { headers: await authHeaders() }
       );
 
       if (!isCurrent()) {
@@ -908,6 +1027,7 @@ export default function ChatInterface({
         headers: {
           "Content-Type": "application/json",
           Accept: "text/event-stream, application/json",
+          ...(await authHeaders()),
         },
         signal: controller.signal,
         body: JSON.stringify({
@@ -1142,6 +1262,7 @@ export default function ChatInterface({
 
       const response = await fetch("/api/ai/intelligence/document", {
         method: "POST",
+        headers: await authHeaders(),
         body: formData,
       });
 
@@ -1192,9 +1313,12 @@ export default function ChatInterface({
     setAttachment(null);
 
     if (current?.status === "ready" && current.documentId) {
-      void fetch(
-        `/api/ai/intelligence/document?documentId=${encodeURIComponent(current.documentId)}`,
-        { method: "DELETE" }
+      const documentId = current.documentId;
+      void authHeaders().then((headers) =>
+        fetch(
+          `/api/ai/intelligence/document?documentId=${encodeURIComponent(documentId)}`,
+          { method: "DELETE", headers },
+        ),
       );
     }
   }

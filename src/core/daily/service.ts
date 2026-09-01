@@ -1,3 +1,4 @@
+import { AILA_MODE_VALUES } from "@/core/ai/chat-api";
 import { prisma } from "@/core/database/prisma";
 import { PRODUCTS, productKeyFromMode } from "@/core/products/catalog";
 import type { AilaMode } from "@/core/types";
@@ -19,19 +20,7 @@ import {
   isOnOrBeforeCivilDay,
 } from "./timezone";
 
-const AILA_MODES = new Set<AilaMode>([
-  "intelligence",
-  "daily",
-  "legal",
-  "business",
-  "automation",
-  "ads",
-  "apps",
-  "calendar",
-  "commerce",
-  "flow",
-  "sites",
-]);
+const AILA_MODES = new Set<AilaMode>(AILA_MODE_VALUES);
 
 function conversationWorkspaceHref(mode: string): string {
   if (!AILA_MODES.has(mode as AilaMode)) {

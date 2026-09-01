@@ -24,9 +24,11 @@ export default function PrivacyPage() {
         </p>
         <h2 className="text-lg font-medium text-white">Product data</h2>
         <p>
-          Content you create in Intelligence, Legal, Calendar, Business, Automation, Commerce, Ads,
-          Apps, Sites, and Flow is stored in our database and is private to your account, except
-          published Sites which are public at the URL you share.
+          Content you create in Intelligence, Daily, Writer, Translate, Documents, Legal, Calendar,
+          Business, Automation, Ads, Coding, Career, Education, Health, Finance, Travel, Commerce,
+          Shipping, Apps, Sites, and Flow is stored in our database and is private to your account,
+          except published Sites which are public at the URL you share. Uploaded document text is
+          stored so you can reopen it; we do not sell that content.
         </p>
         <h2 className="text-lg font-medium text-white">Payments and email</h2>
         <p>

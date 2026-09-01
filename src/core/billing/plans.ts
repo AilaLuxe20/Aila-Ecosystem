@@ -34,10 +34,11 @@ export const BILLING_PLANS: readonly BillingPlanDefinition[] = [
     trialDays: null,
     stripePriceEnv: null,
     summary:
-      "A real everyday workspace. Intelligence, Daily, and Ads stay available without a card.",
+      "A real everyday workspace. Intelligence, Daily, Writer, Translate, Documents, and Ads stay available without a card.",
     includes: [
       "Aila Intelligence conversations and file attachments",
       "Aila Daily briefing from your stored work",
+      "Aila Writer, Translate, and Documents",
       "Aila Ads campaign planning with Free limits",
     ],
   },
@@ -51,7 +52,7 @@ export const BILLING_PLANS: readonly BillingPlanDefinition[] = [
     summary:
       "Unlock paid workspaces. Checkout uses the Stripe price in STRIPE_PRICE_PRO, including that price's currency.",
     includes: [
-      "Legal, Business, Automation, Commerce, Calendar, Sites, Apps, and Flow",
+      "Legal, Business, Automation, Coding, Career, Education, Health, Finance, Travel, Commerce, Shipping, Calendar, Sites, Apps, and Flow",
       "Higher Aila Ads limits",
       `${STRIPE_TRIAL_DAYS}-day Stripe trial on first Pro checkout`,
     ],

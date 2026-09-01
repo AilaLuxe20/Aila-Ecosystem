@@ -4,8 +4,9 @@ import { Plus } from "lucide-react";
 import { useAuth } from "@clerk/nextjs";
 import { useCallback, useEffect, useState } from "react";
 
+import ChatInterface from "@/components/ai/ChatInterface";
 import type { FlowDto } from "@/core/flow/service";
-import { workspaceFetch } from "@/components/workspace/api";
+import { useWorkspaceApi } from "@/components/workspace/api";
 import { WorkspaceShell } from "@/components/workspace/WorkspaceShell";
 import {
   Button,
@@ -26,6 +27,7 @@ import {
 
 function FlowWorkspaceInner(): React.JSX.Element {
   const { isSignedIn } = useAuth();
+  const api = useWorkspaceApi();
   const toast = useToast();
   const [flows, setFlows] = useState<FlowDto[]>([]);
   const [loading, setLoading] = useState(true);
@@ -40,13 +42,13 @@ function FlowWorkspaceInner(): React.JSX.Element {
 
   const load = useCallback(async (signal?: AbortSignal) => {
     if (!isSignedIn) return;
-    const response = (await workspaceFetch("/api/flow", { method: "GET" }, signal)) as {
+    const response = (await api("/api/flow", { method: "GET" }, signal)) as {
       data?: { flows?: FlowDto[] };
     };
     setFlows(response.data?.flows ?? []);
     setError(null);
     setLoading(false);
-  }, [isSignedIn]);
+  }, [api, isSignedIn]);
 
   useEffect(() => {
     if (!isSignedIn) return;
@@ -92,13 +94,13 @@ function FlowWorkspaceInner(): React.JSX.Element {
         })),
       };
       if (editing) {
-        await workspaceFetch(`/api/flow/${editing.id}`, {
+        await api(`/api/flow/${editing.id}`, {
           method: "PATCH",
           body: JSON.stringify(payload),
         });
         toast.success("Flow updated");
       } else {
-        await workspaceFetch("/api/flow", {
+        await api("/api/flow", {
           method: "POST",
           body: JSON.stringify(payload),
         });
@@ -114,13 +116,13 @@ function FlowWorkspaceInner(): React.JSX.Element {
   }
 
   async function advance(flow: FlowDto) {
-    await workspaceFetch(`/api/flow/${flow.id}/advance`, { method: "POST" });
+    await api(`/api/flow/${flow.id}/advance`, { method: "POST" });
     toast.success("Next step completed");
     await load();
   }
 
   async function reset(flow: FlowDto) {
-    await workspaceFetch(`/api/flow/${flow.id}/reset`, { method: "POST" });
+    await api(`/api/flow/${flow.id}/reset`, { method: "POST" });
     toast.success("Flow reset");
     await load();
   }
@@ -194,6 +196,13 @@ function FlowWorkspaceInner(): React.JSX.Element {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+      <div className="mt-10">
+        <ChatInterface
+          mode="flow"
+          showConversationHistory
+          placeholder="Ask Aila Flow how to structure these steps..."
+        />
+      </div>
     </WorkspaceShell>
   );
 }

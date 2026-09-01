@@ -4,8 +4,9 @@ import { Plus } from "lucide-react";
 import { useAuth } from "@clerk/nextjs";
 import { useCallback, useEffect, useState } from "react";
 
+import ChatInterface from "@/components/ai/ChatInterface";
 import type { BusinessContactDto, BusinessTaskDto } from "@/core/business/service";
-import { fieldErrorsFromUnknown, workspaceFetch } from "@/components/workspace/api";
+import { fieldErrorsFromUnknown, useWorkspaceApi } from "@/components/workspace/api";
 import { WorkspaceShell } from "@/components/workspace/WorkspaceShell";
 import {
   Button,
@@ -60,6 +61,7 @@ const emptyTask: TaskForm = {
 
 function BusinessWorkspaceInner(): React.JSX.Element {
   const { isSignedIn } = useAuth();
+  const api = useWorkspaceApi();
   const toast = useToast();
   const [contacts, setContacts] = useState<BusinessContactDto[]>([]);
   const [tasks, setTasks] = useState<BusinessTaskDto[]>([]);
@@ -80,8 +82,8 @@ function BusinessWorkspaceInner(): React.JSX.Element {
     }
 
     const [contactBody, taskBody] = (await Promise.all([
-      workspaceFetch("/api/business/contacts", { method: "GET" }, signal),
-      workspaceFetch("/api/business/tasks", { method: "GET" }, signal),
+      api("/api/business/contacts", { method: "GET" }, signal),
+      api("/api/business/tasks", { method: "GET" }, signal),
     ])) as [
       { data?: { contacts?: BusinessContactDto[] } },
       { data?: { tasks?: BusinessTaskDto[] } },
@@ -91,7 +93,7 @@ function BusinessWorkspaceInner(): React.JSX.Element {
     setTasks(taskBody.data?.tasks ?? []);
     setError(null);
     setLoading(false);
-  }, [isSignedIn]);
+  }, [api, isSignedIn]);
 
   useEffect(() => {
     if (!isSignedIn) {
@@ -163,13 +165,13 @@ function BusinessWorkspaceInner(): React.JSX.Element {
       };
 
       if (editingContact) {
-        await workspaceFetch(`/api/business/contacts/${editingContact.id}`, {
+        await api(`/api/business/contacts/${editingContact.id}`, {
           method: "PATCH",
           body: JSON.stringify(payload),
         });
         toast.success("Contact updated");
       } else {
-        await workspaceFetch("/api/business/contacts", {
+        await api("/api/business/contacts", {
           method: "POST",
           body: JSON.stringify(payload),
         });
@@ -199,13 +201,13 @@ function BusinessWorkspaceInner(): React.JSX.Element {
       };
 
       if (editingTask) {
-        await workspaceFetch(`/api/business/tasks/${editingTask.id}`, {
+        await api(`/api/business/tasks/${editingTask.id}`, {
           method: "PATCH",
           body: JSON.stringify(payload),
         });
         toast.success("Task updated");
       } else {
-        await workspaceFetch("/api/business/tasks", {
+        await api("/api/business/tasks", {
           method: "POST",
           body: JSON.stringify(payload),
         });
@@ -222,7 +224,7 @@ function BusinessWorkspaceInner(): React.JSX.Element {
   }
 
   async function completeTask(task: BusinessTaskDto) {
-    await workspaceFetch(`/api/business/tasks/${task.id}`, {
+    await api(`/api/business/tasks/${task.id}`, {
       method: "PATCH",
       body: JSON.stringify({ status: task.status === "done" ? "open" : "done" }),
     });
@@ -234,7 +236,7 @@ function BusinessWorkspaceInner(): React.JSX.Element {
     if (!editingContact) return;
     setSubmitting(true);
     try {
-      await workspaceFetch(`/api/business/contacts/${editingContact.id}`, { method: "DELETE" });
+      await api(`/api/business/contacts/${editingContact.id}`, { method: "DELETE" });
       toast.success("Contact deleted");
       setContactOpen(false);
       await load();
@@ -249,7 +251,7 @@ function BusinessWorkspaceInner(): React.JSX.Element {
     if (!editingTask) return;
     setSubmitting(true);
     try {
-      await workspaceFetch(`/api/business/tasks/${editingTask.id}`, { method: "DELETE" });
+      await api(`/api/business/tasks/${editingTask.id}`, { method: "DELETE" });
       toast.success("Task deleted");
       setTaskOpen(false);
       await load();
@@ -442,6 +444,13 @@ function BusinessWorkspaceInner(): React.JSX.Element {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+      <div className="mt-10">
+        <ChatInterface
+          mode="business"
+          showConversationHistory
+          placeholder="Ask Aila Business about these contacts or tasks..."
+        />
+      </div>
     </WorkspaceShell>
   );
 }

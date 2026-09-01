@@ -5,6 +5,8 @@ import {
 import { ERROR_CODES } from "@/lib/errors/app-error";
 import { getFileExtension, sanitizeFileName } from "@/lib/utils/file";
 
+import { looksLikeBinary, looksLikePdf } from "@/core/documents/bytes";
+
 import {
   extensionToKind,
   INTELLIGENCE_KIND_MIME,
@@ -26,65 +28,6 @@ export type IntelligenceFileValidation =
     };
 
 const WINDOWS_RESERVED = /^(con|prn|aux|nul|com[1-9]|lpt[1-9])(\.|$)/i;
-
-function looksLikePdf(bytes: Uint8Array): boolean {
-  const limit = Math.min(bytes.length, 1024);
-
-  for (let index = 0; index <= limit - 4; index += 1) {
-    if (
-      bytes[index] === 0x25 &&
-      bytes[index + 1] === 0x50 &&
-      bytes[index + 2] === 0x44 &&
-      bytes[index + 3] === 0x46
-    ) {
-      return true;
-    }
-  }
-
-  return false;
-}
-
-function looksLikeBinary(bytes: Uint8Array): boolean {
-  if (containsNul(bytes)) {
-    return true;
-  }
-
-  if (
-    bytes.length >= 4 &&
-    bytes[0] === 0x89 &&
-    bytes[1] === 0x50 &&
-    bytes[2] === 0x4e &&
-    bytes[3] === 0x47
-  ) {
-    return true;
-  }
-
-  if (bytes.length >= 3 && bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff) {
-    return true;
-  }
-
-  if (bytes.length >= 4 && bytes[0] === 0x50 && bytes[1] === 0x4b) {
-    return true;
-  }
-
-  if (bytes.length >= 2 && bytes[0] === 0x4d && bytes[1] === 0x5a) {
-    return true;
-  }
-
-  return false;
-}
-
-function containsNul(bytes: Uint8Array, sampleBytes = 8192): boolean {
-  const end = Math.min(bytes.length, sampleBytes);
-
-  for (let index = 0; index < end; index += 1) {
-    if (bytes[index] === 0) {
-      return true;
-    }
-  }
-
-  return false;
-}
 
 function validateFileName(rawName: string): string | null {
   const trimmed = rawName.trim();

@@ -96,6 +96,8 @@ a:focus-visible {
   outline: none;
 }
 
+input:focus-visible,
+textarea:focus-visible,
 button:focus-visible,
 a:focus-visible {
   box-shadow:

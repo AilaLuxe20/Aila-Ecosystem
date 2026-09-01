@@ -13,7 +13,17 @@ export type AilaMode =
   | "calendar"
   | "commerce"
   | "flow"
-  | "sites";
+  | "sites"
+  | "writer"
+  | "translate"
+  | "documents"
+  | "coding"
+  | "education"
+  | "career"
+  | "health"
+  | "finance"
+  | "travel"
+  | "shipping";
 
 export type ChatRole = "user" | "assistant";
 

@@ -3,19 +3,27 @@ import type { AilaMode } from "@/core/types";
 /**
  * Canonical registry of products that actually exist in this repository.
  *
- * Documents, Writer, Translate, Coding, Career, Education, Health,
- * Finance, Travel, Ship, and Salon are not implemented here — they are not
- * registered, linked, or stubbed.
+ * Salon is not implemented and is not registered.
  */
 
 export const PRODUCT_KEYS = [
   "intelligence",
   "daily",
+  "writer",
+  "translate",
+  "documents",
   "business",
   "ads",
   "ailalegal",
   "automation",
+  "coding",
+  "career",
+  "education",
+  "health",
+  "finance",
+  "travel",
   "commerce",
+  "shipping",
   "calendar",
   "sites",
   "apps",
@@ -73,6 +81,33 @@ export const PRODUCTS: Record<ProductKey, ProductDefinition> = {
     description:
       "Plan the day from your stored tasks, notes, goals, calendar, conversations, and campaigns.",
   },
+  writer: {
+    key: "writer",
+    title: "Aila Writer",
+    href: "/products/writer",
+    aiMode: "writer",
+    paid: false,
+    group: "everyday",
+    description: "Write, edit, and rewrite documents stored on your account.",
+  },
+  translate: {
+    key: "translate",
+    title: "Aila Translate",
+    href: "/products/translate",
+    aiMode: "translate",
+    paid: false,
+    group: "everyday",
+    description: "Translate text between languages and keep a private history.",
+  },
+  documents: {
+    key: "documents",
+    title: "Aila Documents",
+    href: "/products/documents",
+    aiMode: "documents",
+    paid: false,
+    group: "everyday",
+    description: "Upload files, extract text, search, and keep notes on your documents.",
+  },
   business: {
     key: "business",
     title: "Aila Business",
@@ -112,6 +147,61 @@ export const PRODUCTS: Record<ProductKey, ProductDefinition> = {
     description:
       "Rules that send email, create calendar events, or create tasks. Run them now or on an interval.",
   },
+  coding: {
+    key: "coding",
+    title: "Aila Coding",
+    href: "/products/coding",
+    aiMode: "coding",
+    paid: true,
+    group: "professional",
+    description: "A coding workspace with project files, editing, and AI help to explain code.",
+  },
+  career: {
+    key: "career",
+    title: "Aila Career",
+    href: "/products/career",
+    aiMode: "career",
+    paid: true,
+    group: "professional",
+    description: "Resumes, job applications, and interview notes stored on your account.",
+  },
+  education: {
+    key: "education",
+    title: "Aila Education",
+    href: "/products/education",
+    aiMode: "education",
+    paid: true,
+    group: "life",
+    description: "Courses, study notes, quizzes, and progress stored on your account.",
+  },
+  health: {
+    key: "health",
+    title: "Aila Health",
+    href: "/products/health",
+    aiMode: "health",
+    paid: true,
+    group: "life",
+    description:
+      "Habits, wellness notes, and reminders. This is not medical care and does not diagnose.",
+  },
+  finance: {
+    key: "finance",
+    title: "Aila Finance",
+    href: "/products/finance",
+    aiMode: "finance",
+    paid: true,
+    group: "life",
+    description: "Track income, expenses, budgets, and goals. No bank connection.",
+  },
+  travel: {
+    key: "travel",
+    title: "Aila Travel",
+    href: "/products/travel",
+    aiMode: "travel",
+    paid: true,
+    group: "life",
+    description: "Plan trips, itineraries, and reservation notes. Aila does not book travel.",
+  },
   commerce: {
     key: "commerce",
     title: "Aila Commerce",
@@ -121,6 +211,16 @@ export const PRODUCTS: Record<ProductKey, ProductDefinition> = {
     group: "commerce",
     description:
       "Create products, take orders, and collect payment through Stripe Checkout.",
+  },
+  shipping: {
+    key: "shipping",
+    title: "Aila Shipping",
+    href: "/products/shipping",
+    aiMode: "shipping",
+    paid: true,
+    group: "commerce",
+    description:
+      "Create shipment records, statuses, and tracking numbers you enter. Carrier live tracking is not connected.",
   },
   calendar: {
     key: "calendar",
@@ -194,6 +294,16 @@ const MODE_TO_PRODUCT: Record<AilaMode, ProductKey> = {
   commerce: "commerce",
   flow: "flow",
   sites: "sites",
+  writer: "writer",
+  translate: "translate",
+  documents: "documents",
+  coding: "coding",
+  education: "education",
+  career: "career",
+  health: "health",
+  finance: "finance",
+  travel: "travel",
+  shipping: "shipping",
 };
 
 export function isProductKey(value: string): value is ProductKey {

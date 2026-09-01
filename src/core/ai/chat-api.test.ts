@@ -61,6 +61,15 @@ test("chat request accepts a single document id", () => {
   assert.equal(parsed.success, true);
 });
 
+test("client documentText is accepted by the schema for compatibility", () => {
+  const parsed = aiChatRequestSchema.safeParse({
+    mode: "legal",
+    messages: [{ role: "user", content: "Explain the latest upload." }],
+    documentText: "client-supplied extract that the route must ignore",
+  });
+  assert.equal(parsed.success, true);
+});
+
 test("chat request still works without an attachment", () => {
   const parsed = aiChatRequestSchema.safeParse({
     mode: "intelligence",

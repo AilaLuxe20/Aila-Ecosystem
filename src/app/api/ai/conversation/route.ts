@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { ailaModeQuerySchema } from "@/core/ai/chat-api";
+import { AILA_MODE_VALUES, ailaModeQuerySchema } from "@/core/ai/chat-api";
 import {
   deleteUserConversation,
   ensureUserConversation,
@@ -11,18 +11,7 @@ import { assertModeEntitlement } from "@/lib/auth/require-product-access";
 import type { AilaMode } from "@/core/types";
 import { AuthorizationError, ERROR_CODES } from "@/lib/errors/app-error";
 
-const AILA_MODES = new Set<AilaMode>([
-  "intelligence",
-  "legal",
-  "business",
-  "automation",
-  "ads",
-  "apps",
-  "calendar",
-  "commerce",
-  "flow",
-  "sites",
-]);
+const AILA_MODES = new Set<AilaMode>(AILA_MODE_VALUES);
 
 function resolveMode(value: unknown): AilaMode {
   return typeof value === "string" && AILA_MODES.has(value as AilaMode)

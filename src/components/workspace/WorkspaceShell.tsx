@@ -20,7 +20,11 @@ export type WorkspaceAccent =
   | "indigo"
   | "teal"
   | "fuchsia"
-  | "rose";
+  | "rose"
+  | "sky"
+  | "lime"
+  | "orange"
+  | "blue";
 
 const ACCENT: Record<WorkspaceAccent, { glow: string; kicker: string }> = {
   cyan: { glow: "bg-cyan-500/[0.1]", kicker: "text-cyan-200/70" },
@@ -32,6 +36,10 @@ const ACCENT: Record<WorkspaceAccent, { glow: string; kicker: string }> = {
   teal: { glow: "bg-teal-500/[0.1]", kicker: "text-teal-200/70" },
   fuchsia: { glow: "bg-fuchsia-500/[0.1]", kicker: "text-fuchsia-200/70" },
   rose: { glow: "bg-rose-500/[0.1]", kicker: "text-rose-200/70" },
+  sky: { glow: "bg-sky-500/[0.1]", kicker: "text-sky-200/70" },
+  lime: { glow: "bg-lime-500/[0.1]", kicker: "text-lime-200/70" },
+  orange: { glow: "bg-orange-500/[0.1]", kicker: "text-orange-200/70" },
+  blue: { glow: "bg-blue-500/[0.1]", kicker: "text-blue-200/70" },
 };
 
 type WorkspaceShellProps = {

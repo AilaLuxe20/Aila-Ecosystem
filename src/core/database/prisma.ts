@@ -5,15 +5,18 @@
  * Accelerate URL. Instantiating PrismaClient with no options throws at query time.
  */
 
+import { Pool } from "pg";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "@/generated/prisma";
 
 declare global {
-  // Bump this name whenever the constructor options change so hot reload
-  // cannot keep serving a PrismaClient created without an adapter.
-  var __ailaPrismaWithAdapter: PrismaClient | undefined;
+  // Bump these names whenever the constructor options change so hot reload
+  // cannot keep serving a PrismaClient created without a pooled adapter.
+  var __ailaPrismaPool: Pool | undefined;
+  var __ailaPrismaWithPool: PrismaClient | undefined;
 }
 
+let prismaPool: Pool | undefined;
 let prismaClient: PrismaClient | undefined;
 
 function isLocalDatabaseHost(databaseUrl: string): boolean {
@@ -40,6 +43,37 @@ export function resolvePostgresConnectionString(databaseUrl: string): string {
   );
 }
 
+/**
+ * Neon and other hosted Postgres hosts drop idle or failed clients.
+ * A real `pg.Pool` replaces those connections instead of leaving Prisma
+ * stuck on a closed socket (`Server has closed the connection`).
+ */
+export function createPostgresPool(databaseUrl: string): Pool {
+  const pool = new Pool({
+    connectionString: resolvePostgresConnectionString(databaseUrl),
+    max: 8,
+    idleTimeoutMillis: 10_000,
+    connectionTimeoutMillis: 15_000,
+    allowExitOnIdle: true,
+  });
+
+  pool.on("error", () => {
+    // The pool discards the dead client. Query failures still surface.
+  });
+
+  return pool;
+}
+
+function getPostgresPool(databaseUrl: string): Pool {
+  if (process.env.NODE_ENV === "production") {
+    prismaPool ??= createPostgresPool(databaseUrl);
+    return prismaPool;
+  }
+
+  global.__ailaPrismaPool ??= createPostgresPool(databaseUrl);
+  return global.__ailaPrismaPool;
+}
+
 function createPrismaClient(): PrismaClient {
   const databaseUrl = process.env.DATABASE_URL?.trim();
 
@@ -54,7 +88,10 @@ function createPrismaClient(): PrismaClient {
   }
 
   return new PrismaClient({
-    adapter: new PrismaPg(resolvedUrl),
+    adapter: new PrismaPg(getPostgresPool(databaseUrl), {
+      onPoolError: () => undefined,
+      onConnectionError: () => undefined,
+    }),
   });
 }
 
@@ -64,8 +101,8 @@ function getPrismaClient(): PrismaClient {
     return prismaClient;
   }
 
-  global.__ailaPrismaWithAdapter ??= createPrismaClient();
-  return global.__ailaPrismaWithAdapter;
+  global.__ailaPrismaWithPool ??= createPrismaClient();
+  return global.__ailaPrismaWithPool;
 }
 
 const prisma = new Proxy({} as PrismaClient, {

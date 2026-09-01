@@ -1,8 +1,20 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import ChatInterface from "@/components/ai/ChatInterface";
 import EcosystemCards from "@/components/shared/EcosystemCards";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import ProjectInquiry from "@/components/forms/ProjectInquiry";
+
+export const metadata: Metadata = {
+  title: {
+    absolute: "Aila Ecosystem | AI Software Company",
+  },
+  description:
+    "Aila is an AI software company. Sign in to use Intelligence, Legal, Daily, Ads, and the rest of the product workspaces — or start a custom project.",
+  alternates: {
+    canonical: "/",
+  },
+};
 
 const services = [
   {
@@ -45,9 +57,36 @@ const platforms = [
     accent: "from-cyan-400/20 via-blue-500/5 to-transparent",
   },
   {
+    title: "Aila Writer",
+    description: "Write, edit, and rewrite documents stored on your account.",
+    status: "Live Platform",
+    type: "Everyday",
+    href: "/products/writer",
+    external: false,
+    accent: "from-lime-400/20 via-green-500/5 to-transparent",
+  },
+  {
+    title: "Aila Translate",
+    description: "Translate text between languages and keep a private history.",
+    status: "Live Platform",
+    type: "Everyday",
+    href: "/products/translate",
+    external: false,
+    accent: "from-sky-400/20 via-blue-500/5 to-transparent",
+  },
+  {
+    title: "Aila Documents",
+    description: "Upload files, extract text, search, and keep notes.",
+    status: "Live Platform",
+    type: "Everyday",
+    href: "/products/documents",
+    external: false,
+    accent: "from-orange-400/20 via-amber-500/5 to-transparent",
+  },
+  {
     title: "Aila Ads",
     description:
-      "Plan campaigns, generate ad copy, and analyse stored data for creators, businesses, and agencies worldwide.",
+      "Plan campaigns, generate ad copy, and analyse stored campaign data. Aila Ads does not buy ad inventory.",
     status: "Live Platform",
     type: "Professional",
     href: "/products/ads",
@@ -85,6 +124,60 @@ const platforms = [
     accent: "from-violet-400/20 via-purple-500/5 to-transparent",
   },
   {
+    title: "Aila Coding",
+    description: "A coding workspace with project files and AI help.",
+    status: "Live Platform",
+    type: "Professional",
+    href: "/products/coding",
+    external: false,
+    accent: "from-lime-300/20 via-emerald-500/5 to-transparent",
+  },
+  {
+    title: "Aila Career",
+    description: "Resumes, applications, and interview notes.",
+    status: "Live Platform",
+    type: "Professional",
+    href: "/products/career",
+    external: false,
+    accent: "from-blue-400/20 via-indigo-500/5 to-transparent",
+  },
+  {
+    title: "Aila Education",
+    description: "Courses, notes, quizzes, and study progress.",
+    status: "Live Platform",
+    type: "Life",
+    href: "/products/education",
+    external: false,
+    accent: "from-sky-400/20 via-cyan-500/5 to-transparent",
+  },
+  {
+    title: "Aila Health",
+    description: "Habits and wellness notes. Not medical care.",
+    status: "Live Platform",
+    type: "Life",
+    href: "/products/health",
+    external: false,
+    accent: "from-rose-400/20 via-pink-500/5 to-transparent",
+  },
+  {
+    title: "Aila Finance",
+    description: "Income, expenses, budgets, and goals. No bank connection.",
+    status: "Live Platform",
+    type: "Life",
+    href: "/products/finance",
+    external: false,
+    accent: "from-emerald-400/20 via-teal-500/5 to-transparent",
+  },
+  {
+    title: "Aila Travel",
+    description: "Trip plans and itinerary notes. Aila does not book travel.",
+    status: "Live Platform",
+    type: "Life",
+    href: "/products/travel",
+    external: false,
+    accent: "from-orange-400/20 via-amber-500/5 to-transparent",
+  },
+  {
     title: "Aila Commerce",
     description:
       "Create products, take orders, and collect payment in your Aila catalog.",
@@ -103,6 +196,15 @@ const platforms = [
     href: "https://tluxehairs.shop",
     external: true,
     accent: "from-amber-300/20 via-yellow-500/5 to-transparent",
+  },
+  {
+    title: "Aila Shipping",
+    description: "Shipment records and tracking numbers you enter.",
+    status: "Live Platform",
+    type: "Commerce",
+    href: "/products/shipping",
+    external: false,
+    accent: "from-amber-400/20 via-yellow-500/5 to-transparent",
   },
   {
     title: "Aila Calendar",
@@ -225,11 +327,11 @@ export default function Home() {
 
                 <div>
                   <h2 className="text-4xl font-bold">
-                    Apps
+                    21
                   </h2>
 
                   <p className="mt-2 text-neutral-400">
-                    iOS • Android
+                    Products
                   </p>
                 </div>
               </div>
@@ -343,15 +445,7 @@ export default function Home() {
 
                 <div className="relative flex min-h-[340px] flex-col">
                   <div className="flex items-start justify-between gap-4">
-                    <span
-                      className={`rounded-full border px-3 py-1.5 text-[10px] uppercase tracking-[0.2em] ${
-                        platform.status === "Live Platform"
-                          ? "border-green-400/20 bg-green-400/[0.07] text-green-300"
-                          : platform.status === "Coming Soon"
-                            ? "border-purple-400/20 bg-purple-400/[0.07] text-purple-300"
-                            : "border-white/10 bg-white/5 text-neutral-400"
-                      }`}
-                    >
+                    <span className="rounded-full border border-green-400/20 bg-green-400/[0.07] px-3 py-1.5 text-[10px] uppercase tracking-[0.2em] text-green-300">
                       {platform.status}
                     </span>
 

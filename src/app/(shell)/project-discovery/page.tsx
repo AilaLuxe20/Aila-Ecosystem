@@ -1,4 +1,14 @@
+import type { Metadata } from "next";
+
 import ProjectInquiry from "@/components/forms/ProjectInquiry";
+
+export const metadata: Metadata = {
+  title: "Project Discovery",
+  description: "Describe a website, app, or AI project for Aila Luxe to review.",
+  alternates: {
+    canonical: "/project-discovery",
+  },
+};
 
 export default function ProjectDiscoveryPage() {
   return (

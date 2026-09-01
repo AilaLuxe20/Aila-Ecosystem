@@ -18,6 +18,7 @@ import {
   startOfDay,
   startOfMonth,
 } from "@/lib/utils/date";
+import { useWorkspaceApi } from "@/components/workspace/api";
 import {
   Button,
   EmptyState,
@@ -32,65 +33,14 @@ import {
   useToast,
 } from "@/components/ui";
 
+import ChatInterface from "@/components/ai/ChatInterface";
 import { EventFormDialog } from "./EventFormDialog";
 
 const WEEKDAY_LABELS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"] as const;
 
-type CalendarApiError = {
-  message: string;
-  fieldErrors: Record<string, string>;
-};
-
-function readApiError(body: unknown, fallback: string): CalendarApiError {
-  if (
-    typeof body === "object" &&
-    body !== null &&
-    "error" in body &&
-    typeof (body as { error: unknown }).error === "object" &&
-    (body as { error: unknown }).error !== null
-  ) {
-    const error = (body as { error: { message?: string; fieldErrors?: Record<string, string> } }).error;
-    return {
-      message: error.message ?? fallback,
-      fieldErrors: error.fieldErrors ?? {},
-    };
-  }
-
-  return { message: fallback, fieldErrors: {} };
-}
-
-async function calendarFetch(
-  path: string,
-  init: RequestInit | undefined,
-  signal?: AbortSignal,
-): Promise<unknown> {
-  const response = await fetch(path, {
-    ...init,
-    signal,
-    headers: {
-      ...(init?.body ? { "content-type": "application/json" } : {}),
-      ...init?.headers,
-    },
-  });
-
-  if (response.status === 204) {
-    return null;
-  }
-
-  const body: unknown = await response.json().catch(() => null);
-
-  if (!response.ok) {
-    const parsed = readApiError(body, "Aila Calendar could not complete that request.");
-    const error = new Error(parsed.message) as Error & { fieldErrors?: Record<string, string> };
-    error.fieldErrors = parsed.fieldErrors;
-    throw error;
-  }
-
-  return body;
-}
-
 function CalendarWorkspaceInner(): React.JSX.Element {
   const { isLoaded, isSignedIn } = useAuth();
+  const api = useWorkspaceApi();
   const toast = useToast();
 
   const [viewMonth, setViewMonth] = useState(() => startOfMonth(new Date()));
@@ -135,7 +85,7 @@ function CalendarWorkspaceInner(): React.JSX.Element {
       }
     }
 
-    const body = (await calendarFetch(
+    const body = (await api(
       `/api/calendar/events?${params.toString()}`,
       { method: "GET" },
       signal,
@@ -148,7 +98,7 @@ function CalendarWorkspaceInner(): React.JSX.Element {
     setEvents(body?.data?.events ?? []);
     setLoadError(null);
     setLoading(false);
-  }, [days, debouncedSearch, isSignedIn, status]);
+  }, [api, days, debouncedSearch, isSignedIn, status]);
 
   useEffect(() => {
     if (!isSignedIn) {
@@ -212,13 +162,13 @@ function CalendarWorkspaceInner(): React.JSX.Element {
 
     try {
       if (editingEvent) {
-        await calendarFetch(`/api/calendar/events/${editingEvent.id}`, {
+        await api(`/api/calendar/events/${editingEvent.id}`, {
           method: "PATCH",
           body: JSON.stringify(payload),
         });
         toast.success("Event updated");
       } else {
-        await calendarFetch("/api/calendar/events", {
+        await api("/api/calendar/events", {
           method: "POST",
           body: JSON.stringify(payload),
         });
@@ -245,7 +195,7 @@ function CalendarWorkspaceInner(): React.JSX.Element {
     setFormError(null);
 
     try {
-      await calendarFetch(`/api/calendar/events/${editingEvent.id}`, {
+      await api(`/api/calendar/events/${editingEvent.id}`, {
         method: "DELETE",
       });
       toast.success("Event deleted");
@@ -264,7 +214,7 @@ function CalendarWorkspaceInner(): React.JSX.Element {
     setFormError(null);
 
     try {
-      await calendarFetch(`/api/calendar/events/${editingEvent.id}`, {
+      await api(`/api/calendar/events/${editingEvent.id}`, {
         method: "PATCH",
         body: JSON.stringify({ archived }),
       });
@@ -560,6 +510,14 @@ function CalendarWorkspaceInner(): React.JSX.Element {
             </aside>
           </div>
         )}
+      </div>
+
+      <div className="mt-10">
+        <ChatInterface
+          mode="calendar"
+          showConversationHistory
+          placeholder="Ask Aila Calendar about these events..."
+        />
       </div>
 
       <EventFormDialog

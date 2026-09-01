@@ -12,7 +12,7 @@ import type {
   DailyTaskDto,
   DailyWorkspaceDto,
 } from "@/core/daily/service";
-import { fieldErrorsFromUnknown, workspaceFetch } from "@/components/workspace/api";
+import { fieldErrorsFromUnknown, useWorkspaceApi } from "@/components/workspace/api";
 import { WorkspaceShell } from "@/components/workspace/WorkspaceShell";
 import {
   Button,
@@ -67,6 +67,7 @@ function formatInZone(iso: string, timeZone: string) {
 
 function DailyWorkspaceInner(): React.JSX.Element {
   const { isSignedIn } = useAuth();
+  const api = useWorkspaceApi();
   const toast = useToast();
   const timezone = useMemo(() => resolveTimezone(), []);
   const [workspace, setWorkspace] = useState<DailyWorkspaceDto | null>(null);
@@ -85,7 +86,7 @@ function DailyWorkspaceInner(): React.JSX.Element {
   const load = useCallback(
     async (signal?: AbortSignal) => {
       if (!isSignedIn) return;
-      const response = (await workspaceFetch(
+      const response = (await api(
         `/api/daily/workspace?timezone=${encodeURIComponent(timezone)}`,
         { method: "GET" },
         signal,
@@ -94,7 +95,7 @@ function DailyWorkspaceInner(): React.JSX.Element {
       setError(null);
       setLoading(false);
     },
-    [isSignedIn, timezone],
+    [api, isSignedIn, timezone],
   );
 
   useEffect(() => {
@@ -161,12 +162,12 @@ function DailyWorkspaceInner(): React.JSX.Element {
     try {
       if (editor === "note") {
         if (editingNote) {
-          await workspaceFetch(`/api/daily/notes/${editingNote.id}`, {
+          await api(`/api/daily/notes/${editingNote.id}`, {
             method: "PATCH",
             body: JSON.stringify(noteForm),
           });
         } else {
-          await workspaceFetch("/api/daily/notes", {
+          await api("/api/daily/notes", {
             method: "POST",
             body: JSON.stringify(noteForm),
           });
@@ -178,12 +179,12 @@ function DailyWorkspaceInner(): React.JSX.Element {
           dueAt: goalForm.dueAt ? new Date(goalForm.dueAt).toISOString() : null,
         };
         if (editingGoal) {
-          await workspaceFetch(`/api/daily/goals/${editingGoal.id}`, {
+          await api(`/api/daily/goals/${editingGoal.id}`, {
             method: "PATCH",
             body: JSON.stringify(payload),
           });
         } else {
-          await workspaceFetch("/api/daily/goals", {
+          await api("/api/daily/goals", {
             method: "POST",
             body: JSON.stringify(payload),
           });
@@ -196,12 +197,12 @@ function DailyWorkspaceInner(): React.JSX.Element {
           dueAt: taskForm.dueAt ? new Date(taskForm.dueAt).toISOString() : null,
         };
         if (editingTask) {
-          await workspaceFetch(`/api/daily/tasks/${editingTask.id}`, {
+          await api(`/api/daily/tasks/${editingTask.id}`, {
             method: "PATCH",
             body: JSON.stringify(payload),
           });
         } else {
-          await workspaceFetch("/api/daily/tasks", {
+          await api("/api/daily/tasks", {
             method: "POST",
             body: JSON.stringify(payload),
           });
@@ -222,7 +223,7 @@ function DailyWorkspaceInner(): React.JSX.Element {
 
   async function remove(kind: EditorKind, id: string) {
     try {
-      await workspaceFetch(`/api/daily/${kind === "note" ? "notes" : kind === "goal" ? "goals" : "tasks"}/${id}`, {
+      await api(`/api/daily/${kind === "note" ? "notes" : kind === "goal" ? "goals" : "tasks"}/${id}`, {
         method: "DELETE",
       });
       await load();
@@ -234,7 +235,7 @@ function DailyWorkspaceInner(): React.JSX.Element {
   }
 
   async function toggleGoal(goal: DailyGoalDto) {
-    await workspaceFetch(`/api/daily/goals/${goal.id}`, {
+    await api(`/api/daily/goals/${goal.id}`, {
       method: "PATCH",
       body: JSON.stringify({ status: goal.status === "done" ? "open" : "done" }),
     });
@@ -242,7 +243,7 @@ function DailyWorkspaceInner(): React.JSX.Element {
   }
 
   async function toggleTask(task: DailyTaskDto) {
-    await workspaceFetch(`/api/daily/tasks/${task.id}`, {
+    await api(`/api/daily/tasks/${task.id}`, {
       method: "PATCH",
       body: JSON.stringify({ status: task.status === "done" ? "open" : "done" }),
     });

@@ -52,20 +52,42 @@ export async function requirePrismaUser() {
     null;
 
   return prisma.$transaction(async (tx) => {
-    const user = await tx.user.upsert({
-      where: {
-        email,
-      },
-      update: {
-        name,
-        image: clerkUser.imageUrl,
-      },
-      create: {
-        email,
-        name,
-        image: clerkUser.imageUrl,
+    const existing = await tx.user.findUnique({
+      where: { email },
+      include: {
+        accounts: {
+          where: { provider: "clerk" },
+        },
       },
     });
+
+    if (existing) {
+      const foreign = existing.accounts.find(
+        (account) => account.providerAccountId !== userId,
+      );
+
+      if (foreign) {
+        throw new AilaAuthenticationError(
+          "This email is already linked to another account.",
+        );
+      }
+    }
+
+    const user = existing
+      ? await tx.user.update({
+          where: { id: existing.id },
+          data: {
+            name,
+            image: clerkUser.imageUrl,
+          },
+        })
+      : await tx.user.create({
+          data: {
+            email,
+            name,
+            image: clerkUser.imageUrl,
+          },
+        });
 
     await tx.account.upsert({
       where: {
