@@ -71,6 +71,10 @@ const serverEnvSchema = z.object({
   STRIPE_SECRET_KEY: optionalSecret,
   STRIPE_WEBHOOK_SECRET: optionalSecret,
   STRIPE_PRICE_PRO: optionalSecret,
+  PAYSTACK_SECRET_KEY: optionalSecret,
+  PAYSTACK_PUBLIC_KEY: optionalSecret,
+  PAYSTACK_PLAN_CODE_MONTHLY: optionalSecret,
+  PAYSTACK_PLAN_CODE_YEARLY: optionalSecret,
   CRON_SECRET: optionalSecret,
 });
 
@@ -88,6 +92,7 @@ const publicEnvSchema = z.object({
   NEXT_PUBLIC_SUPABASE_URL: optionalUrl,
   NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: optionalSecret,
   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: optionalSecret,
+  NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY: optionalSecret,
 });
 
 /** Validated server-only environment variables. */
@@ -147,6 +152,7 @@ export const publicEnv: PublicEnv = publicEnvSchema.parse({
   NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY:
     process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
+  NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY,
 });
 
 /**

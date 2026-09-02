@@ -1,7 +1,9 @@
-# Dummy Cloudflare credentials so the UI plugin
-# netlify-purge-cloudflare-on-deploy does not failBuild when they are unset.
-# A later purge API error only failPlugins, so the deploy can still succeed.
-# Omit those keys from secrets scanning because the placeholders live in this file.
+# Netlify is NOT the Aila production host. Production is Cloudflare DNS → Vercel.
+# This file only exists to prevent the Netlify UI plugin
+# `netlify-purge-cloudflare-on-deploy` from failing builds when Netlify is
+# accidentally connected. Do not treat Netlify as a production deployment target.
+# Prefer disabling/removing the Netlify site connection in the Netlify dashboard.
+
 [build.environment]
   CLOUDFLARE_ZONE_ID = "netlify-plugin-placeholder"
   CLOUDFLARE_API_TOKEN = "netlify-plugin-placeholder"

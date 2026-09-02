@@ -159,6 +159,11 @@ export type BillingSubscription = $Result.DefaultSelection<Prisma.$BillingSubscr
  */
 export type StripeWebhookEvent = $Result.DefaultSelection<Prisma.$StripeWebhookEventPayload>
 /**
+ * Model PaystackWebhookEvent
+ * 
+ */
+export type PaystackWebhookEvent = $Result.DefaultSelection<Prisma.$PaystackWebhookEventPayload>
+/**
  * Model WriterDocument
  * 
  */
@@ -649,6 +654,16 @@ export class PrismaClient<
     * ```
     */
   get stripeWebhookEvent(): Prisma.StripeWebhookEventDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.paystackWebhookEvent`: Exposes CRUD operations for the **PaystackWebhookEvent** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PaystackWebhookEvents
+    * const paystackWebhookEvents = await prisma.paystackWebhookEvent.findMany()
+    * ```
+    */
+  get paystackWebhookEvent(): Prisma.PaystackWebhookEventDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.writerDocument`: Exposes CRUD operations for the **WriterDocument** model.
@@ -1285,6 +1300,7 @@ export namespace Prisma {
     DailyGoal: 'DailyGoal',
     BillingSubscription: 'BillingSubscription',
     StripeWebhookEvent: 'StripeWebhookEvent',
+    PaystackWebhookEvent: 'PaystackWebhookEvent',
     WriterDocument: 'WriterDocument',
     TranslateEntry: 'TranslateEntry',
     LibraryDocument: 'LibraryDocument',
@@ -1316,7 +1332,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "account" | "session" | "verificationToken" | "conversation" | "message" | "legalDocument" | "intelligenceDocument" | "projectInquiry" | "calendarEvent" | "businessContact" | "businessTask" | "automationRule" | "automationRun" | "commerceProduct" | "commerceOrder" | "adsCampaign" | "adsCreative" | "adsPlatformConnection" | "adsLandingPageAnalysis" | "adsRecommendation" | "adsAiUsage" | "appListing" | "site" | "flow" | "dailyNote" | "dailyGoal" | "billingSubscription" | "stripeWebhookEvent" | "writerDocument" | "translateEntry" | "libraryDocument" | "codingProject" | "educationCourse" | "educationNote" | "educationQuiz" | "careerResume" | "careerApplication" | "healthHabit" | "healthLog" | "financeTransaction" | "financeBudget" | "financeGoal" | "travelTrip" | "shippingShipment"
+      modelProps: "user" | "account" | "session" | "verificationToken" | "conversation" | "message" | "legalDocument" | "intelligenceDocument" | "projectInquiry" | "calendarEvent" | "businessContact" | "businessTask" | "automationRule" | "automationRun" | "commerceProduct" | "commerceOrder" | "adsCampaign" | "adsCreative" | "adsPlatformConnection" | "adsLandingPageAnalysis" | "adsRecommendation" | "adsAiUsage" | "appListing" | "site" | "flow" | "dailyNote" | "dailyGoal" | "billingSubscription" | "stripeWebhookEvent" | "paystackWebhookEvent" | "writerDocument" | "translateEntry" | "libraryDocument" | "codingProject" | "educationCourse" | "educationNote" | "educationQuiz" | "careerResume" | "careerApplication" | "healthHabit" | "healthLog" | "financeTransaction" | "financeBudget" | "financeGoal" | "travelTrip" | "shippingShipment"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3466,6 +3482,80 @@ export namespace Prisma {
           }
         }
       }
+      PaystackWebhookEvent: {
+        payload: Prisma.$PaystackWebhookEventPayload<ExtArgs>
+        fields: Prisma.PaystackWebhookEventFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PaystackWebhookEventFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaystackWebhookEventPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PaystackWebhookEventFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaystackWebhookEventPayload>
+          }
+          findFirst: {
+            args: Prisma.PaystackWebhookEventFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaystackWebhookEventPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PaystackWebhookEventFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaystackWebhookEventPayload>
+          }
+          findMany: {
+            args: Prisma.PaystackWebhookEventFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaystackWebhookEventPayload>[]
+          }
+          create: {
+            args: Prisma.PaystackWebhookEventCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaystackWebhookEventPayload>
+          }
+          createMany: {
+            args: Prisma.PaystackWebhookEventCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PaystackWebhookEventCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaystackWebhookEventPayload>[]
+          }
+          delete: {
+            args: Prisma.PaystackWebhookEventDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaystackWebhookEventPayload>
+          }
+          update: {
+            args: Prisma.PaystackWebhookEventUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaystackWebhookEventPayload>
+          }
+          deleteMany: {
+            args: Prisma.PaystackWebhookEventDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PaystackWebhookEventUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PaystackWebhookEventUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaystackWebhookEventPayload>[]
+          }
+          upsert: {
+            args: Prisma.PaystackWebhookEventUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaystackWebhookEventPayload>
+          }
+          aggregate: {
+            args: Prisma.PaystackWebhookEventAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePaystackWebhookEvent>
+          }
+          groupBy: {
+            args: Prisma.PaystackWebhookEventGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PaystackWebhookEventGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PaystackWebhookEventCountArgs<ExtArgs>
+            result: $Utils.Optional<PaystackWebhookEventCountAggregateOutputType> | number
+          }
+        }
+      }
       WriterDocument: {
         payload: Prisma.$WriterDocumentPayload<ExtArgs>
         fields: Prisma.WriterDocumentFieldRefs
@@ -4802,6 +4892,7 @@ export namespace Prisma {
     dailyGoal?: DailyGoalOmit
     billingSubscription?: BillingSubscriptionOmit
     stripeWebhookEvent?: StripeWebhookEventOmit
+    paystackWebhookEvent?: PaystackWebhookEventOmit
     writerDocument?: WriterDocumentOmit
     translateEntry?: TranslateEntryOmit
     libraryDocument?: LibraryDocumentOmit
@@ -5528,6 +5619,7 @@ export namespace Prisma {
     image: string | null
     password: string | null
     stripeCustomerId: string | null
+    paystackCustomerCode: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -5540,6 +5632,7 @@ export namespace Prisma {
     image: string | null
     password: string | null
     stripeCustomerId: string | null
+    paystackCustomerCode: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -5552,6 +5645,7 @@ export namespace Prisma {
     image: number
     password: number
     stripeCustomerId: number
+    paystackCustomerCode: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -5566,6 +5660,7 @@ export namespace Prisma {
     image?: true
     password?: true
     stripeCustomerId?: true
+    paystackCustomerCode?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -5578,6 +5673,7 @@ export namespace Prisma {
     image?: true
     password?: true
     stripeCustomerId?: true
+    paystackCustomerCode?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -5590,6 +5686,7 @@ export namespace Prisma {
     image?: true
     password?: true
     stripeCustomerId?: true
+    paystackCustomerCode?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -5675,6 +5772,7 @@ export namespace Prisma {
     image: string | null
     password: string | null
     stripeCustomerId: string | null
+    paystackCustomerCode: string | null
     createdAt: Date
     updatedAt: Date
     _count: UserCountAggregateOutputType | null
@@ -5704,6 +5802,7 @@ export namespace Prisma {
     image?: boolean
     password?: boolean
     stripeCustomerId?: boolean
+    paystackCustomerCode?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     accounts?: boolean | User$accountsArgs<ExtArgs>
@@ -5758,6 +5857,7 @@ export namespace Prisma {
     image?: boolean
     password?: boolean
     stripeCustomerId?: boolean
+    paystackCustomerCode?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -5770,6 +5870,7 @@ export namespace Prisma {
     image?: boolean
     password?: boolean
     stripeCustomerId?: boolean
+    paystackCustomerCode?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -5782,11 +5883,12 @@ export namespace Prisma {
     image?: boolean
     password?: boolean
     stripeCustomerId?: boolean
+    paystackCustomerCode?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "password" | "stripeCustomerId" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "password" | "stripeCustomerId" | "paystackCustomerCode" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
@@ -5887,6 +5989,7 @@ export namespace Prisma {
       image: string | null
       password: string | null
       stripeCustomerId: string | null
+      paystackCustomerCode: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["user"]>
@@ -6360,6 +6463,7 @@ export namespace Prisma {
     readonly image: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
     readonly stripeCustomerId: FieldRef<"User", 'String'>
+    readonly paystackCustomerCode: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
@@ -37568,9 +37672,15 @@ export namespace Prisma {
   export type BillingSubscriptionMinAggregateOutputType = {
     id: string | null
     userId: string | null
+    provider: string | null
     stripeSubscriptionId: string | null
     stripePriceId: string | null
     stripeProductId: string | null
+    paystackSubscriptionCode: string | null
+    paystackCustomerCode: string | null
+    paystackPlanCode: string | null
+    paystackEmailToken: string | null
+    interval: string | null
     plan: string | null
     status: string | null
     currentPeriodEnd: Date | null
@@ -37583,9 +37693,15 @@ export namespace Prisma {
   export type BillingSubscriptionMaxAggregateOutputType = {
     id: string | null
     userId: string | null
+    provider: string | null
     stripeSubscriptionId: string | null
     stripePriceId: string | null
     stripeProductId: string | null
+    paystackSubscriptionCode: string | null
+    paystackCustomerCode: string | null
+    paystackPlanCode: string | null
+    paystackEmailToken: string | null
+    interval: string | null
     plan: string | null
     status: string | null
     currentPeriodEnd: Date | null
@@ -37598,9 +37714,15 @@ export namespace Prisma {
   export type BillingSubscriptionCountAggregateOutputType = {
     id: number
     userId: number
+    provider: number
     stripeSubscriptionId: number
     stripePriceId: number
     stripeProductId: number
+    paystackSubscriptionCode: number
+    paystackCustomerCode: number
+    paystackPlanCode: number
+    paystackEmailToken: number
+    interval: number
     plan: number
     status: number
     currentPeriodEnd: number
@@ -37615,9 +37737,15 @@ export namespace Prisma {
   export type BillingSubscriptionMinAggregateInputType = {
     id?: true
     userId?: true
+    provider?: true
     stripeSubscriptionId?: true
     stripePriceId?: true
     stripeProductId?: true
+    paystackSubscriptionCode?: true
+    paystackCustomerCode?: true
+    paystackPlanCode?: true
+    paystackEmailToken?: true
+    interval?: true
     plan?: true
     status?: true
     currentPeriodEnd?: true
@@ -37630,9 +37758,15 @@ export namespace Prisma {
   export type BillingSubscriptionMaxAggregateInputType = {
     id?: true
     userId?: true
+    provider?: true
     stripeSubscriptionId?: true
     stripePriceId?: true
     stripeProductId?: true
+    paystackSubscriptionCode?: true
+    paystackCustomerCode?: true
+    paystackPlanCode?: true
+    paystackEmailToken?: true
+    interval?: true
     plan?: true
     status?: true
     currentPeriodEnd?: true
@@ -37645,9 +37779,15 @@ export namespace Prisma {
   export type BillingSubscriptionCountAggregateInputType = {
     id?: true
     userId?: true
+    provider?: true
     stripeSubscriptionId?: true
     stripePriceId?: true
     stripeProductId?: true
+    paystackSubscriptionCode?: true
+    paystackCustomerCode?: true
+    paystackPlanCode?: true
+    paystackEmailToken?: true
+    interval?: true
     plan?: true
     status?: true
     currentPeriodEnd?: true
@@ -37733,9 +37873,15 @@ export namespace Prisma {
   export type BillingSubscriptionGroupByOutputType = {
     id: string
     userId: string
-    stripeSubscriptionId: string
-    stripePriceId: string
+    provider: string
+    stripeSubscriptionId: string | null
+    stripePriceId: string | null
     stripeProductId: string | null
+    paystackSubscriptionCode: string | null
+    paystackCustomerCode: string | null
+    paystackPlanCode: string | null
+    paystackEmailToken: string | null
+    interval: string | null
     plan: string
     status: string
     currentPeriodEnd: Date | null
@@ -37765,9 +37911,15 @@ export namespace Prisma {
   export type BillingSubscriptionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
+    provider?: boolean
     stripeSubscriptionId?: boolean
     stripePriceId?: boolean
     stripeProductId?: boolean
+    paystackSubscriptionCode?: boolean
+    paystackCustomerCode?: boolean
+    paystackPlanCode?: boolean
+    paystackEmailToken?: boolean
+    interval?: boolean
     plan?: boolean
     status?: boolean
     currentPeriodEnd?: boolean
@@ -37781,9 +37933,15 @@ export namespace Prisma {
   export type BillingSubscriptionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
+    provider?: boolean
     stripeSubscriptionId?: boolean
     stripePriceId?: boolean
     stripeProductId?: boolean
+    paystackSubscriptionCode?: boolean
+    paystackCustomerCode?: boolean
+    paystackPlanCode?: boolean
+    paystackEmailToken?: boolean
+    interval?: boolean
     plan?: boolean
     status?: boolean
     currentPeriodEnd?: boolean
@@ -37797,9 +37955,15 @@ export namespace Prisma {
   export type BillingSubscriptionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
+    provider?: boolean
     stripeSubscriptionId?: boolean
     stripePriceId?: boolean
     stripeProductId?: boolean
+    paystackSubscriptionCode?: boolean
+    paystackCustomerCode?: boolean
+    paystackPlanCode?: boolean
+    paystackEmailToken?: boolean
+    interval?: boolean
     plan?: boolean
     status?: boolean
     currentPeriodEnd?: boolean
@@ -37813,9 +37977,15 @@ export namespace Prisma {
   export type BillingSubscriptionSelectScalar = {
     id?: boolean
     userId?: boolean
+    provider?: boolean
     stripeSubscriptionId?: boolean
     stripePriceId?: boolean
     stripeProductId?: boolean
+    paystackSubscriptionCode?: boolean
+    paystackCustomerCode?: boolean
+    paystackPlanCode?: boolean
+    paystackEmailToken?: boolean
+    interval?: boolean
     plan?: boolean
     status?: boolean
     currentPeriodEnd?: boolean
@@ -37825,7 +37995,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type BillingSubscriptionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "stripeSubscriptionId" | "stripePriceId" | "stripeProductId" | "plan" | "status" | "currentPeriodEnd" | "trialEndsAt" | "cancelAtPeriodEnd" | "createdAt" | "updatedAt", ExtArgs["result"]["billingSubscription"]>
+  export type BillingSubscriptionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "provider" | "stripeSubscriptionId" | "stripePriceId" | "stripeProductId" | "paystackSubscriptionCode" | "paystackCustomerCode" | "paystackPlanCode" | "paystackEmailToken" | "interval" | "plan" | "status" | "currentPeriodEnd" | "trialEndsAt" | "cancelAtPeriodEnd" | "createdAt" | "updatedAt", ExtArgs["result"]["billingSubscription"]>
   export type BillingSubscriptionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -37844,9 +38014,15 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       userId: string
-      stripeSubscriptionId: string
-      stripePriceId: string
+      provider: string
+      stripeSubscriptionId: string | null
+      stripePriceId: string | null
       stripeProductId: string | null
+      paystackSubscriptionCode: string | null
+      paystackCustomerCode: string | null
+      paystackPlanCode: string | null
+      paystackEmailToken: string | null
+      interval: string | null
       plan: string
       status: string
       currentPeriodEnd: Date | null
@@ -38280,9 +38456,15 @@ export namespace Prisma {
   interface BillingSubscriptionFieldRefs {
     readonly id: FieldRef<"BillingSubscription", 'String'>
     readonly userId: FieldRef<"BillingSubscription", 'String'>
+    readonly provider: FieldRef<"BillingSubscription", 'String'>
     readonly stripeSubscriptionId: FieldRef<"BillingSubscription", 'String'>
     readonly stripePriceId: FieldRef<"BillingSubscription", 'String'>
     readonly stripeProductId: FieldRef<"BillingSubscription", 'String'>
+    readonly paystackSubscriptionCode: FieldRef<"BillingSubscription", 'String'>
+    readonly paystackCustomerCode: FieldRef<"BillingSubscription", 'String'>
+    readonly paystackPlanCode: FieldRef<"BillingSubscription", 'String'>
+    readonly paystackEmailToken: FieldRef<"BillingSubscription", 'String'>
+    readonly interval: FieldRef<"BillingSubscription", 'String'>
     readonly plan: FieldRef<"BillingSubscription", 'String'>
     readonly status: FieldRef<"BillingSubscription", 'String'>
     readonly currentPeriodEnd: FieldRef<"BillingSubscription", 'DateTime'>
@@ -39680,6 +39862,980 @@ export namespace Prisma {
      * Omit specific fields from the StripeWebhookEvent
      */
     omit?: StripeWebhookEventOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PaystackWebhookEvent
+   */
+
+  export type AggregatePaystackWebhookEvent = {
+    _count: PaystackWebhookEventCountAggregateOutputType | null
+    _min: PaystackWebhookEventMinAggregateOutputType | null
+    _max: PaystackWebhookEventMaxAggregateOutputType | null
+  }
+
+  export type PaystackWebhookEventMinAggregateOutputType = {
+    id: string | null
+    event: string | null
+    createdAt: Date | null
+  }
+
+  export type PaystackWebhookEventMaxAggregateOutputType = {
+    id: string | null
+    event: string | null
+    createdAt: Date | null
+  }
+
+  export type PaystackWebhookEventCountAggregateOutputType = {
+    id: number
+    event: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type PaystackWebhookEventMinAggregateInputType = {
+    id?: true
+    event?: true
+    createdAt?: true
+  }
+
+  export type PaystackWebhookEventMaxAggregateInputType = {
+    id?: true
+    event?: true
+    createdAt?: true
+  }
+
+  export type PaystackWebhookEventCountAggregateInputType = {
+    id?: true
+    event?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type PaystackWebhookEventAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PaystackWebhookEvent to aggregate.
+     */
+    where?: PaystackWebhookEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PaystackWebhookEvents to fetch.
+     */
+    orderBy?: PaystackWebhookEventOrderByWithRelationInput | PaystackWebhookEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PaystackWebhookEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PaystackWebhookEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PaystackWebhookEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PaystackWebhookEvents
+    **/
+    _count?: true | PaystackWebhookEventCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PaystackWebhookEventMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PaystackWebhookEventMaxAggregateInputType
+  }
+
+  export type GetPaystackWebhookEventAggregateType<T extends PaystackWebhookEventAggregateArgs> = {
+        [P in keyof T & keyof AggregatePaystackWebhookEvent]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePaystackWebhookEvent[P]>
+      : GetScalarType<T[P], AggregatePaystackWebhookEvent[P]>
+  }
+
+
+
+
+  export type PaystackWebhookEventGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PaystackWebhookEventWhereInput
+    orderBy?: PaystackWebhookEventOrderByWithAggregationInput | PaystackWebhookEventOrderByWithAggregationInput[]
+    by: PaystackWebhookEventScalarFieldEnum[] | PaystackWebhookEventScalarFieldEnum
+    having?: PaystackWebhookEventScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PaystackWebhookEventCountAggregateInputType | true
+    _min?: PaystackWebhookEventMinAggregateInputType
+    _max?: PaystackWebhookEventMaxAggregateInputType
+  }
+
+  export type PaystackWebhookEventGroupByOutputType = {
+    id: string
+    event: string
+    createdAt: Date
+    _count: PaystackWebhookEventCountAggregateOutputType | null
+    _min: PaystackWebhookEventMinAggregateOutputType | null
+    _max: PaystackWebhookEventMaxAggregateOutputType | null
+  }
+
+  type GetPaystackWebhookEventGroupByPayload<T extends PaystackWebhookEventGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PaystackWebhookEventGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PaystackWebhookEventGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PaystackWebhookEventGroupByOutputType[P]>
+            : GetScalarType<T[P], PaystackWebhookEventGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PaystackWebhookEventSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    event?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["paystackWebhookEvent"]>
+
+  export type PaystackWebhookEventSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    event?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["paystackWebhookEvent"]>
+
+  export type PaystackWebhookEventSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    event?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["paystackWebhookEvent"]>
+
+  export type PaystackWebhookEventSelectScalar = {
+    id?: boolean
+    event?: boolean
+    createdAt?: boolean
+  }
+
+  export type PaystackWebhookEventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "event" | "createdAt", ExtArgs["result"]["paystackWebhookEvent"]>
+
+  export type $PaystackWebhookEventPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PaystackWebhookEvent"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      event: string
+      createdAt: Date
+    }, ExtArgs["result"]["paystackWebhookEvent"]>
+    composites: {}
+  }
+
+  type PaystackWebhookEventGetPayload<S extends boolean | null | undefined | PaystackWebhookEventDefaultArgs> = $Result.GetResult<Prisma.$PaystackWebhookEventPayload, S>
+
+  type PaystackWebhookEventCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PaystackWebhookEventFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PaystackWebhookEventCountAggregateInputType | true
+    }
+
+  export interface PaystackWebhookEventDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PaystackWebhookEvent'], meta: { name: 'PaystackWebhookEvent' } }
+    /**
+     * Find zero or one PaystackWebhookEvent that matches the filter.
+     * @param {PaystackWebhookEventFindUniqueArgs} args - Arguments to find a PaystackWebhookEvent
+     * @example
+     * // Get one PaystackWebhookEvent
+     * const paystackWebhookEvent = await prisma.paystackWebhookEvent.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PaystackWebhookEventFindUniqueArgs>(args: SelectSubset<T, PaystackWebhookEventFindUniqueArgs<ExtArgs>>): Prisma__PaystackWebhookEventClient<$Result.GetResult<Prisma.$PaystackWebhookEventPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PaystackWebhookEvent that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PaystackWebhookEventFindUniqueOrThrowArgs} args - Arguments to find a PaystackWebhookEvent
+     * @example
+     * // Get one PaystackWebhookEvent
+     * const paystackWebhookEvent = await prisma.paystackWebhookEvent.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PaystackWebhookEventFindUniqueOrThrowArgs>(args: SelectSubset<T, PaystackWebhookEventFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PaystackWebhookEventClient<$Result.GetResult<Prisma.$PaystackWebhookEventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PaystackWebhookEvent that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaystackWebhookEventFindFirstArgs} args - Arguments to find a PaystackWebhookEvent
+     * @example
+     * // Get one PaystackWebhookEvent
+     * const paystackWebhookEvent = await prisma.paystackWebhookEvent.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PaystackWebhookEventFindFirstArgs>(args?: SelectSubset<T, PaystackWebhookEventFindFirstArgs<ExtArgs>>): Prisma__PaystackWebhookEventClient<$Result.GetResult<Prisma.$PaystackWebhookEventPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PaystackWebhookEvent that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaystackWebhookEventFindFirstOrThrowArgs} args - Arguments to find a PaystackWebhookEvent
+     * @example
+     * // Get one PaystackWebhookEvent
+     * const paystackWebhookEvent = await prisma.paystackWebhookEvent.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PaystackWebhookEventFindFirstOrThrowArgs>(args?: SelectSubset<T, PaystackWebhookEventFindFirstOrThrowArgs<ExtArgs>>): Prisma__PaystackWebhookEventClient<$Result.GetResult<Prisma.$PaystackWebhookEventPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PaystackWebhookEvents that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaystackWebhookEventFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PaystackWebhookEvents
+     * const paystackWebhookEvents = await prisma.paystackWebhookEvent.findMany()
+     * 
+     * // Get first 10 PaystackWebhookEvents
+     * const paystackWebhookEvents = await prisma.paystackWebhookEvent.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const paystackWebhookEventWithIdOnly = await prisma.paystackWebhookEvent.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PaystackWebhookEventFindManyArgs>(args?: SelectSubset<T, PaystackWebhookEventFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaystackWebhookEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PaystackWebhookEvent.
+     * @param {PaystackWebhookEventCreateArgs} args - Arguments to create a PaystackWebhookEvent.
+     * @example
+     * // Create one PaystackWebhookEvent
+     * const PaystackWebhookEvent = await prisma.paystackWebhookEvent.create({
+     *   data: {
+     *     // ... data to create a PaystackWebhookEvent
+     *   }
+     * })
+     * 
+     */
+    create<T extends PaystackWebhookEventCreateArgs>(args: SelectSubset<T, PaystackWebhookEventCreateArgs<ExtArgs>>): Prisma__PaystackWebhookEventClient<$Result.GetResult<Prisma.$PaystackWebhookEventPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PaystackWebhookEvents.
+     * @param {PaystackWebhookEventCreateManyArgs} args - Arguments to create many PaystackWebhookEvents.
+     * @example
+     * // Create many PaystackWebhookEvents
+     * const paystackWebhookEvent = await prisma.paystackWebhookEvent.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PaystackWebhookEventCreateManyArgs>(args?: SelectSubset<T, PaystackWebhookEventCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PaystackWebhookEvents and returns the data saved in the database.
+     * @param {PaystackWebhookEventCreateManyAndReturnArgs} args - Arguments to create many PaystackWebhookEvents.
+     * @example
+     * // Create many PaystackWebhookEvents
+     * const paystackWebhookEvent = await prisma.paystackWebhookEvent.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PaystackWebhookEvents and only return the `id`
+     * const paystackWebhookEventWithIdOnly = await prisma.paystackWebhookEvent.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PaystackWebhookEventCreateManyAndReturnArgs>(args?: SelectSubset<T, PaystackWebhookEventCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaystackWebhookEventPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PaystackWebhookEvent.
+     * @param {PaystackWebhookEventDeleteArgs} args - Arguments to delete one PaystackWebhookEvent.
+     * @example
+     * // Delete one PaystackWebhookEvent
+     * const PaystackWebhookEvent = await prisma.paystackWebhookEvent.delete({
+     *   where: {
+     *     // ... filter to delete one PaystackWebhookEvent
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PaystackWebhookEventDeleteArgs>(args: SelectSubset<T, PaystackWebhookEventDeleteArgs<ExtArgs>>): Prisma__PaystackWebhookEventClient<$Result.GetResult<Prisma.$PaystackWebhookEventPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PaystackWebhookEvent.
+     * @param {PaystackWebhookEventUpdateArgs} args - Arguments to update one PaystackWebhookEvent.
+     * @example
+     * // Update one PaystackWebhookEvent
+     * const paystackWebhookEvent = await prisma.paystackWebhookEvent.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PaystackWebhookEventUpdateArgs>(args: SelectSubset<T, PaystackWebhookEventUpdateArgs<ExtArgs>>): Prisma__PaystackWebhookEventClient<$Result.GetResult<Prisma.$PaystackWebhookEventPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PaystackWebhookEvents.
+     * @param {PaystackWebhookEventDeleteManyArgs} args - Arguments to filter PaystackWebhookEvents to delete.
+     * @example
+     * // Delete a few PaystackWebhookEvents
+     * const { count } = await prisma.paystackWebhookEvent.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PaystackWebhookEventDeleteManyArgs>(args?: SelectSubset<T, PaystackWebhookEventDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PaystackWebhookEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaystackWebhookEventUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PaystackWebhookEvents
+     * const paystackWebhookEvent = await prisma.paystackWebhookEvent.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PaystackWebhookEventUpdateManyArgs>(args: SelectSubset<T, PaystackWebhookEventUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PaystackWebhookEvents and returns the data updated in the database.
+     * @param {PaystackWebhookEventUpdateManyAndReturnArgs} args - Arguments to update many PaystackWebhookEvents.
+     * @example
+     * // Update many PaystackWebhookEvents
+     * const paystackWebhookEvent = await prisma.paystackWebhookEvent.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PaystackWebhookEvents and only return the `id`
+     * const paystackWebhookEventWithIdOnly = await prisma.paystackWebhookEvent.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PaystackWebhookEventUpdateManyAndReturnArgs>(args: SelectSubset<T, PaystackWebhookEventUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaystackWebhookEventPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PaystackWebhookEvent.
+     * @param {PaystackWebhookEventUpsertArgs} args - Arguments to update or create a PaystackWebhookEvent.
+     * @example
+     * // Update or create a PaystackWebhookEvent
+     * const paystackWebhookEvent = await prisma.paystackWebhookEvent.upsert({
+     *   create: {
+     *     // ... data to create a PaystackWebhookEvent
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PaystackWebhookEvent we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PaystackWebhookEventUpsertArgs>(args: SelectSubset<T, PaystackWebhookEventUpsertArgs<ExtArgs>>): Prisma__PaystackWebhookEventClient<$Result.GetResult<Prisma.$PaystackWebhookEventPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PaystackWebhookEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaystackWebhookEventCountArgs} args - Arguments to filter PaystackWebhookEvents to count.
+     * @example
+     * // Count the number of PaystackWebhookEvents
+     * const count = await prisma.paystackWebhookEvent.count({
+     *   where: {
+     *     // ... the filter for the PaystackWebhookEvents we want to count
+     *   }
+     * })
+    **/
+    count<T extends PaystackWebhookEventCountArgs>(
+      args?: Subset<T, PaystackWebhookEventCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PaystackWebhookEventCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PaystackWebhookEvent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaystackWebhookEventAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PaystackWebhookEventAggregateArgs>(args: Subset<T, PaystackWebhookEventAggregateArgs>): Prisma.PrismaPromise<GetPaystackWebhookEventAggregateType<T>>
+
+    /**
+     * Group by PaystackWebhookEvent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaystackWebhookEventGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PaystackWebhookEventGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PaystackWebhookEventGroupByArgs['orderBy'] }
+        : { orderBy?: PaystackWebhookEventGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PaystackWebhookEventGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPaystackWebhookEventGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PaystackWebhookEvent model
+   */
+  readonly fields: PaystackWebhookEventFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PaystackWebhookEvent.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PaystackWebhookEventClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PaystackWebhookEvent model
+   */
+  interface PaystackWebhookEventFieldRefs {
+    readonly id: FieldRef<"PaystackWebhookEvent", 'String'>
+    readonly event: FieldRef<"PaystackWebhookEvent", 'String'>
+    readonly createdAt: FieldRef<"PaystackWebhookEvent", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PaystackWebhookEvent findUnique
+   */
+  export type PaystackWebhookEventFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaystackWebhookEvent
+     */
+    select?: PaystackWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaystackWebhookEvent
+     */
+    omit?: PaystackWebhookEventOmit<ExtArgs> | null
+    /**
+     * Filter, which PaystackWebhookEvent to fetch.
+     */
+    where: PaystackWebhookEventWhereUniqueInput
+  }
+
+  /**
+   * PaystackWebhookEvent findUniqueOrThrow
+   */
+  export type PaystackWebhookEventFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaystackWebhookEvent
+     */
+    select?: PaystackWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaystackWebhookEvent
+     */
+    omit?: PaystackWebhookEventOmit<ExtArgs> | null
+    /**
+     * Filter, which PaystackWebhookEvent to fetch.
+     */
+    where: PaystackWebhookEventWhereUniqueInput
+  }
+
+  /**
+   * PaystackWebhookEvent findFirst
+   */
+  export type PaystackWebhookEventFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaystackWebhookEvent
+     */
+    select?: PaystackWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaystackWebhookEvent
+     */
+    omit?: PaystackWebhookEventOmit<ExtArgs> | null
+    /**
+     * Filter, which PaystackWebhookEvent to fetch.
+     */
+    where?: PaystackWebhookEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PaystackWebhookEvents to fetch.
+     */
+    orderBy?: PaystackWebhookEventOrderByWithRelationInput | PaystackWebhookEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PaystackWebhookEvents.
+     */
+    cursor?: PaystackWebhookEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PaystackWebhookEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PaystackWebhookEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PaystackWebhookEvents.
+     */
+    distinct?: PaystackWebhookEventScalarFieldEnum | PaystackWebhookEventScalarFieldEnum[]
+  }
+
+  /**
+   * PaystackWebhookEvent findFirstOrThrow
+   */
+  export type PaystackWebhookEventFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaystackWebhookEvent
+     */
+    select?: PaystackWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaystackWebhookEvent
+     */
+    omit?: PaystackWebhookEventOmit<ExtArgs> | null
+    /**
+     * Filter, which PaystackWebhookEvent to fetch.
+     */
+    where?: PaystackWebhookEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PaystackWebhookEvents to fetch.
+     */
+    orderBy?: PaystackWebhookEventOrderByWithRelationInput | PaystackWebhookEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PaystackWebhookEvents.
+     */
+    cursor?: PaystackWebhookEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PaystackWebhookEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PaystackWebhookEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PaystackWebhookEvents.
+     */
+    distinct?: PaystackWebhookEventScalarFieldEnum | PaystackWebhookEventScalarFieldEnum[]
+  }
+
+  /**
+   * PaystackWebhookEvent findMany
+   */
+  export type PaystackWebhookEventFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaystackWebhookEvent
+     */
+    select?: PaystackWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaystackWebhookEvent
+     */
+    omit?: PaystackWebhookEventOmit<ExtArgs> | null
+    /**
+     * Filter, which PaystackWebhookEvents to fetch.
+     */
+    where?: PaystackWebhookEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PaystackWebhookEvents to fetch.
+     */
+    orderBy?: PaystackWebhookEventOrderByWithRelationInput | PaystackWebhookEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PaystackWebhookEvents.
+     */
+    cursor?: PaystackWebhookEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PaystackWebhookEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PaystackWebhookEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PaystackWebhookEvents.
+     */
+    distinct?: PaystackWebhookEventScalarFieldEnum | PaystackWebhookEventScalarFieldEnum[]
+  }
+
+  /**
+   * PaystackWebhookEvent create
+   */
+  export type PaystackWebhookEventCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaystackWebhookEvent
+     */
+    select?: PaystackWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaystackWebhookEvent
+     */
+    omit?: PaystackWebhookEventOmit<ExtArgs> | null
+    /**
+     * The data needed to create a PaystackWebhookEvent.
+     */
+    data: XOR<PaystackWebhookEventCreateInput, PaystackWebhookEventUncheckedCreateInput>
+  }
+
+  /**
+   * PaystackWebhookEvent createMany
+   */
+  export type PaystackWebhookEventCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PaystackWebhookEvents.
+     */
+    data: PaystackWebhookEventCreateManyInput | PaystackWebhookEventCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PaystackWebhookEvent createManyAndReturn
+   */
+  export type PaystackWebhookEventCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaystackWebhookEvent
+     */
+    select?: PaystackWebhookEventSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaystackWebhookEvent
+     */
+    omit?: PaystackWebhookEventOmit<ExtArgs> | null
+    /**
+     * The data used to create many PaystackWebhookEvents.
+     */
+    data: PaystackWebhookEventCreateManyInput | PaystackWebhookEventCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PaystackWebhookEvent update
+   */
+  export type PaystackWebhookEventUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaystackWebhookEvent
+     */
+    select?: PaystackWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaystackWebhookEvent
+     */
+    omit?: PaystackWebhookEventOmit<ExtArgs> | null
+    /**
+     * The data needed to update a PaystackWebhookEvent.
+     */
+    data: XOR<PaystackWebhookEventUpdateInput, PaystackWebhookEventUncheckedUpdateInput>
+    /**
+     * Choose, which PaystackWebhookEvent to update.
+     */
+    where: PaystackWebhookEventWhereUniqueInput
+  }
+
+  /**
+   * PaystackWebhookEvent updateMany
+   */
+  export type PaystackWebhookEventUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PaystackWebhookEvents.
+     */
+    data: XOR<PaystackWebhookEventUpdateManyMutationInput, PaystackWebhookEventUncheckedUpdateManyInput>
+    /**
+     * Filter which PaystackWebhookEvents to update
+     */
+    where?: PaystackWebhookEventWhereInput
+    /**
+     * Limit how many PaystackWebhookEvents to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PaystackWebhookEvent updateManyAndReturn
+   */
+  export type PaystackWebhookEventUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaystackWebhookEvent
+     */
+    select?: PaystackWebhookEventSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaystackWebhookEvent
+     */
+    omit?: PaystackWebhookEventOmit<ExtArgs> | null
+    /**
+     * The data used to update PaystackWebhookEvents.
+     */
+    data: XOR<PaystackWebhookEventUpdateManyMutationInput, PaystackWebhookEventUncheckedUpdateManyInput>
+    /**
+     * Filter which PaystackWebhookEvents to update
+     */
+    where?: PaystackWebhookEventWhereInput
+    /**
+     * Limit how many PaystackWebhookEvents to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PaystackWebhookEvent upsert
+   */
+  export type PaystackWebhookEventUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaystackWebhookEvent
+     */
+    select?: PaystackWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaystackWebhookEvent
+     */
+    omit?: PaystackWebhookEventOmit<ExtArgs> | null
+    /**
+     * The filter to search for the PaystackWebhookEvent to update in case it exists.
+     */
+    where: PaystackWebhookEventWhereUniqueInput
+    /**
+     * In case the PaystackWebhookEvent found by the `where` argument doesn't exist, create a new PaystackWebhookEvent with this data.
+     */
+    create: XOR<PaystackWebhookEventCreateInput, PaystackWebhookEventUncheckedCreateInput>
+    /**
+     * In case the PaystackWebhookEvent was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PaystackWebhookEventUpdateInput, PaystackWebhookEventUncheckedUpdateInput>
+  }
+
+  /**
+   * PaystackWebhookEvent delete
+   */
+  export type PaystackWebhookEventDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaystackWebhookEvent
+     */
+    select?: PaystackWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaystackWebhookEvent
+     */
+    omit?: PaystackWebhookEventOmit<ExtArgs> | null
+    /**
+     * Filter which PaystackWebhookEvent to delete.
+     */
+    where: PaystackWebhookEventWhereUniqueInput
+  }
+
+  /**
+   * PaystackWebhookEvent deleteMany
+   */
+  export type PaystackWebhookEventDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PaystackWebhookEvents to delete
+     */
+    where?: PaystackWebhookEventWhereInput
+    /**
+     * Limit how many PaystackWebhookEvents to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PaystackWebhookEvent without action
+   */
+  export type PaystackWebhookEventDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaystackWebhookEvent
+     */
+    select?: PaystackWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaystackWebhookEvent
+     */
+    omit?: PaystackWebhookEventOmit<ExtArgs> | null
   }
 
 
@@ -57834,6 +58990,7 @@ export namespace Prisma {
     image: 'image',
     password: 'password',
     stripeCustomerId: 'stripeCustomerId',
+    paystackCustomerCode: 'paystackCustomerCode',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -58249,9 +59406,15 @@ export namespace Prisma {
   export const BillingSubscriptionScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
+    provider: 'provider',
     stripeSubscriptionId: 'stripeSubscriptionId',
     stripePriceId: 'stripePriceId',
     stripeProductId: 'stripeProductId',
+    paystackSubscriptionCode: 'paystackSubscriptionCode',
+    paystackCustomerCode: 'paystackCustomerCode',
+    paystackPlanCode: 'paystackPlanCode',
+    paystackEmailToken: 'paystackEmailToken',
+    interval: 'interval',
     plan: 'plan',
     status: 'status',
     currentPeriodEnd: 'currentPeriodEnd',
@@ -58271,6 +59434,15 @@ export namespace Prisma {
   };
 
   export type StripeWebhookEventScalarFieldEnum = (typeof StripeWebhookEventScalarFieldEnum)[keyof typeof StripeWebhookEventScalarFieldEnum]
+
+
+  export const PaystackWebhookEventScalarFieldEnum: {
+    id: 'id',
+    event: 'event',
+    createdAt: 'createdAt'
+  };
+
+  export type PaystackWebhookEventScalarFieldEnum = (typeof PaystackWebhookEventScalarFieldEnum)[keyof typeof PaystackWebhookEventScalarFieldEnum]
 
 
   export const WriterDocumentScalarFieldEnum: {
@@ -58665,6 +59837,7 @@ export namespace Prisma {
     image?: StringNullableFilter<"User"> | string | null
     password?: StringNullableFilter<"User"> | string | null
     stripeCustomerId?: StringNullableFilter<"User"> | string | null
+    paystackCustomerCode?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     accounts?: AccountListRelationFilter
@@ -58718,6 +59891,7 @@ export namespace Prisma {
     image?: SortOrderInput | SortOrder
     password?: SortOrderInput | SortOrder
     stripeCustomerId?: SortOrderInput | SortOrder
+    paystackCustomerCode?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     accounts?: AccountOrderByRelationAggregateInput
@@ -58767,6 +59941,7 @@ export namespace Prisma {
     id?: string
     email?: string
     stripeCustomerId?: string
+    paystackCustomerCode?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
@@ -58817,7 +59992,7 @@ export namespace Prisma {
     travelTrips?: TravelTripListRelationFilter
     shippingShipments?: ShippingShipmentListRelationFilter
     billingSubscriptions?: BillingSubscriptionListRelationFilter
-  }, "id" | "email" | "stripeCustomerId">
+  }, "id" | "email" | "stripeCustomerId" | "paystackCustomerCode">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
@@ -58827,6 +60002,7 @@ export namespace Prisma {
     image?: SortOrderInput | SortOrder
     password?: SortOrderInput | SortOrder
     stripeCustomerId?: SortOrderInput | SortOrder
+    paystackCustomerCode?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -58845,6 +60021,7 @@ export namespace Prisma {
     image?: StringNullableWithAggregatesFilter<"User"> | string | null
     password?: StringNullableWithAggregatesFilter<"User"> | string | null
     stripeCustomerId?: StringNullableWithAggregatesFilter<"User"> | string | null
+    paystackCustomerCode?: StringNullableWithAggregatesFilter<"User"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
@@ -60946,9 +62123,15 @@ export namespace Prisma {
     NOT?: BillingSubscriptionWhereInput | BillingSubscriptionWhereInput[]
     id?: StringFilter<"BillingSubscription"> | string
     userId?: StringFilter<"BillingSubscription"> | string
-    stripeSubscriptionId?: StringFilter<"BillingSubscription"> | string
-    stripePriceId?: StringFilter<"BillingSubscription"> | string
+    provider?: StringFilter<"BillingSubscription"> | string
+    stripeSubscriptionId?: StringNullableFilter<"BillingSubscription"> | string | null
+    stripePriceId?: StringNullableFilter<"BillingSubscription"> | string | null
     stripeProductId?: StringNullableFilter<"BillingSubscription"> | string | null
+    paystackSubscriptionCode?: StringNullableFilter<"BillingSubscription"> | string | null
+    paystackCustomerCode?: StringNullableFilter<"BillingSubscription"> | string | null
+    paystackPlanCode?: StringNullableFilter<"BillingSubscription"> | string | null
+    paystackEmailToken?: StringNullableFilter<"BillingSubscription"> | string | null
+    interval?: StringNullableFilter<"BillingSubscription"> | string | null
     plan?: StringFilter<"BillingSubscription"> | string
     status?: StringFilter<"BillingSubscription"> | string
     currentPeriodEnd?: DateTimeNullableFilter<"BillingSubscription"> | Date | string | null
@@ -60962,9 +62145,15 @@ export namespace Prisma {
   export type BillingSubscriptionOrderByWithRelationInput = {
     id?: SortOrder
     userId?: SortOrder
-    stripeSubscriptionId?: SortOrder
-    stripePriceId?: SortOrder
+    provider?: SortOrder
+    stripeSubscriptionId?: SortOrderInput | SortOrder
+    stripePriceId?: SortOrderInput | SortOrder
     stripeProductId?: SortOrderInput | SortOrder
+    paystackSubscriptionCode?: SortOrderInput | SortOrder
+    paystackCustomerCode?: SortOrderInput | SortOrder
+    paystackPlanCode?: SortOrderInput | SortOrder
+    paystackEmailToken?: SortOrderInput | SortOrder
+    interval?: SortOrderInput | SortOrder
     plan?: SortOrder
     status?: SortOrder
     currentPeriodEnd?: SortOrderInput | SortOrder
@@ -60978,12 +62167,18 @@ export namespace Prisma {
   export type BillingSubscriptionWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     stripeSubscriptionId?: string
+    paystackSubscriptionCode?: string
     AND?: BillingSubscriptionWhereInput | BillingSubscriptionWhereInput[]
     OR?: BillingSubscriptionWhereInput[]
     NOT?: BillingSubscriptionWhereInput | BillingSubscriptionWhereInput[]
     userId?: StringFilter<"BillingSubscription"> | string
-    stripePriceId?: StringFilter<"BillingSubscription"> | string
+    provider?: StringFilter<"BillingSubscription"> | string
+    stripePriceId?: StringNullableFilter<"BillingSubscription"> | string | null
     stripeProductId?: StringNullableFilter<"BillingSubscription"> | string | null
+    paystackCustomerCode?: StringNullableFilter<"BillingSubscription"> | string | null
+    paystackPlanCode?: StringNullableFilter<"BillingSubscription"> | string | null
+    paystackEmailToken?: StringNullableFilter<"BillingSubscription"> | string | null
+    interval?: StringNullableFilter<"BillingSubscription"> | string | null
     plan?: StringFilter<"BillingSubscription"> | string
     status?: StringFilter<"BillingSubscription"> | string
     currentPeriodEnd?: DateTimeNullableFilter<"BillingSubscription"> | Date | string | null
@@ -60992,14 +62187,20 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"BillingSubscription"> | Date | string
     updatedAt?: DateTimeFilter<"BillingSubscription"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id" | "stripeSubscriptionId">
+  }, "id" | "stripeSubscriptionId" | "paystackSubscriptionCode">
 
   export type BillingSubscriptionOrderByWithAggregationInput = {
     id?: SortOrder
     userId?: SortOrder
-    stripeSubscriptionId?: SortOrder
-    stripePriceId?: SortOrder
+    provider?: SortOrder
+    stripeSubscriptionId?: SortOrderInput | SortOrder
+    stripePriceId?: SortOrderInput | SortOrder
     stripeProductId?: SortOrderInput | SortOrder
+    paystackSubscriptionCode?: SortOrderInput | SortOrder
+    paystackCustomerCode?: SortOrderInput | SortOrder
+    paystackPlanCode?: SortOrderInput | SortOrder
+    paystackEmailToken?: SortOrderInput | SortOrder
+    interval?: SortOrderInput | SortOrder
     plan?: SortOrder
     status?: SortOrder
     currentPeriodEnd?: SortOrderInput | SortOrder
@@ -61018,9 +62219,15 @@ export namespace Prisma {
     NOT?: BillingSubscriptionScalarWhereWithAggregatesInput | BillingSubscriptionScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"BillingSubscription"> | string
     userId?: StringWithAggregatesFilter<"BillingSubscription"> | string
-    stripeSubscriptionId?: StringWithAggregatesFilter<"BillingSubscription"> | string
-    stripePriceId?: StringWithAggregatesFilter<"BillingSubscription"> | string
+    provider?: StringWithAggregatesFilter<"BillingSubscription"> | string
+    stripeSubscriptionId?: StringNullableWithAggregatesFilter<"BillingSubscription"> | string | null
+    stripePriceId?: StringNullableWithAggregatesFilter<"BillingSubscription"> | string | null
     stripeProductId?: StringNullableWithAggregatesFilter<"BillingSubscription"> | string | null
+    paystackSubscriptionCode?: StringNullableWithAggregatesFilter<"BillingSubscription"> | string | null
+    paystackCustomerCode?: StringNullableWithAggregatesFilter<"BillingSubscription"> | string | null
+    paystackPlanCode?: StringNullableWithAggregatesFilter<"BillingSubscription"> | string | null
+    paystackEmailToken?: StringNullableWithAggregatesFilter<"BillingSubscription"> | string | null
+    interval?: StringNullableWithAggregatesFilter<"BillingSubscription"> | string | null
     plan?: StringWithAggregatesFilter<"BillingSubscription"> | string
     status?: StringWithAggregatesFilter<"BillingSubscription"> | string
     currentPeriodEnd?: DateTimeNullableWithAggregatesFilter<"BillingSubscription"> | Date | string | null
@@ -61070,6 +62277,48 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"StripeWebhookEvent"> | string
     type?: StringWithAggregatesFilter<"StripeWebhookEvent"> | string
     createdAt?: DateTimeWithAggregatesFilter<"StripeWebhookEvent"> | Date | string
+  }
+
+  export type PaystackWebhookEventWhereInput = {
+    AND?: PaystackWebhookEventWhereInput | PaystackWebhookEventWhereInput[]
+    OR?: PaystackWebhookEventWhereInput[]
+    NOT?: PaystackWebhookEventWhereInput | PaystackWebhookEventWhereInput[]
+    id?: StringFilter<"PaystackWebhookEvent"> | string
+    event?: StringFilter<"PaystackWebhookEvent"> | string
+    createdAt?: DateTimeFilter<"PaystackWebhookEvent"> | Date | string
+  }
+
+  export type PaystackWebhookEventOrderByWithRelationInput = {
+    id?: SortOrder
+    event?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PaystackWebhookEventWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: PaystackWebhookEventWhereInput | PaystackWebhookEventWhereInput[]
+    OR?: PaystackWebhookEventWhereInput[]
+    NOT?: PaystackWebhookEventWhereInput | PaystackWebhookEventWhereInput[]
+    event?: StringFilter<"PaystackWebhookEvent"> | string
+    createdAt?: DateTimeFilter<"PaystackWebhookEvent"> | Date | string
+  }, "id">
+
+  export type PaystackWebhookEventOrderByWithAggregationInput = {
+    id?: SortOrder
+    event?: SortOrder
+    createdAt?: SortOrder
+    _count?: PaystackWebhookEventCountOrderByAggregateInput
+    _max?: PaystackWebhookEventMaxOrderByAggregateInput
+    _min?: PaystackWebhookEventMinOrderByAggregateInput
+  }
+
+  export type PaystackWebhookEventScalarWhereWithAggregatesInput = {
+    AND?: PaystackWebhookEventScalarWhereWithAggregatesInput | PaystackWebhookEventScalarWhereWithAggregatesInput[]
+    OR?: PaystackWebhookEventScalarWhereWithAggregatesInput[]
+    NOT?: PaystackWebhookEventScalarWhereWithAggregatesInput | PaystackWebhookEventScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PaystackWebhookEvent"> | string
+    event?: StringWithAggregatesFilter<"PaystackWebhookEvent"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"PaystackWebhookEvent"> | Date | string
   }
 
   export type WriterDocumentWhereInput = {
@@ -62312,6 +63561,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -62365,6 +63615,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -62418,6 +63669,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -62471,6 +63723,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -62524,6 +63777,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -62536,6 +63790,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -62548,6 +63803,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -64843,9 +66099,15 @@ export namespace Prisma {
 
   export type BillingSubscriptionCreateInput = {
     id?: string
-    stripeSubscriptionId: string
-    stripePriceId: string
+    provider?: string
+    stripeSubscriptionId?: string | null
+    stripePriceId?: string | null
     stripeProductId?: string | null
+    paystackSubscriptionCode?: string | null
+    paystackCustomerCode?: string | null
+    paystackPlanCode?: string | null
+    paystackEmailToken?: string | null
+    interval?: string | null
     plan?: string
     status: string
     currentPeriodEnd?: Date | string | null
@@ -64859,9 +66121,15 @@ export namespace Prisma {
   export type BillingSubscriptionUncheckedCreateInput = {
     id?: string
     userId: string
-    stripeSubscriptionId: string
-    stripePriceId: string
+    provider?: string
+    stripeSubscriptionId?: string | null
+    stripePriceId?: string | null
     stripeProductId?: string | null
+    paystackSubscriptionCode?: string | null
+    paystackCustomerCode?: string | null
+    paystackPlanCode?: string | null
+    paystackEmailToken?: string | null
+    interval?: string | null
     plan?: string
     status: string
     currentPeriodEnd?: Date | string | null
@@ -64873,9 +66141,15 @@ export namespace Prisma {
 
   export type BillingSubscriptionUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    stripeSubscriptionId?: StringFieldUpdateOperationsInput | string
-    stripePriceId?: StringFieldUpdateOperationsInput | string
+    provider?: StringFieldUpdateOperationsInput | string
+    stripeSubscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    stripePriceId?: NullableStringFieldUpdateOperationsInput | string | null
     stripeProductId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackSubscriptionCode?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackPlanCode?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackEmailToken?: NullableStringFieldUpdateOperationsInput | string | null
+    interval?: NullableStringFieldUpdateOperationsInput | string | null
     plan?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -64889,9 +66163,15 @@ export namespace Prisma {
   export type BillingSubscriptionUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    stripeSubscriptionId?: StringFieldUpdateOperationsInput | string
-    stripePriceId?: StringFieldUpdateOperationsInput | string
+    provider?: StringFieldUpdateOperationsInput | string
+    stripeSubscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    stripePriceId?: NullableStringFieldUpdateOperationsInput | string | null
     stripeProductId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackSubscriptionCode?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackPlanCode?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackEmailToken?: NullableStringFieldUpdateOperationsInput | string | null
+    interval?: NullableStringFieldUpdateOperationsInput | string | null
     plan?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -64904,9 +66184,15 @@ export namespace Prisma {
   export type BillingSubscriptionCreateManyInput = {
     id?: string
     userId: string
-    stripeSubscriptionId: string
-    stripePriceId: string
+    provider?: string
+    stripeSubscriptionId?: string | null
+    stripePriceId?: string | null
     stripeProductId?: string | null
+    paystackSubscriptionCode?: string | null
+    paystackCustomerCode?: string | null
+    paystackPlanCode?: string | null
+    paystackEmailToken?: string | null
+    interval?: string | null
     plan?: string
     status: string
     currentPeriodEnd?: Date | string | null
@@ -64918,9 +66204,15 @@ export namespace Prisma {
 
   export type BillingSubscriptionUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    stripeSubscriptionId?: StringFieldUpdateOperationsInput | string
-    stripePriceId?: StringFieldUpdateOperationsInput | string
+    provider?: StringFieldUpdateOperationsInput | string
+    stripeSubscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    stripePriceId?: NullableStringFieldUpdateOperationsInput | string | null
     stripeProductId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackSubscriptionCode?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackPlanCode?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackEmailToken?: NullableStringFieldUpdateOperationsInput | string | null
+    interval?: NullableStringFieldUpdateOperationsInput | string | null
     plan?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -64933,9 +66225,15 @@ export namespace Prisma {
   export type BillingSubscriptionUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    stripeSubscriptionId?: StringFieldUpdateOperationsInput | string
-    stripePriceId?: StringFieldUpdateOperationsInput | string
+    provider?: StringFieldUpdateOperationsInput | string
+    stripeSubscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    stripePriceId?: NullableStringFieldUpdateOperationsInput | string | null
     stripeProductId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackSubscriptionCode?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackPlanCode?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackEmailToken?: NullableStringFieldUpdateOperationsInput | string | null
+    interval?: NullableStringFieldUpdateOperationsInput | string | null
     plan?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -64984,6 +66282,48 @@ export namespace Prisma {
   export type StripeWebhookEventUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PaystackWebhookEventCreateInput = {
+    id: string
+    event: string
+    createdAt?: Date | string
+  }
+
+  export type PaystackWebhookEventUncheckedCreateInput = {
+    id: string
+    event: string
+    createdAt?: Date | string
+  }
+
+  export type PaystackWebhookEventUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    event?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PaystackWebhookEventUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    event?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PaystackWebhookEventCreateManyInput = {
+    id: string
+    event: string
+    createdAt?: Date | string
+  }
+
+  export type PaystackWebhookEventUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    event?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PaystackWebhookEventUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    event?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -66810,6 +68150,7 @@ export namespace Prisma {
     image?: SortOrder
     password?: SortOrder
     stripeCustomerId?: SortOrder
+    paystackCustomerCode?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -66822,6 +68163,7 @@ export namespace Prisma {
     image?: SortOrder
     password?: SortOrder
     stripeCustomerId?: SortOrder
+    paystackCustomerCode?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -66834,6 +68176,7 @@ export namespace Prisma {
     image?: SortOrder
     password?: SortOrder
     stripeCustomerId?: SortOrder
+    paystackCustomerCode?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -68162,9 +69505,15 @@ export namespace Prisma {
   export type BillingSubscriptionCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
+    provider?: SortOrder
     stripeSubscriptionId?: SortOrder
     stripePriceId?: SortOrder
     stripeProductId?: SortOrder
+    paystackSubscriptionCode?: SortOrder
+    paystackCustomerCode?: SortOrder
+    paystackPlanCode?: SortOrder
+    paystackEmailToken?: SortOrder
+    interval?: SortOrder
     plan?: SortOrder
     status?: SortOrder
     currentPeriodEnd?: SortOrder
@@ -68177,9 +69526,15 @@ export namespace Prisma {
   export type BillingSubscriptionMaxOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
+    provider?: SortOrder
     stripeSubscriptionId?: SortOrder
     stripePriceId?: SortOrder
     stripeProductId?: SortOrder
+    paystackSubscriptionCode?: SortOrder
+    paystackCustomerCode?: SortOrder
+    paystackPlanCode?: SortOrder
+    paystackEmailToken?: SortOrder
+    interval?: SortOrder
     plan?: SortOrder
     status?: SortOrder
     currentPeriodEnd?: SortOrder
@@ -68192,9 +69547,15 @@ export namespace Prisma {
   export type BillingSubscriptionMinOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
+    provider?: SortOrder
     stripeSubscriptionId?: SortOrder
     stripePriceId?: SortOrder
     stripeProductId?: SortOrder
+    paystackSubscriptionCode?: SortOrder
+    paystackCustomerCode?: SortOrder
+    paystackPlanCode?: SortOrder
+    paystackEmailToken?: SortOrder
+    interval?: SortOrder
     plan?: SortOrder
     status?: SortOrder
     currentPeriodEnd?: SortOrder
@@ -68219,6 +69580,24 @@ export namespace Prisma {
   export type StripeWebhookEventMinOrderByAggregateInput = {
     id?: SortOrder
     type?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PaystackWebhookEventCountOrderByAggregateInput = {
+    id?: SortOrder
+    event?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PaystackWebhookEventMaxOrderByAggregateInput = {
+    id?: SortOrder
+    event?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PaystackWebhookEventMinOrderByAggregateInput = {
+    id?: SortOrder
+    event?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -73428,9 +74807,15 @@ export namespace Prisma {
 
   export type BillingSubscriptionCreateWithoutUserInput = {
     id?: string
-    stripeSubscriptionId: string
-    stripePriceId: string
+    provider?: string
+    stripeSubscriptionId?: string | null
+    stripePriceId?: string | null
     stripeProductId?: string | null
+    paystackSubscriptionCode?: string | null
+    paystackCustomerCode?: string | null
+    paystackPlanCode?: string | null
+    paystackEmailToken?: string | null
+    interval?: string | null
     plan?: string
     status: string
     currentPeriodEnd?: Date | string | null
@@ -73442,9 +74827,15 @@ export namespace Prisma {
 
   export type BillingSubscriptionUncheckedCreateWithoutUserInput = {
     id?: string
-    stripeSubscriptionId: string
-    stripePriceId: string
+    provider?: string
+    stripeSubscriptionId?: string | null
+    stripePriceId?: string | null
     stripeProductId?: string | null
+    paystackSubscriptionCode?: string | null
+    paystackCustomerCode?: string | null
+    paystackPlanCode?: string | null
+    paystackEmailToken?: string | null
+    interval?: string | null
     plan?: string
     status: string
     currentPeriodEnd?: Date | string | null
@@ -74753,9 +76144,15 @@ export namespace Prisma {
     NOT?: BillingSubscriptionScalarWhereInput | BillingSubscriptionScalarWhereInput[]
     id?: StringFilter<"BillingSubscription"> | string
     userId?: StringFilter<"BillingSubscription"> | string
-    stripeSubscriptionId?: StringFilter<"BillingSubscription"> | string
-    stripePriceId?: StringFilter<"BillingSubscription"> | string
+    provider?: StringFilter<"BillingSubscription"> | string
+    stripeSubscriptionId?: StringNullableFilter<"BillingSubscription"> | string | null
+    stripePriceId?: StringNullableFilter<"BillingSubscription"> | string | null
     stripeProductId?: StringNullableFilter<"BillingSubscription"> | string | null
+    paystackSubscriptionCode?: StringNullableFilter<"BillingSubscription"> | string | null
+    paystackCustomerCode?: StringNullableFilter<"BillingSubscription"> | string | null
+    paystackPlanCode?: StringNullableFilter<"BillingSubscription"> | string | null
+    paystackEmailToken?: StringNullableFilter<"BillingSubscription"> | string | null
+    interval?: StringNullableFilter<"BillingSubscription"> | string | null
     plan?: StringFilter<"BillingSubscription"> | string
     status?: StringFilter<"BillingSubscription"> | string
     currentPeriodEnd?: DateTimeNullableFilter<"BillingSubscription"> | Date | string | null
@@ -74773,6 +76170,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -74825,6 +76223,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -74893,6 +76292,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -74945,6 +76345,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -74997,6 +76398,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -75049,6 +76451,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -75117,6 +76520,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -75169,6 +76573,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -75221,6 +76626,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -75273,6 +76679,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -75403,6 +76810,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -75455,6 +76863,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -75606,6 +77015,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -75658,6 +77068,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -75726,6 +77137,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -75778,6 +77190,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -75830,6 +77243,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -75882,6 +77296,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -75975,6 +77390,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -76027,6 +77443,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -76110,6 +77527,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -76162,6 +77580,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -76230,6 +77649,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -76282,6 +77702,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -76334,6 +77755,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -76386,6 +77808,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -76454,6 +77877,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -76506,6 +77930,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -76558,6 +77983,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -76610,6 +78036,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -76710,6 +78137,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -76762,6 +78190,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -76830,6 +78259,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -76882,6 +78312,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -76981,6 +78412,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -77033,6 +78465,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -77122,6 +78555,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -77174,6 +78608,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -77268,6 +78703,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -77320,6 +78756,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -77388,6 +78825,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -77440,6 +78878,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -77545,6 +78984,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -77597,6 +79037,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -77692,6 +79133,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -77744,6 +79186,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -77852,6 +79295,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -77904,6 +79348,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -77972,6 +79417,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -78024,6 +79470,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -78125,6 +79572,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -78177,6 +79625,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -78268,6 +79717,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -78320,6 +79770,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -78492,6 +79943,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -78544,6 +79996,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -78644,6 +80097,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -78696,6 +80150,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -78825,6 +80280,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -78877,6 +80333,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -78996,6 +80453,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -79048,6 +80506,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -79116,6 +80575,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -79168,6 +80628,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -79220,6 +80681,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -79272,6 +80734,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -79401,6 +80864,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -79453,6 +80917,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -79572,6 +81037,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -79624,6 +81090,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -79753,6 +81220,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -79805,6 +81273,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -79924,6 +81393,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -79976,6 +81446,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -80044,6 +81515,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -80096,6 +81568,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -80148,6 +81621,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -80200,6 +81674,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -80268,6 +81743,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -80320,6 +81796,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -80372,6 +81849,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -80424,6 +81902,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -80492,6 +81971,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -80544,6 +82024,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -80596,6 +82077,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -80648,6 +82130,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -80716,6 +82199,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -80768,6 +82252,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -80820,6 +82305,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -80872,6 +82358,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -80940,6 +82427,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -80992,6 +82480,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -81044,6 +82533,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -81096,6 +82586,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -81164,6 +82655,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -81216,6 +82708,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -81268,6 +82761,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -81320,6 +82814,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -81388,6 +82883,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -81440,6 +82936,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -81492,6 +82989,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -81544,6 +83042,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -81612,6 +83111,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -81664,6 +83164,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -81716,6 +83217,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -81768,6 +83270,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -81836,6 +83339,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -81888,6 +83392,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -81940,6 +83445,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -81992,6 +83498,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -82060,6 +83567,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -82112,6 +83620,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -82164,6 +83673,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -82216,6 +83726,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -82284,6 +83795,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -82336,6 +83848,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -82388,6 +83901,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -82440,6 +83954,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -82570,6 +84085,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -82622,6 +84138,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -82706,6 +84223,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -82758,6 +84276,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -82855,6 +84374,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -82907,6 +84427,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -82994,6 +84515,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -83046,6 +84568,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -83143,6 +84666,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -83195,6 +84719,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -83282,6 +84807,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -83334,6 +84860,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -83402,6 +84929,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -83454,6 +84982,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -83506,6 +85035,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -83558,6 +85088,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -83626,6 +85157,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -83678,6 +85210,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -83730,6 +85263,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -83782,6 +85316,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -83850,6 +85385,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -83902,6 +85438,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -83954,6 +85491,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -84006,6 +85544,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -84074,6 +85613,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -84126,6 +85666,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -84178,6 +85719,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -84230,6 +85772,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -84298,6 +85841,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -84350,6 +85894,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -84402,6 +85947,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -84454,6 +86000,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -84522,6 +86069,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -84574,6 +86122,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -84626,6 +86175,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -84678,6 +86228,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -84746,6 +86297,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -84798,6 +86350,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -84850,6 +86403,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -84902,6 +86456,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -84970,6 +86525,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -85022,6 +86578,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -85074,6 +86631,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -85126,6 +86684,7 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -85194,6 +86753,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -85246,6 +86806,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -85759,9 +87320,15 @@ export namespace Prisma {
 
   export type BillingSubscriptionCreateManyUserInput = {
     id?: string
-    stripeSubscriptionId: string
-    stripePriceId: string
+    provider?: string
+    stripeSubscriptionId?: string | null
+    stripePriceId?: string | null
     stripeProductId?: string | null
+    paystackSubscriptionCode?: string | null
+    paystackCustomerCode?: string | null
+    paystackPlanCode?: string | null
+    paystackEmailToken?: string | null
+    interval?: string | null
     plan?: string
     status: string
     currentPeriodEnd?: Date | string | null
@@ -87194,9 +88761,15 @@ export namespace Prisma {
 
   export type BillingSubscriptionUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    stripeSubscriptionId?: StringFieldUpdateOperationsInput | string
-    stripePriceId?: StringFieldUpdateOperationsInput | string
+    provider?: StringFieldUpdateOperationsInput | string
+    stripeSubscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    stripePriceId?: NullableStringFieldUpdateOperationsInput | string | null
     stripeProductId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackSubscriptionCode?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackPlanCode?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackEmailToken?: NullableStringFieldUpdateOperationsInput | string | null
+    interval?: NullableStringFieldUpdateOperationsInput | string | null
     plan?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -87208,9 +88781,15 @@ export namespace Prisma {
 
   export type BillingSubscriptionUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    stripeSubscriptionId?: StringFieldUpdateOperationsInput | string
-    stripePriceId?: StringFieldUpdateOperationsInput | string
+    provider?: StringFieldUpdateOperationsInput | string
+    stripeSubscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    stripePriceId?: NullableStringFieldUpdateOperationsInput | string | null
     stripeProductId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackSubscriptionCode?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackPlanCode?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackEmailToken?: NullableStringFieldUpdateOperationsInput | string | null
+    interval?: NullableStringFieldUpdateOperationsInput | string | null
     plan?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -87222,9 +88801,15 @@ export namespace Prisma {
 
   export type BillingSubscriptionUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    stripeSubscriptionId?: StringFieldUpdateOperationsInput | string
-    stripePriceId?: StringFieldUpdateOperationsInput | string
+    provider?: StringFieldUpdateOperationsInput | string
+    stripeSubscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    stripePriceId?: NullableStringFieldUpdateOperationsInput | string | null
     stripeProductId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackSubscriptionCode?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackPlanCode?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackEmailToken?: NullableStringFieldUpdateOperationsInput | string | null
+    interval?: NullableStringFieldUpdateOperationsInput | string | null
     plan?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null

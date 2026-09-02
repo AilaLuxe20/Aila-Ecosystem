@@ -6,9 +6,15 @@ import {
   type ProductKey,
 } from "@/core/products/catalog";
 
-/** Stripe subscription statuses that still grant paid product access. */
+/**
+ * Subscription statuses that still grant paid product access.
+ * Paystack: active, non-renewing (paid through period end), attention (retrying).
+ * Legacy Stripe rows may still use trialing / past_due.
+ */
 export const ACTIVE_SUBSCRIPTION_STATUSES = [
   "active",
+  "non-renewing",
+  "attention",
   "trialing",
   "past_due",
 ] as const;

@@ -3,7 +3,11 @@
 import Link from "next/link";
 import { useCallback, useState } from "react";
 
-import { BILLING_PLANS } from "@/core/billing/plans";
+import {
+  BILLING_PLANS,
+  PAYSTACK_CHECKOUT_PLANS,
+  type PaystackPlanInterval,
+} from "@/core/billing/plans";
 import type { BillingStatus } from "@/core/billing/types";
 import { PRODUCTS, PRODUCT_LIST, type ProductKey } from "@/core/products/catalog";
 import { useWorkspaceApi } from "@/components/workspace/api";
@@ -15,6 +19,14 @@ type BillingWorkspaceProps = {
   initialBilling: BillingStatus;
 };
 
+function formatNgn(amount: number): string {
+  return new Intl.NumberFormat("en-NG", {
+    style: "currency",
+    currency: "NGN",
+    maximumFractionDigits: 0,
+  }).format(amount);
+}
+
 function BillingWorkspaceInner({
   requestedProduct,
   initialBilling,
@@ -24,7 +36,7 @@ function BillingWorkspaceInner({
   const [billing, setBilling] = useState<BillingStatus>(initialBilling);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<unknown>(null);
-  const [busy, setBusy] = useState<"checkout" | "portal" | null>(null);
+  const [busy, setBusy] = useState<"monthly" | "annually" | "portal" | null>(null);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -44,21 +56,24 @@ function BillingWorkspaceInner({
   }, [api]);
 
   const requested = requestedProduct ? PRODUCTS[requestedProduct] : null;
-  const hasStripeSubscription = Boolean(
-    billing.status && billing.status !== "canceled" && billing.status !== "incomplete_expired",
+  const hasManagedSubscription = Boolean(
+    billing.status &&
+      billing.status !== "cancelled" &&
+      billing.status !== "canceled" &&
+      billing.status !== "completed",
   );
-  const showPortal = hasStripeSubscription && billing.stripeConfigured;
+  const showPortal = hasManagedSubscription && billing.paystackConfigured;
   const showCheckout = billing.plan === "free";
 
-  async function startCheckout() {
-    setBusy("checkout");
+  async function startCheckout(interval: PaystackPlanInterval) {
+    setBusy(interval);
     try {
       const response = (await api("/api/billing/checkout", {
         method: "POST",
-        body: JSON.stringify({ product: requestedProduct }),
+        body: JSON.stringify({ product: requestedProduct, interval }),
       })) as { data?: { checkoutUrl?: string } };
       const url = response.data?.checkoutUrl;
-      if (!url) throw new Error("Stripe did not return a checkout URL.");
+      if (!url) throw new Error("Paystack did not return a checkout URL.");
       window.location.assign(url);
     } catch (caught) {
       showError("Checkout failed", {
@@ -75,11 +90,11 @@ function BillingWorkspaceInner({
         data?: { portalUrl?: string };
       };
       const url = response.data?.portalUrl;
-      if (!url) throw new Error("Stripe did not return a billing portal URL.");
+      if (!url) throw new Error("Paystack did not return a management link.");
       window.location.assign(url);
     } catch (caught) {
-      showError("Billing portal unavailable", {
-        description: caught instanceof Error ? caught.message : "Unable to open the portal.",
+      showError("Subscription management unavailable", {
+        description: caught instanceof Error ? caught.message : "Unable to open Paystack management.",
       });
       setBusy(null);
     }
@@ -87,11 +102,11 @@ function BillingWorkspaceInner({
 
   return (
     <WorkspaceShell
-      product="Billing"
+      product="billing"
       href="/billing"
       accent="cyan"
       title="Aila billing"
-      description="Free includes Intelligence, Daily, Writer, Translate, Documents, and Ads. Pro checkout uses Stripe, including a 7-day trial when this account has not used one. Business and Enterprise are Clerk staff grants, not self-serve Stripe prices."
+      description="Free includes Intelligence, Daily, Writer, Translate, Documents, and Ads. Upgrade to Aila Pro with live Paystack billing — ₦15,000/month or ₦150,000/year. Business and Enterprise remain Clerk staff grants."
       loading={loading}
       error={error}
       onRetry={() => void load()}
@@ -101,24 +116,10 @@ function BillingWorkspaceInner({
             <button
               type="button"
               onClick={() => void openPortal()}
-              disabled={busy !== null || !billing.stripeConfigured}
+              disabled={busy !== null || !billing.paystackConfigured}
               className="rounded-full bg-white px-5 py-2 text-sm font-semibold text-black disabled:opacity-50"
             >
-              {busy === "portal" ? "Opening portal…" : "Manage subscription"}
-            </button>
-          ) : null}
-          {showCheckout ? (
-            <button
-              type="button"
-              onClick={() => void startCheckout()}
-              disabled={busy !== null || !billing.stripeConfigured || !billing.priceConfigured}
-              className="rounded-full bg-white px-5 py-2 text-sm font-semibold text-black disabled:opacity-50"
-            >
-              {busy === "checkout"
-                ? "Redirecting…"
-                : billing.trialEligible
-                  ? "Start 7-day Pro trial"
-                  : "Subscribe with Stripe"}
+              {busy === "portal" ? "Opening…" : "Manage subscription"}
             </button>
           ) : null}
         </>
@@ -127,7 +128,7 @@ function BillingWorkspaceInner({
       {requested ? (
         <p className="mb-6 rounded-2xl border border-amber-300/20 bg-amber-300/[0.06] px-4 py-3 text-sm text-amber-100">
           {requested.paid
-            ? `${requested.title} requires an active Pro subscription or trial.`
+            ? `${requested.title} requires an active Pro subscription.`
             : `${requested.title} is included on Free. Pro raises Ads limits and unlocks paid workspaces.`}
         </p>
       ) : null}
@@ -137,26 +138,18 @@ function BillingWorkspaceInner({
           <p className="text-xs uppercase tracking-[0.18em] text-white/40">Plan</p>
           <p className="mt-3 text-3xl font-semibold tracking-tight">{billing.planLabel}</p>
           <p className="mt-2 text-sm text-white/50">
-            {billing.status ? `Stripe status: ${billing.status}` : "No Stripe subscription on this account."}
+            {billing.status
+              ? `${billing.provider === "paystack" ? "Paystack" : billing.provider ?? "Billing"} status: ${billing.status}${billing.interval ? ` · ${billing.interval}` : ""}`
+              : "No Pro subscription on this account."}
           </p>
         </div>
         <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-5">
-          <p className="text-xs uppercase tracking-[0.18em] text-white/40">Trial</p>
+          <p className="text-xs uppercase tracking-[0.18em] text-white/40">Access</p>
           <p className="mt-3 text-lg font-medium">
-            {billing.trialing
-              ? billing.trialDaysRemaining === null
-                ? "Trialing"
-                : `${billing.trialDaysRemaining} day${billing.trialDaysRemaining === 1 ? "" : "s"} remaining`
-              : billing.trialEndsAt
-                ? "Trial already used on this account"
-                : billing.trialEligible
-                  ? "Eligible for a 7-day Stripe trial"
-                  : "No trial on this account"}
+            {billing.plan === "free" ? "Free workspace" : "Pro workspace unlocked"}
           </p>
           <p className="mt-2 text-sm text-white/50">
-            {billing.trialEndsAt
-              ? `Trial end: ${new Date(billing.trialEndsAt).toLocaleString()}`
-              : "Trial dates are stored on the subscription, not in the browser."}
+            Access follows verified Paystack subscription status on the server — not the browser.
           </p>
         </div>
         <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-5">
@@ -168,11 +161,50 @@ function BillingWorkspaceInner({
           </p>
           <p className="mt-2 text-sm text-white/50">
             {billing.cancelAtPeriodEnd
-              ? "Cancels at the end of the current period."
-              : "Payment methods and invoices are managed in the Stripe portal."}
+              ? "Won't renew. Access continues through the paid period."
+              : "Manage payment methods and cancellation in Paystack."}
           </p>
         </div>
       </div>
+
+      {showCheckout ? (
+        <div className="mt-8 grid gap-4 lg:grid-cols-2">
+          {PAYSTACK_CHECKOUT_PLANS.map((plan) => (
+            <div
+              key={plan.interval}
+              className="rounded-2xl border border-cyan-300/20 bg-cyan-300/[0.04] p-6"
+            >
+              <p className="text-xs uppercase tracking-[0.18em] text-cyan-100/50">
+                Aila Pro
+              </p>
+              <p className="mt-3 text-2xl font-semibold tracking-tight">{plan.label}</p>
+              <p className="mt-2 text-3xl font-semibold text-white">
+                {formatNgn(plan.amountNgn)}
+                <span className="ml-2 text-sm font-normal text-white/50">
+                  {plan.periodLabel}
+                </span>
+              </p>
+              <ul className="mt-4 space-y-2 text-sm text-white/70">
+                <li>All paid Aila workspaces</li>
+                <li>Higher Ads limits</li>
+                <li>Live Paystack recurring billing</li>
+              </ul>
+              <button
+                type="button"
+                onClick={() => void startCheckout(plan.interval)}
+                disabled={busy !== null || !billing.paystackConfigured}
+                className="mt-6 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-black disabled:opacity-50"
+              >
+                {busy === plan.interval
+                  ? "Redirecting to Paystack…"
+                  : billing.paystackConfigured
+                    ? `Subscribe ${plan.interval === "monthly" ? "monthly" : "yearly"}`
+                    : "Paystack not configured"}
+              </button>
+            </div>
+          ))}
+        </div>
+      ) : null}
 
       <div className="mt-8 grid gap-3 lg:grid-cols-2">
         {BILLING_PLANS.map((plan) => {
@@ -182,7 +214,13 @@ function BillingWorkspaceInner({
               <div className="flex items-center justify-between gap-3">
                 <p className="text-xl font-medium">{plan.name}</p>
                 <span className="text-[10px] uppercase tracking-[0.18em] text-white/40">
-                  {current ? "Current" : plan.purchasable ? "Stripe" : plan.grant === "clerk_role" ? "Staff grant" : "Included"}
+                  {current
+                    ? "Current"
+                    : plan.purchasable
+                      ? "Paystack"
+                      : plan.grant === "clerk_role"
+                        ? "Staff grant"
+                        : "Included"}
                 </span>
               </div>
               <p className="mt-3 text-sm text-white/55">{plan.summary}</p>
@@ -191,16 +229,6 @@ function BillingWorkspaceInner({
                   <li key={item}>{item}</li>
                 ))}
               </ul>
-              {plan.purchasable && showCheckout ? (
-                <button
-                  type="button"
-                  onClick={() => void startCheckout()}
-                  disabled={busy !== null || !billing.stripeConfigured || !billing.priceConfigured}
-                  className="mt-5 rounded-full bg-white px-4 py-2 text-sm font-semibold text-black disabled:opacity-50"
-                >
-                  {billing.trialEligible ? "Start 7-day trial" : "Upgrade with Stripe"}
-                </button>
-              ) : null}
             </div>
           );
         })}

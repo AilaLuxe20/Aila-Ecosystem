@@ -70,10 +70,13 @@ test("local product unlock is off under the test runner", () => {
   assert.equal(isLocalProductUnlockEnabled(), false);
 });
 
-test("active subscription statuses include past_due and exclude canceled", () => {
+test("active subscription statuses include Paystack non-renewing and exclude cancelled", () => {
   assert.equal(isActiveSubscriptionStatus("active"), true);
+  assert.equal(isActiveSubscriptionStatus("non-renewing"), true);
+  assert.equal(isActiveSubscriptionStatus("attention"), true);
   assert.equal(isActiveSubscriptionStatus("trialing"), true);
   assert.equal(isActiveSubscriptionStatus("past_due"), true);
   assert.equal(isActiveSubscriptionStatus("canceled"), false);
+  assert.equal(isActiveSubscriptionStatus("cancelled"), false);
   assert.equal(isActiveSubscriptionStatus("unpaid"), false);
 });

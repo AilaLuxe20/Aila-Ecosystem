@@ -128,6 +128,7 @@ exports.Prisma.UserScalarFieldEnum = {
   image: 'image',
   password: 'password',
   stripeCustomerId: 'stripeCustomerId',
+  paystackCustomerCode: 'paystackCustomerCode',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -462,9 +463,15 @@ exports.Prisma.DailyGoalScalarFieldEnum = {
 exports.Prisma.BillingSubscriptionScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
+  provider: 'provider',
   stripeSubscriptionId: 'stripeSubscriptionId',
   stripePriceId: 'stripePriceId',
   stripeProductId: 'stripeProductId',
+  paystackSubscriptionCode: 'paystackSubscriptionCode',
+  paystackCustomerCode: 'paystackCustomerCode',
+  paystackPlanCode: 'paystackPlanCode',
+  paystackEmailToken: 'paystackEmailToken',
+  interval: 'interval',
   plan: 'plan',
   status: 'status',
   currentPeriodEnd: 'currentPeriodEnd',
@@ -477,6 +484,12 @@ exports.Prisma.BillingSubscriptionScalarFieldEnum = {
 exports.Prisma.StripeWebhookEventScalarFieldEnum = {
   id: 'id',
   type: 'type',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.PaystackWebhookEventScalarFieldEnum = {
+  id: 'id',
+  event: 'event',
   createdAt: 'createdAt'
 };
 
@@ -730,6 +743,7 @@ exports.Prisma.ModelName = {
   DailyGoal: 'DailyGoal',
   BillingSubscription: 'BillingSubscription',
   StripeWebhookEvent: 'StripeWebhookEvent',
+  PaystackWebhookEvent: 'PaystackWebhookEvent',
   WriterDocument: 'WriterDocument',
   TranslateEntry: 'TranslateEntry',
   LibraryDocument: 'LibraryDocument',
