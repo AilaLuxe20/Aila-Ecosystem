@@ -180,7 +180,7 @@ const platforms = [
   {
     title: "Aila Commerce",
     description:
-      "Create products, take orders, and collect payment in your Aila catalog.",
+      "Create products and orders in your Aila catalog. Mark paid after payment outside Aila.",
     status: "Live Platform",
     type: "Commerce",
     href: "/products/commerce",
