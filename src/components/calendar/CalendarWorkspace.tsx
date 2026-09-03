@@ -1,8 +1,8 @@
 "use client";
 
-import { SignInButton } from "@clerk/nextjs";
 import { useAuth } from "@clerk/nextjs";
 import { ChevronLeft, ChevronRight, Plus, Search } from "lucide-react";
+import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { eventsForDay } from "@/core/calendar/range";
@@ -311,9 +311,9 @@ function CalendarWorkspaceInner(): React.JSX.Element {
             title="Sign in to use Aila Calendar"
             description="Your events are private and stored against your account. Sign in to create, edit, and search them."
             action={
-              <SignInButton mode="modal" forceRedirectUrl="/products/calendar">
-                <Button>Sign in</Button>
-              </SignInButton>
+              <Button asChild>
+                <Link href="/sign-in?redirect_url=%2Fproducts%2Fcalendar">Sign in</Link>
+              </Button>
             }
           />
         ) : loadError ? (

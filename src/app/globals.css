@@ -15,8 +15,8 @@
 html {
   scroll-behavior: smooth;
   background: var(--background);
-  /* Prevent rubber-band horizontal scroll on mobile webviews / PWA */
-  overflow-x: clip;
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
 }
 
 body {
@@ -24,6 +24,8 @@ body {
   min-height: 100vh;
   min-height: 100dvh;
   overflow-x: clip;
+  overflow-x: hidden;
+  overscroll-behavior-y: contain;
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
