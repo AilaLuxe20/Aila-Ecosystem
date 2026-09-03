@@ -379,7 +379,7 @@ function WriterWorkspaceInner(): React.JSX.Element {
               </div>
 
               <Tabs value={tab} onValueChange={(value) => setTab(value as StudioTab)}>
-                <TabsList variant="underline" className="flex-wrap">
+                <TabsList variant="underline" className="flex w-full flex-nowrap gap-1 overflow-x-auto overscroll-x-contain pb-1 [-webkit-overflow-scrolling:touch] sm:flex-wrap">
                   <TabsTrigger variant="underline" value="concept">Concept</TabsTrigger>
                   <TabsTrigger variant="underline" value="bible">Bible</TabsTrigger>
                   <TabsTrigger variant="underline" value="characters">Characters</TabsTrigger>

@@ -1,14 +1,14 @@
 import { ImageResponse } from "next/og";
 
 export const size = {
-  width: 32,
-  height: 32,
+  width: 180,
+  height: 180,
 };
 
 export const contentType = "image/png";
 
-/** Fallback favicon — prefer /icons from official Aila brand mark. */
-export default function Icon() {
+/** Apple touch icon fallback; production PWA uses /icons/apple-touch-icon.png from official logo. */
+export default function AppleIcon() {
   return new ImageResponse(
     (
       <div
@@ -19,13 +19,12 @@ export default function Icon() {
           alignItems: "center",
           justifyContent: "center",
           background: "#030303",
-          borderRadius: 6,
         }}
       >
         <div
           style={{
             color: "#d4a84b",
-            fontSize: 20,
+            fontSize: 96,
             fontWeight: 700,
             fontFamily: "Georgia, serif",
             lineHeight: 1,

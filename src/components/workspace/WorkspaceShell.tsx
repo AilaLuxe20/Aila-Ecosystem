@@ -71,7 +71,7 @@ function WorkspaceShellInner({
   const tones = ACCENT[accent];
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#030303] text-white">
+    <main className="relative min-h-[100dvh] overflow-x-clip overflow-y-visible bg-[#030303] text-white">
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:72px_72px]" />
       <div
         className={cn(
@@ -80,13 +80,13 @@ function WorkspaceShellInner({
         )}
       />
 
-      <div className="relative mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        <header className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+      <div className="relative mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+        <header className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <p className={cn("text-xs uppercase tracking-[0.24em]", tones.kicker)}>
               Aila Ecosystem / {product}
             </p>
-            <h1 className="mt-3 text-4xl font-semibold tracking-[-0.05em] sm:text-5xl">{title}</h1>
+            <h1 className="mt-3 text-3xl font-semibold tracking-[-0.05em] sm:text-4xl lg:text-5xl">{title}</h1>
             <p className="mt-3 max-w-2xl text-sm leading-6 text-white/55">{description}</p>
           </div>
           {isSignedIn ? <div className="flex flex-wrap items-center gap-2">{actions}</div> : null}
