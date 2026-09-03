@@ -9,7 +9,7 @@ import {
 /**
  * Subscription statuses that still grant paid product access.
  * Paystack: active, non-renewing (paid through period end), attention (retrying).
- * Legacy Stripe rows may still use trialing / past_due.
+ * Legacy subscription rows may still use trialing / past_due.
  */
 export const ACTIVE_SUBSCRIPTION_STATUSES = [
   "active",
@@ -49,7 +49,7 @@ export function isActiveSubscriptionStatus(status: string): boolean {
 /**
  * Resolves whether a signed-in role + subscription may use a product.
  *
- * Staff roles granted in Clerk can access paid products without a Stripe
+ * Staff roles granted in Clerk can access paid products without a Paystack
  * subscription. Everyone else needs an active subscription for paid products.
  * Intelligence stays available to any authenticated user.
  */

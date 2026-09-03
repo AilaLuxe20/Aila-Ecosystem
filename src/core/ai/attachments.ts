@@ -13,4 +13,4 @@ export function modeAllowsChatAttachments(mode: AilaMode): boolean {
 }
 
 export const CHAT_ATTACHMENT_ACCEPT =
-  ".pdf,.txt,.csv,.json,.md,.markdown,.png,.jpg,.jpeg,.webp,.gif,.mp3,.wav,.ogg,.m4a,.webm,image/png,image/jpeg,image/webp,image/gif,audio/mpeg,audio/wav,audio/ogg,audio/mp4,audio/webm";
+  ".pdf,.txt,.csv,.json,.md,.markdown,.png,.jpg,.jpeg,.webp,.gif,.mp3,.wav,.ogg,.m4a,.webm,image/*,audio/*,image/png,image/jpeg,image/webp,image/gif,audio/mpeg,audio/wav,audio/ogg,audio/mp4,audio/webm";

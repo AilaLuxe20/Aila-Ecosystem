@@ -1336,7 +1336,7 @@ export default function ChatInterface({
 
   return (
     <div
-      className={`relative overflow-hidden rounded-[36px] border border-white/[0.09] bg-[#080808]/90 shadow-[0_40px_120px_rgba(0,0,0,0.65)] backdrop-blur-2xl ${containerClassName}`}
+      className={`relative overflow-hidden rounded-[24px] border border-white/[0.09] bg-[#080808]/90 shadow-[0_40px_120px_rgba(0,0,0,0.65)] backdrop-blur-2xl sm:rounded-[36px] ${containerClassName}`}
     >
       {/* GLOW */}
       <div className="pointer-events-none absolute left-1/2 top-[-180px] h-80 w-80 -translate-x-1/2 rounded-full bg-cyan-500/[0.12] blur-[100px]" />

@@ -49,7 +49,7 @@ Automation systems, AI agents and intelligent workflows for repetitive business 
 
 7. Aila Commerce
 
-Catalog, orders, and Stripe checkout for selling products.
+Catalog and orders for selling products. Mark orders paid after you receive payment.
 
 YOUR ROLE:
 

@@ -12,7 +12,7 @@ export default function EcosystemSwitcher() {
   return (
     <>
       {/* DESKTOP SWITCHER */}
-      <div className="pointer-events-none fixed bottom-5 left-0 right-0 z-[100] hidden justify-center px-5 lg:flex">
+      <div className="pointer-events-none fixed bottom-5 left-0 right-0 z-[100] hidden justify-center px-5 pb-[env(safe-area-inset-bottom,0px)] lg:flex">
         <nav className="pointer-events-auto flex max-w-[calc(100vw-2.5rem)] items-center gap-1 overflow-x-auto rounded-full border border-white/[0.1] bg-black/75 p-1.5 shadow-[0_20px_80px_rgba(0,0,0,0.65)] backdrop-blur-2xl">
           <Link
             href="/"
@@ -110,7 +110,7 @@ export default function EcosystemSwitcher() {
       </div>
 
       {/* MOBILE SWITCHER */}
-      <nav className="fixed bottom-3 left-3 right-3 z-[100] flex gap-1 overflow-x-auto rounded-[22px] border border-white/[0.1] bg-black/85 p-1.5 shadow-[0_20px_80px_rgba(0,0,0,0.75)] backdrop-blur-2xl lg:hidden">
+      <nav className="fixed bottom-[max(0.75rem,env(safe-area-inset-bottom))] left-3 right-3 z-[100] flex gap-1 overflow-x-auto overscroll-x-contain rounded-[22px] border border-white/[0.1] bg-black/85 p-1.5 shadow-[0_20px_80px_rgba(0,0,0,0.75)] backdrop-blur-2xl [-webkit-overflow-scrolling:touch] lg:hidden">
         <Link
           href="/"
           aria-label="Aila Ecosystem"
@@ -175,7 +175,7 @@ export default function EcosystemSwitcher() {
         })}
       </nav>
 
-      <div className="h-24 lg:hidden" />
+      <div className="h-[calc(6rem+env(safe-area-inset-bottom,0px))] lg:hidden" />
     </>
   );
 }

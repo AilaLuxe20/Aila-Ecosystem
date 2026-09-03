@@ -126,7 +126,7 @@ export default function ChatInput({
   }
 
   return (
-    <div className="p-5 sm:p-6">
+    <div className="p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:p-5 sm:pb-6">
       {attachment && (
         <div
           className={`mb-3 flex items-start gap-3 rounded-2xl border px-3 py-2.5 ${
@@ -149,7 +149,7 @@ export default function ChatInput({
               onClick={onRemoveAttachment}
               disabled={generating}
               aria-label="Remove attachment"
-              className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-neutral-500 transition hover:bg-white/[0.06] hover:text-white disabled:opacity-40"
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-neutral-500 transition hover:bg-white/[0.06] hover:text-white disabled:opacity-40"
             >
               <X className="h-3.5 w-3.5" />
             </button>
@@ -161,7 +161,7 @@ export default function ChatInput({
         <p className="mb-3 text-[11px] text-red-300/80">{recordError}</p>
       ) : null}
 
-      <div className="flex gap-2 rounded-2xl border border-white/[0.09] bg-black/40 p-2 transition focus-within:border-cyan-300/25">
+      <div className="flex items-end gap-1.5 rounded-2xl border border-white/[0.09] bg-black/40 p-1.5 transition focus-within:border-cyan-300/25 sm:gap-2 sm:p-2">
         {allowAttachments && (
           <>
             <input
@@ -206,14 +206,14 @@ export default function ChatInput({
           placeholder={placeholder}
           rows={1}
           disabled={generating}
-          className="min-w-0 flex-1 resize-none bg-transparent px-4 py-3 text-sm text-white outline-none placeholder:text-neutral-700 disabled:cursor-not-allowed disabled:opacity-60"
+          className="min-h-11 min-w-0 flex-1 resize-none bg-transparent px-3 py-3 text-base text-white outline-none placeholder:text-neutral-700 disabled:cursor-not-allowed disabled:opacity-60 sm:px-4 sm:text-sm"
         />
 
         {generating ? (
           <button
             type="button"
             onClick={onStop}
-            className="rounded-xl border border-white/[0.12] bg-white/[0.04] px-5 py-3 text-sm font-semibold text-white transition hover:border-white/25 hover:bg-white/[0.07]"
+            className="min-h-11 shrink-0 rounded-xl border border-white/[0.12] bg-white/[0.04] px-4 py-3 text-sm font-semibold text-white transition hover:border-white/25 hover:bg-white/[0.07] sm:px-5"
           >
             Stop
           </button>
@@ -222,7 +222,7 @@ export default function ChatInput({
             type="button"
             onClick={onSend}
             disabled={(!input.trim() && attachment?.status !== "ready") || typing || attachmentBusy}
-            className="rounded-xl bg-white px-5 py-3 text-sm font-semibold text-black transition hover:scale-[1.03] disabled:cursor-not-allowed disabled:opacity-30"
+            className="min-h-11 shrink-0 rounded-xl bg-white px-4 py-3 text-sm font-semibold text-black transition hover:scale-[1.03] disabled:cursor-not-allowed disabled:opacity-30 sm:px-5"
           >
             Send
           </button>

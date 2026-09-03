@@ -210,7 +210,7 @@ export const PRODUCTS: Record<ProductKey, ProductDefinition> = {
     paid: true,
     group: "commerce",
     description:
-      "Create products, take orders, and collect payment through Stripe Checkout.",
+      "Create products and orders, then mark them paid after you receive payment.",
   },
   shipping: {
     key: "shipping",

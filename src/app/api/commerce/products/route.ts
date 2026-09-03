@@ -10,7 +10,6 @@ import {
 import { createCommerceProductSchema, listCommerceQuerySchema } from "@/core/commerce/schema";
 import {
   createUserCommerceProduct,
-  isStripeConfigured,
   listUserCommerceProducts,
 } from "@/core/commerce/service";
 import { created, ok } from "@/server/http/responses";
@@ -26,7 +25,7 @@ export async function GET(req: Request) {
       listCommerceQuerySchema,
     );
     const products = await listUserCommerceProducts(user.id, query);
-    return withRateLimitHeaders(ok({ products, stripeConfigured: isStripeConfigured() }), rateLimit);
+    return withRateLimitHeaders(ok({ products }), rateLimit);
   } catch (error) {
     return workspaceFailure(error);
   }

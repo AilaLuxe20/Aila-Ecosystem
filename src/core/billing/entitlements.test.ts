@@ -43,13 +43,13 @@ test("paid products require a subscription for the default user role", () => {
   assert.equal(decision.reason, "subscription_required");
 });
 
-test("an active Stripe subscription unlocks paid products", () => {
+test("an active subscription unlocks paid products", () => {
   const decision = evaluateEntitlement("user", "ailalegal", true);
   assert.equal(decision.allowed, true);
   assert.equal(decision.reason, "active_subscription");
 });
 
-test("staff roles can access paid products without Stripe", () => {
+test("staff roles can access paid products without a Paystack subscription", () => {
   assert.equal(evaluateEntitlement("admin", "commerce", false).allowed, true);
   assert.equal(evaluateEntitlement("enterprise", "flow", false).allowed, true);
   assert.equal(evaluateEntitlement("business", "ads", false).allowed, true);

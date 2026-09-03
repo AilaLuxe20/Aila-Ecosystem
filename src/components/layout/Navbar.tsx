@@ -72,13 +72,13 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed left-0 right-0 top-0 z-50 transition-all duration-500 ${
+        className={`fixed left-0 right-0 top-0 z-50 pt-[env(safe-area-inset-top,0px)] transition-all duration-500 ${
           scrolled
             ? "border-b border-white/[0.07] bg-black/70 backdrop-blur-2xl"
             : "bg-transparent"
         }`}
       >
-        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-4 px-6">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:h-20 sm:px-6">
           <Link
             href="/"
             onClick={() => setMenuOpen(false)}
@@ -255,7 +255,7 @@ export default function Navbar() {
       >
         <div className="pointer-events-none absolute left-1/2 top-[-200px] h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-cyan-500/[0.08] blur-[140px]" />
 
-        <div className="relative flex min-h-screen flex-col overflow-y-auto px-6 pb-10 pt-32">
+        <div className="relative flex min-h-[100dvh] flex-col overflow-y-auto px-4 pb-[max(2.5rem,env(safe-area-inset-bottom))] pt-[calc(5.5rem+env(safe-area-inset-top,0px))] sm:px-6">
           <nav className="flex flex-col">
             {navigation.map((item, index) => (
               <Link
