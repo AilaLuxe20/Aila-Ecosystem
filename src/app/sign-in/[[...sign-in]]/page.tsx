@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SignIn } from "@clerk/nextjs";
+import { ClerkAuthFrame } from "@/components/auth/ClerkAuthFrame";
 
 export const metadata: Metadata = {
   title: "Sign in",
@@ -22,7 +23,11 @@ export default async function SignInPage({ searchParams }: SignInPageProps) {
       : "/dashboard";
 
   return (
-    <div className="flex min-h-[100dvh] items-center justify-center bg-[#030303] px-4 py-[max(2rem,env(safe-area-inset-top))] pb-[max(2rem,env(safe-area-inset-bottom))]">
+    <ClerkAuthFrame
+      title="Sign in"
+      description="Use your Aila account to open Writer and the rest of the ecosystem."
+      loadingLabel="Loading sign-in…"
+    >
       <SignIn
         routing="path"
         path="/sign-in"
@@ -30,6 +35,6 @@ export default async function SignInPage({ searchParams }: SignInPageProps) {
         forceRedirectUrl={redirectUrl}
         fallbackRedirectUrl={redirectUrl}
       />
-    </div>
+    </ClerkAuthFrame>
   );
 }

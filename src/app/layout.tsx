@@ -4,6 +4,10 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { PwaProvider } from "@/components/pwa/PwaProvider";
+import {
+  CLERK_FAPI_PROXY_PATH,
+  shouldUseClerkFrontendApiProxy,
+} from "@/lib/auth/clerk-fapi-proxy";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -151,6 +155,24 @@ export default function RootLayout({
           signInFallbackRedirectUrl="/dashboard"
           signUpFallbackRedirectUrl="/dashboard"
           afterSignOutUrl="/"
+          allowedRedirectOrigins={[
+            "https://ailaluxe.com",
+            "https://www.ailaluxe.com",
+          ]}
+          {...(shouldUseClerkFrontendApiProxy()
+            ? { proxyUrl: CLERK_FAPI_PROXY_PATH }
+            : {})}
+          appearance={{
+            variables: {
+              colorBackground: "#111111",
+              colorPrimary: "#ffffff",
+              colorNeutral: "#e5e5e5",
+              colorDanger: "#f87171",
+              colorSuccess: "#4ade80",
+              colorInput: "#1a1a1a",
+              borderRadius: "0.85rem",
+            },
+          }}
         >
           <PwaProvider>
             <a
