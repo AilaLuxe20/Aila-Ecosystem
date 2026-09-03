@@ -1,8 +1,7 @@
 import { clerkClient } from "@clerk/nextjs/server";
 import { randomUUID } from "node:crypto";
-import Stripe from "stripe";
 
-import { getAppUrl, getStripeProPriceId, getStripeSecretKey } from "@/core/config";
+import { getAppUrl } from "@/core/config";
 import { prisma } from "@/core/database/prisma";
 import { PRODUCT_KEYS, PRODUCTS, isProductKey } from "@/core/products/catalog";
 import {
@@ -38,7 +37,7 @@ import {
   resolveBillingPlanId,
   type PaystackPlanInterval,
 } from "./plans";
-import { trialDaysRemaining, trialEndFromUnix } from "./trial";
+import { trialDaysRemaining } from "./trial";
 import type { BillingStatus } from "./types";
 
 export type { BillingStatus } from "./types";
@@ -48,38 +47,6 @@ const log = createLogger("billing");
 
 export const BILLING_PLAN = PAYSTACK_BILLING_PLAN;
 export const CHECKOUT_KIND_SUBSCRIPTION = "subscription";
-export const CHECKOUT_KIND_COMMERCE = "commerce_order";
-
-function getStripe(): Stripe {
-  const key = getStripeSecretKey();
-  if (!key) {
-    throw new ConfigurationError({
-      message: "STRIPE_SECRET_KEY is not configured.",
-    });
-  }
-  return new Stripe(key);
-}
-
-/** @deprecated Stripe is not used for Aila Pro. Kept for commerce checkout. */
-export function isStripeBillingConfigured(): boolean {
-  return isPaystackBillingConfigured();
-}
-
-function periodEndFromSubscription(subscription: Stripe.Subscription): Date | null {
-  const item = subscription.items.data[0] as
-    | (Stripe.SubscriptionItem & { current_period_end?: number })
-    | undefined;
-  if (typeof item?.current_period_end === "number") {
-    return new Date(item.current_period_end * 1000);
-  }
-
-  const root = subscription as Stripe.Subscription & { current_period_end?: number };
-  if (typeof root.current_period_end === "number") {
-    return new Date(root.current_period_end * 1000);
-  }
-
-  return null;
-}
 
 function parseDate(value: string | null | undefined): Date | null {
   if (!value) return null;
@@ -189,66 +156,6 @@ export async function upsertSubscriptionFromPaystack(input: {
   return record;
 }
 
-export async function upsertSubscriptionFromStripe(
-  subscription: Stripe.Subscription,
-  userId: string,
-) {
-  const price = subscription.items.data[0]?.price;
-  const record = await prisma.billingSubscription.upsert({
-    where: { stripeSubscriptionId: subscription.id },
-    create: {
-      userId,
-      provider: "stripe",
-      stripeSubscriptionId: subscription.id,
-      stripePriceId: price?.id ?? getStripeProPriceId() ?? "unknown",
-      stripeProductId: typeof price?.product === "string" ? price.product : null,
-      plan: BILLING_PLAN,
-      status: subscription.status,
-      currentPeriodEnd: periodEndFromSubscription(subscription),
-      trialEndsAt: trialEndFromUnix(subscription.trial_end),
-      cancelAtPeriodEnd: subscription.cancel_at_period_end,
-    },
-    update: {
-      userId,
-      provider: "stripe",
-      stripePriceId: price?.id ?? undefined,
-      stripeProductId: typeof price?.product === "string" ? price.product : undefined,
-      status: subscription.status,
-      currentPeriodEnd: periodEndFromSubscription(subscription),
-      ...(trialEndFromUnix(subscription.trial_end)
-        ? { trialEndsAt: trialEndFromUnix(subscription.trial_end) }
-        : {}),
-      cancelAtPeriodEnd: subscription.cancel_at_period_end,
-    },
-  });
-
-  await syncClerkRole(
-    userId,
-    isActiveSubscriptionStatus(subscription.status) ? "pro" : "user",
-  );
-
-  return record;
-}
-
-export async function markSubscriptionDeleted(stripeSubscriptionId: string) {
-  const existing = await prisma.billingSubscription.findUnique({
-    where: { stripeSubscriptionId },
-  });
-
-  if (!existing) return null;
-
-  const record = await prisma.billingSubscription.update({
-    where: { stripeSubscriptionId },
-    data: {
-      status: "canceled",
-      cancelAtPeriodEnd: false,
-    },
-  });
-
-  await syncClerkRole(existing.userId, "user");
-  return record;
-}
-
 export async function markPaystackSubscriptionStatus(
   subscriptionCode: string,
   status: string,
@@ -280,7 +187,6 @@ export async function createProCheckoutSession(
     id: string;
     email: string;
     name: string | null;
-    stripeCustomerId: string | null;
     paystackCustomerCode?: string | null;
   },
   options?: {
@@ -359,10 +265,7 @@ export async function createProCheckoutSession(
   };
 }
 
-export async function createBillingPortalSession(user: {
-  id: string;
-  stripeCustomerId: string | null;
-}) {
+export async function createBillingPortalSession(user: { id: string }) {
   const subscription = await prisma.billingSubscription.findFirst({
     where: {
       userId: user.id,
@@ -373,22 +276,12 @@ export async function createBillingPortalSession(user: {
     orderBy: { updatedAt: "desc" },
   });
 
-  if (subscription?.paystackSubscriptionCode) {
-    const link = await generatePaystackManageLink(subscription.paystackSubscriptionCode);
-    return { portalUrl: link };
-  }
-
-  if (!user.stripeCustomerId) {
+  if (!subscription?.paystackSubscriptionCode) {
     throw new NotFoundError("Billing subscription");
   }
 
-  const stripe = getStripe();
-  const session = await stripe.billingPortal.sessions.create({
-    customer: user.stripeCustomerId,
-    return_url: `${getAppUrl()}/billing`,
-  });
-
-  return { portalUrl: session.url };
+  const link = await generatePaystackManageLink(subscription.paystackSubscriptionCode);
+  return { portalUrl: link };
 }
 
 export async function getBillingStatus(
@@ -425,7 +318,6 @@ export async function getBillingStatus(
     trialEligible: false,
     cancelAtPeriodEnd: subscription?.cancelAtPeriodEnd ?? false,
     currentPeriodEnd: subscription?.currentPeriodEnd?.toISOString() ?? null,
-    stripeConfigured: configured,
     priceConfigured: configured,
     paystackConfigured: configured,
     entitledProductKeys: PRODUCT_KEYS.filter((product) => {
@@ -576,68 +468,4 @@ export async function applyPaystackSubscriptionEvent(
     emailToken: subscription.email_token ?? null,
     nextPaymentDate: subscription.next_payment_date ?? null,
   });
-}
-
-export async function applyCheckoutSessionCompleted(
-  session: Stripe.Checkout.Session,
-) {
-  if (session.mode !== "subscription") return;
-  if (session.metadata?.kind && session.metadata.kind !== CHECKOUT_KIND_SUBSCRIPTION) {
-    return;
-  }
-
-  const userId = session.metadata?.userId || session.client_reference_id;
-
-  const subscriptionId =
-    typeof session.subscription === "string"
-      ? session.subscription
-      : session.subscription?.id;
-
-  if (!userId || !subscriptionId) {
-    log.warn("Subscription checkout completed without user or subscription id.");
-    return;
-  }
-
-  if (typeof session.customer === "string") {
-    await prisma.user.updateMany({
-      where: { id: userId, stripeCustomerId: null },
-      data: { stripeCustomerId: session.customer },
-    });
-  }
-
-  const stripe = getStripe();
-  const subscription = await stripe.subscriptions.retrieve(subscriptionId);
-  await upsertSubscriptionFromStripe(subscription, userId);
-}
-
-export async function applySubscriptionEvent(subscription: Stripe.Subscription) {
-  const customerId =
-    typeof subscription.customer === "string"
-      ? subscription.customer
-      : subscription.customer && "deleted" in subscription.customer && subscription.customer.deleted
-        ? null
-        : subscription.customer?.id;
-
-  const userId =
-    subscription.metadata?.userId ??
-    (customerId
-      ? (
-          await prisma.user.findFirst({
-            where: { stripeCustomerId: customerId },
-            select: { id: true },
-          })
-        )?.id
-      : undefined);
-
-  if (!userId) {
-    log.warn("Subscription event had no matching Aila user.");
-    return;
-  }
-
-  if (subscription.status === "canceled") {
-    await markSubscriptionDeleted(subscription.id);
-    return;
-  }
-
-  await upsertSubscriptionFromStripe(subscription, userId);
 }

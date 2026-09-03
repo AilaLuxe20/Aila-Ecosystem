@@ -1,16 +1,18 @@
-import Stripe from "stripe";
-
-import { CHECKOUT_KIND_COMMERCE } from "@/core/billing/service";
-import { getAppUrl, getStripeSecretKey, getStripeWebhookSecret } from "@/core/config";
 import { prisma } from "@/core/database/prisma";
 import {
-  ConfigurationError,
   ConflictError,
   NotFoundError,
   ValidationError,
 } from "@/lib/errors/app-error";
 
-import { COMMERCE_LIST_LIMIT, type CreateCommerceOrderBody, type CreateCommerceProductBody, type ListCommerceQuery, type UpdateCommerceOrderBody, type UpdateCommerceProductBody } from "./schema";
+import {
+  COMMERCE_LIST_LIMIT,
+  type CreateCommerceOrderBody,
+  type CreateCommerceProductBody,
+  type ListCommerceQuery,
+  type UpdateCommerceOrderBody,
+  type UpdateCommerceProductBody,
+} from "./schema";
 
 export type CommerceProductDto = {
   id: string;
@@ -96,20 +98,6 @@ function serializeOrder(record: {
     createdAt: record.createdAt.toISOString(),
     updatedAt: record.updatedAt.toISOString(),
   };
-}
-
-function getStripe() {
-  const key = getStripeSecretKey();
-
-  if (!key) {
-    return null;
-  }
-
-  return new Stripe(key);
-}
-
-export function isStripeConfigured() {
-  return Boolean(getStripeSecretKey());
 }
 
 export async function listUserCommerceProducts(userId: string, query: ListCommerceQuery) {
@@ -242,40 +230,7 @@ export async function createUserCommerceOrder(userId: string, body: CreateCommer
     include: { product: { select: { name: true } } },
   });
 
-  const stripe = getStripe();
-
-  if (!stripe) {
-    return serializeOrder(order);
-  }
-
-  const session = await stripe.checkout.sessions.create({
-    mode: "payment",
-    customer_email: order.customerEmail,
-    line_items: [
-      {
-        quantity: order.quantity,
-        price_data: {
-          currency: order.currency,
-          unit_amount: product.priceCents,
-          product_data: { name: product.name },
-        },
-      },
-    ],
-    success_url: `${getAppUrl()}/products/commerce?order=success&id=${order.id}`,
-    cancel_url: `${getAppUrl()}/products/commerce?order=cancelled&id=${order.id}`,
-    metadata: {
-      kind: CHECKOUT_KIND_COMMERCE,
-      orderId: order.id,
-      userId,
-    },
-  });
-
-  await prisma.commerceOrder.update({
-    where: { id: order.id },
-    data: { stripeCheckoutSessionId: session.id },
-  });
-
-  return { ...serializeOrder(order), checkoutUrl: session.url };
+  return serializeOrder(order);
 }
 
 export async function updateUserCommerceOrder(
@@ -326,33 +281,4 @@ export async function updateUserCommerceOrder(
   });
 
   return serializeOrder(record);
-}
-
-export async function markCommerceOrderPaidFromStripe(sessionId: string) {
-  const existing = await prisma.commerceOrder.findFirst({
-    where: { stripeCheckoutSessionId: sessionId },
-    include: { product: true },
-  });
-
-  if (!existing) {
-    throw new NotFoundError("Order");
-  }
-
-  if (existing.status === "paid") {
-    return serializeOrder({ ...existing, product: { name: existing.product.name } });
-  }
-
-  return updateUserCommerceOrder(existing.userId, existing.id, { status: "paid" });
-}
-
-export function requireStripeWebhookSecret() {
-  const secret = getStripeWebhookSecret();
-
-  if (!secret) {
-    throw new ConfigurationError({
-      message: "STRIPE_WEBHOOK_SECRET is required for Stripe webhooks.",
-    });
-  }
-
-  return secret;
 }

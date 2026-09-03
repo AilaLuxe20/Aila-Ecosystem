@@ -32,9 +32,10 @@ export default function PrivacyPage() {
         </p>
         <h2 className="text-lg font-medium text-white">Payments and email</h2>
         <p>
-          Card payments and Aila Pro subscriptions are processed by Stripe. We store
-          Stripe customer IDs, subscription status, order records, and checkout
-          session IDs. Project inquiries and automation emails are sent with Resend.
+          Aila Pro subscriptions are processed by Paystack. We store Paystack
+          customer codes, subscription status, and related billing records.
+          Commerce orders are tracked in our database; you mark them paid after
+          receiving payment. Project inquiries and automation emails are sent with Resend.
         </p>
         <h2 className="text-lg font-medium text-white">Contact</h2>
         <p>

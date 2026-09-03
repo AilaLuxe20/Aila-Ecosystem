@@ -38,7 +38,6 @@ function CommerceWorkspaceInner(): React.JSX.Element {
   const toast = useToast();
   const [products, setProducts] = useState<CommerceProductDto[]>([]);
   const [orders, setOrders] = useState<CommerceOrderDto[]>([]);
-  const [stripeConfigured, setStripeConfigured] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<unknown>(null);
   const [productOpen, setProductOpen] = useState(false);
@@ -62,11 +61,10 @@ function CommerceWorkspaceInner(): React.JSX.Element {
       api("/api/commerce/products", { method: "GET" }, signal),
       api("/api/commerce/orders", { method: "GET" }, signal),
     ])) as [
-      { data?: { products?: CommerceProductDto[]; stripeConfigured?: boolean } },
+      { data?: { products?: CommerceProductDto[] } },
       { data?: { orders?: CommerceOrderDto[] } },
     ];
     setProducts(productBody.data?.products ?? []);
-    setStripeConfigured(Boolean(productBody.data?.stripeConfigured));
     setOrders(orderBody.data?.orders ?? []);
     setError(null);
     setLoading(false);
@@ -175,11 +173,7 @@ function CommerceWorkspaceInner(): React.JSX.Element {
       href="/products/commerce"
       accent="emerald"
       title="Catalog and orders"
-      description={
-        stripeConfigured
-          ? "Create products, take orders, and collect card payments with Stripe Checkout."
-          : "Create products and orders. Add STRIPE_SECRET_KEY to enable card checkout; until then you can mark orders paid."
-      }
+      description="Create products and orders. Mark orders paid after you receive payment outside Aila."
       loading={loading}
       error={error}
       onRetry={() => void load()}
@@ -265,7 +259,7 @@ function CommerceWorkspaceInner(): React.JSX.Element {
           <DialogHeader>
             <DialogTitle>New order</DialogTitle>
             <DialogDescription>
-              {stripeConfigured ? "Stripe Checkout opens after the order is created." : "Mark the order paid after you receive payment."}
+              Mark the order paid after you receive payment.
             </DialogDescription>
           </DialogHeader>
           <DialogBody className="space-y-3">

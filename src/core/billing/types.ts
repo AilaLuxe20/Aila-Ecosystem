@@ -13,8 +13,6 @@ export type BillingStatus = {
   trialEligible: boolean;
   cancelAtPeriodEnd: boolean;
   currentPeriodEnd: string | null;
-  /** @deprecated Use paystackConfigured — kept for existing UI bindings. */
-  stripeConfigured: boolean;
   priceConfigured: boolean;
   paystackConfigured: boolean;
   entitledProductKeys: ProductKey[];

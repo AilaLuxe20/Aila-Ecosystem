@@ -9,7 +9,7 @@ import { getActorRole, parseProductQuery } from "@/lib/auth/require-product-acce
 
 export const metadata: Metadata = {
   title: "Billing",
-  description: "Aila plans, Stripe checkout, 7-day trial status, and billing portal.",
+  description: "Aila Pro plans via Paystack (₦15,000 monthly / ₦150,000 yearly) and subscription status.",
 };
 
 type PageProps = {

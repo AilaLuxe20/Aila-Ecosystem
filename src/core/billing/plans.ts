@@ -178,8 +178,3 @@ export function resolveBillingPlanId(
 
   return "free";
 }
-
-/** @deprecated Prefer PAYSTACK_BILLING_PLAN — kept for import compatibility. */
-export const STRIPE_BILLING_PLAN = PAYSTACK_BILLING_PLAN;
-/** @deprecated Stripe trials are not used for Aila Pro. */
-export const STRIPE_TRIAL_DAYS = 0;

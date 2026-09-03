@@ -48,18 +48,6 @@ export function getResendFromEmail(): string {
   return getOptionalSecret("RESEND_FROM_EMAIL") ?? "Aila Ecosystem <onboarding@resend.dev>";
 }
 
-export function getStripeSecretKey(): string | undefined {
-  return getOptionalSecret("STRIPE_SECRET_KEY");
-}
-
-export function getStripeWebhookSecret(): string | undefined {
-  return getOptionalSecret("STRIPE_WEBHOOK_SECRET");
-}
-
-export function getStripeProPriceId(): string | undefined {
-  return getOptionalSecret("STRIPE_PRICE_PRO");
-}
-
 export function getCronSecret(): string | undefined {
   return getOptionalSecret("CRON_SECRET");
 }

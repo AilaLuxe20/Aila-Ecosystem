@@ -20,8 +20,8 @@ export const authConfig = {
     "/project-discovery",
     "/products/intelligence",
     "/api/project-inquiry",
-    "/api/stripe/webhook",
     "/api/webhooks/clerk",
+    "/api/paystack/webhook",
     "/api/cron",
   ],
 
