@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { useAuth, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
+import { useAuth, UserButton } from "@clerk/nextjs";
 import { groupedNavProducts } from "@/core/constants";
 
 const navigation = [
@@ -186,22 +186,18 @@ export default function Navbar() {
               </>
             ) : (
               <>
-                <SignInButton mode="modal">
-                  <button
-                    type="button"
-                    className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-neutral-300 transition hover:bg-white/10"
-                  >
-                    Sign In
-                  </button>
-                </SignInButton>
-                <SignUpButton mode="modal">
-                  <button
-                    type="button"
-                    className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-black transition hover:scale-105"
-                  >
-                    Sign Up
-                  </button>
-                </SignUpButton>
+                <Link
+                  href="/sign-in"
+                  className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-neutral-300 transition hover:bg-white/10"
+                >
+                  Sign In
+                </Link>
+                <Link
+                  href="/sign-up"
+                  className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-black transition hover:scale-105"
+                >
+                  Sign Up
+                </Link>
               </>
             )}
           </div>
@@ -249,8 +245,8 @@ export default function Navbar() {
         aria-hidden={!menuOpen}
         className={`fixed inset-0 z-40 bg-[#030303] transition duration-500 lg:hidden ${
           menuOpen
-            ? "visible opacity-100"
-            : "invisible opacity-0"
+            ? "pointer-events-auto visible opacity-100"
+            : "pointer-events-none invisible opacity-0"
         }`}
       >
         <div className="pointer-events-none absolute left-1/2 top-[-200px] h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-cyan-500/[0.08] blur-[140px]" />
@@ -341,22 +337,20 @@ export default function Navbar() {
                 </div>
               ) : (
                 <>
-                  <SignInButton mode="modal">
-                    <button
-                      type="button"
-                      className="w-full rounded-full border border-white/10 bg-white/5 px-6 py-4 text-center text-sm font-semibold text-neutral-300 transition hover:bg-white/10"
-                    >
-                      Sign In
-                    </button>
-                  </SignInButton>
-                  <SignUpButton mode="modal">
-                    <button
-                      type="button"
-                      className="w-full rounded-full bg-white px-6 py-4 text-center text-sm font-semibold text-black transition hover:scale-105"
-                    >
-                      Sign Up
-                    </button>
-                  </SignUpButton>
+                  <Link
+                    href="/sign-in"
+                    onClick={() => setMenuOpen(false)}
+                    className="w-full rounded-full border border-white/10 bg-white/5 px-6 py-4 text-center text-sm font-semibold text-neutral-300 transition hover:bg-white/10"
+                  >
+                    Sign In
+                  </Link>
+                  <Link
+                    href="/sign-up"
+                    onClick={() => setMenuOpen(false)}
+                    className="w-full rounded-full bg-white px-6 py-4 text-center text-sm font-semibold text-black transition hover:scale-105"
+                  >
+                    Sign Up
+                  </Link>
                 </>
               )}
             </div>
