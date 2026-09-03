@@ -1,7 +1,7 @@
 "use client";
 
 import { Download, Share, X } from "lucide-react";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const DISMISS_KEY = "aila.pwa.install.dismissed";
 const DISMISS_DAYS = 21;
@@ -42,7 +42,9 @@ function detectIosSafari(): boolean {
 function isStandaloneDisplay(): boolean {
   if (typeof window === "undefined") return false;
   const mq = window.matchMedia("(display-mode: standalone)").matches;
-  const iosStandalone = "standalone" in navigator && Boolean((navigator as Navigator & { standalone?: boolean }).standalone);
+  const iosStandalone =
+    "standalone" in navigator &&
+    Boolean((navigator as Navigator & { standalone?: boolean }).standalone);
   return mq || iosStandalone;
 }
 
@@ -52,15 +54,9 @@ export function InstallAilaPrompt() {
   const [iosHint, setIosHint] = useState(false);
   const [installing, setInstalling] = useState(false);
 
-  const canShow = useMemo(() => {
-    if (typeof window === "undefined") return false;
-    if (isStandaloneDisplay()) return false;
-    if (Date.now() < readDismissedUntil()) return false;
-    return true;
-  }, []);
-
   useEffect(() => {
-    if (!canShow) return;
+    if (isStandaloneDisplay()) return;
+    if (Date.now() < readDismissedUntil()) return;
 
     const onBeforeInstall = (event: Event) => {
       event.preventDefault();
@@ -71,9 +67,11 @@ export function InstallAilaPrompt() {
 
     window.addEventListener("beforeinstallprompt", onBeforeInstall);
 
-    if (detectIosSafari() && !isStandaloneDisplay()) {
-      window.setTimeout(() => {
+    let iosTimer: number | undefined;
+    if (detectIosSafari()) {
+      iosTimer = window.setTimeout(() => {
         if (Date.now() < readDismissedUntil()) return;
+        if (isStandaloneDisplay()) return;
         setIosHint(true);
         setVisible(true);
       }, 2400);
@@ -81,8 +79,9 @@ export function InstallAilaPrompt() {
 
     return () => {
       window.removeEventListener("beforeinstallprompt", onBeforeInstall);
+      if (iosTimer) window.clearTimeout(iosTimer);
     };
-  }, [canShow]);
+  }, []);
 
   const dismiss = useCallback(() => {
     writeDismissed();
@@ -123,7 +122,13 @@ export function InstallAilaPrompt() {
         <div className="flex items-start gap-3">
           <div className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-amber-300/25 bg-[#030303]">
             {/* eslint-disable-next-line @next/next/no-img-element -- small install badge; avoid layout shift */}
-            <img src="/icons/icon-96.png" alt="" width={44} height={44} className="h-full w-full object-cover" />
+            <img
+              src="/icons/icon-96.png"
+              alt=""
+              width={44}
+              height={44}
+              className="h-full w-full object-cover"
+            />
           </div>
           <div className="min-w-0 flex-1">
             <p className="text-sm font-semibold text-white">Install Aila</p>
