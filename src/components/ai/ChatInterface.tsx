@@ -35,6 +35,10 @@ type ChatInterfaceProps = {
   showSuggestions?: boolean;
   showHeader?: boolean;
   showConversationHistory?: boolean;
+  /** Optional Writer book context for continuity-aware generation. */
+  bookId?: string | null;
+  /** Enable document/image/voice attachments for this product chat. */
+  allowAttachments?: boolean;
 };
 
 const defaultSuggestions: Record<AilaMode, string[]> = {
@@ -465,7 +469,18 @@ export default function ChatInterface({
   showSuggestions = true,
   showHeader = true,
   showConversationHistory = false,
+  bookId = null,
+  allowAttachments,
 }: ChatInterfaceProps) {
+  const attachmentsEnabled =
+    allowAttachments ??
+    (mode === "intelligence" ||
+      mode === "writer" ||
+      mode === "legal" ||
+      mode === "business" ||
+      mode === "documents");
+  const mediaUploadPath =
+    mode === "intelligence" ? "/api/ai/intelligence/document" : "/api/ai/media";
   const { isLoaded: isAuthLoaded, isSignedIn, getToken } = useAuth();
 
   const authHeaders = useCallback(async (): Promise<HeadersInit> => {
@@ -1035,7 +1050,8 @@ export default function ChatInterface({
           conversationId,
           sessionId: conversationId,
           messages: updatedMessages,
-          ...(mode === "intelligence" &&
+          ...(bookId ? { bookId } : {}),
+          ...(attachmentsEnabled &&
           attachment?.status === "ready" &&
           attachment.documentId
             ? { documentIds: [attachment.documentId] }
@@ -1223,7 +1239,7 @@ export default function ChatInterface({
   }
 
   async function attachFile(file: File) {
-    if (mode !== "intelligence" || generatingRef.current) {
+    if (!attachmentsEnabled || generatingRef.current) {
       return;
     }
 
@@ -1260,7 +1276,7 @@ export default function ChatInterface({
         formData.append("conversationId", conversationIdRef.current);
       }
 
-      const response = await fetch("/api/ai/intelligence/document", {
+      const response = await fetch(mediaUploadPath, {
         method: "POST",
         headers: await authHeaders(),
         body: formData,
@@ -1289,6 +1305,7 @@ export default function ChatInterface({
         fileSize:
           typeof document.fileSize === "number" ? document.fileSize : file.size,
         truncated: Boolean(document.truncated),
+        message: typeof data?.note === "string" ? data.note : undefined,
       });
     } catch (error) {
       if (!isCurrent()) {
@@ -1537,8 +1554,8 @@ export default function ChatInterface({
           placeholder={resolvedPlaceholder}
           typing={inputDisabled}
           generating={generating}
-          attachment={mode === "intelligence" ? attachment : null}
-          allowAttachments={mode === "intelligence"}
+          attachment={attachmentsEnabled ? attachment : null}
+          allowAttachments={attachmentsEnabled}
           onChange={setInput}
           onSend={() => void sendMessage()}
           onStop={stopGeneration}
