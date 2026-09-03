@@ -2,7 +2,7 @@
  * Never caches /api/*, auth, billing, checkout, or authenticated HTML as opaque private data.
  * Version bump CACHE_VERSION to invalidate.
  */
-const CACHE_VERSION = "aila-pwa-v1";
+const CACHE_VERSION = "aila-pwa-v2";
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const OFFLINE_URL = "/offline";
 
@@ -16,6 +16,7 @@ const PRECACHE_URLS = [
 
 const NEVER_CACHE_PATH_PREFIXES = [
   "/api/",
+  "/__clerk",
   "/sign-in",
   "/sign-up",
   "/login",

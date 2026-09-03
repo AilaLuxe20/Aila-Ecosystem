@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SignUp } from "@clerk/nextjs";
+import { ClerkAuthFrame } from "@/components/auth/ClerkAuthFrame";
 
 export const metadata: Metadata = {
   title: "Sign up",
@@ -22,7 +23,11 @@ export default async function SignUpPage({ searchParams }: SignUpPageProps) {
       : "/dashboard";
 
   return (
-    <div className="flex min-h-[100dvh] items-center justify-center bg-[#030303] px-4 py-[max(2rem,env(safe-area-inset-top))] pb-[max(2rem,env(safe-area-inset-bottom))]">
+    <ClerkAuthFrame
+      title="Create your account"
+      description="Join Aila to write, generate, and work across products with one account."
+      loadingLabel="Loading sign-up…"
+    >
       <SignUp
         routing="path"
         path="/sign-up"
@@ -30,6 +35,6 @@ export default async function SignUpPage({ searchParams }: SignUpPageProps) {
         forceRedirectUrl={redirectUrl}
         fallbackRedirectUrl={redirectUrl}
       />
-    </div>
+    </ClerkAuthFrame>
   );
 }
