@@ -17,7 +17,7 @@ export const ALLOWED_FILE_TYPES = [
   "text/plain",
 ];
 
-/** Intelligence chat attachments. Legal upload limits stay on ALLOWED_FILE_TYPES. */
+/** Chat attachments. Client MIME types are ignored; the server sniffs bytes. */
 export const INTELLIGENCE_ALLOWED_EXTENSIONS = [
   "pdf",
   "txt",
@@ -25,6 +25,16 @@ export const INTELLIGENCE_ALLOWED_EXTENSIONS = [
   "json",
   "md",
   "markdown",
+  "png",
+  "jpg",
+  "jpeg",
+  "webp",
+  "gif",
+  "mp3",
+  "wav",
+  "ogg",
+  "m4a",
+  "webm",
 ] as const;
 
 export const MAX_INTELLIGENCE_ATTACHMENTS = 1;
@@ -93,8 +103,8 @@ export const MODE_CONFIG = {
     temperature: 0.5,
   },
   writer: {
-    maxTokens: 1400,
-    temperature: 0.55,
+    maxTokens: 2800,
+    temperature: 0.7,
   },
   translate: {
     maxTokens: 1200,

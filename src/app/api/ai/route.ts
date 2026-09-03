@@ -5,6 +5,7 @@ import {
   aiFailure,
   aiStreamResponse,
   extractLatestUserMessage,
+  modeAllowsChatAttachments,
   resolveConversationId,
 } from "@/core/ai/chat-api";
 import {
@@ -41,7 +42,7 @@ import { formatHealthAiContext, listHealthHabits, listHealthLogs } from "@/core/
 import { formatShippingAiContext, listShippingShipments } from "@/core/shipping/service";
 import { formatTranslateAiContext, listTranslateEntries } from "@/core/translate/service";
 import { formatTravelAiContext, listTravelTrips } from "@/core/travel/service";
-import { formatWriterAiContext, listWriterDocuments } from "@/core/writer/service";
+import { formatWriterWorkspaceContext } from "@/core/writer/books";
 import { getLatestLegalDocumentContext } from "@/core/legal/service";
 import {
   encodeSseData,
@@ -158,11 +159,7 @@ export async function POST(req: Request) {
     let intelligenceDocumentIds: string[] = [];
     let workspaceContext: string | undefined;
 
-    if (mode === "intelligence") {
-      // Intelligence never trusts client-supplied document bodies.
-      documentText = undefined;
-      documentName = undefined;
-
+    if (modeAllowsChatAttachments(mode)) {
       const resolvedDocuments = await resolveIntelligenceDocuments({
         userId: user.id,
         conversationId: existingConversation?.id,
@@ -194,7 +191,7 @@ export async function POST(req: Request) {
       }
     }
 
-    if (mode === "legal") {
+    if (mode === "legal" && !documentText) {
       const latestLegal = await getLatestLegalDocumentContext(user.id);
       if (latestLegal) {
         documentText = latestLegal.text;
@@ -230,7 +227,7 @@ export async function POST(req: Request) {
     }
 
     if (mode === "writer") {
-      workspaceContext = formatWriterAiContext(await listWriterDocuments(user.id, {}));
+      workspaceContext = await formatWriterWorkspaceContext(user.id);
     }
 
     if (mode === "translate") {
@@ -324,7 +321,7 @@ export async function POST(req: Request) {
               ]);
 
               if (
-                mode === "intelligence" &&
+                modeAllowsChatAttachments(mode) &&
                 intelligenceDocumentIds.length > 0
               ) {
                 await attachIntelligenceDocuments({

@@ -5,6 +5,8 @@ import {
 } from "@/core/constants";
 import { ERROR_CODES } from "@/lib/errors/app-error";
 
+import { describeImageForContext, transcribeAudioForContext } from "@/core/ai/media/openrouter-media";
+
 import type { IntelligenceFileKind } from "./kinds";
 
 export type ExtractedIntelligenceText = {
@@ -17,7 +19,10 @@ export type ExtractResult =
   | { ok: true; data: ExtractedIntelligenceText }
   | {
       ok: false;
-      code: typeof ERROR_CODES.VALIDATION_FAILED | typeof ERROR_CODES.TIMEOUT;
+      code:
+        | typeof ERROR_CODES.VALIDATION_FAILED
+        | typeof ERROR_CODES.TIMEOUT
+        | typeof ERROR_CODES.EXTERNAL_SERVICE_ERROR;
       message: string;
     };
 
@@ -65,8 +70,32 @@ async function withTimeout<T>(
 
 export async function extractIntelligenceText(
   bytes: Uint8Array,
-  kind: IntelligenceFileKind
+  kind: IntelligenceFileKind,
+  options?: { mimeType?: string; fileName?: string },
 ): Promise<ExtractResult> {
+  if (kind === "image") {
+    const described = await describeImageForContext({
+      bytes,
+      mimeType: options?.mimeType ?? "image/jpeg",
+      fileName: options?.fileName ?? "image",
+    });
+    if (!described.ok) {
+      return described;
+    }
+    return { ok: true, data: truncateExtractedText(described.text) };
+  }
+
+  if (kind === "audio") {
+    const transcribed = await transcribeAudioForContext({
+      bytes,
+      mimeType: options?.mimeType ?? "audio/webm",
+      fileName: options?.fileName ?? "audio.webm",
+    });
+    if (!transcribed.ok) {
+      return transcribed;
+    }
+    return { ok: true, data: truncateExtractedText(transcribed.text) };
+  }
   try {
     const raw = await withTimeout(
       kind === "pdf"

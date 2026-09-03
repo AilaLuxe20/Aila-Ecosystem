@@ -73,12 +73,15 @@ test("unsupported file rejection", () => {
   const exe = validateIntelligenceFile("payload.exe", 2, bytes("MZ"));
   assert.equal(exe.ok, false);
 
-  const png = validateIntelligenceFile(
-    "photo.png",
-    4,
-    new Uint8Array([0x89, 0x50, 0x4e, 0x47])
+  const video = validateIntelligenceFile(
+    "clip.mp4",
+    12,
+    bytes("\x00\x00\x00\x18ftypmp42")
   );
-  assert.equal(png.ok, false);
+  assert.equal(video.ok, false);
+  if (!video.ok) {
+    assert.match(video.message, /video/i);
+  }
 
   const pngAsTxt = validateIntelligenceFile(
     "notes.txt",
@@ -86,6 +89,19 @@ test("unsupported file rejection", () => {
     new Uint8Array([0x89, 0x50, 0x4e, 0x47])
   );
   assert.equal(pngAsTxt.ok, false);
+});
+
+test("image magic is accepted for png", () => {
+  const png = validateIntelligenceFile(
+    "photo.png",
+    4,
+    new Uint8Array([0x89, 0x50, 0x4e, 0x47])
+  );
+  assert.equal(png.ok, true);
+  if (png.ok) {
+    assert.equal(png.kind, "image");
+    assert.equal(png.mimeType, "image/png");
+  }
 });
 
 test("oversized file rejection", () => {

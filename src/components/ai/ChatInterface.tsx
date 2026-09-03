@@ -9,6 +9,7 @@ import {
 import { useAuth } from "@clerk/nextjs";
 import { MessageSquare, Plus, Trash2 } from "lucide-react";
 import type { ChatMessage, AilaMode } from "@/core/types";
+import { modeAllowsChatAttachments } from "@/core/ai/attachments";
 import { iterateAilaSse, isAbortError } from "@/core/ai/streaming/parse";
 import ChatMessages from "./ChatMessages";
 import ChatInput, { type ChatAttachment } from "./ChatInput";
@@ -96,9 +97,10 @@ const defaultSuggestions: Record<AilaMode, string[]> = {
     "Help me plan my site structure",
   ],
   writer: [
-    "Rewrite this more clearly",
-    "Shorten this paragraph",
-    "Make this more professional",
+    "Develop the concept for this book",
+    "Write the next scene in this chapter",
+    "Check continuity against the story bible",
+    "Improve the dialogue in this chapter",
   ],
   translate: [
     "Translate this to Spanish",
@@ -957,7 +959,9 @@ export default function ChatInterface({
   }
 
   async function sendMessage(customMessage?: string) {
-    const messageToSend = (customMessage || input).trim();
+    const messageToSend =
+      (customMessage || input).trim() ||
+      (attachment?.status === "ready" ? "Use the attached file." : "");
 
     if (
       !messageToSend ||
@@ -1035,7 +1039,7 @@ export default function ChatInterface({
           conversationId,
           sessionId: conversationId,
           messages: updatedMessages,
-          ...(mode === "intelligence" &&
+          ...(modeAllowsChatAttachments(mode) &&
           attachment?.status === "ready" &&
           attachment.documentId
             ? { documentIds: [attachment.documentId] }
@@ -1256,11 +1260,12 @@ export default function ChatInterface({
 
       const formData = new FormData();
       formData.append("file", file);
+      formData.append("mode", mode);
       if (conversationIdRef.current) {
         formData.append("conversationId", conversationIdRef.current);
       }
 
-      const response = await fetch("/api/ai/intelligence/document", {
+      const response = await fetch("/api/ai/media", {
         method: "POST",
         headers: await authHeaders(),
         body: formData,
@@ -1316,7 +1321,7 @@ export default function ChatInterface({
       const documentId = current.documentId;
       void authHeaders().then((headers) =>
         fetch(
-          `/api/ai/intelligence/document?documentId=${encodeURIComponent(documentId)}`,
+          `/api/ai/media?documentId=${encodeURIComponent(documentId)}&mode=${encodeURIComponent(mode)}`,
           { method: "DELETE", headers },
         ),
       );
@@ -1537,8 +1542,8 @@ export default function ChatInterface({
           placeholder={resolvedPlaceholder}
           typing={inputDisabled}
           generating={generating}
-          attachment={mode === "intelligence" ? attachment : null}
-          allowAttachments={mode === "intelligence"}
+          attachment={modeAllowsChatAttachments(mode) ? attachment : null}
+          allowAttachments={modeAllowsChatAttachments(mode)}
           onChange={setInput}
           onSend={() => void sendMessage()}
           onStop={stopGeneration}

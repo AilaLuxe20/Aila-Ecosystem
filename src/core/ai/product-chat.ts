@@ -2,10 +2,17 @@ import { chat } from "@/core/ai/engine";
 import type { AilaMode } from "@/core/types";
 import { ConfigurationError, ExternalServiceError } from "@/lib/errors/app-error";
 
-export async function runProductChat(mode: AilaMode, prompt: string): Promise<string> {
+export async function runProductChat(
+  mode: AilaMode,
+  prompt: string,
+  options?: { workspaceContext?: string; documentText?: string; documentName?: string },
+): Promise<string> {
   const result = await chat({
     mode,
     messages: [{ role: "user", content: prompt }],
+    workspaceContext: options?.workspaceContext,
+    documentText: options?.documentText,
+    documentName: options?.documentName,
   });
 
   if (!result.success) {
