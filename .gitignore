@@ -1,7 +1,7 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Aila — local and generated paths that must never be committed.
 
-# dependencies
-/node_modules
+# Dependencies
+/node_modules/
 /.pnp
 .pnp.*
 .yarn/*
@@ -10,56 +10,65 @@
 !.yarn/releases
 !.yarn/versions
 
-# testing
-/coverage
+# Tests and coverage
+/coverage/
 
-# next.js
+# Next.js
 /.next/
 /out/
 
-# production
-/build
+# Build output
+/build/
+/dist/
 
-# misc
+# OS and editor noise
 .DS_Store
-*.pem
+Thumbs.db
+*.swp
+*.swo
 
-# debug
+# Certificates and private keys
+*.pem
+*.key
+
+# Package manager / tool logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+*.log
 
-# env files (can opt-in for committing if needed)
+# Environment and secrets (keep only .env.example tracked)
 .env
 .env.*
 !.env.example
 
-# vercel
-.vercel
+# Vercel CLI and local deploy diagnostics
+.vercel/
 .vercel-prod-*.log
 .vercel-*.log
 
-# cloudflare wrangler
+# Cloudflare Wrangler
 .wrangler/
 .dev.vars
 
-# typescript
+# TypeScript
 *.tsbuildinfo
 next-env.d.ts
 
+# Local route/audit scratch files
 route-backup-*.zip
 route-usage-audit.csv
 routes-to-delete.csv
 replacements.txt
 
-# stray backup/scaffold artifacts
+# Backup and scaffold leftovers
 *.bak
 my-app/
 build_output.txt
 globals.txt
 
-# Local diagnostic scripts and their output. Never commit secrets.
+# Local diagnostic scripts and their output (never commit secrets)
 scripts/_*.mjs
 scripts/_*.out.json
 scripts/_inspect-*.json
