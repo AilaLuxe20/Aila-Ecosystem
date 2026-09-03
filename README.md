@@ -23,8 +23,8 @@ The goal is simple: a signed-in user can do real work, see their own data, and g
 - **Everyday workspaces** — Daily, Writer, Translate, Documents
 - **Professional workspaces** — Business, Ads (planning only), Automation, Coding, Career
 - **Life workspaces** — Education, Health, Finance, Travel
-- **Operations** — Commerce (Stripe Checkout when configured), Shipping records, Calendar, Sites, Apps listings, Flow
-- **Billing** — Free products plus Aila Pro via Stripe
+- **Operations** — Commerce catalogs and orders (mark paid after external payment), Shipping records, Calendar, Sites, Apps listings, Flow
+- **Billing** — Free products plus Aila Pro via Paystack (₦15,000/month or ₦150,000/year)
 - **Project intake** — public inquiry form for custom build work
 
 Salon is not implemented and is not registered in the product catalog.
@@ -69,9 +69,11 @@ Some older modules under `src/core/ai/` are unused stubs from earlier experiment
 - **Tailwind CSS 4**
 - **Prisma 7** with PostgreSQL (`pg` adapter)
 - **Clerk** for authentication
+- **Neon PostgreSQL** with **Prisma**
 - **OpenRouter** (`openai/gpt-4.1-mini`) for model calls
-- **Stripe** for Aila Pro and Commerce checkout
+- **Paystack** for Aila Pro subscriptions
 - **Resend** for project inquiries and automation email
+- **Cloudflare** for DNS/edge
 - **Vercel** for hosting, Analytics, Speed Insights, and cron
 
 ---
@@ -129,7 +131,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 Do not paste production secrets into chat, source files, or git. Set real values only in `.env.local` or the Vercel project.
 
-In `NODE_ENV=development`, paid product entitlements are unlocked so local workspaces can be used without a Stripe subscription.
+In `NODE_ENV=development`, paid product entitlements are unlocked so local workspaces can be used without a Paystack subscription.
 
 ---
 
@@ -147,9 +149,11 @@ See `.env.example`. Names only — never commit values.
 **Required for production features**
 
 - `CLERK_WEBHOOK_SIGNING_SECRET`
-- `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `STRIPE_PRICE_PRO`, `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`
+- `PAYSTACK_SECRET_KEY`, `PAYSTACK_PUBLIC_KEY` or `NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY`, `PAYSTACK_PLAN_CODE_MONTHLY`, `PAYSTACK_PLAN_CODE_YEARLY`
 - `CRON_SECRET` (Vercel Cron for automations)
 - `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, `PROJECT_INQUIRY_EMAIL` (inquiries and automation email)
+
+Aila Pro does **not** use Stripe. Commerce does not run live checkout; orders are marked paid after payment outside Aila.
 
 `NEXT_PUBLIC_APP_URL` defaults to `https://ailaluxe.com`.
 
@@ -215,12 +219,22 @@ prisma/             Schema and migrations
 - Aila Finance has no bank connection.
 - Aila Travel does not book travel.
 - Aila Apps is a listing registry, not an app builder or native iOS/Android runtime.
+- Aila Commerce stores catalogs and orders; it does not collect card payments inside Aila.
 - Daily tasks currently reuse the Business task table for the same user.
 - Document text is stored in Postgres so the owner can reopen it. There is no separate redaction/OCR pipeline for scanned PDFs.
 - Unused AI stub modules remain in `src/core/ai/` and are not part of the live path.
 
 ---
 
+## Company
+
+**Aila Luxe Ventures** · Aila · [ailaluxe.com](https://ailaluxe.com)
+
+Primary contact: ailaluxeventures@gmail.com  
+Secondary: ailaluxeventures@outlook.com
+
+---
+
 ## License
 
-Proprietary. © Aila Luxe / Aila Ecosystem. All rights reserved.
+Proprietary. © Aila Luxe Ventures / Aila. All rights reserved.

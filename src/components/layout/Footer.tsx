@@ -114,10 +114,21 @@ export default function Footer() {
             </Link>
 
             <p className="mt-7 max-w-md text-sm leading-7 text-neutral-500">
-              An intelligent software ecosystem building
-              AI-powered products, websites, applications
-              and automation systems for what comes next.
+              An intelligent software ecosystem from Aila Luxe Ventures —
+              AI-powered products, websites, applications and automation
+              systems for what comes next.
             </p>
+
+            <a
+              href="mailto:ailaluxeventures@gmail.com"
+              aria-label="Email Aila Luxe Ventures"
+              onClick={() =>
+                trackClick("email_clicked", "ailaluxeventures@gmail.com")
+              }
+              className="mt-5 inline-flex text-sm text-neutral-400 transition hover:text-white"
+            >
+              ailaluxeventures@gmail.com
+            </a>
 
             <a
               href="https://wa.me/2348080479490"
