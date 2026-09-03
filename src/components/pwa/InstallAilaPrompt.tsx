@@ -116,9 +116,9 @@ export function InstallAilaPrompt() {
     <div
       role="dialog"
       aria-label="Install Aila"
-      className="pointer-events-none fixed inset-x-0 bottom-0 z-[110] px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2 sm:inset-x-auto sm:bottom-6 sm:right-6 sm:w-[380px] sm:px-0"
+      className="fixed inset-x-0 bottom-0 z-[110] px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2 sm:inset-x-auto sm:bottom-6 sm:right-6 sm:w-[380px] sm:px-0"
     >
-      <div className="pointer-events-auto rounded-[22px] border border-white/[0.12] bg-black/90 p-4 shadow-[0_24px_80px_rgba(0,0,0,0.75)] backdrop-blur-2xl">
+      <div className="rounded-[22px] border border-white/[0.12] bg-black/90 p-4 shadow-[0_24px_80px_rgba(0,0,0,0.75)] backdrop-blur-2xl">
         <div className="flex items-start gap-3">
           <div className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-amber-300/25 bg-[#030303]">
             {/* eslint-disable-next-line @next/next/no-img-element -- small install badge; avoid layout shift */}
