@@ -1,6 +1,7 @@
 "use client";
 
-import { SignInButton, useAuth } from "@clerk/nextjs";
+import { useAuth } from "@clerk/nextjs";
+import Link from "next/link";
 import type { ReactNode } from "react";
 
 import {
@@ -100,9 +101,11 @@ function WorkspaceShellInner({
             title={`Sign in to use Aila ${product}`}
             description="Your work is private and stored against your account. Sign in to create, edit, and run it."
             action={
-              <SignInButton mode="modal" forceRedirectUrl={href}>
-                <Button>Sign in</Button>
-              </SignInButton>
+              <Button asChild>
+                <Link href={`/sign-in?redirect_url=${encodeURIComponent(href)}`}>
+                  Sign in
+                </Link>
+              </Button>
             }
           />
         ) : error ? (
