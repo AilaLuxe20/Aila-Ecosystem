@@ -5,7 +5,7 @@ import { requireProductAccess } from "@/lib/auth/require-product-access";
 
 export const metadata: Metadata = {
   title: "Aila Writer",
-  description: "Write, edit, and rewrite documents stored on your account.",
+  description: "Develop a book from idea to manuscript with characters, bible, chapters, and revision.",
 };
 
 export default async function AilaWriterPage() {

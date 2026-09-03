@@ -504,6 +504,56 @@ exports.Prisma.WriterDocumentScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.WriterBookScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  title: 'title',
+  premise: 'premise',
+  genre: 'genre',
+  themes: 'themes',
+  audience: 'audience',
+  tone: 'tone',
+  worldBible: 'worldBible',
+  storyBible: 'storyBible',
+  plot: 'plot',
+  outline: 'outline',
+  locations: 'locations',
+  timeline: 'timeline',
+  continuityNotes: 'continuityNotes',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.WriterCharacterScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  bookId: 'bookId',
+  name: 'name',
+  role: 'role',
+  bio: 'bio',
+  appearance: 'appearance',
+  motivation: 'motivation',
+  relationships: 'relationships',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.WriterChapterScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  bookId: 'bookId',
+  position: 'position',
+  title: 'title',
+  summary: 'summary',
+  scenePlan: 'scenePlan',
+  body: 'body',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.TranslateEntryScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -745,6 +795,9 @@ exports.Prisma.ModelName = {
   StripeWebhookEvent: 'StripeWebhookEvent',
   PaystackWebhookEvent: 'PaystackWebhookEvent',
   WriterDocument: 'WriterDocument',
+  WriterBook: 'WriterBook',
+  WriterCharacter: 'WriterCharacter',
+  WriterChapter: 'WriterChapter',
   TranslateEntry: 'TranslateEntry',
   LibraryDocument: 'LibraryDocument',
   CodingProject: 'CodingProject',

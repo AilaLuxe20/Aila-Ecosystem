@@ -88,7 +88,7 @@ export const PRODUCTS: Record<ProductKey, ProductDefinition> = {
     aiMode: "writer",
     paid: false,
     group: "everyday",
-    description: "Write, edit, and rewrite documents stored on your account.",
+    description: "Develop a book from idea to manuscript, with characters, bible, chapters, and revision.",
   },
   translate: {
     key: "translate",

@@ -42,6 +42,9 @@ model User {
   sites                  Site[]
   flows                  Flow[]
   writerDocuments        WriterDocument[]
+  writerBooks            WriterBook[]
+  writerCharacters       WriterCharacter[]
+  writerChapters         WriterChapter[]
   translateEntries       TranslateEntry[]
   libraryDocuments       LibraryDocument[]
   codingProjects         CodingProject[]
@@ -594,6 +597,78 @@ model WriterDocument {
 
   @@index([userId, updatedAt])
   @@map("writer_documents")
+}
+
+model WriterBook {
+  id               String   @id @default(cuid())
+  userId           String
+  title            String
+  premise          String   @db.Text @default("")
+  genre            String   @default("")
+  themes           String   @db.Text @default("")
+  audience         String   @default("")
+  tone             String   @default("")
+  worldBible       String   @db.Text @default("")
+  storyBible       String   @db.Text @default("")
+  plot             String   @db.Text @default("")
+  outline          String   @db.Text @default("")
+  locations        String   @db.Text @default("")
+  timeline         String   @db.Text @default("")
+  continuityNotes  String   @db.Text @default("")
+  status           String   @default("idea")
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  user       User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  characters WriterCharacter[]
+  chapters   WriterChapter[]
+
+  @@index([userId, updatedAt])
+  @@map("writer_books")
+}
+
+model WriterCharacter {
+  id            String   @id @default(cuid())
+  userId        String
+  bookId        String
+  name          String
+  role          String   @default("")
+  bio           String   @db.Text @default("")
+  appearance    String   @db.Text @default("")
+  motivation    String   @db.Text @default("")
+  relationships String   @db.Text @default("")
+  notes         String   @db.Text @default("")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  user User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  book WriterBook @relation(fields: [bookId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([bookId, updatedAt])
+  @@map("writer_characters")
+}
+
+model WriterChapter {
+  id        String   @id @default(cuid())
+  userId    String
+  bookId    String
+  position  Int
+  title     String
+  summary   String   @db.Text @default("")
+  scenePlan String   @db.Text @default("")
+  body      String   @db.Text @default("")
+  status    String   @default("planned")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  book WriterBook @relation(fields: [bookId], references: [id], onDelete: Cascade)
+
+  @@unique([bookId, position])
+  @@index([userId])
+  @@index([bookId, position])
+  @@map("writer_chapters")
 }
 
 model TranslateEntry {

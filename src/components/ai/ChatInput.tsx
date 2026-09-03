@@ -1,8 +1,9 @@
 "use client";
 
 import type { ChangeEvent, KeyboardEvent } from "react";
-import { useRef } from "react";
-import { Loader2, Paperclip, X } from "lucide-react";
+import { useRef, useState } from "react";
+import { Loader2, Mic, Paperclip, Square, X } from "lucide-react";
+import { CHAT_ATTACHMENT_ACCEPT } from "@/core/ai/attachments";
 import { formatBytes } from "@/lib/utils/format";
 
 export type ChatAttachment = {
@@ -29,7 +30,7 @@ type ChatInputProps = {
   onKeyDown: (event: KeyboardEvent<HTMLTextAreaElement>) => void;
 };
 
-const ACCEPT = ".pdf,.txt,.csv,.json,.md,.markdown";
+const ACCEPT = CHAT_ATTACHMENT_ACCEPT;
 
 function attachmentLabel(attachment: ChatAttachment): string {
   if (attachment.status === "uploading") {
@@ -69,6 +70,10 @@ export default function ChatInput({
   onKeyDown,
 }: ChatInputProps) {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const chunksRef = useRef<Blob[]>([]);
+  const [recording, setRecording] = useState(false);
+  const [recordError, setRecordError] = useState<string | null>(null);
   const attachmentBusy =
     attachment?.status === "uploading" || attachment?.status === "processing";
 
@@ -77,6 +82,46 @@ export default function ChatInput({
     event.target.value = "";
     if (file) {
       onAttachFile?.(file);
+    }
+  }
+
+  async function toggleRecording() {
+    if (recording) {
+      mediaRecorderRef.current?.stop();
+      return;
+    }
+
+    setRecordError(null);
+    if (!navigator.mediaDevices?.getUserMedia || typeof MediaRecorder === "undefined") {
+      setRecordError("This browser cannot record audio.");
+      return;
+    }
+
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const recorder = new MediaRecorder(stream);
+      chunksRef.current = [];
+      recorder.ondataavailable = (event) => {
+        if (event.data.size > 0) {
+          chunksRef.current.push(event.data);
+        }
+      };
+      recorder.onstop = () => {
+        stream.getTracks().forEach((track) => track.stop());
+        setRecording(false);
+        mediaRecorderRef.current = null;
+        const blob = new Blob(chunksRef.current, { type: recorder.mimeType || "audio/webm" });
+        chunksRef.current = [];
+        if (blob.size > 0) {
+          const extension = blob.type.includes("ogg") ? "ogg" : "webm";
+          onAttachFile?.(new File([blob], `voice-note.${extension}`, { type: blob.type || "audio/webm" }));
+        }
+      };
+      mediaRecorderRef.current = recorder;
+      recorder.start();
+      setRecording(true);
+    } catch {
+      setRecordError("Microphone permission is required to record a voice note.");
     }
   }
 
@@ -112,6 +157,10 @@ export default function ChatInput({
         </div>
       )}
 
+      {recordError ? (
+        <p className="mb-3 text-[11px] text-red-300/80">{recordError}</p>
+      ) : null}
+
       <div className="flex gap-2 rounded-2xl border border-white/[0.09] bg-black/40 p-2 transition focus-within:border-cyan-300/25">
         {allowAttachments && (
           <>
@@ -126,12 +175,26 @@ export default function ChatInput({
             <button
               type="button"
               onClick={() => fileInputRef.current?.click()}
-              disabled={typing}
+              disabled={typing || recording}
               aria-label="Attach a file"
-              title="Attach a PDF, TXT, CSV, JSON, or Markdown file"
+              title="Attach a document, image, or audio note"
               className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-neutral-500 transition hover:bg-white/[0.05] hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
             >
               <Paperclip className="h-4 w-4" />
+            </button>
+            <button
+              type="button"
+              onClick={() => void toggleRecording()}
+              disabled={typing}
+              aria-label={recording ? "Stop recording" : "Record a voice note"}
+              title={recording ? "Stop recording" : "Record a voice note"}
+              className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition disabled:cursor-not-allowed disabled:opacity-40 ${
+                recording
+                  ? "bg-red-400/20 text-red-200"
+                  : "text-neutral-500 hover:bg-white/[0.05] hover:text-white"
+              }`}
+            >
+              {recording ? <Square className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
             </button>
           </>
         )}
@@ -158,7 +221,7 @@ export default function ChatInput({
           <button
             type="button"
             onClick={onSend}
-            disabled={!input.trim() || typing || attachmentBusy}
+            disabled={(!input.trim() && attachment?.status !== "ready") || typing || attachmentBusy}
             className="rounded-xl bg-white px-5 py-3 text-sm font-semibold text-black transition hover:scale-[1.03] disabled:cursor-not-allowed disabled:opacity-30"
           >
             Send

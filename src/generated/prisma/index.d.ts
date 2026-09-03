@@ -169,6 +169,21 @@ export type PaystackWebhookEvent = $Result.DefaultSelection<Prisma.$PaystackWebh
  */
 export type WriterDocument = $Result.DefaultSelection<Prisma.$WriterDocumentPayload>
 /**
+ * Model WriterBook
+ * 
+ */
+export type WriterBook = $Result.DefaultSelection<Prisma.$WriterBookPayload>
+/**
+ * Model WriterCharacter
+ * 
+ */
+export type WriterCharacter = $Result.DefaultSelection<Prisma.$WriterCharacterPayload>
+/**
+ * Model WriterChapter
+ * 
+ */
+export type WriterChapter = $Result.DefaultSelection<Prisma.$WriterChapterPayload>
+/**
  * Model TranslateEntry
  * 
  */
@@ -674,6 +689,36 @@ export class PrismaClient<
     * ```
     */
   get writerDocument(): Prisma.WriterDocumentDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.writerBook`: Exposes CRUD operations for the **WriterBook** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more WriterBooks
+    * const writerBooks = await prisma.writerBook.findMany()
+    * ```
+    */
+  get writerBook(): Prisma.WriterBookDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.writerCharacter`: Exposes CRUD operations for the **WriterCharacter** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more WriterCharacters
+    * const writerCharacters = await prisma.writerCharacter.findMany()
+    * ```
+    */
+  get writerCharacter(): Prisma.WriterCharacterDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.writerChapter`: Exposes CRUD operations for the **WriterChapter** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more WriterChapters
+    * const writerChapters = await prisma.writerChapter.findMany()
+    * ```
+    */
+  get writerChapter(): Prisma.WriterChapterDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.translateEntry`: Exposes CRUD operations for the **TranslateEntry** model.
@@ -1302,6 +1347,9 @@ export namespace Prisma {
     StripeWebhookEvent: 'StripeWebhookEvent',
     PaystackWebhookEvent: 'PaystackWebhookEvent',
     WriterDocument: 'WriterDocument',
+    WriterBook: 'WriterBook',
+    WriterCharacter: 'WriterCharacter',
+    WriterChapter: 'WriterChapter',
     TranslateEntry: 'TranslateEntry',
     LibraryDocument: 'LibraryDocument',
     CodingProject: 'CodingProject',
@@ -1332,7 +1380,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "account" | "session" | "verificationToken" | "conversation" | "message" | "legalDocument" | "intelligenceDocument" | "projectInquiry" | "calendarEvent" | "businessContact" | "businessTask" | "automationRule" | "automationRun" | "commerceProduct" | "commerceOrder" | "adsCampaign" | "adsCreative" | "adsPlatformConnection" | "adsLandingPageAnalysis" | "adsRecommendation" | "adsAiUsage" | "appListing" | "site" | "flow" | "dailyNote" | "dailyGoal" | "billingSubscription" | "stripeWebhookEvent" | "paystackWebhookEvent" | "writerDocument" | "translateEntry" | "libraryDocument" | "codingProject" | "educationCourse" | "educationNote" | "educationQuiz" | "careerResume" | "careerApplication" | "healthHabit" | "healthLog" | "financeTransaction" | "financeBudget" | "financeGoal" | "travelTrip" | "shippingShipment"
+      modelProps: "user" | "account" | "session" | "verificationToken" | "conversation" | "message" | "legalDocument" | "intelligenceDocument" | "projectInquiry" | "calendarEvent" | "businessContact" | "businessTask" | "automationRule" | "automationRun" | "commerceProduct" | "commerceOrder" | "adsCampaign" | "adsCreative" | "adsPlatformConnection" | "adsLandingPageAnalysis" | "adsRecommendation" | "adsAiUsage" | "appListing" | "site" | "flow" | "dailyNote" | "dailyGoal" | "billingSubscription" | "stripeWebhookEvent" | "paystackWebhookEvent" | "writerDocument" | "writerBook" | "writerCharacter" | "writerChapter" | "translateEntry" | "libraryDocument" | "codingProject" | "educationCourse" | "educationNote" | "educationQuiz" | "careerResume" | "careerApplication" | "healthHabit" | "healthLog" | "financeTransaction" | "financeBudget" | "financeGoal" | "travelTrip" | "shippingShipment"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3630,6 +3678,228 @@ export namespace Prisma {
           }
         }
       }
+      WriterBook: {
+        payload: Prisma.$WriterBookPayload<ExtArgs>
+        fields: Prisma.WriterBookFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.WriterBookFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WriterBookPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.WriterBookFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WriterBookPayload>
+          }
+          findFirst: {
+            args: Prisma.WriterBookFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WriterBookPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.WriterBookFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WriterBookPayload>
+          }
+          findMany: {
+            args: Prisma.WriterBookFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WriterBookPayload>[]
+          }
+          create: {
+            args: Prisma.WriterBookCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WriterBookPayload>
+          }
+          createMany: {
+            args: Prisma.WriterBookCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.WriterBookCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WriterBookPayload>[]
+          }
+          delete: {
+            args: Prisma.WriterBookDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WriterBookPayload>
+          }
+          update: {
+            args: Prisma.WriterBookUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WriterBookPayload>
+          }
+          deleteMany: {
+            args: Prisma.WriterBookDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.WriterBookUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.WriterBookUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WriterBookPayload>[]
+          }
+          upsert: {
+            args: Prisma.WriterBookUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WriterBookPayload>
+          }
+          aggregate: {
+            args: Prisma.WriterBookAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateWriterBook>
+          }
+          groupBy: {
+            args: Prisma.WriterBookGroupByArgs<ExtArgs>
+            result: $Utils.Optional<WriterBookGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.WriterBookCountArgs<ExtArgs>
+            result: $Utils.Optional<WriterBookCountAggregateOutputType> | number
+          }
+        }
+      }
+      WriterCharacter: {
+        payload: Prisma.$WriterCharacterPayload<ExtArgs>
+        fields: Prisma.WriterCharacterFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.WriterCharacterFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WriterCharacterPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.WriterCharacterFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WriterCharacterPayload>
+          }
+          findFirst: {
+            args: Prisma.WriterCharacterFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WriterCharacterPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.WriterCharacterFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WriterCharacterPayload>
+          }
+          findMany: {
+            args: Prisma.WriterCharacterFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WriterCharacterPayload>[]
+          }
+          create: {
+            args: Prisma.WriterCharacterCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WriterCharacterPayload>
+          }
+          createMany: {
+            args: Prisma.WriterCharacterCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.WriterCharacterCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WriterCharacterPayload>[]
+          }
+          delete: {
+            args: Prisma.WriterCharacterDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WriterCharacterPayload>
+          }
+          update: {
+            args: Prisma.WriterCharacterUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WriterCharacterPayload>
+          }
+          deleteMany: {
+            args: Prisma.WriterCharacterDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.WriterCharacterUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.WriterCharacterUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WriterCharacterPayload>[]
+          }
+          upsert: {
+            args: Prisma.WriterCharacterUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WriterCharacterPayload>
+          }
+          aggregate: {
+            args: Prisma.WriterCharacterAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateWriterCharacter>
+          }
+          groupBy: {
+            args: Prisma.WriterCharacterGroupByArgs<ExtArgs>
+            result: $Utils.Optional<WriterCharacterGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.WriterCharacterCountArgs<ExtArgs>
+            result: $Utils.Optional<WriterCharacterCountAggregateOutputType> | number
+          }
+        }
+      }
+      WriterChapter: {
+        payload: Prisma.$WriterChapterPayload<ExtArgs>
+        fields: Prisma.WriterChapterFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.WriterChapterFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WriterChapterPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.WriterChapterFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WriterChapterPayload>
+          }
+          findFirst: {
+            args: Prisma.WriterChapterFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WriterChapterPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.WriterChapterFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WriterChapterPayload>
+          }
+          findMany: {
+            args: Prisma.WriterChapterFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WriterChapterPayload>[]
+          }
+          create: {
+            args: Prisma.WriterChapterCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WriterChapterPayload>
+          }
+          createMany: {
+            args: Prisma.WriterChapterCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.WriterChapterCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WriterChapterPayload>[]
+          }
+          delete: {
+            args: Prisma.WriterChapterDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WriterChapterPayload>
+          }
+          update: {
+            args: Prisma.WriterChapterUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WriterChapterPayload>
+          }
+          deleteMany: {
+            args: Prisma.WriterChapterDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.WriterChapterUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.WriterChapterUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WriterChapterPayload>[]
+          }
+          upsert: {
+            args: Prisma.WriterChapterUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WriterChapterPayload>
+          }
+          aggregate: {
+            args: Prisma.WriterChapterAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateWriterChapter>
+          }
+          groupBy: {
+            args: Prisma.WriterChapterGroupByArgs<ExtArgs>
+            result: $Utils.Optional<WriterChapterGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.WriterChapterCountArgs<ExtArgs>
+            result: $Utils.Optional<WriterChapterCountAggregateOutputType> | number
+          }
+        }
+      }
       TranslateEntry: {
         payload: Prisma.$TranslateEntryPayload<ExtArgs>
         fields: Prisma.TranslateEntryFieldRefs
@@ -4894,6 +5164,9 @@ export namespace Prisma {
     stripeWebhookEvent?: StripeWebhookEventOmit
     paystackWebhookEvent?: PaystackWebhookEventOmit
     writerDocument?: WriterDocumentOmit
+    writerBook?: WriterBookOmit
+    writerCharacter?: WriterCharacterOmit
+    writerChapter?: WriterChapterOmit
     translateEntry?: TranslateEntryOmit
     libraryDocument?: LibraryDocumentOmit
     codingProject?: CodingProjectOmit
@@ -5014,6 +5287,9 @@ export namespace Prisma {
     sites: number
     flows: number
     writerDocuments: number
+    writerBooks: number
+    writerCharacters: number
+    writerChapters: number
     translateEntries: number
     libraryDocuments: number
     codingProjects: number
@@ -5058,6 +5334,9 @@ export namespace Prisma {
     sites?: boolean | UserCountOutputTypeCountSitesArgs
     flows?: boolean | UserCountOutputTypeCountFlowsArgs
     writerDocuments?: boolean | UserCountOutputTypeCountWriterDocumentsArgs
+    writerBooks?: boolean | UserCountOutputTypeCountWriterBooksArgs
+    writerCharacters?: boolean | UserCountOutputTypeCountWriterCharactersArgs
+    writerChapters?: boolean | UserCountOutputTypeCountWriterChaptersArgs
     translateEntries?: boolean | UserCountOutputTypeCountTranslateEntriesArgs
     libraryDocuments?: boolean | UserCountOutputTypeCountLibraryDocumentsArgs
     codingProjects?: boolean | UserCountOutputTypeCountCodingProjectsArgs
@@ -5260,6 +5539,27 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountWriterDocumentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: WriterDocumentWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountWriterBooksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WriterBookWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountWriterCharactersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WriterCharacterWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountWriterChaptersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WriterChapterWhereInput
   }
 
   /**
@@ -5558,6 +5858,46 @@ export namespace Prisma {
 
 
   /**
+   * Count Type WriterBookCountOutputType
+   */
+
+  export type WriterBookCountOutputType = {
+    characters: number
+    chapters: number
+  }
+
+  export type WriterBookCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    characters?: boolean | WriterBookCountOutputTypeCountCharactersArgs
+    chapters?: boolean | WriterBookCountOutputTypeCountChaptersArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * WriterBookCountOutputType without action
+   */
+  export type WriterBookCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterBookCountOutputType
+     */
+    select?: WriterBookCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * WriterBookCountOutputType without action
+   */
+  export type WriterBookCountOutputTypeCountCharactersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WriterCharacterWhereInput
+  }
+
+  /**
+   * WriterBookCountOutputType without action
+   */
+  export type WriterBookCountOutputTypeCountChaptersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WriterChapterWhereInput
+  }
+
+
+  /**
    * Count Type EducationCourseCountOutputType
    */
 
@@ -5830,6 +6170,9 @@ export namespace Prisma {
     sites?: boolean | User$sitesArgs<ExtArgs>
     flows?: boolean | User$flowsArgs<ExtArgs>
     writerDocuments?: boolean | User$writerDocumentsArgs<ExtArgs>
+    writerBooks?: boolean | User$writerBooksArgs<ExtArgs>
+    writerCharacters?: boolean | User$writerCharactersArgs<ExtArgs>
+    writerChapters?: boolean | User$writerChaptersArgs<ExtArgs>
     translateEntries?: boolean | User$translateEntriesArgs<ExtArgs>
     libraryDocuments?: boolean | User$libraryDocumentsArgs<ExtArgs>
     codingProjects?: boolean | User$codingProjectsArgs<ExtArgs>
@@ -5915,6 +6258,9 @@ export namespace Prisma {
     sites?: boolean | User$sitesArgs<ExtArgs>
     flows?: boolean | User$flowsArgs<ExtArgs>
     writerDocuments?: boolean | User$writerDocumentsArgs<ExtArgs>
+    writerBooks?: boolean | User$writerBooksArgs<ExtArgs>
+    writerCharacters?: boolean | User$writerCharactersArgs<ExtArgs>
+    writerChapters?: boolean | User$writerChaptersArgs<ExtArgs>
     translateEntries?: boolean | User$translateEntriesArgs<ExtArgs>
     libraryDocuments?: boolean | User$libraryDocumentsArgs<ExtArgs>
     codingProjects?: boolean | User$codingProjectsArgs<ExtArgs>
@@ -5964,6 +6310,9 @@ export namespace Prisma {
       sites: Prisma.$SitePayload<ExtArgs>[]
       flows: Prisma.$FlowPayload<ExtArgs>[]
       writerDocuments: Prisma.$WriterDocumentPayload<ExtArgs>[]
+      writerBooks: Prisma.$WriterBookPayload<ExtArgs>[]
+      writerCharacters: Prisma.$WriterCharacterPayload<ExtArgs>[]
+      writerChapters: Prisma.$WriterChapterPayload<ExtArgs>[]
       translateEntries: Prisma.$TranslateEntryPayload<ExtArgs>[]
       libraryDocuments: Prisma.$LibraryDocumentPayload<ExtArgs>[]
       codingProjects: Prisma.$CodingProjectPayload<ExtArgs>[]
@@ -6411,6 +6760,9 @@ export namespace Prisma {
     sites<T extends User$sitesArgs<ExtArgs> = {}>(args?: Subset<T, User$sitesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SitePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     flows<T extends User$flowsArgs<ExtArgs> = {}>(args?: Subset<T, User$flowsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlowPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     writerDocuments<T extends User$writerDocumentsArgs<ExtArgs> = {}>(args?: Subset<T, User$writerDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WriterDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    writerBooks<T extends User$writerBooksArgs<ExtArgs> = {}>(args?: Subset<T, User$writerBooksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WriterBookPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    writerCharacters<T extends User$writerCharactersArgs<ExtArgs> = {}>(args?: Subset<T, User$writerCharactersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WriterCharacterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    writerChapters<T extends User$writerChaptersArgs<ExtArgs> = {}>(args?: Subset<T, User$writerChaptersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WriterChapterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     translateEntries<T extends User$translateEntriesArgs<ExtArgs> = {}>(args?: Subset<T, User$translateEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TranslateEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     libraryDocuments<T extends User$libraryDocumentsArgs<ExtArgs> = {}>(args?: Subset<T, User$libraryDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LibraryDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     codingProjects<T extends User$codingProjectsArgs<ExtArgs> = {}>(args?: Subset<T, User$codingProjectsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CodingProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -7456,6 +7808,78 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: WriterDocumentScalarFieldEnum | WriterDocumentScalarFieldEnum[]
+  }
+
+  /**
+   * User.writerBooks
+   */
+  export type User$writerBooksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterBook
+     */
+    select?: WriterBookSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterBook
+     */
+    omit?: WriterBookOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterBookInclude<ExtArgs> | null
+    where?: WriterBookWhereInput
+    orderBy?: WriterBookOrderByWithRelationInput | WriterBookOrderByWithRelationInput[]
+    cursor?: WriterBookWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: WriterBookScalarFieldEnum | WriterBookScalarFieldEnum[]
+  }
+
+  /**
+   * User.writerCharacters
+   */
+  export type User$writerCharactersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterCharacter
+     */
+    select?: WriterCharacterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterCharacter
+     */
+    omit?: WriterCharacterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterCharacterInclude<ExtArgs> | null
+    where?: WriterCharacterWhereInput
+    orderBy?: WriterCharacterOrderByWithRelationInput | WriterCharacterOrderByWithRelationInput[]
+    cursor?: WriterCharacterWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: WriterCharacterScalarFieldEnum | WriterCharacterScalarFieldEnum[]
+  }
+
+  /**
+   * User.writerChapters
+   */
+  export type User$writerChaptersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterChapter
+     */
+    select?: WriterChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterChapter
+     */
+    omit?: WriterChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterChapterInclude<ExtArgs> | null
+    where?: WriterChapterWhereInput
+    orderBy?: WriterChapterOrderByWithRelationInput | WriterChapterOrderByWithRelationInput[]
+    cursor?: WriterChapterWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: WriterChapterScalarFieldEnum | WriterChapterScalarFieldEnum[]
   }
 
   /**
@@ -41942,6 +42366,3641 @@ export namespace Prisma {
 
 
   /**
+   * Model WriterBook
+   */
+
+  export type AggregateWriterBook = {
+    _count: WriterBookCountAggregateOutputType | null
+    _min: WriterBookMinAggregateOutputType | null
+    _max: WriterBookMaxAggregateOutputType | null
+  }
+
+  export type WriterBookMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    title: string | null
+    premise: string | null
+    genre: string | null
+    themes: string | null
+    audience: string | null
+    tone: string | null
+    worldBible: string | null
+    storyBible: string | null
+    plot: string | null
+    outline: string | null
+    locations: string | null
+    timeline: string | null
+    continuityNotes: string | null
+    status: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type WriterBookMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    title: string | null
+    premise: string | null
+    genre: string | null
+    themes: string | null
+    audience: string | null
+    tone: string | null
+    worldBible: string | null
+    storyBible: string | null
+    plot: string | null
+    outline: string | null
+    locations: string | null
+    timeline: string | null
+    continuityNotes: string | null
+    status: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type WriterBookCountAggregateOutputType = {
+    id: number
+    userId: number
+    title: number
+    premise: number
+    genre: number
+    themes: number
+    audience: number
+    tone: number
+    worldBible: number
+    storyBible: number
+    plot: number
+    outline: number
+    locations: number
+    timeline: number
+    continuityNotes: number
+    status: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type WriterBookMinAggregateInputType = {
+    id?: true
+    userId?: true
+    title?: true
+    premise?: true
+    genre?: true
+    themes?: true
+    audience?: true
+    tone?: true
+    worldBible?: true
+    storyBible?: true
+    plot?: true
+    outline?: true
+    locations?: true
+    timeline?: true
+    continuityNotes?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type WriterBookMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    title?: true
+    premise?: true
+    genre?: true
+    themes?: true
+    audience?: true
+    tone?: true
+    worldBible?: true
+    storyBible?: true
+    plot?: true
+    outline?: true
+    locations?: true
+    timeline?: true
+    continuityNotes?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type WriterBookCountAggregateInputType = {
+    id?: true
+    userId?: true
+    title?: true
+    premise?: true
+    genre?: true
+    themes?: true
+    audience?: true
+    tone?: true
+    worldBible?: true
+    storyBible?: true
+    plot?: true
+    outline?: true
+    locations?: true
+    timeline?: true
+    continuityNotes?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type WriterBookAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WriterBook to aggregate.
+     */
+    where?: WriterBookWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WriterBooks to fetch.
+     */
+    orderBy?: WriterBookOrderByWithRelationInput | WriterBookOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: WriterBookWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WriterBooks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WriterBooks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned WriterBooks
+    **/
+    _count?: true | WriterBookCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: WriterBookMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: WriterBookMaxAggregateInputType
+  }
+
+  export type GetWriterBookAggregateType<T extends WriterBookAggregateArgs> = {
+        [P in keyof T & keyof AggregateWriterBook]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateWriterBook[P]>
+      : GetScalarType<T[P], AggregateWriterBook[P]>
+  }
+
+
+
+
+  export type WriterBookGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WriterBookWhereInput
+    orderBy?: WriterBookOrderByWithAggregationInput | WriterBookOrderByWithAggregationInput[]
+    by: WriterBookScalarFieldEnum[] | WriterBookScalarFieldEnum
+    having?: WriterBookScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: WriterBookCountAggregateInputType | true
+    _min?: WriterBookMinAggregateInputType
+    _max?: WriterBookMaxAggregateInputType
+  }
+
+  export type WriterBookGroupByOutputType = {
+    id: string
+    userId: string
+    title: string
+    premise: string
+    genre: string
+    themes: string
+    audience: string
+    tone: string
+    worldBible: string
+    storyBible: string
+    plot: string
+    outline: string
+    locations: string
+    timeline: string
+    continuityNotes: string
+    status: string
+    createdAt: Date
+    updatedAt: Date
+    _count: WriterBookCountAggregateOutputType | null
+    _min: WriterBookMinAggregateOutputType | null
+    _max: WriterBookMaxAggregateOutputType | null
+  }
+
+  type GetWriterBookGroupByPayload<T extends WriterBookGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<WriterBookGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof WriterBookGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], WriterBookGroupByOutputType[P]>
+            : GetScalarType<T[P], WriterBookGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type WriterBookSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    title?: boolean
+    premise?: boolean
+    genre?: boolean
+    themes?: boolean
+    audience?: boolean
+    tone?: boolean
+    worldBible?: boolean
+    storyBible?: boolean
+    plot?: boolean
+    outline?: boolean
+    locations?: boolean
+    timeline?: boolean
+    continuityNotes?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    characters?: boolean | WriterBook$charactersArgs<ExtArgs>
+    chapters?: boolean | WriterBook$chaptersArgs<ExtArgs>
+    _count?: boolean | WriterBookCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["writerBook"]>
+
+  export type WriterBookSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    title?: boolean
+    premise?: boolean
+    genre?: boolean
+    themes?: boolean
+    audience?: boolean
+    tone?: boolean
+    worldBible?: boolean
+    storyBible?: boolean
+    plot?: boolean
+    outline?: boolean
+    locations?: boolean
+    timeline?: boolean
+    continuityNotes?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["writerBook"]>
+
+  export type WriterBookSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    title?: boolean
+    premise?: boolean
+    genre?: boolean
+    themes?: boolean
+    audience?: boolean
+    tone?: boolean
+    worldBible?: boolean
+    storyBible?: boolean
+    plot?: boolean
+    outline?: boolean
+    locations?: boolean
+    timeline?: boolean
+    continuityNotes?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["writerBook"]>
+
+  export type WriterBookSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    title?: boolean
+    premise?: boolean
+    genre?: boolean
+    themes?: boolean
+    audience?: boolean
+    tone?: boolean
+    worldBible?: boolean
+    storyBible?: boolean
+    plot?: boolean
+    outline?: boolean
+    locations?: boolean
+    timeline?: boolean
+    continuityNotes?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type WriterBookOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "title" | "premise" | "genre" | "themes" | "audience" | "tone" | "worldBible" | "storyBible" | "plot" | "outline" | "locations" | "timeline" | "continuityNotes" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["writerBook"]>
+  export type WriterBookInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    characters?: boolean | WriterBook$charactersArgs<ExtArgs>
+    chapters?: boolean | WriterBook$chaptersArgs<ExtArgs>
+    _count?: boolean | WriterBookCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type WriterBookIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type WriterBookIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $WriterBookPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "WriterBook"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      characters: Prisma.$WriterCharacterPayload<ExtArgs>[]
+      chapters: Prisma.$WriterChapterPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      title: string
+      premise: string
+      genre: string
+      themes: string
+      audience: string
+      tone: string
+      worldBible: string
+      storyBible: string
+      plot: string
+      outline: string
+      locations: string
+      timeline: string
+      continuityNotes: string
+      status: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["writerBook"]>
+    composites: {}
+  }
+
+  type WriterBookGetPayload<S extends boolean | null | undefined | WriterBookDefaultArgs> = $Result.GetResult<Prisma.$WriterBookPayload, S>
+
+  type WriterBookCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<WriterBookFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: WriterBookCountAggregateInputType | true
+    }
+
+  export interface WriterBookDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['WriterBook'], meta: { name: 'WriterBook' } }
+    /**
+     * Find zero or one WriterBook that matches the filter.
+     * @param {WriterBookFindUniqueArgs} args - Arguments to find a WriterBook
+     * @example
+     * // Get one WriterBook
+     * const writerBook = await prisma.writerBook.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends WriterBookFindUniqueArgs>(args: SelectSubset<T, WriterBookFindUniqueArgs<ExtArgs>>): Prisma__WriterBookClient<$Result.GetResult<Prisma.$WriterBookPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one WriterBook that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {WriterBookFindUniqueOrThrowArgs} args - Arguments to find a WriterBook
+     * @example
+     * // Get one WriterBook
+     * const writerBook = await prisma.writerBook.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends WriterBookFindUniqueOrThrowArgs>(args: SelectSubset<T, WriterBookFindUniqueOrThrowArgs<ExtArgs>>): Prisma__WriterBookClient<$Result.GetResult<Prisma.$WriterBookPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first WriterBook that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WriterBookFindFirstArgs} args - Arguments to find a WriterBook
+     * @example
+     * // Get one WriterBook
+     * const writerBook = await prisma.writerBook.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends WriterBookFindFirstArgs>(args?: SelectSubset<T, WriterBookFindFirstArgs<ExtArgs>>): Prisma__WriterBookClient<$Result.GetResult<Prisma.$WriterBookPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first WriterBook that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WriterBookFindFirstOrThrowArgs} args - Arguments to find a WriterBook
+     * @example
+     * // Get one WriterBook
+     * const writerBook = await prisma.writerBook.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends WriterBookFindFirstOrThrowArgs>(args?: SelectSubset<T, WriterBookFindFirstOrThrowArgs<ExtArgs>>): Prisma__WriterBookClient<$Result.GetResult<Prisma.$WriterBookPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more WriterBooks that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WriterBookFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all WriterBooks
+     * const writerBooks = await prisma.writerBook.findMany()
+     * 
+     * // Get first 10 WriterBooks
+     * const writerBooks = await prisma.writerBook.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const writerBookWithIdOnly = await prisma.writerBook.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends WriterBookFindManyArgs>(args?: SelectSubset<T, WriterBookFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WriterBookPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a WriterBook.
+     * @param {WriterBookCreateArgs} args - Arguments to create a WriterBook.
+     * @example
+     * // Create one WriterBook
+     * const WriterBook = await prisma.writerBook.create({
+     *   data: {
+     *     // ... data to create a WriterBook
+     *   }
+     * })
+     * 
+     */
+    create<T extends WriterBookCreateArgs>(args: SelectSubset<T, WriterBookCreateArgs<ExtArgs>>): Prisma__WriterBookClient<$Result.GetResult<Prisma.$WriterBookPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many WriterBooks.
+     * @param {WriterBookCreateManyArgs} args - Arguments to create many WriterBooks.
+     * @example
+     * // Create many WriterBooks
+     * const writerBook = await prisma.writerBook.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends WriterBookCreateManyArgs>(args?: SelectSubset<T, WriterBookCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many WriterBooks and returns the data saved in the database.
+     * @param {WriterBookCreateManyAndReturnArgs} args - Arguments to create many WriterBooks.
+     * @example
+     * // Create many WriterBooks
+     * const writerBook = await prisma.writerBook.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many WriterBooks and only return the `id`
+     * const writerBookWithIdOnly = await prisma.writerBook.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends WriterBookCreateManyAndReturnArgs>(args?: SelectSubset<T, WriterBookCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WriterBookPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a WriterBook.
+     * @param {WriterBookDeleteArgs} args - Arguments to delete one WriterBook.
+     * @example
+     * // Delete one WriterBook
+     * const WriterBook = await prisma.writerBook.delete({
+     *   where: {
+     *     // ... filter to delete one WriterBook
+     *   }
+     * })
+     * 
+     */
+    delete<T extends WriterBookDeleteArgs>(args: SelectSubset<T, WriterBookDeleteArgs<ExtArgs>>): Prisma__WriterBookClient<$Result.GetResult<Prisma.$WriterBookPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one WriterBook.
+     * @param {WriterBookUpdateArgs} args - Arguments to update one WriterBook.
+     * @example
+     * // Update one WriterBook
+     * const writerBook = await prisma.writerBook.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends WriterBookUpdateArgs>(args: SelectSubset<T, WriterBookUpdateArgs<ExtArgs>>): Prisma__WriterBookClient<$Result.GetResult<Prisma.$WriterBookPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more WriterBooks.
+     * @param {WriterBookDeleteManyArgs} args - Arguments to filter WriterBooks to delete.
+     * @example
+     * // Delete a few WriterBooks
+     * const { count } = await prisma.writerBook.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends WriterBookDeleteManyArgs>(args?: SelectSubset<T, WriterBookDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WriterBooks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WriterBookUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many WriterBooks
+     * const writerBook = await prisma.writerBook.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends WriterBookUpdateManyArgs>(args: SelectSubset<T, WriterBookUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WriterBooks and returns the data updated in the database.
+     * @param {WriterBookUpdateManyAndReturnArgs} args - Arguments to update many WriterBooks.
+     * @example
+     * // Update many WriterBooks
+     * const writerBook = await prisma.writerBook.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more WriterBooks and only return the `id`
+     * const writerBookWithIdOnly = await prisma.writerBook.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends WriterBookUpdateManyAndReturnArgs>(args: SelectSubset<T, WriterBookUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WriterBookPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one WriterBook.
+     * @param {WriterBookUpsertArgs} args - Arguments to update or create a WriterBook.
+     * @example
+     * // Update or create a WriterBook
+     * const writerBook = await prisma.writerBook.upsert({
+     *   create: {
+     *     // ... data to create a WriterBook
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the WriterBook we want to update
+     *   }
+     * })
+     */
+    upsert<T extends WriterBookUpsertArgs>(args: SelectSubset<T, WriterBookUpsertArgs<ExtArgs>>): Prisma__WriterBookClient<$Result.GetResult<Prisma.$WriterBookPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of WriterBooks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WriterBookCountArgs} args - Arguments to filter WriterBooks to count.
+     * @example
+     * // Count the number of WriterBooks
+     * const count = await prisma.writerBook.count({
+     *   where: {
+     *     // ... the filter for the WriterBooks we want to count
+     *   }
+     * })
+    **/
+    count<T extends WriterBookCountArgs>(
+      args?: Subset<T, WriterBookCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], WriterBookCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a WriterBook.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WriterBookAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends WriterBookAggregateArgs>(args: Subset<T, WriterBookAggregateArgs>): Prisma.PrismaPromise<GetWriterBookAggregateType<T>>
+
+    /**
+     * Group by WriterBook.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WriterBookGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends WriterBookGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: WriterBookGroupByArgs['orderBy'] }
+        : { orderBy?: WriterBookGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, WriterBookGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetWriterBookGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the WriterBook model
+   */
+  readonly fields: WriterBookFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for WriterBook.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__WriterBookClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    characters<T extends WriterBook$charactersArgs<ExtArgs> = {}>(args?: Subset<T, WriterBook$charactersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WriterCharacterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    chapters<T extends WriterBook$chaptersArgs<ExtArgs> = {}>(args?: Subset<T, WriterBook$chaptersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WriterChapterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the WriterBook model
+   */
+  interface WriterBookFieldRefs {
+    readonly id: FieldRef<"WriterBook", 'String'>
+    readonly userId: FieldRef<"WriterBook", 'String'>
+    readonly title: FieldRef<"WriterBook", 'String'>
+    readonly premise: FieldRef<"WriterBook", 'String'>
+    readonly genre: FieldRef<"WriterBook", 'String'>
+    readonly themes: FieldRef<"WriterBook", 'String'>
+    readonly audience: FieldRef<"WriterBook", 'String'>
+    readonly tone: FieldRef<"WriterBook", 'String'>
+    readonly worldBible: FieldRef<"WriterBook", 'String'>
+    readonly storyBible: FieldRef<"WriterBook", 'String'>
+    readonly plot: FieldRef<"WriterBook", 'String'>
+    readonly outline: FieldRef<"WriterBook", 'String'>
+    readonly locations: FieldRef<"WriterBook", 'String'>
+    readonly timeline: FieldRef<"WriterBook", 'String'>
+    readonly continuityNotes: FieldRef<"WriterBook", 'String'>
+    readonly status: FieldRef<"WriterBook", 'String'>
+    readonly createdAt: FieldRef<"WriterBook", 'DateTime'>
+    readonly updatedAt: FieldRef<"WriterBook", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * WriterBook findUnique
+   */
+  export type WriterBookFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterBook
+     */
+    select?: WriterBookSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterBook
+     */
+    omit?: WriterBookOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterBookInclude<ExtArgs> | null
+    /**
+     * Filter, which WriterBook to fetch.
+     */
+    where: WriterBookWhereUniqueInput
+  }
+
+  /**
+   * WriterBook findUniqueOrThrow
+   */
+  export type WriterBookFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterBook
+     */
+    select?: WriterBookSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterBook
+     */
+    omit?: WriterBookOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterBookInclude<ExtArgs> | null
+    /**
+     * Filter, which WriterBook to fetch.
+     */
+    where: WriterBookWhereUniqueInput
+  }
+
+  /**
+   * WriterBook findFirst
+   */
+  export type WriterBookFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterBook
+     */
+    select?: WriterBookSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterBook
+     */
+    omit?: WriterBookOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterBookInclude<ExtArgs> | null
+    /**
+     * Filter, which WriterBook to fetch.
+     */
+    where?: WriterBookWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WriterBooks to fetch.
+     */
+    orderBy?: WriterBookOrderByWithRelationInput | WriterBookOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WriterBooks.
+     */
+    cursor?: WriterBookWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WriterBooks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WriterBooks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WriterBooks.
+     */
+    distinct?: WriterBookScalarFieldEnum | WriterBookScalarFieldEnum[]
+  }
+
+  /**
+   * WriterBook findFirstOrThrow
+   */
+  export type WriterBookFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterBook
+     */
+    select?: WriterBookSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterBook
+     */
+    omit?: WriterBookOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterBookInclude<ExtArgs> | null
+    /**
+     * Filter, which WriterBook to fetch.
+     */
+    where?: WriterBookWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WriterBooks to fetch.
+     */
+    orderBy?: WriterBookOrderByWithRelationInput | WriterBookOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WriterBooks.
+     */
+    cursor?: WriterBookWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WriterBooks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WriterBooks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WriterBooks.
+     */
+    distinct?: WriterBookScalarFieldEnum | WriterBookScalarFieldEnum[]
+  }
+
+  /**
+   * WriterBook findMany
+   */
+  export type WriterBookFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterBook
+     */
+    select?: WriterBookSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterBook
+     */
+    omit?: WriterBookOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterBookInclude<ExtArgs> | null
+    /**
+     * Filter, which WriterBooks to fetch.
+     */
+    where?: WriterBookWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WriterBooks to fetch.
+     */
+    orderBy?: WriterBookOrderByWithRelationInput | WriterBookOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing WriterBooks.
+     */
+    cursor?: WriterBookWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WriterBooks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WriterBooks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WriterBooks.
+     */
+    distinct?: WriterBookScalarFieldEnum | WriterBookScalarFieldEnum[]
+  }
+
+  /**
+   * WriterBook create
+   */
+  export type WriterBookCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterBook
+     */
+    select?: WriterBookSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterBook
+     */
+    omit?: WriterBookOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterBookInclude<ExtArgs> | null
+    /**
+     * The data needed to create a WriterBook.
+     */
+    data: XOR<WriterBookCreateInput, WriterBookUncheckedCreateInput>
+  }
+
+  /**
+   * WriterBook createMany
+   */
+  export type WriterBookCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many WriterBooks.
+     */
+    data: WriterBookCreateManyInput | WriterBookCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * WriterBook createManyAndReturn
+   */
+  export type WriterBookCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterBook
+     */
+    select?: WriterBookSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterBook
+     */
+    omit?: WriterBookOmit<ExtArgs> | null
+    /**
+     * The data used to create many WriterBooks.
+     */
+    data: WriterBookCreateManyInput | WriterBookCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterBookIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * WriterBook update
+   */
+  export type WriterBookUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterBook
+     */
+    select?: WriterBookSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterBook
+     */
+    omit?: WriterBookOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterBookInclude<ExtArgs> | null
+    /**
+     * The data needed to update a WriterBook.
+     */
+    data: XOR<WriterBookUpdateInput, WriterBookUncheckedUpdateInput>
+    /**
+     * Choose, which WriterBook to update.
+     */
+    where: WriterBookWhereUniqueInput
+  }
+
+  /**
+   * WriterBook updateMany
+   */
+  export type WriterBookUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update WriterBooks.
+     */
+    data: XOR<WriterBookUpdateManyMutationInput, WriterBookUncheckedUpdateManyInput>
+    /**
+     * Filter which WriterBooks to update
+     */
+    where?: WriterBookWhereInput
+    /**
+     * Limit how many WriterBooks to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * WriterBook updateManyAndReturn
+   */
+  export type WriterBookUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterBook
+     */
+    select?: WriterBookSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterBook
+     */
+    omit?: WriterBookOmit<ExtArgs> | null
+    /**
+     * The data used to update WriterBooks.
+     */
+    data: XOR<WriterBookUpdateManyMutationInput, WriterBookUncheckedUpdateManyInput>
+    /**
+     * Filter which WriterBooks to update
+     */
+    where?: WriterBookWhereInput
+    /**
+     * Limit how many WriterBooks to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterBookIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * WriterBook upsert
+   */
+  export type WriterBookUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterBook
+     */
+    select?: WriterBookSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterBook
+     */
+    omit?: WriterBookOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterBookInclude<ExtArgs> | null
+    /**
+     * The filter to search for the WriterBook to update in case it exists.
+     */
+    where: WriterBookWhereUniqueInput
+    /**
+     * In case the WriterBook found by the `where` argument doesn't exist, create a new WriterBook with this data.
+     */
+    create: XOR<WriterBookCreateInput, WriterBookUncheckedCreateInput>
+    /**
+     * In case the WriterBook was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<WriterBookUpdateInput, WriterBookUncheckedUpdateInput>
+  }
+
+  /**
+   * WriterBook delete
+   */
+  export type WriterBookDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterBook
+     */
+    select?: WriterBookSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterBook
+     */
+    omit?: WriterBookOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterBookInclude<ExtArgs> | null
+    /**
+     * Filter which WriterBook to delete.
+     */
+    where: WriterBookWhereUniqueInput
+  }
+
+  /**
+   * WriterBook deleteMany
+   */
+  export type WriterBookDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WriterBooks to delete
+     */
+    where?: WriterBookWhereInput
+    /**
+     * Limit how many WriterBooks to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * WriterBook.characters
+   */
+  export type WriterBook$charactersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterCharacter
+     */
+    select?: WriterCharacterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterCharacter
+     */
+    omit?: WriterCharacterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterCharacterInclude<ExtArgs> | null
+    where?: WriterCharacterWhereInput
+    orderBy?: WriterCharacterOrderByWithRelationInput | WriterCharacterOrderByWithRelationInput[]
+    cursor?: WriterCharacterWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: WriterCharacterScalarFieldEnum | WriterCharacterScalarFieldEnum[]
+  }
+
+  /**
+   * WriterBook.chapters
+   */
+  export type WriterBook$chaptersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterChapter
+     */
+    select?: WriterChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterChapter
+     */
+    omit?: WriterChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterChapterInclude<ExtArgs> | null
+    where?: WriterChapterWhereInput
+    orderBy?: WriterChapterOrderByWithRelationInput | WriterChapterOrderByWithRelationInput[]
+    cursor?: WriterChapterWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: WriterChapterScalarFieldEnum | WriterChapterScalarFieldEnum[]
+  }
+
+  /**
+   * WriterBook without action
+   */
+  export type WriterBookDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterBook
+     */
+    select?: WriterBookSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterBook
+     */
+    omit?: WriterBookOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterBookInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model WriterCharacter
+   */
+
+  export type AggregateWriterCharacter = {
+    _count: WriterCharacterCountAggregateOutputType | null
+    _min: WriterCharacterMinAggregateOutputType | null
+    _max: WriterCharacterMaxAggregateOutputType | null
+  }
+
+  export type WriterCharacterMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    bookId: string | null
+    name: string | null
+    role: string | null
+    bio: string | null
+    appearance: string | null
+    motivation: string | null
+    relationships: string | null
+    notes: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type WriterCharacterMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    bookId: string | null
+    name: string | null
+    role: string | null
+    bio: string | null
+    appearance: string | null
+    motivation: string | null
+    relationships: string | null
+    notes: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type WriterCharacterCountAggregateOutputType = {
+    id: number
+    userId: number
+    bookId: number
+    name: number
+    role: number
+    bio: number
+    appearance: number
+    motivation: number
+    relationships: number
+    notes: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type WriterCharacterMinAggregateInputType = {
+    id?: true
+    userId?: true
+    bookId?: true
+    name?: true
+    role?: true
+    bio?: true
+    appearance?: true
+    motivation?: true
+    relationships?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type WriterCharacterMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    bookId?: true
+    name?: true
+    role?: true
+    bio?: true
+    appearance?: true
+    motivation?: true
+    relationships?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type WriterCharacterCountAggregateInputType = {
+    id?: true
+    userId?: true
+    bookId?: true
+    name?: true
+    role?: true
+    bio?: true
+    appearance?: true
+    motivation?: true
+    relationships?: true
+    notes?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type WriterCharacterAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WriterCharacter to aggregate.
+     */
+    where?: WriterCharacterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WriterCharacters to fetch.
+     */
+    orderBy?: WriterCharacterOrderByWithRelationInput | WriterCharacterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: WriterCharacterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WriterCharacters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WriterCharacters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned WriterCharacters
+    **/
+    _count?: true | WriterCharacterCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: WriterCharacterMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: WriterCharacterMaxAggregateInputType
+  }
+
+  export type GetWriterCharacterAggregateType<T extends WriterCharacterAggregateArgs> = {
+        [P in keyof T & keyof AggregateWriterCharacter]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateWriterCharacter[P]>
+      : GetScalarType<T[P], AggregateWriterCharacter[P]>
+  }
+
+
+
+
+  export type WriterCharacterGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WriterCharacterWhereInput
+    orderBy?: WriterCharacterOrderByWithAggregationInput | WriterCharacterOrderByWithAggregationInput[]
+    by: WriterCharacterScalarFieldEnum[] | WriterCharacterScalarFieldEnum
+    having?: WriterCharacterScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: WriterCharacterCountAggregateInputType | true
+    _min?: WriterCharacterMinAggregateInputType
+    _max?: WriterCharacterMaxAggregateInputType
+  }
+
+  export type WriterCharacterGroupByOutputType = {
+    id: string
+    userId: string
+    bookId: string
+    name: string
+    role: string
+    bio: string
+    appearance: string
+    motivation: string
+    relationships: string
+    notes: string
+    createdAt: Date
+    updatedAt: Date
+    _count: WriterCharacterCountAggregateOutputType | null
+    _min: WriterCharacterMinAggregateOutputType | null
+    _max: WriterCharacterMaxAggregateOutputType | null
+  }
+
+  type GetWriterCharacterGroupByPayload<T extends WriterCharacterGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<WriterCharacterGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof WriterCharacterGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], WriterCharacterGroupByOutputType[P]>
+            : GetScalarType<T[P], WriterCharacterGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type WriterCharacterSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    bookId?: boolean
+    name?: boolean
+    role?: boolean
+    bio?: boolean
+    appearance?: boolean
+    motivation?: boolean
+    relationships?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    book?: boolean | WriterBookDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["writerCharacter"]>
+
+  export type WriterCharacterSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    bookId?: boolean
+    name?: boolean
+    role?: boolean
+    bio?: boolean
+    appearance?: boolean
+    motivation?: boolean
+    relationships?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    book?: boolean | WriterBookDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["writerCharacter"]>
+
+  export type WriterCharacterSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    bookId?: boolean
+    name?: boolean
+    role?: boolean
+    bio?: boolean
+    appearance?: boolean
+    motivation?: boolean
+    relationships?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    book?: boolean | WriterBookDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["writerCharacter"]>
+
+  export type WriterCharacterSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    bookId?: boolean
+    name?: boolean
+    role?: boolean
+    bio?: boolean
+    appearance?: boolean
+    motivation?: boolean
+    relationships?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type WriterCharacterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "bookId" | "name" | "role" | "bio" | "appearance" | "motivation" | "relationships" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["writerCharacter"]>
+  export type WriterCharacterInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    book?: boolean | WriterBookDefaultArgs<ExtArgs>
+  }
+  export type WriterCharacterIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    book?: boolean | WriterBookDefaultArgs<ExtArgs>
+  }
+  export type WriterCharacterIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    book?: boolean | WriterBookDefaultArgs<ExtArgs>
+  }
+
+  export type $WriterCharacterPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "WriterCharacter"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      book: Prisma.$WriterBookPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      bookId: string
+      name: string
+      role: string
+      bio: string
+      appearance: string
+      motivation: string
+      relationships: string
+      notes: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["writerCharacter"]>
+    composites: {}
+  }
+
+  type WriterCharacterGetPayload<S extends boolean | null | undefined | WriterCharacterDefaultArgs> = $Result.GetResult<Prisma.$WriterCharacterPayload, S>
+
+  type WriterCharacterCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<WriterCharacterFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: WriterCharacterCountAggregateInputType | true
+    }
+
+  export interface WriterCharacterDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['WriterCharacter'], meta: { name: 'WriterCharacter' } }
+    /**
+     * Find zero or one WriterCharacter that matches the filter.
+     * @param {WriterCharacterFindUniqueArgs} args - Arguments to find a WriterCharacter
+     * @example
+     * // Get one WriterCharacter
+     * const writerCharacter = await prisma.writerCharacter.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends WriterCharacterFindUniqueArgs>(args: SelectSubset<T, WriterCharacterFindUniqueArgs<ExtArgs>>): Prisma__WriterCharacterClient<$Result.GetResult<Prisma.$WriterCharacterPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one WriterCharacter that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {WriterCharacterFindUniqueOrThrowArgs} args - Arguments to find a WriterCharacter
+     * @example
+     * // Get one WriterCharacter
+     * const writerCharacter = await prisma.writerCharacter.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends WriterCharacterFindUniqueOrThrowArgs>(args: SelectSubset<T, WriterCharacterFindUniqueOrThrowArgs<ExtArgs>>): Prisma__WriterCharacterClient<$Result.GetResult<Prisma.$WriterCharacterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first WriterCharacter that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WriterCharacterFindFirstArgs} args - Arguments to find a WriterCharacter
+     * @example
+     * // Get one WriterCharacter
+     * const writerCharacter = await prisma.writerCharacter.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends WriterCharacterFindFirstArgs>(args?: SelectSubset<T, WriterCharacterFindFirstArgs<ExtArgs>>): Prisma__WriterCharacterClient<$Result.GetResult<Prisma.$WriterCharacterPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first WriterCharacter that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WriterCharacterFindFirstOrThrowArgs} args - Arguments to find a WriterCharacter
+     * @example
+     * // Get one WriterCharacter
+     * const writerCharacter = await prisma.writerCharacter.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends WriterCharacterFindFirstOrThrowArgs>(args?: SelectSubset<T, WriterCharacterFindFirstOrThrowArgs<ExtArgs>>): Prisma__WriterCharacterClient<$Result.GetResult<Prisma.$WriterCharacterPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more WriterCharacters that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WriterCharacterFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all WriterCharacters
+     * const writerCharacters = await prisma.writerCharacter.findMany()
+     * 
+     * // Get first 10 WriterCharacters
+     * const writerCharacters = await prisma.writerCharacter.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const writerCharacterWithIdOnly = await prisma.writerCharacter.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends WriterCharacterFindManyArgs>(args?: SelectSubset<T, WriterCharacterFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WriterCharacterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a WriterCharacter.
+     * @param {WriterCharacterCreateArgs} args - Arguments to create a WriterCharacter.
+     * @example
+     * // Create one WriterCharacter
+     * const WriterCharacter = await prisma.writerCharacter.create({
+     *   data: {
+     *     // ... data to create a WriterCharacter
+     *   }
+     * })
+     * 
+     */
+    create<T extends WriterCharacterCreateArgs>(args: SelectSubset<T, WriterCharacterCreateArgs<ExtArgs>>): Prisma__WriterCharacterClient<$Result.GetResult<Prisma.$WriterCharacterPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many WriterCharacters.
+     * @param {WriterCharacterCreateManyArgs} args - Arguments to create many WriterCharacters.
+     * @example
+     * // Create many WriterCharacters
+     * const writerCharacter = await prisma.writerCharacter.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends WriterCharacterCreateManyArgs>(args?: SelectSubset<T, WriterCharacterCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many WriterCharacters and returns the data saved in the database.
+     * @param {WriterCharacterCreateManyAndReturnArgs} args - Arguments to create many WriterCharacters.
+     * @example
+     * // Create many WriterCharacters
+     * const writerCharacter = await prisma.writerCharacter.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many WriterCharacters and only return the `id`
+     * const writerCharacterWithIdOnly = await prisma.writerCharacter.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends WriterCharacterCreateManyAndReturnArgs>(args?: SelectSubset<T, WriterCharacterCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WriterCharacterPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a WriterCharacter.
+     * @param {WriterCharacterDeleteArgs} args - Arguments to delete one WriterCharacter.
+     * @example
+     * // Delete one WriterCharacter
+     * const WriterCharacter = await prisma.writerCharacter.delete({
+     *   where: {
+     *     // ... filter to delete one WriterCharacter
+     *   }
+     * })
+     * 
+     */
+    delete<T extends WriterCharacterDeleteArgs>(args: SelectSubset<T, WriterCharacterDeleteArgs<ExtArgs>>): Prisma__WriterCharacterClient<$Result.GetResult<Prisma.$WriterCharacterPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one WriterCharacter.
+     * @param {WriterCharacterUpdateArgs} args - Arguments to update one WriterCharacter.
+     * @example
+     * // Update one WriterCharacter
+     * const writerCharacter = await prisma.writerCharacter.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends WriterCharacterUpdateArgs>(args: SelectSubset<T, WriterCharacterUpdateArgs<ExtArgs>>): Prisma__WriterCharacterClient<$Result.GetResult<Prisma.$WriterCharacterPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more WriterCharacters.
+     * @param {WriterCharacterDeleteManyArgs} args - Arguments to filter WriterCharacters to delete.
+     * @example
+     * // Delete a few WriterCharacters
+     * const { count } = await prisma.writerCharacter.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends WriterCharacterDeleteManyArgs>(args?: SelectSubset<T, WriterCharacterDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WriterCharacters.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WriterCharacterUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many WriterCharacters
+     * const writerCharacter = await prisma.writerCharacter.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends WriterCharacterUpdateManyArgs>(args: SelectSubset<T, WriterCharacterUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WriterCharacters and returns the data updated in the database.
+     * @param {WriterCharacterUpdateManyAndReturnArgs} args - Arguments to update many WriterCharacters.
+     * @example
+     * // Update many WriterCharacters
+     * const writerCharacter = await prisma.writerCharacter.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more WriterCharacters and only return the `id`
+     * const writerCharacterWithIdOnly = await prisma.writerCharacter.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends WriterCharacterUpdateManyAndReturnArgs>(args: SelectSubset<T, WriterCharacterUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WriterCharacterPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one WriterCharacter.
+     * @param {WriterCharacterUpsertArgs} args - Arguments to update or create a WriterCharacter.
+     * @example
+     * // Update or create a WriterCharacter
+     * const writerCharacter = await prisma.writerCharacter.upsert({
+     *   create: {
+     *     // ... data to create a WriterCharacter
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the WriterCharacter we want to update
+     *   }
+     * })
+     */
+    upsert<T extends WriterCharacterUpsertArgs>(args: SelectSubset<T, WriterCharacterUpsertArgs<ExtArgs>>): Prisma__WriterCharacterClient<$Result.GetResult<Prisma.$WriterCharacterPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of WriterCharacters.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WriterCharacterCountArgs} args - Arguments to filter WriterCharacters to count.
+     * @example
+     * // Count the number of WriterCharacters
+     * const count = await prisma.writerCharacter.count({
+     *   where: {
+     *     // ... the filter for the WriterCharacters we want to count
+     *   }
+     * })
+    **/
+    count<T extends WriterCharacterCountArgs>(
+      args?: Subset<T, WriterCharacterCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], WriterCharacterCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a WriterCharacter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WriterCharacterAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends WriterCharacterAggregateArgs>(args: Subset<T, WriterCharacterAggregateArgs>): Prisma.PrismaPromise<GetWriterCharacterAggregateType<T>>
+
+    /**
+     * Group by WriterCharacter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WriterCharacterGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends WriterCharacterGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: WriterCharacterGroupByArgs['orderBy'] }
+        : { orderBy?: WriterCharacterGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, WriterCharacterGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetWriterCharacterGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the WriterCharacter model
+   */
+  readonly fields: WriterCharacterFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for WriterCharacter.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__WriterCharacterClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    book<T extends WriterBookDefaultArgs<ExtArgs> = {}>(args?: Subset<T, WriterBookDefaultArgs<ExtArgs>>): Prisma__WriterBookClient<$Result.GetResult<Prisma.$WriterBookPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the WriterCharacter model
+   */
+  interface WriterCharacterFieldRefs {
+    readonly id: FieldRef<"WriterCharacter", 'String'>
+    readonly userId: FieldRef<"WriterCharacter", 'String'>
+    readonly bookId: FieldRef<"WriterCharacter", 'String'>
+    readonly name: FieldRef<"WriterCharacter", 'String'>
+    readonly role: FieldRef<"WriterCharacter", 'String'>
+    readonly bio: FieldRef<"WriterCharacter", 'String'>
+    readonly appearance: FieldRef<"WriterCharacter", 'String'>
+    readonly motivation: FieldRef<"WriterCharacter", 'String'>
+    readonly relationships: FieldRef<"WriterCharacter", 'String'>
+    readonly notes: FieldRef<"WriterCharacter", 'String'>
+    readonly createdAt: FieldRef<"WriterCharacter", 'DateTime'>
+    readonly updatedAt: FieldRef<"WriterCharacter", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * WriterCharacter findUnique
+   */
+  export type WriterCharacterFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterCharacter
+     */
+    select?: WriterCharacterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterCharacter
+     */
+    omit?: WriterCharacterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterCharacterInclude<ExtArgs> | null
+    /**
+     * Filter, which WriterCharacter to fetch.
+     */
+    where: WriterCharacterWhereUniqueInput
+  }
+
+  /**
+   * WriterCharacter findUniqueOrThrow
+   */
+  export type WriterCharacterFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterCharacter
+     */
+    select?: WriterCharacterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterCharacter
+     */
+    omit?: WriterCharacterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterCharacterInclude<ExtArgs> | null
+    /**
+     * Filter, which WriterCharacter to fetch.
+     */
+    where: WriterCharacterWhereUniqueInput
+  }
+
+  /**
+   * WriterCharacter findFirst
+   */
+  export type WriterCharacterFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterCharacter
+     */
+    select?: WriterCharacterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterCharacter
+     */
+    omit?: WriterCharacterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterCharacterInclude<ExtArgs> | null
+    /**
+     * Filter, which WriterCharacter to fetch.
+     */
+    where?: WriterCharacterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WriterCharacters to fetch.
+     */
+    orderBy?: WriterCharacterOrderByWithRelationInput | WriterCharacterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WriterCharacters.
+     */
+    cursor?: WriterCharacterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WriterCharacters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WriterCharacters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WriterCharacters.
+     */
+    distinct?: WriterCharacterScalarFieldEnum | WriterCharacterScalarFieldEnum[]
+  }
+
+  /**
+   * WriterCharacter findFirstOrThrow
+   */
+  export type WriterCharacterFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterCharacter
+     */
+    select?: WriterCharacterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterCharacter
+     */
+    omit?: WriterCharacterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterCharacterInclude<ExtArgs> | null
+    /**
+     * Filter, which WriterCharacter to fetch.
+     */
+    where?: WriterCharacterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WriterCharacters to fetch.
+     */
+    orderBy?: WriterCharacterOrderByWithRelationInput | WriterCharacterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WriterCharacters.
+     */
+    cursor?: WriterCharacterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WriterCharacters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WriterCharacters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WriterCharacters.
+     */
+    distinct?: WriterCharacterScalarFieldEnum | WriterCharacterScalarFieldEnum[]
+  }
+
+  /**
+   * WriterCharacter findMany
+   */
+  export type WriterCharacterFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterCharacter
+     */
+    select?: WriterCharacterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterCharacter
+     */
+    omit?: WriterCharacterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterCharacterInclude<ExtArgs> | null
+    /**
+     * Filter, which WriterCharacters to fetch.
+     */
+    where?: WriterCharacterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WriterCharacters to fetch.
+     */
+    orderBy?: WriterCharacterOrderByWithRelationInput | WriterCharacterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing WriterCharacters.
+     */
+    cursor?: WriterCharacterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WriterCharacters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WriterCharacters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WriterCharacters.
+     */
+    distinct?: WriterCharacterScalarFieldEnum | WriterCharacterScalarFieldEnum[]
+  }
+
+  /**
+   * WriterCharacter create
+   */
+  export type WriterCharacterCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterCharacter
+     */
+    select?: WriterCharacterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterCharacter
+     */
+    omit?: WriterCharacterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterCharacterInclude<ExtArgs> | null
+    /**
+     * The data needed to create a WriterCharacter.
+     */
+    data: XOR<WriterCharacterCreateInput, WriterCharacterUncheckedCreateInput>
+  }
+
+  /**
+   * WriterCharacter createMany
+   */
+  export type WriterCharacterCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many WriterCharacters.
+     */
+    data: WriterCharacterCreateManyInput | WriterCharacterCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * WriterCharacter createManyAndReturn
+   */
+  export type WriterCharacterCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterCharacter
+     */
+    select?: WriterCharacterSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterCharacter
+     */
+    omit?: WriterCharacterOmit<ExtArgs> | null
+    /**
+     * The data used to create many WriterCharacters.
+     */
+    data: WriterCharacterCreateManyInput | WriterCharacterCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterCharacterIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * WriterCharacter update
+   */
+  export type WriterCharacterUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterCharacter
+     */
+    select?: WriterCharacterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterCharacter
+     */
+    omit?: WriterCharacterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterCharacterInclude<ExtArgs> | null
+    /**
+     * The data needed to update a WriterCharacter.
+     */
+    data: XOR<WriterCharacterUpdateInput, WriterCharacterUncheckedUpdateInput>
+    /**
+     * Choose, which WriterCharacter to update.
+     */
+    where: WriterCharacterWhereUniqueInput
+  }
+
+  /**
+   * WriterCharacter updateMany
+   */
+  export type WriterCharacterUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update WriterCharacters.
+     */
+    data: XOR<WriterCharacterUpdateManyMutationInput, WriterCharacterUncheckedUpdateManyInput>
+    /**
+     * Filter which WriterCharacters to update
+     */
+    where?: WriterCharacterWhereInput
+    /**
+     * Limit how many WriterCharacters to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * WriterCharacter updateManyAndReturn
+   */
+  export type WriterCharacterUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterCharacter
+     */
+    select?: WriterCharacterSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterCharacter
+     */
+    omit?: WriterCharacterOmit<ExtArgs> | null
+    /**
+     * The data used to update WriterCharacters.
+     */
+    data: XOR<WriterCharacterUpdateManyMutationInput, WriterCharacterUncheckedUpdateManyInput>
+    /**
+     * Filter which WriterCharacters to update
+     */
+    where?: WriterCharacterWhereInput
+    /**
+     * Limit how many WriterCharacters to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterCharacterIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * WriterCharacter upsert
+   */
+  export type WriterCharacterUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterCharacter
+     */
+    select?: WriterCharacterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterCharacter
+     */
+    omit?: WriterCharacterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterCharacterInclude<ExtArgs> | null
+    /**
+     * The filter to search for the WriterCharacter to update in case it exists.
+     */
+    where: WriterCharacterWhereUniqueInput
+    /**
+     * In case the WriterCharacter found by the `where` argument doesn't exist, create a new WriterCharacter with this data.
+     */
+    create: XOR<WriterCharacterCreateInput, WriterCharacterUncheckedCreateInput>
+    /**
+     * In case the WriterCharacter was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<WriterCharacterUpdateInput, WriterCharacterUncheckedUpdateInput>
+  }
+
+  /**
+   * WriterCharacter delete
+   */
+  export type WriterCharacterDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterCharacter
+     */
+    select?: WriterCharacterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterCharacter
+     */
+    omit?: WriterCharacterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterCharacterInclude<ExtArgs> | null
+    /**
+     * Filter which WriterCharacter to delete.
+     */
+    where: WriterCharacterWhereUniqueInput
+  }
+
+  /**
+   * WriterCharacter deleteMany
+   */
+  export type WriterCharacterDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WriterCharacters to delete
+     */
+    where?: WriterCharacterWhereInput
+    /**
+     * Limit how many WriterCharacters to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * WriterCharacter without action
+   */
+  export type WriterCharacterDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterCharacter
+     */
+    select?: WriterCharacterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterCharacter
+     */
+    omit?: WriterCharacterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterCharacterInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model WriterChapter
+   */
+
+  export type AggregateWriterChapter = {
+    _count: WriterChapterCountAggregateOutputType | null
+    _avg: WriterChapterAvgAggregateOutputType | null
+    _sum: WriterChapterSumAggregateOutputType | null
+    _min: WriterChapterMinAggregateOutputType | null
+    _max: WriterChapterMaxAggregateOutputType | null
+  }
+
+  export type WriterChapterAvgAggregateOutputType = {
+    position: number | null
+  }
+
+  export type WriterChapterSumAggregateOutputType = {
+    position: number | null
+  }
+
+  export type WriterChapterMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    bookId: string | null
+    position: number | null
+    title: string | null
+    summary: string | null
+    scenePlan: string | null
+    body: string | null
+    status: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type WriterChapterMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    bookId: string | null
+    position: number | null
+    title: string | null
+    summary: string | null
+    scenePlan: string | null
+    body: string | null
+    status: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type WriterChapterCountAggregateOutputType = {
+    id: number
+    userId: number
+    bookId: number
+    position: number
+    title: number
+    summary: number
+    scenePlan: number
+    body: number
+    status: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type WriterChapterAvgAggregateInputType = {
+    position?: true
+  }
+
+  export type WriterChapterSumAggregateInputType = {
+    position?: true
+  }
+
+  export type WriterChapterMinAggregateInputType = {
+    id?: true
+    userId?: true
+    bookId?: true
+    position?: true
+    title?: true
+    summary?: true
+    scenePlan?: true
+    body?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type WriterChapterMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    bookId?: true
+    position?: true
+    title?: true
+    summary?: true
+    scenePlan?: true
+    body?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type WriterChapterCountAggregateInputType = {
+    id?: true
+    userId?: true
+    bookId?: true
+    position?: true
+    title?: true
+    summary?: true
+    scenePlan?: true
+    body?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type WriterChapterAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WriterChapter to aggregate.
+     */
+    where?: WriterChapterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WriterChapters to fetch.
+     */
+    orderBy?: WriterChapterOrderByWithRelationInput | WriterChapterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: WriterChapterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WriterChapters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WriterChapters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned WriterChapters
+    **/
+    _count?: true | WriterChapterCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: WriterChapterAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: WriterChapterSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: WriterChapterMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: WriterChapterMaxAggregateInputType
+  }
+
+  export type GetWriterChapterAggregateType<T extends WriterChapterAggregateArgs> = {
+        [P in keyof T & keyof AggregateWriterChapter]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateWriterChapter[P]>
+      : GetScalarType<T[P], AggregateWriterChapter[P]>
+  }
+
+
+
+
+  export type WriterChapterGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WriterChapterWhereInput
+    orderBy?: WriterChapterOrderByWithAggregationInput | WriterChapterOrderByWithAggregationInput[]
+    by: WriterChapterScalarFieldEnum[] | WriterChapterScalarFieldEnum
+    having?: WriterChapterScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: WriterChapterCountAggregateInputType | true
+    _avg?: WriterChapterAvgAggregateInputType
+    _sum?: WriterChapterSumAggregateInputType
+    _min?: WriterChapterMinAggregateInputType
+    _max?: WriterChapterMaxAggregateInputType
+  }
+
+  export type WriterChapterGroupByOutputType = {
+    id: string
+    userId: string
+    bookId: string
+    position: number
+    title: string
+    summary: string
+    scenePlan: string
+    body: string
+    status: string
+    createdAt: Date
+    updatedAt: Date
+    _count: WriterChapterCountAggregateOutputType | null
+    _avg: WriterChapterAvgAggregateOutputType | null
+    _sum: WriterChapterSumAggregateOutputType | null
+    _min: WriterChapterMinAggregateOutputType | null
+    _max: WriterChapterMaxAggregateOutputType | null
+  }
+
+  type GetWriterChapterGroupByPayload<T extends WriterChapterGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<WriterChapterGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof WriterChapterGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], WriterChapterGroupByOutputType[P]>
+            : GetScalarType<T[P], WriterChapterGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type WriterChapterSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    bookId?: boolean
+    position?: boolean
+    title?: boolean
+    summary?: boolean
+    scenePlan?: boolean
+    body?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    book?: boolean | WriterBookDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["writerChapter"]>
+
+  export type WriterChapterSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    bookId?: boolean
+    position?: boolean
+    title?: boolean
+    summary?: boolean
+    scenePlan?: boolean
+    body?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    book?: boolean | WriterBookDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["writerChapter"]>
+
+  export type WriterChapterSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    bookId?: boolean
+    position?: boolean
+    title?: boolean
+    summary?: boolean
+    scenePlan?: boolean
+    body?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    book?: boolean | WriterBookDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["writerChapter"]>
+
+  export type WriterChapterSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    bookId?: boolean
+    position?: boolean
+    title?: boolean
+    summary?: boolean
+    scenePlan?: boolean
+    body?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type WriterChapterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "bookId" | "position" | "title" | "summary" | "scenePlan" | "body" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["writerChapter"]>
+  export type WriterChapterInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    book?: boolean | WriterBookDefaultArgs<ExtArgs>
+  }
+  export type WriterChapterIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    book?: boolean | WriterBookDefaultArgs<ExtArgs>
+  }
+  export type WriterChapterIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    book?: boolean | WriterBookDefaultArgs<ExtArgs>
+  }
+
+  export type $WriterChapterPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "WriterChapter"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      book: Prisma.$WriterBookPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      bookId: string
+      position: number
+      title: string
+      summary: string
+      scenePlan: string
+      body: string
+      status: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["writerChapter"]>
+    composites: {}
+  }
+
+  type WriterChapterGetPayload<S extends boolean | null | undefined | WriterChapterDefaultArgs> = $Result.GetResult<Prisma.$WriterChapterPayload, S>
+
+  type WriterChapterCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<WriterChapterFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: WriterChapterCountAggregateInputType | true
+    }
+
+  export interface WriterChapterDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['WriterChapter'], meta: { name: 'WriterChapter' } }
+    /**
+     * Find zero or one WriterChapter that matches the filter.
+     * @param {WriterChapterFindUniqueArgs} args - Arguments to find a WriterChapter
+     * @example
+     * // Get one WriterChapter
+     * const writerChapter = await prisma.writerChapter.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends WriterChapterFindUniqueArgs>(args: SelectSubset<T, WriterChapterFindUniqueArgs<ExtArgs>>): Prisma__WriterChapterClient<$Result.GetResult<Prisma.$WriterChapterPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one WriterChapter that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {WriterChapterFindUniqueOrThrowArgs} args - Arguments to find a WriterChapter
+     * @example
+     * // Get one WriterChapter
+     * const writerChapter = await prisma.writerChapter.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends WriterChapterFindUniqueOrThrowArgs>(args: SelectSubset<T, WriterChapterFindUniqueOrThrowArgs<ExtArgs>>): Prisma__WriterChapterClient<$Result.GetResult<Prisma.$WriterChapterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first WriterChapter that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WriterChapterFindFirstArgs} args - Arguments to find a WriterChapter
+     * @example
+     * // Get one WriterChapter
+     * const writerChapter = await prisma.writerChapter.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends WriterChapterFindFirstArgs>(args?: SelectSubset<T, WriterChapterFindFirstArgs<ExtArgs>>): Prisma__WriterChapterClient<$Result.GetResult<Prisma.$WriterChapterPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first WriterChapter that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WriterChapterFindFirstOrThrowArgs} args - Arguments to find a WriterChapter
+     * @example
+     * // Get one WriterChapter
+     * const writerChapter = await prisma.writerChapter.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends WriterChapterFindFirstOrThrowArgs>(args?: SelectSubset<T, WriterChapterFindFirstOrThrowArgs<ExtArgs>>): Prisma__WriterChapterClient<$Result.GetResult<Prisma.$WriterChapterPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more WriterChapters that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WriterChapterFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all WriterChapters
+     * const writerChapters = await prisma.writerChapter.findMany()
+     * 
+     * // Get first 10 WriterChapters
+     * const writerChapters = await prisma.writerChapter.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const writerChapterWithIdOnly = await prisma.writerChapter.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends WriterChapterFindManyArgs>(args?: SelectSubset<T, WriterChapterFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WriterChapterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a WriterChapter.
+     * @param {WriterChapterCreateArgs} args - Arguments to create a WriterChapter.
+     * @example
+     * // Create one WriterChapter
+     * const WriterChapter = await prisma.writerChapter.create({
+     *   data: {
+     *     // ... data to create a WriterChapter
+     *   }
+     * })
+     * 
+     */
+    create<T extends WriterChapterCreateArgs>(args: SelectSubset<T, WriterChapterCreateArgs<ExtArgs>>): Prisma__WriterChapterClient<$Result.GetResult<Prisma.$WriterChapterPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many WriterChapters.
+     * @param {WriterChapterCreateManyArgs} args - Arguments to create many WriterChapters.
+     * @example
+     * // Create many WriterChapters
+     * const writerChapter = await prisma.writerChapter.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends WriterChapterCreateManyArgs>(args?: SelectSubset<T, WriterChapterCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many WriterChapters and returns the data saved in the database.
+     * @param {WriterChapterCreateManyAndReturnArgs} args - Arguments to create many WriterChapters.
+     * @example
+     * // Create many WriterChapters
+     * const writerChapter = await prisma.writerChapter.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many WriterChapters and only return the `id`
+     * const writerChapterWithIdOnly = await prisma.writerChapter.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends WriterChapterCreateManyAndReturnArgs>(args?: SelectSubset<T, WriterChapterCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WriterChapterPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a WriterChapter.
+     * @param {WriterChapterDeleteArgs} args - Arguments to delete one WriterChapter.
+     * @example
+     * // Delete one WriterChapter
+     * const WriterChapter = await prisma.writerChapter.delete({
+     *   where: {
+     *     // ... filter to delete one WriterChapter
+     *   }
+     * })
+     * 
+     */
+    delete<T extends WriterChapterDeleteArgs>(args: SelectSubset<T, WriterChapterDeleteArgs<ExtArgs>>): Prisma__WriterChapterClient<$Result.GetResult<Prisma.$WriterChapterPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one WriterChapter.
+     * @param {WriterChapterUpdateArgs} args - Arguments to update one WriterChapter.
+     * @example
+     * // Update one WriterChapter
+     * const writerChapter = await prisma.writerChapter.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends WriterChapterUpdateArgs>(args: SelectSubset<T, WriterChapterUpdateArgs<ExtArgs>>): Prisma__WriterChapterClient<$Result.GetResult<Prisma.$WriterChapterPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more WriterChapters.
+     * @param {WriterChapterDeleteManyArgs} args - Arguments to filter WriterChapters to delete.
+     * @example
+     * // Delete a few WriterChapters
+     * const { count } = await prisma.writerChapter.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends WriterChapterDeleteManyArgs>(args?: SelectSubset<T, WriterChapterDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WriterChapters.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WriterChapterUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many WriterChapters
+     * const writerChapter = await prisma.writerChapter.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends WriterChapterUpdateManyArgs>(args: SelectSubset<T, WriterChapterUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WriterChapters and returns the data updated in the database.
+     * @param {WriterChapterUpdateManyAndReturnArgs} args - Arguments to update many WriterChapters.
+     * @example
+     * // Update many WriterChapters
+     * const writerChapter = await prisma.writerChapter.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more WriterChapters and only return the `id`
+     * const writerChapterWithIdOnly = await prisma.writerChapter.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends WriterChapterUpdateManyAndReturnArgs>(args: SelectSubset<T, WriterChapterUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WriterChapterPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one WriterChapter.
+     * @param {WriterChapterUpsertArgs} args - Arguments to update or create a WriterChapter.
+     * @example
+     * // Update or create a WriterChapter
+     * const writerChapter = await prisma.writerChapter.upsert({
+     *   create: {
+     *     // ... data to create a WriterChapter
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the WriterChapter we want to update
+     *   }
+     * })
+     */
+    upsert<T extends WriterChapterUpsertArgs>(args: SelectSubset<T, WriterChapterUpsertArgs<ExtArgs>>): Prisma__WriterChapterClient<$Result.GetResult<Prisma.$WriterChapterPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of WriterChapters.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WriterChapterCountArgs} args - Arguments to filter WriterChapters to count.
+     * @example
+     * // Count the number of WriterChapters
+     * const count = await prisma.writerChapter.count({
+     *   where: {
+     *     // ... the filter for the WriterChapters we want to count
+     *   }
+     * })
+    **/
+    count<T extends WriterChapterCountArgs>(
+      args?: Subset<T, WriterChapterCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], WriterChapterCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a WriterChapter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WriterChapterAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends WriterChapterAggregateArgs>(args: Subset<T, WriterChapterAggregateArgs>): Prisma.PrismaPromise<GetWriterChapterAggregateType<T>>
+
+    /**
+     * Group by WriterChapter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WriterChapterGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends WriterChapterGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: WriterChapterGroupByArgs['orderBy'] }
+        : { orderBy?: WriterChapterGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, WriterChapterGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetWriterChapterGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the WriterChapter model
+   */
+  readonly fields: WriterChapterFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for WriterChapter.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__WriterChapterClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    book<T extends WriterBookDefaultArgs<ExtArgs> = {}>(args?: Subset<T, WriterBookDefaultArgs<ExtArgs>>): Prisma__WriterBookClient<$Result.GetResult<Prisma.$WriterBookPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the WriterChapter model
+   */
+  interface WriterChapterFieldRefs {
+    readonly id: FieldRef<"WriterChapter", 'String'>
+    readonly userId: FieldRef<"WriterChapter", 'String'>
+    readonly bookId: FieldRef<"WriterChapter", 'String'>
+    readonly position: FieldRef<"WriterChapter", 'Int'>
+    readonly title: FieldRef<"WriterChapter", 'String'>
+    readonly summary: FieldRef<"WriterChapter", 'String'>
+    readonly scenePlan: FieldRef<"WriterChapter", 'String'>
+    readonly body: FieldRef<"WriterChapter", 'String'>
+    readonly status: FieldRef<"WriterChapter", 'String'>
+    readonly createdAt: FieldRef<"WriterChapter", 'DateTime'>
+    readonly updatedAt: FieldRef<"WriterChapter", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * WriterChapter findUnique
+   */
+  export type WriterChapterFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterChapter
+     */
+    select?: WriterChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterChapter
+     */
+    omit?: WriterChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterChapterInclude<ExtArgs> | null
+    /**
+     * Filter, which WriterChapter to fetch.
+     */
+    where: WriterChapterWhereUniqueInput
+  }
+
+  /**
+   * WriterChapter findUniqueOrThrow
+   */
+  export type WriterChapterFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterChapter
+     */
+    select?: WriterChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterChapter
+     */
+    omit?: WriterChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterChapterInclude<ExtArgs> | null
+    /**
+     * Filter, which WriterChapter to fetch.
+     */
+    where: WriterChapterWhereUniqueInput
+  }
+
+  /**
+   * WriterChapter findFirst
+   */
+  export type WriterChapterFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterChapter
+     */
+    select?: WriterChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterChapter
+     */
+    omit?: WriterChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterChapterInclude<ExtArgs> | null
+    /**
+     * Filter, which WriterChapter to fetch.
+     */
+    where?: WriterChapterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WriterChapters to fetch.
+     */
+    orderBy?: WriterChapterOrderByWithRelationInput | WriterChapterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WriterChapters.
+     */
+    cursor?: WriterChapterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WriterChapters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WriterChapters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WriterChapters.
+     */
+    distinct?: WriterChapterScalarFieldEnum | WriterChapterScalarFieldEnum[]
+  }
+
+  /**
+   * WriterChapter findFirstOrThrow
+   */
+  export type WriterChapterFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterChapter
+     */
+    select?: WriterChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterChapter
+     */
+    omit?: WriterChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterChapterInclude<ExtArgs> | null
+    /**
+     * Filter, which WriterChapter to fetch.
+     */
+    where?: WriterChapterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WriterChapters to fetch.
+     */
+    orderBy?: WriterChapterOrderByWithRelationInput | WriterChapterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WriterChapters.
+     */
+    cursor?: WriterChapterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WriterChapters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WriterChapters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WriterChapters.
+     */
+    distinct?: WriterChapterScalarFieldEnum | WriterChapterScalarFieldEnum[]
+  }
+
+  /**
+   * WriterChapter findMany
+   */
+  export type WriterChapterFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterChapter
+     */
+    select?: WriterChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterChapter
+     */
+    omit?: WriterChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterChapterInclude<ExtArgs> | null
+    /**
+     * Filter, which WriterChapters to fetch.
+     */
+    where?: WriterChapterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WriterChapters to fetch.
+     */
+    orderBy?: WriterChapterOrderByWithRelationInput | WriterChapterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing WriterChapters.
+     */
+    cursor?: WriterChapterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WriterChapters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WriterChapters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WriterChapters.
+     */
+    distinct?: WriterChapterScalarFieldEnum | WriterChapterScalarFieldEnum[]
+  }
+
+  /**
+   * WriterChapter create
+   */
+  export type WriterChapterCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterChapter
+     */
+    select?: WriterChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterChapter
+     */
+    omit?: WriterChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterChapterInclude<ExtArgs> | null
+    /**
+     * The data needed to create a WriterChapter.
+     */
+    data: XOR<WriterChapterCreateInput, WriterChapterUncheckedCreateInput>
+  }
+
+  /**
+   * WriterChapter createMany
+   */
+  export type WriterChapterCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many WriterChapters.
+     */
+    data: WriterChapterCreateManyInput | WriterChapterCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * WriterChapter createManyAndReturn
+   */
+  export type WriterChapterCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterChapter
+     */
+    select?: WriterChapterSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterChapter
+     */
+    omit?: WriterChapterOmit<ExtArgs> | null
+    /**
+     * The data used to create many WriterChapters.
+     */
+    data: WriterChapterCreateManyInput | WriterChapterCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterChapterIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * WriterChapter update
+   */
+  export type WriterChapterUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterChapter
+     */
+    select?: WriterChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterChapter
+     */
+    omit?: WriterChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterChapterInclude<ExtArgs> | null
+    /**
+     * The data needed to update a WriterChapter.
+     */
+    data: XOR<WriterChapterUpdateInput, WriterChapterUncheckedUpdateInput>
+    /**
+     * Choose, which WriterChapter to update.
+     */
+    where: WriterChapterWhereUniqueInput
+  }
+
+  /**
+   * WriterChapter updateMany
+   */
+  export type WriterChapterUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update WriterChapters.
+     */
+    data: XOR<WriterChapterUpdateManyMutationInput, WriterChapterUncheckedUpdateManyInput>
+    /**
+     * Filter which WriterChapters to update
+     */
+    where?: WriterChapterWhereInput
+    /**
+     * Limit how many WriterChapters to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * WriterChapter updateManyAndReturn
+   */
+  export type WriterChapterUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterChapter
+     */
+    select?: WriterChapterSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterChapter
+     */
+    omit?: WriterChapterOmit<ExtArgs> | null
+    /**
+     * The data used to update WriterChapters.
+     */
+    data: XOR<WriterChapterUpdateManyMutationInput, WriterChapterUncheckedUpdateManyInput>
+    /**
+     * Filter which WriterChapters to update
+     */
+    where?: WriterChapterWhereInput
+    /**
+     * Limit how many WriterChapters to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterChapterIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * WriterChapter upsert
+   */
+  export type WriterChapterUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterChapter
+     */
+    select?: WriterChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterChapter
+     */
+    omit?: WriterChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterChapterInclude<ExtArgs> | null
+    /**
+     * The filter to search for the WriterChapter to update in case it exists.
+     */
+    where: WriterChapterWhereUniqueInput
+    /**
+     * In case the WriterChapter found by the `where` argument doesn't exist, create a new WriterChapter with this data.
+     */
+    create: XOR<WriterChapterCreateInput, WriterChapterUncheckedCreateInput>
+    /**
+     * In case the WriterChapter was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<WriterChapterUpdateInput, WriterChapterUncheckedUpdateInput>
+  }
+
+  /**
+   * WriterChapter delete
+   */
+  export type WriterChapterDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterChapter
+     */
+    select?: WriterChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterChapter
+     */
+    omit?: WriterChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterChapterInclude<ExtArgs> | null
+    /**
+     * Filter which WriterChapter to delete.
+     */
+    where: WriterChapterWhereUniqueInput
+  }
+
+  /**
+   * WriterChapter deleteMany
+   */
+  export type WriterChapterDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WriterChapters to delete
+     */
+    where?: WriterChapterWhereInput
+    /**
+     * Limit how many WriterChapters to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * WriterChapter without action
+   */
+  export type WriterChapterDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WriterChapter
+     */
+    select?: WriterChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WriterChapter
+     */
+    omit?: WriterChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WriterChapterInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model TranslateEntry
    */
 
@@ -59459,6 +63518,65 @@ export namespace Prisma {
   export type WriterDocumentScalarFieldEnum = (typeof WriterDocumentScalarFieldEnum)[keyof typeof WriterDocumentScalarFieldEnum]
 
 
+  export const WriterBookScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    title: 'title',
+    premise: 'premise',
+    genre: 'genre',
+    themes: 'themes',
+    audience: 'audience',
+    tone: 'tone',
+    worldBible: 'worldBible',
+    storyBible: 'storyBible',
+    plot: 'plot',
+    outline: 'outline',
+    locations: 'locations',
+    timeline: 'timeline',
+    continuityNotes: 'continuityNotes',
+    status: 'status',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type WriterBookScalarFieldEnum = (typeof WriterBookScalarFieldEnum)[keyof typeof WriterBookScalarFieldEnum]
+
+
+  export const WriterCharacterScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    bookId: 'bookId',
+    name: 'name',
+    role: 'role',
+    bio: 'bio',
+    appearance: 'appearance',
+    motivation: 'motivation',
+    relationships: 'relationships',
+    notes: 'notes',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type WriterCharacterScalarFieldEnum = (typeof WriterCharacterScalarFieldEnum)[keyof typeof WriterCharacterScalarFieldEnum]
+
+
+  export const WriterChapterScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    bookId: 'bookId',
+    position: 'position',
+    title: 'title',
+    summary: 'summary',
+    scenePlan: 'scenePlan',
+    body: 'body',
+    status: 'status',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type WriterChapterScalarFieldEnum = (typeof WriterChapterScalarFieldEnum)[keyof typeof WriterChapterScalarFieldEnum]
+
+
   export const TranslateEntryScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
@@ -59865,6 +63983,9 @@ export namespace Prisma {
     sites?: SiteListRelationFilter
     flows?: FlowListRelationFilter
     writerDocuments?: WriterDocumentListRelationFilter
+    writerBooks?: WriterBookListRelationFilter
+    writerCharacters?: WriterCharacterListRelationFilter
+    writerChapters?: WriterChapterListRelationFilter
     translateEntries?: TranslateEntryListRelationFilter
     libraryDocuments?: LibraryDocumentListRelationFilter
     codingProjects?: CodingProjectListRelationFilter
@@ -59919,6 +64040,9 @@ export namespace Prisma {
     sites?: SiteOrderByRelationAggregateInput
     flows?: FlowOrderByRelationAggregateInput
     writerDocuments?: WriterDocumentOrderByRelationAggregateInput
+    writerBooks?: WriterBookOrderByRelationAggregateInput
+    writerCharacters?: WriterCharacterOrderByRelationAggregateInput
+    writerChapters?: WriterChapterOrderByRelationAggregateInput
     translateEntries?: TranslateEntryOrderByRelationAggregateInput
     libraryDocuments?: LibraryDocumentOrderByRelationAggregateInput
     codingProjects?: CodingProjectOrderByRelationAggregateInput
@@ -59976,6 +64100,9 @@ export namespace Prisma {
     sites?: SiteListRelationFilter
     flows?: FlowListRelationFilter
     writerDocuments?: WriterDocumentListRelationFilter
+    writerBooks?: WriterBookListRelationFilter
+    writerCharacters?: WriterCharacterListRelationFilter
+    writerChapters?: WriterChapterListRelationFilter
     translateEntries?: TranslateEntryListRelationFilter
     libraryDocuments?: LibraryDocumentListRelationFilter
     codingProjects?: CodingProjectListRelationFilter
@@ -62391,6 +66518,316 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"WriterDocument"> | Date | string
   }
 
+  export type WriterBookWhereInput = {
+    AND?: WriterBookWhereInput | WriterBookWhereInput[]
+    OR?: WriterBookWhereInput[]
+    NOT?: WriterBookWhereInput | WriterBookWhereInput[]
+    id?: StringFilter<"WriterBook"> | string
+    userId?: StringFilter<"WriterBook"> | string
+    title?: StringFilter<"WriterBook"> | string
+    premise?: StringFilter<"WriterBook"> | string
+    genre?: StringFilter<"WriterBook"> | string
+    themes?: StringFilter<"WriterBook"> | string
+    audience?: StringFilter<"WriterBook"> | string
+    tone?: StringFilter<"WriterBook"> | string
+    worldBible?: StringFilter<"WriterBook"> | string
+    storyBible?: StringFilter<"WriterBook"> | string
+    plot?: StringFilter<"WriterBook"> | string
+    outline?: StringFilter<"WriterBook"> | string
+    locations?: StringFilter<"WriterBook"> | string
+    timeline?: StringFilter<"WriterBook"> | string
+    continuityNotes?: StringFilter<"WriterBook"> | string
+    status?: StringFilter<"WriterBook"> | string
+    createdAt?: DateTimeFilter<"WriterBook"> | Date | string
+    updatedAt?: DateTimeFilter<"WriterBook"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    characters?: WriterCharacterListRelationFilter
+    chapters?: WriterChapterListRelationFilter
+  }
+
+  export type WriterBookOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    premise?: SortOrder
+    genre?: SortOrder
+    themes?: SortOrder
+    audience?: SortOrder
+    tone?: SortOrder
+    worldBible?: SortOrder
+    storyBible?: SortOrder
+    plot?: SortOrder
+    outline?: SortOrder
+    locations?: SortOrder
+    timeline?: SortOrder
+    continuityNotes?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    characters?: WriterCharacterOrderByRelationAggregateInput
+    chapters?: WriterChapterOrderByRelationAggregateInput
+  }
+
+  export type WriterBookWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: WriterBookWhereInput | WriterBookWhereInput[]
+    OR?: WriterBookWhereInput[]
+    NOT?: WriterBookWhereInput | WriterBookWhereInput[]
+    userId?: StringFilter<"WriterBook"> | string
+    title?: StringFilter<"WriterBook"> | string
+    premise?: StringFilter<"WriterBook"> | string
+    genre?: StringFilter<"WriterBook"> | string
+    themes?: StringFilter<"WriterBook"> | string
+    audience?: StringFilter<"WriterBook"> | string
+    tone?: StringFilter<"WriterBook"> | string
+    worldBible?: StringFilter<"WriterBook"> | string
+    storyBible?: StringFilter<"WriterBook"> | string
+    plot?: StringFilter<"WriterBook"> | string
+    outline?: StringFilter<"WriterBook"> | string
+    locations?: StringFilter<"WriterBook"> | string
+    timeline?: StringFilter<"WriterBook"> | string
+    continuityNotes?: StringFilter<"WriterBook"> | string
+    status?: StringFilter<"WriterBook"> | string
+    createdAt?: DateTimeFilter<"WriterBook"> | Date | string
+    updatedAt?: DateTimeFilter<"WriterBook"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    characters?: WriterCharacterListRelationFilter
+    chapters?: WriterChapterListRelationFilter
+  }, "id">
+
+  export type WriterBookOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    premise?: SortOrder
+    genre?: SortOrder
+    themes?: SortOrder
+    audience?: SortOrder
+    tone?: SortOrder
+    worldBible?: SortOrder
+    storyBible?: SortOrder
+    plot?: SortOrder
+    outline?: SortOrder
+    locations?: SortOrder
+    timeline?: SortOrder
+    continuityNotes?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: WriterBookCountOrderByAggregateInput
+    _max?: WriterBookMaxOrderByAggregateInput
+    _min?: WriterBookMinOrderByAggregateInput
+  }
+
+  export type WriterBookScalarWhereWithAggregatesInput = {
+    AND?: WriterBookScalarWhereWithAggregatesInput | WriterBookScalarWhereWithAggregatesInput[]
+    OR?: WriterBookScalarWhereWithAggregatesInput[]
+    NOT?: WriterBookScalarWhereWithAggregatesInput | WriterBookScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"WriterBook"> | string
+    userId?: StringWithAggregatesFilter<"WriterBook"> | string
+    title?: StringWithAggregatesFilter<"WriterBook"> | string
+    premise?: StringWithAggregatesFilter<"WriterBook"> | string
+    genre?: StringWithAggregatesFilter<"WriterBook"> | string
+    themes?: StringWithAggregatesFilter<"WriterBook"> | string
+    audience?: StringWithAggregatesFilter<"WriterBook"> | string
+    tone?: StringWithAggregatesFilter<"WriterBook"> | string
+    worldBible?: StringWithAggregatesFilter<"WriterBook"> | string
+    storyBible?: StringWithAggregatesFilter<"WriterBook"> | string
+    plot?: StringWithAggregatesFilter<"WriterBook"> | string
+    outline?: StringWithAggregatesFilter<"WriterBook"> | string
+    locations?: StringWithAggregatesFilter<"WriterBook"> | string
+    timeline?: StringWithAggregatesFilter<"WriterBook"> | string
+    continuityNotes?: StringWithAggregatesFilter<"WriterBook"> | string
+    status?: StringWithAggregatesFilter<"WriterBook"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"WriterBook"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"WriterBook"> | Date | string
+  }
+
+  export type WriterCharacterWhereInput = {
+    AND?: WriterCharacterWhereInput | WriterCharacterWhereInput[]
+    OR?: WriterCharacterWhereInput[]
+    NOT?: WriterCharacterWhereInput | WriterCharacterWhereInput[]
+    id?: StringFilter<"WriterCharacter"> | string
+    userId?: StringFilter<"WriterCharacter"> | string
+    bookId?: StringFilter<"WriterCharacter"> | string
+    name?: StringFilter<"WriterCharacter"> | string
+    role?: StringFilter<"WriterCharacter"> | string
+    bio?: StringFilter<"WriterCharacter"> | string
+    appearance?: StringFilter<"WriterCharacter"> | string
+    motivation?: StringFilter<"WriterCharacter"> | string
+    relationships?: StringFilter<"WriterCharacter"> | string
+    notes?: StringFilter<"WriterCharacter"> | string
+    createdAt?: DateTimeFilter<"WriterCharacter"> | Date | string
+    updatedAt?: DateTimeFilter<"WriterCharacter"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    book?: XOR<WriterBookScalarRelationFilter, WriterBookWhereInput>
+  }
+
+  export type WriterCharacterOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    bookId?: SortOrder
+    name?: SortOrder
+    role?: SortOrder
+    bio?: SortOrder
+    appearance?: SortOrder
+    motivation?: SortOrder
+    relationships?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    book?: WriterBookOrderByWithRelationInput
+  }
+
+  export type WriterCharacterWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: WriterCharacterWhereInput | WriterCharacterWhereInput[]
+    OR?: WriterCharacterWhereInput[]
+    NOT?: WriterCharacterWhereInput | WriterCharacterWhereInput[]
+    userId?: StringFilter<"WriterCharacter"> | string
+    bookId?: StringFilter<"WriterCharacter"> | string
+    name?: StringFilter<"WriterCharacter"> | string
+    role?: StringFilter<"WriterCharacter"> | string
+    bio?: StringFilter<"WriterCharacter"> | string
+    appearance?: StringFilter<"WriterCharacter"> | string
+    motivation?: StringFilter<"WriterCharacter"> | string
+    relationships?: StringFilter<"WriterCharacter"> | string
+    notes?: StringFilter<"WriterCharacter"> | string
+    createdAt?: DateTimeFilter<"WriterCharacter"> | Date | string
+    updatedAt?: DateTimeFilter<"WriterCharacter"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    book?: XOR<WriterBookScalarRelationFilter, WriterBookWhereInput>
+  }, "id">
+
+  export type WriterCharacterOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    bookId?: SortOrder
+    name?: SortOrder
+    role?: SortOrder
+    bio?: SortOrder
+    appearance?: SortOrder
+    motivation?: SortOrder
+    relationships?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: WriterCharacterCountOrderByAggregateInput
+    _max?: WriterCharacterMaxOrderByAggregateInput
+    _min?: WriterCharacterMinOrderByAggregateInput
+  }
+
+  export type WriterCharacterScalarWhereWithAggregatesInput = {
+    AND?: WriterCharacterScalarWhereWithAggregatesInput | WriterCharacterScalarWhereWithAggregatesInput[]
+    OR?: WriterCharacterScalarWhereWithAggregatesInput[]
+    NOT?: WriterCharacterScalarWhereWithAggregatesInput | WriterCharacterScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"WriterCharacter"> | string
+    userId?: StringWithAggregatesFilter<"WriterCharacter"> | string
+    bookId?: StringWithAggregatesFilter<"WriterCharacter"> | string
+    name?: StringWithAggregatesFilter<"WriterCharacter"> | string
+    role?: StringWithAggregatesFilter<"WriterCharacter"> | string
+    bio?: StringWithAggregatesFilter<"WriterCharacter"> | string
+    appearance?: StringWithAggregatesFilter<"WriterCharacter"> | string
+    motivation?: StringWithAggregatesFilter<"WriterCharacter"> | string
+    relationships?: StringWithAggregatesFilter<"WriterCharacter"> | string
+    notes?: StringWithAggregatesFilter<"WriterCharacter"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"WriterCharacter"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"WriterCharacter"> | Date | string
+  }
+
+  export type WriterChapterWhereInput = {
+    AND?: WriterChapterWhereInput | WriterChapterWhereInput[]
+    OR?: WriterChapterWhereInput[]
+    NOT?: WriterChapterWhereInput | WriterChapterWhereInput[]
+    id?: StringFilter<"WriterChapter"> | string
+    userId?: StringFilter<"WriterChapter"> | string
+    bookId?: StringFilter<"WriterChapter"> | string
+    position?: IntFilter<"WriterChapter"> | number
+    title?: StringFilter<"WriterChapter"> | string
+    summary?: StringFilter<"WriterChapter"> | string
+    scenePlan?: StringFilter<"WriterChapter"> | string
+    body?: StringFilter<"WriterChapter"> | string
+    status?: StringFilter<"WriterChapter"> | string
+    createdAt?: DateTimeFilter<"WriterChapter"> | Date | string
+    updatedAt?: DateTimeFilter<"WriterChapter"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    book?: XOR<WriterBookScalarRelationFilter, WriterBookWhereInput>
+  }
+
+  export type WriterChapterOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    bookId?: SortOrder
+    position?: SortOrder
+    title?: SortOrder
+    summary?: SortOrder
+    scenePlan?: SortOrder
+    body?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    book?: WriterBookOrderByWithRelationInput
+  }
+
+  export type WriterChapterWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    bookId_position?: WriterChapterBookIdPositionCompoundUniqueInput
+    AND?: WriterChapterWhereInput | WriterChapterWhereInput[]
+    OR?: WriterChapterWhereInput[]
+    NOT?: WriterChapterWhereInput | WriterChapterWhereInput[]
+    userId?: StringFilter<"WriterChapter"> | string
+    bookId?: StringFilter<"WriterChapter"> | string
+    position?: IntFilter<"WriterChapter"> | number
+    title?: StringFilter<"WriterChapter"> | string
+    summary?: StringFilter<"WriterChapter"> | string
+    scenePlan?: StringFilter<"WriterChapter"> | string
+    body?: StringFilter<"WriterChapter"> | string
+    status?: StringFilter<"WriterChapter"> | string
+    createdAt?: DateTimeFilter<"WriterChapter"> | Date | string
+    updatedAt?: DateTimeFilter<"WriterChapter"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    book?: XOR<WriterBookScalarRelationFilter, WriterBookWhereInput>
+  }, "id" | "bookId_position">
+
+  export type WriterChapterOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    bookId?: SortOrder
+    position?: SortOrder
+    title?: SortOrder
+    summary?: SortOrder
+    scenePlan?: SortOrder
+    body?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: WriterChapterCountOrderByAggregateInput
+    _avg?: WriterChapterAvgOrderByAggregateInput
+    _max?: WriterChapterMaxOrderByAggregateInput
+    _min?: WriterChapterMinOrderByAggregateInput
+    _sum?: WriterChapterSumOrderByAggregateInput
+  }
+
+  export type WriterChapterScalarWhereWithAggregatesInput = {
+    AND?: WriterChapterScalarWhereWithAggregatesInput | WriterChapterScalarWhereWithAggregatesInput[]
+    OR?: WriterChapterScalarWhereWithAggregatesInput[]
+    NOT?: WriterChapterScalarWhereWithAggregatesInput | WriterChapterScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"WriterChapter"> | string
+    userId?: StringWithAggregatesFilter<"WriterChapter"> | string
+    bookId?: StringWithAggregatesFilter<"WriterChapter"> | string
+    position?: IntWithAggregatesFilter<"WriterChapter"> | number
+    title?: StringWithAggregatesFilter<"WriterChapter"> | string
+    summary?: StringWithAggregatesFilter<"WriterChapter"> | string
+    scenePlan?: StringWithAggregatesFilter<"WriterChapter"> | string
+    body?: StringWithAggregatesFilter<"WriterChapter"> | string
+    status?: StringWithAggregatesFilter<"WriterChapter"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"WriterChapter"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"WriterChapter"> | Date | string
+  }
+
   export type TranslateEntryWhereInput = {
     AND?: TranslateEntryWhereInput | TranslateEntryWhereInput[]
     OR?: TranslateEntryWhereInput[]
@@ -63589,6 +68026,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -63643,6 +68083,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -63697,6 +68140,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -63751,6 +68197,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -66403,6 +70852,359 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type WriterBookCreateInput = {
+    id?: string
+    title: string
+    premise?: string
+    genre?: string
+    themes?: string
+    audience?: string
+    tone?: string
+    worldBible?: string
+    storyBible?: string
+    plot?: string
+    outline?: string
+    locations?: string
+    timeline?: string
+    continuityNotes?: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutWriterBooksInput
+    characters?: WriterCharacterCreateNestedManyWithoutBookInput
+    chapters?: WriterChapterCreateNestedManyWithoutBookInput
+  }
+
+  export type WriterBookUncheckedCreateInput = {
+    id?: string
+    userId: string
+    title: string
+    premise?: string
+    genre?: string
+    themes?: string
+    audience?: string
+    tone?: string
+    worldBible?: string
+    storyBible?: string
+    plot?: string
+    outline?: string
+    locations?: string
+    timeline?: string
+    continuityNotes?: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    characters?: WriterCharacterUncheckedCreateNestedManyWithoutBookInput
+    chapters?: WriterChapterUncheckedCreateNestedManyWithoutBookInput
+  }
+
+  export type WriterBookUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    premise?: StringFieldUpdateOperationsInput | string
+    genre?: StringFieldUpdateOperationsInput | string
+    themes?: StringFieldUpdateOperationsInput | string
+    audience?: StringFieldUpdateOperationsInput | string
+    tone?: StringFieldUpdateOperationsInput | string
+    worldBible?: StringFieldUpdateOperationsInput | string
+    storyBible?: StringFieldUpdateOperationsInput | string
+    plot?: StringFieldUpdateOperationsInput | string
+    outline?: StringFieldUpdateOperationsInput | string
+    locations?: StringFieldUpdateOperationsInput | string
+    timeline?: StringFieldUpdateOperationsInput | string
+    continuityNotes?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutWriterBooksNestedInput
+    characters?: WriterCharacterUpdateManyWithoutBookNestedInput
+    chapters?: WriterChapterUpdateManyWithoutBookNestedInput
+  }
+
+  export type WriterBookUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    premise?: StringFieldUpdateOperationsInput | string
+    genre?: StringFieldUpdateOperationsInput | string
+    themes?: StringFieldUpdateOperationsInput | string
+    audience?: StringFieldUpdateOperationsInput | string
+    tone?: StringFieldUpdateOperationsInput | string
+    worldBible?: StringFieldUpdateOperationsInput | string
+    storyBible?: StringFieldUpdateOperationsInput | string
+    plot?: StringFieldUpdateOperationsInput | string
+    outline?: StringFieldUpdateOperationsInput | string
+    locations?: StringFieldUpdateOperationsInput | string
+    timeline?: StringFieldUpdateOperationsInput | string
+    continuityNotes?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    characters?: WriterCharacterUncheckedUpdateManyWithoutBookNestedInput
+    chapters?: WriterChapterUncheckedUpdateManyWithoutBookNestedInput
+  }
+
+  export type WriterBookCreateManyInput = {
+    id?: string
+    userId: string
+    title: string
+    premise?: string
+    genre?: string
+    themes?: string
+    audience?: string
+    tone?: string
+    worldBible?: string
+    storyBible?: string
+    plot?: string
+    outline?: string
+    locations?: string
+    timeline?: string
+    continuityNotes?: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WriterBookUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    premise?: StringFieldUpdateOperationsInput | string
+    genre?: StringFieldUpdateOperationsInput | string
+    themes?: StringFieldUpdateOperationsInput | string
+    audience?: StringFieldUpdateOperationsInput | string
+    tone?: StringFieldUpdateOperationsInput | string
+    worldBible?: StringFieldUpdateOperationsInput | string
+    storyBible?: StringFieldUpdateOperationsInput | string
+    plot?: StringFieldUpdateOperationsInput | string
+    outline?: StringFieldUpdateOperationsInput | string
+    locations?: StringFieldUpdateOperationsInput | string
+    timeline?: StringFieldUpdateOperationsInput | string
+    continuityNotes?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WriterBookUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    premise?: StringFieldUpdateOperationsInput | string
+    genre?: StringFieldUpdateOperationsInput | string
+    themes?: StringFieldUpdateOperationsInput | string
+    audience?: StringFieldUpdateOperationsInput | string
+    tone?: StringFieldUpdateOperationsInput | string
+    worldBible?: StringFieldUpdateOperationsInput | string
+    storyBible?: StringFieldUpdateOperationsInput | string
+    plot?: StringFieldUpdateOperationsInput | string
+    outline?: StringFieldUpdateOperationsInput | string
+    locations?: StringFieldUpdateOperationsInput | string
+    timeline?: StringFieldUpdateOperationsInput | string
+    continuityNotes?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WriterCharacterCreateInput = {
+    id?: string
+    name: string
+    role?: string
+    bio?: string
+    appearance?: string
+    motivation?: string
+    relationships?: string
+    notes?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutWriterCharactersInput
+    book: WriterBookCreateNestedOneWithoutCharactersInput
+  }
+
+  export type WriterCharacterUncheckedCreateInput = {
+    id?: string
+    userId: string
+    bookId: string
+    name: string
+    role?: string
+    bio?: string
+    appearance?: string
+    motivation?: string
+    relationships?: string
+    notes?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WriterCharacterUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
+    appearance?: StringFieldUpdateOperationsInput | string
+    motivation?: StringFieldUpdateOperationsInput | string
+    relationships?: StringFieldUpdateOperationsInput | string
+    notes?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutWriterCharactersNestedInput
+    book?: WriterBookUpdateOneRequiredWithoutCharactersNestedInput
+  }
+
+  export type WriterCharacterUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    bookId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
+    appearance?: StringFieldUpdateOperationsInput | string
+    motivation?: StringFieldUpdateOperationsInput | string
+    relationships?: StringFieldUpdateOperationsInput | string
+    notes?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WriterCharacterCreateManyInput = {
+    id?: string
+    userId: string
+    bookId: string
+    name: string
+    role?: string
+    bio?: string
+    appearance?: string
+    motivation?: string
+    relationships?: string
+    notes?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WriterCharacterUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
+    appearance?: StringFieldUpdateOperationsInput | string
+    motivation?: StringFieldUpdateOperationsInput | string
+    relationships?: StringFieldUpdateOperationsInput | string
+    notes?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WriterCharacterUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    bookId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
+    appearance?: StringFieldUpdateOperationsInput | string
+    motivation?: StringFieldUpdateOperationsInput | string
+    relationships?: StringFieldUpdateOperationsInput | string
+    notes?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WriterChapterCreateInput = {
+    id?: string
+    position: number
+    title: string
+    summary?: string
+    scenePlan?: string
+    body?: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutWriterChaptersInput
+    book: WriterBookCreateNestedOneWithoutChaptersInput
+  }
+
+  export type WriterChapterUncheckedCreateInput = {
+    id?: string
+    userId: string
+    bookId: string
+    position: number
+    title: string
+    summary?: string
+    scenePlan?: string
+    body?: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WriterChapterUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    summary?: StringFieldUpdateOperationsInput | string
+    scenePlan?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutWriterChaptersNestedInput
+    book?: WriterBookUpdateOneRequiredWithoutChaptersNestedInput
+  }
+
+  export type WriterChapterUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    bookId?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    summary?: StringFieldUpdateOperationsInput | string
+    scenePlan?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WriterChapterCreateManyInput = {
+    id?: string
+    userId: string
+    bookId: string
+    position: number
+    title: string
+    summary?: string
+    scenePlan?: string
+    body?: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WriterChapterUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    summary?: StringFieldUpdateOperationsInput | string
+    scenePlan?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WriterChapterUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    bookId?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    summary?: StringFieldUpdateOperationsInput | string
+    scenePlan?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type TranslateEntryCreateInput = {
     id?: string
     sourceLang: string
@@ -67877,6 +72679,24 @@ export namespace Prisma {
     none?: WriterDocumentWhereInput
   }
 
+  export type WriterBookListRelationFilter = {
+    every?: WriterBookWhereInput
+    some?: WriterBookWhereInput
+    none?: WriterBookWhereInput
+  }
+
+  export type WriterCharacterListRelationFilter = {
+    every?: WriterCharacterWhereInput
+    some?: WriterCharacterWhereInput
+    none?: WriterCharacterWhereInput
+  }
+
+  export type WriterChapterListRelationFilter = {
+    every?: WriterChapterWhereInput
+    some?: WriterChapterWhereInput
+    none?: WriterChapterWhereInput
+  }
+
   export type TranslateEntryListRelationFilter = {
     every?: TranslateEntryWhereInput
     some?: TranslateEntryWhereInput
@@ -68075,6 +72895,18 @@ export namespace Prisma {
   }
 
   export type WriterDocumentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type WriterBookOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type WriterCharacterOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type WriterChapterOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -69634,6 +74466,174 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type WriterBookCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    premise?: SortOrder
+    genre?: SortOrder
+    themes?: SortOrder
+    audience?: SortOrder
+    tone?: SortOrder
+    worldBible?: SortOrder
+    storyBible?: SortOrder
+    plot?: SortOrder
+    outline?: SortOrder
+    locations?: SortOrder
+    timeline?: SortOrder
+    continuityNotes?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WriterBookMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    premise?: SortOrder
+    genre?: SortOrder
+    themes?: SortOrder
+    audience?: SortOrder
+    tone?: SortOrder
+    worldBible?: SortOrder
+    storyBible?: SortOrder
+    plot?: SortOrder
+    outline?: SortOrder
+    locations?: SortOrder
+    timeline?: SortOrder
+    continuityNotes?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WriterBookMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    premise?: SortOrder
+    genre?: SortOrder
+    themes?: SortOrder
+    audience?: SortOrder
+    tone?: SortOrder
+    worldBible?: SortOrder
+    storyBible?: SortOrder
+    plot?: SortOrder
+    outline?: SortOrder
+    locations?: SortOrder
+    timeline?: SortOrder
+    continuityNotes?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WriterBookScalarRelationFilter = {
+    is?: WriterBookWhereInput
+    isNot?: WriterBookWhereInput
+  }
+
+  export type WriterCharacterCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    bookId?: SortOrder
+    name?: SortOrder
+    role?: SortOrder
+    bio?: SortOrder
+    appearance?: SortOrder
+    motivation?: SortOrder
+    relationships?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WriterCharacterMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    bookId?: SortOrder
+    name?: SortOrder
+    role?: SortOrder
+    bio?: SortOrder
+    appearance?: SortOrder
+    motivation?: SortOrder
+    relationships?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WriterCharacterMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    bookId?: SortOrder
+    name?: SortOrder
+    role?: SortOrder
+    bio?: SortOrder
+    appearance?: SortOrder
+    motivation?: SortOrder
+    relationships?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WriterChapterBookIdPositionCompoundUniqueInput = {
+    bookId: string
+    position: number
+  }
+
+  export type WriterChapterCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    bookId?: SortOrder
+    position?: SortOrder
+    title?: SortOrder
+    summary?: SortOrder
+    scenePlan?: SortOrder
+    body?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WriterChapterAvgOrderByAggregateInput = {
+    position?: SortOrder
+  }
+
+  export type WriterChapterMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    bookId?: SortOrder
+    position?: SortOrder
+    title?: SortOrder
+    summary?: SortOrder
+    scenePlan?: SortOrder
+    body?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WriterChapterMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    bookId?: SortOrder
+    position?: SortOrder
+    title?: SortOrder
+    summary?: SortOrder
+    scenePlan?: SortOrder
+    body?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WriterChapterSumOrderByAggregateInput = {
+    position?: SortOrder
+  }
+
   export type TranslateEntryCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
@@ -70448,6 +75448,27 @@ export namespace Prisma {
     connect?: WriterDocumentWhereUniqueInput | WriterDocumentWhereUniqueInput[]
   }
 
+  export type WriterBookCreateNestedManyWithoutUserInput = {
+    create?: XOR<WriterBookCreateWithoutUserInput, WriterBookUncheckedCreateWithoutUserInput> | WriterBookCreateWithoutUserInput[] | WriterBookUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: WriterBookCreateOrConnectWithoutUserInput | WriterBookCreateOrConnectWithoutUserInput[]
+    createMany?: WriterBookCreateManyUserInputEnvelope
+    connect?: WriterBookWhereUniqueInput | WriterBookWhereUniqueInput[]
+  }
+
+  export type WriterCharacterCreateNestedManyWithoutUserInput = {
+    create?: XOR<WriterCharacterCreateWithoutUserInput, WriterCharacterUncheckedCreateWithoutUserInput> | WriterCharacterCreateWithoutUserInput[] | WriterCharacterUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: WriterCharacterCreateOrConnectWithoutUserInput | WriterCharacterCreateOrConnectWithoutUserInput[]
+    createMany?: WriterCharacterCreateManyUserInputEnvelope
+    connect?: WriterCharacterWhereUniqueInput | WriterCharacterWhereUniqueInput[]
+  }
+
+  export type WriterChapterCreateNestedManyWithoutUserInput = {
+    create?: XOR<WriterChapterCreateWithoutUserInput, WriterChapterUncheckedCreateWithoutUserInput> | WriterChapterCreateWithoutUserInput[] | WriterChapterUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: WriterChapterCreateOrConnectWithoutUserInput | WriterChapterCreateOrConnectWithoutUserInput[]
+    createMany?: WriterChapterCreateManyUserInputEnvelope
+    connect?: WriterChapterWhereUniqueInput | WriterChapterWhereUniqueInput[]
+  }
+
   export type TranslateEntryCreateNestedManyWithoutUserInput = {
     create?: XOR<TranslateEntryCreateWithoutUserInput, TranslateEntryUncheckedCreateWithoutUserInput> | TranslateEntryCreateWithoutUserInput[] | TranslateEntryUncheckedCreateWithoutUserInput[]
     connectOrCreate?: TranslateEntryCreateOrConnectWithoutUserInput | TranslateEntryCreateOrConnectWithoutUserInput[]
@@ -70733,6 +75754,27 @@ export namespace Prisma {
     connectOrCreate?: WriterDocumentCreateOrConnectWithoutUserInput | WriterDocumentCreateOrConnectWithoutUserInput[]
     createMany?: WriterDocumentCreateManyUserInputEnvelope
     connect?: WriterDocumentWhereUniqueInput | WriterDocumentWhereUniqueInput[]
+  }
+
+  export type WriterBookUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<WriterBookCreateWithoutUserInput, WriterBookUncheckedCreateWithoutUserInput> | WriterBookCreateWithoutUserInput[] | WriterBookUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: WriterBookCreateOrConnectWithoutUserInput | WriterBookCreateOrConnectWithoutUserInput[]
+    createMany?: WriterBookCreateManyUserInputEnvelope
+    connect?: WriterBookWhereUniqueInput | WriterBookWhereUniqueInput[]
+  }
+
+  export type WriterCharacterUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<WriterCharacterCreateWithoutUserInput, WriterCharacterUncheckedCreateWithoutUserInput> | WriterCharacterCreateWithoutUserInput[] | WriterCharacterUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: WriterCharacterCreateOrConnectWithoutUserInput | WriterCharacterCreateOrConnectWithoutUserInput[]
+    createMany?: WriterCharacterCreateManyUserInputEnvelope
+    connect?: WriterCharacterWhereUniqueInput | WriterCharacterWhereUniqueInput[]
+  }
+
+  export type WriterChapterUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<WriterChapterCreateWithoutUserInput, WriterChapterUncheckedCreateWithoutUserInput> | WriterChapterCreateWithoutUserInput[] | WriterChapterUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: WriterChapterCreateOrConnectWithoutUserInput | WriterChapterCreateOrConnectWithoutUserInput[]
+    createMany?: WriterChapterCreateManyUserInputEnvelope
+    connect?: WriterChapterWhereUniqueInput | WriterChapterWhereUniqueInput[]
   }
 
   export type TranslateEntryUncheckedCreateNestedManyWithoutUserInput = {
@@ -71211,6 +76253,48 @@ export namespace Prisma {
     update?: WriterDocumentUpdateWithWhereUniqueWithoutUserInput | WriterDocumentUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: WriterDocumentUpdateManyWithWhereWithoutUserInput | WriterDocumentUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: WriterDocumentScalarWhereInput | WriterDocumentScalarWhereInput[]
+  }
+
+  export type WriterBookUpdateManyWithoutUserNestedInput = {
+    create?: XOR<WriterBookCreateWithoutUserInput, WriterBookUncheckedCreateWithoutUserInput> | WriterBookCreateWithoutUserInput[] | WriterBookUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: WriterBookCreateOrConnectWithoutUserInput | WriterBookCreateOrConnectWithoutUserInput[]
+    upsert?: WriterBookUpsertWithWhereUniqueWithoutUserInput | WriterBookUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: WriterBookCreateManyUserInputEnvelope
+    set?: WriterBookWhereUniqueInput | WriterBookWhereUniqueInput[]
+    disconnect?: WriterBookWhereUniqueInput | WriterBookWhereUniqueInput[]
+    delete?: WriterBookWhereUniqueInput | WriterBookWhereUniqueInput[]
+    connect?: WriterBookWhereUniqueInput | WriterBookWhereUniqueInput[]
+    update?: WriterBookUpdateWithWhereUniqueWithoutUserInput | WriterBookUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: WriterBookUpdateManyWithWhereWithoutUserInput | WriterBookUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: WriterBookScalarWhereInput | WriterBookScalarWhereInput[]
+  }
+
+  export type WriterCharacterUpdateManyWithoutUserNestedInput = {
+    create?: XOR<WriterCharacterCreateWithoutUserInput, WriterCharacterUncheckedCreateWithoutUserInput> | WriterCharacterCreateWithoutUserInput[] | WriterCharacterUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: WriterCharacterCreateOrConnectWithoutUserInput | WriterCharacterCreateOrConnectWithoutUserInput[]
+    upsert?: WriterCharacterUpsertWithWhereUniqueWithoutUserInput | WriterCharacterUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: WriterCharacterCreateManyUserInputEnvelope
+    set?: WriterCharacterWhereUniqueInput | WriterCharacterWhereUniqueInput[]
+    disconnect?: WriterCharacterWhereUniqueInput | WriterCharacterWhereUniqueInput[]
+    delete?: WriterCharacterWhereUniqueInput | WriterCharacterWhereUniqueInput[]
+    connect?: WriterCharacterWhereUniqueInput | WriterCharacterWhereUniqueInput[]
+    update?: WriterCharacterUpdateWithWhereUniqueWithoutUserInput | WriterCharacterUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: WriterCharacterUpdateManyWithWhereWithoutUserInput | WriterCharacterUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: WriterCharacterScalarWhereInput | WriterCharacterScalarWhereInput[]
+  }
+
+  export type WriterChapterUpdateManyWithoutUserNestedInput = {
+    create?: XOR<WriterChapterCreateWithoutUserInput, WriterChapterUncheckedCreateWithoutUserInput> | WriterChapterCreateWithoutUserInput[] | WriterChapterUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: WriterChapterCreateOrConnectWithoutUserInput | WriterChapterCreateOrConnectWithoutUserInput[]
+    upsert?: WriterChapterUpsertWithWhereUniqueWithoutUserInput | WriterChapterUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: WriterChapterCreateManyUserInputEnvelope
+    set?: WriterChapterWhereUniqueInput | WriterChapterWhereUniqueInput[]
+    disconnect?: WriterChapterWhereUniqueInput | WriterChapterWhereUniqueInput[]
+    delete?: WriterChapterWhereUniqueInput | WriterChapterWhereUniqueInput[]
+    connect?: WriterChapterWhereUniqueInput | WriterChapterWhereUniqueInput[]
+    update?: WriterChapterUpdateWithWhereUniqueWithoutUserInput | WriterChapterUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: WriterChapterUpdateManyWithWhereWithoutUserInput | WriterChapterUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: WriterChapterScalarWhereInput | WriterChapterScalarWhereInput[]
   }
 
   export type TranslateEntryUpdateManyWithoutUserNestedInput = {
@@ -71785,6 +76869,48 @@ export namespace Prisma {
     update?: WriterDocumentUpdateWithWhereUniqueWithoutUserInput | WriterDocumentUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: WriterDocumentUpdateManyWithWhereWithoutUserInput | WriterDocumentUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: WriterDocumentScalarWhereInput | WriterDocumentScalarWhereInput[]
+  }
+
+  export type WriterBookUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<WriterBookCreateWithoutUserInput, WriterBookUncheckedCreateWithoutUserInput> | WriterBookCreateWithoutUserInput[] | WriterBookUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: WriterBookCreateOrConnectWithoutUserInput | WriterBookCreateOrConnectWithoutUserInput[]
+    upsert?: WriterBookUpsertWithWhereUniqueWithoutUserInput | WriterBookUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: WriterBookCreateManyUserInputEnvelope
+    set?: WriterBookWhereUniqueInput | WriterBookWhereUniqueInput[]
+    disconnect?: WriterBookWhereUniqueInput | WriterBookWhereUniqueInput[]
+    delete?: WriterBookWhereUniqueInput | WriterBookWhereUniqueInput[]
+    connect?: WriterBookWhereUniqueInput | WriterBookWhereUniqueInput[]
+    update?: WriterBookUpdateWithWhereUniqueWithoutUserInput | WriterBookUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: WriterBookUpdateManyWithWhereWithoutUserInput | WriterBookUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: WriterBookScalarWhereInput | WriterBookScalarWhereInput[]
+  }
+
+  export type WriterCharacterUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<WriterCharacterCreateWithoutUserInput, WriterCharacterUncheckedCreateWithoutUserInput> | WriterCharacterCreateWithoutUserInput[] | WriterCharacterUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: WriterCharacterCreateOrConnectWithoutUserInput | WriterCharacterCreateOrConnectWithoutUserInput[]
+    upsert?: WriterCharacterUpsertWithWhereUniqueWithoutUserInput | WriterCharacterUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: WriterCharacterCreateManyUserInputEnvelope
+    set?: WriterCharacterWhereUniqueInput | WriterCharacterWhereUniqueInput[]
+    disconnect?: WriterCharacterWhereUniqueInput | WriterCharacterWhereUniqueInput[]
+    delete?: WriterCharacterWhereUniqueInput | WriterCharacterWhereUniqueInput[]
+    connect?: WriterCharacterWhereUniqueInput | WriterCharacterWhereUniqueInput[]
+    update?: WriterCharacterUpdateWithWhereUniqueWithoutUserInput | WriterCharacterUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: WriterCharacterUpdateManyWithWhereWithoutUserInput | WriterCharacterUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: WriterCharacterScalarWhereInput | WriterCharacterScalarWhereInput[]
+  }
+
+  export type WriterChapterUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<WriterChapterCreateWithoutUserInput, WriterChapterUncheckedCreateWithoutUserInput> | WriterChapterCreateWithoutUserInput[] | WriterChapterUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: WriterChapterCreateOrConnectWithoutUserInput | WriterChapterCreateOrConnectWithoutUserInput[]
+    upsert?: WriterChapterUpsertWithWhereUniqueWithoutUserInput | WriterChapterUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: WriterChapterCreateManyUserInputEnvelope
+    set?: WriterChapterWhereUniqueInput | WriterChapterWhereUniqueInput[]
+    disconnect?: WriterChapterWhereUniqueInput | WriterChapterWhereUniqueInput[]
+    delete?: WriterChapterWhereUniqueInput | WriterChapterWhereUniqueInput[]
+    connect?: WriterChapterWhereUniqueInput | WriterChapterWhereUniqueInput[]
+    update?: WriterChapterUpdateWithWhereUniqueWithoutUserInput | WriterChapterUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: WriterChapterUpdateManyWithWhereWithoutUserInput | WriterChapterUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: WriterChapterScalarWhereInput | WriterChapterScalarWhereInput[]
   }
 
   export type TranslateEntryUncheckedUpdateManyWithoutUserNestedInput = {
@@ -72849,6 +77975,160 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutWriterDocumentsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutWriterDocumentsInput, UserUpdateWithoutWriterDocumentsInput>, UserUncheckedUpdateWithoutWriterDocumentsInput>
+  }
+
+  export type UserCreateNestedOneWithoutWriterBooksInput = {
+    create?: XOR<UserCreateWithoutWriterBooksInput, UserUncheckedCreateWithoutWriterBooksInput>
+    connectOrCreate?: UserCreateOrConnectWithoutWriterBooksInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type WriterCharacterCreateNestedManyWithoutBookInput = {
+    create?: XOR<WriterCharacterCreateWithoutBookInput, WriterCharacterUncheckedCreateWithoutBookInput> | WriterCharacterCreateWithoutBookInput[] | WriterCharacterUncheckedCreateWithoutBookInput[]
+    connectOrCreate?: WriterCharacterCreateOrConnectWithoutBookInput | WriterCharacterCreateOrConnectWithoutBookInput[]
+    createMany?: WriterCharacterCreateManyBookInputEnvelope
+    connect?: WriterCharacterWhereUniqueInput | WriterCharacterWhereUniqueInput[]
+  }
+
+  export type WriterChapterCreateNestedManyWithoutBookInput = {
+    create?: XOR<WriterChapterCreateWithoutBookInput, WriterChapterUncheckedCreateWithoutBookInput> | WriterChapterCreateWithoutBookInput[] | WriterChapterUncheckedCreateWithoutBookInput[]
+    connectOrCreate?: WriterChapterCreateOrConnectWithoutBookInput | WriterChapterCreateOrConnectWithoutBookInput[]
+    createMany?: WriterChapterCreateManyBookInputEnvelope
+    connect?: WriterChapterWhereUniqueInput | WriterChapterWhereUniqueInput[]
+  }
+
+  export type WriterCharacterUncheckedCreateNestedManyWithoutBookInput = {
+    create?: XOR<WriterCharacterCreateWithoutBookInput, WriterCharacterUncheckedCreateWithoutBookInput> | WriterCharacterCreateWithoutBookInput[] | WriterCharacterUncheckedCreateWithoutBookInput[]
+    connectOrCreate?: WriterCharacterCreateOrConnectWithoutBookInput | WriterCharacterCreateOrConnectWithoutBookInput[]
+    createMany?: WriterCharacterCreateManyBookInputEnvelope
+    connect?: WriterCharacterWhereUniqueInput | WriterCharacterWhereUniqueInput[]
+  }
+
+  export type WriterChapterUncheckedCreateNestedManyWithoutBookInput = {
+    create?: XOR<WriterChapterCreateWithoutBookInput, WriterChapterUncheckedCreateWithoutBookInput> | WriterChapterCreateWithoutBookInput[] | WriterChapterUncheckedCreateWithoutBookInput[]
+    connectOrCreate?: WriterChapterCreateOrConnectWithoutBookInput | WriterChapterCreateOrConnectWithoutBookInput[]
+    createMany?: WriterChapterCreateManyBookInputEnvelope
+    connect?: WriterChapterWhereUniqueInput | WriterChapterWhereUniqueInput[]
+  }
+
+  export type UserUpdateOneRequiredWithoutWriterBooksNestedInput = {
+    create?: XOR<UserCreateWithoutWriterBooksInput, UserUncheckedCreateWithoutWriterBooksInput>
+    connectOrCreate?: UserCreateOrConnectWithoutWriterBooksInput
+    upsert?: UserUpsertWithoutWriterBooksInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutWriterBooksInput, UserUpdateWithoutWriterBooksInput>, UserUncheckedUpdateWithoutWriterBooksInput>
+  }
+
+  export type WriterCharacterUpdateManyWithoutBookNestedInput = {
+    create?: XOR<WriterCharacterCreateWithoutBookInput, WriterCharacterUncheckedCreateWithoutBookInput> | WriterCharacterCreateWithoutBookInput[] | WriterCharacterUncheckedCreateWithoutBookInput[]
+    connectOrCreate?: WriterCharacterCreateOrConnectWithoutBookInput | WriterCharacterCreateOrConnectWithoutBookInput[]
+    upsert?: WriterCharacterUpsertWithWhereUniqueWithoutBookInput | WriterCharacterUpsertWithWhereUniqueWithoutBookInput[]
+    createMany?: WriterCharacterCreateManyBookInputEnvelope
+    set?: WriterCharacterWhereUniqueInput | WriterCharacterWhereUniqueInput[]
+    disconnect?: WriterCharacterWhereUniqueInput | WriterCharacterWhereUniqueInput[]
+    delete?: WriterCharacterWhereUniqueInput | WriterCharacterWhereUniqueInput[]
+    connect?: WriterCharacterWhereUniqueInput | WriterCharacterWhereUniqueInput[]
+    update?: WriterCharacterUpdateWithWhereUniqueWithoutBookInput | WriterCharacterUpdateWithWhereUniqueWithoutBookInput[]
+    updateMany?: WriterCharacterUpdateManyWithWhereWithoutBookInput | WriterCharacterUpdateManyWithWhereWithoutBookInput[]
+    deleteMany?: WriterCharacterScalarWhereInput | WriterCharacterScalarWhereInput[]
+  }
+
+  export type WriterChapterUpdateManyWithoutBookNestedInput = {
+    create?: XOR<WriterChapterCreateWithoutBookInput, WriterChapterUncheckedCreateWithoutBookInput> | WriterChapterCreateWithoutBookInput[] | WriterChapterUncheckedCreateWithoutBookInput[]
+    connectOrCreate?: WriterChapterCreateOrConnectWithoutBookInput | WriterChapterCreateOrConnectWithoutBookInput[]
+    upsert?: WriterChapterUpsertWithWhereUniqueWithoutBookInput | WriterChapterUpsertWithWhereUniqueWithoutBookInput[]
+    createMany?: WriterChapterCreateManyBookInputEnvelope
+    set?: WriterChapterWhereUniqueInput | WriterChapterWhereUniqueInput[]
+    disconnect?: WriterChapterWhereUniqueInput | WriterChapterWhereUniqueInput[]
+    delete?: WriterChapterWhereUniqueInput | WriterChapterWhereUniqueInput[]
+    connect?: WriterChapterWhereUniqueInput | WriterChapterWhereUniqueInput[]
+    update?: WriterChapterUpdateWithWhereUniqueWithoutBookInput | WriterChapterUpdateWithWhereUniqueWithoutBookInput[]
+    updateMany?: WriterChapterUpdateManyWithWhereWithoutBookInput | WriterChapterUpdateManyWithWhereWithoutBookInput[]
+    deleteMany?: WriterChapterScalarWhereInput | WriterChapterScalarWhereInput[]
+  }
+
+  export type WriterCharacterUncheckedUpdateManyWithoutBookNestedInput = {
+    create?: XOR<WriterCharacterCreateWithoutBookInput, WriterCharacterUncheckedCreateWithoutBookInput> | WriterCharacterCreateWithoutBookInput[] | WriterCharacterUncheckedCreateWithoutBookInput[]
+    connectOrCreate?: WriterCharacterCreateOrConnectWithoutBookInput | WriterCharacterCreateOrConnectWithoutBookInput[]
+    upsert?: WriterCharacterUpsertWithWhereUniqueWithoutBookInput | WriterCharacterUpsertWithWhereUniqueWithoutBookInput[]
+    createMany?: WriterCharacterCreateManyBookInputEnvelope
+    set?: WriterCharacterWhereUniqueInput | WriterCharacterWhereUniqueInput[]
+    disconnect?: WriterCharacterWhereUniqueInput | WriterCharacterWhereUniqueInput[]
+    delete?: WriterCharacterWhereUniqueInput | WriterCharacterWhereUniqueInput[]
+    connect?: WriterCharacterWhereUniqueInput | WriterCharacterWhereUniqueInput[]
+    update?: WriterCharacterUpdateWithWhereUniqueWithoutBookInput | WriterCharacterUpdateWithWhereUniqueWithoutBookInput[]
+    updateMany?: WriterCharacterUpdateManyWithWhereWithoutBookInput | WriterCharacterUpdateManyWithWhereWithoutBookInput[]
+    deleteMany?: WriterCharacterScalarWhereInput | WriterCharacterScalarWhereInput[]
+  }
+
+  export type WriterChapterUncheckedUpdateManyWithoutBookNestedInput = {
+    create?: XOR<WriterChapterCreateWithoutBookInput, WriterChapterUncheckedCreateWithoutBookInput> | WriterChapterCreateWithoutBookInput[] | WriterChapterUncheckedCreateWithoutBookInput[]
+    connectOrCreate?: WriterChapterCreateOrConnectWithoutBookInput | WriterChapterCreateOrConnectWithoutBookInput[]
+    upsert?: WriterChapterUpsertWithWhereUniqueWithoutBookInput | WriterChapterUpsertWithWhereUniqueWithoutBookInput[]
+    createMany?: WriterChapterCreateManyBookInputEnvelope
+    set?: WriterChapterWhereUniqueInput | WriterChapterWhereUniqueInput[]
+    disconnect?: WriterChapterWhereUniqueInput | WriterChapterWhereUniqueInput[]
+    delete?: WriterChapterWhereUniqueInput | WriterChapterWhereUniqueInput[]
+    connect?: WriterChapterWhereUniqueInput | WriterChapterWhereUniqueInput[]
+    update?: WriterChapterUpdateWithWhereUniqueWithoutBookInput | WriterChapterUpdateWithWhereUniqueWithoutBookInput[]
+    updateMany?: WriterChapterUpdateManyWithWhereWithoutBookInput | WriterChapterUpdateManyWithWhereWithoutBookInput[]
+    deleteMany?: WriterChapterScalarWhereInput | WriterChapterScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutWriterCharactersInput = {
+    create?: XOR<UserCreateWithoutWriterCharactersInput, UserUncheckedCreateWithoutWriterCharactersInput>
+    connectOrCreate?: UserCreateOrConnectWithoutWriterCharactersInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type WriterBookCreateNestedOneWithoutCharactersInput = {
+    create?: XOR<WriterBookCreateWithoutCharactersInput, WriterBookUncheckedCreateWithoutCharactersInput>
+    connectOrCreate?: WriterBookCreateOrConnectWithoutCharactersInput
+    connect?: WriterBookWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutWriterCharactersNestedInput = {
+    create?: XOR<UserCreateWithoutWriterCharactersInput, UserUncheckedCreateWithoutWriterCharactersInput>
+    connectOrCreate?: UserCreateOrConnectWithoutWriterCharactersInput
+    upsert?: UserUpsertWithoutWriterCharactersInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutWriterCharactersInput, UserUpdateWithoutWriterCharactersInput>, UserUncheckedUpdateWithoutWriterCharactersInput>
+  }
+
+  export type WriterBookUpdateOneRequiredWithoutCharactersNestedInput = {
+    create?: XOR<WriterBookCreateWithoutCharactersInput, WriterBookUncheckedCreateWithoutCharactersInput>
+    connectOrCreate?: WriterBookCreateOrConnectWithoutCharactersInput
+    upsert?: WriterBookUpsertWithoutCharactersInput
+    connect?: WriterBookWhereUniqueInput
+    update?: XOR<XOR<WriterBookUpdateToOneWithWhereWithoutCharactersInput, WriterBookUpdateWithoutCharactersInput>, WriterBookUncheckedUpdateWithoutCharactersInput>
+  }
+
+  export type UserCreateNestedOneWithoutWriterChaptersInput = {
+    create?: XOR<UserCreateWithoutWriterChaptersInput, UserUncheckedCreateWithoutWriterChaptersInput>
+    connectOrCreate?: UserCreateOrConnectWithoutWriterChaptersInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type WriterBookCreateNestedOneWithoutChaptersInput = {
+    create?: XOR<WriterBookCreateWithoutChaptersInput, WriterBookUncheckedCreateWithoutChaptersInput>
+    connectOrCreate?: WriterBookCreateOrConnectWithoutChaptersInput
+    connect?: WriterBookWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutWriterChaptersNestedInput = {
+    create?: XOR<UserCreateWithoutWriterChaptersInput, UserUncheckedCreateWithoutWriterChaptersInput>
+    connectOrCreate?: UserCreateOrConnectWithoutWriterChaptersInput
+    upsert?: UserUpsertWithoutWriterChaptersInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutWriterChaptersInput, UserUpdateWithoutWriterChaptersInput>, UserUncheckedUpdateWithoutWriterChaptersInput>
+  }
+
+  export type WriterBookUpdateOneRequiredWithoutChaptersNestedInput = {
+    create?: XOR<WriterBookCreateWithoutChaptersInput, WriterBookUncheckedCreateWithoutChaptersInput>
+    connectOrCreate?: WriterBookCreateOrConnectWithoutChaptersInput
+    upsert?: WriterBookUpsertWithoutChaptersInput
+    connect?: WriterBookWhereUniqueInput
+    update?: XOR<XOR<WriterBookUpdateToOneWithWhereWithoutChaptersInput, WriterBookUpdateWithoutChaptersInput>, WriterBookUncheckedUpdateWithoutChaptersInput>
   }
 
   export type UserCreateNestedOneWithoutTranslateEntriesInput = {
@@ -74315,6 +79595,134 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type WriterBookCreateWithoutUserInput = {
+    id?: string
+    title: string
+    premise?: string
+    genre?: string
+    themes?: string
+    audience?: string
+    tone?: string
+    worldBible?: string
+    storyBible?: string
+    plot?: string
+    outline?: string
+    locations?: string
+    timeline?: string
+    continuityNotes?: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    characters?: WriterCharacterCreateNestedManyWithoutBookInput
+    chapters?: WriterChapterCreateNestedManyWithoutBookInput
+  }
+
+  export type WriterBookUncheckedCreateWithoutUserInput = {
+    id?: string
+    title: string
+    premise?: string
+    genre?: string
+    themes?: string
+    audience?: string
+    tone?: string
+    worldBible?: string
+    storyBible?: string
+    plot?: string
+    outline?: string
+    locations?: string
+    timeline?: string
+    continuityNotes?: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    characters?: WriterCharacterUncheckedCreateNestedManyWithoutBookInput
+    chapters?: WriterChapterUncheckedCreateNestedManyWithoutBookInput
+  }
+
+  export type WriterBookCreateOrConnectWithoutUserInput = {
+    where: WriterBookWhereUniqueInput
+    create: XOR<WriterBookCreateWithoutUserInput, WriterBookUncheckedCreateWithoutUserInput>
+  }
+
+  export type WriterBookCreateManyUserInputEnvelope = {
+    data: WriterBookCreateManyUserInput | WriterBookCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type WriterCharacterCreateWithoutUserInput = {
+    id?: string
+    name: string
+    role?: string
+    bio?: string
+    appearance?: string
+    motivation?: string
+    relationships?: string
+    notes?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    book: WriterBookCreateNestedOneWithoutCharactersInput
+  }
+
+  export type WriterCharacterUncheckedCreateWithoutUserInput = {
+    id?: string
+    bookId: string
+    name: string
+    role?: string
+    bio?: string
+    appearance?: string
+    motivation?: string
+    relationships?: string
+    notes?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WriterCharacterCreateOrConnectWithoutUserInput = {
+    where: WriterCharacterWhereUniqueInput
+    create: XOR<WriterCharacterCreateWithoutUserInput, WriterCharacterUncheckedCreateWithoutUserInput>
+  }
+
+  export type WriterCharacterCreateManyUserInputEnvelope = {
+    data: WriterCharacterCreateManyUserInput | WriterCharacterCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type WriterChapterCreateWithoutUserInput = {
+    id?: string
+    position: number
+    title: string
+    summary?: string
+    scenePlan?: string
+    body?: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    book: WriterBookCreateNestedOneWithoutChaptersInput
+  }
+
+  export type WriterChapterUncheckedCreateWithoutUserInput = {
+    id?: string
+    bookId: string
+    position: number
+    title: string
+    summary?: string
+    scenePlan?: string
+    body?: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WriterChapterCreateOrConnectWithoutUserInput = {
+    where: WriterChapterWhereUniqueInput
+    create: XOR<WriterChapterCreateWithoutUserInput, WriterChapterUncheckedCreateWithoutUserInput>
+  }
+
+  export type WriterChapterCreateManyUserInputEnvelope = {
+    data: WriterChapterCreateManyUserInput | WriterChapterCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type TranslateEntryCreateWithoutUserInput = {
     id?: string
     sourceLang: string
@@ -75654,6 +81062,113 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"WriterDocument"> | Date | string
   }
 
+  export type WriterBookUpsertWithWhereUniqueWithoutUserInput = {
+    where: WriterBookWhereUniqueInput
+    update: XOR<WriterBookUpdateWithoutUserInput, WriterBookUncheckedUpdateWithoutUserInput>
+    create: XOR<WriterBookCreateWithoutUserInput, WriterBookUncheckedCreateWithoutUserInput>
+  }
+
+  export type WriterBookUpdateWithWhereUniqueWithoutUserInput = {
+    where: WriterBookWhereUniqueInput
+    data: XOR<WriterBookUpdateWithoutUserInput, WriterBookUncheckedUpdateWithoutUserInput>
+  }
+
+  export type WriterBookUpdateManyWithWhereWithoutUserInput = {
+    where: WriterBookScalarWhereInput
+    data: XOR<WriterBookUpdateManyMutationInput, WriterBookUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type WriterBookScalarWhereInput = {
+    AND?: WriterBookScalarWhereInput | WriterBookScalarWhereInput[]
+    OR?: WriterBookScalarWhereInput[]
+    NOT?: WriterBookScalarWhereInput | WriterBookScalarWhereInput[]
+    id?: StringFilter<"WriterBook"> | string
+    userId?: StringFilter<"WriterBook"> | string
+    title?: StringFilter<"WriterBook"> | string
+    premise?: StringFilter<"WriterBook"> | string
+    genre?: StringFilter<"WriterBook"> | string
+    themes?: StringFilter<"WriterBook"> | string
+    audience?: StringFilter<"WriterBook"> | string
+    tone?: StringFilter<"WriterBook"> | string
+    worldBible?: StringFilter<"WriterBook"> | string
+    storyBible?: StringFilter<"WriterBook"> | string
+    plot?: StringFilter<"WriterBook"> | string
+    outline?: StringFilter<"WriterBook"> | string
+    locations?: StringFilter<"WriterBook"> | string
+    timeline?: StringFilter<"WriterBook"> | string
+    continuityNotes?: StringFilter<"WriterBook"> | string
+    status?: StringFilter<"WriterBook"> | string
+    createdAt?: DateTimeFilter<"WriterBook"> | Date | string
+    updatedAt?: DateTimeFilter<"WriterBook"> | Date | string
+  }
+
+  export type WriterCharacterUpsertWithWhereUniqueWithoutUserInput = {
+    where: WriterCharacterWhereUniqueInput
+    update: XOR<WriterCharacterUpdateWithoutUserInput, WriterCharacterUncheckedUpdateWithoutUserInput>
+    create: XOR<WriterCharacterCreateWithoutUserInput, WriterCharacterUncheckedCreateWithoutUserInput>
+  }
+
+  export type WriterCharacterUpdateWithWhereUniqueWithoutUserInput = {
+    where: WriterCharacterWhereUniqueInput
+    data: XOR<WriterCharacterUpdateWithoutUserInput, WriterCharacterUncheckedUpdateWithoutUserInput>
+  }
+
+  export type WriterCharacterUpdateManyWithWhereWithoutUserInput = {
+    where: WriterCharacterScalarWhereInput
+    data: XOR<WriterCharacterUpdateManyMutationInput, WriterCharacterUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type WriterCharacterScalarWhereInput = {
+    AND?: WriterCharacterScalarWhereInput | WriterCharacterScalarWhereInput[]
+    OR?: WriterCharacterScalarWhereInput[]
+    NOT?: WriterCharacterScalarWhereInput | WriterCharacterScalarWhereInput[]
+    id?: StringFilter<"WriterCharacter"> | string
+    userId?: StringFilter<"WriterCharacter"> | string
+    bookId?: StringFilter<"WriterCharacter"> | string
+    name?: StringFilter<"WriterCharacter"> | string
+    role?: StringFilter<"WriterCharacter"> | string
+    bio?: StringFilter<"WriterCharacter"> | string
+    appearance?: StringFilter<"WriterCharacter"> | string
+    motivation?: StringFilter<"WriterCharacter"> | string
+    relationships?: StringFilter<"WriterCharacter"> | string
+    notes?: StringFilter<"WriterCharacter"> | string
+    createdAt?: DateTimeFilter<"WriterCharacter"> | Date | string
+    updatedAt?: DateTimeFilter<"WriterCharacter"> | Date | string
+  }
+
+  export type WriterChapterUpsertWithWhereUniqueWithoutUserInput = {
+    where: WriterChapterWhereUniqueInput
+    update: XOR<WriterChapterUpdateWithoutUserInput, WriterChapterUncheckedUpdateWithoutUserInput>
+    create: XOR<WriterChapterCreateWithoutUserInput, WriterChapterUncheckedCreateWithoutUserInput>
+  }
+
+  export type WriterChapterUpdateWithWhereUniqueWithoutUserInput = {
+    where: WriterChapterWhereUniqueInput
+    data: XOR<WriterChapterUpdateWithoutUserInput, WriterChapterUncheckedUpdateWithoutUserInput>
+  }
+
+  export type WriterChapterUpdateManyWithWhereWithoutUserInput = {
+    where: WriterChapterScalarWhereInput
+    data: XOR<WriterChapterUpdateManyMutationInput, WriterChapterUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type WriterChapterScalarWhereInput = {
+    AND?: WriterChapterScalarWhereInput | WriterChapterScalarWhereInput[]
+    OR?: WriterChapterScalarWhereInput[]
+    NOT?: WriterChapterScalarWhereInput | WriterChapterScalarWhereInput[]
+    id?: StringFilter<"WriterChapter"> | string
+    userId?: StringFilter<"WriterChapter"> | string
+    bookId?: StringFilter<"WriterChapter"> | string
+    position?: IntFilter<"WriterChapter"> | number
+    title?: StringFilter<"WriterChapter"> | string
+    summary?: StringFilter<"WriterChapter"> | string
+    scenePlan?: StringFilter<"WriterChapter"> | string
+    body?: StringFilter<"WriterChapter"> | string
+    status?: StringFilter<"WriterChapter"> | string
+    createdAt?: DateTimeFilter<"WriterChapter"> | Date | string
+    updatedAt?: DateTimeFilter<"WriterChapter"> | Date | string
+  }
+
   export type TranslateEntryUpsertWithWhereUniqueWithoutUserInput = {
     where: TranslateEntryWhereUniqueInput
     update: XOR<TranslateEntryUpdateWithoutUserInput, TranslateEntryUncheckedUpdateWithoutUserInput>
@@ -76197,6 +81712,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -76250,6 +81768,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -76319,6 +81840,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -76372,6 +81896,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -76425,6 +81952,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -76478,6 +82008,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -76547,6 +82080,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -76600,6 +82136,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -76653,6 +82192,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -76706,6 +82248,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -76837,6 +82382,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -76890,6 +82438,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -77042,6 +82593,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -77095,6 +82649,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -77164,6 +82721,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -77217,6 +82777,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -77270,6 +82833,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -77323,6 +82889,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -77417,6 +82986,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -77470,6 +83042,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -77554,6 +83129,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -77607,6 +83185,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -77676,6 +83257,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -77729,6 +83313,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -77782,6 +83369,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -77835,6 +83425,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -77904,6 +83497,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -77957,6 +83553,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -78010,6 +83609,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -78063,6 +83665,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -78164,6 +83769,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -78217,6 +83825,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -78286,6 +83897,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -78339,6 +83953,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -78439,6 +84056,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -78492,6 +84112,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -78582,6 +84205,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -78635,6 +84261,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -78730,6 +84359,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -78783,6 +84415,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -78852,6 +84487,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -78905,6 +84543,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -79011,6 +84652,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -79064,6 +84708,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -79160,6 +84807,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -79213,6 +84863,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -79322,6 +84975,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -79375,6 +85031,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -79444,6 +85103,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -79497,6 +85159,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -79599,6 +85264,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -79652,6 +85320,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -79744,6 +85415,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -79797,6 +85471,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -79970,6 +85647,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -80023,6 +85703,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -80124,6 +85807,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -80177,6 +85863,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -80307,6 +85996,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -80360,6 +86052,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -80480,6 +86175,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -80533,6 +86231,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -80602,6 +86303,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -80655,6 +86359,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -80708,6 +86415,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -80761,6 +86471,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -80891,6 +86604,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -80944,6 +86660,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -81064,6 +86783,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -81117,6 +86839,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -81247,6 +86972,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -81300,6 +87028,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -81420,6 +87151,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -81473,6 +87207,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -81542,6 +87279,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -81595,6 +87335,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -81648,6 +87391,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -81701,6 +87447,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -81770,6 +87519,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -81823,6 +87575,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -81876,6 +87631,9 @@ export namespace Prisma {
     appListings?: AppListingCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -81929,6 +87687,9 @@ export namespace Prisma {
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -81998,6 +87759,9 @@ export namespace Prisma {
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -82051,6 +87815,9 @@ export namespace Prisma {
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -82104,6 +87871,9 @@ export namespace Prisma {
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -82157,6 +87927,9 @@ export namespace Prisma {
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -82226,6 +87999,9 @@ export namespace Prisma {
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -82279,6 +88055,9 @@ export namespace Prisma {
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -82332,6 +88111,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -82385,6 +88167,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -82454,6 +88239,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -82507,6 +88295,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -82560,6 +88351,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -82613,6 +88407,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -82682,6 +88479,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -82735,6 +88535,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -82789,6 +88592,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -82842,6 +88648,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -82911,6 +88720,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -82964,6 +88776,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -83016,6 +88831,9 @@ export namespace Prisma {
     appListings?: AppListingCreateNestedManyWithoutUserInput
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -83069,6 +88887,9 @@ export namespace Prisma {
     appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -83138,6 +88959,9 @@ export namespace Prisma {
     appListings?: AppListingUpdateManyWithoutUserNestedInput
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -83191,6 +89015,9 @@ export namespace Prisma {
     appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -83207,6 +89034,1040 @@ export namespace Prisma {
     travelTrips?: TravelTripUncheckedUpdateManyWithoutUserNestedInput
     shippingShipments?: ShippingShipmentUncheckedUpdateManyWithoutUserNestedInput
     billingSubscriptions?: BillingSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutWriterBooksInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    password?: string | null
+    stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
+    legalDocuments?: LegalDocumentCreateNestedManyWithoutUserInput
+    intelligenceDocuments?: IntelligenceDocumentCreateNestedManyWithoutUserInput
+    projectInquiries?: ProjectInquiryCreateNestedManyWithoutUserInput
+    calendarEvents?: CalendarEventCreateNestedManyWithoutUserInput
+    businessContacts?: BusinessContactCreateNestedManyWithoutUserInput
+    businessTasks?: BusinessTaskCreateNestedManyWithoutUserInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutUserInput
+    automationRuns?: AutomationRunCreateNestedManyWithoutUserInput
+    commerceProducts?: CommerceProductCreateNestedManyWithoutUserInput
+    commerceOrders?: CommerceOrderCreateNestedManyWithoutUserInput
+    adsCampaigns?: AdsCampaignCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalCreateNestedManyWithoutUserInput
+    appListings?: AppListingCreateNestedManyWithoutUserInput
+    sites?: SiteCreateNestedManyWithoutUserInput
+    flows?: FlowCreateNestedManyWithoutUserInput
+    writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
+    translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
+    libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
+    codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
+    educationCourses?: EducationCourseCreateNestedManyWithoutUserInput
+    educationNotes?: EducationNoteCreateNestedManyWithoutUserInput
+    educationQuizzes?: EducationQuizCreateNestedManyWithoutUserInput
+    careerResumes?: CareerResumeCreateNestedManyWithoutUserInput
+    careerApplications?: CareerApplicationCreateNestedManyWithoutUserInput
+    healthHabits?: HealthHabitCreateNestedManyWithoutUserInput
+    healthLogs?: HealthLogCreateNestedManyWithoutUserInput
+    financeTransactions?: FinanceTransactionCreateNestedManyWithoutUserInput
+    financeBudgets?: FinanceBudgetCreateNestedManyWithoutUserInput
+    financeGoals?: FinanceGoalCreateNestedManyWithoutUserInput
+    travelTrips?: TravelTripCreateNestedManyWithoutUserInput
+    shippingShipments?: ShippingShipmentCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutWriterBooksInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    password?: string | null
+    stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    legalDocuments?: LegalDocumentUncheckedCreateNestedManyWithoutUserInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedCreateNestedManyWithoutUserInput
+    projectInquiries?: ProjectInquiryUncheckedCreateNestedManyWithoutUserInput
+    calendarEvents?: CalendarEventUncheckedCreateNestedManyWithoutUserInput
+    businessContacts?: BusinessContactUncheckedCreateNestedManyWithoutUserInput
+    businessTasks?: BusinessTaskUncheckedCreateNestedManyWithoutUserInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutUserInput
+    automationRuns?: AutomationRunUncheckedCreateNestedManyWithoutUserInput
+    commerceProducts?: CommerceProductUncheckedCreateNestedManyWithoutUserInput
+    commerceOrders?: CommerceOrderUncheckedCreateNestedManyWithoutUserInput
+    adsCampaigns?: AdsCampaignUncheckedCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeUncheckedCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteUncheckedCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalUncheckedCreateNestedManyWithoutUserInput
+    appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
+    sites?: SiteUncheckedCreateNestedManyWithoutUserInput
+    flows?: FlowUncheckedCreateNestedManyWithoutUserInput
+    writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
+    translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
+    libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
+    codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
+    educationCourses?: EducationCourseUncheckedCreateNestedManyWithoutUserInput
+    educationNotes?: EducationNoteUncheckedCreateNestedManyWithoutUserInput
+    educationQuizzes?: EducationQuizUncheckedCreateNestedManyWithoutUserInput
+    careerResumes?: CareerResumeUncheckedCreateNestedManyWithoutUserInput
+    careerApplications?: CareerApplicationUncheckedCreateNestedManyWithoutUserInput
+    healthHabits?: HealthHabitUncheckedCreateNestedManyWithoutUserInput
+    healthLogs?: HealthLogUncheckedCreateNestedManyWithoutUserInput
+    financeTransactions?: FinanceTransactionUncheckedCreateNestedManyWithoutUserInput
+    financeBudgets?: FinanceBudgetUncheckedCreateNestedManyWithoutUserInput
+    financeGoals?: FinanceGoalUncheckedCreateNestedManyWithoutUserInput
+    travelTrips?: TravelTripUncheckedCreateNestedManyWithoutUserInput
+    shippingShipments?: ShippingShipmentUncheckedCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutWriterBooksInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutWriterBooksInput, UserUncheckedCreateWithoutWriterBooksInput>
+  }
+
+  export type WriterCharacterCreateWithoutBookInput = {
+    id?: string
+    name: string
+    role?: string
+    bio?: string
+    appearance?: string
+    motivation?: string
+    relationships?: string
+    notes?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutWriterCharactersInput
+  }
+
+  export type WriterCharacterUncheckedCreateWithoutBookInput = {
+    id?: string
+    userId: string
+    name: string
+    role?: string
+    bio?: string
+    appearance?: string
+    motivation?: string
+    relationships?: string
+    notes?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WriterCharacterCreateOrConnectWithoutBookInput = {
+    where: WriterCharacterWhereUniqueInput
+    create: XOR<WriterCharacterCreateWithoutBookInput, WriterCharacterUncheckedCreateWithoutBookInput>
+  }
+
+  export type WriterCharacterCreateManyBookInputEnvelope = {
+    data: WriterCharacterCreateManyBookInput | WriterCharacterCreateManyBookInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type WriterChapterCreateWithoutBookInput = {
+    id?: string
+    position: number
+    title: string
+    summary?: string
+    scenePlan?: string
+    body?: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutWriterChaptersInput
+  }
+
+  export type WriterChapterUncheckedCreateWithoutBookInput = {
+    id?: string
+    userId: string
+    position: number
+    title: string
+    summary?: string
+    scenePlan?: string
+    body?: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WriterChapterCreateOrConnectWithoutBookInput = {
+    where: WriterChapterWhereUniqueInput
+    create: XOR<WriterChapterCreateWithoutBookInput, WriterChapterUncheckedCreateWithoutBookInput>
+  }
+
+  export type WriterChapterCreateManyBookInputEnvelope = {
+    data: WriterChapterCreateManyBookInput | WriterChapterCreateManyBookInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutWriterBooksInput = {
+    update: XOR<UserUpdateWithoutWriterBooksInput, UserUncheckedUpdateWithoutWriterBooksInput>
+    create: XOR<UserCreateWithoutWriterBooksInput, UserUncheckedCreateWithoutWriterBooksInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutWriterBooksInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutWriterBooksInput, UserUncheckedUpdateWithoutWriterBooksInput>
+  }
+
+  export type UserUpdateWithoutWriterBooksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
+    legalDocuments?: LegalDocumentUpdateManyWithoutUserNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUpdateManyWithoutUserNestedInput
+    projectInquiries?: ProjectInquiryUpdateManyWithoutUserNestedInput
+    calendarEvents?: CalendarEventUpdateManyWithoutUserNestedInput
+    businessContacts?: BusinessContactUpdateManyWithoutUserNestedInput
+    businessTasks?: BusinessTaskUpdateManyWithoutUserNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutUserNestedInput
+    automationRuns?: AutomationRunUpdateManyWithoutUserNestedInput
+    commerceProducts?: CommerceProductUpdateManyWithoutUserNestedInput
+    commerceOrders?: CommerceOrderUpdateManyWithoutUserNestedInput
+    adsCampaigns?: AdsCampaignUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUpdateManyWithoutUserNestedInput
+    appListings?: AppListingUpdateManyWithoutUserNestedInput
+    sites?: SiteUpdateManyWithoutUserNestedInput
+    flows?: FlowUpdateManyWithoutUserNestedInput
+    writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
+    translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
+    libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
+    codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
+    educationCourses?: EducationCourseUpdateManyWithoutUserNestedInput
+    educationNotes?: EducationNoteUpdateManyWithoutUserNestedInput
+    educationQuizzes?: EducationQuizUpdateManyWithoutUserNestedInput
+    careerResumes?: CareerResumeUpdateManyWithoutUserNestedInput
+    careerApplications?: CareerApplicationUpdateManyWithoutUserNestedInput
+    healthHabits?: HealthHabitUpdateManyWithoutUserNestedInput
+    healthLogs?: HealthLogUpdateManyWithoutUserNestedInput
+    financeTransactions?: FinanceTransactionUpdateManyWithoutUserNestedInput
+    financeBudgets?: FinanceBudgetUpdateManyWithoutUserNestedInput
+    financeGoals?: FinanceGoalUpdateManyWithoutUserNestedInput
+    travelTrips?: TravelTripUpdateManyWithoutUserNestedInput
+    shippingShipments?: ShippingShipmentUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutWriterBooksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    legalDocuments?: LegalDocumentUncheckedUpdateManyWithoutUserNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedUpdateManyWithoutUserNestedInput
+    projectInquiries?: ProjectInquiryUncheckedUpdateManyWithoutUserNestedInput
+    calendarEvents?: CalendarEventUncheckedUpdateManyWithoutUserNestedInput
+    businessContacts?: BusinessContactUncheckedUpdateManyWithoutUserNestedInput
+    businessTasks?: BusinessTaskUncheckedUpdateManyWithoutUserNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutUserNestedInput
+    automationRuns?: AutomationRunUncheckedUpdateManyWithoutUserNestedInput
+    commerceProducts?: CommerceProductUncheckedUpdateManyWithoutUserNestedInput
+    commerceOrders?: CommerceOrderUncheckedUpdateManyWithoutUserNestedInput
+    adsCampaigns?: AdsCampaignUncheckedUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUncheckedUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUncheckedUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUncheckedUpdateManyWithoutUserNestedInput
+    appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
+    sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
+    flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
+    writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
+    translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
+    libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
+    codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
+    educationCourses?: EducationCourseUncheckedUpdateManyWithoutUserNestedInput
+    educationNotes?: EducationNoteUncheckedUpdateManyWithoutUserNestedInput
+    educationQuizzes?: EducationQuizUncheckedUpdateManyWithoutUserNestedInput
+    careerResumes?: CareerResumeUncheckedUpdateManyWithoutUserNestedInput
+    careerApplications?: CareerApplicationUncheckedUpdateManyWithoutUserNestedInput
+    healthHabits?: HealthHabitUncheckedUpdateManyWithoutUserNestedInput
+    healthLogs?: HealthLogUncheckedUpdateManyWithoutUserNestedInput
+    financeTransactions?: FinanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+    financeBudgets?: FinanceBudgetUncheckedUpdateManyWithoutUserNestedInput
+    financeGoals?: FinanceGoalUncheckedUpdateManyWithoutUserNestedInput
+    travelTrips?: TravelTripUncheckedUpdateManyWithoutUserNestedInput
+    shippingShipments?: ShippingShipmentUncheckedUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type WriterCharacterUpsertWithWhereUniqueWithoutBookInput = {
+    where: WriterCharacterWhereUniqueInput
+    update: XOR<WriterCharacterUpdateWithoutBookInput, WriterCharacterUncheckedUpdateWithoutBookInput>
+    create: XOR<WriterCharacterCreateWithoutBookInput, WriterCharacterUncheckedCreateWithoutBookInput>
+  }
+
+  export type WriterCharacterUpdateWithWhereUniqueWithoutBookInput = {
+    where: WriterCharacterWhereUniqueInput
+    data: XOR<WriterCharacterUpdateWithoutBookInput, WriterCharacterUncheckedUpdateWithoutBookInput>
+  }
+
+  export type WriterCharacterUpdateManyWithWhereWithoutBookInput = {
+    where: WriterCharacterScalarWhereInput
+    data: XOR<WriterCharacterUpdateManyMutationInput, WriterCharacterUncheckedUpdateManyWithoutBookInput>
+  }
+
+  export type WriterChapterUpsertWithWhereUniqueWithoutBookInput = {
+    where: WriterChapterWhereUniqueInput
+    update: XOR<WriterChapterUpdateWithoutBookInput, WriterChapterUncheckedUpdateWithoutBookInput>
+    create: XOR<WriterChapterCreateWithoutBookInput, WriterChapterUncheckedCreateWithoutBookInput>
+  }
+
+  export type WriterChapterUpdateWithWhereUniqueWithoutBookInput = {
+    where: WriterChapterWhereUniqueInput
+    data: XOR<WriterChapterUpdateWithoutBookInput, WriterChapterUncheckedUpdateWithoutBookInput>
+  }
+
+  export type WriterChapterUpdateManyWithWhereWithoutBookInput = {
+    where: WriterChapterScalarWhereInput
+    data: XOR<WriterChapterUpdateManyMutationInput, WriterChapterUncheckedUpdateManyWithoutBookInput>
+  }
+
+  export type UserCreateWithoutWriterCharactersInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    password?: string | null
+    stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
+    legalDocuments?: LegalDocumentCreateNestedManyWithoutUserInput
+    intelligenceDocuments?: IntelligenceDocumentCreateNestedManyWithoutUserInput
+    projectInquiries?: ProjectInquiryCreateNestedManyWithoutUserInput
+    calendarEvents?: CalendarEventCreateNestedManyWithoutUserInput
+    businessContacts?: BusinessContactCreateNestedManyWithoutUserInput
+    businessTasks?: BusinessTaskCreateNestedManyWithoutUserInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutUserInput
+    automationRuns?: AutomationRunCreateNestedManyWithoutUserInput
+    commerceProducts?: CommerceProductCreateNestedManyWithoutUserInput
+    commerceOrders?: CommerceOrderCreateNestedManyWithoutUserInput
+    adsCampaigns?: AdsCampaignCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalCreateNestedManyWithoutUserInput
+    appListings?: AppListingCreateNestedManyWithoutUserInput
+    sites?: SiteCreateNestedManyWithoutUserInput
+    flows?: FlowCreateNestedManyWithoutUserInput
+    writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
+    translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
+    libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
+    codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
+    educationCourses?: EducationCourseCreateNestedManyWithoutUserInput
+    educationNotes?: EducationNoteCreateNestedManyWithoutUserInput
+    educationQuizzes?: EducationQuizCreateNestedManyWithoutUserInput
+    careerResumes?: CareerResumeCreateNestedManyWithoutUserInput
+    careerApplications?: CareerApplicationCreateNestedManyWithoutUserInput
+    healthHabits?: HealthHabitCreateNestedManyWithoutUserInput
+    healthLogs?: HealthLogCreateNestedManyWithoutUserInput
+    financeTransactions?: FinanceTransactionCreateNestedManyWithoutUserInput
+    financeBudgets?: FinanceBudgetCreateNestedManyWithoutUserInput
+    financeGoals?: FinanceGoalCreateNestedManyWithoutUserInput
+    travelTrips?: TravelTripCreateNestedManyWithoutUserInput
+    shippingShipments?: ShippingShipmentCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutWriterCharactersInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    password?: string | null
+    stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    legalDocuments?: LegalDocumentUncheckedCreateNestedManyWithoutUserInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedCreateNestedManyWithoutUserInput
+    projectInquiries?: ProjectInquiryUncheckedCreateNestedManyWithoutUserInput
+    calendarEvents?: CalendarEventUncheckedCreateNestedManyWithoutUserInput
+    businessContacts?: BusinessContactUncheckedCreateNestedManyWithoutUserInput
+    businessTasks?: BusinessTaskUncheckedCreateNestedManyWithoutUserInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutUserInput
+    automationRuns?: AutomationRunUncheckedCreateNestedManyWithoutUserInput
+    commerceProducts?: CommerceProductUncheckedCreateNestedManyWithoutUserInput
+    commerceOrders?: CommerceOrderUncheckedCreateNestedManyWithoutUserInput
+    adsCampaigns?: AdsCampaignUncheckedCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeUncheckedCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteUncheckedCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalUncheckedCreateNestedManyWithoutUserInput
+    appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
+    sites?: SiteUncheckedCreateNestedManyWithoutUserInput
+    flows?: FlowUncheckedCreateNestedManyWithoutUserInput
+    writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
+    translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
+    libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
+    codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
+    educationCourses?: EducationCourseUncheckedCreateNestedManyWithoutUserInput
+    educationNotes?: EducationNoteUncheckedCreateNestedManyWithoutUserInput
+    educationQuizzes?: EducationQuizUncheckedCreateNestedManyWithoutUserInput
+    careerResumes?: CareerResumeUncheckedCreateNestedManyWithoutUserInput
+    careerApplications?: CareerApplicationUncheckedCreateNestedManyWithoutUserInput
+    healthHabits?: HealthHabitUncheckedCreateNestedManyWithoutUserInput
+    healthLogs?: HealthLogUncheckedCreateNestedManyWithoutUserInput
+    financeTransactions?: FinanceTransactionUncheckedCreateNestedManyWithoutUserInput
+    financeBudgets?: FinanceBudgetUncheckedCreateNestedManyWithoutUserInput
+    financeGoals?: FinanceGoalUncheckedCreateNestedManyWithoutUserInput
+    travelTrips?: TravelTripUncheckedCreateNestedManyWithoutUserInput
+    shippingShipments?: ShippingShipmentUncheckedCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutWriterCharactersInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutWriterCharactersInput, UserUncheckedCreateWithoutWriterCharactersInput>
+  }
+
+  export type WriterBookCreateWithoutCharactersInput = {
+    id?: string
+    title: string
+    premise?: string
+    genre?: string
+    themes?: string
+    audience?: string
+    tone?: string
+    worldBible?: string
+    storyBible?: string
+    plot?: string
+    outline?: string
+    locations?: string
+    timeline?: string
+    continuityNotes?: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutWriterBooksInput
+    chapters?: WriterChapterCreateNestedManyWithoutBookInput
+  }
+
+  export type WriterBookUncheckedCreateWithoutCharactersInput = {
+    id?: string
+    userId: string
+    title: string
+    premise?: string
+    genre?: string
+    themes?: string
+    audience?: string
+    tone?: string
+    worldBible?: string
+    storyBible?: string
+    plot?: string
+    outline?: string
+    locations?: string
+    timeline?: string
+    continuityNotes?: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    chapters?: WriterChapterUncheckedCreateNestedManyWithoutBookInput
+  }
+
+  export type WriterBookCreateOrConnectWithoutCharactersInput = {
+    where: WriterBookWhereUniqueInput
+    create: XOR<WriterBookCreateWithoutCharactersInput, WriterBookUncheckedCreateWithoutCharactersInput>
+  }
+
+  export type UserUpsertWithoutWriterCharactersInput = {
+    update: XOR<UserUpdateWithoutWriterCharactersInput, UserUncheckedUpdateWithoutWriterCharactersInput>
+    create: XOR<UserCreateWithoutWriterCharactersInput, UserUncheckedCreateWithoutWriterCharactersInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutWriterCharactersInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutWriterCharactersInput, UserUncheckedUpdateWithoutWriterCharactersInput>
+  }
+
+  export type UserUpdateWithoutWriterCharactersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
+    legalDocuments?: LegalDocumentUpdateManyWithoutUserNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUpdateManyWithoutUserNestedInput
+    projectInquiries?: ProjectInquiryUpdateManyWithoutUserNestedInput
+    calendarEvents?: CalendarEventUpdateManyWithoutUserNestedInput
+    businessContacts?: BusinessContactUpdateManyWithoutUserNestedInput
+    businessTasks?: BusinessTaskUpdateManyWithoutUserNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutUserNestedInput
+    automationRuns?: AutomationRunUpdateManyWithoutUserNestedInput
+    commerceProducts?: CommerceProductUpdateManyWithoutUserNestedInput
+    commerceOrders?: CommerceOrderUpdateManyWithoutUserNestedInput
+    adsCampaigns?: AdsCampaignUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUpdateManyWithoutUserNestedInput
+    appListings?: AppListingUpdateManyWithoutUserNestedInput
+    sites?: SiteUpdateManyWithoutUserNestedInput
+    flows?: FlowUpdateManyWithoutUserNestedInput
+    writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
+    translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
+    libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
+    codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
+    educationCourses?: EducationCourseUpdateManyWithoutUserNestedInput
+    educationNotes?: EducationNoteUpdateManyWithoutUserNestedInput
+    educationQuizzes?: EducationQuizUpdateManyWithoutUserNestedInput
+    careerResumes?: CareerResumeUpdateManyWithoutUserNestedInput
+    careerApplications?: CareerApplicationUpdateManyWithoutUserNestedInput
+    healthHabits?: HealthHabitUpdateManyWithoutUserNestedInput
+    healthLogs?: HealthLogUpdateManyWithoutUserNestedInput
+    financeTransactions?: FinanceTransactionUpdateManyWithoutUserNestedInput
+    financeBudgets?: FinanceBudgetUpdateManyWithoutUserNestedInput
+    financeGoals?: FinanceGoalUpdateManyWithoutUserNestedInput
+    travelTrips?: TravelTripUpdateManyWithoutUserNestedInput
+    shippingShipments?: ShippingShipmentUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutWriterCharactersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    legalDocuments?: LegalDocumentUncheckedUpdateManyWithoutUserNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedUpdateManyWithoutUserNestedInput
+    projectInquiries?: ProjectInquiryUncheckedUpdateManyWithoutUserNestedInput
+    calendarEvents?: CalendarEventUncheckedUpdateManyWithoutUserNestedInput
+    businessContacts?: BusinessContactUncheckedUpdateManyWithoutUserNestedInput
+    businessTasks?: BusinessTaskUncheckedUpdateManyWithoutUserNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutUserNestedInput
+    automationRuns?: AutomationRunUncheckedUpdateManyWithoutUserNestedInput
+    commerceProducts?: CommerceProductUncheckedUpdateManyWithoutUserNestedInput
+    commerceOrders?: CommerceOrderUncheckedUpdateManyWithoutUserNestedInput
+    adsCampaigns?: AdsCampaignUncheckedUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUncheckedUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUncheckedUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUncheckedUpdateManyWithoutUserNestedInput
+    appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
+    sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
+    flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
+    writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
+    translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
+    libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
+    codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
+    educationCourses?: EducationCourseUncheckedUpdateManyWithoutUserNestedInput
+    educationNotes?: EducationNoteUncheckedUpdateManyWithoutUserNestedInput
+    educationQuizzes?: EducationQuizUncheckedUpdateManyWithoutUserNestedInput
+    careerResumes?: CareerResumeUncheckedUpdateManyWithoutUserNestedInput
+    careerApplications?: CareerApplicationUncheckedUpdateManyWithoutUserNestedInput
+    healthHabits?: HealthHabitUncheckedUpdateManyWithoutUserNestedInput
+    healthLogs?: HealthLogUncheckedUpdateManyWithoutUserNestedInput
+    financeTransactions?: FinanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+    financeBudgets?: FinanceBudgetUncheckedUpdateManyWithoutUserNestedInput
+    financeGoals?: FinanceGoalUncheckedUpdateManyWithoutUserNestedInput
+    travelTrips?: TravelTripUncheckedUpdateManyWithoutUserNestedInput
+    shippingShipments?: ShippingShipmentUncheckedUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type WriterBookUpsertWithoutCharactersInput = {
+    update: XOR<WriterBookUpdateWithoutCharactersInput, WriterBookUncheckedUpdateWithoutCharactersInput>
+    create: XOR<WriterBookCreateWithoutCharactersInput, WriterBookUncheckedCreateWithoutCharactersInput>
+    where?: WriterBookWhereInput
+  }
+
+  export type WriterBookUpdateToOneWithWhereWithoutCharactersInput = {
+    where?: WriterBookWhereInput
+    data: XOR<WriterBookUpdateWithoutCharactersInput, WriterBookUncheckedUpdateWithoutCharactersInput>
+  }
+
+  export type WriterBookUpdateWithoutCharactersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    premise?: StringFieldUpdateOperationsInput | string
+    genre?: StringFieldUpdateOperationsInput | string
+    themes?: StringFieldUpdateOperationsInput | string
+    audience?: StringFieldUpdateOperationsInput | string
+    tone?: StringFieldUpdateOperationsInput | string
+    worldBible?: StringFieldUpdateOperationsInput | string
+    storyBible?: StringFieldUpdateOperationsInput | string
+    plot?: StringFieldUpdateOperationsInput | string
+    outline?: StringFieldUpdateOperationsInput | string
+    locations?: StringFieldUpdateOperationsInput | string
+    timeline?: StringFieldUpdateOperationsInput | string
+    continuityNotes?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutWriterBooksNestedInput
+    chapters?: WriterChapterUpdateManyWithoutBookNestedInput
+  }
+
+  export type WriterBookUncheckedUpdateWithoutCharactersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    premise?: StringFieldUpdateOperationsInput | string
+    genre?: StringFieldUpdateOperationsInput | string
+    themes?: StringFieldUpdateOperationsInput | string
+    audience?: StringFieldUpdateOperationsInput | string
+    tone?: StringFieldUpdateOperationsInput | string
+    worldBible?: StringFieldUpdateOperationsInput | string
+    storyBible?: StringFieldUpdateOperationsInput | string
+    plot?: StringFieldUpdateOperationsInput | string
+    outline?: StringFieldUpdateOperationsInput | string
+    locations?: StringFieldUpdateOperationsInput | string
+    timeline?: StringFieldUpdateOperationsInput | string
+    continuityNotes?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    chapters?: WriterChapterUncheckedUpdateManyWithoutBookNestedInput
+  }
+
+  export type UserCreateWithoutWriterChaptersInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    password?: string | null
+    stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    conversations?: ConversationCreateNestedManyWithoutUserInput
+    legalDocuments?: LegalDocumentCreateNestedManyWithoutUserInput
+    intelligenceDocuments?: IntelligenceDocumentCreateNestedManyWithoutUserInput
+    projectInquiries?: ProjectInquiryCreateNestedManyWithoutUserInput
+    calendarEvents?: CalendarEventCreateNestedManyWithoutUserInput
+    businessContacts?: BusinessContactCreateNestedManyWithoutUserInput
+    businessTasks?: BusinessTaskCreateNestedManyWithoutUserInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutUserInput
+    automationRuns?: AutomationRunCreateNestedManyWithoutUserInput
+    commerceProducts?: CommerceProductCreateNestedManyWithoutUserInput
+    commerceOrders?: CommerceOrderCreateNestedManyWithoutUserInput
+    adsCampaigns?: AdsCampaignCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalCreateNestedManyWithoutUserInput
+    appListings?: AppListingCreateNestedManyWithoutUserInput
+    sites?: SiteCreateNestedManyWithoutUserInput
+    flows?: FlowCreateNestedManyWithoutUserInput
+    writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
+    libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
+    codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
+    educationCourses?: EducationCourseCreateNestedManyWithoutUserInput
+    educationNotes?: EducationNoteCreateNestedManyWithoutUserInput
+    educationQuizzes?: EducationQuizCreateNestedManyWithoutUserInput
+    careerResumes?: CareerResumeCreateNestedManyWithoutUserInput
+    careerApplications?: CareerApplicationCreateNestedManyWithoutUserInput
+    healthHabits?: HealthHabitCreateNestedManyWithoutUserInput
+    healthLogs?: HealthLogCreateNestedManyWithoutUserInput
+    financeTransactions?: FinanceTransactionCreateNestedManyWithoutUserInput
+    financeBudgets?: FinanceBudgetCreateNestedManyWithoutUserInput
+    financeGoals?: FinanceGoalCreateNestedManyWithoutUserInput
+    travelTrips?: TravelTripCreateNestedManyWithoutUserInput
+    shippingShipments?: ShippingShipmentCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutWriterChaptersInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    password?: string | null
+    stripeCustomerId?: string | null
+    paystackCustomerCode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutUserInput
+    legalDocuments?: LegalDocumentUncheckedCreateNestedManyWithoutUserInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedCreateNestedManyWithoutUserInput
+    projectInquiries?: ProjectInquiryUncheckedCreateNestedManyWithoutUserInput
+    calendarEvents?: CalendarEventUncheckedCreateNestedManyWithoutUserInput
+    businessContacts?: BusinessContactUncheckedCreateNestedManyWithoutUserInput
+    businessTasks?: BusinessTaskUncheckedCreateNestedManyWithoutUserInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutUserInput
+    automationRuns?: AutomationRunUncheckedCreateNestedManyWithoutUserInput
+    commerceProducts?: CommerceProductUncheckedCreateNestedManyWithoutUserInput
+    commerceOrders?: CommerceOrderUncheckedCreateNestedManyWithoutUserInput
+    adsCampaigns?: AdsCampaignUncheckedCreateNestedManyWithoutUserInput
+    adsCreatives?: AdsCreativeUncheckedCreateNestedManyWithoutUserInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedCreateNestedManyWithoutUserInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedCreateNestedManyWithoutUserInput
+    adsRecommendations?: AdsRecommendationUncheckedCreateNestedManyWithoutUserInput
+    adsAiUsage?: AdsAiUsageUncheckedCreateNestedManyWithoutUserInput
+    dailyNotes?: DailyNoteUncheckedCreateNestedManyWithoutUserInput
+    dailyGoals?: DailyGoalUncheckedCreateNestedManyWithoutUserInput
+    appListings?: AppListingUncheckedCreateNestedManyWithoutUserInput
+    sites?: SiteUncheckedCreateNestedManyWithoutUserInput
+    flows?: FlowUncheckedCreateNestedManyWithoutUserInput
+    writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
+    libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
+    codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
+    educationCourses?: EducationCourseUncheckedCreateNestedManyWithoutUserInput
+    educationNotes?: EducationNoteUncheckedCreateNestedManyWithoutUserInput
+    educationQuizzes?: EducationQuizUncheckedCreateNestedManyWithoutUserInput
+    careerResumes?: CareerResumeUncheckedCreateNestedManyWithoutUserInput
+    careerApplications?: CareerApplicationUncheckedCreateNestedManyWithoutUserInput
+    healthHabits?: HealthHabitUncheckedCreateNestedManyWithoutUserInput
+    healthLogs?: HealthLogUncheckedCreateNestedManyWithoutUserInput
+    financeTransactions?: FinanceTransactionUncheckedCreateNestedManyWithoutUserInput
+    financeBudgets?: FinanceBudgetUncheckedCreateNestedManyWithoutUserInput
+    financeGoals?: FinanceGoalUncheckedCreateNestedManyWithoutUserInput
+    travelTrips?: TravelTripUncheckedCreateNestedManyWithoutUserInput
+    shippingShipments?: ShippingShipmentUncheckedCreateNestedManyWithoutUserInput
+    billingSubscriptions?: BillingSubscriptionUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutWriterChaptersInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutWriterChaptersInput, UserUncheckedCreateWithoutWriterChaptersInput>
+  }
+
+  export type WriterBookCreateWithoutChaptersInput = {
+    id?: string
+    title: string
+    premise?: string
+    genre?: string
+    themes?: string
+    audience?: string
+    tone?: string
+    worldBible?: string
+    storyBible?: string
+    plot?: string
+    outline?: string
+    locations?: string
+    timeline?: string
+    continuityNotes?: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutWriterBooksInput
+    characters?: WriterCharacterCreateNestedManyWithoutBookInput
+  }
+
+  export type WriterBookUncheckedCreateWithoutChaptersInput = {
+    id?: string
+    userId: string
+    title: string
+    premise?: string
+    genre?: string
+    themes?: string
+    audience?: string
+    tone?: string
+    worldBible?: string
+    storyBible?: string
+    plot?: string
+    outline?: string
+    locations?: string
+    timeline?: string
+    continuityNotes?: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    characters?: WriterCharacterUncheckedCreateNestedManyWithoutBookInput
+  }
+
+  export type WriterBookCreateOrConnectWithoutChaptersInput = {
+    where: WriterBookWhereUniqueInput
+    create: XOR<WriterBookCreateWithoutChaptersInput, WriterBookUncheckedCreateWithoutChaptersInput>
+  }
+
+  export type UserUpsertWithoutWriterChaptersInput = {
+    update: XOR<UserUpdateWithoutWriterChaptersInput, UserUncheckedUpdateWithoutWriterChaptersInput>
+    create: XOR<UserCreateWithoutWriterChaptersInput, UserUncheckedCreateWithoutWriterChaptersInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutWriterChaptersInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutWriterChaptersInput, UserUncheckedUpdateWithoutWriterChaptersInput>
+  }
+
+  export type UserUpdateWithoutWriterChaptersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUpdateManyWithoutUserNestedInput
+    legalDocuments?: LegalDocumentUpdateManyWithoutUserNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUpdateManyWithoutUserNestedInput
+    projectInquiries?: ProjectInquiryUpdateManyWithoutUserNestedInput
+    calendarEvents?: CalendarEventUpdateManyWithoutUserNestedInput
+    businessContacts?: BusinessContactUpdateManyWithoutUserNestedInput
+    businessTasks?: BusinessTaskUpdateManyWithoutUserNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutUserNestedInput
+    automationRuns?: AutomationRunUpdateManyWithoutUserNestedInput
+    commerceProducts?: CommerceProductUpdateManyWithoutUserNestedInput
+    commerceOrders?: CommerceOrderUpdateManyWithoutUserNestedInput
+    adsCampaigns?: AdsCampaignUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUpdateManyWithoutUserNestedInput
+    appListings?: AppListingUpdateManyWithoutUserNestedInput
+    sites?: SiteUpdateManyWithoutUserNestedInput
+    flows?: FlowUpdateManyWithoutUserNestedInput
+    writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
+    libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
+    codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
+    educationCourses?: EducationCourseUpdateManyWithoutUserNestedInput
+    educationNotes?: EducationNoteUpdateManyWithoutUserNestedInput
+    educationQuizzes?: EducationQuizUpdateManyWithoutUserNestedInput
+    careerResumes?: CareerResumeUpdateManyWithoutUserNestedInput
+    careerApplications?: CareerApplicationUpdateManyWithoutUserNestedInput
+    healthHabits?: HealthHabitUpdateManyWithoutUserNestedInput
+    healthLogs?: HealthLogUpdateManyWithoutUserNestedInput
+    financeTransactions?: FinanceTransactionUpdateManyWithoutUserNestedInput
+    financeBudgets?: FinanceBudgetUpdateManyWithoutUserNestedInput
+    financeGoals?: FinanceGoalUpdateManyWithoutUserNestedInput
+    travelTrips?: TravelTripUpdateManyWithoutUserNestedInput
+    shippingShipments?: ShippingShipmentUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutWriterChaptersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paystackCustomerCode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutUserNestedInput
+    legalDocuments?: LegalDocumentUncheckedUpdateManyWithoutUserNestedInput
+    intelligenceDocuments?: IntelligenceDocumentUncheckedUpdateManyWithoutUserNestedInput
+    projectInquiries?: ProjectInquiryUncheckedUpdateManyWithoutUserNestedInput
+    calendarEvents?: CalendarEventUncheckedUpdateManyWithoutUserNestedInput
+    businessContacts?: BusinessContactUncheckedUpdateManyWithoutUserNestedInput
+    businessTasks?: BusinessTaskUncheckedUpdateManyWithoutUserNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutUserNestedInput
+    automationRuns?: AutomationRunUncheckedUpdateManyWithoutUserNestedInput
+    commerceProducts?: CommerceProductUncheckedUpdateManyWithoutUserNestedInput
+    commerceOrders?: CommerceOrderUncheckedUpdateManyWithoutUserNestedInput
+    adsCampaigns?: AdsCampaignUncheckedUpdateManyWithoutUserNestedInput
+    adsCreatives?: AdsCreativeUncheckedUpdateManyWithoutUserNestedInput
+    adsPlatformConnections?: AdsPlatformConnectionUncheckedUpdateManyWithoutUserNestedInput
+    adsLandingAnalyses?: AdsLandingPageAnalysisUncheckedUpdateManyWithoutUserNestedInput
+    adsRecommendations?: AdsRecommendationUncheckedUpdateManyWithoutUserNestedInput
+    adsAiUsage?: AdsAiUsageUncheckedUpdateManyWithoutUserNestedInput
+    dailyNotes?: DailyNoteUncheckedUpdateManyWithoutUserNestedInput
+    dailyGoals?: DailyGoalUncheckedUpdateManyWithoutUserNestedInput
+    appListings?: AppListingUncheckedUpdateManyWithoutUserNestedInput
+    sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
+    flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
+    writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
+    libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
+    codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
+    educationCourses?: EducationCourseUncheckedUpdateManyWithoutUserNestedInput
+    educationNotes?: EducationNoteUncheckedUpdateManyWithoutUserNestedInput
+    educationQuizzes?: EducationQuizUncheckedUpdateManyWithoutUserNestedInput
+    careerResumes?: CareerResumeUncheckedUpdateManyWithoutUserNestedInput
+    careerApplications?: CareerApplicationUncheckedUpdateManyWithoutUserNestedInput
+    healthHabits?: HealthHabitUncheckedUpdateManyWithoutUserNestedInput
+    healthLogs?: HealthLogUncheckedUpdateManyWithoutUserNestedInput
+    financeTransactions?: FinanceTransactionUncheckedUpdateManyWithoutUserNestedInput
+    financeBudgets?: FinanceBudgetUncheckedUpdateManyWithoutUserNestedInput
+    financeGoals?: FinanceGoalUncheckedUpdateManyWithoutUserNestedInput
+    travelTrips?: TravelTripUncheckedUpdateManyWithoutUserNestedInput
+    shippingShipments?: ShippingShipmentUncheckedUpdateManyWithoutUserNestedInput
+    billingSubscriptions?: BillingSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type WriterBookUpsertWithoutChaptersInput = {
+    update: XOR<WriterBookUpdateWithoutChaptersInput, WriterBookUncheckedUpdateWithoutChaptersInput>
+    create: XOR<WriterBookCreateWithoutChaptersInput, WriterBookUncheckedCreateWithoutChaptersInput>
+    where?: WriterBookWhereInput
+  }
+
+  export type WriterBookUpdateToOneWithWhereWithoutChaptersInput = {
+    where?: WriterBookWhereInput
+    data: XOR<WriterBookUpdateWithoutChaptersInput, WriterBookUncheckedUpdateWithoutChaptersInput>
+  }
+
+  export type WriterBookUpdateWithoutChaptersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    premise?: StringFieldUpdateOperationsInput | string
+    genre?: StringFieldUpdateOperationsInput | string
+    themes?: StringFieldUpdateOperationsInput | string
+    audience?: StringFieldUpdateOperationsInput | string
+    tone?: StringFieldUpdateOperationsInput | string
+    worldBible?: StringFieldUpdateOperationsInput | string
+    storyBible?: StringFieldUpdateOperationsInput | string
+    plot?: StringFieldUpdateOperationsInput | string
+    outline?: StringFieldUpdateOperationsInput | string
+    locations?: StringFieldUpdateOperationsInput | string
+    timeline?: StringFieldUpdateOperationsInput | string
+    continuityNotes?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutWriterBooksNestedInput
+    characters?: WriterCharacterUpdateManyWithoutBookNestedInput
+  }
+
+  export type WriterBookUncheckedUpdateWithoutChaptersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    premise?: StringFieldUpdateOperationsInput | string
+    genre?: StringFieldUpdateOperationsInput | string
+    themes?: StringFieldUpdateOperationsInput | string
+    audience?: StringFieldUpdateOperationsInput | string
+    tone?: StringFieldUpdateOperationsInput | string
+    worldBible?: StringFieldUpdateOperationsInput | string
+    storyBible?: StringFieldUpdateOperationsInput | string
+    plot?: StringFieldUpdateOperationsInput | string
+    outline?: StringFieldUpdateOperationsInput | string
+    locations?: StringFieldUpdateOperationsInput | string
+    timeline?: StringFieldUpdateOperationsInput | string
+    continuityNotes?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    characters?: WriterCharacterUncheckedUpdateManyWithoutBookNestedInput
   }
 
   export type UserCreateWithoutTranslateEntriesInput = {
@@ -83245,6 +90106,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
     educationCourses?: EducationCourseCreateNestedManyWithoutUserInput
@@ -83298,6 +90162,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
     educationCourses?: EducationCourseUncheckedCreateNestedManyWithoutUserInput
@@ -83367,6 +90234,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
     educationCourses?: EducationCourseUpdateManyWithoutUserNestedInput
@@ -83420,6 +90290,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
     educationCourses?: EducationCourseUncheckedUpdateManyWithoutUserNestedInput
@@ -83473,6 +90346,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
     educationCourses?: EducationCourseCreateNestedManyWithoutUserInput
@@ -83526,6 +90402,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
     educationCourses?: EducationCourseUncheckedCreateNestedManyWithoutUserInput
@@ -83595,6 +90474,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
     educationCourses?: EducationCourseUpdateManyWithoutUserNestedInput
@@ -83648,6 +90530,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
     educationCourses?: EducationCourseUncheckedUpdateManyWithoutUserNestedInput
@@ -83701,6 +90586,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     educationCourses?: EducationCourseCreateNestedManyWithoutUserInput
@@ -83754,6 +90642,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     educationCourses?: EducationCourseUncheckedCreateNestedManyWithoutUserInput
@@ -83823,6 +90714,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     educationCourses?: EducationCourseUpdateManyWithoutUserNestedInput
@@ -83876,6 +90770,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     educationCourses?: EducationCourseUncheckedUpdateManyWithoutUserNestedInput
@@ -83929,6 +90826,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -83982,6 +90882,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -84113,6 +91016,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -84166,6 +91072,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -84251,6 +91160,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -84304,6 +91216,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -84402,6 +91317,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -84455,6 +91373,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -84543,6 +91464,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -84596,6 +91520,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -84694,6 +91621,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -84747,6 +91677,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -84835,6 +91768,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -84888,6 +91824,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -84957,6 +91896,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -85010,6 +91952,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -85063,6 +92008,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -85116,6 +92064,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -85185,6 +92136,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -85238,6 +92192,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -85291,6 +92248,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -85344,6 +92304,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -85413,6 +92376,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -85466,6 +92432,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -85519,6 +92488,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -85572,6 +92544,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -85641,6 +92616,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -85694,6 +92672,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -85747,6 +92728,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -85800,6 +92784,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -85869,6 +92856,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -85922,6 +92912,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -85975,6 +92968,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -86028,6 +93024,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -86097,6 +93096,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -86150,6 +93152,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -86203,6 +93208,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -86256,6 +93264,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -86325,6 +93336,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -86378,6 +93392,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -86431,6 +93448,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -86484,6 +93504,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -86553,6 +93576,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -86606,6 +93632,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -86659,6 +93688,9 @@ export namespace Prisma {
     sites?: SiteCreateNestedManyWithoutUserInput
     flows?: FlowCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectCreateNestedManyWithoutUserInput
@@ -86712,6 +93744,9 @@ export namespace Prisma {
     sites?: SiteUncheckedCreateNestedManyWithoutUserInput
     flows?: FlowUncheckedCreateNestedManyWithoutUserInput
     writerDocuments?: WriterDocumentUncheckedCreateNestedManyWithoutUserInput
+    writerBooks?: WriterBookUncheckedCreateNestedManyWithoutUserInput
+    writerCharacters?: WriterCharacterUncheckedCreateNestedManyWithoutUserInput
+    writerChapters?: WriterChapterUncheckedCreateNestedManyWithoutUserInput
     translateEntries?: TranslateEntryUncheckedCreateNestedManyWithoutUserInput
     libraryDocuments?: LibraryDocumentUncheckedCreateNestedManyWithoutUserInput
     codingProjects?: CodingProjectUncheckedCreateNestedManyWithoutUserInput
@@ -86781,6 +93816,9 @@ export namespace Prisma {
     sites?: SiteUpdateManyWithoutUserNestedInput
     flows?: FlowUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUpdateManyWithoutUserNestedInput
@@ -86834,6 +93872,9 @@ export namespace Prisma {
     sites?: SiteUncheckedUpdateManyWithoutUserNestedInput
     flows?: FlowUncheckedUpdateManyWithoutUserNestedInput
     writerDocuments?: WriterDocumentUncheckedUpdateManyWithoutUserNestedInput
+    writerBooks?: WriterBookUncheckedUpdateManyWithoutUserNestedInput
+    writerCharacters?: WriterCharacterUncheckedUpdateManyWithoutUserNestedInput
+    writerChapters?: WriterChapterUncheckedUpdateManyWithoutUserNestedInput
     translateEntries?: TranslateEntryUncheckedUpdateManyWithoutUserNestedInput
     libraryDocuments?: LibraryDocumentUncheckedUpdateManyWithoutUserNestedInput
     codingProjects?: CodingProjectUncheckedUpdateManyWithoutUserNestedInput
@@ -87145,6 +94186,53 @@ export namespace Prisma {
     title: string
     body: string
     folder?: string | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WriterBookCreateManyUserInput = {
+    id?: string
+    title: string
+    premise?: string
+    genre?: string
+    themes?: string
+    audience?: string
+    tone?: string
+    worldBible?: string
+    storyBible?: string
+    plot?: string
+    outline?: string
+    locations?: string
+    timeline?: string
+    continuityNotes?: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WriterCharacterCreateManyUserInput = {
+    id?: string
+    bookId: string
+    name: string
+    role?: string
+    bio?: string
+    appearance?: string
+    motivation?: string
+    relationships?: string
+    notes?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WriterChapterCreateManyUserInput = {
+    id?: string
+    bookId: string
+    position: number
+    title: string
+    summary?: string
+    scenePlan?: string
+    body?: string
     status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -88251,6 +95339,151 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type WriterBookUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    premise?: StringFieldUpdateOperationsInput | string
+    genre?: StringFieldUpdateOperationsInput | string
+    themes?: StringFieldUpdateOperationsInput | string
+    audience?: StringFieldUpdateOperationsInput | string
+    tone?: StringFieldUpdateOperationsInput | string
+    worldBible?: StringFieldUpdateOperationsInput | string
+    storyBible?: StringFieldUpdateOperationsInput | string
+    plot?: StringFieldUpdateOperationsInput | string
+    outline?: StringFieldUpdateOperationsInput | string
+    locations?: StringFieldUpdateOperationsInput | string
+    timeline?: StringFieldUpdateOperationsInput | string
+    continuityNotes?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    characters?: WriterCharacterUpdateManyWithoutBookNestedInput
+    chapters?: WriterChapterUpdateManyWithoutBookNestedInput
+  }
+
+  export type WriterBookUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    premise?: StringFieldUpdateOperationsInput | string
+    genre?: StringFieldUpdateOperationsInput | string
+    themes?: StringFieldUpdateOperationsInput | string
+    audience?: StringFieldUpdateOperationsInput | string
+    tone?: StringFieldUpdateOperationsInput | string
+    worldBible?: StringFieldUpdateOperationsInput | string
+    storyBible?: StringFieldUpdateOperationsInput | string
+    plot?: StringFieldUpdateOperationsInput | string
+    outline?: StringFieldUpdateOperationsInput | string
+    locations?: StringFieldUpdateOperationsInput | string
+    timeline?: StringFieldUpdateOperationsInput | string
+    continuityNotes?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    characters?: WriterCharacterUncheckedUpdateManyWithoutBookNestedInput
+    chapters?: WriterChapterUncheckedUpdateManyWithoutBookNestedInput
+  }
+
+  export type WriterBookUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    premise?: StringFieldUpdateOperationsInput | string
+    genre?: StringFieldUpdateOperationsInput | string
+    themes?: StringFieldUpdateOperationsInput | string
+    audience?: StringFieldUpdateOperationsInput | string
+    tone?: StringFieldUpdateOperationsInput | string
+    worldBible?: StringFieldUpdateOperationsInput | string
+    storyBible?: StringFieldUpdateOperationsInput | string
+    plot?: StringFieldUpdateOperationsInput | string
+    outline?: StringFieldUpdateOperationsInput | string
+    locations?: StringFieldUpdateOperationsInput | string
+    timeline?: StringFieldUpdateOperationsInput | string
+    continuityNotes?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WriterCharacterUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
+    appearance?: StringFieldUpdateOperationsInput | string
+    motivation?: StringFieldUpdateOperationsInput | string
+    relationships?: StringFieldUpdateOperationsInput | string
+    notes?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    book?: WriterBookUpdateOneRequiredWithoutCharactersNestedInput
+  }
+
+  export type WriterCharacterUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bookId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
+    appearance?: StringFieldUpdateOperationsInput | string
+    motivation?: StringFieldUpdateOperationsInput | string
+    relationships?: StringFieldUpdateOperationsInput | string
+    notes?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WriterCharacterUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bookId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
+    appearance?: StringFieldUpdateOperationsInput | string
+    motivation?: StringFieldUpdateOperationsInput | string
+    relationships?: StringFieldUpdateOperationsInput | string
+    notes?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WriterChapterUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    summary?: StringFieldUpdateOperationsInput | string
+    scenePlan?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    book?: WriterBookUpdateOneRequiredWithoutChaptersNestedInput
+  }
+
+  export type WriterChapterUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bookId?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    summary?: StringFieldUpdateOperationsInput | string
+    scenePlan?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WriterChapterUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bookId?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    summary?: StringFieldUpdateOperationsInput | string
+    scenePlan?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type TranslateEntryUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     sourceLang?: StringFieldUpdateOperationsInput | string
@@ -89183,6 +96416,114 @@ export namespace Prisma {
     kind?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     source?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WriterCharacterCreateManyBookInput = {
+    id?: string
+    userId: string
+    name: string
+    role?: string
+    bio?: string
+    appearance?: string
+    motivation?: string
+    relationships?: string
+    notes?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WriterChapterCreateManyBookInput = {
+    id?: string
+    userId: string
+    position: number
+    title: string
+    summary?: string
+    scenePlan?: string
+    body?: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WriterCharacterUpdateWithoutBookInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
+    appearance?: StringFieldUpdateOperationsInput | string
+    motivation?: StringFieldUpdateOperationsInput | string
+    relationships?: StringFieldUpdateOperationsInput | string
+    notes?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutWriterCharactersNestedInput
+  }
+
+  export type WriterCharacterUncheckedUpdateWithoutBookInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
+    appearance?: StringFieldUpdateOperationsInput | string
+    motivation?: StringFieldUpdateOperationsInput | string
+    relationships?: StringFieldUpdateOperationsInput | string
+    notes?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WriterCharacterUncheckedUpdateManyWithoutBookInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
+    appearance?: StringFieldUpdateOperationsInput | string
+    motivation?: StringFieldUpdateOperationsInput | string
+    relationships?: StringFieldUpdateOperationsInput | string
+    notes?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WriterChapterUpdateWithoutBookInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    summary?: StringFieldUpdateOperationsInput | string
+    scenePlan?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutWriterChaptersNestedInput
+  }
+
+  export type WriterChapterUncheckedUpdateWithoutBookInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    summary?: StringFieldUpdateOperationsInput | string
+    scenePlan?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WriterChapterUncheckedUpdateManyWithoutBookInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    summary?: StringFieldUpdateOperationsInput | string
+    scenePlan?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

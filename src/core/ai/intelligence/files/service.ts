@@ -2,6 +2,7 @@ import { getUserConversation } from "@/core/ai/conversation/service";
 import {
   MAX_INTELLIGENCE_ATTACHMENTS,
 } from "@/core/constants";
+import type { AilaMode } from "@/core/types";
 import { ERROR_CODES } from "@/lib/errors/app-error";
 
 import {
@@ -25,7 +26,8 @@ export type IntelligenceFileErrorCode =
   | typeof ERROR_CODES.VALIDATION_FAILED
   | typeof ERROR_CODES.NOT_FOUND
   | typeof ERROR_CODES.CONFLICT
-  | typeof ERROR_CODES.TIMEOUT;
+  | typeof ERROR_CODES.TIMEOUT
+  | typeof ERROR_CODES.EXTERNAL_SERVICE_ERROR;
 
 export type IntelligenceFileFailure = {
   ok: false;
@@ -61,11 +63,13 @@ export async function processIntelligenceUpload(options: {
   fileSize: number;
   bytes: Uint8Array;
   conversationId?: string;
+  mode?: AilaMode;
   store?: IntelligenceDocumentStore;
   getConversation?: typeof getUserConversation;
 }): Promise<ProcessIntelligenceUploadResult> {
   const store = options.store ?? prismaIntelligenceDocumentStore;
   const loadConversation = options.getConversation ?? getUserConversation;
+  const expectedMode = options.mode ?? "intelligence";
 
   if (options.conversationId) {
     const conversation = await loadConversation(
@@ -77,7 +81,7 @@ export async function processIntelligenceUpload(options: {
       return fail(404, ERROR_CODES.NOT_FOUND, "Conversation not found.");
     }
 
-    if (conversation.mode !== "intelligence") {
+    if (conversation.mode !== expectedMode) {
       return fail(
         409,
         ERROR_CODES.CONFLICT,
@@ -96,11 +100,18 @@ export async function processIntelligenceUpload(options: {
     return fail(400, validated.code, validated.message);
   }
 
-  const extracted = await extractIntelligenceText(options.bytes, validated.kind);
+  const extracted = await extractIntelligenceText(options.bytes, validated.kind, {
+    mimeType: validated.mimeType,
+    fileName: validated.fileName,
+  });
 
   if (!extracted.ok) {
     return fail(
-      extracted.code === ERROR_CODES.TIMEOUT ? 408 : 400,
+      extracted.code === ERROR_CODES.TIMEOUT
+        ? 408
+        : extracted.code === ERROR_CODES.EXTERNAL_SERVICE_ERROR
+          ? 502
+          : 400,
       extracted.code,
       extracted.message
     );

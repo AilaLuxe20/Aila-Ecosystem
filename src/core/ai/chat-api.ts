@@ -46,6 +46,8 @@ export const AILA_MODE_VALUES = [
   "shipping",
 ] as const satisfies readonly AilaMode[];
 
+export { CHAT_ATTACHMENT_MODES, modeAllowsChatAttachments } from "@/core/ai/attachments";
+
 export const ailaModeQuerySchema = z.enum(AILA_MODE_VALUES);
 
 const chatMessageSchema = z.object({
