@@ -3,11 +3,12 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   async redirects() {
     return [
-      // Canonical host: Clerk proxy is configured for apex only (www /__clerk → host_invalid)
+      // Canonical host: Clerk proxy is apex-only. Cloudflare currently 301s apex `/` → www `/`.
+      // Redirect only non-root www paths so `/` cannot loop (www `/` ↔ apex `/`).
       {
-        source: "/:path*",
+        source: "/:path+",
         has: [{ type: "host", value: "www.ailaluxe.com" }],
-        destination: "https://ailaluxe.com/:path*",
+        destination: "https://ailaluxe.com/:path+",
         permanent: true,
       },
       { source: "/login", destination: "/sign-in", permanent: false },
