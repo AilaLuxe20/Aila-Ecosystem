@@ -67,7 +67,7 @@ export async function getDashboardSummary(
     prisma.conversation.count({ where: { userId, mode: "intelligence" } }),
     prisma.dailyNote.count({ where: { userId } }),
     prisma.dailyGoal.count({ where: { userId, status: "open" } }),
-    prisma.writerDocument.count({ where: { userId } }),
+    prisma.writerBook.count({ where: { userId } }),
     prisma.translateEntry.count({ where: { userId } }),
     prisma.libraryDocument.count({ where: { userId } }),
     prisma.legalDocument.count({ where: { userId } }),

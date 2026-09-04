@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SignIn } from "@clerk/nextjs";
 import { ClerkAuthFrame } from "@/components/auth/ClerkAuthFrame";
+import { safeRedirectPath } from "@/lib/utils/url";
 
 export const metadata: Metadata = {
   title: "Sign in",
@@ -17,10 +18,7 @@ type SignInPageProps = {
 
 export default async function SignInPage({ searchParams }: SignInPageProps) {
   const params = await searchParams;
-  const redirectUrl =
-    typeof params.redirect_url === "string" && params.redirect_url.startsWith("/")
-      ? params.redirect_url
-      : "/dashboard";
+  const redirectUrl = safeRedirectPath(params.redirect_url, "/dashboard");
 
   return (
     <ClerkAuthFrame

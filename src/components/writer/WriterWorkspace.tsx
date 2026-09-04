@@ -45,6 +45,7 @@ function WriterWorkspaceInner(): React.JSX.Element {
   const [generating, setGenerating] = useState<WriterGenerateAction | null>(null);
   const selectedIdRef = useRef<string | null>(null);
   const chapterSaveTimer = useRef<number | null>(null);
+  const pendingChapterSave = useRef<{ id: string; body: Record<string, unknown> } | null>(null);
 
   const selectedCharacter = book?.characters.find((item) => item.id === characterId) ?? book?.characters[0] ?? null;
   const selectedChapter = book?.chapters.find((item) => item.id === chapterId) ?? book?.chapters[0] ?? null;
@@ -167,6 +168,7 @@ function WriterWorkspaceInner(): React.JSX.Element {
     if (!book) return;
     setGenerating(action);
     try {
+      await flushChapterSave();
       const response = (await workspaceFetch(
         "/api/writer/generate",
         {
@@ -232,19 +234,46 @@ function WriterWorkspaceInner(): React.JSX.Element {
   }
 
   function queueChapterSave(chapter: { id: string }, body: Record<string, unknown>) {
+    pendingChapterSave.current = { id: chapter.id, body };
     if (chapterSaveTimer.current) window.clearTimeout(chapterSaveTimer.current);
     chapterSaveTimer.current = window.setTimeout(() => {
-      void workspaceFetch(
-        `/api/writer/chapters/${chapter.id}`,
+      void flushChapterSave();
+    }, 900);
+  }
+
+  async function flushChapterSave() {
+    if (chapterSaveTimer.current) {
+      window.clearTimeout(chapterSaveTimer.current);
+      chapterSaveTimer.current = null;
+    }
+    const pending = pendingChapterSave.current;
+    if (!pending) return;
+    pendingChapterSave.current = null;
+    try {
+      await workspaceFetch(
+        `/api/writer/chapters/${pending.id}`,
+        { method: "PATCH", body: JSON.stringify(pending.body) },
+        undefined,
+        getToken,
+      );
+      await loadList();
+    } catch (caught) {
+      toast.error(caught instanceof Error ? caught.message : "Unable to save the chapter.");
+      throw caught;
+    }
+  }
+
+  async function patchCharacter(character: { id: string }, body: Record<string, unknown>) {
+    try {
+      await workspaceFetch(
+        `/api/writer/characters/${character.id}`,
         { method: "PATCH", body: JSON.stringify(body) },
         undefined,
         getToken,
-      ).then(async () => {
-        if (book) await loadBook(book.id);
-      }).catch((caught: unknown) => {
-        toast.error(caught instanceof Error ? caught.message : "Unable to save the chapter.");
-      });
-    }, 900);
+      );
+    } catch (caught) {
+      toast.error(caught instanceof Error ? caught.message : "Unable to save the character.");
+    }
   }
 
   async function exportBook() {
@@ -325,7 +354,20 @@ function WriterWorkspaceInner(): React.JSX.Element {
           <div className="space-y-3">
             <Field label="New book">
               <div className="flex gap-2">
-                <Input value={newTitle} onChange={(event) => setNewTitle(event.target.value)} placeholder="Title" />
+                <Input
+                  value={newTitle}
+                  onChange={(event) => setNewTitle(event.target.value)}
+                  placeholder="Title"
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter") {
+                      event.preventDefault();
+                      void createBook();
+                    }
+                  }}
+                />
+                <Button variant="secondary" onClick={() => void createBook()} loading={saving}>
+                  Create
+                </Button>
               </div>
             </Field>
             <ul className="space-y-2">
@@ -516,12 +558,7 @@ function WriterWorkspaceInner(): React.JSX.Element {
                               })
                             }
                             onBlur={() =>
-                              void workspaceFetch(
-                                `/api/writer/characters/${selectedCharacter.id}`,
-                                { method: "PATCH", body: JSON.stringify({ name: selectedCharacter.name }) },
-                                undefined,
-                                getToken,
-                              )
+                              void patchCharacter(selectedCharacter, { name: selectedCharacter.name })
                             }
                           />
                         </Field>
@@ -537,12 +574,7 @@ function WriterWorkspaceInner(): React.JSX.Element {
                               })
                             }
                             onBlur={() =>
-                              void workspaceFetch(
-                                `/api/writer/characters/${selectedCharacter.id}`,
-                                { method: "PATCH", body: JSON.stringify({ role: selectedCharacter.role }) },
-                                undefined,
-                                getToken,
-                              )
+                              void patchCharacter(selectedCharacter, { role: selectedCharacter.role })
                             }
                           />
                         </Field>
@@ -560,12 +592,7 @@ function WriterWorkspaceInner(): React.JSX.Element {
                             })
                           }
                           onBlur={() =>
-                            void workspaceFetch(
-                              `/api/writer/characters/${selectedCharacter.id}`,
-                              { method: "PATCH", body: JSON.stringify({ bio: selectedCharacter.bio }) },
-                              undefined,
-                              getToken,
-                            )
+                            void patchCharacter(selectedCharacter, { bio: selectedCharacter.bio })
                           }
                         />
                       </Field>
@@ -584,12 +611,51 @@ function WriterWorkspaceInner(): React.JSX.Element {
                             })
                           }
                           onBlur={() =>
-                            void workspaceFetch(
-                              `/api/writer/characters/${selectedCharacter.id}`,
-                              { method: "PATCH", body: JSON.stringify({ motivation: selectedCharacter.motivation }) },
-                              undefined,
-                              getToken,
-                            )
+                            void patchCharacter(selectedCharacter, {
+                              motivation: selectedCharacter.motivation,
+                            })
+                          }
+                        />
+                      </Field>
+                      <Field label="Appearance">
+                        <Textarea
+                          rows={3}
+                          value={selectedCharacter.appearance}
+                          onChange={(event) =>
+                            applyBook({
+                              ...book,
+                              characters: book.characters.map((item) =>
+                                item.id === selectedCharacter.id
+                                  ? { ...item, appearance: event.target.value }
+                                  : item,
+                              ),
+                            })
+                          }
+                          onBlur={() =>
+                            void patchCharacter(selectedCharacter, {
+                              appearance: selectedCharacter.appearance,
+                            })
+                          }
+                        />
+                      </Field>
+                      <Field label="Relationships">
+                        <Textarea
+                          rows={3}
+                          value={selectedCharacter.relationships}
+                          onChange={(event) =>
+                            applyBook({
+                              ...book,
+                              characters: book.characters.map((item) =>
+                                item.id === selectedCharacter.id
+                                  ? { ...item, relationships: event.target.value }
+                                  : item,
+                              ),
+                            })
+                          }
+                          onBlur={() =>
+                            void patchCharacter(selectedCharacter, {
+                              relationships: selectedCharacter.relationships,
+                            })
                           }
                         />
                       </Field>
@@ -805,6 +871,7 @@ function WriterWorkspaceInner(): React.JSX.Element {
         <ChatInterface
           mode="writer"
           showConversationHistory
+          bookId={book?.id ?? null}
           placeholder="Ask Aila about this book, or attach a voice note, image, or research file..."
         />
       </div>

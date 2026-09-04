@@ -5,7 +5,7 @@ import {
   applyVerifiedPaystackTransaction,
   markPaystackSubscriptionStatus,
 } from "@/core/billing/service";
-import { hasProcessedPaystackEvent, recordPaystackEvent } from "@/core/billing/webhooks";
+import { claimPaystackEvent } from "@/core/billing/webhooks";
 import {
   parsePaystackMetadata,
   type PaystackSubscriptionData,
@@ -51,15 +51,17 @@ export async function POST(req: Request) {
     }
 
     const id = eventId(event, data);
-    if (await hasProcessedPaystackEvent(id)) {
+    // Claim first so concurrent deliveries cannot double-apply.
+    if (!(await claimPaystackEvent(id, event))) {
       return ok({ received: true, duplicate: true });
     }
 
     switch (event) {
       case "charge.success": {
         const transaction = data as unknown as PaystackTransactionData;
-        const metadata = parsePaystackMetadata(transaction.metadata);
-        await applyVerifiedPaystackTransaction(transaction, metadata.userId);
+        // Do not pass metadata.userId as "expected" — that would skip mismatch checks.
+        // applyVerifiedPaystackTransaction binds from metadata + validated amount/plan.
+        await applyVerifiedPaystackTransaction(transaction);
         break;
       }
       case "subscription.create":
@@ -98,7 +100,6 @@ export async function POST(req: Request) {
         log.info("Ignored Paystack event.", { event });
     }
 
-    await recordPaystackEvent(id, event);
     return ok({ received: true });
   } catch (error) {
     return failure(error);

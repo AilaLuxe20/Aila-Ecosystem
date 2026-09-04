@@ -31,7 +31,6 @@ export type EntitlementDecision = {
     | "staff"
     | "free_product"
     | "active_subscription"
-    | "clerk_pro"
     | "development"
     | "unauthenticated"
     | "subscription_required";
@@ -74,18 +73,19 @@ export function evaluateEntitlement(
     return { allowed: true, reason: "active_subscription" };
   }
 
-  if (role === "pro") {
-    return { allowed: true, reason: "clerk_pro" };
-  }
-
+  // Clerk `pro` is a cache hint only — Paystack subscription state is source of truth.
   return { allowed: false, reason: "subscription_required" };
 }
 
 export async function userHasActiveSubscription(userId: string): Promise<boolean> {
+  const now = new Date();
   const subscription = await prisma.billingSubscription.findFirst({
     where: {
       userId,
       status: { in: [...ACTIVE_SUBSCRIPTION_STATUSES] },
+      // Provisional charge rows use pending_* codes until subscription.create.
+      NOT: { paystackSubscriptionCode: { startsWith: "pending_" } },
+      OR: [{ currentPeriodEnd: null }, { currentPeriodEnd: { gt: now } }],
     },
     select: { id: true },
   });
@@ -102,7 +102,7 @@ export async function resolveProductEntitlement(
     return { allowed: true, reason: "development" };
   }
 
-  if (!isPaidProduct(product) || STAFF_ROLES.has(role) || role === "pro") {
+  if (!isPaidProduct(product) || STAFF_ROLES.has(role)) {
     return evaluateEntitlement(role, product, false);
   }
 
