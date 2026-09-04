@@ -6,16 +6,13 @@ import { AilaAuthenticationError, requirePrismaUser } from "@/core/auth/clerk-us
 import { productKeyFromMode, PRODUCTS, isProductKey, type ProductKey } from "@/core/products/catalog";
 import type { AilaMode } from "@/core/types";
 import { AuthenticationError, AuthorizationError } from "@/lib/errors/app-error";
+import { parseClerkPublicRole } from "@/lib/auth/role";
 import type { UserRole } from "@/types/auth";
-
-function resolveRole(role: UserRole | undefined): UserRole {
-  return role && role !== "guest" ? role : "user";
-}
 
 export async function getActorRole(): Promise<UserRole | null> {
   const { userId, sessionClaims } = await auth();
   if (!userId) return null;
-  return resolveRole(sessionClaims?.metadata?.role);
+  return parseClerkPublicRole(sessionClaims?.metadata?.role);
 }
 
 export async function requireProductAccess(product: ProductKey) {
@@ -25,7 +22,7 @@ export async function requireProductAccess(product: ProductKey) {
     redirect(`/sign-in?redirect_url=${encodeURIComponent(PRODUCTS[product].href)}`);
   }
 
-  const role = resolveRole(sessionClaims?.metadata?.role);
+  const role = parseClerkPublicRole(sessionClaims?.metadata?.role);
   const user = await requirePrismaUser();
   const decision = await resolveProductEntitlement(user.id, role, product);
 
@@ -43,7 +40,7 @@ export async function assertProductEntitlement(product: ProductKey) {
     throw new AuthenticationError();
   }
 
-  const role = resolveRole(sessionClaims?.metadata?.role);
+  const role = parseClerkPublicRole(sessionClaims?.metadata?.role);
   const user = await requirePrismaUser();
   const decision = await resolveProductEntitlement(user.id, role, product);
 
