@@ -19,3 +19,6 @@ export {
   runStreamingChatSession,
   type ProviderChatStreamEvent,
 } from "./session";
+export {
+  createStream,
+} from "./stream";
