@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const features = [
   {
@@ -36,15 +36,22 @@ const features = [
 ];
 
 export default function FeaturePanel() {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <section className="w-full max-w-5xl mx-auto mt-12">
       <div className="grid md:grid-cols-3 gap-6">
         {features.map((feature, index) => (
           <motion.div
             key={feature.title}
-            initial={{ opacity: 0, y: 30 }}
+            initial={
+              shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
+            }
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.15 }}
+            transition={{
+              delay: shouldReduceMotion ? 0 : index * 0.15,
+              duration: shouldReduceMotion ? 0 : undefined,
+            }}
             className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 shadow-xl"
           >
             <h3 className="text-xl font-semibold text-white">

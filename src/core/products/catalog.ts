@@ -210,7 +210,7 @@ export const PRODUCTS: Record<ProductKey, ProductDefinition> = {
     paid: true,
     group: "commerce",
     description:
-      "Create products and orders, then mark them paid after you receive payment.",
+      "Create products and orders, then mark them paid after you receive payment outside Aila.",
   },
   shipping: {
     key: "shipping",

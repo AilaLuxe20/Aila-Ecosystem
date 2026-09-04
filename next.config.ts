@@ -3,6 +3,13 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   async redirects() {
     return [
+      // Canonical host: Clerk proxy is configured for apex only (www /__clerk → host_invalid)
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.ailaluxe.com" }],
+        destination: "https://ailaluxe.com/:path*",
+        permanent: true,
+      },
       { source: "/login", destination: "/sign-in", permanent: false },
       { source: "/signup", destination: "/sign-up", permanent: false },
       { source: "/guest", destination: "/sign-in", permanent: false },

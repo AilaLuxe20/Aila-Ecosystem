@@ -826,8 +826,12 @@ export default function ChatInterface({
     : defaultHeaders[mode];
 
   useEffect(() => {
+    const prefersReducedMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     chatEndRef.current?.scrollIntoView({
-      behavior: "smooth",
+      behavior: prefersReducedMotion ? "auto" : "smooth",
     });
   }, [messages, typing, generating, conversationLoadStatus]);
 
