@@ -249,7 +249,7 @@ const platforms = [
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#030303] text-white">
+    <main className="relative min-h-screen overflow-x-clip overflow-y-visible bg-[#030303] text-white">
       {/* BACKGROUND */}
       <div className="absolute inset-0 -z-30 bg-[#030303]" />
 

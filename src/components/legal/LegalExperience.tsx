@@ -36,7 +36,7 @@ const legalCapabilities = [
 export function LegalExperience() {
   return (
     <AilaLegalProvider>
-      <main className="relative min-h-screen overflow-hidden bg-[#030303] text-white">
+      <main className="relative min-h-screen overflow-x-clip overflow-y-visible bg-[#030303] text-white">
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:72px_72px]" />
         <div className="pointer-events-none absolute left-1/2 top-[-350px] h-[900px] w-[1100px] -translate-x-1/2 rounded-full bg-blue-500/[0.1] blur-[200px]" />
         <div className="pointer-events-none absolute right-[-300px] top-[700px] h-[600px] w-[600px] rounded-full bg-cyan-500/[0.07] blur-[180px]" />
