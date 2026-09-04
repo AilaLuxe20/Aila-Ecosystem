@@ -11,6 +11,7 @@ import {
 } from "@/lib/errors/app-error";
 import { createLogger } from "@/lib/logger/logger";
 import { canAccess } from "@/lib/auth/can-access";
+import { parseClerkPublicRole } from "@/lib/auth/role";
 import { assertProductEntitlement } from "@/lib/auth/require-product-access";
 import { isProductKey } from "@/core/products/catalog";
 import { flattenZodError } from "@/lib/utils/validation";
@@ -85,9 +86,7 @@ async function resolveActor(): Promise<Actor | null> {
 
   return {
     userId,
-    role: sessionClaims?.metadata?.role && sessionClaims.metadata.role !== "guest"
-      ? sessionClaims.metadata.role
-      : "user",
+    role: parseClerkPublicRole(sessionClaims?.metadata?.role),
   };
 }
 
