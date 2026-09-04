@@ -159,9 +159,9 @@ export default function RootLayout({
             "https://ailaluxe.com",
             "https://www.ailaluxe.com",
           ]}
-          {...(shouldUseClerkFrontendApiProxy()
-            ? { proxyUrl: CLERK_FAPI_PROXY_PATH }
-            : {})}
+          proxyUrl={
+            shouldUseClerkFrontendApiProxy() ? CLERK_FAPI_PROXY_PATH : undefined
+          }
           appearance={{
             variables: {
               colorBackground: "#111111",

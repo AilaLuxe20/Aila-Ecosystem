@@ -4,10 +4,12 @@ import {
   shouldUseClerkFrontendApiProxy,
 } from "@/lib/auth/clerk-fapi-proxy";
 
-const isProduction = process.env.VERCEL_ENV === "production";
+const useAuthorizedParties =
+  process.env.VERCEL_ENV === "production" ||
+  (process.env.NODE_ENV === "production" && process.env.VERCEL_ENV !== "preview");
 
 const clerkMiddlewareOptions = {
-  ...(isProduction
+  ...(useAuthorizedParties
     ? {
         authorizedParties: [
           "https://ailaluxe.com",

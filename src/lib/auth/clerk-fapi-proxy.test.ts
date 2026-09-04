@@ -6,10 +6,12 @@ import {
   shouldUseClerkFrontendApiProxy,
 } from "./clerk-fapi-proxy";
 
-test("Clerk FAPI proxy is production-only and uses /__clerk", () => {
+test("Clerk FAPI proxy is on for hosted deploys and uses /__clerk", () => {
   assert.equal(CLERK_FAPI_PROXY_PATH, "/__clerk");
-  assert.equal(shouldUseClerkFrontendApiProxy("production"), true);
-  assert.equal(shouldUseClerkFrontendApiProxy("preview"), false);
-  assert.equal(shouldUseClerkFrontendApiProxy("development"), false);
-  assert.equal(shouldUseClerkFrontendApiProxy(undefined), false);
+  assert.equal(shouldUseClerkFrontendApiProxy("production", "production"), true);
+  assert.equal(shouldUseClerkFrontendApiProxy("preview", "production"), true);
+  assert.equal(shouldUseClerkFrontendApiProxy(undefined, "production"), true);
+  assert.equal(shouldUseClerkFrontendApiProxy("development", "development"), false);
+  assert.equal(shouldUseClerkFrontendApiProxy(undefined, "development"), false);
+  assert.equal(shouldUseClerkFrontendApiProxy("test", "test"), false);
 });
