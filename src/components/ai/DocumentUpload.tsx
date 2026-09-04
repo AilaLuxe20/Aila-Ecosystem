@@ -421,7 +421,7 @@ export default function DocumentUpload() {
 
           <p className="text-[11px] leading-5 text-neutral-700">
             Documents are processed for analysis.
-            Aila provides general information
+            AilaLegal provides general information
             and document assistance, not legal
             advice.
           </p>
