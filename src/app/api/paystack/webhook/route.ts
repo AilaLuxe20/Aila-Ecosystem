@@ -7,7 +7,6 @@ import {
 } from "@/core/billing/service";
 import { claimPaystackEvent } from "@/core/billing/webhooks";
 import {
-  parsePaystackMetadata,
   type PaystackSubscriptionData,
   type PaystackTransactionData,
   verifyPaystackSignature,
