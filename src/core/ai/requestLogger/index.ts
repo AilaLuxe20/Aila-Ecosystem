@@ -1,19 +1,12 @@
-const requests:any[]=[];
+const requests: unknown[] = [];
 
-export function logRequest(request:any){
-
+export function logRequest(request: unknown) {
     requests.push({
-
-        timestamp:new Date().toISOString(),
-
+        timestamp: new Date().toISOString(),
         request
-
     });
-
 }
 
-export function getRequests(){
-
+export function getRequests() {
     return requests;
-
 }

@@ -17,12 +17,54 @@ export const ALLOWED_FILE_TYPES = [
   "text/plain",
 ];
 
+/** Chat attachments. Client MIME types are ignored; the server sniffs bytes. */
+export const INTELLIGENCE_ALLOWED_EXTENSIONS = [
+  "pdf",
+  "txt",
+  "csv",
+  "json",
+  "md",
+  "markdown",
+  "png",
+  "jpg",
+  "jpeg",
+  "webp",
+  "gif",
+  "mp3",
+  "wav",
+  "ogg",
+  "m4a",
+  "webm",
+] as const;
+
+export const MAX_INTELLIGENCE_ATTACHMENTS = 1;
+
+/** Hard cap on stored extracted text. Excess is dropped and flagged. */
+export const MAX_EXTRACTED_TEXT_CHARS = 100_000;
+
+/** Maximum characters injected into the model prompt from an attached file. */
+export const MAX_DOCUMENT_CONTEXT_CHARS = 8_000;
+
+export const MAX_FILENAME_LENGTH = 255;
+
+export const INTELLIGENCE_EXTRACT_TIMEOUT_MS = 20_000;
+
+/** OpenRouter request budget when the caller does not pass an abort signal. */
+export const AI_REQUEST_TIMEOUT_MS = 30_000;
+
 export const AI_MODEL = "openai/gpt-4.1-mini";
+
+/** Maximum tool rounds per Intelligence request. Prevents unbounded loops. */
+export const MAX_TOOL_ITERATIONS = 3;
 
 export const MODE_CONFIG = {
   intelligence: {
     maxTokens: 700,
     temperature: 0.5,
+  },
+  daily: {
+    maxTokens: 900,
+    temperature: 0.4,
   },
   legal: {
     maxTokens: 1400,
@@ -36,44 +78,225 @@ export const MODE_CONFIG = {
     maxTokens: 1400,
     temperature: 0.45,
   },
+  ads: {
+    maxTokens: 1600,
+    temperature: 0.5,
+  },
+  apps: {
+    maxTokens: 1000,
+    temperature: 0.45,
+  },
+  calendar: {
+    maxTokens: 700,
+    temperature: 0.4,
+  },
+  commerce: {
+    maxTokens: 1000,
+    temperature: 0.5,
+  },
+  flow: {
+    maxTokens: 1200,
+    temperature: 0.45,
+  },
+  sites: {
+    maxTokens: 900,
+    temperature: 0.5,
+  },
+  writer: {
+    maxTokens: 2800,
+    temperature: 0.7,
+  },
+  translate: {
+    maxTokens: 1200,
+    temperature: 0.2,
+  },
+  documents: {
+    maxTokens: 1000,
+    temperature: 0.3,
+  },
+  coding: {
+    maxTokens: 1600,
+    temperature: 0.2,
+  },
+  education: {
+    maxTokens: 1100,
+    temperature: 0.45,
+  },
+  career: {
+    maxTokens: 1200,
+    temperature: 0.45,
+  },
+  health: {
+    maxTokens: 900,
+    temperature: 0.35,
+  },
+  finance: {
+    maxTokens: 900,
+    temperature: 0.3,
+  },
+  travel: {
+    maxTokens: 1000,
+    temperature: 0.45,
+  },
+  shipping: {
+    maxTokens: 800,
+    temperature: 0.3,
+  },
 } as const;
 
 export const PRODUCT_NAVIGATION = [
   {
+    name: "Daily",
+    mobileName: "Daily",
+    href: "/products/daily",
+    group: "everyday",
+    dot: "bg-sky-300 shadow-[0_0_14px_rgba(125,211,252,0.9)]",
+    activeBorder: "border-sky-300/20",
+    activeBackground: "bg-sky-300/[0.08]",
+    activeText: "text-sky-100",
+  },
+  {
     name: "Intelligence",
     mobileName: "AI",
     href: "/products/intelligence",
+    group: "everyday",
     dot: "bg-cyan-300 shadow-[0_0_14px_rgba(103,232,249,0.9)]",
     activeBorder: "border-cyan-300/20",
     activeBackground: "bg-cyan-300/[0.08]",
     activeText: "text-cyan-100",
   },
   {
-    name: "Legal",
-    mobileName: "Legal",
-    href: "/products/ailalegal",
-    dot: "bg-blue-300 shadow-[0_0_14px_rgba(147,197,253,0.9)]",
-    activeBorder: "border-blue-300/20",
-    activeBackground: "bg-blue-300/[0.08]",
-    activeText: "text-blue-100",
+    name: "Writer",
+    mobileName: "Write",
+    href: "/products/writer",
+    group: "everyday",
+    dot: "bg-lime-300 shadow-[0_0_14px_rgba(190,242,100,0.9)]",
+    activeBorder: "border-lime-300/20",
+    activeBackground: "bg-lime-300/[0.08]",
+    activeText: "text-lime-100",
+  },
+  {
+    name: "Translate",
+    mobileName: "Lang",
+    href: "/products/translate",
+    group: "everyday",
+    dot: "bg-sky-300 shadow-[0_0_14px_rgba(125,211,252,0.9)]",
+    activeBorder: "border-sky-300/20",
+    activeBackground: "bg-sky-300/[0.08]",
+    activeText: "text-sky-100",
+  },
+  {
+    name: "Documents",
+    mobileName: "Docs",
+    href: "/products/documents",
+    group: "everyday",
+    dot: "bg-orange-300 shadow-[0_0_14px_rgba(253,186,116,0.9)]",
+    activeBorder: "border-orange-300/20",
+    activeBackground: "bg-orange-300/[0.08]",
+    activeText: "text-orange-100",
   },
   {
     name: "Business",
     mobileName: "Business",
     href: "/products/business",
+    group: "professional",
     dot: "bg-purple-300 shadow-[0_0_14px_rgba(216,180,254,0.9)]",
     activeBorder: "border-purple-300/20",
     activeBackground: "bg-purple-300/[0.08]",
     activeText: "text-purple-100",
   },
   {
+    name: "Ads",
+    mobileName: "Ads",
+    href: "/products/ads",
+    group: "professional",
+    dot: "bg-amber-300 shadow-[0_0_14px_rgba(245,158,11,0.9)]",
+    activeBorder: "border-amber-300/20",
+    activeBackground: "bg-amber-300/[0.08]",
+    activeText: "text-amber-100",
+  },
+  {
+    name: "Legal",
+    mobileName: "Legal",
+    href: "/products/ailalegal",
+    group: "professional",
+    dot: "bg-blue-300 shadow-[0_0_14px_rgba(147,197,253,0.9)]",
+    activeBorder: "border-blue-300/20",
+    activeBackground: "bg-blue-300/[0.08]",
+    activeText: "text-blue-100",
+  },
+  {
     name: "Automation",
     mobileName: "Auto",
     href: "/products/automation",
+    group: "professional",
     dot: "bg-violet-300 shadow-[0_0_14px_rgba(196,181,253,0.9)]",
     activeBorder: "border-violet-300/20",
     activeBackground: "bg-violet-300/[0.08]",
     activeText: "text-violet-100",
+  },
+  {
+    name: "Coding",
+    mobileName: "Code",
+    href: "/products/coding",
+    group: "professional",
+    dot: "bg-lime-300 shadow-[0_0_14px_rgba(163,230,53,0.9)]",
+    activeBorder: "border-lime-300/20",
+    activeBackground: "bg-lime-300/[0.08]",
+    activeText: "text-lime-100",
+  },
+  {
+    name: "Career",
+    mobileName: "Career",
+    href: "/products/career",
+    group: "professional",
+    dot: "bg-blue-300 shadow-[0_0_14px_rgba(147,197,253,0.9)]",
+    activeBorder: "border-blue-300/20",
+    activeBackground: "bg-blue-300/[0.08]",
+    activeText: "text-blue-100",
+  },
+] as const;
+
+export const LIFE_NAVIGATION = [
+  {
+    name: "Education",
+    mobileName: "Learn",
+    href: "/products/education",
+    group: "life",
+    dot: "bg-sky-300 shadow-[0_0_14px_rgba(56,189,248,0.9)]",
+    activeBorder: "border-sky-300/20",
+    activeBackground: "bg-sky-300/[0.08]",
+    activeText: "text-sky-100",
+  },
+  {
+    name: "Health",
+    mobileName: "Health",
+    href: "/products/health",
+    group: "life",
+    dot: "bg-rose-300 shadow-[0_0_14px_rgba(251,113,133,0.9)]",
+    activeBorder: "border-rose-300/20",
+    activeBackground: "bg-rose-300/[0.08]",
+    activeText: "text-rose-100",
+  },
+  {
+    name: "Finance",
+    mobileName: "Money",
+    href: "/products/finance",
+    group: "life",
+    dot: "bg-emerald-300 shadow-[0_0_14px_rgba(52,211,153,0.9)]",
+    activeBorder: "border-emerald-300/20",
+    activeBackground: "bg-emerald-300/[0.08]",
+    activeText: "text-emerald-100",
+  },
+  {
+    name: "Travel",
+    mobileName: "Travel",
+    href: "/products/travel",
+    group: "life",
+    dot: "bg-orange-300 shadow-[0_0_14px_rgba(251,146,60,0.9)]",
+    activeBorder: "border-orange-300/20",
+    activeBackground: "bg-orange-300/[0.08]",
+    activeText: "text-orange-100",
   },
 ] as const;
 
@@ -82,16 +305,18 @@ export const PLATFORM_NAVIGATION = [
     name: "Commerce",
     mobileName: "Com",
     href: "/products/commerce",
+    group: "commerce",
     dot: "bg-emerald-300 shadow-[0_0_14px_rgba(34,197,94,0.9)]",
     activeBorder: "border-emerald-300/20",
     activeBackground: "bg-emerald-300/[0.08]",
     activeText: "text-emerald-100",
   },
   {
-    name: "Ads",
-    mobileName: "Ads",
-    href: "/products/ads",
-    dot: "bg-amber-300 shadow-[0_0_14px_rgba(245,158,11,0.9)]",
+    name: "Shipping",
+    mobileName: "Ship",
+    href: "/products/shipping",
+    group: "commerce",
+    dot: "bg-amber-300 shadow-[0_0_14px_rgba(251,191,36,0.9)]",
     activeBorder: "border-amber-300/20",
     activeBackground: "bg-amber-300/[0.08]",
     activeText: "text-amber-100",
@@ -100,6 +325,7 @@ export const PLATFORM_NAVIGATION = [
     name: "Calendar",
     mobileName: "Cal",
     href: "/products/calendar",
+    group: "supporting",
     dot: "bg-rose-300 shadow-[0_0_14px_rgba(244,63,94,0.9)]",
     activeBorder: "border-rose-300/20",
     activeBackground: "bg-rose-300/[0.08]",
@@ -109,6 +335,7 @@ export const PLATFORM_NAVIGATION = [
     name: "Sites",
     mobileName: "Sites",
     href: "/products/sites",
+    group: "supporting",
     dot: "bg-teal-300 shadow-[0_0_14px_rgba(20,181,169,0.9)]",
     activeBorder: "border-teal-300/20",
     activeBackground: "bg-teal-300/[0.08]",
@@ -118,6 +345,7 @@ export const PLATFORM_NAVIGATION = [
     name: "Apps",
     mobileName: "Apps",
     href: "/products/apps",
+    group: "supporting",
     dot: "bg-indigo-300 shadow-[0_0_14px_rgba(129,140,249,0.9)]",
     activeBorder: "border-indigo-300/20",
     activeBackground: "bg-indigo-300/[0.08]",
@@ -127,6 +355,7 @@ export const PLATFORM_NAVIGATION = [
     name: "Flow",
     mobileName: "Flow",
     href: "/products/flow",
+    group: "supporting",
     dot: "bg-fuchsia-300 shadow-[0_0_14px_rgba(217,70,239,0.9)]",
     activeBorder: "border-fuchsia-300/20",
     activeBackground: "bg-fuchsia-300/[0.08]",
@@ -134,7 +363,35 @@ export const PLATFORM_NAVIGATION = [
   },
 ] as const;
 
-export const ALL_PRODUCTS = [...PRODUCT_NAVIGATION, ...PLATFORM_NAVIGATION];
+export const ALL_PRODUCTS = [
+  ...PRODUCT_NAVIGATION,
+  ...LIFE_NAVIGATION,
+  ...PLATFORM_NAVIGATION,
+];
+
+export const NAV_GROUP_ORDER = [
+  "everyday",
+  "professional",
+  "life",
+  "commerce",
+  "supporting",
+] as const;
+
+export const NAV_GROUP_LABELS = {
+  everyday: "Everyday core",
+  professional: "Professional",
+  life: "Life",
+  commerce: "Commerce & operations",
+  supporting: "More",
+} as const;
+
+export function groupedNavProducts() {
+  return NAV_GROUP_ORDER.map((group) => ({
+    group,
+    label: NAV_GROUP_LABELS[group],
+    products: ALL_PRODUCTS.filter((product) => product.group === group),
+  }));
+}
 
 export const PROJECT_TYPES = [
   "Website",

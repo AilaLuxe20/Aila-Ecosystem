@@ -3,7 +3,6 @@ import { z } from "zod";
 import { flattenZodError } from "@/lib/utils/validation";
 
 import {
-  AppError,
   ERROR_CODES,
   ValidationError,
   isAppError,

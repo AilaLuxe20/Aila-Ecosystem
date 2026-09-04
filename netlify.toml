@@ -1,0 +1,11 @@
+# Netlify is NOT the Aila production host. Production is Cloudflare DNS → Vercel.
+# This file only exists to prevent the Netlify UI plugin
+# `netlify-purge-cloudflare-on-deploy` from failing builds when Netlify is
+# accidentally connected. Do not treat Netlify as a production deployment target.
+# Prefer disabling/removing the Netlify site connection in the Netlify dashboard.
+
+[build.environment]
+  CLOUDFLARE_ZONE_ID = "netlify-plugin-placeholder"
+  CLOUDFLARE_API_TOKEN = "netlify-plugin-placeholder"
+  SECRETS_SCAN_OMIT_KEYS = "CLOUDFLARE_API_TOKEN,CLOUDFLARE_ZONE_ID,NETLIFY_EMAILS_SECRET,I_KEY"
+  SECRETS_SCAN_OMIT_PATHS = "netlify.toml"

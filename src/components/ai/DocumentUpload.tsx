@@ -1,5 +1,6 @@
 "use client";
 
+import { useAuth } from "@clerk/nextjs";
 import {
   ChangeEvent,
   DragEvent,
@@ -18,6 +19,7 @@ const acceptedFileTypes =
   ".pdf,.txt";
 
 export default function DocumentUpload() {
+  const { getToken } = useAuth();
   const [file, setFile] =
     useState<File | null>(null);
 
@@ -110,6 +112,14 @@ export default function DocumentUpload() {
       return;
     }
 
+    const token = await getToken();
+
+    if (!token) {
+      setStatus("error");
+      setAnalysis("Sign in to analyze a document.");
+      return;
+    }
+
     setStatus("analyzing");
     setAnalysis("");
 
@@ -122,6 +132,9 @@ export default function DocumentUpload() {
         "/api/ai/document",
         {
           method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
           body: formData,
         }
       );
@@ -232,7 +245,7 @@ export default function DocumentUpload() {
               </button>
 
               <p className="mt-4 text-[10px] uppercase tracking-[0.16em] text-neutral-700">
-                PDF · TXT
+                PDF · TXT · MAX 10 MB
               </p>
             </div>
           </div>

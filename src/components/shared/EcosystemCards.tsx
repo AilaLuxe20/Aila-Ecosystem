@@ -1,191 +1,251 @@
 import Link from "next/link";
 
-const products = [
-  {
-    number: "01",
-    title: "Aila Intelligence",
-    shortName: "AI",
-    tag: "Intelligence Core",
-    status: "Online",
-    description:
-      "The intelligence layer powering the Aila Ecosystem. Explore ideas, discover solutions and find the right path from possibility to working technology.",
-    link: "/products/intelligence",
-    accent: "cyan",
-    capabilities: ["AI Guidance", "Discovery", "Product Intelligence"],
-  },
-  {
-    number: "02",
-    title: "AilaLegal AI",
-    shortName: "AL",
-    tag: "Legal Technology",
-    status: "Active",
-    description:
-      "An intelligent legal technology experience designed to improve research, document understanding, organization and modern legal workflows.",
-    link: "/products/ailalegal",
-    accent: "blue",
-    capabilities: ["Research", "Documents", "Legal Workflows"],
-  },
-  {
-    number: "03",
-    title: "Aila Business AI",
-    shortName: "AB",
-    tag: "Business Intelligence",
-    status: "Building",
-    description:
-      "AI-powered business intelligence designed to uncover opportunities, improve operations and transform complex processes into smarter systems.",
-    link: "/products/business",
-    accent: "purple",
-    capabilities: ["Insights", "Operations", "AI Strategy"],
-  },
-  {
-    number: "04",
-    title: "Aila Automation",
-    shortName: "AA",
-    tag: "Intelligent Systems",
-    status: "Building",
-    description:
-      "Connected automation systems that reduce repetitive work, improve efficiency and help businesses operate with greater intelligence.",
-    link: "/products/automation",
-    accent: "violet",
-    capabilities: ["Workflows", "Connections", "Automation"],
-  },
-];
+import { groupedCatalogProducts, type ProductKey } from "@/core/products/catalog";
 
-const accentStyles = {
-  cyan: {
+const accentByProduct: Record<
+  ProductKey,
+  {
+    glow: string;
+    orb: string;
+    dot: string;
+    text: string;
+    line: string;
+  }
+> = {
+  intelligence: {
     glow: "group-hover:bg-cyan-400/10",
     orb: "from-cyan-300/30 to-cyan-500/5",
     dot: "bg-cyan-300 shadow-[0_0_16px_rgba(103,232,249,0.9)]",
     text: "group-hover:text-cyan-200",
     line: "from-cyan-300/70",
   },
-  blue: {
+  daily: {
+    glow: "group-hover:bg-sky-400/10",
+    orb: "from-sky-300/30 to-sky-500/5",
+    dot: "bg-sky-300 shadow-[0_0_16px_rgba(125,211,252,0.9)]",
+    text: "group-hover:text-sky-200",
+    line: "from-sky-300/70",
+  },
+  ailalegal: {
     glow: "group-hover:bg-blue-500/10",
     orb: "from-blue-300/30 to-blue-600/5",
     dot: "bg-blue-300 shadow-[0_0_16px_rgba(147,197,253,0.9)]",
     text: "group-hover:text-blue-200",
     line: "from-blue-300/70",
   },
-  purple: {
+  business: {
     glow: "group-hover:bg-purple-500/10",
     orb: "from-purple-300/30 to-purple-600/5",
     dot: "bg-purple-300 shadow-[0_0_16px_rgba(216,180,254,0.9)]",
     text: "group-hover:text-purple-200",
     line: "from-purple-300/70",
   },
-  violet: {
+  automation: {
     glow: "group-hover:bg-violet-500/10",
     orb: "from-violet-300/30 to-violet-600/5",
     dot: "bg-violet-300 shadow-[0_0_16px_rgba(196,181,253,0.9)]",
     text: "group-hover:text-violet-200",
     line: "from-violet-300/70",
   },
+  commerce: {
+    glow: "group-hover:bg-emerald-500/10",
+    orb: "from-emerald-300/30 to-emerald-600/5",
+    dot: "bg-emerald-300 shadow-[0_0_16px_rgba(52,211,153,0.9)]",
+    text: "group-hover:text-emerald-200",
+    line: "from-emerald-300/70",
+  },
+  ads: {
+    glow: "group-hover:bg-amber-500/10",
+    orb: "from-amber-300/30 to-amber-600/5",
+    dot: "bg-amber-300 shadow-[0_0_16px_rgba(252,211,77,0.9)]",
+    text: "group-hover:text-amber-200",
+    line: "from-amber-300/70",
+  },
+  calendar: {
+    glow: "group-hover:bg-rose-500/10",
+    orb: "from-rose-300/30 to-rose-600/5",
+    dot: "bg-rose-300 shadow-[0_0_16px_rgba(253,164,175,0.9)]",
+    text: "group-hover:text-rose-200",
+    line: "from-rose-300/70",
+  },
+  sites: {
+    glow: "group-hover:bg-teal-500/10",
+    orb: "from-teal-300/30 to-teal-600/5",
+    dot: "bg-teal-300 shadow-[0_0_16px_rgba(94,234,212,0.9)]",
+    text: "group-hover:text-teal-200",
+    line: "from-teal-300/70",
+  },
+  apps: {
+    glow: "group-hover:bg-indigo-500/10",
+    orb: "from-indigo-300/30 to-indigo-600/5",
+    dot: "bg-indigo-300 shadow-[0_0_16px_rgba(165,180,252,0.9)]",
+    text: "group-hover:text-indigo-200",
+    line: "from-indigo-300/70",
+  },
+  flow: {
+    glow: "group-hover:bg-fuchsia-500/10",
+    orb: "from-fuchsia-300/30 to-fuchsia-600/5",
+    dot: "bg-fuchsia-300 shadow-[0_0_16px_rgba(240,171,252,0.9)]",
+    text: "group-hover:text-fuchsia-200",
+    line: "from-fuchsia-300/70",
+  },
+  writer: {
+    glow: "group-hover:bg-lime-500/10",
+    orb: "from-lime-300/30 to-lime-600/5",
+    dot: "bg-lime-300 shadow-[0_0_16px_rgba(190,242,100,0.9)]",
+    text: "group-hover:text-lime-200",
+    line: "from-lime-300/70",
+  },
+  translate: {
+    glow: "group-hover:bg-sky-500/10",
+    orb: "from-sky-300/30 to-sky-600/5",
+    dot: "bg-sky-300 shadow-[0_0_16px_rgba(125,211,252,0.9)]",
+    text: "group-hover:text-sky-200",
+    line: "from-sky-300/70",
+  },
+  documents: {
+    glow: "group-hover:bg-orange-500/10",
+    orb: "from-orange-300/30 to-orange-600/5",
+    dot: "bg-orange-300 shadow-[0_0_16px_rgba(253,186,116,0.9)]",
+    text: "group-hover:text-orange-200",
+    line: "from-orange-300/70",
+  },
+  coding: {
+    glow: "group-hover:bg-lime-500/10",
+    orb: "from-lime-300/30 to-emerald-600/5",
+    dot: "bg-lime-300 shadow-[0_0_16px_rgba(163,230,53,0.9)]",
+    text: "group-hover:text-lime-200",
+    line: "from-lime-300/70",
+  },
+  career: {
+    glow: "group-hover:bg-blue-500/10",
+    orb: "from-blue-300/30 to-indigo-600/5",
+    dot: "bg-blue-300 shadow-[0_0_16px_rgba(147,197,253,0.9)]",
+    text: "group-hover:text-blue-200",
+    line: "from-blue-300/70",
+  },
+  education: {
+    glow: "group-hover:bg-sky-500/10",
+    orb: "from-sky-300/30 to-cyan-600/5",
+    dot: "bg-sky-300 shadow-[0_0_16px_rgba(56,189,248,0.9)]",
+    text: "group-hover:text-sky-200",
+    line: "from-sky-300/70",
+  },
+  health: {
+    glow: "group-hover:bg-rose-500/10",
+    orb: "from-rose-300/30 to-pink-600/5",
+    dot: "bg-rose-300 shadow-[0_0_16px_rgba(251,113,133,0.9)]",
+    text: "group-hover:text-rose-200",
+    line: "from-rose-300/70",
+  },
+  finance: {
+    glow: "group-hover:bg-emerald-500/10",
+    orb: "from-emerald-300/30 to-teal-600/5",
+    dot: "bg-emerald-300 shadow-[0_0_16px_rgba(52,211,153,0.9)]",
+    text: "group-hover:text-emerald-200",
+    line: "from-emerald-300/70",
+  },
+  travel: {
+    glow: "group-hover:bg-orange-500/10",
+    orb: "from-orange-300/30 to-amber-600/5",
+    dot: "bg-orange-300 shadow-[0_0_16px_rgba(251,146,60,0.9)]",
+    text: "group-hover:text-orange-200",
+    line: "from-orange-300/70",
+  },
+  shipping: {
+    glow: "group-hover:bg-amber-500/10",
+    orb: "from-amber-300/30 to-yellow-600/5",
+    dot: "bg-amber-300 shadow-[0_0_16px_rgba(251,191,36,0.9)]",
+    text: "group-hover:text-amber-200",
+    line: "from-amber-300/70",
+  },
 };
 
 export default function EcosystemCards() {
+  const groups = groupedCatalogProducts();
+
   return (
-    <div className="w-full">
-      <div className="grid gap-4 lg:grid-cols-2">
-        {products.map((product) => {
-          const accent =
-            accentStyles[product.accent as keyof typeof accentStyles];
+    <div className="w-full space-y-14">
+      {groups.map((group) => (
+        <section key={group.group}>
+          <p className="mb-5 text-xs uppercase tracking-[0.25em] text-neutral-600">
+            {group.label}
+          </p>
+          <div className="grid gap-4 lg:grid-cols-2">
+            {group.products.map((product, index) => {
+              const accent = accentByProduct[product.key];
+              const shortName = product.title.replace("Aila ", "").slice(0, 2).toUpperCase();
 
-          return (
-            <Link
-              key={product.title}
-              href={product.link}
-              className="group relative block overflow-hidden rounded-[32px] border border-white/[0.08] bg-white/[0.025] transition duration-500 hover:-translate-y-1 hover:border-white/[0.16] hover:bg-white/[0.045]"
-            >
-              {/* HOVER GLOW */}
-              <div
-                className={`pointer-events-none absolute right-[-80px] top-[-80px] h-72 w-72 rounded-full bg-transparent blur-[100px] transition duration-700 ${accent.glow}`}
-              />
-
-              {/* TOP LIGHT */}
-              <div
-                className={`absolute left-12 right-12 top-0 h-px bg-gradient-to-r ${accent.line} via-white/10 to-transparent opacity-0 transition duration-500 group-hover:opacity-100`}
-              />
-
-              <div className="relative flex min-h-[430px] flex-col p-7 sm:p-9">
-                {/* TOP ROW */}
-                <div className="flex items-start justify-between gap-6">
-                  <div className="flex items-center gap-4">
-                    <div
-                      className={`relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br ${accent.orb}`}
-                    >
-                      <div className="absolute inset-0 bg-black/20" />
-
-                      <span className="relative text-sm font-semibold tracking-[-0.02em] text-white">
-                        {product.shortName}
-                      </span>
-                    </div>
-
-                    <div>
-                      <p className="text-[10px] uppercase tracking-[0.25em] text-neutral-600">
-                        Product {product.number}
-                      </p>
-
-                      <p className="mt-1 text-xs text-neutral-400">
-                        {product.tag}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-2 rounded-full border border-white/[0.08] bg-black/20 px-3 py-1.5">
-                    <span
-                      className={`h-1.5 w-1.5 rounded-full ${accent.dot}`}
-                    />
-
-                    <span className="text-[10px] uppercase tracking-[0.18em] text-neutral-500">
-                      {product.status}
-                    </span>
-                  </div>
-                </div>
-
-                {/* PRODUCT CONTENT */}
-                <div className="mt-14">
-                  <h3 className="text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">
-                    {product.title}
-                  </h3>
-
-                  <p className="mt-5 max-w-xl text-base leading-7 text-neutral-400">
-                    {product.description}
-                  </p>
-                </div>
-
-                {/* CAPABILITIES */}
-                <div className="mt-8 flex flex-wrap gap-2">
-                  {product.capabilities.map((capability) => (
-                    <span
-                      key={capability}
-                      className="rounded-full border border-white/[0.07] bg-white/[0.025] px-3 py-1.5 text-[11px] text-neutral-500 transition duration-300 group-hover:border-white/[0.12] group-hover:text-neutral-400"
-                    >
-                      {capability}
-                    </span>
-                  ))}
-                </div>
-
-                {/* BOTTOM */}
-                <div className="mt-auto flex items-end justify-between pt-12">
-                  <div>
-                    <p className="text-[10px] uppercase tracking-[0.25em] text-neutral-600">
-                      Aila Ecosystem
-                    </p>
-
-                    <div className="mt-3 h-px w-16 bg-gradient-to-r from-white/30 to-transparent transition-all duration-500 group-hover:w-28" />
-                  </div>
-
+              return (
+                <Link
+                  key={product.key}
+                  href={product.href}
+                  className="group relative block overflow-hidden rounded-[32px] border border-white/[0.08] bg-white/[0.025] transition duration-500 hover:-translate-y-1 hover:border-white/[0.16] hover:bg-white/[0.045]"
+                >
                   <div
-                    className={`flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-lg text-neutral-400 transition duration-500 group-hover:rotate-[-45deg] group-hover:border-white/20 group-hover:bg-white group-hover:text-black ${accent.text}`}
-                  >
-                    ↗
+                    className={`pointer-events-none absolute right-[-80px] top-[-80px] h-72 w-72 rounded-full bg-transparent blur-[100px] transition duration-700 ${accent.glow}`}
+                  />
+                  <div
+                    className={`absolute left-12 right-12 top-0 h-px bg-gradient-to-r ${accent.line} via-white/10 to-transparent opacity-0 transition duration-500 group-hover:opacity-100`}
+                  />
+
+                  <div className="relative flex min-h-[360px] flex-col p-7 sm:p-9">
+                    <div className="flex items-start justify-between gap-6">
+                      <div className="flex items-center gap-4">
+                        <div
+                          className={`relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br ${accent.orb}`}
+                        >
+                          <div className="absolute inset-0 bg-black/20" />
+                          <span className="relative text-sm font-semibold tracking-[-0.02em] text-white">
+                            {shortName}
+                          </span>
+                        </div>
+                        <div>
+                          <p className="text-[10px] uppercase tracking-[0.25em] text-neutral-600">
+                            {group.label} · {String(index + 1).padStart(2, "0")}
+                          </p>
+                          <p className="mt-1 text-xs text-neutral-400">
+                            {product.paid ? "Pro" : "Included"}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2 rounded-full border border-white/[0.08] bg-black/20 px-3 py-1.5">
+                        <span className={`h-1.5 w-1.5 rounded-full ${accent.dot}`} />
+                        <span className="text-[10px] uppercase tracking-[0.18em] text-neutral-500">
+                          Online
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="mt-10">
+                      <h3 className="text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">
+                        {product.title}
+                      </h3>
+                      <p className="mt-5 max-w-xl text-base leading-7 text-neutral-400">
+                        {product.description}
+                      </p>
+                    </div>
+
+                    <div className="mt-auto flex items-end justify-between pt-12">
+                      <div>
+                        <p className="text-[10px] uppercase tracking-[0.25em] text-neutral-600">
+                          Aila Ecosystem
+                        </p>
+                        <div className="mt-3 h-px w-16 bg-gradient-to-r from-white/30 to-transparent transition-all duration-500 group-hover:w-28" />
+                      </div>
+                      <div
+                        className={`flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-lg text-neutral-400 transition duration-500 group-hover:rotate-[-45deg] group-hover:border-white/20 group-hover:bg-white group-hover:text-black ${accent.text}`}
+                      >
+                        ↗
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </Link>
-          );
-        })}
-      </div>
+                </Link>
+              );
+            })}
+          </div>
+        </section>
+      ))}
     </div>
   );
 }

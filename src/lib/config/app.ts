@@ -19,7 +19,9 @@ export const APP_CONFIG = {
   url: publicEnv.NEXT_PUBLIC_APP_URL,
   locale: "en-US",
   defaultThemeMode: "dark" satisfies ThemeMode,
-  supportEmail: "support@ailaluxe.com",
+  supportEmail: "ailaluxeventures@gmail.com",
+  companyName: "Aila Luxe Ventures",
+  secondaryEmail: "ailaluxeventures@outlook.com",
 } as const;
 
 /** Limits applied to API requests and client-side operations. */

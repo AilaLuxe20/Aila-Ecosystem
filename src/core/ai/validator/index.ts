@@ -1,11 +1,8 @@
-export function validateConversation(messages:any[]){
+import type { ChatMessage } from "@/core/types";
 
-    return{
-
-        valid:Array.isArray(messages),
-
-        count:messages.length
-
+export function validateConversation(messages: ChatMessage[]) {
+    return {
+        valid: Array.isArray(messages),
+        count: messages.length
     };
-
 }

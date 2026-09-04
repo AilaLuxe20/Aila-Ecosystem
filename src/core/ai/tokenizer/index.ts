@@ -1,19 +1,13 @@
-export function estimateTokens(text:string){
+import type { ChatMessage } from "@/core/types";
 
-    return Math.ceil(text.length/4);
-
+export function estimateTokens(text: string) {
+    return Math.ceil(text.length / 4);
 }
 
-export function estimateMessageTokens(messages:any[]){
-
+export function estimateMessageTokens(messages: ChatMessage[]) {
     return messages.reduce(
-
-        (total,message)=>
-
-            total+estimateTokens(message.content ?? ""),
-
+        (total, message) =>
+            total + estimateTokens(message.content ?? ""),
         0
-
     );
-
 }

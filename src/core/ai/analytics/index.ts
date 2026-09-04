@@ -1,17 +1,13 @@
-export function analyzeConversation(messages:any[]){
+import type { ChatMessage } from "@/core/types";
 
-    return{
-
-        totalMessages:messages.length,
-
-        userMessages:messages.filter(
-            m=>m.role==="user"
+export function analyzeConversation(messages: ChatMessage[]) {
+    return {
+        totalMessages: messages.length,
+        userMessages: messages.filter(
+            m => m.role === "user"
         ).length,
-
-        assistantMessages:messages.filter(
-            m=>m.role==="assistant"
+        assistantMessages: messages.filter(
+            m => m.role === "assistant"
         ).length
-
     };
-
 }

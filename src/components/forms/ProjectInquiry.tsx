@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { track } from "@vercel/analytics";
 
 type ProjectType =
   | "Website"
@@ -111,6 +112,11 @@ export default function ProjectInquiry() {
             "Could not send your project inquiry."
         );
       }
+
+      track("project_inquiry_submitted", {
+        projectType: form.projectType,
+        hasCompany: Boolean(form.company.trim()),
+      });
 
       setSuccess(true);
       setForm(initialForm);

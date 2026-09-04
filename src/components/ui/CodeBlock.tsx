@@ -1,6 +1,7 @@
 "use client";
 
 import hljs from "highlight.js/lib/common";
+import "highlight.js/styles/github-dark.css";
 import { Check, Copy } from "lucide-react";
 import { useMemo } from "react";
 
@@ -93,7 +94,7 @@ export function CodeBlock({
   return (
     <div
       className={cn(
-        "overflow-hidden rounded-panel border border-hairline bg-surface-sunken",
+        "max-w-full min-w-0 overflow-hidden rounded-panel border border-hairline bg-surface-sunken",
         className,
       )}
       {...props}
@@ -119,7 +120,10 @@ export function CodeBlock({
 
       <div className="overflow-auto" style={maxHeight ? { maxHeight } : undefined}>
         <pre className="min-w-full p-3 font-mono text-xs leading-relaxed">
-          <code className="hljs block">
+          <code
+            className="hljs block"
+            style={{ background: "transparent", padding: 0 }}
+          >
             {lines.map((line, index) => (
               <span
                 key={index}

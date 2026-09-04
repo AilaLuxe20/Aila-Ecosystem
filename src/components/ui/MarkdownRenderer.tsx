@@ -1,7 +1,10 @@
 "use client";
 
 import { useMemo } from "react";
-import ReactMarkdown, { type Components } from "react-markdown";
+import ReactMarkdown, {
+  defaultUrlTransform,
+  type Components,
+} from "react-markdown";
 import remarkGfm from "remark-gfm";
 
 import { cn } from "@/lib/utils/cn";
@@ -113,13 +116,20 @@ export function MarkdownRenderer({
       strong: ({ children }) => <strong className="font-semibold text-white">{children}</strong>,
       em: ({ children }) => <em className="italic">{children}</em>,
       a: ({ href, children }) => {
-        const external = typeof href === "string" && isExternalUrl(href);
+        const safeHref =
+          typeof href === "string" ? defaultUrlTransform(href) : "";
+
+        if (!safeHref) {
+          return <span>{children}</span>;
+        }
+
+        const external = isExternalUrl(safeHref);
 
         return (
           <a
-            href={href}
+            href={safeHref}
             target={external ? "_blank" : undefined}
-            rel={external ? "noopener noreferrer" : undefined}
+            rel={external ? "noopener noreferrer nofollow" : undefined}
             className="text-brand-400 underline decoration-brand-400/40 underline-offset-2 transition-colors hover:decoration-brand-400"
           >
             {children}
@@ -127,7 +137,7 @@ export function MarkdownRenderer({
         );
       },
       code: ({ className: codeClassName, children }) => {
-        const language = /language-(\w+)/.exec(codeClassName ?? "")?.[1];
+        const language = /language-([\w+-]+)/.exec(codeClassName ?? "")?.[1];
         const text = extractText(children).replace(/\n$/, "");
 
         // A fenced block always carries a `language-*` class or a newline;
@@ -138,34 +148,62 @@ export function MarkdownRenderer({
 
         return <CodeBlock code={text} language={language} className="my-4" />;
       },
-      pre: ({ children }) => <>{children}</>,
+      pre: ({ children }) => <div className="contents">{children}</div>,
       table: ({ children }) => <Table className="my-4">{children}</Table>,
       thead: ({ children }) => <TableHeader>{children}</TableHeader>,
       tbody: ({ children }) => <TableBody>{children}</TableBody>,
       tr: ({ children }) => <TableRow>{children}</TableRow>,
       th: ({ children }) => <TableHead>{children}</TableHead>,
       td: ({ children }) => <TableCell>{children}</TableCell>,
-      img: ({ src, alt }) => (
-        <img
-          src={typeof src === "string" ? src : undefined}
-          alt={alt ?? ""}
-          loading="lazy"
-          className="my-4 max-w-full rounded-panel border border-hairline"
-        />
-      ),
+      img: ({ src, alt }) => {
+        const safeSrc =
+          typeof src === "string" ? defaultUrlTransform(src) : "";
+
+        if (!safeSrc) {
+          return null;
+        }
+
+        return (
+          // Remote markdown images are not limited to next/image remotePatterns.
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={safeSrc}
+            alt={alt ?? ""}
+            loading="lazy"
+            className="my-4 max-w-full rounded-panel border border-hairline"
+          />
+        );
+      },
     }),
     [],
   );
 
+  if (!content.trim()) {
+    return (
+      <div
+        className={cn(
+          "text-white/75",
+          compact ? "text-xs" : "text-sm",
+          className,
+        )}
+      />
+    );
+  }
+
   return (
     <div
       className={cn(
-        "text-white/75",
+        "max-w-full overflow-x-auto break-words text-white/75",
         compact ? "text-xs [&_h1]:text-base [&_h2]:text-sm [&_h3]:text-sm" : "text-sm",
         className,
       )}
     >
-      <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
+        skipHtml
+        urlTransform={defaultUrlTransform}
+        components={components}
+      >
         {content}
       </ReactMarkdown>
     </div>

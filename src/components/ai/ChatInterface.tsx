@@ -1,13 +1,26 @@
 "use client";
 
 import {
+  useCallback,
   useEffect,
   useRef,
   useState,
 } from "react";
+import { useAuth } from "@clerk/nextjs";
+import { MessageSquare, Plus, Trash2 } from "lucide-react";
 import type { ChatMessage, AilaMode } from "@/core/types";
+import { modeAllowsChatAttachments } from "@/core/ai/attachments";
+import { iterateAilaSse, isAbortError } from "@/core/ai/streaming/parse";
 import ChatMessages from "./ChatMessages";
-import ChatInput from "./ChatInput";
+import ChatInput, { type ChatAttachment } from "./ChatInput";
+
+type ConversationSummary = {
+  id: string;
+  mode: string;
+  title: string | null;
+  updatedAt: string;
+  messageCount: number;
+};
 
 type ChatInterfaceProps = {
   mode: AilaMode;
@@ -22,6 +35,7 @@ type ChatInterfaceProps = {
   messagesHeight?: string;
   showSuggestions?: boolean;
   showHeader?: boolean;
+  showConversationHistory?: boolean;
 };
 
 const defaultSuggestions: Record<AilaMode, string[]> = {
@@ -30,6 +44,12 @@ const defaultSuggestions: Record<AilaMode, string[]> = {
     "I need a mobile app",
     "Add AI to my business",
     "Automate repetitive work",
+  ],
+  daily: [
+    "Help me plan today from my stored work",
+    "Break my open goals into tasks",
+    "Prioritize what I should do first",
+    "Summarise my notes into an action plan",
   ],
   legal: [
     "What should I check before signing a contract?",
@@ -46,19 +66,121 @@ const defaultSuggestions: Record<AilaMode, string[]> = {
     "How can I automate customer follow-ups?",
     "What processes can be automated?",
   ],
+  ads: [
+    "Help me plan an ad campaign",
+    "How should I target my audience?",
+    "Where should I allocate my budget?",
+  ],
+  apps: [
+    "I have an app idea",
+    "Web, iOS, or Android — what fits me?",
+    "What should my MVP include?",
+  ],
+  calendar: [
+    "Help me plan a booking workflow",
+    "How can I reduce scheduling back-and-forth?",
+    "What reminders should I set up?",
+  ],
+  commerce: [
+    "I want to sell online",
+    "How can I improve my checkout?",
+    "How do I increase conversion?",
+  ],
+  flow: [
+    "Map out my current process",
+    "Where is my workflow breaking down?",
+    "Help me connect two tools together",
+  ],
+  sites: [
+    "I need a new website",
+    "What pages should my site have?",
+    "Help me plan my site structure",
+  ],
+  writer: [
+    "Develop the concept for this book",
+    "Write the next scene in this chapter",
+    "Check continuity against the story bible",
+    "Improve the dialogue in this chapter",
+  ],
+  translate: [
+    "Translate this to Spanish",
+    "Translate this to French",
+    "What language is this?",
+  ],
+  documents: [
+    "Summarise the document I uploaded",
+    "What dates appear in this file?",
+    "Help me organise these notes",
+  ],
+  coding: [
+    "Explain this function",
+    "Find the bug in this code",
+    "Write a unit test for this",
+  ],
+  education: [
+    "Quiz me on this topic",
+    "Turn my notes into a study plan",
+    "Explain this in simpler words",
+  ],
+  career: [
+    "Improve this resume bullet",
+    "Prepare me for a product interview",
+    "Draft a short cover note",
+  ],
+  health: [
+    "Help me set a sleep reminder",
+    "Turn this into a weekly habit",
+    "This is not medical advice — help me organise notes",
+  ],
+  finance: [
+    "Summarise this month's expenses",
+    "Help me set a grocery budget",
+    "How close am I to this savings goal?",
+  ],
+  travel: [
+    "Build a 3-day itinerary",
+    "What should I pack for this trip?",
+    "Organise these reservation notes",
+  ],
+  shipping: [
+    "Help me complete this shipment form",
+    "What status should this parcel have?",
+    "Where can I look up this tracking number?",
+  ],
 };
 
 const defaultPlaceholders: Record<AilaMode, string> = {
   intelligence: "Tell Aila what you want to build...",
+  daily: "Ask Aila Daily to plan from your stored work...",
   legal: "Ask AilaLegal about a contract, clause or legal document...",
   business: "Ask Aila Business AI...",
   automation: "Describe a process to automate...",
+  ads: "Ask Aila Ads about a campaign...",
+  apps: "Tell Aila Apps about your app idea...",
+  calendar: "Ask Aila Calendar about scheduling...",
+  commerce: "Ask Aila Commerce about your store...",
+  flow: "Describe a workflow to connect...",
+  sites: "Tell Aila Sites about your website...",
+  writer: "Paste text to draft or rewrite...",
+  translate: "Paste text to translate...",
+  documents: "Ask about a file you uploaded...",
+  coding: "Paste code or ask for a change...",
+  education: "Ask to study, quiz, or plan...",
+  career: "Ask about a resume or interview...",
+  health: "Log a habit or reminder — not medical advice...",
+  finance: "Ask about a budget or expense...",
+  travel: "Plan a trip from your notes...",
+  shipping: "Ask about a shipment record...",
 };
 
 const defaultHeaders: Record<AilaMode, { title: string; subtitle: string }> = {
   intelligence: {
     title: "Aila Intelligence",
     subtitle: "Core ecosystem intelligence",
+  },
+  daily: {
+    title: "Aila Daily",
+    subtitle: "Everyday planning assistant",
   },
   legal: {
     title: "AilaLegal Intelligence",
@@ -72,7 +194,253 @@ const defaultHeaders: Record<AilaMode, { title: string; subtitle: string }> = {
     title: "Aila Automation",
     subtitle: "Workflow discovery assistant",
   },
+  ads: {
+    title: "Aila Ads",
+    subtitle: "Advertising intelligence assistant",
+  },
+  apps: {
+    title: "Aila Apps",
+    subtitle: "App planning assistant",
+  },
+  calendar: {
+    title: "Aila Calendar",
+    subtitle: "Scheduling assistant",
+  },
+  commerce: {
+    title: "Aila Commerce",
+    subtitle: "Commerce intelligence assistant",
+  },
+  flow: {
+    title: "Aila Flow",
+    subtitle: "Connected process assistant",
+  },
+  sites: {
+    title: "Aila Sites",
+    subtitle: "Website planning assistant",
+  },
+  writer: {
+    title: "Aila Writer",
+    subtitle: "Writing assistant",
+  },
+  translate: {
+    title: "Aila Translate",
+    subtitle: "Translation assistant",
+  },
+  documents: {
+    title: "Aila Documents",
+    subtitle: "Document assistant",
+  },
+  coding: {
+    title: "Aila Coding",
+    subtitle: "Code assistant",
+  },
+  education: {
+    title: "Aila Education",
+    subtitle: "Study assistant",
+  },
+  career: {
+    title: "Aila Career",
+    subtitle: "Career assistant",
+  },
+  health: {
+    title: "Aila Health",
+    subtitle: "Wellness organiser — not medical care",
+  },
+  finance: {
+    title: "Aila Finance",
+    subtitle: "Budget assistant",
+  },
+  travel: {
+    title: "Aila Travel",
+    subtitle: "Trip planner — bookings are yours",
+  },
+  shipping: {
+    title: "Aila Shipping",
+    subtitle: "Shipment records",
+  },
 };
+
+const defaultWelcomeMessages: Record<AilaMode, string> = {
+  intelligence:
+    "Welcome. I am Aila Intelligence, the intelligence layer of the Aila Ecosystem. Tell me what you want to build, improve or automate.",
+  daily:
+    "Welcome to Aila Daily. I can help plan the day from the notes, goals, tasks, and calendar already stored on your account.",
+  legal:
+    "Welcome to AilaLegal AI. I can help you understand contracts, documents, clauses and potential review points. How can I assist you?",
+  business:
+    "Hello, I am Aila Business AI. How can I help your business today?",
+  automation:
+    "Hello, I am Aila Automation. Tell me about a process you want to automate.",
+  ads: "Hello, I am Aila Ads. Tell me about the campaign you want to plan.",
+  apps: "Hello, I am Aila Apps. Tell me about the app you want to build.",
+  calendar:
+    "Hello, I am Aila Calendar. Tell me about the scheduling workflow you need.",
+  commerce:
+    "Hello, I am Aila Commerce. Tell me about the store you want to build or improve.",
+  flow: "Hello, I am Aila Flow. Tell me about the process you want to connect.",
+  sites: "Hello, I am Aila Sites. Tell me about the website you want to build.",
+  writer: "Hello, I am Aila Writer. Paste a draft and I will help you rewrite it.",
+  translate: "Hello, I am Aila Translate. Paste text and choose a language.",
+  documents: "Hello, I am Aila Documents. Upload a file, then ask about the extracted text.",
+  coding: "Hello, I am Aila Coding. Open a file or paste code and I will help you change it.",
+  education: "Hello, I am Aila Education. I can explain a topic, quiz you, or build a study plan.",
+  career: "Hello, I am Aila Career. I can help with resumes, applications, and interview practice.",
+  health:
+    "Hello, I am Aila Health. I can help organise habits and notes. I do not diagnose or replace a clinician.",
+  finance: "Hello, I am Aila Finance. Track money you enter here — no bank is connected.",
+  travel: "Hello, I am Aila Travel. I can help plan a trip. I cannot book or confirm reservations.",
+  shipping:
+    "Hello, I am Aila Shipping. I keep shipment records you enter. I cannot query carrier networks.",
+};
+
+function sessionStorageKey(mode: AilaMode) {
+  return `aila-session-${mode}`;
+}
+
+function draftStorageKey(mode: AilaMode) {
+  return `aila-chat-${mode}`;
+}
+
+function welcomeMessages(mode: AilaMode): ChatMessage[] {
+  return [
+    {
+      role: "assistant",
+      content: defaultWelcomeMessages[mode],
+    },
+  ];
+}
+
+function readStoredSessionId(mode: AilaMode): string | null {
+  if (typeof window === "undefined") {
+    return null;
+  }
+
+  const value = localStorage.getItem(sessionStorageKey(mode));
+  return value && value.trim() ? value.trim() : null;
+}
+
+function writeStoredSessionId(mode: AilaMode, id: string | null) {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  if (!id) {
+    localStorage.removeItem(sessionStorageKey(mode));
+    return;
+  }
+
+  localStorage.setItem(sessionStorageKey(mode), id);
+}
+
+function clearDraftMessages(mode: AilaMode) {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  localStorage.removeItem(draftStorageKey(mode));
+}
+
+function toClientMessages(value: unknown): ChatMessage[] {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+
+  const messages: ChatMessage[] = [];
+
+  for (const item of value) {
+    if (!item || typeof item !== "object") {
+      continue;
+    }
+
+    const role = "role" in item ? item.role : null;
+    const content = "content" in item ? item.content : null;
+
+    if (
+      (role === "user" || role === "assistant") &&
+      typeof content === "string"
+    ) {
+      messages.push({ role, content });
+    }
+  }
+
+  return messages;
+}
+
+function readDraftMessages(mode: AilaMode): ChatMessage[] | null {
+  if (typeof window === "undefined") {
+    return null;
+  }
+
+  const saved = localStorage.getItem(draftStorageKey(mode));
+
+  if (!saved) {
+    return null;
+  }
+
+  try {
+    const messages = toClientMessages(JSON.parse(saved));
+    return messages.length > 0 ? messages : null;
+  } catch {
+    return null;
+  }
+}
+
+function writeDraftMessages(mode: AilaMode, messages: ChatMessage[]) {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  localStorage.setItem(draftStorageKey(mode), JSON.stringify(messages));
+}
+
+function appendAssistantDelta(
+  current: ChatMessage[],
+  delta: string
+): ChatMessage[] {
+  const next = [...current];
+  const last = next[next.length - 1];
+
+  if (last?.role === "assistant") {
+    next[next.length - 1] = {
+      role: "assistant",
+      content: last.content + delta,
+    };
+    return next;
+  }
+
+  next.push({ role: "assistant", content: delta });
+  return next;
+}
+
+function jsonErrorMessage(
+  data: unknown,
+  status: number
+): string {
+  if (data && typeof data === "object") {
+    const error = "error" in data ? data.error : null;
+
+    if (error && typeof error === "object" && "message" in error) {
+      const message = error.message;
+      if (typeof message === "string" && message.trim()) {
+        return message;
+      }
+    }
+
+    if (typeof error === "string" && error.trim()) {
+      return error;
+    }
+  }
+
+  if (status === 401) {
+    return "Sign in to continue chatting with Aila.";
+  }
+
+  if (status === 429) {
+    return "Too many requests. Please try again shortly.";
+  }
+
+  return `Aila could not respond (${status}).`;
+}
 
 /**
  * Single premium chat component.
@@ -81,9 +449,9 @@ const defaultHeaders: Record<AilaMode, { title: string; subtitle: string }> = {
  * and the component handles the rest — API calls, suggestions,
  * styling, and behaviour.
  *
- * This file is the controller: it owns the conversation state
- * (input, messages, typing) and delegates rendering to the
- * presentational sub-components (ChatMessages, ChatInput, …).
+ * For authenticated users, the database is the source of truth for
+ * conversation history. localStorage only remembers the active
+ * conversationId and temporary signed-out drafts.
  */
 export default function ChatInterface({
   mode,
@@ -98,64 +466,358 @@ export default function ChatInterface({
   messagesHeight = "h-[400px]",
   showSuggestions = true,
   showHeader = true,
+  showConversationHistory = false,
 }: ChatInterfaceProps) {
+  const { isLoaded: isAuthLoaded, isSignedIn, getToken } = useAuth();
+
+  const authHeaders = useCallback(async (): Promise<HeadersInit> => {
+    const token = await getToken();
+    return token ? { Authorization: `Bearer ${token}` } : {};
+  }, [getToken]);
+
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>(
-    initialMessages ?? [
-      {
-        role: "assistant",
-        content:
-          mode === "intelligence"
-            ? "Welcome. I am Aila Intelligence, the intelligence layer of the Aila Ecosystem. Tell me what you want to build, improve or automate."
-            : mode === "legal"
-              ? "Welcome to AilaLegal AI. I can help you understand contracts, documents, clauses and potential review points. How can I assist you?"
-              : mode === "business"
-                ? "Hello, I am Aila Business AI. How can I help your business today?"
-                : "Hello, I am Aila Automation. Tell me about a process you want to automate.",
-      },
-    ]
+    initialMessages ?? welcomeMessages(mode)
   );
 
   const chatEndRef = useRef<HTMLDivElement | null>(null);
   const [typing, setTyping] = useState(false);
+  const [generating, setGenerating] = useState(false);
+  const [sendError, setSendError] = useState<string | null>(null);
+  const [conversationId, setConversationId] = useState<string | null>(null);
+  const [conversations, setConversations] = useState<ConversationSummary[]>([]);
+  const [conversationListStatus, setConversationListStatus] = useState<
+    "idle" | "loading" | "ready" | "signed-out" | "error"
+  >("idle");
+  const [conversationLoadStatus, setConversationLoadStatus] = useState<
+    "idle" | "loading" | "ready" | "error"
+  >("idle");
+  const [conversationLoadError, setConversationLoadError] = useState<
+    string | null
+  >(null);
+  const [failedConversationId, setFailedConversationId] = useState<
+    string | null
+  >(null);
+  const [hasHydrated, setHasHydrated] = useState(false);
+  const [attachment, setAttachment] = useState<ChatAttachment | null>(null);
+
+  const loadAbortRef = useRef<AbortController | null>(null);
+  const listAbortRef = useRef<AbortController | null>(null);
+  const sendAbortRef = useRef<AbortController | null>(null);
+  const syncGenerationRef = useRef(0);
+  const attachmentGenerationRef = useRef(0);
+  const conversationIdRef = useRef<string | null>(null);
+  const typingRef = useRef(false);
+  const generatingRef = useRef(false);
 
   useEffect(() => {
-    const STORAGE_KEY = `aila-chat-${mode}`;
+    conversationIdRef.current = conversationId;
+  }, [conversationId]);
 
-    const saved = localStorage.getItem(STORAGE_KEY);
+  useEffect(() => {
+    typingRef.current = typing;
+  }, [typing]);
 
-    if (!saved) return;
+  useEffect(() => {
+    generatingRef.current = generating;
+  }, [generating]);
 
-    try {
-      const parsed = JSON.parse(saved);
+  const beginFreshConversation = useCallback(() => {
+    syncGenerationRef.current += 1;
+    loadAbortRef.current?.abort();
+    loadAbortRef.current = null;
+    sendAbortRef.current?.abort();
+    sendAbortRef.current = null;
 
-      if (Array.isArray(parsed) && parsed.length > 0) {
-        setMessages(parsed);
-      }
-    } catch {
-      console.warn("Unable to restore previous conversation.");
-    }
+    generatingRef.current = false;
+    typingRef.current = false;
+    attachmentGenerationRef.current += 1;
+    setGenerating(false);
+    setTyping(false);
+    setConversationId(null);
+    conversationIdRef.current = null;
+    setSendError(null);
+    setConversationLoadError(null);
+    setFailedConversationId(null);
+    setConversationLoadStatus("idle");
+    setAttachment(null);
+    setMessages(welcomeMessages(mode));
+    writeStoredSessionId(mode, null);
+    clearDraftMessages(mode);
   }, [mode]);
 
-  const [sessionId] = useState(() => {
-    if (typeof window === "undefined") {
-      return crypto.randomUUID();
+  const refreshConversations = useCallback(async () => {
+    if (!showConversationHistory) {
+      return;
     }
 
-    const STORAGE_KEY = `aila-session-${mode}`;
+    listAbortRef.current?.abort();
+    const controller = new AbortController();
+    listAbortRef.current = controller;
 
-    const existing = localStorage.getItem(STORAGE_KEY);
+    setConversationListStatus("loading");
 
-    if (existing) {
-      return existing;
+    try {
+      const response = await fetch(
+        `/api/ai/conversation/list?mode=${encodeURIComponent(mode)}`,
+        { signal: controller.signal, headers: await authHeaders() }
+      );
+
+      if (controller.signal.aborted) {
+        return;
+      }
+
+      if (response.status === 401) {
+        setConversationListStatus("signed-out");
+        setConversations([]);
+        return;
+      }
+
+      if (!response.ok) {
+        throw new Error("Unable to load conversations.");
+      }
+
+      const data = await response.json();
+
+      if (controller.signal.aborted) {
+        return;
+      }
+
+      const listed = Array.isArray(data.conversations)
+        ? data.conversations
+        : [];
+
+      setConversations(
+        listed.filter(
+          (conversation: ConversationSummary) => conversation.mode === mode
+        )
+      );
+      setConversationListStatus("ready");
+    } catch (error) {
+      if (controller.signal.aborted) {
+        return;
+      }
+
+      if (error instanceof DOMException && error.name === "AbortError") {
+        return;
+      }
+
+      setConversationListStatus("error");
+    }
+  }, [authHeaders, mode, showConversationHistory]);
+
+  const loadConversation = useCallback(
+    async (id: string) => {
+      if (generatingRef.current || typingRef.current) {
+        return;
+      }
+
+      const generation = ++syncGenerationRef.current;
+      attachmentGenerationRef.current += 1;
+      loadAbortRef.current?.abort();
+      const controller = new AbortController();
+      loadAbortRef.current = controller;
+
+      setConversationLoadStatus("loading");
+      setConversationLoadError(null);
+      setFailedConversationId(null);
+      setSendError(null);
+
+      const isStale = () =>
+        controller.signal.aborted || syncGenerationRef.current !== generation;
+
+      try {
+        const response = await fetch(
+          `/api/ai/conversation?conversationId=${encodeURIComponent(id)}&mode=${encodeURIComponent(mode)}`,
+          { signal: controller.signal, headers: await authHeaders() }
+        );
+
+        if (isStale()) {
+          return;
+        }
+
+        if (response.status === 401) {
+          setConversationId(null);
+          conversationIdRef.current = null;
+          setConversationLoadStatus("idle");
+          setConversationListStatus("signed-out");
+          setConversations([]);
+          setAttachment(null);
+          return;
+        }
+
+        if (response.status === 404 || response.status === 409) {
+          beginFreshConversation();
+          void refreshConversations();
+          return;
+        }
+
+        if (!response.ok) {
+          throw new Error("Unable to load conversation.");
+        }
+
+        const data = await response.json();
+        const conversation = data?.conversation;
+
+        if (isStale()) {
+          return;
+        }
+
+        if (
+          !conversation ||
+          typeof conversation.id !== "string" ||
+          conversation.mode !== mode
+        ) {
+          beginFreshConversation();
+          void refreshConversations();
+          return;
+        }
+
+        const nextMessages = toClientMessages(conversation.messages);
+        const attachments = Array.isArray(conversation.attachments)
+          ? conversation.attachments
+          : [];
+        const firstAttachment = attachments[0];
+
+        setConversationId(conversation.id);
+        conversationIdRef.current = conversation.id;
+        setMessages(
+          nextMessages.length > 0 ? nextMessages : welcomeMessages(mode)
+        );
+
+        if (
+          firstAttachment &&
+          typeof firstAttachment.id === "string" &&
+          typeof firstAttachment.fileName === "string"
+        ) {
+          setAttachment({
+            status: "ready",
+            documentId: firstAttachment.id,
+            fileName: firstAttachment.fileName,
+            fileSize:
+              typeof firstAttachment.fileSize === "number"
+                ? firstAttachment.fileSize
+                : 0,
+            truncated: Boolean(firstAttachment.truncated),
+          });
+        } else {
+          setAttachment(null);
+        }
+        writeStoredSessionId(mode, conversation.id);
+        clearDraftMessages(mode);
+        setConversationLoadStatus("ready");
+      } catch (error) {
+        if (isStale()) {
+          return;
+        }
+
+        if (error instanceof DOMException && error.name === "AbortError") {
+          return;
+        }
+
+        setConversationLoadStatus("error");
+        setFailedConversationId(id);
+        setConversationLoadError(
+          error instanceof Error && error.message.trim()
+            ? error.message
+            : "Unable to load conversation."
+        );
+      }
+    },
+    [authHeaders, beginFreshConversation, mode, refreshConversations]
+  );
+
+  const loadConversationRef = useRef(loadConversation);
+  useEffect(() => {
+    loadConversationRef.current = loadConversation;
+  }, [loadConversation]);
+
+  useEffect(() => {
+    if (!isAuthLoaded) {
+      return;
     }
 
-    const id = crypto.randomUUID();
+    let cancelled = false;
 
-    localStorage.setItem(STORAGE_KEY, id);
+    async function hydrate() {
+      if (!isSignedIn) {
+        syncGenerationRef.current += 1;
+        loadAbortRef.current?.abort();
+        loadAbortRef.current = null;
+        sendAbortRef.current?.abort();
+        sendAbortRef.current = null;
 
-    return id;
-  });
+        generatingRef.current = false;
+        typingRef.current = false;
+        setGenerating(false);
+        setTyping(false);
+        setConversationId(null);
+        conversationIdRef.current = null;
+        setConversationLoadStatus("idle");
+        setConversationLoadError(null);
+        setFailedConversationId(null);
+        setAttachment(null);
+
+        const draft = readDraftMessages(mode);
+        if (!cancelled) {
+          setMessages(draft && draft.length > 0 ? draft : welcomeMessages(mode));
+          setHasHydrated(true);
+        }
+        return;
+      }
+
+      // Authenticated: never treat cached messages as authoritative.
+      clearDraftMessages(mode);
+
+      const storedId = readStoredSessionId(mode);
+
+      if (!storedId) {
+        if (!cancelled) {
+          setConversationId(null);
+          conversationIdRef.current = null;
+          setMessages(welcomeMessages(mode));
+          setConversationLoadStatus("idle");
+          setHasHydrated(true);
+        }
+        return;
+      }
+
+      if (!cancelled) {
+        setHasHydrated(true);
+        await loadConversationRef.current(storedId);
+      }
+    }
+
+    void hydrate();
+
+    return () => {
+      cancelled = true;
+      syncGenerationRef.current += 1;
+      loadAbortRef.current?.abort();
+      listAbortRef.current?.abort();
+      sendAbortRef.current?.abort();
+    };
+  }, [isAuthLoaded, isSignedIn, mode]);
+
+  useEffect(() => {
+    queueMicrotask(() => void refreshConversations());
+  }, [refreshConversations]);
+
+  // Signed-out draft continuity only — never used as source of truth when signed in.
+  useEffect(() => {
+    if (!hasHydrated || !isAuthLoaded || isSignedIn || conversationId) {
+      return;
+    }
+
+    writeDraftMessages(mode, messages);
+  }, [
+    conversationId,
+    hasHydrated,
+    isAuthLoaded,
+    isSignedIn,
+    messages,
+    mode,
+  ]);
 
   const resolvedSuggestions = suggestions ?? defaultSuggestions[mode];
   const resolvedPlaceholder = placeholder ?? defaultPlaceholders[mode];
@@ -164,18 +826,164 @@ export default function ChatInterface({
     : defaultHeaders[mode];
 
   useEffect(() => {
+    const prefersReducedMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     chatEndRef.current?.scrollIntoView({
-      behavior: "smooth",
+      behavior: prefersReducedMotion ? "auto" : "smooth",
     });
-  }, [messages, typing]);
+  }, [messages, typing, generating, conversationLoadStatus]);
 
-  async function sendMessage(customMessage?: string) {
-    const messageToSend = (customMessage || input).trim();
+  function resetConversation() {
+    beginFreshConversation();
+  }
 
-    if (!messageToSend || typing) {
+  async function deleteConversation(id: string) {
+    if (generating || typing || conversationLoadStatus === "loading") {
       return;
     }
 
+    const previous = conversations;
+    const wasActive = conversationId === id;
+    const previousMessages = messages;
+    const previousConversationId = conversationId;
+
+    setConversations((current) =>
+      current.filter((conversation) => conversation.id !== id)
+    );
+
+    if (wasActive) {
+      beginFreshConversation();
+    }
+
+    const generation = syncGenerationRef.current;
+
+    try {
+      const response = await fetch(
+        `/api/ai/conversation?conversationId=${encodeURIComponent(id)}`,
+        {
+          method: "DELETE",
+          headers: await authHeaders(),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Unable to delete conversation.");
+      }
+
+      const data = await response.json().catch(() => null);
+
+      if (data?.deleted !== true) {
+        throw new Error("Unable to delete conversation.");
+      }
+    } catch {
+      setConversations(previous);
+
+      if (wasActive && syncGenerationRef.current === generation) {
+        setConversationId(previousConversationId);
+        conversationIdRef.current = previousConversationId;
+        setMessages(previousMessages);
+        writeStoredSessionId(mode, previousConversationId);
+        setConversationLoadStatus("ready");
+      }
+
+      setConversationListStatus("error");
+    }
+  }
+
+  async function reconcileAbortedGeneration({
+    conversationId: id,
+    previousMessages,
+    messageToSend,
+    sendGeneration,
+  }: {
+    conversationId: string;
+    previousMessages: ChatMessage[];
+    messageToSend: string;
+    sendGeneration: number;
+  }) {
+    const isCurrent = () => syncGenerationRef.current === sendGeneration;
+
+    try {
+      const response = await fetch(
+        `/api/ai/conversation?conversationId=${encodeURIComponent(id)}&mode=${encodeURIComponent(mode)}`,
+        { headers: await authHeaders() }
+      );
+
+      if (!isCurrent()) {
+        return;
+      }
+
+      if (!response.ok) {
+        setMessages(previousMessages);
+        setInput((current) => (current.trim() ? current : messageToSend));
+        return;
+      }
+
+      const data = await response.json();
+      const conversation = data?.conversation;
+
+      if (!isCurrent()) {
+        return;
+      }
+
+      if (
+        !conversation ||
+        typeof conversation.id !== "string" ||
+        conversation.mode !== mode
+      ) {
+        setMessages(previousMessages);
+        setInput((current) => (current.trim() ? current : messageToSend));
+        return;
+      }
+
+      const nextMessages = toClientMessages(conversation.messages);
+      const persistedNewTurn = nextMessages.length > previousMessages.length;
+
+      setConversationId(conversation.id);
+      conversationIdRef.current = conversation.id;
+      setMessages(
+        nextMessages.length > 0 ? nextMessages : welcomeMessages(mode)
+      );
+      writeStoredSessionId(mode, conversation.id);
+      clearDraftMessages(mode);
+
+      if (!persistedNewTurn) {
+        setInput((current) => (current.trim() ? current : messageToSend));
+      }
+    } catch {
+      if (!isCurrent()) {
+        return;
+      }
+
+      setMessages(previousMessages);
+      setInput((current) => (current.trim() ? current : messageToSend));
+    }
+  }
+
+  async function sendMessage(customMessage?: string) {
+    const messageToSend =
+      (customMessage || input).trim() ||
+      (attachment?.status === "ready" ? "Use the attached file." : "");
+
+    if (
+      !messageToSend ||
+      generating ||
+      typing ||
+      conversationLoadStatus === "loading" ||
+      attachment?.status === "uploading" ||
+      attachment?.status === "processing"
+    ) {
+      return;
+    }
+
+    if (!isSignedIn) {
+      setSendError("Sign in to chat with Aila.");
+      return;
+    }
+
+    const previousMessages = messages;
     const userMessage: ChatMessage = {
       role: "user",
       content: messageToSend,
@@ -183,56 +991,460 @@ export default function ChatInterface({
 
     const updatedMessages = [...messages, userMessage];
 
+    // A send is a newer action than an in-flight load or delete rollback.
+    const sendGeneration = ++syncGenerationRef.current;
+    loadAbortRef.current?.abort();
+    loadAbortRef.current = null;
+    sendAbortRef.current?.abort();
+
+    const controller = new AbortController();
+    sendAbortRef.current = controller;
+
+    const conversationIdAtSend = conversationId;
+    const isCurrent = () => syncGenerationRef.current === sendGeneration;
+    let receivedDone = false;
+
     setMessages(updatedMessages);
     setInput("");
+    setSendError(null);
+    generatingRef.current = true;
+    typingRef.current = true;
+    setGenerating(true);
     setTyping(true);
+
+    const restoreAfterFailure = (errorMessage: string | null) => {
+      if (!isCurrent()) {
+        return;
+      }
+
+      generatingRef.current = false;
+      typingRef.current = false;
+      setGenerating(false);
+      setTyping(false);
+      setMessages(previousMessages);
+      setInput((current) => (current.trim() ? current : messageToSend));
+
+      if (errorMessage) {
+        setSendError(errorMessage);
+      }
+    };
 
     try {
       const response = await fetch("/api/ai", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Accept: "text/event-stream, application/json",
+          ...(await authHeaders()),
         },
+        signal: controller.signal,
         body: JSON.stringify({
           mode,
+          conversationId,
+          sessionId: conversationId,
           messages: updatedMessages,
+          ...(modeAllowsChatAttachments(mode) &&
+          attachment?.status === "ready" &&
+          attachment.documentId
+            ? { documentIds: [attachment.documentId] }
+            : {}),
+          ...(mode === "daily"
+            ? { timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC" }
+            : {}),
         }),
       });
 
-      if (!response.ok) {
-        throw new Error("Aila Intelligence could not respond.");
+      if (!isCurrent()) {
+        return;
       }
 
-      const data = await response.json();
+      const contentType = response.headers.get("content-type") ?? "";
+      const isSse = contentType.includes("text/event-stream");
+
+      if (!isSse) {
+        const data = await response.json().catch(() => null);
+
+        if (!response.ok || data?.success === false) {
+          throw new Error(jsonErrorMessage(data, response.status));
+        }
+
+        if (
+          !data ||
+          typeof data.reply !== "string" ||
+          data.reply.trim().length === 0
+        ) {
+          throw new Error("Aila returned an empty response.");
+        }
+
+        if (typeof data.conversationId === "string") {
+          setConversationId(data.conversationId);
+          conversationIdRef.current = data.conversationId;
+          writeStoredSessionId(mode, data.conversationId);
+          clearDraftMessages(mode);
+        }
+
+        generatingRef.current = false;
+        typingRef.current = false;
+        setFailedConversationId(null);
+        setConversationLoadError(null);
+        setGenerating(false);
+        setTyping(false);
+        setMessages((current) => [
+          ...current,
+          {
+            role: "assistant",
+            content: data.reply,
+          },
+        ]);
+        void refreshConversations();
+        return;
+      }
+
+      if (!response.ok || !response.body) {
+        throw new Error(jsonErrorMessage(null, response.status));
+      }
 
       setTyping(false);
-      setMessages((previous) => [
-        ...previous,
-        {
-          role: "assistant",
-          content: data.reply,
-        },
+      setMessages((current) => [
+        ...current,
+        { role: "assistant", content: "" },
       ]);
-    } catch {
-      setTyping(false);
-      setMessages((previous) => [
-        ...previous,
-        {
-          role: "assistant",
-          content: "Sorry, something went wrong. Please try again.",
-        },
-      ]);
+
+      for await (const event of iterateAilaSse(
+        response.body,
+        controller.signal
+      )) {
+        if (!isCurrent()) {
+          controller.abort();
+          return;
+        }
+
+        if (event.type === "delta") {
+          setMessages((current) =>
+            appendAssistantDelta(current, event.content)
+          );
+          continue;
+        }
+
+        if (event.type === "error") {
+          throw new Error(event.error.message);
+        }
+
+        receivedDone = true;
+        generatingRef.current = false;
+        typingRef.current = false;
+        setTyping(false);
+        setGenerating(false);
+        setFailedConversationId(null);
+        setConversationLoadError(null);
+        setConversationId(event.conversationId);
+        conversationIdRef.current = event.conversationId;
+        writeStoredSessionId(mode, event.conversationId);
+        clearDraftMessages(mode);
+        setMessages((current) => {
+          const next = [...current];
+          const last = next[next.length - 1];
+
+          if (last?.role === "assistant") {
+            next[next.length - 1] = {
+              role: "assistant",
+              content: event.reply,
+            };
+            return next;
+          }
+
+          next.push({ role: "assistant", content: event.reply });
+          return next;
+        });
+        void refreshConversations();
+      }
+
+      if (!isCurrent()) {
+        return;
+      }
+
+      if (!receivedDone) {
+        throw new Error("Aila Intelligence could not respond right now.");
+      }
+    } catch (error) {
+      if (!isCurrent()) {
+        return;
+      }
+
+      if (isAbortError(error) || controller.signal.aborted) {
+        if (receivedDone) {
+          generatingRef.current = false;
+          typingRef.current = false;
+          setGenerating(false);
+          setTyping(false);
+          return;
+        }
+
+        if (conversationIdAtSend) {
+          generatingRef.current = false;
+          typingRef.current = false;
+          setGenerating(false);
+          setTyping(false);
+          void reconcileAbortedGeneration({
+            conversationId: conversationIdAtSend,
+            previousMessages,
+            messageToSend,
+            sendGeneration,
+          });
+          return;
+        }
+
+        restoreAfterFailure(null);
+        void refreshConversations();
+        return;
+      }
+
+      if (error instanceof TypeError) {
+        restoreAfterFailure(
+          "Aila Intelligence could not respond. Please try again."
+        );
+        return;
+      }
+
+      const message =
+        error instanceof Error && error.message.trim()
+          ? error.message
+          : "Aila Intelligence could not respond. Please try again.";
+
+      restoreAfterFailure(message);
+    } finally {
+      if (sendAbortRef.current === controller) {
+        sendAbortRef.current = null;
+      }
+
+      if (isCurrent()) {
+        generatingRef.current = false;
+        typingRef.current = false;
+        setGenerating(false);
+        setTyping(false);
+      }
     }
   }
 
+  function stopGeneration() {
+    sendAbortRef.current?.abort();
+  }
+
+  async function attachFile(file: File) {
+    if (mode !== "intelligence" || generatingRef.current) {
+      return;
+    }
+
+    if (!isSignedIn) {
+      setAttachment({
+        status: "error",
+        fileName: file.name,
+        fileSize: file.size,
+        message: "Sign in to attach files.",
+      });
+      return;
+    }
+
+    const generation = ++attachmentGenerationRef.current;
+    setAttachment({
+      status: "uploading",
+      fileName: file.name,
+      fileSize: file.size,
+    });
+    setSendError(null);
+
+    const isCurrent = () => attachmentGenerationRef.current === generation;
+
+    try {
+      setAttachment({
+        status: "processing",
+        fileName: file.name,
+        fileSize: file.size,
+      });
+
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("mode", mode);
+      if (conversationIdRef.current) {
+        formData.append("conversationId", conversationIdRef.current);
+      }
+
+      const response = await fetch("/api/ai/media", {
+        method: "POST",
+        headers: await authHeaders(),
+        body: formData,
+      });
+
+      const data = await response.json().catch(() => null);
+
+      if (!isCurrent()) {
+        return;
+      }
+
+      if (!response.ok || data?.success === false) {
+        throw new Error(jsonErrorMessage(data, response.status));
+      }
+
+      const document = data?.document;
+      if (!document || typeof document.id !== "string") {
+        throw new Error("Aila could not attach this file.");
+      }
+
+      setAttachment({
+        status: "ready",
+        documentId: document.id,
+        fileName:
+          typeof document.fileName === "string" ? document.fileName : file.name,
+        fileSize:
+          typeof document.fileSize === "number" ? document.fileSize : file.size,
+        truncated: Boolean(document.truncated),
+      });
+    } catch (error) {
+      if (!isCurrent()) {
+        return;
+      }
+
+      setAttachment({
+        status: "error",
+        fileName: file.name,
+        fileSize: file.size,
+        message:
+          error instanceof Error && error.message.trim()
+            ? error.message
+            : "Aila could not attach this file.",
+      });
+    }
+  }
+
+  function removeAttachment() {
+    const current = attachment;
+    attachmentGenerationRef.current += 1;
+    setAttachment(null);
+
+    if (current?.status === "ready" && current.documentId) {
+      const documentId = current.documentId;
+      void authHeaders().then((headers) =>
+        fetch(
+          `/api/ai/media?documentId=${encodeURIComponent(documentId)}&mode=${encodeURIComponent(mode)}`,
+          { method: "DELETE", headers },
+        ),
+      );
+    }
+  }
+
+  const isConversationLoading = conversationLoadStatus === "loading";
+  const attachmentBusy =
+    attachment?.status === "uploading" || attachment?.status === "processing";
+  const inputDisabled =
+    generating || typing || isConversationLoading || attachmentBusy;
+
   return (
     <div
-      className={`relative overflow-hidden rounded-[36px] border border-white/[0.09] bg-[#080808]/90 shadow-[0_40px_120px_rgba(0,0,0,0.65)] backdrop-blur-2xl ${containerClassName}`}
+      className={`relative overflow-hidden rounded-[24px] border border-white/[0.09] bg-[#080808]/90 shadow-[0_40px_120px_rgba(0,0,0,0.65)] backdrop-blur-2xl sm:rounded-[36px] ${containerClassName}`}
     >
       {/* GLOW */}
       <div className="pointer-events-none absolute left-1/2 top-[-180px] h-80 w-80 -translate-x-1/2 rounded-full bg-cyan-500/[0.12] blur-[100px]" />
 
-      <div className="relative">
+      <div
+        className={`relative ${showConversationHistory ? "grid min-h-full lg:grid-cols-[250px_minmax(0,1fr)]" : ""}`}
+      >
+        {showConversationHistory && (
+          <aside className="border-b border-white/[0.07] bg-black/20 p-4 lg:border-b-0 lg:border-r">
+            <div className="flex items-center justify-between gap-3">
+              <div>
+                <p className="text-xs font-medium text-white">Conversations</p>
+                <p className="mt-1 text-[11px] text-neutral-600">
+                  Saved intelligence threads
+                </p>
+              </div>
+
+              <button
+                type="button"
+                onClick={resetConversation}
+                disabled={inputDisabled}
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.03] text-neutral-400 transition hover:border-cyan-300/30 hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
+                aria-label="Start new conversation"
+                title="Start new conversation"
+              >
+                <Plus className="h-4 w-4" />
+              </button>
+            </div>
+
+            <div className="mt-4 max-h-52 space-y-1 overflow-y-auto pr-1 lg:max-h-[500px]">
+              {conversationListStatus === "loading" && (
+                <p className="px-2 py-3 text-xs text-neutral-600">Loading...</p>
+              )}
+
+              {conversationListStatus === "signed-out" && (
+                <p className="px-2 py-3 text-xs leading-5 text-neutral-600">
+                  Sign in to save and reopen conversations.
+                </p>
+              )}
+
+              {conversationListStatus === "error" && (
+                <div className="space-y-2 px-2 py-3">
+                  <p className="text-xs leading-5 text-red-300/70">
+                    Conversation history is unavailable.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => void refreshConversations()}
+                    className="text-[11px] text-cyan-300/80 underline-offset-2 hover:underline"
+                  >
+                    Retry
+                  </button>
+                </div>
+              )}
+
+              {conversationListStatus === "ready" && conversations.length === 0 && (
+                <p className="px-2 py-3 text-xs leading-5 text-neutral-600">
+                  No saved conversations yet.
+                </p>
+              )}
+
+              {conversations.map((conversation) => (
+                <div
+                  key={conversation.id}
+                  className={`group flex items-center gap-2 rounded-2xl border px-2 py-2 transition ${
+                    conversation.id === conversationId
+                      ? "border-cyan-300/20 bg-cyan-300/[0.06]"
+                      : "border-transparent hover:border-white/[0.08] hover:bg-white/[0.03]"
+                  }`}
+                >
+                  <button
+                    type="button"
+                    onClick={() => void loadConversation(conversation.id)}
+                    disabled={inputDisabled}
+                    className="flex min-w-0 flex-1 items-center gap-2 text-left disabled:cursor-not-allowed"
+                  >
+                    <MessageSquare className="h-4 w-4 shrink-0 text-cyan-300/60" />
+                    <span className="min-w-0">
+                      <span className="block truncate text-xs text-neutral-300">
+                        {conversation.title ?? "New conversation"}
+                      </span>
+                      <span className="mt-0.5 block text-[10px] text-neutral-700">
+                        {conversation.messageCount} messages
+                      </span>
+                    </span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => void deleteConversation(conversation.id)}
+                    disabled={inputDisabled}
+                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-neutral-700 opacity-0 transition hover:bg-red-400/10 hover:text-red-300 group-hover:opacity-100 disabled:cursor-not-allowed"
+                    aria-label="Delete conversation"
+                    title="Delete conversation"
+                  >
+                    <Trash2 className="h-3.5 w-3.5" />
+                  </button>
+                </div>
+              ))}
+            </div>
+          </aside>
+        )}
+
+        <div className="min-w-0">
         {/* HEADER */}
         {showHeader && (
           <div className="flex items-center justify-between border-b border-white/[0.07] px-6 py-5">
@@ -270,6 +1482,12 @@ export default function ChatInterface({
           </div>
         )}
 
+        {isConversationLoading && (
+          <div className="border-b border-white/[0.07] px-5 py-3 sm:px-6">
+            <p className="text-xs text-neutral-500">Loading conversation...</p>
+          </div>
+        )}
+
         {/* MESSAGES */}
         <ChatMessages
           messages={messages}
@@ -286,8 +1504,8 @@ export default function ChatInterface({
                 <button
                   key={suggestion}
                   type="button"
-                  onClick={() => sendMessage(suggestion)}
-                  disabled={typing}
+                  onClick={() => void sendMessage(suggestion)}
+                  disabled={inputDisabled}
                   className="rounded-full border border-white/[0.08] bg-white/[0.025] px-4 py-2 text-xs text-neutral-500 transition hover:border-cyan-300/20 hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
                 >
                   {suggestion}
@@ -297,22 +1515,57 @@ export default function ChatInterface({
           </div>
         )}
 
+        {(sendError || conversationLoadError) && (
+          <div className="space-y-2 px-5 pt-3 sm:px-6" role="alert">
+            {conversationLoadError && (
+              <div className="flex flex-wrap items-center gap-3">
+                <p className="text-xs leading-5 text-red-300/80">
+                  {conversationLoadError}
+                </p>
+                {failedConversationId && (
+                  <button
+                    type="button"
+                    onClick={() => void loadConversation(failedConversationId)}
+                    disabled={inputDisabled}
+                    className="text-[11px] text-cyan-300/80 underline-offset-2 hover:underline disabled:opacity-40"
+                  >
+                    Retry
+                  </button>
+                )}
+              </div>
+            )}
+            {sendError && (
+              <p className="text-xs leading-5 text-red-300/80">{sendError}</p>
+            )}
+          </div>
+        )}
+
         {/* INPUT */}
         <ChatInput
           input={input}
           placeholder={resolvedPlaceholder}
-          typing={typing}
+          typing={inputDisabled}
+          generating={generating}
+          attachment={modeAllowsChatAttachments(mode) ? attachment : null}
+          allowAttachments={modeAllowsChatAttachments(mode)}
           onChange={setInput}
-          onSend={() => sendMessage()}
+          onSend={() => void sendMessage()}
+          onStop={stopGeneration}
+          onAttachFile={(file) => void attachFile(file)}
+          onRemoveAttachment={removeAttachment}
           onKeyDown={(event) => {
+            if (generating) {
+              return;
+            }
+
             if (event.key === "Enter" && !event.shiftKey) {
               event.preventDefault();
-              sendMessage();
+              void sendMessage();
             }
           }}
         />
+        </div>
       </div>
     </div>
   );
 }
-

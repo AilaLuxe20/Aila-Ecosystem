@@ -1,10 +1,8 @@
-export function validateMessages(messages:any[]){
+import type { ChatMessage } from "@/core/types";
 
-    return messages.every(message=>
-
-        typeof message.role==="string" &&
-        typeof message.content==="string"
-
+export function validateMessages(messages: ChatMessage[]) {
+    return messages.every(message =>
+        typeof message.role === "string" &&
+        typeof message.content === "string"
     );
-
 }

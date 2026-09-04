@@ -1,0 +1,1014 @@
+import { routeRequest } from "./router/router";
+import { buildResponse, buildErrorResponse } from "./response/builder";
+import {
+  getSession,
+  saveSession,
+} from "@/core/ai/sessions";
+
+const DEFAULT_SESSION = "default";
+
+export async function orchestrate(
+  request: AIRequest
+): Promise<AIResponse> {
+  try {
+    const sessionId = request.sessionId ?? DEFAULT_SESSION;
+
+    const history = getSession(sessionId);
+
+    const mergedRequest: AIRequest = {
+      ...request,
+      messages: [...history, ...request.messages],
+    };
+
+    const routing = routeRequest(mergedRequest);
+
+    const result = await chat(mergedRequest);
+
+    if (!result.success) {
+      return buildErrorResponse(
+        result.error ?? "Aila Intelligence could not respond."
+      );
+    }
+
+    saveSession(sessionId, mergedRequest.messages);
+
+    return buildResponse({
+      routing,
+      reply: result.reply,
+    });
+  } catch (error) {
+    console.error("Aila Orchestrator Error:", error);
+
+    return buildErrorResponse(
+      "Aila Orchestrator encountered an unexpected error."
+    );
+  }
+}
+
+(.venv) PS C:\Users\karma\aila> Get-Content "src\core\ai\types.ts" -Raw
+/**
+ * AI engine types for the single Aila AI engine.
+ */
+
+import type { ChatMessage, AilaMode } from "@/core/types";
+
+export interface AIRequest {
+  mode: AilaMode;
+  messages: ChatMessage[];
+  sessionId?: string;
+  documentText?: string;
+  documentName?: string;
+}
+
+export interface AIResponse {
+  success: boolean;
+  reply: string;
+  error?: string;
+}
+
+export interface AIStreamChunk {
+  content: string;
+}
+
+export interface AIPromptConfig {
+  systemPrompt: string;
+  maxTokens: number;
+  temperature: number;
+}
+
+export interface DocumentContext {
+  fileName: string;
+  text: string;
+}
+
+(.venv) PS C:\Users\karma\aila> Get-Content "src\core\ai\conversation\types.ts" -Raw
+import type { ChatMessage } from "@/core/types";
+
+export interface Conversation{
+    id:string;
+    createdAt:string;
+    updatedAt:string;
+    messages:ChatMessage[];
+}
+
+(.venv) PS C:\Users\karma\aila> Get-Content "src\core\ai\conversation\service.ts" -Raw
+(.venv) PS C:\Users\karma\aila> Get-Content "src\core\ai\conversation\repository.ts" -Raw
+(.venv) PS C:\Users\karma\aila> Get-Content "src\core\ai\sessions\index.ts" -Raw
+import type { ChatMessage } from "@/core/types";
+
+interface Session {
+  id: string;
+  messages: ChatMessage[];
+}
+
+const sessions = new Map<string, Session>();
+
+export function getSession(id: string): ChatMessage[] {
+  return sessions.get(id)?.messages ?? [];
+}
+
+export function saveSession(id: string, messages: ChatMessage[]): void {
+  sessions.set(id, { id, messages });
+}
+
+export function getSessions(): Session[] {
+  return [...sessions.values()];
+}
+
+export function createSession(id: string): void {
+  if (!sessions.has(id)) {
+    sessions.set(id, { id, messages: [] });
+  }
+}
+
+export function deleteSession(id: string): void {
+  sessions.delete(id);
+}
+
+(.venv) PS C:\Users\karma\aila> Get-Content "src\core\ai\sessions\service.ts" -Raw
+(.venv) PS C:\Users\karma\aila> Get-Content "src\core\ai\conversation\db.ts" -Raw
+import type { Conversation } from "./types";
+
+const db=new Map<string,Conversation>();
+
+export default db;
+
+(.venv) PS C:\Users\karma\aila> Get-Content "src\core\types.ts" -Raw
+Get-Content: Cannot find path 'C:\Users\karma\aila\src\core\types.ts' because it does not exist.
+(.venv) PS C:\Users\karma\aila> Get-ChildItem "src\core" -Recurse -File | Select-Object FullName
+
+FullName
+--------
+C:\Users\karma\aila\src\core\ai\documentContext.ts
+C:\Users\karma\aila\src\core\ai\documentEngine.ts
+C:\Users\karma\aila\src\core\ai\engine.ts
+C:\Users\karma\aila\src\core\ai\prompts.ts
+C:\Users\karma\aila\src\core\ai\types.ts
+C:\Users\karma\aila\src\core\ai\agents\index.ts
+C:\Users\karma\aila\src\core\ai\agentTypes\index.ts
+C:\Users\karma\aila\src\core\ai\analytics\index.ts
+C:\Users\karma\aila\src\core\ai\builder\index.ts
+C:\Users\karma\aila\src\core\ai\cache\index.ts
+C:\Users\karma\aila\src\core\ai\capabilities\index.ts
+C:\Users\karma\aila\src\core\ai\chat\index.ts
+C:\Users\karma\aila\src\core\ai\cleaner\index.ts
+C:\Users\karma\aila\src\core\ai\compress\index.ts
+C:\Users\karma\aila\src\core\ai\config\index.ts
+C:\Users\karma\aila\src\core\ai\context\index.ts
+C:\Users\karma\aila\src\core\ai\conversation\db.ts
+C:\Users\karma\aila\src\core\ai\conversation\delete.ts
+C:\Users\karma\aila\src\core\ai\conversation\index.ts
+C:\Users\karma\aila\src\core\ai\conversation\list.ts
+C:\Users\karma\aila\src\core\ai\conversation\load.ts
+C:\Users\karma\aila\src\core\ai\conversation\repository.ts
+C:\Users\karma\aila\src\core\ai\conversation\save.ts
+C:\Users\karma\aila\src\core\ai\conversation\service.ts
+C:\Users\karma\aila\src\core\ai\conversation\types.ts
+C:\Users\karma\aila\src\core\ai\conversation\metrics\index.ts
+C:\Users\karma\aila\src\core\ai\deduplicate\index.ts
+C:\Users\karma\aila\src\core\ai\events\index.ts
+C:\Users\karma\aila\src\core\ai\executor\index.ts
+C:\Users\karma\aila\src\core\ai\exporter\index.ts
+C:\Users\karma\aila\src\core\ai\extensions\index.ts
+C:\Users\karma\aila\src\core\ai\filter\index.ts
+C:\Users\karma\aila\src\core\ai\formatter\conversation.ts
+C:\Users\karma\aila\src\core\ai\formatter\index.ts
+C:\Users\karma\aila\src\core\ai\jobs\index.ts
+C:\Users\karma\aila\src\core\ai\logging\index.ts
+C:\Users\karma\aila\src\core\ai\memory\index.ts
+C:\Users\karma\aila\src\core\ai\merge\index.ts
+C:\Users\karma\aila\src\core\ai\messages\index.ts
+C:\Users\karma\aila\src\core\ai\metrics\index.ts
+C:\Users\karma\aila\src\core\ai\middleware\index.ts
+C:\Users\karma\aila\src\core\ai\modelResolver\index.ts
+C:\Users\karma\aila\src\core\ai\models\index.ts
+C:\Users\karma\aila\src\core\ai\models\types.ts
+C:\Users\karma\aila\src\core\ai\models\config\index.ts
+C:\Users\karma\aila\src\core\ai\openrouter\index.ts
+C:\Users\karma\aila\src\core\ai\options\index.ts
+C:\Users\karma\aila\src\core\ai\orchestrator\index.ts
+C:\Users\karma\aila\src\core\ai\orchestrator\intent\detect.ts
+C:\Users\karma\aila\src\core\ai\orchestrator\memory\memory.ts
+C:\Users\karma\aila\src\core\ai\orchestrator\planner\planner.ts
+C:\Users\karma\aila\src\core\ai\orchestrator\response\builder.ts
+C:\Users\karma\aila\src\core\ai\orchestrator\router\router.ts
+C:\Users\karma\aila\src\core\ai\orchestrator\tools\registry.ts
+C:\Users\karma\aila\src\core\ai\parser\index.ts
+C:\Users\karma\aila\src\core\ai\payload\index.ts
+C:\Users\karma\aila\src\core\ai\pipeline\index.ts
+C:\Users\karma\aila\src\core\ai\plugins\index.ts
+C:\Users\karma\aila\src\core\ai\prompt\index.ts
+C:\Users\karma\aila\src\core\ai\promptBuilder\index.ts
+C:\Users\karma\aila\src\core\ai\providerManager\index.ts
+C:\Users\karma\aila\src\core\ai\providers\index.ts
+C:\Users\karma\aila\src\core\ai\providers\openrouter.ts
+C:\Users\karma\aila\src\core\ai\providers\types.ts
+C:\Users\karma\aila\src\core\ai\queue\index.ts
+C:\Users\karma\aila\src\core\ai\registry\index.ts
+C:\Users\karma\aila\src\core\ai\requestId\index.ts
+C:\Users\karma\aila\src\core\ai\requestLogger\index.ts
+C:\Users\karma\aila\src\core\ai\resolver\index.ts
+C:\Users\karma\aila\src\core\ai\responseCache\index.ts
+C:\Users\karma\aila\src\core\ai\roles\index.ts
+C:\Users\karma\aila\src\core\ai\router\index.ts
+C:\Users\karma\aila\src\core\ai\runtime\index.ts
+C:\Users\karma\aila\src\core\ai\runtimeContext\index.ts
+C:\Users\karma\aila\src\core\ai\sanitizer\index.ts
+C:\Users\karma\aila\src\core\ai\serializer\index.ts
+C:\Users\karma\aila\src\core\ai\sessions\index.ts
+C:\Users\karma\aila\src\core\ai\sessions\service.ts
+C:\Users\karma\aila\src\core\ai\settings\index.ts
+C:\Users\karma\aila\src\core\ai\sort\index.ts
+C:\Users\karma\aila\src\core\ai\statistics\index.ts
+C:\Users\karma\aila\src\core\ai\stopwatch\index.ts
+C:\Users\karma\aila\src\core\ai\streaming\index.ts
+C:\Users\karma\aila\src\core\ai\streaming\types.ts
+C:\Users\karma\aila\src\core\ai\summary\index.ts
+C:\Users\karma\aila\src\core\ai\tasks\index.ts
+C:\Users\karma\aila\src\core\ai\templates\index.ts
+C:\Users\karma\aila\src\core\ai\tokenizer\index.ts
+C:\Users\karma\aila\src\core\ai\tokens\index.ts
+C:\Users\karma\aila\src\core\ai\toolResolver\index.ts
+C:\Users\karma\aila\src\core\ai\tools\index.ts
+C:\Users\karma\aila\src\core\ai\usage\index.ts
+C:\Users\karma\aila\src\core\ai\utils\index.ts
+C:\Users\karma\aila\src\core\ai\validator\index.ts
+C:\Users\karma\aila\src\core\ai\window\index.ts
+C:\Users\karma\aila\src\core\ai\workflows\index.ts
+C:\Users\karma\aila\src\core\config\index.ts
+C:\Users\karma\aila\src\core\constants\index.ts
+C:\Users\karma\aila\src\core\database\prisma.ts
+C:\Users\karma\aila\src\core\types\index.ts
+
+(.venv) PS C:\Users\karma\aila> Get-Content "src\core\types\index.ts" -Raw
+/**
+ * Core shared types used across the Aila Ecosystem.
+ */
+
+export type AilaMode =
+  | "intelligence"
+  | "legal"
+  | "business"
+  | "automation"
+  | "ads"
+  | "apps"
+  | "calendar"
+  | "commerce"
+  | "flow"
+  | "sites";
+
+export type ChatRole = "user" | "assistant";
+
+export interface ChatMessage {
+  role: ChatRole;
+  content: string;
+}
+
+export interface AIModelConfig {
+  model: string;
+  maxTokens: number;
+  temperature: number;
+}
+
+export interface DocumentResult {
+  fileName: string;
+  pages: number;
+  text: string;
+  size: number;
+  type: string;
+}
+
+export interface AnalysisResult {
+  summary: string;
+  riskScore: string;
+  risks: string[];
+  keyClauses: string[];
+  recommendations: string[];
+}
+
+(.venv) PS C:\Users\karma\aila> Get-Content "src\core\database\prisma.ts" -Raw
+/**
+ * Prisma database client singleton.
+ *
+ * Preserves the existing Prisma schema and generated client.
+ * Do NOT regenerate models, rename tables, or change the schema.
+ */
+
+import { PrismaClient } from "@/generated/prisma";
+
+declare global {
+  // Allow global `var` for Prisma client in development to prevent
+  // multiple instances during hot module replacement.
+  var __prismaClient: PrismaClient | undefined;
+}
+
+let prismaClient: PrismaClient;
+
+if (process.env.NODE_ENV === "production") {
+  prismaClient = new PrismaClient();
+} else {
+  if (!global.__prismaClient) {
+    global.__prismaClient = new PrismaClient();
+  }
+  prismaClient = global.__prismaClient;
+}
+
+export { prismaClient as prisma };
+export default prismaClient;
+
+(.venv) PS C:\Users\karma\aila> Get-Content "prisma\schema.prisma" -Raw
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  // The 'url' property has been removed to comply with Prisma 7 configuration requirements
+}
+
+model User {
+  id               String           @id @default(cuid())
+  name             String?
+  email            String           @unique
+  emailVerified    DateTime?
+  image            String?
+  password         String?
+  accounts         Account[]
+  sessions         Session[]
+  conversations    Conversation[]
+  legalDocuments   LegalDocument[]
+  projectInquiries ProjectInquiry[]
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Conversation {
+  id        String   @id @default(cuid())
+  userId    String
+  mode      String   @default("intelligence")
+  title     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages Message[]
+
+  @@index([userId])
+  @@map("conversations")
+}
+
+model Message {
+  id             String   @id @default(cuid())
+  conversationId String
+  role           String
+  content        String   @db.Text
+  createdAt      DateTime @default(now())
+
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@index([conversationId])
+}
+
+model LegalDocument {
+  id             String   @id @default(cuid())
+  userId         String
+  fileName       String
+  fileSize       Int
+  mimeType       String
+  fileType       String
+  content        String   @db.Text
+  summary        String?  @db.Text
+  conversationId String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("legal_documents")
+}
+
+model ProjectInquiry {
+  id          String   @id @default(cuid())
+  userId      String?
+  name        String
+  email       String
+  company     String?
+  idea        String
+  projectType String
+  budget      String?
+  timeline    String?
+  description String   @db.Text
+  status      String   @default("new")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@map("project_inquiries")
+}
+
+(.venv) PS C:\Users\karma\aila> Get-Content "src\core\ai\conversation\index.ts" -Raw
+import type { ChatMessage } from "@/core/types";
+
+export interface Conversation {
+    id: string;
+    title?: string;
+    messages: ChatMessage[];
+}
+
+const conversations = new Map<string, Conversation>();
+
+export function saveConversation(id: string, messages: ChatMessage[]) {
+
+    const existing = conversations.get(id);
+
+    conversations.set(id, {
+        id,
+        title: existing?.title ?? id,
+        messages
+    });
+
+}
+
+export function getConversation(id: string): ChatMessage[] {
+
+    return conversations.get(id)?.messages ?? [];
+
+}
+
+export function listConversations() {
+
+    return [...conversations.values()];
+
+}
+
+export function clearConversations() {
+
+    conversations.clear();
+
+}
+
+export function deleteConversation(id: string) {
+
+    return conversations.delete(id);
+
+}
+
+export function renameConversation(id: string, title: string) {
+
+    const conversation = conversations.get(id);
+
+    if (!conversation) return false;
+
+    conversation.title = title;
+
+    conversations.set(id, conversation);
+
+    return true;
+
+}
+
+export function getConversationIds() {
+
+    return [...conversations.keys()];
+
+}
+
+(.venv) PS C:\Users\karma\aila> Get-Content "src\core\ai\conversation\load.ts" -Raw
+import db from "./db";
+
+export function loadConversation(id:string){
+
+    return db.get(id);
+
+}
+
+(.venv) PS C:\Users\karma\aila> Get-Content "src\core\ai\conversation\save.ts" -Raw
+import db from "./db";
+import type { Conversation } from "./types";
+
+export function saveConversation(c:Conversation){
+
+    db.set(c.id,c);
+
+}
+
+(.venv) PS C:\Users\karma\aila> Get-Content "src\core\ai\engine.ts" -Raw
+/**
+ * Single Aila AI Engine.
+ *
+ * Consolidates all chat and document analysis APIs into one engine.
+ * Products specify only a mode (intelligence, legal, business, automation)
+ * and the engine selects the appropriate system prompt and configuration.
+ *
+ * This replaces the previous duplicate implementations:
+ * - /api/chat (intelligence)
+ * - /api/legal-chat (legal)
+ * - /api/business-chat (business)
+ * - /api/automation-chat (automation)
+ * - /api/legal-upload (document analysis)
+ */
+
+import type { ChatMessage, AilaMode } from "@/core/types";
+import type { AIRequest, AIResponse, AIPromptConfig } from "@/core/ai/types";
+import { PROMPTS, DOCUMENT_ANALYSIS_PROMPT } from "@/core/ai/prompts";
+import { MODE_CONFIG, MAX_MESSAGES, MAX_MESSAGE_LENGTH, AI_MODEL } from "@/core/constants";
+import { getOpenRouterApiKey } from "@/core/config";
+import {
+  saveDocument,
+  getDocument,
+  hasDocument,
+  clearDocument,
+} from "@/core/ai/documentContext";
+
+const OPENROUTER_ENDPOINT = "https://openrouter.ai/api/v1/chat/completions";
+
+/**
+ * Validate and sanitise chat messages.
+ * Preserves the validation logic from all original API routes.
+ */
+function validateMessages(
+  rawMessages: unknown[]
+): ChatMessage[] {
+  return rawMessages
+    .filter(
+      (message: unknown): message is ChatMessage => {
+        if (typeof message !== "object" || message === null) {
+          return false;
+        }
+
+        const candidate = message as Partial<ChatMessage>;
+
+        return (
+          (candidate.role === "user" ||
+            candidate.role === "assistant") &&
+          typeof candidate.content === "string" &&
+          candidate.content.trim().length > 0
+        );
+      }
+    )
+    .slice(-MAX_MESSAGES)
+    .map((message: ChatMessage): ChatMessage => ({
+      role: message.role,
+      content: message.content.trim().slice(0, MAX_MESSAGE_LENGTH),
+    }));
+}
+
+/**
+ * Get the prompt configuration for a given mode.
+ */
+function getPromptConfig(mode: AilaMode): AIPromptConfig {
+  const modeConfig = MODE_CONFIG[mode];
+  return {
+    systemPrompt: PROMPTS[mode],
+    maxTokens: modeConfig.maxTokens,
+    temperature: modeConfig.temperature,
+  };
+}
+
+/**
+ * Send a chat request to the AI engine.
+ *
+ * @param request - The AI request containing mode, messages, and optional document context
+ * @returns The AI response with reply or error
+ */
+export async function chat(request: AIRequest): Promise<AIResponse> {
+  const { mode, messages, documentText, documentName } = request;
+
+  // Check API key
+  const apiKey = getOpenRouterApiKey();
+  if (!apiKey) {
+    console.error("Missing OPENROUTER_API_KEY");
+    return {
+      success: false,
+      reply: "",
+      error: "Aila Intelligence is not configured.",
+    };
+  }
+
+  // Validate messages
+  const validMessages = validateMessages(messages);
+
+  if (validMessages.length === 0) {
+    return {
+      success: false,
+      reply: "",
+      error: "Please send Aila a message.",
+    };
+  }
+
+  // Ensure last message is from user
+  const lastMessage = validMessages[validMessages.length - 1];
+  if (lastMessage.role !== "user") {
+    return {
+      success: false,
+      reply: "",
+      error: "The latest message must come from the user.",
+    };
+  }
+
+  // Build the prompt configuration
+  const promptConfig = getPromptConfig(mode);
+
+  // If document text is provided, append it to the system prompt
+  let systemPrompt = promptConfig.systemPrompt;
+
+  if (documentText && documentText.trim().length > 0) {
+    systemPrompt = `${promptConfig.systemPrompt}
+
+DOCUMENT CONTEXT:
+
+Document: ${documentName || "uploaded document"}
+
+Content:
+${documentText.trim().slice(0, 14000)}`;
+  }
+
+  // Call OpenRouter
+  const aiResponse = await fetch(OPENROUTER_ENDPOINT, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model: AI_MODEL,
+      messages: [
+        {
+          role: "system",
+          content: systemPrompt,
+        },
+        ...validMessages,
+      ],
+      max_tokens: promptConfig.maxTokens,
+      temperature: promptConfig.temperature,
+
+    }),
+  });
+
+  const data = await aiResponse.json();
+
+  if (!aiResponse.ok) {
+    console.error("Aila AI Engine API Error:", data);
+
+    const providerMessage =
+      typeof data?.error?.message === "string"
+        ? data.error.message
+        : "";
+
+    return {
+      success: false,
+      reply: "",
+      error: providerMessage || "Aila Intelligence could not respond right now.",
+    };
+  }
+
+  const reply = data?.choices?.[0]?.message?.content;
+
+  if (typeof reply !== "string" || !reply.trim()) {
+    console.error("Aila AI Engine Empty Response:", data);
+
+    return {
+      success: false,
+      reply: "",
+      error: "Aila Intelligence did not receive a valid response.",
+    };
+  }
+
+  return {
+    success: true,
+    reply: reply.trim(),
+  };
+}
+
+/**
+ * Analyze a document using the AI engine.
+ *
+ * This consolidates the document analysis logic from /api/legal-upload
+ * and /products/ailalegal/analyze into a single pipeline.
+ *
+ * @param text - The extracted document text
+ * @param fileName - The name of the uploaded file
+ * @param mode - The AI mode to use for analysis (defaults to legal)
+ * @returns The AI response with analysis or error
+ */
+export async function analyzeDocument(
+  text: string,
+  fileName: string,
+  mode: AilaMode = "legal"
+): Promise<AIResponse> {
+  const apiKey = getOpenRouterApiKey();
+  if (!apiKey) {
+    console.error("Missing OPENROUTER_API_KEY");
+    return {
+      success: false,
+      reply: "",
+      error: "Aila Intelligence is not configured.",
+    };
+  }
+
+  const documentText = text.trim().slice(0, 14000);
+
+  if (!documentText) {
+    return {
+      success: false,
+      reply: "",
+      error: "No readable text found in the document.",
+    };
+  }
+
+  const modeConfig = MODE_CONFIG[mode];
+
+  const aiResponse = await fetch(OPENROUTER_ENDPOINT, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model: AI_MODEL,
+      messages: [
+        {
+          role: "system",
+          content: DOCUMENT_ANALYSIS_PROMPT,
+        },
+        {
+          role: "user",
+          content: `
+DOCUMENT NAME:
+${fileName}
+
+DOCUMENT CONTENT:
+${documentText}
+          `.trim(),
+        },
+      ],
+      max_tokens: modeConfig.maxTokens,
+      temperature: modeConfig.temperature,
+    }),
+  });
+
+  const data = await aiResponse.json();
+
+  if (!aiResponse.ok) {
+    console.error("Aila Document Analysis API Error:", data);
+
+    const providerMessage =
+      typeof data?.error?.message === "string"
+        ? data.error.message
+        : "";
+
+    return {
+      success: false,
+      reply: "",
+      error: providerMessage || "Aila could not analyze the document right now.",
+    };
+  }
+
+  const analysis = data?.choices?.[0]?.message?.content;
+
+  if (typeof analysis !== "string" || !analysis.trim()) {
+    console.error("Aila Document Analysis Empty Response:", data);
+
+    return {
+      success: false,
+      reply: "",
+      error: "Aila completed the request but did not receive a valid analysis.",
+    };
+  }
+
+  return {
+    success: true,
+    reply: analysis.trim(),
+  };
+}
+
+/**
+ * Get the current document context.
+ * Delegates to the document context manager.
+ */
+export { getDocument, hasDocument, saveDocument, clearDocument };
+
+
+
+
+(.venv) PS C:\Users\karma\aila> Get-Content "src\core\ai\conversation\list.ts" -Raw
+import db from "./db";
+
+export function listConversations(){
+
+    return [...db.values()];
+
+}
+
+(.venv) PS C:\Users\karma\aila> Get-Content "src\core\ai\conversation\delete.ts" -Raw
+import db from "./db";
+
+export function deleteConversation(id:string){
+
+    db.delete(id);
+
+}
+
+(.venv) PS C:\Users\karma\aila> Get-Content "src\core\ai\conversation\repository.ts" -Raw
+(.venv) PS C:\Users\karma\aila> Get-Content "src\core\ai\conversation\service.ts" -Raw
+(.venv) PS C:\Users\karma\aila> Get-Content "src\app\api\ai\conversation\route.ts" -Raw
+import { NextResponse } from "next/server";
+
+export async function GET(){
+    return NextResponse.json({
+        success:true,
+        conversation:[]
+    });
+}
+
+(.venv) PS C:\Users\karma\aila> Get-ChildItem "src\app\api\ai\conversation" -Recurse -File | Select-Object FullName
+
+FullName
+--------
+C:\Users\karma\aila\src\app\api\ai\conversation\route.ts
+C:\Users\karma\aila\src\app\api\ai\conversation\list\route.ts
+C:\Users\karma\aila\src\app\api\ai\conversation\metrics\route.ts
+
+(.venv) PS C:\Users\karma\aila> Get-ChildItem "src\app" -Recurse -File | Select-String -Pattern "currentUser|auth\(|auth\)|getAuth|getUser|clerk|currentUser" | Select-Object -First 100
+
+src\app\layout.tsx:2:import { ClerkProvider } from "@clerk/nextjs";
+src\app\layout.tsx:96:    <ClerkProvider>
+src\app\layout.tsx:123:    </ClerkProvider>
+src\app\(auth)\login\page.tsx:1:import { SignIn } from "@clerk/nextjs";
+src\app\(auth)\signup\page.tsx:1:import { SignUp } from "@clerk/nextjs";
+src\app\sign-in\[[...sign-in]]\page.tsx:1:import { SignIn } from "@clerk/nextjs";
+src\app\sign-up\[[...sign-up]]\page.tsx:1:import { SignUp } from "@clerk/nextjs";
+
+(.venv) PS C:\Users\karma\aila> Get-Content "src\middleware.ts" -Raw
+Get-Content: Cannot find path 'C:\Users\karma\aila\src\middleware.ts' because it does not exist.
+(.venv) PS C:\Users\karma\aila> Get-ChildItem "src" -Recurse -File -Filter "*middleware*" | Select-Object FullName
+(.venv) PS C:\Users\karma\aila> Get-Content "src\app\api\ai\conversation\list\route.ts" -Raw
+import { NextResponse } from "next/server";
+import { getConversationIds } from "@/core/ai/conversation";
+
+export async function GET(){
+    return NextResponse.json({
+        success:true,
+        conversations:getConversationIds()
+    });
+}
+
+(.venv) PS C:\Users\karma\aila> npm run build
+>> git status
+>> git add .
+>> git commit -m "feat: persist Aila Intelligence conversations"
+>> git push
+
+> aila@0.1.0 build
+> next build
+
+▲ Next.js 16.3.0 (Turbopack)
+- Environments: .env.local
+✓ Running next.config.ts took 184ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 13.2s
+✓ Finished TypeScript in 7.5s    
+✓ Collecting page data using 11 workers in 2.4s    
+✓ Generating static pages using 11 workers (83/83) in 899ms
+✓ Finalizing page optimization in 33ms    
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ƒ /api/ai
+├ ƒ /api/ai/capabilities
+├ ƒ /api/ai/capabilities/all
+├ ƒ /api/ai/capabilities/delete
+├ ƒ /api/ai/capabilities/diagnostics
+├ ƒ /api/ai/capabilities/health
+├ ƒ /api/ai/capabilities/info
+├ ƒ /api/ai/capabilities/lookup
+├ ƒ /api/ai/capabilities/registry
+├ ƒ /api/ai/capabilities/version
+├ ƒ /api/ai/config
+├ ƒ /api/ai/config/current
+├ ƒ /api/ai/config/diagnostics
+├ ƒ /api/ai/config/health
+├ ƒ /api/ai/config/model
+├ ƒ /api/ai/conversation
+├ ƒ /api/ai/conversation/list
+├ ƒ /api/ai/conversation/metrics
+├ ƒ /api/ai/diagnostics
+├ ƒ /api/ai/document
+├ ƒ /api/ai/environment
+├ ƒ /api/ai/features
+├ ƒ /api/ai/health
+├ ƒ /api/ai/history
+├ ƒ /api/ai/index
+├ ƒ /api/ai/info
+├ ƒ /api/ai/memory
+├ ƒ /api/ai/memory/all
+├ ƒ /api/ai/memory/clear
+├ ƒ /api/ai/memory/get
+├ ƒ /api/ai/memory/set
+├ ƒ /api/ai/models
+├ ƒ /api/ai/models/active
+├ ƒ /api/ai/models/capabilities
+├ ƒ /api/ai/models/default
+├ ƒ /api/ai/models/lookup
+├ ƒ /api/ai/models/providers
+├ ƒ /api/ai/modes
+├ ƒ /api/ai/prompt
+├ ƒ /api/ai/prompt/diagnostics
+├ ƒ /api/ai/prompt/health
+├ ƒ /api/ai/prompt/modes
+├ ƒ /api/ai/prompt/preview
+├ ƒ /api/ai/prompt/version
+├ ƒ /api/ai/provider
+├ ƒ /api/ai/provider/config
+├ ƒ /api/ai/provider/diagnostics
+├ ƒ /api/ai/provider/health
+├ ƒ /api/ai/provider/models
+├ ƒ /api/ai/runtime
+├ ƒ /api/ai/runtime/context
+├ ƒ /api/ai/runtime/context/health
+├ ƒ /api/ai/runtime/health
+├ ƒ /api/ai/runtime/info
+├ ƒ /api/ai/runtime/version
+├ ƒ /api/ai/sessions
+├ ƒ /api/ai/sessions/all
+├ ƒ /api/ai/sessions/create
+├ ƒ /api/ai/sessions/delete
+├ ƒ /api/ai/status
+├ ƒ /api/ai/version
+├ ƒ /api/project-inquiry
+├ ○ /build-with-aila
+├ ○ /dashboard
+├ ○ /guest
+├ ○ /login
+├ ○ /products/ads
+├ ○ /products/ailalegal
+├ ○ /products/apps
+├ ○ /products/automation
+├ ○ /products/business
+├ ○ /products/calendar
+├ ○ /products/commerce
+├ ○ /products/flow
+├ ○ /products/intelligence
+├ ○ /products/sites
+├ ○ /project-discovery
+├ ○ /robots.txt
+├ ƒ /sign-in/[[...sign-in]]
+├ ƒ /sign-up/[[...sign-up]]
+└ ○ /signup
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+On branch release/v1.0.0
+Your branch is up to date with 'origin/release/v1.0.0'.
+
+nothing to commit, working tree clean
+On branch release/v1.0.0
+Your branch is up to date with 'origin/release/v1.0.0'.
+
+nothing to commit, working tree clean
+Everything up-to-date
+(.venv) PS C:\Users\karma\aila> 

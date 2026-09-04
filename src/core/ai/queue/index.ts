@@ -1,21 +1,14 @@
-const queue:any[]=[];
+const queue: unknown[] = [];
 
-export function enqueue(item:any){
-
+export function enqueue(item: unknown) {
     queue.push(item);
-
     return queue.length;
-
 }
 
-export function dequeue(){
-
+export function dequeue() {
     return queue.shift();
-
 }
 
-export function getQueue(){
-
+export function getQueue() {
     return queue;
-
 }

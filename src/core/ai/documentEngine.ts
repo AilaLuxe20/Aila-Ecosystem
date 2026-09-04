@@ -1,34 +1,107 @@
 /**
- * Single Document Engine.
+ * Document upload and text extraction for Legal (and shared PDF helpers).
  *
- * Consolidates all document upload and parsing logic into one pipeline.
- * Legal, Business, Automation, and Intelligence products all reuse
- * this same engine — no duplicated upload logic.
- *
- * Replaces the previous duplicate implementations:
- * - /api/legal-upload (document upload + analysis)
- * - /products/ailalegal/extract (PDF extraction)
- * - src/app/components/AilaLegalAnalyzer.tsx (upload + extract + analyze)
- * - src/app/components/DocumentAnalyzer.tsx (mock upload)
- * - src/app/products/ailalegal/components/DocumentUpload.tsx (upload + analysis)
- * - src/app/products/ailalegal/components/DocumentAnalyzer.tsx (mock upload)
+ * Extracted text is returned to the caller. Persistence is the caller's
+ * responsibility (Prisma, per user). This module does not write process-global
+ * document state.
  */
 
 import { extractText } from "unpdf";
-import {
-  MAX_DOCUMENT_SIZE,
-  ALLOWED_FILE_TYPES,
-} from "@/core/constants";
-import type { DocumentResult } from "@/core/types";
-import { saveDocument, getDocument, hasDocument, clearDocument } from "@/core/ai/documentContext";
 
-export type { DocumentContext } from "@/core/ai/documentContext";
+import { MAX_DOCUMENT_SIZE } from "@/core/constants";
+import { looksLikeBinary, looksLikePdf } from "@/core/documents/bytes";
+import type { DocumentResult } from "@/core/types";
+import { ValidationError } from "@/lib/errors/app-error";
+import { getFileExtension, sanitizeFileName } from "@/lib/utils/file";
+
+export type LegalDocumentKind = "pdf" | "txt";
+
+export type LegalFileValidation =
+  | {
+      ok: true;
+      fileName: string;
+      kind: LegalDocumentKind;
+      mimeType: string;
+      fileSize: number;
+    }
+  | { ok: false; message: string };
+
+const WINDOWS_RESERVED = /^(con|prn|aux|nul|com[1-9]|lpt[1-9])(\.|$)/i;
+
+function sanitizeLegalFileName(rawName: string): string | null {
+  const trimmed = rawName.trim();
+  if (!trimmed || trimmed.length > 255) {
+    return null;
+  }
+
+  if (/[\\/\x00-\x1f]/.test(trimmed) || trimmed.includes("..")) {
+    return null;
+  }
+
+  const sanitised = sanitizeFileName(trimmed);
+  if (!sanitised || WINDOWS_RESERVED.test(sanitised)) {
+    return null;
+  }
+
+  return sanitised;
+}
 
 /**
- * Validate an uploaded file.
- *
- * @param file - The uploaded file
- * @returns An error message if validation fails, or null if valid
+ * Server-side Legal upload checks. Client MIME types are ignored.
+ */
+export function validateLegalDocumentFile(
+  fileName: string,
+  fileSize: number,
+  bytes: Uint8Array,
+): LegalFileValidation {
+  if (fileSize <= 0 || bytes.length === 0) {
+    return { ok: false, message: "The uploaded document is empty." };
+  }
+
+  if (fileSize > MAX_DOCUMENT_SIZE || bytes.length > MAX_DOCUMENT_SIZE) {
+    return {
+      ok: false,
+      message: "The document is too large. Please upload a file smaller than 10 MB.",
+    };
+  }
+
+  const safeName = sanitizeLegalFileName(fileName);
+  if (!safeName) {
+    return { ok: false, message: "That file name is not allowed." };
+  }
+
+  const extension = getFileExtension(safeName);
+  const kind: LegalDocumentKind | null =
+    extension === "pdf" ? "pdf" : extension === "txt" ? "txt" : null;
+
+  if (!kind) {
+    return {
+      ok: false,
+      message: "This file type is not supported yet. Please upload a PDF or TXT document.",
+    };
+  }
+
+  const pdfMagic = looksLikePdf(bytes);
+
+  if (kind === "pdf") {
+    if (!pdfMagic) {
+      return { ok: false, message: "The file does not look like a valid PDF." };
+    }
+  } else if (pdfMagic || looksLikeBinary(bytes)) {
+    return { ok: false, message: "The file does not look like readable text." };
+  }
+
+  return {
+    ok: true,
+    fileName: safeName,
+    kind,
+    mimeType: kind === "pdf" ? "application/pdf" : "text/plain",
+    fileSize: bytes.length,
+  };
+}
+
+/**
+ * @deprecated Use {@link validateLegalDocumentFile} with file bytes.
  */
 export function validateFile(file: File): string | null {
   if (!file) {
@@ -47,108 +120,104 @@ export function validateFile(file: File): string | null {
   const isPdf = fileName.endsWith(".pdf");
   const isTextFile = fileName.endsWith(".txt");
 
-  if (!isPdf && !isTextFile && !ALLOWED_FILE_TYPES.includes(file.type)) {
+  if (!isPdf && !isTextFile) {
     return "This file type is not supported yet. Please upload a PDF or TXT document.";
   }
 
   return null;
 }
 
-/**
- * Extract text from an uploaded file.
- *
- * Supports PDF (via unpdf) and plain text files.
- *
- * @param file - The uploaded file
- * @returns The extracted text
- */
-export async function extractTextFromFile(file: File): Promise<string> {
-  const fileName = file.name.toLowerCase();
-  const isPdf = fileName.endsWith(".pdf");
+export async function extractPdfTextFromBytes(
+  bytes: Uint8Array,
+): Promise<string> {
+  const { text } = await extractText(bytes, {
+    mergePages: true,
+  });
+  return text;
+}
 
-  if (isPdf) {
-    const buffer = await file.arrayBuffer();
-    const { text } = await extractText(new Uint8Array(buffer), {
-      mergePages: true,
-    });
-    return text;
-  }
-
-  return await file.text();
+export async function extractPdfPagesFromBytes(bytes: Uint8Array): Promise<{
+  text: string;
+  totalPages: number;
+}> {
+  return extractText(bytes, {
+    mergePages: true,
+  });
 }
 
 /**
- * Process an uploaded document through the full pipeline:
- * 1. Validate the file
- * 2. Extract text
- * 3. Save to document context
- * 4. Return the result
- *
- * @param file - The uploaded file
- * @returns The document result with extracted text
- * @throws Error if validation or extraction fails
+ * Validate, extract text, and return the document. Does not persist.
  */
 export async function processDocument(file: File): Promise<DocumentResult> {
-  const validationError = validateFile(file);
-  if (validationError) {
-    throw new Error(validationError);
+  const bytes = new Uint8Array(await file.arrayBuffer());
+  const validated = validateLegalDocumentFile(file.name, file.size, bytes);
+
+  if (!validated.ok) {
+    throw new ValidationError({ file: validated.message }, { message: validated.message });
   }
 
-  const extractedText = await extractTextFromFile(file);
+  const extractedText =
+    validated.kind === "pdf"
+      ? await extractPdfTextFromBytes(bytes)
+      : new TextDecoder("utf-8").decode(bytes);
+
   const cleanText = extractedText.trim();
 
   if (!cleanText) {
-    throw new Error(
-      "AilaLegal could not find readable text in this document. The file may contain scanned images and require OCR."
+    throw new ValidationError(
+      { file: "empty" },
+      {
+        message:
+          "Aila Legal could not find readable text in this document. The file may contain scanned images and require OCR.",
+      },
     );
   }
 
-  // Save to shared document context
-  saveDocument(file.name, cleanText);
-
   return {
-    fileName: file.name,
-    pages: 0, // Page count is only available for PDFs via unpdf's totalPages
+    fileName: validated.fileName,
+    pages: 0,
     text: cleanText,
-    size: file.size,
-    type: file.type || "unknown",
+    size: validated.fileSize,
+    type: validated.mimeType,
   };
 }
 
 /**
- * Process a PDF file and return page count along with text.
- * Used by the extract endpoint for backward compatibility.
+ * Process a PDF and return page count with text. Does not persist.
  */
 export async function extractPdf(file: File): Promise<{
   text: string;
   totalPages: number;
 }> {
-  const validationError = validateFile(file);
-  if (validationError) {
-    throw new Error(validationError);
+  const bytes = new Uint8Array(await file.arrayBuffer());
+  const validated = validateLegalDocumentFile(file.name, file.size, bytes);
+
+  if (!validated.ok) {
+    throw new ValidationError({ file: validated.message }, { message: validated.message });
   }
 
-  const buffer = await file.arrayBuffer();
-  const { text, totalPages } = await extractText(new Uint8Array(buffer), {
-    mergePages: true,
-  });
-
-  const cleanText = text.trim();
-
-  if (!cleanText) {
-    throw new Error(
-      "AilaLegal could not find readable text in this document. The file may contain scanned images and require OCR."
+  if (validated.kind !== "pdf") {
+    throw new ValidationError(
+      { file: "not-pdf" },
+      { message: "This endpoint only accepts PDF documents." },
     );
   }
 
-  // Save to shared document context
-  saveDocument(file.name, cleanText);
+  const { text, totalPages } = await extractPdfPagesFromBytes(bytes);
+  const cleanText = text.trim();
+
+  if (!cleanText) {
+    throw new ValidationError(
+      { file: "empty" },
+      {
+        message:
+          "Aila Legal could not find readable text in this document. The file may contain scanned images and require OCR.",
+      },
+    );
+  }
 
   return {
     text: cleanText,
     totalPages,
   };
 }
-
-// Re-export document context functions for convenience
-export { getDocument, hasDocument, clearDocument };

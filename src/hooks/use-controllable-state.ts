@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 
 import { useLatestRef } from "./use-latest-ref";
 
@@ -36,13 +36,6 @@ export function useControllableState<T>(
   const isControlled = value !== undefined;
   const [internalValue, setInternalValue] = useState<T>(defaultValue);
   const onChangeRef = useLatestRef(onChange);
-
-  // Mirrors the controlled value so functional updaters can read it without
-  // the caller having to thread the previous value through.
-  const controlledRef = useRef(value);
-  useEffect(() => {
-    controlledRef.current = value;
-  });
 
   const current = isControlled ? (value as T) : internalValue;
   const currentRef = useLatestRef(current);

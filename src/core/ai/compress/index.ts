@@ -1,11 +1,8 @@
-export function compressConversation(messages:any[]){
+import type { ChatMessage } from "@/core/types";
 
-    return messages.map(message=>({
-
-        role:message.role,
-
-        content:(message.content ?? "").trim()
-
+export function compressConversation(messages: ChatMessage[]) {
+    return messages.map(message => ({
+        role: message.role,
+        content: (message.content ?? "").trim()
     }));
-
 }

@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { useAuth, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
-import { ALL_PRODUCTS } from "@/core/constants";
+import { useEffect, useRef, useState } from "react";
+import { useAuth, UserButton } from "@clerk/nextjs";
+import { groupedNavProducts } from "@/core/constants";
 
 const navigation = [
   {
@@ -14,18 +14,15 @@ const navigation = [
     label: "Services",
     href: "/#services",
   },
-  {
-    label: "Products",
-    href: "/#products",
-  },
 ];
 
-const aiProducts = ALL_PRODUCTS.slice(0, 4);
-const platformProducts = ALL_PRODUCTS.slice(4);
+const navGroups = groupedNavProducts();
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [productsOpen, setProductsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const productsRef = useRef<HTMLDivElement>(null);
   const { isSignedIn } = useAuth();
 
   useEffect(() => {
@@ -35,36 +32,53 @@ export default function Navbar() {
 
     handleScroll();
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
-      window.removeEventListener(
-        "scroll",
-        handleScroll
-      );
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = menuOpen
-      ? "hidden"
-      : "";
+    document.body.style.overflow = menuOpen ? "hidden" : "";
 
     return () => {
       document.body.style.overflow = "";
     };
   }, [menuOpen]);
 
+  useEffect(() => {
+    function onPointerDown(event: MouseEvent) {
+      if (!productsRef.current?.contains(event.target as Node)) {
+        setProductsOpen(false);
+      }
+    }
+
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setProductsOpen(false);
+        setMenuOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, []);
+
   return (
     <>
       <header
-        className={`fixed left-0 right-0 top-0 z-50 transition-all duration-500 ${
+        className={`fixed left-0 right-0 top-0 z-50 pt-[env(safe-area-inset-top,0px)] transition-all duration-500 ${
           scrolled
             ? "border-b border-white/[0.07] bg-black/70 backdrop-blur-2xl"
             : "bg-transparent"
         }`}
       >
-        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:h-20 sm:px-6">
           <Link
             href="/"
             onClick={() => setMenuOpen(false)}
@@ -98,67 +112,92 @@ export default function Navbar() {
               </Link>
             ))}
 
-            <div className="mx-2 h-4 w-px bg-white/[0.08]" />
-
-            {aiProducts.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
+            <div className="relative" ref={productsRef}>
+              <button
+                type="button"
+                aria-expanded={productsOpen}
+                aria-haspopup="menu"
+                aria-controls="navbar-products-menu"
+                onClick={() => setProductsOpen((open) => !open)}
                 className="rounded-full px-4 py-2 text-sm text-neutral-500 transition duration-300 hover:bg-white/[0.04] hover:text-white"
               >
-                {item.name}
-              </Link>
-            ))}
+                Products
+              </button>
 
-            <div className="mx-2 h-4 w-px bg-white/[0.08]" />
-
-            {platformProducts.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="rounded-full px-4 py-2 text-sm text-neutral-500 transition duration-300 hover:bg-white/[0.04] hover:text-white"
-              >
-                {item.name}
-              </Link>
-            ))}
+              {productsOpen ? (
+                <div
+                  id="navbar-products-menu"
+                  role="menu"
+                  className="absolute left-0 top-full z-50 mt-2 max-h-[70vh] w-[360px] overflow-y-auto rounded-2xl border border-white/[0.1] bg-black/95 p-2 shadow-[0_20px_80px_rgba(0,0,0,0.65)] backdrop-blur-2xl"
+                >
+                  {navGroups.map((group) => (
+                    <div key={group.group} className="mb-1 last:mb-0">
+                      <p className="px-3 pb-1 pt-2 text-[10px] uppercase tracking-[0.22em] text-neutral-600">
+                        {group.label}
+                      </p>
+                      {group.products.map((item) => (
+                        <Link
+                          key={item.name}
+                          href={item.href}
+                          role="menuitem"
+                          onClick={() => setProductsOpen(false)}
+                          className="flex items-center justify-between rounded-xl px-3 py-2.5 text-sm text-neutral-300 transition hover:bg-white/[0.06] hover:text-white"
+                        >
+                          <span>{item.name}</span>
+                          <span className="text-neutral-600">→</span>
+                        </Link>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              ) : null}
+            </div>
           </nav>
 
-          <Link
-            href="/#start-project"
-            className="hidden rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition duration-300 hover:scale-105 lg:inline-flex"
-          >
-            Start a Project
-          </Link>
-
           <div className="hidden items-center gap-2 lg:flex">
+            <Link
+              href="/#start-project"
+              className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition duration-300 hover:scale-105"
+            >
+              Start a Project
+            </Link>
+
             {isSignedIn ? (
-              <UserButton
-                appearance={{
-                  elements: {
-                    avatarBox: "h-9 w-9",
-                  },
-                }}
-              />
+              <>
+                <Link
+                  href="/dashboard"
+                  className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-neutral-300 transition hover:bg-white/10"
+                >
+                  Dashboard
+                </Link>
+                <Link
+                  href="/billing"
+                  className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-neutral-300 transition hover:bg-white/10"
+                >
+                  Billing
+                </Link>
+                <UserButton
+                  appearance={{
+                    elements: {
+                      avatarBox: "h-9 w-9",
+                    },
+                  }}
+                />
+              </>
             ) : (
               <>
-                <SignInButton
-                  mode="modal"
-                  appearance={{
-                    elements: {
-                      button:
-                        "rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-neutral-300 transition hover:bg-white/10",
-                    },
-                  }}
-                />
-                <SignUpButton
-                  mode="modal"
-                  appearance={{
-                    elements: {
-                      button:
-                        "rounded-full bg-white px-4 py-2 text-sm font-semibold text-black transition hover:scale-105",
-                    },
-                  }}
-                />
+                <Link
+                  href="/sign-in"
+                  className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-neutral-300 transition hover:bg-white/10"
+                >
+                  Sign In
+                </Link>
+                <Link
+                  href="/sign-up"
+                  className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-black transition hover:scale-105"
+                >
+                  Sign Up
+                </Link>
               </>
             )}
           </div>
@@ -168,6 +207,8 @@ export default function Navbar() {
             onClick={() =>
               setMenuOpen((previous) => !previous)
             }
+            aria-expanded={menuOpen}
+            aria-controls="mobile-navigation"
             aria-label={
               menuOpen
                 ? "Close navigation menu"
@@ -197,15 +238,20 @@ export default function Navbar() {
       </header>
 
       <div
+        id="mobile-navigation"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Site navigation"
+        aria-hidden={!menuOpen}
         className={`fixed inset-0 z-40 bg-[#030303] transition duration-500 lg:hidden ${
           menuOpen
-            ? "visible opacity-100"
-            : "invisible opacity-0"
+            ? "pointer-events-auto visible opacity-100"
+            : "pointer-events-none invisible opacity-0"
         }`}
       >
         <div className="pointer-events-none absolute left-1/2 top-[-200px] h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-cyan-500/[0.08] blur-[140px]" />
 
-        <div className="relative flex min-h-screen flex-col px-6 pb-10 pt-32">
+        <div className="relative flex min-h-[100dvh] flex-col overflow-y-auto px-4 pb-[max(2.5rem,env(safe-area-inset-bottom))] pt-[calc(5.5rem+env(safe-area-inset-top,0px))] sm:px-6">
           <nav className="flex flex-col">
             {navigation.map((item, index) => (
               <Link
@@ -230,62 +276,28 @@ export default function Navbar() {
               </Link>
             ))}
 
-            <div className="my-4 h-px w-full bg-white/[0.06]" />
-
-            <p className="py-3 text-xs uppercase tracking-[0.25em] text-neutral-600">
-              AI Products
-            </p>
-
-            {aiProducts.map((item, index) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                onClick={() => setMenuOpen(false)}
-                className="group flex items-center justify-between border-b border-white/[0.07] py-5"
-              >
-                <div className="flex items-center gap-5">
-                  <span className="text-xs text-neutral-700">
-                    0{navigation.length + index + 1}
-                  </span>
-
-                  <span className="text-xl font-medium tracking-[-0.03em] text-neutral-300 transition group-hover:text-white">
-                    {item.name}
-                  </span>
-                </div>
-
-                <span className="text-neutral-700 transition group-hover:translate-x-1 group-hover:text-cyan-300">
-                  →
-                </span>
-              </Link>
-            ))}
-
-            <div className="my-4 h-px w-full bg-white/[0.06]" />
-
-            <p className="py-3 text-xs uppercase tracking-[0.25em] text-neutral-600">
-              Platform
-            </p>
-
-            {platformProducts.map((item, index) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                onClick={() => setMenuOpen(false)}
-                className="group flex items-center justify-between border-b border-white/[0.07] py-5"
-              >
-                <div className="flex items-center gap-5">
-                  <span className="text-xs text-neutral-700">
-                    0{navigation.length + aiProducts.length + index + 1}
-                  </span>
-
-                  <span className="text-xl font-medium tracking-[-0.03em] text-neutral-300 transition group-hover:text-white">
-                    {item.name}
-                  </span>
-                </div>
-
-                <span className="text-neutral-700 transition group-hover:translate-x-1 group-hover:text-cyan-300">
-                  →
-                </span>
-              </Link>
+            {navGroups.map((group) => (
+              <div key={group.group}>
+                <div className="my-4 h-px w-full bg-white/[0.06]" />
+                <p className="py-3 text-xs uppercase tracking-[0.25em] text-neutral-600">
+                  {group.label}
+                </p>
+                {group.products.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    onClick={() => setMenuOpen(false)}
+                    className="group flex items-center justify-between border-b border-white/[0.07] py-5"
+                  >
+                    <span className="text-xl font-medium tracking-[-0.03em] text-neutral-300 transition group-hover:text-white">
+                      {item.name}
+                    </span>
+                    <span className="text-neutral-700 transition group-hover:translate-x-1 group-hover:text-cyan-300">
+                      →
+                    </span>
+                  </Link>
+                ))}
+              </div>
             ))}
           </nav>
 
@@ -300,7 +312,21 @@ export default function Navbar() {
 
             <div className="mt-6 flex flex-col gap-3">
               {isSignedIn ? (
-                <div className="flex justify-center">
+                <div className="flex flex-col items-center gap-3">
+                  <Link
+                    href="/dashboard"
+                    onClick={() => setMenuOpen(false)}
+                    className="w-full rounded-full border border-white/10 bg-white/5 px-6 py-4 text-center text-sm font-semibold text-neutral-300"
+                  >
+                    Dashboard
+                  </Link>
+                  <Link
+                    href="/billing"
+                    onClick={() => setMenuOpen(false)}
+                    className="w-full rounded-full border border-white/10 bg-white/5 px-6 py-4 text-center text-sm font-semibold text-neutral-300"
+                  >
+                    Billing
+                  </Link>
                   <UserButton
                     appearance={{
                       elements: {
@@ -311,24 +337,20 @@ export default function Navbar() {
                 </div>
               ) : (
                 <>
-                  <SignInButton
-                    mode="modal"
-                    appearance={{
-                      elements: {
-                        button:
-                          "w-full rounded-full border border-white/10 bg-white/5 px-6 py-4 text-center text-sm font-semibold text-neutral-300 transition hover:bg-white/10",
-                      },
-                    }}
-                  />
-                  <SignUpButton
-                    mode="modal"
-                    appearance={{
-                      elements: {
-                        button:
-                          "w-full rounded-full bg-white px-6 py-4 text-center text-sm font-semibold text-black transition hover:scale-105",
-                      },
-                    }}
-                  />
+                  <Link
+                    href="/sign-in"
+                    onClick={() => setMenuOpen(false)}
+                    className="w-full rounded-full border border-white/10 bg-white/5 px-6 py-4 text-center text-sm font-semibold text-neutral-300 transition hover:bg-white/10"
+                  >
+                    Sign In
+                  </Link>
+                  <Link
+                    href="/sign-up"
+                    onClick={() => setMenuOpen(false)}
+                    className="w-full rounded-full bg-white px-6 py-4 text-center text-sm font-semibold text-black transition hover:scale-105"
+                  >
+                    Sign Up
+                  </Link>
                 </>
               )}
             </div>

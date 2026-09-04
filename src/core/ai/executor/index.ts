@@ -1,9 +1,17 @@
-export async function executeTool(id:string,input:unknown){
+import { runRegisteredTool } from "@/core/ai/orchestrator/tools/execute";
+import type { ToolContext } from "@/core/ai/orchestrator/tools/contract";
 
-    return{
-        tool:id,
-        input,
-        executed:true
-    };
-
+export async function executeTool(
+  id: string,
+  input: unknown,
+  context?: ToolContext
+) {
+  return runRegisteredTool(
+    id,
+    input,
+    context ?? {
+      userId: "",
+      mode: "intelligence",
+    }
+  );
 }

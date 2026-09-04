@@ -1,6 +1,29 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
+import { getPrismaUserOrNull } from "@/core/auth/clerk-user";
+import { getProjectInquiryEmail, getResendApiKey, getResendFromEmail } from "@/core/config";
+import { prisma } from "@/core/database/prisma";
+import { MemoryRateLimiter } from "@/lib/api/rate-limit";
+import { createLogger } from "@/lib/logger/logger";
+
+const log = createLogger("api.project-inquiry");
+
+const projectInquiryRateLimiter = new MemoryRateLimiter({
+  limit: 8,
+  windowMs: 60_000,
+});
+
+function clientIp(req: Request): string {
+  const forwarded = req.headers.get("x-forwarded-for");
+  if (forwarded) {
+    const first = forwarded.split(",")[0]?.trim();
+    if (first) return first;
+  }
+
+  return req.headers.get("x-real-ip") ?? "unknown";
+}
+
 const allowedProjectTypes = [
   "Website",
   "Web App",
@@ -11,6 +34,17 @@ const allowedProjectTypes = [
 
 export async function POST(req: Request) {
   try {
+    const rateLimit = await projectInquiryRateLimiter.check(
+      `project-inquiry:${clientIp(req)}`,
+    );
+
+    if (!rateLimit.allowed) {
+      return NextResponse.json(
+        { error: "Too many inquiries. Please try again shortly." },
+        { status: 429 },
+      );
+    }
+
     const body = await req.json();
 
     const name =
@@ -120,38 +154,38 @@ export async function POST(req: Request) {
       );
     }
 
-    if (
-      !process.env.RESEND_API_KEY ||
-      !process.env.PROJECT_INQUIRY_EMAIL
-    ) {
-      console.error(
-        "Missing RESEND_API_KEY or PROJECT_INQUIRY_EMAIL"
-      );
+    const signedInUser = await getPrismaUserOrNull();
 
-      return NextResponse.json(
-        {
-          error:
-            "Project inquiry email is not configured yet.",
-        },
-        {
-          status: 500,
-        }
-      );
-    }
+    const inquiry = await prisma.projectInquiry.create({
+      data: {
+        userId: signedInUser?.id,
+        name,
+        email,
+        company: company || null,
+        idea,
+        projectType,
+        description: idea,
+        status: "new",
+      },
+    });
 
+    const inquiryId = inquiry.id;
+
+    const resendApiKey = getResendApiKey();
+    const inquiryEmail = getProjectInquiryEmail();
+
+    if (resendApiKey && inquiryEmail) {
     const resend = new Resend(
-      process.env.RESEND_API_KEY
+      resendApiKey
     );
 
-    const inquiryId = crypto.randomUUID();
 
     const { data: emailData, error: emailError } =
       await resend.emails.send({
-        from:
-          "Aila Ecosystem <onboarding@resend.dev>",
+        from: getResendFromEmail(),
 
         to: [
-          process.env.PROJECT_INQUIRY_EMAIL,
+          inquiryEmail,
         ],
 
         replyTo: email,
@@ -293,27 +327,14 @@ export async function POST(req: Request) {
       });
 
     if (emailError) {
-      console.error(
-        "Aila Inquiry Email Error:",
-        emailError
-      );
-
-      return NextResponse.json(
-        {
-          error:
-            emailError.message ||
-            "Aila could not send the notification email.",
-        },
-        {
-          status: 500,
-        }
-      );
+      log.error("Project inquiry email failed.", emailError);
+    } else {
+      log.info("Project inquiry email sent.", {
+        inquiryId,
+        emailId: emailData?.id,
+      });
     }
-
-    console.log(
-      "Aila Inquiry Email Sent:",
-      emailData
-    );
+    }
 
     return NextResponse.json(
       {
@@ -329,17 +350,11 @@ export async function POST(req: Request) {
       }
     );
   } catch (error) {
-    console.error(
-      "Project Inquiry API Error:",
-      error
-    );
+    log.error("Project inquiry failed.", error);
 
     return NextResponse.json(
       {
-        error:
-          error instanceof Error
-            ? error.message
-            : "Aila could not receive your project right now.",
+        error: "Aila could not receive your project right now.",
       },
       {
         status: 500,

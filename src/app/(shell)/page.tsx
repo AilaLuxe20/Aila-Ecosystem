@@ -1,8 +1,20 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import ChatInterface from "@/components/ai/ChatInterface";
 import EcosystemCards from "@/components/shared/EcosystemCards";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import ProjectInquiry from "@/components/forms/ProjectInquiry";
+
+export const metadata: Metadata = {
+  title: {
+    absolute: "Aila Ecosystem | AI Software Company",
+  },
+  description:
+    "Aila is an AI software company. Sign in to use Intelligence, Legal, Daily, Ads, and the rest of the product workspaces — or start a custom project.",
+  alternates: {
+    canonical: "/",
+  },
+};
 
 const services = [
   {
@@ -25,6 +37,157 @@ const services = [
 
 const platforms = [
   {
+    title: "Aila Daily",
+    description:
+      "Plan the day from your stored tasks, notes, goals, calendar, conversations, and campaigns.",
+    status: "Live Platform",
+    type: "Everyday",
+    href: "/products/daily",
+    external: false,
+    accent: "from-sky-400/20 via-cyan-500/5 to-transparent",
+  },
+  {
+    title: "Aila Intelligence",
+    description:
+      "Chat, attach files, and persist conversations on your account.",
+    status: "Live Platform",
+    type: "Everyday",
+    href: "/products/intelligence",
+    external: false,
+    accent: "from-cyan-400/20 via-blue-500/5 to-transparent",
+  },
+  {
+    title: "Aila Writer",
+    description: "Write, edit, and rewrite documents stored on your account.",
+    status: "Live Platform",
+    type: "Everyday",
+    href: "/products/writer",
+    external: false,
+    accent: "from-lime-400/20 via-green-500/5 to-transparent",
+  },
+  {
+    title: "Aila Translate",
+    description: "Translate text between languages and keep a private history.",
+    status: "Live Platform",
+    type: "Everyday",
+    href: "/products/translate",
+    external: false,
+    accent: "from-sky-400/20 via-blue-500/5 to-transparent",
+  },
+  {
+    title: "Aila Documents",
+    description: "Upload files, extract text, search, and keep notes.",
+    status: "Live Platform",
+    type: "Everyday",
+    href: "/products/documents",
+    external: false,
+    accent: "from-orange-400/20 via-amber-500/5 to-transparent",
+  },
+  {
+    title: "Aila Ads",
+    description:
+      "Plan campaigns, generate ad copy, and analyse stored campaign data. Aila Ads does not buy ad inventory.",
+    status: "Live Platform",
+    type: "Professional",
+    href: "/products/ads",
+    external: false,
+    accent: "from-amber-400/20 via-orange-500/5 to-transparent",
+  },
+  {
+    title: "Aila Business",
+    description:
+      "Track contacts and complete tasks in a signed-in business workspace.",
+    status: "Live Platform",
+    type: "Professional",
+    href: "/products/business",
+    external: false,
+    accent: "from-cyan-300/20 via-teal-500/5 to-transparent",
+  },
+  {
+    title: "Aila Legal",
+    description:
+      "Upload contracts and get AI-powered analysis stored on your account.",
+    status: "Live Platform",
+    type: "Professional",
+    href: "/products/ailalegal",
+    external: false,
+    accent: "from-blue-400/20 via-indigo-500/5 to-transparent",
+  },
+  {
+    title: "Aila Automation",
+    description:
+      "Rules that send email, create calendar events, or create tasks.",
+    status: "Live Platform",
+    type: "Professional",
+    href: "/products/automation",
+    external: false,
+    accent: "from-violet-400/20 via-purple-500/5 to-transparent",
+  },
+  {
+    title: "Aila Coding",
+    description: "A coding workspace with project files and AI help.",
+    status: "Live Platform",
+    type: "Professional",
+    href: "/products/coding",
+    external: false,
+    accent: "from-lime-300/20 via-emerald-500/5 to-transparent",
+  },
+  {
+    title: "Aila Career",
+    description: "Resumes, applications, and interview notes.",
+    status: "Live Platform",
+    type: "Professional",
+    href: "/products/career",
+    external: false,
+    accent: "from-blue-400/20 via-indigo-500/5 to-transparent",
+  },
+  {
+    title: "Aila Education",
+    description: "Courses, notes, quizzes, and study progress.",
+    status: "Live Platform",
+    type: "Life",
+    href: "/products/education",
+    external: false,
+    accent: "from-sky-400/20 via-cyan-500/5 to-transparent",
+  },
+  {
+    title: "Aila Health",
+    description: "Habits and wellness notes. Not medical care.",
+    status: "Live Platform",
+    type: "Life",
+    href: "/products/health",
+    external: false,
+    accent: "from-rose-400/20 via-pink-500/5 to-transparent",
+  },
+  {
+    title: "Aila Finance",
+    description: "Income, expenses, budgets, and goals. No bank connection.",
+    status: "Live Platform",
+    type: "Life",
+    href: "/products/finance",
+    external: false,
+    accent: "from-emerald-400/20 via-teal-500/5 to-transparent",
+  },
+  {
+    title: "Aila Travel",
+    description: "Trip plans and itinerary notes. Aila does not book travel.",
+    status: "Live Platform",
+    type: "Life",
+    href: "/products/travel",
+    external: false,
+    accent: "from-orange-400/20 via-amber-500/5 to-transparent",
+  },
+  {
+    title: "Aila Commerce",
+    description:
+      "Create products and orders in your Aila catalog. Mark paid after payment outside Aila.",
+    status: "Live Platform",
+    type: "Commerce",
+    href: "/products/commerce",
+    external: false,
+    accent: "from-purple-400/20 via-fuchsia-500/5 to-transparent",
+  },
+  {
     title: "TLUXE Hairs",
     description:
       "A luxury hair shopping platform and real client commerce experience.",
@@ -35,60 +198,58 @@ const platforms = [
     accent: "from-amber-300/20 via-yellow-500/5 to-transparent",
   },
   {
-    title: "Shopping Web App",
-    description:
-      "A modern intelligent shopping experience built for the next generation of digital commerce.",
-    status: "Coming Soon",
-    type: "Web App",
-    href: "",
+    title: "Aila Shipping",
+    description: "Shipment records and tracking numbers you enter.",
+    status: "Live Platform",
+    type: "Commerce",
+    href: "/products/shipping",
     external: false,
-    accent: "from-purple-400/20 via-fuchsia-500/5 to-transparent",
+    accent: "from-amber-400/20 via-yellow-500/5 to-transparent",
   },
   {
-    title: "Hotel Booking",
+    title: "Aila Calendar",
     description:
-      "A premium hotel discovery and reservation experience built as an interactive product demo.",
-    status: "Demo",
-    type: "Booking Platform",
-    href: "",
+      "Create, search, edit, and archive events stored on your account.",
+    status: "Live Platform",
+    type: "Workspace",
+    href: "/products/calendar",
     external: false,
     accent: "from-blue-400/20 via-cyan-500/5 to-transparent",
   },
   {
-    title: "Cleaning Booking",
+    title: "Aila Sites",
     description:
-      "A service booking experience designed for cleaning businesses and modern service operations.",
-    status: "Demo",
-    type: "Service Platform",
-    href: "",
-    external: false,
-    accent: "from-cyan-300/20 via-teal-500/5 to-transparent",
-  },
-  {
-    title: "Restaurant",
-    description:
-      "A modern restaurant experience for menus, reservations, discovery and digital ordering.",
-    status: "Demo",
-    type: "Hospitality",
-    href: "",
+      "Write markdown pages and publish them to a public Aila URL.",
+    status: "Live Platform",
+    type: "Sites",
+    href: "/products/sites",
     external: false,
     accent: "from-orange-400/20 via-red-500/5 to-transparent",
   },
   {
-    title: "Barber",
+    title: "Aila Flow",
     description:
-      "A premium barber booking experience for appointments, services and customer management.",
-    status: "Demo",
-    type: "Booking Platform",
-    href: "",
+      "Define ordered steps and complete the next one as the work moves.",
+    status: "Live Platform",
+    type: "Workflows",
+    href: "/products/flow",
     external: false,
     accent: "from-neutral-300/20 via-neutral-500/5 to-transparent",
+  },
+  {
+    title: "Aila Apps",
+    description: "Describe, draft, and publish app listings on your account.",
+    status: "Live Platform",
+    type: "Apps",
+    href: "/products/apps",
+    external: false,
+    accent: "from-indigo-400/20 via-blue-500/5 to-transparent",
   },
 ];
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#030303] text-white">
+    <main className="relative min-h-screen overflow-x-clip overflow-y-visible bg-[#030303] text-white">
       {/* BACKGROUND */}
       <div className="absolute inset-0 -z-30 bg-[#030303]" />
 
@@ -166,11 +327,11 @@ export default function Home() {
 
                 <div>
                   <h2 className="text-4xl font-bold">
-                    Apps
+                    21
                   </h2>
 
                   <p className="mt-2 text-neutral-400">
-                    iOS • Android
+                    Products
                   </p>
                 </div>
               </div>
@@ -268,9 +429,8 @@ export default function Home() {
             </div>
 
             <p className="max-w-md leading-8 text-neutral-400">
-              Explore live platforms, products in development and interactive
-              demonstrations across commerce, hospitality and service
-              industries.
+              Live client work and Aila products you can sign in and use: catalog,
+              calendar, contacts, published sites, and workflows.
             </p>
           </div>
         </AnimatedSection>
@@ -285,15 +445,7 @@ export default function Home() {
 
                 <div className="relative flex min-h-[340px] flex-col">
                   <div className="flex items-start justify-between gap-4">
-                    <span
-                      className={`rounded-full border px-3 py-1.5 text-[10px] uppercase tracking-[0.2em] ${
-                        platform.status === "Live Platform"
-                          ? "border-green-400/20 bg-green-400/[0.07] text-green-300"
-                          : platform.status === "Coming Soon"
-                            ? "border-purple-400/20 bg-purple-400/[0.07] text-purple-300"
-                            : "border-white/10 bg-white/5 text-neutral-400"
-                      }`}
-                    >
+                    <span className="rounded-full border border-green-400/20 bg-green-400/[0.07] px-3 py-1.5 text-[10px] uppercase tracking-[0.2em] text-green-300">
                       {platform.status}
                     </span>
 
@@ -317,11 +469,7 @@ export default function Home() {
 
                     <div className="mt-8 flex items-center justify-between border-t border-white/[0.07] pt-5">
                       <span className="text-sm text-neutral-400 transition group-hover:text-white">
-                        {platform.status === "Live Platform"
-                          ? "Visit Platform"
-                          : platform.status === "Coming Soon"
-                            ? "In Development"
-                            : "Explore Demo"}
+                        {platform.external ? "Visit Platform" : "Open workspace"}
                       </span>
 
                       <span className="text-xl text-neutral-600 transition duration-300 group-hover:translate-x-1 group-hover:text-cyan-300">
@@ -334,16 +482,27 @@ export default function Home() {
             );
 
             if (platform.href) {
+              const className =
+                "group relative overflow-hidden rounded-[32px] border border-white/[0.08] bg-white/[0.025] p-7 transition duration-500 hover:-translate-y-2 hover:border-white/[0.16]";
+
+              if (platform.external) {
+                return (
+                  <a
+                    key={platform.title}
+                    href={platform.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={className}
+                  >
+                    {cardContent}
+                  </a>
+                );
+              }
+
               return (
-                <a
-                  key={platform.title}
-                  href={platform.href}
-                  target={platform.external ? "_blank" : undefined}
-                  rel={platform.external ? "noopener noreferrer" : undefined}
-                  className="group relative overflow-hidden rounded-[32px] border border-white/[0.08] bg-white/[0.025] p-7 transition duration-500 hover:-translate-y-2 hover:border-white/[0.16]"
-                >
+                <Link key={platform.title} href={platform.href} className={className}>
                   {cardContent}
-                </a>
+                </Link>
               );
             }
 
@@ -417,7 +576,3 @@ export default function Home() {
     </main>
   );
 }
-
-
-
-
