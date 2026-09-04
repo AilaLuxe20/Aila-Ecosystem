@@ -14,7 +14,7 @@ const CARDS: Array<{ key: keyof DashboardSummary; label: string; href: string }>
   { key: "dailyNotes", label: "Daily notes", href: "/products/daily" },
   { key: "openGoals", label: "Open Daily goals", href: "/products/daily" },
   { key: "conversations", label: "Intelligence chats", href: "/products/intelligence" },
-  { key: "writerDocuments", label: "Writer documents", href: "/products/writer" },
+  { key: "writerDocuments", label: "Writer books", href: "/products/writer" },
   { key: "translations", label: "Translations", href: "/products/translate" },
   { key: "libraryDocuments", label: "Documents", href: "/products/documents" },
   { key: "contacts", label: "Business contacts", href: "/products/business" },

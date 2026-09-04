@@ -33,7 +33,10 @@ import {
   isPaystackBillingConfigured,
   paystackCheckoutPlan,
   getPaystackPlanCode,
+  getPaystackPlanCodeMonthly,
+  getPaystackPlanCodeYearly,
   PAYSTACK_BILLING_PLAN,
+  PAYSTACK_CHECKOUT_PLANS,
   resolveBillingPlanId,
   type PaystackPlanInterval,
 } from "./plans";
@@ -117,6 +120,17 @@ export async function upsertSubscriptionFromPaystack(input: {
 
   const entitled = isActiveSubscriptionStatus(input.status);
 
+  const existing = await prisma.billingSubscription.findUnique({
+    where: { paystackSubscriptionCode: input.subscriptionCode },
+    select: { userId: true },
+  });
+
+  if (existing && existing.userId !== input.userId) {
+    throw new ConflictError({
+      message: "This Paystack subscription is already linked to another Aila account.",
+    });
+  }
+
   const record = await prisma.billingSubscription.upsert({
     where: { paystackSubscriptionCode: input.subscriptionCode },
     create: {
@@ -133,7 +147,6 @@ export async function upsertSubscriptionFromPaystack(input: {
       cancelAtPeriodEnd,
     },
     update: {
-      userId: input.userId,
       provider: "paystack",
       paystackCustomerCode: input.customerCode ?? undefined,
       paystackPlanCode: input.planCode ?? undefined,
@@ -341,6 +354,29 @@ export async function applyVerifiedPaystackTransaction(
   }
 
   const metadata = parsePaystackMetadata(transaction.metadata);
+
+  if (metadata.kind && metadata.kind !== CHECKOUT_KIND_SUBSCRIPTION) {
+    throw new ValidationError(
+      { kind: "Unsupported Paystack checkout kind." },
+      { message: "This payment is not an Aila Pro subscription charge." },
+    );
+  }
+
+  if (expectedUserId) {
+    if (!metadata.userId) {
+      throw new ValidationError(
+        { userId: "Missing Aila user on payment metadata." },
+        { message: "Unable to associate this payment with an Aila account." },
+      );
+    }
+    if (metadata.userId !== expectedUserId) {
+      throw new ValidationError(
+        { userId: "Payment user does not match the signed-in account." },
+        { message: "This payment belongs to a different Aila account." },
+      );
+    }
+  }
+
   const userId = expectedUserId ?? metadata.userId;
   if (!userId) {
     throw new ValidationError(
@@ -349,10 +385,45 @@ export async function applyVerifiedPaystackTransaction(
     );
   }
 
-  if (expectedUserId && metadata.userId && metadata.userId !== expectedUserId) {
+  const currency = (transaction.currency || "NGN").toUpperCase();
+  if (currency !== "NGN") {
     throw new ValidationError(
-      { userId: "Payment user does not match the signed-in account." },
-      { message: "This payment belongs to a different Aila account." },
+      { currency: "Unsupported currency." },
+      { message: "Aila Pro checkout must be paid in NGN." },
+    );
+  }
+
+  const matchingPlan = PAYSTACK_CHECKOUT_PLANS.find(
+    (plan) => plan.amountKobo === transaction.amount,
+  );
+  const monthlyCode = getPaystackPlanCodeMonthly();
+  const yearlyCode = getPaystackPlanCodeYearly();
+  const planFromTx =
+    typeof transaction.plan === "string"
+      ? transaction.plan
+      : transaction.plan?.plan_code ?? metadata.planCode ?? null;
+
+  const planCodeMatches =
+    Boolean(planFromTx) &&
+    ((monthlyCode && planFromTx === monthlyCode) ||
+      (yearlyCode && planFromTx === yearlyCode));
+
+  if (!matchingPlan && !planCodeMatches) {
+    throw new ValidationError(
+      { amount: "Payment amount or plan does not match Aila Pro." },
+      {
+        message:
+          "This Paystack charge does not match Aila Pro monthly or yearly pricing.",
+      },
+    );
+  }
+
+  if (metadata.kind !== CHECKOUT_KIND_SUBSCRIPTION && !transaction.subscription?.subscription_code) {
+    // Webhooks for legitimate subscription charges should still carry our kind
+    // or an attached subscription object. Fail closed for bare one-off charges.
+    throw new ValidationError(
+      { kind: "Missing Aila subscription checkout metadata." },
+      { message: "This payment is not a verified Aila Pro subscription charge." },
     );
   }
 
@@ -364,11 +435,8 @@ export async function applyVerifiedPaystackTransaction(
     });
   }
 
-  const planFromTx =
-    typeof transaction.plan === "string"
-      ? transaction.plan
-      : transaction.plan?.plan_code ?? metadata.planCode ?? null;
   const interval =
+    matchingPlan?.interval ??
     resolveIntervalFromPlan(
       planFromTx,
       typeof transaction.plan === "object" ? transaction.plan?.interval : null,
@@ -393,12 +461,12 @@ export async function applyVerifiedPaystackTransaction(
   }
 
   // charge.success for a plan payment may arrive before subscription.create.
-  // Record an active provisional row keyed by reference until subscription code arrives.
+  // Keep a non-entitling provisional row until the real subscription code arrives.
   const provisionalCode = `pending_${transaction.reference}`;
   await upsertSubscriptionFromPaystack({
     userId,
     subscriptionCode: provisionalCode,
-    status: "active",
+    status: "pending",
     customerCode,
     planCode: planFromTx,
     interval,
@@ -439,10 +507,15 @@ export async function applyPaystackSubscriptionEvent(
   }
 
   if (!userId) {
+    if (!customerCode) {
+      log.warn("Paystack subscription event had no customer code or Aila user.");
+      return null;
+    }
+
     const pending = await prisma.billingSubscription.findFirst({
       where: {
         provider: "paystack",
-        paystackCustomerCode: customerCode ?? undefined,
+        paystackCustomerCode: customerCode,
         paystackSubscriptionCode: { startsWith: "pending_" },
       },
       orderBy: { updatedAt: "desc" },

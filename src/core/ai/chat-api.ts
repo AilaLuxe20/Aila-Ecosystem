@@ -75,6 +75,7 @@ export const aiChatRequestSchema = z
       .max(MAX_INTELLIGENCE_ATTACHMENTS)
       .optional(),
     timezone: z.string().trim().min(1).max(64).optional(),
+    bookId: z.string().trim().min(1).max(64).optional(),
   })
   .strict();
 

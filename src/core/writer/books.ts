@@ -329,18 +329,22 @@ export function formatWriterBookContext(book: WriterBookDetailDto): string {
     .join("\n\n");
 }
 
-export async function formatWriterWorkspaceContext(userId: string): Promise<string> {
+export async function formatWriterWorkspaceContext(
+  userId: string,
+  bookId?: string | null,
+): Promise<string> {
   const books = await listWriterBooks(userId);
   if (books.length === 0) {
     return "AILA WRITER SNAPSHOT\nNo book projects yet.";
   }
 
-  const latest = books[0];
-  const detail = await getWriterBook(userId, latest.id);
+  const selected =
+    (bookId ? books.find((entry) => entry.id === bookId) : undefined) ?? books[0];
+  const detail = await getWriterBook(userId, selected.id);
   return [
     "AILA WRITER SNAPSHOT",
     `Projects: ${books.map((book) => `${book.title} (${book.status}, ${book.chapterCount} ch)`).join("; ")}`,
-    "Most recently edited book:",
+    bookId ? "Open book:" : "Most recently edited book:",
     formatWriterBookContext(detail),
   ].join("\n\n");
 }

@@ -40,9 +40,12 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
+    const overflow = menuOpen ? "hidden" : "";
+    document.documentElement.style.overflow = overflow;
+    document.body.style.overflow = overflow;
 
     return () => {
+      document.documentElement.style.overflow = "";
       document.body.style.overflow = "";
     };
   }, [menuOpen]);

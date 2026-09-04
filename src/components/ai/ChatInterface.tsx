@@ -36,6 +36,8 @@ type ChatInterfaceProps = {
   showSuggestions?: boolean;
   showHeader?: boolean;
   showConversationHistory?: boolean;
+  /** Writer: pass the open book so chat context matches the studio. */
+  bookId?: string | null;
 };
 
 const defaultSuggestions: Record<AilaMode, string[]> = {
@@ -467,6 +469,7 @@ export default function ChatInterface({
   showSuggestions = true,
   showHeader = true,
   showConversationHistory = false,
+  bookId = null,
 }: ChatInterfaceProps) {
   const { isLoaded: isAuthLoaded, isSignedIn, getToken } = useAuth();
 
@@ -1051,6 +1054,7 @@ export default function ChatInterface({
           ...(mode === "daily"
             ? { timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC" }
             : {}),
+          ...(mode === "writer" && bookId ? { bookId } : {}),
         }),
       });
 

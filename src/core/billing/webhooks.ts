@@ -8,19 +8,28 @@ export async function hasProcessedPaystackEvent(eventId: string): Promise<boolea
   return Boolean(existing);
 }
 
-export async function recordPaystackEvent(eventId: string, event: string): Promise<void> {
+/**
+ * Inserts the event id first. Returns true when this delivery owns processing,
+ * false when another delivery already claimed the id (duplicate).
+ */
+export async function claimPaystackEvent(eventId: string, event: string): Promise<boolean> {
   try {
     await prisma.paystackWebhookEvent.create({
       data: { id: eventId, event },
     });
+    return true;
   } catch (error) {
     const code =
       typeof error === "object" && error && "code" in error
         ? (error as { code?: string }).code
         : undefined;
     if (code === "P2002") {
-      return;
+      return false;
     }
     throw error;
   }
+}
+
+export async function recordPaystackEvent(eventId: string, event: string): Promise<void> {
+  await claimPaystackEvent(eventId, event);
 }

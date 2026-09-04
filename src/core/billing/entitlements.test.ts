@@ -55,10 +55,16 @@ test("staff roles can access paid products without a Paystack subscription", () 
   assert.equal(evaluateEntitlement("business", "ads", false).allowed, true);
 });
 
-test("Clerk pro role unlocks paid products", () => {
+test("Clerk pro role alone does not unlock paid products without a subscription", () => {
   const decision = evaluateEntitlement("pro", "sites", false);
+  assert.equal(decision.allowed, false);
+  assert.equal(decision.reason, "subscription_required");
+});
+
+test("Clerk pro with an active subscription unlocks paid products", () => {
+  const decision = evaluateEntitlement("pro", "sites", true);
   assert.equal(decision.allowed, true);
-  assert.equal(decision.reason, "clerk_pro");
+  assert.equal(decision.reason, "active_subscription");
 });
 
 test("guests cannot use any product", () => {

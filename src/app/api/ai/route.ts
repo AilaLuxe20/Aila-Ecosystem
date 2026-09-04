@@ -227,7 +227,7 @@ export async function POST(req: Request) {
     }
 
     if (mode === "writer") {
-      workspaceContext = await formatWriterWorkspaceContext(user.id);
+      workspaceContext = await formatWriterWorkspaceContext(user.id, body.bookId);
     }
 
     if (mode === "translate") {
