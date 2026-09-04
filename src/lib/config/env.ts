@@ -72,6 +72,8 @@ const serverEnvSchema = z.object({
   PAYSTACK_PUBLIC_KEY: optionalSecret,
   PAYSTACK_PLAN_CODE_MONTHLY: optionalSecret,
   PAYSTACK_PLAN_CODE_YEARLY: optionalSecret,
+  PAYSTACK_MONTHLY_PLAN_CODE: optionalSecret,
+  PAYSTACK_YEARLY_PLAN_CODE: optionalSecret,
   CRON_SECRET: optionalSecret,
 });
 

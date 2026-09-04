@@ -210,7 +210,7 @@ export async function createProCheckoutSession(
   if (!isPaystackBillingConfigured()) {
     throw new ConfigurationError({
       message:
-        "Paystack billing is not configured. Set PAYSTACK_SECRET_KEY, PAYSTACK_PLAN_CODE_MONTHLY, and PAYSTACK_PLAN_CODE_YEARLY.",
+        "Paystack billing is not configured. Set PAYSTACK_SECRET_KEY and monthly/yearly plan codes (PAYSTACK_PLAN_CODE_MONTHLY or PAYSTACK_MONTHLY_PLAN_CODE, and PAYSTACK_PLAN_CODE_YEARLY or PAYSTACK_YEARLY_PLAN_CODE).",
     });
   }
 

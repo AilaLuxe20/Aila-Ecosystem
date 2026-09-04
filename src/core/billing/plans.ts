@@ -121,11 +121,17 @@ export function getPaystackPublicKey(): string | undefined {
 }
 
 export function getPaystackPlanCodeMonthly(): string | undefined {
-  return getOptionalSecret("PAYSTACK_PLAN_CODE_MONTHLY");
+  return (
+    getOptionalSecret("PAYSTACK_PLAN_CODE_MONTHLY") ||
+    getOptionalSecret("PAYSTACK_MONTHLY_PLAN_CODE")
+  );
 }
 
 export function getPaystackPlanCodeYearly(): string | undefined {
-  return getOptionalSecret("PAYSTACK_PLAN_CODE_YEARLY");
+  return (
+    getOptionalSecret("PAYSTACK_PLAN_CODE_YEARLY") ||
+    getOptionalSecret("PAYSTACK_YEARLY_PLAN_CODE")
+  );
 }
 
 export function getPaystackPlanCode(interval: PaystackPlanInterval): string | undefined {
