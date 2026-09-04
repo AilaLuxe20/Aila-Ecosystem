@@ -3,14 +3,10 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   async redirects() {
     return [
-      // Canonical host is apex (Clerk FAPI proxy is apex-only). Cloudflare Worker
-      // and this redirect both send www → ailaluxe.com, including `/`.
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.ailaluxe.com" }],
-        destination: "https://ailaluxe.com/:path*",
-        permanent: true,
-      },
+      // Do not 301 www ↔ apex here. Cloudflare already proxies both hosts, Vercel
+      // lists both as production, and a permanent host bounce against any
+      // apex→www rule (or a cached 301) becomes ERR_TOO_MANY_REDIRECTS.
+      // Clerk allows both origins; metadataBase stays the apex URL.
       { source: "/login", destination: "/sign-in", permanent: false },
       { source: "/signup", destination: "/sign-up", permanent: false },
       { source: "/guest", destination: "/sign-in", permanent: false },

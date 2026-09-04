@@ -1,17 +1,10 @@
 /**
  * Cloudflare Workers Builds requires a Wrangler entrypoint.
- * Keep the Email Routing handler. Canonical host is apex (ailaluxe.com);
- * www redirects there so Clerk's apex-only proxy stays consistent.
+ * Do not 301 www → apex here. That fights Vercel/Cloudflare host rules and
+ * cached browser 301s (ERR_TOO_MANY_REDIRECTS). Pass through to origin.
  */
 const worker = {
   async fetch(request) {
-    const url = new URL(request.url);
-
-    if (url.hostname === "www.ailaluxe.com") {
-      url.hostname = "ailaluxe.com";
-      return Response.redirect(url.toString(), 301);
-    }
-
     // Same-URL fetch reaches the DNS origin (Vercel) and skips this Worker.
     return fetch(request);
   },
