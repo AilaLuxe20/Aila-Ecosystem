@@ -4,7 +4,7 @@ Aila is an AI software company and product ecosystem. It is not a template, a ch
 
 People use Aila to chat with a shared intelligence layer, store work on their own account, and run product workspaces for writing, documents, legal review, planning, commerce, and operations. Aila Luxe also builds custom websites, applications, and automation for clients.
 
-Live site: [https://ailaluxe.website](https://ailaluxe.website)
+Live site: [https://aila.website](https://aila.website)
 
 ---
 
@@ -188,7 +188,7 @@ npm start
 
 The production app is the existing Vercel project for this repository. Do not create a second production project.
 
-Production hosts already authorized for Clerk sessions include `ailaluxe.com` and `aila.website`.
+Production hosts already authorized for Clerk sessions include `ailaluxe.website` and `aila.website`.
 
 Set environment variables in the Vercel project (Production / Preview). Apply Prisma migrations with `npx prisma migrate deploy` against the production database — never `migrate reset` on production data.
 
@@ -228,7 +228,7 @@ prisma/             Schema and migrations
 
 ## Company
 
-**Aila Luxe Ventures** · Aila · [ailaluxe.com](https://ailaluxe.com)
+**Aila Luxe Ventures** · Aila · [aila.website](https://aila.website)
 
 Primary contact: ailaluxeventures@gmail.com  
 Secondary: ailaluxeventures@outlook.com
