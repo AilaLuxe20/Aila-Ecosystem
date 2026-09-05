@@ -35,6 +35,9 @@ export const INTELLIGENCE_ALLOWED_EXTENSIONS = [
   "ogg",
   "m4a",
   "webm",
+  "mp4",
+  "mov",
+  "m4v",
 ] as const;
 
 export const MAX_INTELLIGENCE_ATTACHMENTS = 1;
@@ -52,7 +55,39 @@ export const INTELLIGENCE_EXTRACT_TIMEOUT_MS = 20_000;
 /** OpenRouter request budget when the caller does not pass an abort signal. */
 export const AI_REQUEST_TIMEOUT_MS = 30_000;
 
-export const AI_MODEL = "openai/gpt-4.1-mini";
+/**
+ * Default OpenRouter chat model when env overrides are unset.
+ * GLM 5.2 `:free` is the production text/reasoning model.
+ * Override with OPENROUTER_MODEL (e.g. openrouter/free or a paid model).
+ */
+export const DEFAULT_OPENROUTER_CHAT_MODEL = "z-ai/glm-5.2:free";
+
+/**
+ * Default multimodal understanding model (image, video, and Omni audio).
+ * The live free Omni id includes `-reasoning`; the shorter Omni slug 404s.
+ * Override with OPENROUTER_VISION_MODEL.
+ */
+export const DEFAULT_OPENROUTER_VISION_MODEL =
+  "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free";
+
+/**
+ * Default fallback after a primary chat/vision/document model fails.
+ * Override with OPENROUTER_MODEL_FALLBACKS (comma-separated ids).
+ */
+export const DEFAULT_OPENROUTER_DOCUMENT_FALLBACK_MODEL =
+  "google/gemma-4-31b-it:free";
+
+export const DEFAULT_OPENROUTER_FALLBACK_MODELS =
+  DEFAULT_OPENROUTER_DOCUMENT_FALLBACK_MODEL;
+
+/**
+ * Default transcription model. Kept as a dedicated pipeline even though Omni
+ * can accept audio. Override with OPENROUTER_AUDIO_MODEL.
+ */
+export const DEFAULT_OPENROUTER_AUDIO_MODEL = "openai/whisper-large-v3";
+
+/** @deprecated Use getOpenRouterChatModel() so env overrides apply. */
+export const AI_MODEL = DEFAULT_OPENROUTER_CHAT_MODEL;
 
 /** Maximum tool rounds per Intelligence request. Prevents unbounded loops. */
 export const MAX_TOOL_ITERATIONS = 3;

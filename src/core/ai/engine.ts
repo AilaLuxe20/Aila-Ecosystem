@@ -16,8 +16,8 @@
 import type { ChatMessage, AilaMode } from "@/core/types";
 import type { AIRequest, AIResponse, AIPromptConfig } from "@/core/ai/types";
 import { PROMPTS, DOCUMENT_ANALYSIS_PROMPT } from "@/core/ai/prompts";
-import { MODE_CONFIG, MAX_MESSAGES, MAX_MESSAGE_LENGTH, AI_MODEL } from "@/core/constants";
-import { getOpenRouterApiKey } from "@/core/config";
+import { MODE_CONFIG, MAX_MESSAGES, MAX_MESSAGE_LENGTH } from "@/core/constants";
+import { getOpenRouterApiKey, openRouterModelRequestFields } from "@/core/config";
 import {
   saveDocument,
   getDocument,
@@ -31,11 +31,9 @@ import {
 } from "@/core/ai/streaming";
 import type { OpenRouterToolSpec, ProviderChatMessage } from "@/core/ai/orchestrator/tools/contract";
 import {
-  OPENROUTER_CHAT_URL,
-  buildOpenRouterHeaders,
+  fetchOpenRouterChatCompletion,
   openRouterUserMessage,
   readOpenRouterFailure,
-  resolveOpenRouterSignal,
 } from "@/core/ai/openrouter";
 
 /**
@@ -193,12 +191,12 @@ function createOpenRouterRequest(
     ...prepared.validMessages,
   ];
 
-  return fetch(OPENROUTER_CHAT_URL, {
-    method: "POST",
-    headers: buildOpenRouterHeaders(prepared.apiKey, stream),
-    signal: resolveOpenRouterSignal(options.signal),
-    body: JSON.stringify({
-      model: AI_MODEL,
+  return fetchOpenRouterChatCompletion({
+    apiKey: prepared.apiKey,
+    stream,
+    signal: options.signal,
+    payload: {
+      ...openRouterModelRequestFields("chat"),
       stream,
       messages,
       max_tokens: prepared.maxTokens,
@@ -206,7 +204,7 @@ function createOpenRouterRequest(
       ...(options.tools && options.tools.length > 0
         ? { tools: options.tools, tool_choice: "auto" }
         : {}),
-    }),
+    },
   });
 }
 
@@ -545,12 +543,10 @@ export async function analyzeDocument(
   let aiResponse: Response;
 
   try {
-    aiResponse = await fetch(OPENROUTER_CHAT_URL, {
-      method: "POST",
-      headers: buildOpenRouterHeaders(apiKey),
-      signal: resolveOpenRouterSignal(),
-      body: JSON.stringify({
-        model: AI_MODEL,
+    aiResponse = await fetchOpenRouterChatCompletion({
+      apiKey,
+      payload: {
+        ...openRouterModelRequestFields("document"),
         messages: [
           {
             role: "system",
@@ -569,7 +565,7 @@ ${documentText}
         ],
         max_tokens: modeConfig.maxTokens,
         temperature: modeConfig.temperature,
-      }),
+      },
     });
   } catch {
     return {

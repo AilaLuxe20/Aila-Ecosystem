@@ -2,20 +2,109 @@
  * Core configuration for the Aila Ecosystem.
  */
 
-import { AI_MODEL, MODE_CONFIG } from "@/core/constants";
+import {
+  DEFAULT_OPENROUTER_AUDIO_MODEL,
+  DEFAULT_OPENROUTER_CHAT_MODEL,
+  DEFAULT_OPENROUTER_FALLBACK_MODELS,
+  DEFAULT_OPENROUTER_VISION_MODEL,
+  MODE_CONFIG,
+} from "@/core/constants";
 import type { AIModelConfig, AilaMode } from "@/core/types";
 import { getOptionalSecret, publicEnv } from "@/lib/config/env";
+
+export const OPENROUTER_MODEL_ID = /^[a-zA-Z0-9_.:/-]{1,200}$/;
+
+export type OpenRouterRequestKind = "chat" | "vision" | "document";
+
+export function uniqueOpenRouterModelIds(ids: string[]): string[] {
+  return [...new Set(ids.filter((id) => OPENROUTER_MODEL_ID.test(id)))];
+}
+
+export function buildOpenRouterModelQueue(options: {
+  kind: OpenRouterRequestKind;
+  chatModel: string;
+  visionModel: string;
+  fallbacks: string[];
+}): string[] {
+  const fallbacks = uniqueOpenRouterModelIds(options.fallbacks);
+  if (options.kind === "vision") {
+    return uniqueOpenRouterModelIds([options.visionModel, ...fallbacks]);
+  }
+  return uniqueOpenRouterModelIds([options.chatModel, ...fallbacks]);
+}
+
+function readOpenRouterModelId(
+  key: "OPENROUTER_MODEL" | "OPENROUTER_VISION_MODEL" | "OPENROUTER_AUDIO_MODEL",
+  fallback: string,
+): string {
+  const value = getOptionalSecret(key);
+  if (value && OPENROUTER_MODEL_ID.test(value)) {
+    return value;
+  }
+  return fallback;
+}
+
+/** Chat/completions model. Default is GLM 5.2 `:free`. */
+export function getOpenRouterChatModel(): string {
+  return readOpenRouterModelId("OPENROUTER_MODEL", DEFAULT_OPENROUTER_CHAT_MODEL);
+}
+
+/** Image/video/Omni-audio understanding. Default is Nemotron Omni `:free`. */
+export function getOpenRouterVisionModel(): string {
+  return readOpenRouterModelId(
+    "OPENROUTER_VISION_MODEL",
+    DEFAULT_OPENROUTER_VISION_MODEL,
+  );
+}
+
+/** Audio transcriptions model. Often paid; override or expect an honest failure. */
+export function getOpenRouterAudioModel(): string {
+  return readOpenRouterModelId(
+    "OPENROUTER_AUDIO_MODEL",
+    DEFAULT_OPENROUTER_AUDIO_MODEL,
+  );
+}
+
+/** Extra OpenRouter model ids tried if the primary model is unavailable. */
+export function getOpenRouterModelFallbacks(): string[] {
+  const raw = getOptionalSecret("OPENROUTER_MODEL_FALLBACKS");
+  const parts = (raw ?? DEFAULT_OPENROUTER_FALLBACK_MODELS)
+    .split(",")
+    .map((part) => part.trim())
+    .filter((part) => OPENROUTER_MODEL_ID.test(part));
+  return uniqueOpenRouterModelIds(parts);
+}
+
+export function openRouterModelQueue(kind: OpenRouterRequestKind): string[] {
+  return buildOpenRouterModelQueue({
+    kind,
+    chatModel: getOpenRouterChatModel(),
+    visionModel: getOpenRouterVisionModel(),
+    fallbacks: getOpenRouterModelFallbacks(),
+  });
+}
+
+export function openRouterModelRequestFields(kind: OpenRouterRequestKind): {
+  model: string;
+  models?: string[];
+} {
+  const models = openRouterModelQueue(kind);
+  const model = models[0] ?? getOpenRouterChatModel();
+  return models.length > 1 ? { model, models } : { model };
+}
 
 export const config = {
   siteUrl: "https://ailaluxe.com",
   siteName: "Aila Ecosystem",
   ai: {
-    model: AI_MODEL,
+    get model() {
+      return getOpenRouterChatModel();
+    },
     endpoint: "https://openrouter.ai/api/v1/chat/completions",
     getModeConfig(mode: AilaMode): AIModelConfig {
       const modeConfig = MODE_CONFIG[mode];
       return {
-        model: AI_MODEL,
+        model: getOpenRouterChatModel(),
         maxTokens: modeConfig.maxTokens,
         temperature: modeConfig.temperature,
       };

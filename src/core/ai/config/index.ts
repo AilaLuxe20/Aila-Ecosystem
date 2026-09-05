@@ -1,11 +1,10 @@
-export const AIConfig={
+import { getOpenRouterChatModel } from "@/core/config";
 
-    defaultModel:"openai/gpt-5",
-
-    temperature:0.3,
-
-    maxTokens:4096,
-
-    stream:true
-
+export const AIConfig = {
+  get defaultModel() {
+    return getOpenRouterChatModel();
+  },
+  temperature: 0.3,
+  maxTokens: 4096,
+  stream: true,
 };

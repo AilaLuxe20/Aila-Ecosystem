@@ -55,11 +55,13 @@ const chatMessageSchema = z.object({
   content: z.string().max(MAX_MESSAGE_LENGTH),
 });
 
+const optionalId = z.string().trim().min(1).max(128).nullish();
+
 export const aiChatRequestSchema = z
   .object({
     mode: z.enum(AILA_MODE_VALUES).optional().default("intelligence"),
-    conversationId: z.string().trim().min(1).max(128).nullish(),
-    sessionId: z.string().trim().min(1).max(128).nullish(),
+    conversationId: optionalId,
+    sessionId: optionalId,
     messages: z
       .array(chatMessageSchema)
       .max(MAX_MESSAGES + 5)
@@ -75,9 +77,49 @@ export const aiChatRequestSchema = z
       .max(MAX_INTELLIGENCE_ATTACHMENTS)
       .optional(),
     timezone: z.string().trim().min(1).max(64).optional(),
-    bookId: z.string().trim().min(1).max(64).optional(),
+    bookId: optionalId,
   })
   .strict();
+
+/**
+ * Writer (and other clients) may send extra message fields or an empty bookId.
+ * Keep the strict schema, but only parse the known chat contract.
+ */
+export function normalizeAiChatRequestInput(raw: unknown): unknown {
+  if (!raw || typeof raw !== "object" || Array.isArray(raw)) {
+    return raw;
+  }
+
+  const input = raw as Record<string, unknown>;
+  const messages = Array.isArray(input.messages)
+    ? input.messages.map((item) => {
+        if (!item || typeof item !== "object" || Array.isArray(item)) {
+          return item;
+        }
+        const message = item as Record<string, unknown>;
+        return { role: message.role, content: message.content };
+      })
+    : input.messages;
+
+  const bookId =
+    typeof input.bookId === "string"
+      ? input.bookId.trim() || undefined
+      : input.bookId == null
+        ? undefined
+        : input.bookId;
+
+  return {
+    mode: input.mode,
+    conversationId: input.conversationId,
+    sessionId: input.sessionId,
+    messages,
+    documentText: input.documentText,
+    documentName: input.documentName,
+    documentIds: input.documentIds,
+    timezone: input.timezone,
+    bookId,
+  };
+}
 
 export type AiChatRequest = z.infer<typeof aiChatRequestSchema>;
 

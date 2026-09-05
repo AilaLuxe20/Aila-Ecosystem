@@ -5,7 +5,11 @@ import {
 } from "@/core/constants";
 import { ERROR_CODES } from "@/lib/errors/app-error";
 
-import { describeImageForContext, transcribeAudioForContext } from "@/core/ai/media/openrouter-media";
+import {
+  describeImageForContext,
+  describeVideoForContext,
+  transcribeAudioForContext,
+} from "@/core/ai/media/openrouter-media";
 
 import type { IntelligenceFileKind } from "./kinds";
 
@@ -95,6 +99,18 @@ export async function extractIntelligenceText(
       return transcribed;
     }
     return { ok: true, data: truncateExtractedText(transcribed.text) };
+  }
+
+  if (kind === "video") {
+    const described = await describeVideoForContext({
+      bytes,
+      mimeType: options?.mimeType ?? "video/mp4",
+      fileName: options?.fileName ?? "video.mp4",
+    });
+    if (!described.ok) {
+      return described;
+    }
+    return { ok: true, data: truncateExtractedText(described.text) };
   }
   try {
     const raw = await withTimeout(

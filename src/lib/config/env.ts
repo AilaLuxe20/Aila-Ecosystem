@@ -58,6 +58,10 @@ const optionalSecret = z.preprocess(
 const serverEnvSchema = z.object({
   NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
   OPENROUTER_API_KEY: optionalSecret,
+  OPENROUTER_MODEL: optionalSecret,
+  OPENROUTER_VISION_MODEL: optionalSecret,
+  OPENROUTER_AUDIO_MODEL: optionalSecret,
+  OPENROUTER_MODEL_FALLBACKS: optionalSecret,
   RESEND_API_KEY: optionalSecret,
   RESEND_FROM_EMAIL: optionalSecret,
   PROJECT_INQUIRY_EMAIL: optionalSecret,

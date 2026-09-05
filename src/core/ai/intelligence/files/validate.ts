@@ -30,7 +30,7 @@ export type IntelligenceFileValidation =
 
 const WINDOWS_RESERVED = /^(con|prn|aux|nul|com[1-9]|lpt[1-9])(\.|$)/i;
 const UNSUPPORTED_MESSAGE =
-  "This file type is not supported. Attach a PDF, TXT, CSV, JSON, Markdown, image (PNG, JPEG, WEBP, GIF), or audio note (MP3, WAV, OGG, M4A, WEBM).";
+  "This file type is not supported. Attach a PDF, TXT, CSV, JSON, Markdown, image (PNG, JPEG, WEBP, GIF), audio note (MP3, WAV, OGG, M4A, WEBM), or short video (MP4, MOV, M4V).";
 
 function validateFileName(rawName: string): string | null {
   const trimmed = rawName.trim();
@@ -128,6 +128,18 @@ function sniffAudioMime(bytes: Uint8Array, extension: string): string | null {
   return null;
 }
 
+function sniffVideoMime(bytes: Uint8Array, extension: string): string | null {
+  if (bytes.length >= 12 && ascii(bytes, 4, 4) === "ftyp") {
+    return extension === "mov" ? "video/quicktime" : "video/mp4";
+  }
+
+  if (extension === "mp4" || extension === "m4v" || extension === "mov") {
+    return extension === "mov" ? "video/quicktime" : "video/mp4";
+  }
+
+  return null;
+}
+
 /**
  * Server-side file checks. Client MIME types are ignored.
  */
@@ -168,7 +180,7 @@ export function validateIntelligenceFile(
       ok: false,
       code: ERROR_CODES.VALIDATION_FAILED,
       message:
-        "Aila cannot analyze video frames. Upload an audio recording or a transcript of the spoken content instead.",
+        "This video container is not supported. Upload MP4, MOV, or M4V, or an audio recording instead.",
     };
   }
 
@@ -228,6 +240,25 @@ export function validateIntelligenceFile(
         ok: false,
         code: ERROR_CODES.VALIDATION_FAILED,
         message: "The file does not look like a valid audio recording.",
+      };
+    }
+
+    return {
+      ok: true,
+      fileName: safeName,
+      kind,
+      mimeType,
+      fileSize: bytes.length,
+    };
+  }
+
+  if (kind === "video") {
+    const mimeType = sniffVideoMime(bytes, extension);
+    if (!mimeType) {
+      return {
+        ok: false,
+        code: ERROR_CODES.VALIDATION_FAILED,
+        message: "The file does not look like a valid video.",
       };
     }
 

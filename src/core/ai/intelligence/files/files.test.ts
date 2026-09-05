@@ -78,9 +78,16 @@ test("unsupported file rejection", () => {
     12,
     bytes("\x00\x00\x00\x18ftypmp42")
   );
-  assert.equal(video.ok, false);
-  if (!video.ok) {
-    assert.match(video.message, /video/i);
+  assert.equal(video.ok, true);
+  if (video.ok) {
+    assert.equal(video.kind, "video");
+    assert.equal(video.mimeType, "video/mp4");
+  }
+
+  const avi = validateIntelligenceFile("clip.avi", 4, bytes("RIFF"));
+  assert.equal(avi.ok, false);
+  if (!avi.ok) {
+    assert.match(avi.message, /video/i);
   }
 
   const pngAsTxt = validateIntelligenceFile(

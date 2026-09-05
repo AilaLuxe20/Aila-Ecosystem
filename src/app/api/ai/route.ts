@@ -6,6 +6,7 @@ import {
   aiStreamResponse,
   extractLatestUserMessage,
   modeAllowsChatAttachments,
+  normalizeAiChatRequestInput,
   resolveConversationId,
 } from "@/core/ai/chat-api";
 import {
@@ -86,12 +87,17 @@ export async function POST(req: Request) {
       );
     }
 
-    const parsed = aiChatRequestSchema.safeParse(rawBody);
+    const parsed = aiChatRequestSchema.safeParse(
+      normalizeAiChatRequestInput(rawBody)
+    );
 
     if (!parsed.success) {
+      const firstIssue = parsed.error.issues[0];
       log.info("AI chat validation failed", {
         userId: user.id,
         issueCount: parsed.error.issues.length,
+        issuePath: firstIssue?.path.map(String).join(".") || "",
+        issueCode: firstIssue?.code,
       });
 
       return aiFailure(

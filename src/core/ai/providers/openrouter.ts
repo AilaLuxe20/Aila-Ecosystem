@@ -1,5 +1,5 @@
-import { AI_MODEL } from "@/core/constants";
 import { openRouterChat } from "@/core/ai/openrouter";
+import { openRouterModelRequestFields } from "@/core/config";
 
 import type { AIProvider } from "./types";
 
@@ -8,7 +8,7 @@ export const OpenRouterProvider: AIProvider = {
 
   async chat(messages) {
     return openRouterChat({
-      model: AI_MODEL,
+      ...openRouterModelRequestFields("chat"),
       messages,
     });
   },

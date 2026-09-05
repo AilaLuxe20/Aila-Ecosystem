@@ -1045,7 +1045,10 @@ export default function ChatInterface({
           mode,
           conversationId,
           sessionId: conversationId,
-          messages: updatedMessages,
+          messages: updatedMessages.map((message) => ({
+            role: message.role,
+            content: message.content,
+          })),
           ...(modeAllowsChatAttachments(mode) &&
           attachment?.status === "ready" &&
           attachment.documentId

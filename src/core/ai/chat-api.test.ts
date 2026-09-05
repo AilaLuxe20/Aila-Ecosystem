@@ -4,6 +4,7 @@ import { test } from "node:test";
 import {
   aiChatRequestSchema,
   extractLatestUserMessage,
+  normalizeAiChatRequestInput,
 } from "./chat-api";
 import { MemoryRateLimiter } from "@/lib/api/rate-limit";
 
@@ -75,5 +76,41 @@ test("chat request still works without an attachment", () => {
     mode: "intelligence",
     messages: [{ role: "user", content: "Hello" }],
   });
+  assert.equal(parsed.success, true);
+});
+
+test("writer chat accepts extra message fields and empty bookId after normalize", () => {
+  const parsed = aiChatRequestSchema.safeParse(
+    normalizeAiChatRequestInput({
+      mode: "writer",
+      bookId: "",
+      chapterId: "not-part-of-chat-contract",
+      messages: [
+        {
+          role: "assistant",
+          content: "Hello, I am Aila Writer.",
+          id: "msg_1",
+          createdAt: "2026-01-01T00:00:00.000Z",
+        },
+        { role: "user", content: "Help me rewrite this scene." },
+      ],
+    }),
+  );
+  assert.equal(parsed.success, true);
+  if (parsed.success) {
+    assert.equal(parsed.data.mode, "writer");
+    assert.equal(parsed.data.bookId, undefined);
+    assert.equal(parsed.data.messages.length, 2);
+  }
+});
+
+test("writer chat accepts a book id", () => {
+  const parsed = aiChatRequestSchema.safeParse(
+    normalizeAiChatRequestInput({
+      mode: "writer",
+      bookId: "cmtnifft0000620o1tafjdcpv",
+      messages: [{ role: "user", content: "Continue the chapter." }],
+    }),
+  );
   assert.equal(parsed.success, true);
 });
