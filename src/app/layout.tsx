@@ -20,7 +20,7 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
 });
 
-const siteUrl = "https://ailaluxe.com";
+const siteUrl = "https://ailaluxe.website";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -156,8 +156,9 @@ export default function RootLayout({
           signUpFallbackRedirectUrl="/dashboard"
           afterSignOutUrl="/"
           allowedRedirectOrigins={[
-            "https://ailaluxe.com",
-            "https://www.ailaluxe.com",
+            "https://ailaluxe.website",
+            "https://www.ailaluxe.website",
+            "https://aila.website",
           ]}
           proxyUrl={
             shouldUseClerkFrontendApiProxy() ? CLERK_FAPI_PROXY_PATH : undefined

@@ -12,12 +12,9 @@ const clerkMiddlewareOptions = {
   ...(useAuthorizedParties
     ? {
         authorizedParties: [
-          "https://ailaluxe.com",
-          "https://www.ailaluxe.com",
           "https://ailaluxe.website",
           "https://www.ailaluxe.website",
           "https://aila.website",
-          "https://www.aila.website",
         ],
       }
     : {}),
