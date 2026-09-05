@@ -4,7 +4,7 @@ Aila is an AI software company and product ecosystem. It is not a template, a ch
 
 People use Aila to chat with a shared intelligence layer, store work on their own account, and run product workspaces for writing, documents, legal review, planning, commerce, and operations. Aila Luxe also builds custom websites, applications, and automation for clients.
 
-Live site: [https://ailaluxe.com](https://ailaluxe.com)
+Live site: [https://ailaluxe.website](https://ailaluxe.website)
 
 ---
 
